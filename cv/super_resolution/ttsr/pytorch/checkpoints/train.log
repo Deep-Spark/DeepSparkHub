@@ -1,0 +1,13 @@
+[2022-08-16 11:45:30,596] - [trainer.py file line:75] - INFO: Current epoch learning rate: 1.000000e-04
+[2022-08-16 11:46:09,391] - [trainer.py file line:97] - INFO: training fps = 41.24274159862805
+[2022-08-16 11:46:09,392] - [trainer.py file line:102] - INFO: epoch: 1	 batch: 100
+[2022-08-16 11:46:09,392] - [trainer.py file line:104] - INFO: rec_loss: 0.1996560842
+[2022-08-16 11:46:09,404] - [trainer.py file line:114] - INFO: per_loss: 0.0691360161
+[2022-08-16 11:46:09,408] - [trainer.py file line:121] - INFO: tpl_loss: 0.0240736995
+[2022-08-16 11:46:09,517] - [trainer.py file line:126] - INFO: adv_loss: -0.1518322527
+[2022-08-16 11:46:45,718] - [trainer.py file line:97] - INFO: training fps = 44.04433695749565
+[2022-08-16 11:46:45,719] - [trainer.py file line:102] - INFO: epoch: 1	 batch: 200
+[2022-08-16 11:46:45,719] - [trainer.py file line:104] - INFO: rec_loss: 0.1592512131
+[2022-08-16 11:46:45,731] - [trainer.py file line:114] - INFO: per_loss: 0.0439612940
+[2022-08-16 11:46:45,735] - [trainer.py file line:121] - INFO: tpl_loss: 0.0166233946
+[2022-08-16 11:46:45,844] - [trainer.py file line:126] - INFO: adv_loss: 0.0254640970

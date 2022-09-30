@@ -1,0 +1,6 @@
+*.py[cod]
+/tmp/
+/mlperf/RNNT.log
+debug.sh
+/deps
+/deps_ngb

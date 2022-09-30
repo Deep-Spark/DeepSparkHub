@@ -1,0 +1,27 @@
+
+- KEY:
+    NAME:  lars_opt_end_learning_rate
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0 "
+
+- KEY:
+    NAME:  lars_opt_learning_rate_decay_steps
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+
+- KEY:
+    NAME:  lars_opt_learning_rate_decay_poly_power
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+
+- KEY:
+    NAME:  lars_epsilon
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0"
+
+
+- KEY:
+    NAME:  opt_weight_decay
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+

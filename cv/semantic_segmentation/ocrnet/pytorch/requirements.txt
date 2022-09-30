@@ -1,0 +1,5 @@
+torch>=1.8.0
+opencv-python>=3.4.1.15
+yacs>=0.1.5
+tensorboardX>=1.6
+tqdm

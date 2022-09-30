@@ -1,0 +1,5 @@
+addict==2.4.0
+yapf==0.32.0
+lmdb==1.3.0
+rapidfuzz==2.0.7
+shapely
