@@ -1,0 +1,24 @@
+
+- KEY:
+    NAME:  submission_benchmark
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] in ['deepcam', 'cosmoflow', 'oc20'] "
+    POST:  " enqueue_config('hpc_1.0.0/closed_{}.yaml'.format(v['value'])) "
+
+- KEY:
+    NAME:  gradient_accumulation_steps
+    CHECK: " v['value'] > 0 "
+
+- KEY:
+    NAME:  gradient_accumulation_frequency
+    CHECK: " v['value'] > 0 "
+
+- KEY:
+    NAME:  number_of_nodes
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+
+- KEY:
+    NAME:  accelerators_per_node
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0"

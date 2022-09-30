@@ -1,0 +1,2 @@
+cuda_*
+corex-installer-*

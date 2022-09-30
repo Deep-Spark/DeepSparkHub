@@ -1,0 +1,4 @@
+# progress bars in model download and training scripts
+pycocotools==2.0.2
+ujson==1.35
+

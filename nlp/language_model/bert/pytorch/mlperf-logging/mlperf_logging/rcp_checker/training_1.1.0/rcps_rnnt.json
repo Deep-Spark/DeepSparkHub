@@ -1,0 +1,115 @@
+{
+
+  "rnn_t_ref_1k":
+  {
+    "Benchmark": "rnnt",
+    "Creator": "NVIDIA",
+    "When": "Prior to 1.1 submission",
+    "Platform": "TBD",
+    "BS": 1024,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.004,
+      "opt_lamb_learning_rate_hold_epochs": 40,
+      "opt_lamb_learning_rate_decay_poly_power": 0.935,
+      "opt_learning_rate_warmup_epochs": 6,
+      "opt_weight_decay": 0.001,
+      "opt_lamb_beta_1": 0.9,
+      "opt_lamb_beta_2": 0.999,
+      "opt_lamb_learning_rate_min": 1e-5,
+      "opt_gradient_clip_norm": "none",
+      "opt_gradient_accumulation_steps": 8,
+      "model_eva_ema_factor": 0.999,
+      "model_weights_initialization_scale": 0.5,
+      "data_train_num_buckets": 1
+    },
+  "Epochs to converge": [
+    59, 57, 59, 54, 57, 58, 56, 58, 55, 58,
+    58, 58, 62, 61, 63, 60, 57, 59, 57, 63 ]
+  },
+
+  "rnn_t_ref_2k":
+  {
+    "Benchmark": "rnnt",
+    "Creator": "NVIDIA",
+    "When": "Prior to 1.1 submission",
+    "Platform": "TBD",
+    "BS": 2048,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.007,
+      "opt_lamb_learning_rate_hold_epochs": 33,
+      "opt_lamb_learning_rate_decay_poly_power": 0.939,
+      "opt_learning_rate_warmup_epochs": 6,
+      "opt_weight_decay": 0.001,
+      "opt_lamb_beta_1": 0.9,
+      "opt_lamb_beta_2": 0.999,
+      "opt_lamb_learning_rate_min": 1e-5,
+      "opt_gradient_clip_norm": 1.0,
+      "opt_gradient_accumulation_steps": 16,
+      "model_eva_ema_factor": 0.995,
+      "model_weights_initialization_scale": 0.5,
+      "data_train_num_buckets": 1
+    },
+    "Epochs to converge": [
+      56, 56, 54, 56, 57, 58, 55, 56, 60, 56,
+      58, 57, 53, 60, 57, 57, 55, 57, 56, 56
+    ]
+  },
+
+  "rnn_t_ref_3k":
+  {
+    "Benchmark": "rnnt",
+    "Creator": "NVIDIA",
+    "When": "Prior to 1.1 submission",
+    "Platform": "TBD",
+    "BS": 3072,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.009,
+      "opt_lamb_learning_rate_hold_epochs": 40,
+      "opt_lamb_learning_rate_decay_poly_power": 0.940,
+      "opt_learning_rate_warmup_epochs": 9,
+      "opt_weight_decay": 0.001,
+      "opt_lamb_beta_1": 0.9,
+      "opt_lamb_beta_2": 0.995,
+      "opt_lamb_learning_rate_min": 1e-5,
+      "opt_gradient_clip_norm": 1.0,
+      "opt_gradient_accumulation_steps": 24,
+      "model_eva_ema_factor": 0.985,
+      "model_weights_initialization_scale": 0.35,
+      "data_train_num_buckets": 1
+    },
+    "Epochs to converge": [
+      64, 65, 65, 63, 63, 65, 66, 67, 66, 62,
+      67, 65, 64, 64, 66, 68, 68, 68, 62, 64
+    ]
+  },
+
+  "rnn_t_ref_6k":
+  {
+    "Benchmark": "rnnt",
+    "Creator": "NVIDIA",
+    "When": "Prior to 1.1 submission",
+    "Platform": "TBD",
+    "BS": 6144,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.014,
+      "opt_lamb_learning_rate_hold_epochs": 40,
+      "opt_lamb_learning_rate_decay_poly_power": 0.970,
+      "opt_learning_rate_warmup_epochs": 16,
+      "opt_weight_decay": 0.001,
+      "opt_lamb_beta_1": 0.82,
+      "opt_lamb_beta_2": 0.98,
+      "opt_lamb_learning_rate_min": 1e-5,
+      "opt_gradient_clip_norm": 1.0,
+      "opt_gradient_accumulation_steps": 4,
+      "model_eva_ema_factor": 0.96,
+      "model_weights_initialization_scale": 0.5,
+      "data_train_num_buckets": 1
+    },
+    "Epochs to converge": [
+      97, 98, 97, 97, 92, 99, 93, 90, 85, 117,
+      99, 101, 91, 98, 94, 93, 97, 93, 101, 90
+    ]
+  }
+
+}
+

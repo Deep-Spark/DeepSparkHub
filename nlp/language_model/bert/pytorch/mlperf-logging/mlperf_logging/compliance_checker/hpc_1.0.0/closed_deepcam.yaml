@@ -1,0 +1,80 @@
+# General Settings
+- KEY:
+    NAME:  gradient_accumulation_frequency
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0 "
+
+- KEY:
+    NAME:  seed
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+
+- KEY:
+    NAME:  global_batch_size
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+    
+- KEY:
+    NAME:  batchnorm_group_size
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+
+
+# Optimizer Parameters
+- KEY:
+    NAME:  opt_name
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] in ['Adam', 'AdamW', 'LAMB']"
+    POST:  " if (v['value'] == 'LAMB'): enqueue_config('hpc_1.0.0/closed_deepcam_lamb.yaml') "
+
+- KEY:
+    NAME:  opt_lr
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >0."
+
+- KEY:
+    NAME:  opt_betas
+    REQ:   EXACTLY_ONE
+    CHECK: " len(v['value']) == 2"
+
+- KEY:
+    NAME:  opt_eps
+    REQ:   EXACTLY_ONE
+    CHECK: " math.isclose(v['value'], 1e-6)"
+
+
+# Scheduler Parameters
+- KEY:
+    NAME:  scheduler_type
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] in ['multistep', 'cosine_annealing']"
+    POST:  " enqueue_config('hpc_1.0.0/closed_deepcam_{}.yaml'.format(v['value'].lower())) "
+
+- KEY:
+    NAME:  scheduler_lr_warmup_steps
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0 "
+
+- KEY:
+    NAME:  scheduler_lr_warmup_factor
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 1. "
+
+# Dataset Properties
+- KEY:
+    NAME:  train_samples
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 121266"
+
+- KEY:
+    NAME:  eval_samples
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 15158"
+
+# Convergence Properties
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'epoch_num' in v['metadata']"
+    ATLEAST_ONE_CHECK: "v['value'] >= 0.82 and v['value'] <= 1."

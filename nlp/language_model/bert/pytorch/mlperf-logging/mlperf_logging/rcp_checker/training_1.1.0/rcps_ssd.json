@@ -1,0 +1,93 @@
+{
+
+  "ssd_ref_1024_s128":
+  {
+    "Benchmark": "ssd",
+    "Creator": "NVIDIA",
+    "When": "Prior 1.0 submission",
+    "Platform": "TBD",
+    "BS": 1024,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.8,
+      "opt_learning_rate_decay_boundary_epochs": [40, 50],
+      "opt_learning_rate_warmup_factor": 0,
+      "opt_learning_rate_warmup_steps": 300,
+      "opt_weight_decay": 5e-4,
+      "max_samples": 50,
+      "model_bn_span": 128
+    },
+    "Epochs to converge": [
+       50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+  },
+
+  "ssd_ref_1536_s192":
+  {
+    "Benchmark": "ssd",
+    "Creator": "NVIDIA",
+    "When": "At 1.2 submission",
+    "Platform": "TBD",
+    "BS": 1536,
+    "Hyperparams": {
+      "opt_base_learning_rate": 2.5e-3,
+      "opt_learning_rate_decay_boundary_epochs": [44, 55],
+      "opt_learning_rate_warmup_factor": 0,
+      "opt_learning_rate_warmup_steps": 2.619685,
+      "opt_weight_decay": 1.3e-4,
+      "max_samples": 50,
+      "model_bn_span": 192
+    },
+    "Epochs to converge": [
+       55, 55, 55, 55, 55, 55, 55, 55, 55, 55,
+       55, 55, 55, 55, 55, 55, 55, 55, 55, 55]
+  },
+
+  "ssd_ref_2048_s16":
+  {
+    "Benchmark": "ssd",
+    "Creator": "NVIDIA",
+    "When": "Prior 1.0 submission",
+    "Platform": "TBD",
+    "BS": 2048,
+    "Hyperparams": {
+      "opt_base_learning_rate": 2.9248,
+      "opt_learning_rate_decay_boundary_epochs": [60, 75],
+      "opt_learning_rate_warmup_factor": 0,
+      "opt_learning_rate_warmup_steps": 1489,
+      "opt_weight_decay": 4e-5,
+      "max_samples": 50,
+      "model_bn_span": 16
+    },
+    "Epochs to converge": [
+       65, 65, 65, 65, 65, 70, 65, 65, 65, 65,
+       65, 65, 65, 65, 65, 65, 65, 65, 65, 65,
+       65, 65, 65, 65, 65, 65, 65, 65, 65, 65,
+       65, 65, 65, 65, 65, 65, 65, 65, 65, 65,
+       65, 65, 65, 65, 65, 65, 65, 65, 65, 65,
+       65, 65, 65, 65, 65, 65, 65, 65, 70, 65]
+  },
+
+  "ssd_ref_4096_s64":
+  {
+    "Benchmark": "ssd",
+    "Creator": "NVIDIA",
+    "When": "Prior 1.0 submission",
+    "Platform": "TBD",
+    "BS": 4096,
+    "Hyperparams": {
+      "opt_base_learning_rate": 3.2,
+      "opt_learning_rate_decay_boundary_epochs": [80, 100],
+      "opt_learning_rate_warmup_factor": 0,
+      "opt_learning_rate_warmup_steps": 1145,
+      "opt_weight_decay": 4e-5,
+      "max_samples": 50,
+      "model_bn_span": 64
+    },
+    "Epochs to converge": [
+       90, 90, 85, 90, 90, 85, 85, 90, 85, 90,
+       90, 85, 85, 90, 85, 90, 85, 85, 85, 85,
+       90, 85, 85, 85, 85, 85, 85, 90, 85, 90,
+       85, 85, 85, 90, 85, 90, 90]
+  }
+
+}
+

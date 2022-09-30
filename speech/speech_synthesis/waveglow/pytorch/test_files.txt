@@ -1,0 +1,10 @@
+LJSpeech-1.1/wavs/LJ050-0269.wav
+LJSpeech-1.1/wavs/LJ050-0270.wav
+LJSpeech-1.1/wavs/LJ050-0271.wav
+LJSpeech-1.1/wavs/LJ050-0272.wav
+LJSpeech-1.1/wavs/LJ050-0273.wav
+LJSpeech-1.1/wavs/LJ050-0274.wav
+LJSpeech-1.1/wavs/LJ050-0275.wav
+LJSpeech-1.1/wavs/LJ050-0276.wav
+LJSpeech-1.1/wavs/LJ050-0277.wav
+LJSpeech-1.1/wavs/LJ050-0278.wav

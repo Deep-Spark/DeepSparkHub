@@ -1,0 +1,256 @@
+{
+
+  "bert_ref_256":
+  {
+    "Benchmark": "bert",
+    "Creator": "Google",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TPU-v4-16 / TF1, TF version ~2.4",
+    "BS": 256,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.00035,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 13700,
+      "num_warmup_steps": 0,
+      "start_warmup_step": 0,
+      "opt_lamb_beta_1": 0.9,
+      "opt_lamb_beta_2": 0.999,
+      "opt_lamb_weight_decay_rate": 0.01,
+      "gradient_accumulation_steps": 1
+    },
+    "Epochs to converge": [
+      2834944, 2508800, 2709504, 2609152, 2383360, 2308096, 2910208, 2333184, 2283008, 2935296,
+      2483712, 2558976, 2709504, 2232832, 2333184, 2533888, 2709504, 2257920, 2609152, 2809856]
+  },
+
+  "bert_ref_448":
+  {
+    "Benchmark": "bert",
+    "Creator": "Google",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TPU-v4-16 / TF1, TF version ~2.4",
+    "BS": 448,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.0004,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 8103,
+      "num_warmup_steps": 0,
+      "start_warmup_step": 0,
+      "opt_lamb_beta_1": 0.9,
+      "opt_lamb_beta_2": 0.999,
+      "opt_lamb_weight_decay_rate": 0.01,
+      "gradient_accumulation_steps": 1
+    },
+    "Epochs to converge": [
+       2558976, 2634240, 2885120, 2734592, 3010560, 2383360, 2458624, 2609152, 2558976, 2684416,
+       2508800, 2458624, 2684416, 2533888, 2533888, 2784768, 2308096, 2784768, 2584064, 2809856]
+  },
+
+  "bert_ref_1536":
+  {
+    "Benchmark": "bert",
+    "Creator": "Google",
+    "When": "At 1.0 submission",
+    "Platform": "TPU-v4-128 / TF1, TF version ~2.4",
+    "BS": 1536,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.002,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 2254,
+      "num_warmup_steps": 0,
+      "start_warmup_step": 0,
+      "opt_lamb_beta_1": 0.66,
+      "opt_lamb_beta_2": 0.996,
+      "opt_lamb_weight_decay_rate": 0.01,
+      "gradient_accumulation_steps": 1
+    },
+    "Epochs to converge": [
+       2836240, 2801664, 2801664, 2727936, 2801664, 2875392, 2899968, 2727936, 2777088, 2875392,
+       2777088, 2801664, 2678784, 2801664, 2703360, 2629632, 2727936, 2703360, 2654208, 2949120]
+  },
+
+  "bert_ref_4096":
+  {
+    "Benchmark": "bert",
+    "Creator": "Google",
+    "When": "Prior to 1.1 submission",
+    "Platform": "TPU-v4-128 / TF1, TF version ~2.4",
+    "BS": 4096,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.0024,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 855,
+      "num_warmup_steps": 0,
+      "start_warmup_step": 0,
+      "opt_lamb_beta_1": 0.66,
+      "opt_lamb_beta_2": 0.998,
+      "opt_lamb_weight_decay_rate": 0.01,
+      "gradient_accumulation_steps": 16
+    },
+    "Epochs to converge": [
+       2801664, 3022848, 2801664, 3022848, 3047424, 2727936, 2973696, 2703360, 2924544, 2629632,
+       2678784, 2850816, 2777088, 2826240, 2801664, 2850816, 2924544, 2924544, 2727936, 2850816]
+  },
+
+
+  "bert_ref_3072":
+  {
+    "Benchmark": "bert",
+    "Creator": "Google",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TPU-v4-128 / TF1, TF version ~2.4",
+    "BS": 3072,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.002,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 1141,
+      "num_warmup_steps": 100,
+      "start_warmup_step": 0,
+      "opt_lamb_beta_1": 0.66,
+      "opt_lamb_beta_2": 0.998,
+      "opt_lamb_weight_decay_rate": 0.01,
+      "gradient_accumulation_steps": 96
+    },
+    "Epochs to converge": [
+       2703360, 2482176, 3072000, 2654208, 2580480, 2727936, 2605056, 2801664, 2777088, 2580480,
+       2875392, 2826240, 2973696, 2850816, 2678784, 2919120, 3121152, 2605056, 2678784, 2850816]
+  },
+
+  "bert_ref_6144":
+  {
+    "Benchmark": "bert",
+    "Creator": "Google",
+    "When": "At 1.0 submission",
+    "Platform": "TPU-v4-128 / TF1, TF version ~2.4",
+    "BS": 6144,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.0029293,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 700,
+      "num_warmup_steps": 0,
+      "start_warmup_step": -700,
+      "opt_lamb_beta_1": 0.7206,
+      "opt_lamb_beta_2": 0.78921,
+      "opt_lamb_weight_decay_rate": 0.001,
+      "gradient_accumulation_steps": 24
+    },
+    "Epochs to converge": [
+       3366912, 3244032, 3219456, 3686400, 3317760, 3293184, 3416064, 3317760, 3391488, 2998272,
+       3317760, 3072000, 3416064, 3293184, 3391488, 3514368, 3194880, 3465216, 3244032, 3268608]
+  },
+
+  "bert_ref_6912":
+  {
+    "Benchmark": "bert",
+    "Creator": "Google",
+    "When": "At 1.0 submission",
+    "Platform": "TPU-v4-128 / TF1, TF version ~2.4",
+    "BS": 6912,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.0029293,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 700,
+      "num_warmup_steps": 0,
+      "start_warmup_step": -700,
+      "opt_lamb_beta_1": 0.7206,
+      "opt_lamb_beta_2": 0.78921,
+      "opt_lamb_weight_decay_rate": 0.001,
+      "gradient_accumulation_steps": 27
+    },
+    "Epochs to converge": [
+       3621888, 3677184, 3400704, 3594240, 3483648, 3732480, 3677184, 3797776, 3621888, 3760128,
+       3649536, 3483648, 3566592, 3649536, 3621888, 3483648, 3290112, 3704832, 3594240, 3511296]
+  },
+
+  "bert_ref_8192":
+  {
+    "Benchmark": "bert",
+    "Creator": "Google",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TPU-v4-128 / TF1, TF version ~2.4",
+    "BS": 8192,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.00288293,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 600,
+      "num_warmup_steps": 287,
+      "start_warmup_step": -76,
+      "opt_lamb_beta_1": 0.88,
+      "opt_lamb_beta_2": 0.88,
+      "opt_lamb_weight_decay_rate": 0.0166629,
+      "gradient_accumulation_steps": 16
+    },
+    "Epochs to converge": [
+       4251648, 4153344, 4055040, 4177920, 4177920, 4079616, 4276224, 4128768, 4177920, 4153344,
+       4177920, 4079616, 4300800, 4153344, 4276224, 4423680, 4276224, 4104192, 4251648, 4153344]
+  },
+
+  "bert_ref_8704":
+  {
+    "Benchmark": "bert",
+    "Creator": "NVIDIA",
+    "When": "At 1.1 submission",
+    "Platform": "TBD",
+    "BS": 8704,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.002971656225,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 600,
+      "num_warmup_steps": 287,
+      "start_warmup_step": -76,
+      "opt_lamb_beta_1": 0.88,
+      "opt_lamb_beta_2": 0.88,
+      "opt_lamb_weight_decay_rate": 0.0166629,
+      "gradient_accumulation_steps": 34
+    },
+    "Epochs to converge": [
+      4343040, 4143360, 4143360, 4442880, 4392960, 4243200, 4193280, 4542720, 4492800, 4243200,
+      4243200, 4392960, 4243200, 4193280, 4093440, 4392960, 4093440, 4243200, 4093440, 4392960]
+  },
+
+  "bert_ref_12288":
+  {
+    "Benchmark": "bert",
+    "Creator": "NVIDIA",
+    "When": "At 1.1 submission",
+    "Platform": "TBD",
+    "BS": 12288,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.0031,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 500,
+      "num_warmup_steps": 300,
+      "start_warmup_step": -100,
+      "opt_lamb_beta_1": 0.80,
+      "opt_lamb_beta_2": 0.925,
+      "opt_lamb_weight_decay_rate": 0.0166629,
+      "gradient_accumulation_steps": 32
+    },
+    "Epochs to converge": [
+      4542720, 4392960, 4642560, 4542720, 4542720, 4492800, 4343040, 4343040, 4442880, 4442880, 
+      4442880, 4442880, 4442880, 4692480, 4492800, 4442880, 4442880, 4442880, 4492800, 4343040]
+  },
+
+  "bert_ref_13056":
+  {
+    "Benchmark": "bert",
+    "Creator": "NVIDIA",
+    "When": "At 1.1 submission",
+    "Platform": "TBD",
+    "BS": 13056,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.00319540686,
+      "opt_epsilon": 1e-6,
+      "opt_learning_rate_training_steps": 500,
+      "num_warmup_steps": 300,
+      "start_warmup_step": -100,
+      "opt_lamb_beta_1": 0.80,
+      "opt_lamb_beta_2": 0.925,
+      "opt_lamb_weight_decay_rate": 0.0166629,
+      "gradient_accumulation_steps": 34
+    },
+    "Epochs to converge": [
+      4442880, 4592640, 4642560, 4842240, 4742400, 4592640, 4642560, 4692480, 4942080, 4542720,
+      4592640, 4093440, 4442880, 4792320, 4642560, 4592640, 4592640, 4892160, 4742400, 4592640]
+  }
+}

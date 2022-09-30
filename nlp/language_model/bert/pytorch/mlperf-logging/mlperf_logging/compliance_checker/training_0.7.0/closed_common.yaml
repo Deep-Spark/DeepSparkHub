@@ -1,0 +1,6 @@
+
+- KEY:
+    NAME:  submission_benchmark
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] in ['resnet', 'ssd', 'maskrcnn', 'transformer', 'gnmt', 'minigo', 'dlrm', 'bert'] "
+    POST:  " enqueue_config('training_0.7.0/closed_{}.yaml'.format(v['value'])) "

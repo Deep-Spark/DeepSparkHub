@@ -1,0 +1,197 @@
+{
+
+  "resnet_ref_1632":
+  {
+    "Benchmark": "resnet",
+    "Creator": "NVIDIA",
+    "When": "At 1.0 submission",
+    "Platform": "TBD",
+    "BS": 1632,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 7.4,
+      "opt_learning_rate_warmup_epochs": 2,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 5.0e-5,
+      "opt_learning_rate_decay_steps": 27476,
+      "model_bn_span": 204
+    },
+    "Epochs to converge": [
+      34, 34, 34, 35, 35, 37, 35, 35, 33, 35,
+      35, 37, 37, 35, 35, 34, 35
+    ]
+  },
+
+  "resnet_ref_3264":
+  {
+    "Benchmark": "resnet",
+    "Creator": "NVIDIA",
+    "When": "At 1.0 submission",
+    "Platform": "TBD",
+    "BS": 3264,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 10.5,
+      "opt_learning_rate_warmup_epochs": 2,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 0.00005,
+      "opt_learning_rate_decay_steps": 14523,
+      "model_bn_span": 204
+    },
+    "Epochs to converge": [
+      36, 35, 34, 34, 36, 35, 35, 35, 35, 37,
+      35, 35, 35, 36, 35
+    ]
+  },
+
+  "resnet_ref_4096":
+  {
+    "Benchmark": "resnet",
+    "Creator": "Google",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TPU-v4-64 / TF2, TF version ~2.4",
+    "BS": 4096,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 10,
+      "opt_learning_rate_warmup_epochs": 5,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 2e-4,
+      "opt_learning_rate_decay_steps": 13137,
+      "model_bn_span": 64
+    },
+    "Epochs to converge": [
+      39, 42, 40, 41, 39, 40, 41, 39, 40, 39]
+  },
+
+  "resnet_ref_8192":
+  {
+    "Benchmark": "resnet",
+    "Creator": "Google",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TPU-v4-128 / TF2, TF version ~2.4",
+    "BS": 8192,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 17,
+      "opt_learning_rate_warmup_epochs": 5,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 2e-4,
+      "opt_learning_rate_decay_steps": 6095,
+      "model_bn_span": 64
+    },
+    "Epochs to converge": [
+      42, 44, 43, 41, 41, 41, 42, 42, 43, 41]
+  },
+
+  "resnet_ref_13056":
+  {
+    "Benchmark": "resnet",
+    "Creator": "NVIDIA",
+    "When": "At 1.0 submission",
+    "Platform": "TBD",
+    "BS": 13056,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 12.8,
+      "opt_learning_rate_warmup_epochs": 9,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 2.5e-5,
+      "opt_learning_rate_decay_steps": 4710,
+      "model_bn_span": 204
+    },
+    "Epochs to converge": [
+      46, 46, 44, 46, 45, 46, 45, 45, 45, 46
+    ]
+  },
+
+  "resnet_ref_32768":
+  {
+    "Benchmark": "resnet",
+    "Creator": "Google",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TPU-v4-32 / TF2, TF version ~2.4",
+    "BS": 32768,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 21.2,
+      "opt_learning_rate_warmup_epochs": 16,
+      "opt_momentum": 0.94,
+      "opt_weight_decay": 2.5e-5,
+      "opt_learning_rate_decay_steps": 2267,
+      "model_bn_span": 128
+    },
+    "Epochs to converge": [
+      56, 56, 55, 56, 56, 56, 56, 56, 57, 56]
+  },
+
+  "resnet_ref_49152":
+  {
+    "Benchmark": "resnet",
+    "Creator": "NVIDIA",
+    "When": "At 1.1 submission",
+    "Platform": "TBD",
+    "BS": 49152,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 19.405,
+      "opt_end_learning_rate": 0.0001,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 24,
+      "opt_momentum": 0.951807,
+      "opt_weight_decay": 0.0001,
+      "opt_learning_rate_decay_steps": 1846,
+      "model_bn_span": 256
+    },
+    "Epochs to converge": [
+      68, 68, 68, 68, 69, 68, 68, 67, 69, 67
+    ]
+  },
+
+  "resnet_ref_58880":
+  {
+    "Benchmark": "resnet",
+    "Creator": "NVIDIA",
+    "When": "At 1.1 submission",
+    "Platform": "TBD",
+    "BS": 58880,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 23.246,
+      "opt_end_learning_rate": 0.0001,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 29,
+      "opt_momentum": 0.951807,
+      "opt_weight_decay": 0.0001,
+      "opt_learning_rate_decay_steps": 1785,
+      "model_bn_span": 230
+    },
+    "Epochs to converge": [
+      80, 81, 80, 78, 80, 80, 81, 79, 80, 80
+    ]
+  },
+
+  "resnet_ref_65536":
+  {
+    "Benchmark": "resnet",
+    "Creator": "Google",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TPU-v3-512 / TF2, TF version ~2.4",
+    "BS": 65536,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 24.699,
+      "opt_learning_rate_warmup_epochs": 31,
+      "opt_momentum": 0.951807,
+      "opt_weight_decay": 1e-4,
+      "opt_learning_rate_decay_steps": 1133,
+      "model_bn_span": 128
+    },
+    "Epochs to converge": [
+      83, 85, 84, 86, 85, 85, 83, 84, 85, 85]
+  }
+
+}
+
