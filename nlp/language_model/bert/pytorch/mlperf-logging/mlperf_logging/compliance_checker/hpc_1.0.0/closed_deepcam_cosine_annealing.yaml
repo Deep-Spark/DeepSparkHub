@@ -1,0 +1,10 @@
+# Scheduler Parameters
+- KEY:
+    NAME:  scheduler_t_max
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 1. "
+
+- KEY:
+    NAME:  scheduler_eta_min
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0. "

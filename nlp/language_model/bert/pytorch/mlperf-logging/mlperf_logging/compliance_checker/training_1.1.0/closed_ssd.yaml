@@ -1,0 +1,181 @@
+- BEGIN:
+    CODE: >
+        s.update({
+            'initialized_tensors': []
+        })
+- KEY:
+    NAME: weights_initialization
+    REQ: AT_LEAST_ONE
+    CHECK:
+        - "'tensor' in v['metadata']"
+    POST: >
+        s['initialized_tensors'] += [v['metadata']['tensor']]
+- END:
+    CHECK: >
+        sorted(s['initialized_tensors']) == sorted([
+            "ssd0_resnetmlperf0_conv0_weight",
+            "ssd0_resnetmlperf0_batchnorm0_gamma",
+            "ssd0_resnetmlperf0_batchnorm0_beta",
+            "ssd0_resnetmlperf0_stage1_conv0_weight",
+            "ssd0_resnetmlperf0_stage1_batchnorm0_gamma",
+            "ssd0_resnetmlperf0_stage1_batchnorm0_beta",
+            "ssd0_resnetmlperf0_stage1_conv1_weight",
+            "ssd0_resnetmlperf0_stage1_batchnorm1_gamma",
+            "ssd0_resnetmlperf0_stage1_batchnorm1_beta",
+            "ssd0_resnetmlperf0_stage1_conv2_weight",
+            "ssd0_resnetmlperf0_stage1_batchnorm2_gamma",
+            "ssd0_resnetmlperf0_stage1_batchnorm2_beta",
+            "ssd0_resnetmlperf0_stage1_conv3_weight",
+            "ssd0_resnetmlperf0_stage1_batchnorm3_gamma",
+            "ssd0_resnetmlperf0_stage1_batchnorm3_beta",
+            "ssd0_resnetmlperf0_stage1_conv4_weight",
+            "ssd0_resnetmlperf0_stage1_batchnorm4_gamma",
+            "ssd0_resnetmlperf0_stage1_batchnorm4_beta",
+            "ssd0_resnetmlperf0_stage1_conv5_weight",
+            "ssd0_resnetmlperf0_stage1_batchnorm5_gamma",
+            "ssd0_resnetmlperf0_stage1_batchnorm5_beta",
+            "ssd0_resnetmlperf0_stage2_conv0_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm0_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm0_beta",
+            "ssd0_resnetmlperf0_stage2_conv1_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm1_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm1_beta",
+            "ssd0_resnetmlperf0_stage2_conv2_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm2_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm2_beta",
+            "ssd0_resnetmlperf0_stage2_conv3_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm3_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm3_beta",
+            "ssd0_resnetmlperf0_stage2_conv4_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm4_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm4_beta",
+            "ssd0_resnetmlperf0_stage2_conv5_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm5_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm5_beta",
+            "ssd0_resnetmlperf0_stage2_conv6_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm6_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm6_beta",
+            "ssd0_resnetmlperf0_stage2_conv7_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm7_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm7_beta",
+            "ssd0_resnetmlperf0_stage2_conv8_weight",
+            "ssd0_resnetmlperf0_stage2_batchnorm8_gamma",
+            "ssd0_resnetmlperf0_stage2_batchnorm8_beta",
+            "ssd0_resnetmlperf0_stage3_conv0_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm0_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm0_beta",
+            "ssd0_resnetmlperf0_stage3_conv1_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm1_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm1_beta",
+            "ssd0_resnetmlperf0_stage3_conv2_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm2_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm2_beta",
+            "ssd0_resnetmlperf0_stage3_conv3_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm3_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm3_beta",
+            "ssd0_resnetmlperf0_stage3_conv4_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm4_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm4_beta",
+            "ssd0_resnetmlperf0_stage3_conv5_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm5_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm5_beta",
+            "ssd0_resnetmlperf0_stage3_conv6_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm6_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm6_beta",
+            "ssd0_resnetmlperf0_stage3_conv7_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm7_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm7_beta",
+            "ssd0_resnetmlperf0_stage3_conv8_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm8_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm8_beta",
+            "ssd0_resnetmlperf0_stage3_conv9_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm9_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm9_beta",
+            "ssd0_resnetmlperf0_stage3_conv10_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm10_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm10_beta",
+            "ssd0_resnetmlperf0_stage3_conv11_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm11_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm11_beta",
+            "ssd0_resnetmlperf0_stage3_conv12_weight",
+            "ssd0_resnetmlperf0_stage3_batchnorm12_gamma",
+            "ssd0_resnetmlperf0_stage3_batchnorm12_beta",
+            "ssd0_expand_trans_conv0_weight",
+            "ssd0_expand_trans_conv0_bias",
+            "ssd0_expand_conv0_weight",
+            "ssd0_expand_conv0_bias",
+            "ssd0_expand_trans_conv1_weight",
+            "ssd0_expand_trans_conv1_bias",
+            "ssd0_expand_conv1_weight",
+            "ssd0_expand_conv1_bias",
+            "ssd0_expand_trans_conv2_weight",
+            "ssd0_expand_trans_conv2_bias",
+            "ssd0_expand_conv2_weight",
+            "ssd0_expand_conv2_bias",
+            "ssd0_expand_trans_conv3_weight",
+            "ssd0_expand_trans_conv3_bias",
+            "ssd0_expand_conv3_weight",
+            "ssd0_expand_conv3_bias",
+            "ssd0_expand_trans_conv4_weight",
+            "ssd0_expand_trans_conv4_bias",
+            "ssd0_expand_conv4_weight",
+            "ssd0_expand_conv4_bias",
+            "ssd0_convpredictor0_conv0_weight",
+            "ssd0_convpredictor0_conv0_bias",
+            "ssd0_convpredictor1_conv0_weight",
+            "ssd0_convpredictor1_conv0_bias",
+            "ssd0_convpredictor2_conv0_weight",
+            "ssd0_convpredictor2_conv0_bias",
+            "ssd0_convpredictor3_conv0_weight",
+            "ssd0_convpredictor3_conv0_bias",
+            "ssd0_convpredictor4_conv0_weight",
+            "ssd0_convpredictor4_conv0_bias",
+            "ssd0_convpredictor5_conv0_weight",
+            "ssd0_convpredictor5_conv0_bias",
+        ])
+
+- KEY:
+    NAME:  global_batch_size
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  model_bn_span
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 1"
+
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_factor
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0"
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_steps
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 1"
+
+- KEY:
+    NAME:  opt_weight_decay
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  opt_base_learning_rate
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  max_samples
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] in [1, 50]"
+
+- KEY:
+    NAME: opt_learning_rate_decay_boundary_epochs
+    REQ:   EXACTLY_ONE
+    CHECK: " is_integer(10 * (v['value'][0] / 40.0 - 1))"
+    CHECK: " is_integer(10 * (v['value'][1] / 50.0 - 1))"
+
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'epoch_num' in v['metadata']"
+    ATLEAST_ONE_CHECK: "v['value'] >= 0.230 and v['value'] < 1.0"

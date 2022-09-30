@@ -1,0 +1,16 @@
+# Optimizer Parameters
+- KEY:
+    NAME:  opt_bias_correction
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] "
+
+- KEY:
+    NAME:  opt_grad_averaging
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] "
+
+- KEY:
+    NAME:  opt_max_grad_norm
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 1."
+

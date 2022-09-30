@@ -1,0 +1,154 @@
+# This file lists all the KEYs to be checked. Every line that matches mlperf logging regex (::MLL...) will be checked against these rules.
+# In the order of the appearance in the log, for each line will execute the code specified under CHECK for the KEY in that line.
+# The code will be launched using local state 'v' which is the content of value field in log line, and global state 's'.
+# Global state 's' exists to allow cross-line checks, like start/stop pairs etc. To initialize 's' use BEGIN record which CODE will
+# be executed before any checks.
+# In addition, occurrence of each key will be counted and at the end if a requirement regarding the number of occurrences is defined it will
+# be confirmed. This could be implemented using global state, but since this is a common thing to do it is natively supported.
+#
+# KEY record:
+# NAME
+# REQ   - optional - {EXACTLY_ONE, AT_LEAST_ONE}
+# PRE   - optional - code to be executed before CHECK
+# CHECK - optional - expression to be evaluated to verify correctness
+# POST  - optional - code to be executed after CHECK
+
+- BEGIN:
+    CODE: |
+        print('AAAAAAAAA')
+        s['summary'] = {}
+
+- END:
+    PRE: |
+        import yaml
+        import sys
+        yaml.safe_dump(s['summary'], sys.stdout, default_flow_style=False)
+        print('BBBBBBBBBBB')
+
+- KEY:
+    NAME:  submission_org
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  submission_platform
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  submission_division
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  submission_status
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  submission_benchmark
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+# at least one record should be found, but any found records must pass the test
+- KEY:
+    NAME:  cache_clear
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+# frequency not checked
+- KEY:
+    NAME:  init_start
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+# confirm less than 20min since the very first init_start
+- KEY:
+    NAME:  init_stop
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  run_start
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+# status can also be aborted, but not allowing it here for now
+# if eval is inside epoch and we decide to terminate, we can lack epoch_stop, it is ok
+- KEY:
+    NAME:  run_stop
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+# FIXME: check epoch_count value match
+- KEY:
+    NAME:  block_start
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  block_stop
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  epoch_start
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  epoch_stop
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+# making sure previous eval did print it's accuracy result
+- KEY:
+    NAME:  eval_start
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  eval_stop
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  eval_accuracy
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  seed
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  train_samples
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  eval_samples
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  epoch_train_samples
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  block_train_samples
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  epoch_train_throughput
+    POST: |
+        s['summary'][ll.key] = v['value']
+
+- KEY:
+    NAME:  block_train_throughput
+    POST: |
+        s['summary'][ll.key] = v['value']
+

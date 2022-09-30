@@ -1,0 +1,125 @@
+accelerator_version:
+  description: "Accelerator driver version"
+  command: null
+  vendor_command:
+      NVIDIA: echo $CUDA_DRIVER_VERSION
+accelerator_type:
+  description: "Accelerator type"
+  command: null
+  vendor_command:
+      NVIDIA: nvidia-smi -i 0 --query-gpu=name --format=csv,noheader,nounits
+accelerator_model:
+  description: "Accelerator name"
+  command: null
+  vendor_command:
+      NVIDIA: nvidia-smi -i 0 --query-gpu=name --format=csv,noheader,nounits
+total_num_accelerators:
+  description: "Total number of accelerators"
+  command: null
+  vendor_command:
+      NVIDIA: >
+          GPUS_PER_NODE=$(nvidia-smi -i 0 --query-gpu=count --format=csv,noheader,nounits)
+          echo "$((GPUS_PER_NODE * $SLURM_NNODE))"
+precision:
+  description: "Precision"
+  command: null
+  vendor_command: {}
+framework_name_version:
+  description: "Framework name and version"
+  command: null
+  vendor_command:
+      NVIDIA: echo "PyTorch NVIDIA Release $NVIDIA_PYTORCH_VERSION"
+python_version:
+  description: "Python version"
+  command: python --version
+  vendor_command: {}
+library_versions:
+  description: "Library versions, {library1: version, library2: version}"
+  command: null
+  vendor_command:
+      NVIDIA: >
+          OS_NAME=$(cat /etc/lsb-release |grep DISTRIB_ID |cut -f 2 -d "=")
+          OS_VERSION=$(cat /etc/lsb-release |grep DISTRIB_RELEASE |cut -f 2 -d "=")
+          MOFED_VERSION=$(cat /sys/module/mlx5_core/version)
+
+          cat <<EOF
+          {
+              "container_base": "${OS_NAME}-${OS_VERSION}",
+              "openmpi_version": "${OPENMPI_VERSION}",
+              "mofed_version": "${MOFED_VERSION}",
+              "cuda_version": "${CUDA_VERSION}",
+              "cuda_driver_version": "${CUDA_DRIVER_VERSION}",
+              "nccl_version": "${NCCL_VERSION}",
+              "cudnn_version": "${CUDNN_VERSION}",
+              "cublas_version": "${CUBLAS_VERSION}",
+              "trt_version": "${TRT_VERSION}",
+              "dali_version": "${DALI_VERSION}"
+          }
+          EOF
+processor_model:
+  description: "Host processor name"
+  command: null
+  vendor_command:
+      NVIDIA: >
+          CPU_NUMA_NODES=$(lscpu |grep "NUMA node(s):"|cut -f2 -d:)
+          CPU_MODEL_NAME=$(lscpu |grep "Model name:"|cut -f2 -d:)
+          echo "${CPU_NUMA_NODES}x ${CPU_MODEL_NAME}"
+total_num_processors:
+  description: "Host processor count"
+  command: null
+  vendor_command:
+      NVIDIA: >
+          CPU_NUMA_NODES=$(lscpu |grep "NUMA node(s):"|cut -f2 -d:)
+          CPU_CORES_PER_SOCKET=$(lscpu |grep "Core(s) per socket:"|cut -f2 -d:)
+          echo "$(($CPU_NUMA_NODES * $CPU_CORES_PER_SOCKET))"
+num_processors_per_node:
+  description: "Number of accelerators per node"
+  command: null
+  vendor_command:
+      NVIDIA: nvidia-smi -i 0 --query-gpu=count --format=csv,noheader,nounits
+accelerator_mem_capacity:
+  description: "Total accelerator memory capacity"
+  command: null
+  vendor_command: {}
+accelerator_topology_info:
+  description: "Accelerator interconnect topology"
+  command: null
+  vendor_command:
+      NVIDIA: >
+          DEV=$(ibstat -l | head -1)
+          LINK_LAYER=$(ibstatus $DEV | grep "link_layer" | cut -f 2- -d" ")
+          RATE=$(ibstatus $DEV | grep "rate" | cut -f 2- -d" ")
+          echo "$LINK_LAYER $RATE"
+os_version:
+  description: "OS and version"
+  command: null
+  vendor_command:
+      NVIDIA: cat /etc/lsb-release |grep DISTRIB_RELEASE |cut -f 2 -d "="
+linux_version:
+  description: "Linux version"
+  command: null
+  vendor_command:
+      NVIDIA: cat /etc/lsb-release |grep DISTRIB_RELEASE |cut -f 2 -d "="
+runtime_command:
+  description: "Command used to execute the job"
+storage_location:
+  description: "Storage location: {remote, local, ...}"
+  vendor_command:
+      NVIDIA: >
+          DEV=$(lsblk -e 11 -ndio KNAME | head -1)
+          case "$DEV" in
+            sd*)
+                TRANSPORT="SATA"
+                ;;
+            hd*)
+                TRANSPORT="IDE"
+                ;;
+            nvme*)
+                TRANSPORT="NVMe"
+                ;;
+            *)
+                TRANSPORT="<unknown bus>"
+                ;;
+          esac
+storage_protocol:
+  description: "Storage protocol: {file, object, ...}"

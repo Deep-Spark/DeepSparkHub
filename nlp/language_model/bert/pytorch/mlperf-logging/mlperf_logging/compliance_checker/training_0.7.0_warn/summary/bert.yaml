@@ -1,0 +1,55 @@
+
+- KEY:
+    NAME: initial_eval_accuracy
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  global_batch_size
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_epochs
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_steps
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  max_sequence_length
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  opt_base_learning_rate
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  opt_lamb_beta_1
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  opt_lamb_beta_2
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  opt_lamb_learning_rate_decay_poly_power
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  opt_gradient_accumulation_steps
+    POST: |
+        s['summary'][ll.key] = ll.value
+
+- KEY:
+    NAME:  max_predictions_per_seq
+    POST: |
+        s['summary'][ll.key] = ll.value

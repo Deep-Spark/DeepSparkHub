@@ -1,0 +1,3 @@
+torch
+torchvision
+--extra-index-url https://developer.download.nvidia.com/compute/redist/ nvidia-dali-cuda102==1.6.0

@@ -1,0 +1,37 @@
+
+- KEY:
+    NAME:  lars_opt_base_learning_rate
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lars_opt_end_learning_rate
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 0.0001 "
+
+- KEY:
+    NAME:  lars_opt_learning_rate_decay_poly_power
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 2 "
+
+- KEY:
+    NAME:  lars_opt_learning_rate_decay_steps
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lars_epsilon
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 0.0 "
+
+- KEY:
+    NAME:  lars_opt_learning_rate_warmup_epochs
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lars_opt_momentum
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lars_opt_weight_decay
+    REQ:   EXACTLY_ONE
+    CHECK: " is_integer(math.log2(v['value'] / 0.0001)) "
+

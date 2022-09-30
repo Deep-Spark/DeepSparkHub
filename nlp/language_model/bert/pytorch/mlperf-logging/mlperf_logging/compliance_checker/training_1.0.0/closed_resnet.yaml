@@ -1,0 +1,18 @@
+
+- KEY:
+    NAME:  global_batch_size
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+
+- KEY:
+    NAME:  opt_name
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] in ['sgd', 'lars'] "
+    POST:  " enqueue_config('training_1.0.0/closed_resnet_{}.yaml'.format(v['value'])) "
+
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'epoch_num' in v['metadata']"
+    ATLEAST_ONE_CHECK: "v['value'] >= 0.7590 and v['value'] < 1.0"
