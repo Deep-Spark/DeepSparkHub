@@ -1,0 +1,8 @@
+**/__pycache__/
+data
+work_dirs
+mmcv_full.egg-info
+build
+*.so
+mmcv/_ext.cpython-36m-x86_64-linux-gnu.so
+nohup.out

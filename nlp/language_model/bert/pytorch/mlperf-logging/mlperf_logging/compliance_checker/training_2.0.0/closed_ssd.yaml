@@ -1,0 +1,141 @@
+- BEGIN:
+    CODE: >
+        s.update({
+            'initialized_tensors': []
+        })
+- KEY:
+    NAME: weights_initialization
+    REQ: AT_LEAST_ONE
+    CHECK:
+        - "'tensor' in v['metadata']"
+    POST: >
+        s['initialized_tensors'] += [v['metadata']['tensor']]
+- END:
+    CHECK: >
+        sorted(s['initialized_tensors']) == sorted([
+            "module.backbone.body.conv1.weight",
+            "module.backbone.body.layer1.0.conv1.weight",
+            "module.backbone.body.layer1.0.conv2.weight",
+            "module.backbone.body.layer1.0.conv3.weight",
+            "module.backbone.body.layer1.0.downsample.0.weight",
+            "module.backbone.body.layer1.1.conv1.weight",
+            "module.backbone.body.layer1.1.conv2.weight",
+            "module.backbone.body.layer1.1.conv3.weight",
+            "module.backbone.body.layer1.2.conv1.weight",
+            "module.backbone.body.layer1.2.conv2.weight",
+            "module.backbone.body.layer1.2.conv3.weight",
+            "module.backbone.body.layer2.0.conv1.weight",
+            "module.backbone.body.layer2.0.conv2.weight",
+            "module.backbone.body.layer2.0.conv3.weight",
+            "module.backbone.body.layer2.0.downsample.0.weight",
+            "module.backbone.body.layer2.1.conv1.weight",
+            "module.backbone.body.layer2.1.conv2.weight",
+            "module.backbone.body.layer2.1.conv3.weight",
+            "module.backbone.body.layer2.2.conv1.weight",
+            "module.backbone.body.layer2.2.conv2.weight",
+            "module.backbone.body.layer2.2.conv3.weight",
+            "module.backbone.body.layer2.3.conv1.weight",
+            "module.backbone.body.layer2.3.conv2.weight",
+            "module.backbone.body.layer2.3.conv3.weight",
+            "module.backbone.body.layer3.0.conv1.weight",
+            "module.backbone.body.layer3.0.conv2.weight",
+            "module.backbone.body.layer3.0.conv3.weight",
+            "module.backbone.body.layer3.0.downsample.0.weight",
+            "module.backbone.body.layer3.1.conv1.weight",
+            "module.backbone.body.layer3.1.conv2.weight",
+            "module.backbone.body.layer3.1.conv3.weight",
+            "module.backbone.body.layer3.2.conv1.weight",
+            "module.backbone.body.layer3.2.conv2.weight",
+            "module.backbone.body.layer3.2.conv3.weight",
+            "module.backbone.body.layer3.3.conv1.weight",
+            "module.backbone.body.layer3.3.conv2.weight",
+            "module.backbone.body.layer3.3.conv3.weight",
+            "module.backbone.body.layer3.4.conv1.weight",
+            "module.backbone.body.layer3.4.conv2.weight",
+            "module.backbone.body.layer3.4.conv3.weight",
+            "module.backbone.body.layer3.5.conv1.weight",
+            "module.backbone.body.layer3.5.conv2.weight",
+            "module.backbone.body.layer3.5.conv3.weight",
+            "module.backbone.body.layer4.0.conv1.weight",
+            "module.backbone.body.layer4.0.conv2.weight",
+            "module.backbone.body.layer4.0.conv3.weight",
+            "module.backbone.body.layer4.0.downsample.0.weight",
+            "module.backbone.body.layer4.1.conv1.weight",
+            "module.backbone.body.layer4.1.conv2.weight",
+            "module.backbone.body.layer4.1.conv3.weight",
+            "module.backbone.body.layer4.2.conv1.weight",
+            "module.backbone.body.layer4.2.conv2.weight",
+            "module.backbone.body.layer4.2.conv3.weight",
+            "module.backbone.fpn.extra_blocks.p6.bias",
+            "module.backbone.fpn.extra_blocks.p6.weight",
+            "module.backbone.fpn.extra_blocks.p7.bias",
+            "module.backbone.fpn.extra_blocks.p7.weight",
+            "module.backbone.fpn.inner_blocks.0.bias",
+            "module.backbone.fpn.inner_blocks.0.weight",
+            "module.backbone.fpn.inner_blocks.1.bias",
+            "module.backbone.fpn.inner_blocks.1.weight",
+            "module.backbone.fpn.inner_blocks.2.bias",
+            "module.backbone.fpn.inner_blocks.2.weight",
+            "module.backbone.fpn.layer_blocks.0.bias",
+            "module.backbone.fpn.layer_blocks.0.weight",
+            "module.backbone.fpn.layer_blocks.1.bias",
+            "module.backbone.fpn.layer_blocks.1.weight",
+            "module.backbone.fpn.layer_blocks.2.bias",
+            "module.backbone.fpn.layer_blocks.2.weight",
+            "module.head.classification_head.cls_logits.bias",
+            "module.head.classification_head.cls_logits.weight",
+            "module.head.classification_head.conv.0.bias",
+            "module.head.classification_head.conv.0.weight",
+            "module.head.classification_head.conv.2.bias",
+            "module.head.classification_head.conv.2.weight",
+            "module.head.classification_head.conv.4.bias",
+            "module.head.classification_head.conv.4.weight",
+            "module.head.classification_head.conv.6.bias",
+            "module.head.classification_head.conv.6.weight",
+            "module.head.regression_head.bbox_reg.bias",
+            "module.head.regression_head.bbox_reg.weight",
+            "module.head.regression_head.conv.0.bias",
+            "module.head.regression_head.conv.0.weight",
+            "module.head.regression_head.conv.2.bias",
+            "module.head.regression_head.conv.2.weight",
+            "module.head.regression_head.conv.4.bias",
+            "module.head.regression_head.conv.4.weight",
+            "module.head.regression_head.conv.6.bias",
+            "module.head.regression_head.conv.6.weight",
+        ])
+
+- KEY:
+    NAME:  global_batch_size
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  opt_name
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 'adam' "
+
+- KEY:
+    NAME:  opt_base_learning_rate
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0.0"
+
+- KEY:
+    NAME:  opt_weight_decay
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 0.0"
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_epochs
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0.0"
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_factor
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0.0"
+
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'epoch_num' in v['metadata']"
+    ATLEAST_ONE_CHECK: "v['value'] >= 0.340 and v['value'] < 1.0"

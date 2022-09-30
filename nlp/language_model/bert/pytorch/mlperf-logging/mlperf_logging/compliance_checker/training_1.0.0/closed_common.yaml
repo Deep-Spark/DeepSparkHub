@@ -1,0 +1,11 @@
+
+- KEY:
+    NAME:  submission_benchmark
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] in ['resnet', 'ssd', 'maskrcnn', 'minigo', 'dlrm', 'bert', 'rnnt', 'unet3d'] "
+    POST:  " enqueue_config('training_1.0.0/closed_{}.yaml'.format(v['value'])) "
+
+- KEY:
+    NAME: gradient_accumulation_steps
+    REQ: EXACTLY_ONE
+    CHECK: " v['value'] > 0 "

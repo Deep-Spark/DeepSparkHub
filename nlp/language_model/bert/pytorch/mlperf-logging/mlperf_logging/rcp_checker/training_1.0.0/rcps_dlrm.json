@@ -1,0 +1,59 @@
+{
+
+  "dlrm_ref_32768":
+  {
+    "Benchmark": "dlrm",
+    "BS": 32768,
+    "Hyperparams": {
+       "opt_base_learning_rate": 18,
+       "opt_learning_rate_warmup_steps": 8000,
+       "lr_decay_start_steps": 70000,
+       "sgd_opt_base_learning_rate": 18,
+       "sgd_opt_learning_rate_decay_poly_power": 2,
+       "sgd_opt_learning_rate_decay_steps": 30000
+    },
+    "Epochs to converge": [
+       1.8, 1.75, 1.75, 1.75, 1.75, 1.8, 1.7, 1.75, 1.75, 1.75
+    ]
+  },
+
+  "dlrm_ref_55296":
+  {
+    "Benchmark": "dlrm",
+    "BS": 55296,
+    "Hyperparams": {
+       "opt_base_learning_rate": 24,
+       "opt_learning_rate_warmup_steps": 2750,
+       "lr_decay_start_steps": 49315,
+       "sgd_opt_base_learning_rate": 24,
+       "sgd_opt_learning_rate_decay_poly_power": 2,
+       "sgd_opt_learning_rate_decay_steps": 27772
+    },
+    "Epochs to converge": [
+       1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.95,
+       1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9,
+       1.9, 1.9, 1.85, 1.9, 1.9, 1.9, 1.9, 1.95, 1.9 
+    ]
+  },
+
+  "dlrm_ref_71680":
+  {
+    "Benchmark": "dlrm",
+    "BS": 71680,
+    "Hyperparams": {
+       "opt_base_learning_rate": 26,
+       "opt_learning_rate_warmup_steps": 2500,
+       "lr_decay_start_steps": 46821,
+       "sgd_opt_base_learning_rate": 26,
+       "sgd_opt_learning_rate_decay_poly_power": 2,
+       "sgd_opt_learning_rate_decay_steps": 15406
+    },
+    "Epochs to converge": [
+      2.0, 1.95, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0,
+      2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0,
+      2.0, 2.0, 2.0, 2.0
+    ]
+  }
+
+}
+

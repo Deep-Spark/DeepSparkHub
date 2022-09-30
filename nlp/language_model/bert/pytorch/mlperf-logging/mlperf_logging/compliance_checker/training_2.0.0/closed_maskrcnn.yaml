@@ -1,0 +1,96 @@
+- BEGIN:
+    CODE: >
+        s.update({
+            'initialized_tensors': [],
+            'global_batch_size': None,
+        })
+- KEY:
+    NAME: weights_initialization
+    REQ: AT_LEAST_ONE
+    CHECK:
+        - "'tensor' in v['metadata']"
+    POST: >
+        s['initialized_tensors'] += [v['metadata']['tensor']]
+- END:
+    CHECK: >
+        sorted(s['initialized_tensors']) == sorted([
+            "FPN_inner_block1",
+            "FPN_layer_block1",
+            "FPN_inner_block2",
+            "FPN_layer_block2",
+            "FPN_inner_block3",
+            "FPN_layer_block3",
+            "FPN_inner_block4",
+            "FPN_layer_block4",
+            "RPNHead_conv",
+            "RPNHead_cls",
+            "RPNHead_bbox",
+            "ROI_BOX_FEATURE_EXTRACTOR_fc6",
+            "ROI_BOX_FEATURE_EXTRACTOR_fc7",
+            "ROI_BOX_PREDICTOR_cls",
+            "ROI_BOX_PREDICTOR_bbox",
+            "ROI_MASK_FEATURE_EXTRACTOR_fcn1",
+            "ROI_MASK_FEATURE_EXTRACTOR_fcn2",
+            "ROI_MASK_FEATURE_EXTRACTOR_fcn3",
+            "ROI_MASK_FEATURE_EXTRACTOR_fcn4",
+            "ROI_MASK_PREDICTOR_fcn5",
+            "ROI_MASK_PREDICTOR_fcn_logits",
+        ])
+
+- KEY:
+    NAME:  global_batch_size
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+    POST: " s['global_batch_size'] = v['value'] "
+
+- KEY:
+    NAME:  opt_base_learning_rate
+    REQ:   EXACTLY_ONE
+    CHECK: " is_integer(v['value'] / 0.02) or ( s['global_batch_size'] < 16 and is_integer(0.02 / v['value']) )"
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_steps
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0"
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_factor
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] > 0"
+
+- KEY:
+    NAME:  num_image_candidates
+    REQ:   EXACTLY_ONE
+    CHECK: " is_integer(v['value'] / 1000.0)"
+
+- KEY:
+    NAME:  opt_learning_rate_decay_factor
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 0.1 "
+
+- KEY:
+    NAME:  opt_learning_rate_decay_steps
+    REQ:   EXACTLY_ONE
+    CHECK: " len(v['value']) == 2 "
+
+- KEY:
+    NAME:  min_image_size
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0 "
+
+- KEY:
+    NAME:  max_image_size
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] >= 0 "
+
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'BBOX' in v['value']"
+        - "'SEGM' in v['value']"
+        - "'epoch_num' in v['metadata']"
+    POST: " s['accuracy_printed'] = True "
+    ATLEAST_ONE_CHECK: "v['value']['BBOX'] >= 0.377 and v['value']['BBOX'] < 1.0 and v['value']['SEGM'] >= 0.339 and v['value']['SEGM'] < 1.0"
+
+
