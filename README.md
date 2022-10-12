@@ -36,8 +36,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 - [3D Reconstruction](#3d-reconstruction模型列表)
 
-- [Privacy Preserving](#privacy-preserving)
-
   
 --------
 
@@ -259,9 +257,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 -------- | ------ | ---- 
 [ngp-nerf](3d-reconstruction/hashnerf/readme.md)  | PyTorch | fox
 
-## Privacy Preserving
-
-- [AES](privacy-preserving/aes/README.md)
 
 -------
 
