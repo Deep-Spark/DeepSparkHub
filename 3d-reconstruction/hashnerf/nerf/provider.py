@@ -96,6 +96,7 @@ class NeRFDataset:
         super().__init__()
         
         self.opt = opt
+        self.num_gpus = opt.num_gpus
         self.device = device
         self.type = type # train, val, test
         self.downscale = downscale
@@ -342,7 +343,13 @@ class NeRFDataset:
         size = len(self.poses)
         if self.training and self.rand_pose > 0:
             size += size // self.rand_pose # index >= size means we use random pose.
-        loader = DataLoader(list(range(size)), batch_size=1, collate_fn=self.collate, shuffle=self.training, num_workers=0)
+        if self.num_gpus > 1:
+            train_sampler = torch.utils.data.distributed.DistributedSampler(list(range(size)))
+            loader = DataLoader(list(range(size)), batch_size=1, sampler=train_sampler, collate_fn=self.collate, num_workers=0)
+        else:
+            loader = DataLoader(list(range(size)), batch_size=1, collate_fn=self.collate, shuffle=self.training, num_workers=0)
+
         loader._data = self # an ugly fix... we need to access error_map & poses in trainer.
         loader.has_gt = self.images is not None
         return loader
+

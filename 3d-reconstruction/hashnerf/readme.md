@@ -15,6 +15,9 @@ pip install -r requirements.txt
 We use the same data format as instant-ngp, e.g., [armadillo](https://github.com/NVlabs/instant-ngp/blob/master/data/sdf/armadillo.obj) and [fox](https://github.com/NVlabs/instant-ngp/tree/master/data/nerf/fox). 
 Please download and put them under `./data`.
 
+#bash
+bash train.sh
+
 We also support self-captured dataset and converting other formats (e.g., LLFF, Tanks&Temples, Mip-NeRF 360) to the nerf-compatible format, with details in the following code block.
 
 Supported datasets
@@ -31,7 +34,6 @@ First time running will take some time to compile the CUDA extensions.
 # for the colmap dataset, the default dataset setting `--bound 2 --scale 0.33` is used.
 python main_nerf.py data/fox --workspace trial_nerf # fp32 mode
 python main_nerf.py data/fox --workspace trial_nerf --fp16 # fp16 mode (pytorch amp)
-python main_nerf.py data/fox --workspace trial_nerf --fp16 --ff # fp16 mode + FFMLP (this repo's implementation)
 
 
 # one for all: -O means --fp16 --cuda_ray --preload, which usually gives the best results balanced on speed & performance.
@@ -54,16 +56,6 @@ python main_nerf.py data/nerf_synthetic/lego --workspace trial_nerf -O --bound 1
 python main_nerf.py data/nerf_llff_data/fern --workspace trial_nerf -O
 ```
 
-```bash
-# for custom dataset, you should:
-# 1. take a video / many photos from different views 
-# 2. put the video under a path like ./data/custom/video.mp4 or the images under ./data/custom/images/*.jpg.
-# 3. call the preprocess code: (should install ffmpeg and colmap first! refer to the file for more options)
-python scripts/colmap2nerf.py --video ./data/custom/video.mp4 --run_colmap # if use video
-python scripts/colmap2nerf.py --images ./data/custom/images/ --run_colmap # if use images
-# 4. it should create the transform.json, and you can train with: (you'll need to try with different scale & bound & dt_gamma to make the object correctly located in the bounding box and render fluently.)
-python main_nerf.py data/custom --workspace trial_nerf_custom -O --gui --scale 2.0 --bound 1.0 --dt_gamma 0.02
-```
 
 ## Results on BI-V100
 
