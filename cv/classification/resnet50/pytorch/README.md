@@ -4,7 +4,7 @@ Residual Networks, or ResNets, learn residual functions with reference to the la
 
 ## Step 1: Installing
 ```bash
-pip3 install -r requirements.txt
+pip3 install torch torchvision
 ```
 :beers: Done!
 
