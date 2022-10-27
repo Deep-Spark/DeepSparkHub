@@ -4,14 +4,8 @@
 
 A pytorch implementation of the NeRF part (grid encoder, density grid ray sampler) in instant-ngp, as described in Instant Neural Graphics Primitives with a Multiresolution Hash Encoding.
 
-## Step 1: Installing
+## Step 1: Installing with pip
 
-```bash
-git clone --recursive http://bitbucket.iluvatar.ai:7990/scm/sol/hashnerf.git
-cd hashnerf
-```
-
-### Install with pip
 ```bash
 pip install -r requirements.txt
 ```
