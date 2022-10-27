@@ -9,12 +9,49 @@ from functools import partial
 from loss import huber_loss
 
 #torch.autograd.set_detect_anomaly(True)
+torch.backends.cudnn.benchmark = True
+
+
+def setup_for_distributed(is_master):
+    """
+    This function disables printing when not in master process
+    """
+    import builtins as __builtin__
+    builtin_print = __builtin__.print
+
+    def print(*args, **kwargs):
+        force = kwargs.pop('force', False)
+        if is_master or force:
+            builtin_print(*args, **kwargs)
+
+    __builtin__.print = print
+
+
+def init_distributed_mode(args):
+    if args.num_gpus > 1 and 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:
+        env_rank = int(os.environ["RANK"])
+        env_world_size = int(os.environ["WORLD_SIZE"])
+        env_gpu = int(os.environ['LOCAL_RANK'])
+    else:
+        print('Not using distributed mode')
+        return
+
+    dist_backend = "nccl"
+    print('| distributed init (rank {}) (size {})'.format(env_rank,env_world_size), flush=True)
+    torch.distributed.init_process_group(backend=dist_backend, init_method='env://',
+                                         world_size=env_world_size, rank=env_rank)
+
+    torch.cuda.set_device(env_gpu)
+    torch.distributed.barrier()
+    setup_for_distributed(env_rank == 0)
+
 
 if __name__ == '__main__':
     print('[TIMESTAMP] start time:', time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     parser = argparse.ArgumentParser()
     parser.add_argument('path', type=str)
     parser.add_argument('-O', action='store_true', help="equals --fp16 --cuda_ray --preload")
+    parser.add_argument('--num_gpus', type=int, default=1)
     parser.add_argument('--test', action='store_true', help="test mode")
     parser.add_argument('--workspace', type=str, default='workspace')
     parser.add_argument('--seed', type=int, default=0)
@@ -39,7 +76,7 @@ if __name__ == '__main__':
     parser.add_argument('--view', type=str, default='yaw', help="view direction:random or yaw")
 
     ### evaluate options
-    parser.add_argument('--eval_interval', type=int, default=5, help="eval_interval")
+    parser.add_argument('--eval_interval', type=int, default=1, help="eval_interval")
 
     ### network backbone options
     parser.add_argument('--fp16', action='store_true', help="use amp mixed precision training")
@@ -76,6 +113,8 @@ if __name__ == '__main__':
     parser.add_argument('--rand_pose', type=int, default=-1, help="<0 uses no rand pose, =0 only uses rand pose, >0 sample one rand pose every $ known poses")
 
     opt = parser.parse_args()
+
+    init_distributed_mode(opt)
 
     if opt.O:
         opt.fp16 = True
@@ -122,7 +161,16 @@ if __name__ == '__main__':
     #criterion = torch.nn.HuberLoss(reduction='none', beta=0.1) # only available after torch 1.10 ?
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    
+
+    if opt.num_gpus > 1:
+        env_rank = int(os.environ["RANK"])
+        env_world_size = int(os.environ["WORLD_SIZE"])
+        env_gpu = int(os.environ['LOCAL_RANK'])
+    else:
+        env_rank = 0
+        env_world_size = 1
+        env_gpu = 0
+
     if opt.test:
         
         metrics = [PSNRMeter(), LPIPSMeter(device=device)]
@@ -156,7 +204,7 @@ if __name__ == '__main__':
         scheduler = lambda optimizer: optim.lr_scheduler.LambdaLR(optimizer, lambda iter: 0.1 ** min(iter / opt.iters, 1))
 
         metrics = [PSNRMeter(), LPIPSMeter(device=device)]
-        trainer = Trainer('ngp', opt, model, device=device, workspace=opt.workspace, optimizer=optimizer, criterion=criterion, ema_decay=0.95, fp16=opt.fp16, lr_scheduler=scheduler, scheduler_update_every_step=True, metrics=metrics, use_checkpoint=opt.ckpt, eval_interval=opt.eval_interval)
+        trainer = Trainer('ngp', opt, model, local_rank=env_gpu, world_size=env_world_size, device=device, workspace=opt.workspace, optimizer=optimizer, criterion=criterion, ema_decay=0.95, fp16=opt.fp16, lr_scheduler=scheduler, scheduler_update_every_step=True, metrics=metrics, use_checkpoint=opt.ckpt, eval_interval=opt.eval_interval)
 
         if opt.gui:
             gui = NeRFGUI(opt, trainer, train_loader)
