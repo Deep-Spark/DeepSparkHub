@@ -1,18 +1,16 @@
 #!/bin/bash
 
 echo "prepare data..."
-DATA_URL=$1
+
+git clone https://github.com/neheller/kits19
+cd kits19
+pip3 install -r requirements.txt
+python3 -m starter_code.get_imaging
+cd ..
 
 mkdir -p data/kits19/train
 
-data_file="data/kits19/train/kits19.tar.gz"
+python3 preprocess_dataset.py --data_dir kits19/data --results_dir data/kits19/train
 
-if [ ! -e ${data_file} ]; then
-    echo "ERROR: Invalid data file ${data_file}"
-    wget -P data/kits19/train ${DATA_URL}
-fi
-
-echo "Uncompressing the kits19!"
-tar -xf ${data_file} -C data/kits19/train
-
+echo "data done!"
 
