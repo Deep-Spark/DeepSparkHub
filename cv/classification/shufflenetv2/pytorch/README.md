@@ -5,6 +5,7 @@ ShuffleNet v2 is a convolutional neural network optimized for a direct metric (s
 ```bash
 pip3 install -r requirements.txt
 ```
+Sign up and login in [imagenet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole imagenet dataset. Specify `/path/to/imagenet` to your imagenet path in later training process.
 :beers: Done!
 
 ## Step 2: Training
