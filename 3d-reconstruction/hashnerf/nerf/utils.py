@@ -30,6 +30,113 @@ from torch_ema import ExponentialMovingAverage
 
 from packaging import version as pver
 import lpips
+from torch.distributed.algorithms.join import (
+    Join,
+    Joinable,
+    JoinHook,
+)
+import logging
+
+
+
+class DDP(torch.nn.parallel.DistributedDataParallel):
+    def __init__(self, module, device_ids, output_device=None, dim=0, broadcast_buffers=True, process_group=None, bucket_cap_mb=25, find_unused_parameters=False, check_reduction=False):
+        super().__init__(module, device_ids, output_device, dim, broadcast_buffers, process_group, bucket_cap_mb, find_unused_parameters, check_reduction)
+
+    def render(self, *inputs, **kwargs):
+        with torch.autograd.profiler.record_function("DistributedDataParallel.forward"):
+            if torch.is_grad_enabled() and self.require_backward_grad_sync:
+                self.logger.set_runtime_stats_and_log()
+                self.num_iterations += 1
+                self.reducer.prepare_for_forward()
+
+            # Notify the join context that this process has not joined, if
+            # needed
+            work = Join.notify_join_context(self)
+            if work:
+                self.reducer._set_forward_pass_work_handle(
+                    work, self._divide_by_initial_world_size
+                )
+
+            # Calling _rebuild_buckets before forward compuation,
+            # It may allocate new buckets before deallocating old buckets
+            # inside _rebuild_buckets. To save peak memory usage,
+            # call _rebuild_buckets before the peak memory usage increases
+            # during forward computation.
+            # This should be called only once during whole training period.
+            if torch.is_grad_enabled() and self.reducer._rebuild_buckets():
+                logging.info("Reducer buckets have been rebuilt in this iteration.")
+                self._has_rebuilt_buckets = True
+
+            if self.require_forward_param_sync:
+                self._sync_params()
+
+            if self._join_config.enable:
+                # Notify joined ranks whether they should sync in backwards pass or not.
+                self._check_global_requires_backward_grad_sync(is_joined_rank=False)
+
+            if self.device_ids:
+                inputs, kwargs = self.to_kwargs(inputs, kwargs, self.device_ids[0])
+                output = self.module.render(*inputs[0], **kwargs[0])
+            else:
+                output = self.module.render(*inputs, **kwargs)
+
+            if torch.is_grad_enabled() and self.require_backward_grad_sync:
+                self.require_forward_param_sync = True
+                # We'll return the output object verbatim since it is a freeform
+                # object. We need to find any tensors in this object, though,
+                # because we need to figure out which parameters were used during
+                # this forward pass, to ensure we short circuit reduction for any
+                # unused parameters. Only if `find_unused_parameters` is set.
+                if self.find_unused_parameters and not self.static_graph:
+                    # Do not need to populate this for static graph.
+                    self.reducer.prepare_for_backward(list(_find_tensors(output)))
+                else:
+                    self.reducer.prepare_for_backward([])
+            else:
+                self.require_forward_param_sync = False
+
+        # TODO: DDPSink is currently enabled for unused parameter detection and
+        # static graph training for first iteration.
+        if (self.find_unused_parameters and not self.static_graph) or (
+            self.static_graph and self.num_iterations == 1
+        ):
+            state_dict = {
+                'static_graph': self.static_graph,
+                'num_iterations': self.num_iterations,
+            }
+
+            output_tensor_list, treespec, output_is_rref = _tree_flatten_with_rref(
+                output
+            )
+            output_placeholders = [None for _ in range(len(output_tensor_list))]
+            # Do not touch tensors that have no grad_fn, which can cause issues
+            # such as https://github.com/pytorch/pytorch/issues/60733
+            for i, output in enumerate(output_tensor_list):
+                if torch.is_tensor(output) and output.grad_fn is None:
+                    output_placeholders[i] = output
+
+            # When find_unused_parameters=True, makes tensors which require grad
+            # run through the DDPSink backward pass. When not all outputs are
+            # used in loss, this makes those corresponding tensors receive
+            # undefined gradient which the reducer then handles to ensure
+            # param.grad field is not touched and we don't error out.
+            passthrough_tensor_list = _DDPSink.apply(
+                self.reducer,
+                state_dict,
+                *output_tensor_list,
+            )
+            for i in range(len(output_placeholders)):
+                if output_placeholders[i] is None:
+                    output_placeholders[i] = passthrough_tensor_list[i]
+
+            # Reconstruct output data structure.
+            output = _tree_unflatten_with_rref(
+                output_placeholders, treespec, output_is_rref
+            )
+        return output
+
+
 
 def custom_meshgrid(*args):
     # ref: https://pytorch.org/docs/stable/generated/torch.meshgrid.html?highlight=meshgrid#torch.meshgrid
@@ -261,9 +368,10 @@ class LPIPSMeter:
     
     def update(self, preds, truths):
         preds, truths = self.prepare_inputs(preds, truths) # [B, H, W, 3] --> [B, 3, H, W], range in [0, 1]
-        v = self.fn(truths, preds, normalize=True).item() # normalize=True: [0, 1] to [-1, 1]
-        self.V += v
-        self.N += 1
+        v = self.fn(truths, preds, normalize=True) # normalize=True: [0, 1] to [-1, 1]
+        n = v.shape[0]
+        self.V += v.sum().item()
+        self.N += n
     
     def measure(self):
         return self.V / self.N
@@ -322,9 +430,11 @@ class Trainer(object):
         self.console = Console()
 
         model.to(self.device)
+        self._model = model
         if self.world_size > 1:
             model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
-            model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[local_rank])
+            # model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[local_rank])
+            model = DDP(model, device_ids=[local_rank])
         self.model = model
 
         if isinstance(criterion, nn.Module):
@@ -339,7 +449,10 @@ class Trainer(object):
         if optimizer is None:
             self.optimizer = optim.Adam(self.model.parameters(), lr=0.001, weight_decay=5e-4) # naive adam
         else:
-            self.optimizer = optimizer(self.model)
+            if self.world_size > 1:
+                self.optimizer = optimizer(self.model.module)
+            else:
+                self.optimizer = optimizer(self.model)
 
         if lr_scheduler is None:
             self.lr_scheduler = optim.lr_scheduler.LambdaLR(self.optimizer, lr_lambda=lambda epoch: 1) # fake scheduler
@@ -470,7 +583,6 @@ class Trainer(object):
 
         # outputs = self.model.render(rays_o, rays_d, staged=False, bg_color=bg_color, perturb=True, force_all_rays=False if self.opt.patch_size == 1 else True, **vars(self.opt))
         outputs = self.model.render(rays_o, rays_d, staged=False, bg_color=bg_color, perturb=True, force_all_rays=True, **vars(self.opt))
-    
         pred_rgb = outputs['image']
 
         # MSE loss
@@ -521,11 +633,10 @@ class Trainer(object):
         # pred_weights_sum = outputs['weights_sum'] + 1e-8
         # loss_ws = - 1e-1 * pred_weights_sum * torch.log(pred_weights_sum) # entropy to encourage weights_sum to be 0 or 1.
         # loss = loss + loss_ws.mean()
-
+        
         return pred_rgb, gt_rgb, loss
 
     def eval_step(self, data):
-
         rays_o = data['rays_o'] # [B, N, 3]
         rays_d = data['rays_d'] # [B, N, 3]
         images = data['images'] # [B, H, W, 3/4]
@@ -597,8 +708,8 @@ class Trainer(object):
             self.writer = tensorboardX.SummaryWriter(os.path.join(self.workspace, "run", self.name))
 
         # mark untrained region (i.e., not covered by any camera from the training dataset)
-        if self.model.cuda_ray:
-            self.model.mark_untrained_grid(train_loader._data.poses, train_loader._data.intrinsics)
+        if self._model.cuda_ray:
+            self._model.mark_untrained_grid(train_loader._data.poses, train_loader._data.intrinsics)
 
         # get a ref to error_map
         self.error_map = train_loader._data.error_map
@@ -698,7 +809,7 @@ class Trainer(object):
                 data = next(loader)
 
             # update grid every 16 steps
-            if self.model.cuda_ray and self.global_step % self.opt.update_extra_interval == 0:
+            if self._model.cuda_ray and self.global_step % self.opt.update_extra_interval == 0:
                 with torch.cuda.amp.autocast(enabled=self.fp16):
                     self.model.update_extra_state()
             
@@ -812,7 +923,7 @@ class Trainer(object):
         for data in loader:
             
             # update grid every 16 steps
-            if self.model.cuda_ray and self.global_step % self.opt.update_extra_interval == 0:
+            if self._model.cuda_ray and self.global_step % self.opt.update_extra_interval == 0:
                 with torch.cuda.amp.autocast(enabled=self.fp16):
                     self.model.update_extra_state()
                     
@@ -984,9 +1095,9 @@ class Trainer(object):
             'stats': self.stats,
         }
 
-        if self.model.cuda_ray:
-            state['mean_count'] = self.model.mean_count
-            state['mean_density'] = self.model.mean_density
+        if self._model.cuda_ray:
+            state['mean_count'] = self._model.mean_count
+            state['mean_density'] = self._model.mean_density
 
         if full:
             state['optimizer'] = self.optimizer.state_dict()
@@ -1062,11 +1173,11 @@ class Trainer(object):
         if self.ema is not None and 'ema' in checkpoint_dict:
             self.ema.load_state_dict(checkpoint_dict['ema'])
 
-        if self.model.cuda_ray:
+        if self._model.cuda_ray:
             if 'mean_count' in checkpoint_dict:
-                self.model.mean_count = checkpoint_dict['mean_count']
+                self._model.mean_count = checkpoint_dict['mean_count']
             if 'mean_density' in checkpoint_dict:
-                self.model.mean_density = checkpoint_dict['mean_density']
+                self._model.mean_density = checkpoint_dict['mean_density']
         
         if model_only:
             return
