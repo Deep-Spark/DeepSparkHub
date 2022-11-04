@@ -31,7 +31,7 @@ else:
 
 ```shell
 
-bash prepare.sh /url/to/kits19/
+bash prepare.sh
 
 ```
 
