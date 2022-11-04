@@ -26,5 +26,5 @@ fi
 cd ${ROOT_DIR}
 python3  $PYTHONARG ${ROOT_DIR}/run_train.py  \
 	--model vgg16 --dali --dali-cpu  --data-path $DATA_PATH  \
-	--opt fused_sgd --batch-size 300 --lr 1e-2   \
+	--opt fused_sgd --batch-size 200 --lr 1e-2   \
 	--amp --nhwc "$@"
