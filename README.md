@@ -264,7 +264,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### 治理
 
-请参见 [DeepSpark Code of Conduct](https://gitee.com/deep-spark/deepspark/blob/master/CODE_OF_CONDUCT.md)。
+请参见 DeepSpark Code of Conduct on [Gitee](https://gitee.com/deep-spark/deepspark/blob/master/CODE_OF_CONDUCT.md) or on [GitHub](https://github.com/Deep-Spark/deepspark/blob/main/CODE_OF_CONDUCT.md)。
 
 ### 交流
 
@@ -276,5 +276,5 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ## 许可证
 
-本项目许可证遵循Apache-2.0。
+本项目许可证遵循[Apache-2.0](LICENSE)。
 
