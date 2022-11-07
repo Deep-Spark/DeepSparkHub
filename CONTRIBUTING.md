@@ -4,11 +4,11 @@ You are welcome to contribute to DeepSparkHub project. We want to make contribut
 
 ## Contributor License Agreement
 
-It's required to sign [CLA](https://gitee.com/organizations/deep-spark/cla/deep-park-contributor-protocol) when you first time submit PR (Pull Request) to the DeepSparkHub project. You only need to do it once.
+It's required to sign CLA on [Gitee](https://gitee.com/organizations/deep-spark/cla/deep-park-contributor-protocol) or [GitHub](https://gist.github.com/Deep-Spark/67e39ac5b1836a9ba5f35b1a3e600223) when you first time submit PR (Pull Request) to the DeepSparkHub project. You only need to do it once.
 
 ## Report Issue
 
-Please submit an issue on [Gitee](https://gitee.com/deep-spark/deepsparkhub/issues) when you find a bug, or raise feature request, or raise any questions regarding this project. Please ensure your issue description is clear and sufficient enough by referring to following format:
+Please submit an issue on [Gitee](https://gitee.com/deep-spark/deepsparkhub/issues) or [GitHub](https://github.com/Deep-Spark/deepsparkhub/issues) when you find a bug, or raise feature request, or raise any questions regarding this project. Please ensure your issue description is clear and sufficient enough by referring to following format:
 * Whether this is a bug or a feature request or a technical question.
 * The detailed description of the hardware and software environment.
 * Issue description, including what happened, what you expect to happen, and how to reproduce it.
@@ -16,15 +16,15 @@ Please submit an issue on [Gitee](https://gitee.com/deep-spark/deepsparkhub/issu
 
 ## Propose Pull Request (PR)
 
-* Raise your idea as an issue on [Gitee](https://gitee.com/deep-spark/deepsparkhub/issues).
+* Raise your idea as an issue on [Gitee](https://gitee.com/deep-spark/deepsparkhub/issues) or [GitHub](https://github.com/Deep-Spark/deepsparkhub/issues).
 * If it is a new feature, a design document should also be submitted.
-* After finishing design review and/or reaching consensus in the issue discussion, complete the code/document development on the forked repo and submit a PR on [Gitee](https://gitee.com/deep-spark/deepsparkhub/pulls).
+* After finishing design review and/or reaching consensus in the issue discussion, complete the code/document development on the forked repo and submit a PR on [Gitee](https://gitee.com/deep-spark/deepsparkhub/pulls) or [GitHub](https://github.com/Deep-Spark/deepsparkhub/pulls).
   * Any irrelevant changes of this PR should be avoided.
   * Make sure your commit history being ordered.
   * Always keep your branch up with the master branch.
   * Make sure all related issues being linked with this PR.
   * Need to provide test method and test result.
-* You need to sign [CLA](https://gitee.com/organizations/deep-spark/cla/deep-park-contributor-protocol) when first time submitting the PR (only do it once).
+* You need to sign CLA on [Gitee](https://gitee.com/organizations/deep-spark/cla/deep-park-contributor-protocol) or [GitHub](https://gist.github.com/Deep-Spark/67e39ac5b1836a9ba5f35b1a3e600223) when first time submitting the PR (only do it once).
 * The PR will only be merged by project maintainer after receiving 2+ LGTM from approvers. Please note that the approver is NOT allowed to add LGTM on his own PR.
 * After PR is sufficiently discussed/reviewed, it will get merged, abandoned or rejected by the project maintainer.
 
