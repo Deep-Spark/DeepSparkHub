@@ -7,6 +7,7 @@ VGG is a classical convolutional neural network architecture. It was based on an
 ```bash
 pip3 install -r requirements.txt
 ```
+Sign up and login in [imagenet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole imagenet dataset. Specify `/path/to/imagenet` to your imagenet path in later training process.
 :beers: Done!
 
 ## Step 2: Training
