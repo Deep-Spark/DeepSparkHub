@@ -6,6 +6,7 @@ Residual Networks, or ResNets, learn residual functions with reference to the la
 ```bash
 pip3 install torch torchvision
 ```
+Sign up and login in [imagenet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole imagenet dataset. Specify `/path/to/imagenet` to your imagenet path in later training process.
 :beers: Done!
 
 ## Step 2: Training
