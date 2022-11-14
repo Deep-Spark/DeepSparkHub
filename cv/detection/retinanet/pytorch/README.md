@@ -14,6 +14,8 @@ pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm
 
 ## Step 2: Training on COCO dataset
 
+Download the [COCO Dataset](https://cocodataset.org/#home) 
+
 ### Multiple GPUs on one machine
 
 ```shell

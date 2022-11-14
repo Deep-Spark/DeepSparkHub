@@ -8,6 +8,9 @@ The ConvNeXT model was proposed in [A ConvNet for the 2020s](https://arxiv.org/a
 pip install timm==0.3.2 tensorboardX six torch torchvision
 ```
 
+Sign up and login in [imagenet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole imagenet dataset. Specify `/path/to/imagenet` to your imagenet path in later training process.
+
+
 ## Step 2: Training
 ### Multiple GPUs on one machine
 ```bash
