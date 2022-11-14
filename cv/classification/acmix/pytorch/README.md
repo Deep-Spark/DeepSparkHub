@@ -9,6 +9,7 @@ Convolution and self-attention are two powerful techniques for representation le
 pip install termcolor==1.1.0 yacs==0.1.8 timm==0.4.5
 ```
 
+Sign up and login in [imagenet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole imagenet dataset. Specify `/path/to/imagenet` to your imagenet path in later training process.
 
 ## Step 2: Training
 
