@@ -1,7 +1,8 @@
 # DeepSparkHub
 
-
 DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领域，支持主流市场智能计算场景，包括智慧城市、数字个人、医疗、教育、通信、能源等多个领域。
+
+注：当前列表中的模型主要支持PyTorch框架，PaddlePaddle框架的模型在逐步添加。
 
 - Computer Vision
 
@@ -22,6 +23,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
    - [Cloze Test](#cloze-test)
    - [Dialogue Generation](#dialogue-generation)
    - [Language Model](#language-model)
+   - [Text Correction](#text-correction)
    - [Translation](#translation)
 
 - Recommendation
@@ -54,18 +56,21 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ECA_MobileNet_V2](cv/classification/eca_mobilenet_v2/pytorch/README.md)  | PyTorch | ImageNet
 [ECA_RESNET152](cv/classification/eca_resnet152/pytorch/README.md)  | PyTorch | ImageNet
 [Efficientb4](cv/classification/efficientb4/pytorch/README.md)  | PyTorch | ImageNet
-[googlenet](cv/classification/googlenet/pytorch/README.md)  | PyTorch | ImageNet 
+[googlenet](cv/classification/googlenet/pytorch/README.md)  | PyTorch | ImageNet
+[googlenet](cv/classification/googlenet/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [InceptionV3](cv/classification/inceptionv3/pytorch/README.md)  | PyTorch | ImageNet
 [InceptionV4](cv/classification/inceptionv4/pytorch/README.md)  | PyTorch | ImageNet
 [lenet](cv/classification/lenet/pytorch/README.md)  | PyTorch | ImageNet
 [MobileNetV2](cv/classification/mobilenetv2/pytorch/README.md)  | PyTorch | ImageNet
 [MobileNetV3](cv/classification/mobilenetv3/pytorch/README.md)  | PyTorch | ImageNet
+[MobileNetV3](cv/classification/mobilenetv3/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [ResNeSt14](cv/classification/resnest14/pytorch/README.md)  | PyTorch | ImageNet
 [ResNeSt50](cv/classification/resnest50/pytorch/README.md)  | PyTorch | ImageNet
 [ResNeSt101](cv/classification/resnest101/pytorch/README.md)  | PyTorch | ImageNet
 [ResNeSt269](cv/classification/resnest269/pytorch/README.md)  | PyTorch | ImageNet
 [ResNet18](cv/classification/resnet18/pytorch/README.md)  | PyTorch | ImageNet
 [ResNet50](cv/classification/resnet50/pytorch/README.md)  | PyTorch | ImageNet
+[ResNet50](cv/classification/resnet50/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [ResNet101](cv/classification/resnet101/pytorch/README.md)  | PyTorch | ImageNet
 [ResNet152](cv/classification/resnet152/pytorch/README.md)  | PyTorch | ImageNet
 [ResNeXt50_32x4d](cv/classification/resnext50_32x4d/pytorch/README.md)  | PyTorch | ImageNet
@@ -75,6 +80,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [SqueezeNet](cv/classification/squeezenet/pytorch/README.md)  | PyTorch | ImageNet
 [Swin Transformer](cv/classification/swin_transformer/pytorch/README.md)  | PyTorch | ImageNet
 [VGG16](cv/classification/vgg/pytorch/README.md)  | PyTorch | ImageNet
+[VGG16](cv/classification/vgg/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [Wave-MLP](cv/classification/wavemlp/pytorch/README.md)  | PyTorch | ImageNet
 [Wide_ResNet101_2](cv/classification/wide_resnet101_2/pytorch/README.md)  | PyTorch | ImageNet
 [Xception](cv/classification/xception/pytorch/README.md)  | PyTorch | ImageNet
@@ -87,12 +93,16 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [CenterNet](cv/detection/centernet/pytorch/README.md)  | PyTorch | COCO
 [Faster R-CNN](cv/detection/fasterrcnn/pytorch/README.md)  | PyTorch | COCO
 [Mask R-CNN](cv/detection/maskrcnn/pytorch/README.md)  | PyTorch | COCO
+[Mask R-CNN](cv/detection/maskrcnn/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PVANet](cv/detection/pvanet/pytorch/README.md)  | PyTorch | COCO
 [RetinaNet](cv/detection/retinanet/pytorch/README.md)  | PyTorch | COCO
 [SSD](cv/detection/ssd/pytorch/README.md)  | PyTorch | COCO
+[SSD](cv/detection/ssd/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [YOLOF](cv/detection/yolof/pytorch/README.md)  | PyTorch | COCO
 [YOLOv3](cv/detection/yolov3/pytorch/README.md)  | PyTorch | COCO
+[YOLOv3](cv/detection/yolov3/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [YOLOv5](cv/detection/yolov5/pytorch/README.md)  | PyTorch | COCO
+[PP-YOLOE](cv/detection/pp-yoloe/paddlepaddle/README.md)  | PaddlePaddle | COCO
 
 
 ### OCR
@@ -101,7 +111,9 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 -------- | ------ | ---- 
 [SAR](cv/ocr/sar/pytorch/README.md)  | PyTorch | OCR_Recog
 [SATRN](cv/ocr/satrn/pytorch/base/README.md)  | PyTorch | OCR_Recog
-
+[PSE](cv/ocr/pse/paddlepaddle/README.md)  | PaddlePaddle | OCR_Recog
+[CRNN](cv/ocr/crnn/paddlepaddle/README.md)  | PaddlePaddle | LMDB
+[PP-OCR DB](cv/ocr/pp-ocr-db/paddlepaddle/README.md)  | PaddlePaddle | ICDAR2015
 ### Point Cloud
 
 模型名称 | 框架 | 数据集 
@@ -127,6 +139,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [DabNet](cv/semantic_segmentation/dabnet/pytorch/README.md)  | PyTorch | COCO
 [DANet](cv/semantic_segmentation/danet/pytorch/README.md)  | PyTorch | COCO
 [DeepLab](cv/semantic_segmentation/deeplabv3/pytorch/README.md)  | PyTorch | COCO
+[DeepLab](cv/semantic_segmentation/deeplabv3/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [DenseASPP](cv/semantic_segmentation/denseaspp/pytorch/README.md)  | PyTorch | COCO
 [DFANet](cv/semantic_segmentation/dfanet/pytorch/README.md)  | PyTorch | COCO
 [DUNet](cv/semantic_segmentation/dunet/pytorch/README.md)  | PyTorch | COCO
@@ -137,7 +150,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [FastSCNN](cv/semantic_segmentation/fastscnn/pytorch/README.md)  | PyTorch | COCO
 [FCN](cv/semantic_segmentation/fcn/pytorch/README.md)  | PyTorch | COCO
 [FPENet](cv/semantic_segmentation/fpenet/pytorch/README.md)  | PyTorch | COCO
-[GCNet](cv/semantic_segmentation/gcnet/pytorch/README.md)  | PyTorch | cityscape
+[GCNet](cv/semantic_segmentation/gcnet/pytorch/README.md)  | PyTorch | CityScapes
 [HardNet](cv/semantic_segmentation/hardnet/pytorch/README.md)  | PyTorch | COCO
 [ICNet](cv/semantic_segmentation/icnet/pytorch/README.md)  | PyTorch | COCO
 [LedNet](cv/semantic_segmentation/lednet/pytorch/README.md)  | PyTorch | COCO
@@ -148,7 +161,9 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [RefineNet](cv/semantic_segmentation/refinenet/pytorch/README.md)  | PyTorch | COCO
 [SegNet](cv/semantic_segmentation/segnet/pytorch/README.md)  | PyTorch | COCO
 [UNet](cv/semantic_segmentation/unet/pytorch/README.md)  | PyTorch | COCO
+[UNet](cv/semantic_segmentation/unet/paddlepaddle/README.md)  | PaddlePaddle | CityScapes
 [3D-UNet](cv/semantic_segmentation/unet3d/pytorch/README.md)  | PyTorch | kits19
+[dnlnet](cv/semantic_segmentation/dnlnet/paddlepaddle/README.md)  | PaddlePaddle | CityScapes
 
 ### Super Resolution
 
@@ -206,19 +221,23 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [BERT Pretraining](nlp/language_model/bert/pytorch/README.md)  | PyTorch | MLCommon Wikipedia (2048_shards_uncompressed)
+[BERT Pretraining](nlp/language_model/bert/paddlepaddle/README.md)  | PaddlePaddle | MNLI
 
-
+### Text Correction
+模型名称 | 框架 | 数据集 
+-------- | ------ | ---- 
+[Ernie](nlp/text_correction/ernie/paddlepaddle/README.md)  | PaddlePaddle | corpus
 
 ### Translation
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [T5](nlp/translation/t5/pytorch/README.md)  | PyTorch | wmt14-en-de-pre-processed
+[Transformer](nlp/translation/transformer/paddlepaddle/README.md)  | PaddlePaddle | wmt14-en-de-pre-processed
 
 ## Recommendation模型列表
 
 ### Collaborative Filtering
-
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -230,6 +249,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [DLRM](recommendation/ctr/dlrm/pytorch/README.md)  | PyTorch | Criteo_Terabyte
+[DeepFM](recommendation/deepfm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
+[Wide&Deep](recommendation/wide_deep/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
 
 ## Speech模型列表
 
