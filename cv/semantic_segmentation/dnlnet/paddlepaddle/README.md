@@ -45,7 +45,7 @@ Notice: modify configs/dnlnet/dnlnet_resnet50_os8_cityscapes_1024x512_80k.yml fi
 cd PaddleSeg
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
-export CUDA_VISIBLE_DEVICES=4,5,6,7 # 设置4张可用的卡
+export CUDA_VISIBLE_DEVICES=4,5,6,7 # setup 4 available cards
 python3 -u -m paddle.distributed.launch train.py \
        --config configs/dnlnet/dnlnet_resnet50_os8_cityscapes_1024x512_80k.yml \
        --do_eval \
