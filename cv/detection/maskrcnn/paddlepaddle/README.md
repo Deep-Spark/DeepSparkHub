@@ -20,14 +20,14 @@ Download the [COCO Dataset](https://cocodataset.org/#home)
 ```bash
 
 #COCO PATH as follow:
-#ls -al /home/datasets/coco
-#total 5208
-#drwxrwxr-x 6 1003 1003      93 Dec 29  2021 .
-#drwxr-xr-x 6 root root     179 Jul 18 06:48 ..
-#drwxrwxr-x 2 1003 1003     322 Sep 24  2021 annotations
-#drwxrwxr-x 2 1003 1003      54 Dec 29  2021 pkl_coco
-#drwxrwxr-x 2 1003 1003 3846144 Sep 24  2021 train2017
-#drwxrwxr-x 2 1003 1003  163840 Sep 24  2021 val2017
+ls -al /home/datasets/coco
+total 5208
+drwxrwxr-x 6 1003 1003      93 Dec 29  2021 .
+drwxr-xr-x 6 root root     179 Jul 18 06:48 ..
+drwxrwxr-x 2 1003 1003     322 Sep 24  2021 annotations
+drwxrwxr-x 2 1003 1003      54 Dec 29  2021 pkl_coco
+drwxrwxr-x 2 1003 1003 3846144 Sep 24  2021 train2017
+drwxrwxr-x 2 1003 1003  163840 Sep 24  2021 val2017
 
 ```
 
@@ -35,7 +35,7 @@ Download the [COCO Dataset](https://cocodataset.org/#home)
 
 ```bash
 # Make sure your dataset path is the same as above
-#coco_dir=${coco_dir:-/home/datasets/coco/}
+coco_dir=${coco_dir:-/home/datasets/coco/}
 sed -i "s#dataset/coco#${coco_dir}#g" configs/datasets/coco_instance.yml
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True

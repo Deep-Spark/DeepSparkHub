@@ -15,7 +15,7 @@ pip3 install -r requirements.txt
 ```
 cd PaddleRec
 
-# 下载数据集
+# Download dataset
 pushd datasets/criteo/
 sh run.sh
 popd

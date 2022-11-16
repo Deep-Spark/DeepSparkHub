@@ -16,10 +16,10 @@ pip3 install -r requirements.txt
 Download [ImageNet](https://www.image-net.org/), the path as /home/datasets/imagenet/, then the imagenet path as follows:
 ```
 # IMAGENET PATH as follow:
-# drwxr-xr-x 1002 root root    24576 Mar  1 15:33 train
-# -rw-r--r--    1 root root 43829433 May 16 07:55 train_list.txt
-# drwxr-xr-x 1002 root root    24576 Mar  1 15:41 val
-# -rw-r--r--    1 root root  2144499 May 16 07:56 val_list.txt
+drwxr-xr-x 1002 root root    24576 Mar  1 15:33 train
+-rw-r--r--    1 root root 43829433 May 16 07:55 train_list.txt
+drwxr-xr-x 1002 root root    24576 Mar  1 15:41 val
+-rw-r--r--    1 root root  2144499 May 16 07:56 val_list.txt
 ```
 
 ## Step 3: Training
