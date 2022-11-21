@@ -150,9 +150,9 @@ def prepare_data():
 
     if exist_preprocessed_data:
         return
-    current_dir = os.path.join(MODEL_DIR, "pytorch")
+    # current_dir = os.path.join(MODEL_DIR, "pytorch")
     cmds = [
-        f"cd {current_dir}",
+        # f"cd {current_dir}",
         f"python3 data_preprocessing/prepare_json.py --keep-keys {DATA_DIR}/annotations/instances_val2017.json {DATA_DIR}/annotations/bbox_only_instances_val2017.json",
         f"python3 data_preprocessing/prepare_json.py {DATA_DIR}/annotations/instances_train2017.json {DATA_DIR}/annotations/bbox_only_instances_train2017.json"
     ]
