@@ -1,3 +1,5 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+
 exp_name = 'liif_rdn_norm_x2-4_c64b16_g1_1000k_div2k'
 scale_min, scale_max = 1, 4
 
