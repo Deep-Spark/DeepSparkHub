@@ -6,7 +6,7 @@ In the field of computer vision, recent works show that a pure MLP architecture 
 
 ## Step 1: Installing packages
 ```
-pip install thop timm==0.3.2 torchprofile 
+pip install thop timm==0.4.5 torchprofile
 ```
 
 ## Step 2: Training

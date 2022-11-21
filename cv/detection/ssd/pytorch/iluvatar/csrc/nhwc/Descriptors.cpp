@@ -20,7 +20,7 @@
 #include "Descriptors.h"
 
 #include <ATen/ATen.h>
-
+#include <iostream>
 #include <ostream>
 #include <sstream>
 #include <string>
