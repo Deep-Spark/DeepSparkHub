@@ -18,7 +18,11 @@ pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm
 
 ## Step 2: Training
 
-#### Training on COCO dataset
+### Preparing datasets
+
+Download the [COCO Dataset](https://cocodataset.org/#home)
+
+### Training on COCO dataset
 
 ```shell
 bash train_unet_dist.sh --data-path /path/to/coco2017/ --dataset coco
