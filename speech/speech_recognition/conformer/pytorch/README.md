@@ -12,8 +12,8 @@ pip3 install -r requirements.txt
 
 ## Step 2: Training
 
-dataset is data_aishell.tgz and resource_aishell.tgz from wenet.  
-You could just run the whole script
+Dataset is data_aishell.tgz and resource_aishell.tgz from wenet.
+You could just run the whole script, which will download the dataset automatically.
 ```
 bash run.sh --stage -1 --stop-stage 6
 ```
