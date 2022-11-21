@@ -115,6 +115,12 @@ $ bash dist_train.sh configs/models/satrn_academic.py 8
 | :-----: |:-------:| :-------: |:--------: |
 |  satrn  | BI100x8 |   14.159G |  549.94   |
 
+| dataset |   acc   |
+| :-----: |:-------:|
+|  IIIT5K |   94.5  |
+|  IC15   |   83.3  |
+|  SVTP   |   88.4  |
+
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 |----------------------|------------------------------------------|-------------|----------|------------|-------------|-------------------------|-----------|
 | 0.841                | SDK V2.2,bs:128,8x,fp32                  | 630         | N/A      | 166\*8     | 0.98        | 28.5\*8                 | 1         |
