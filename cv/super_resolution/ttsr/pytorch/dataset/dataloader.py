@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+
+
 from torch.utils.data import DataLoader
 import torch
 from importlib import import_module
