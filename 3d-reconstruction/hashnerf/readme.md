@@ -61,7 +61,7 @@ python main_nerf.py data/nerf_llff_data/fern --workspace trial_nerf -O
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 |----------------------|------------------------------------------|-------------|----------|------------|-------------|-------------------------|-----------|
-| N/A                  | SDK V2.2,bs:4,1x,fp32                    | 10          | N/A      | 82         | N/A         | 28.1                    | 1         |
+| 0.0652               | SDK V2.2,bs:1,1x,fp16                    | 10          | 11.9     | 82         | 0.903       | 28.1                    | 1         |
 
 
 ## Reference
