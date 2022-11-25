@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 import sys
 from typing import List, Tuple, Dict, Optional
