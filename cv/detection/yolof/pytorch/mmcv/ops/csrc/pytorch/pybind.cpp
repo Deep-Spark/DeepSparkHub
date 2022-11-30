@@ -1,3 +1,5 @@
+// Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+// All Rights Reserved.
 // Copyright (c) OpenMMLab. All rights reserved
 #include "pytorch_cpp_helper.hpp"
 

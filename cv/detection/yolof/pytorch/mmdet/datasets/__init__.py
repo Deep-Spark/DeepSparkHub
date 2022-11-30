@@ -1,3 +1,5 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 from .builder import DATASETS, PIPELINES, build_dataloader, build_dataset
 from .coco import CocoDataset

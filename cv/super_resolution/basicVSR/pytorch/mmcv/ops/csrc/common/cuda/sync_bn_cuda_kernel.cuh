@@ -1,3 +1,4 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 // Copyright (c) OpenMMLab. All rights reserved
 #ifndef SYNCBN_CUDA_KERNEL_CUH
 #define SYNCBN_CUDA_KERNEL_CUH

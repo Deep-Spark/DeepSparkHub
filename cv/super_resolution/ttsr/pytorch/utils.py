@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+
+
 import math
 import numpy as np
 import logging
