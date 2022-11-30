@@ -1,3 +1,4 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 exp_name = 'realbasicvsr_c64b20_1x30x8_lr5e-5_150k_reds'
 
 scale = 4
