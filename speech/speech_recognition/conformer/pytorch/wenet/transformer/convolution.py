@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright 2021 Mobvoi Inc. All Rights Reserved.
 # Author: di.wu@mobvoi.com (DI WU)
 """ConvolutionModule definition."""
@@ -136,7 +138,7 @@ class ConvolutionModule(nn.Module):
 
         return x.transpose(1, 2), new_cache
 
-def glu_torch_imply(inputs,dim=-1):
+def glu_torch_imply(inputs,dim:int=-1):
     x,y = torch.chunk(inputs, 2, dim=dim)
     outputs = x * torch.nn.functional.sigmoid(y)
     return outputs
