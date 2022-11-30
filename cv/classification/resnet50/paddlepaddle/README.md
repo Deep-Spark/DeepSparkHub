@@ -44,3 +44,13 @@ export FLAGS_cudnn_batchnorm_spatial_persistent=True
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/ResNet/ResNet50.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
+
+## Results on BI-V100
+
+<div align="center">
+
+| GPU         | FP32                                 |
+| ----------- | ------------------------------------ |
+| 4 cards     | Acc@1=76.27,FPS=80.37,BatchSize=64   |
+
+</div>
