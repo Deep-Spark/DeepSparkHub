@@ -1,3 +1,5 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) 2018, deepakn94, codyaustun, robieta. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
