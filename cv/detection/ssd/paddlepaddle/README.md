@@ -35,5 +35,15 @@ export CUDA_VISIBLE_DEVICES=0,1
 python3 -u -m paddle.distributed.launch --gpus 0,1 tools/train.py -c configs/ssd/ssd_mobilenet_v1_300_120e_voc.yml --eval
 ```
 
+## Results on BI-V100
+
+<div align="center">
+
+| GPU         | FP32                                 |
+| ----------- | ------------------------------------ |
+| 2 cards     | bbox=73.62,FPS=45.49,BatchSize=32    |
+
+</div>
+
 ## Reference
 - [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)
