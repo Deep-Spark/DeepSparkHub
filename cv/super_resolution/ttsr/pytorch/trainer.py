@@ -1,3 +1,5 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+
 from utils import calc_psnr_and_ssim
 from model import Vgg19
 

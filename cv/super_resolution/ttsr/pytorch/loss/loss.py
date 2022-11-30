@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+
+
 from loss import discriminator
 import os
 import torch
