@@ -1,3 +1,5 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 from .train import init_random_seed, train_detector
 from .utils import (disable_text_recog_aug_test, replace_image_to_tensor,
