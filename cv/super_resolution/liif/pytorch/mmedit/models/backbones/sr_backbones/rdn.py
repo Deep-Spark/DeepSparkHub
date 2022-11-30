@@ -1,3 +1,4 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 import torch
 from mmcv.runner import load_checkpoint
 from torch import nn

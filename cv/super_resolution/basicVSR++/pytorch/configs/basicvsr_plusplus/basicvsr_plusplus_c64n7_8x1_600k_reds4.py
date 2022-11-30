@@ -1,3 +1,4 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 exp_name = 'basicvsr_plusplus_c64n7_8x1_600k_reds4'
 
 # model settings

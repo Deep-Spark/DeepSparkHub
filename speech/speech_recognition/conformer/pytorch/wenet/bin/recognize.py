@@ -1,3 +1,5 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) 2020 Mobvoi Inc. (authors: Binbin Zhang, Xiaoyu Chen, Di Wu)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -173,7 +175,7 @@ def main():
     model = model.to(device)
 
     model.eval()
-    with torch.no_grad(), open(args.result_file, 'w') as fout:
+    with torch.no_grad(), open(args.result_file, 'w', encoding="utf-8") as fout:
         for batch_idx, batch in enumerate(test_data_loader):
             keys, feats, target, feats_lengths, target_lengths = batch
             feats = feats.to(device)

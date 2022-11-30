@@ -123,7 +123,7 @@ $ bash dist_train.sh configs/models/satrn_academic.py 8
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 |----------------------|------------------------------------------|-------------|----------|------------|-------------|-------------------------|-----------|
-| 0.841                | SDK V2.2,bs:128,8x,fp32                  | 630         | N/A      | 166\*8     | 0.98        | 28.5\*8                 | 1         |
+| 0.841                | SDK V2.2,bs:128,8x,fp32                  | 630         | 88.4     | 166\*8     | 0.98        | 28.5\*8                 | 1         |
 
 
 ## Reference
