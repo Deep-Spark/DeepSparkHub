@@ -46,7 +46,7 @@ bash run.sh --stage 6 --stop-stage 6
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 |----------------------|------------------------------------------|-------------|----------|------------|-------------|-------------------------|-----------|
-| N/A                  | SDK V2.2,bs:32,8x,fp32                   | 380         | N/A      | 113\*8     | 0.82        | 21.5\*8                 | 1         |
+| 3.72                 | SDK V2.2,bs:32,8x,fp32                   | 380         | 4.79@cer | 113\*8     | 0.82        | 21.5\*8                 | 1         |
 
 
 ## Reference
