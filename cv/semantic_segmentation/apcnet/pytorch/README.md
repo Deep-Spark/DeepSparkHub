@@ -12,17 +12,25 @@ And then calculates a context vector with these affinities.
 ### Install packages
 
 ```shell
-$ pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Build Extension
 
 ```shell
-$ python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
+python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
 ```
 
+## Step 2: Prepare Datasets
 
-## Step 2: Training
+Download cityscapes from file server or official website [Cityscapes](https://www.cityscapes-dataset.com)
+
+```shell
+mkdir -p data/
+ln -s ${CITYSCAPES_DATASET_PATH} data/cityscapes
+```
+
+## Step 3: Training
 
 **The available configs are as follows:**
 
@@ -52,18 +60,18 @@ apcnet_r101-d8_769x769_80k_cityscapes
 
 ### Training on single card
 ```shell
-$ bash train.sh <config file> [training args]    # config file can be found in the configs directory 
+bash train.sh <config file> [training args]    # config file can be found in the configs directory 
 ```
 
 ### Training on mutil-cards
 ```shell
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
 
 ### Example
 
 ```shell
-bash train_dist.sh apcnet_r50-d8_512x1024_40k_cityscapes 8
+bash train_dist.sh configs/apcnet/apcnet_r50-d8_512x1024_40k_cityscapes.py 8
 ```
 
 ### Training arguments
