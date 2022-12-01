@@ -14,23 +14,28 @@ pip3 install -r requirements.txt
 ## Step 2: Preparing datasets
 
 ```bash
-$ mkdir data && cd data
-# down CUFED here && Home page: https://zzutk.github.io/SRNTT-Project-Page/
+mkdir -p data/
+cd data
+# Download CUFED Dataset from [homepage](https://zzutk.github.io/SRNTT-Project-Page)
+# the folder would be like:
+data/CUFED/
+└── train
+    ├── input
+    └── ref
 ```
-
 
 ## Step 3: Training
 
 ### Multiple GPUs on one machine
 
 ```bash
-$ CUDA_VISIBLE_DEVICES=${gpu_id_1,gpu_id_2,...} bash train.sh ${num_gpus}
+CUDA_VISIBLE_DEVICES=${gpu_id_1,gpu_id_2,...} bash train.sh ${num_gpus}
 ```
 
 For example, GPU 5 and GPU 7 are available for use and you can use these two GPUs as follows:
 
 ```bash
-$ CUDA_VISIBLE_DEVICES=5,7 bash train.sh 2
+CUDA_VISIBLE_DEVICES=5,7 bash train.sh 2
 ```
 
 ## Reference
