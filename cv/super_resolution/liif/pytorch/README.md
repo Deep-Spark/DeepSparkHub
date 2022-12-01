@@ -7,21 +7,18 @@ How to represent an image? While the visual world is presented in a continuous m
 ## Step 1: Installing packages
 
 ```shell
-$ pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Step 2: Preparing datasets
 
 ```shell
-$ cd /path/to/modelzoo/cv/super_resolution/liif/pytorch
-
 # Download DIV2K 
-$ mkdir -p data/DIV2K
+mkdir -p data/DIV2K
 # Home page: https://data.vision.ee.ethz.ch/cvl/DIV2K/
 
 # Download validation samples
-$ cd ../..
-$ mkdir -p data/test
+mkdir -p data/test
 # Home page of Set5: http://people.rennes.inria.fr/Aline.Roumy/results/SR_BMVC12.html
 # Home page of Set14: https://github.com/jbhuang0604/SelfExSR
 ```
@@ -30,12 +27,12 @@ $ mkdir -p data/test
 
 ### One single GPU
 ```shell
-$ bash train.sh <config file> [training args]   # config file can be found in the configs directory
+python3 train.py <config file> [training args]   # config file can be found in the configs directory
 ```
 
 ### Mutiple GPUs on one machine
 ```shell
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
 
 ## Results on BI-V100
