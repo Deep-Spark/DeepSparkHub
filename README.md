@@ -196,8 +196,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[CLIP](multimodal\Language-Image_Pre-Training\clip\pytorch\README.md)  | PyTorch | CIFAR100
-[L-Verse](multimodal\Language-Image_Pre-Training\L-Verse\pytorch\README.md)  | PyTorch | ImageNet
+[CLIP](multimodal/Language-Image_Pre-Training/clip/pytorch/README.md)  | PyTorch | CIFAR100
+[L-Verse](multimodal/Language-Image_Pre-Training/L-Verse/pytorch/README.md)  | PyTorch | ImageNet
 
 
 ## NLP模型列表
