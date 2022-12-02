@@ -21,9 +21,23 @@ pip3 install -r requirements.txt
 
 ### Step 2.2: Process raw data 
 
-```
-# Create data directories
-mkdir -p data/{METR-LA,PEMS-BAY}
+```shell
+# Create data and garage directories
+mkdir -p data/
+mkdir -p garage/
+
+# Get adj_mx_bay.pkl and adj_mx.pkl
+mkdir -p data/sensor_graph/
+wget https://github.com/liyaguang/DCRNN/raw/master/data/sensor_graph/adj_mx_bay.pkl -P data/sensor_graph/
+wget https://github.com/liyaguang/DCRNN/raw/master/data/sensor_graph/adj_mx.pkl -P data/sensor_graph/
+
+# Put METR-LA and PEMS-BAY data in data/
+data/
+├── metr-la.h5
+├── pems-bay.h5
+└── sensor_graph
+    ├── adj_mx_bay.pkl
+    └── adj_mx.pkl
 
 # METR-LA
 python3 generate_training_data.py --output_dir=data/METR-LA --traffic_df_filename=data/metr-la.h5
@@ -32,10 +46,10 @@ python3 generate_training_data.py --output_dir=data/METR-LA --traffic_df_filenam
 python3 generate_training_data.py --output_dir=data/PEMS-BAY --traffic_df_filename=data/pems-bay.h5
 
 ```
+
 ## Step 3: Training
 
-```
+```shell
 python3 train.py --gcn_bool --adjtype doubletransition --addaptadj  --randomadj
 ```
-
 
