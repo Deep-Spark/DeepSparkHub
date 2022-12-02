@@ -7,20 +7,24 @@ By replacing the inner product with a neural architecture that can learn an arbi
 
 ## Step 1: Installing packages
 
-```
+```shell
 pip3 install -r requirements.txt
 ```
 
 
 ## Step 2: Preparing datasets
 
-dataset is movielens  
+Dataset is movielens  
 
-cd /modelzoo/recommendation/collaborative_filtering/ncf/pytorch/  
-```
-bash download_dataset.sh  
+```shell
+# Download dataset
+mkdir -p data/
+wget http://files.grouplens.org/datasets/movielens/ml-20m.zip -P data/
 
-# convert
+# Unzip
+unzip data/ml-20m.zip -d data/
+
+# Convert
 python3 convert.py --path ./data/ml-20m/ratings.csv --output ./data/ml-20m
 ```
 
@@ -29,13 +33,14 @@ python3 convert.py --path ./data/ml-20m/ratings.csv --output ./data/ml-20m
 
 ### Multiple GPUs on one machine
 
-```
+```shell
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 
 bash run_train_fp32.sh
 ```
 
 ### Multiple GPUs on one machine (AMP)
-```
+
+```shell
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 
 # fp16 train
 bash run_train_fp16.sh
