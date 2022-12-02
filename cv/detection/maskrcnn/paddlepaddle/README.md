@@ -40,5 +40,15 @@ sed -i "s#dataset/coco#${coco_dir}#g" configs/datasets/coco_instance.yml
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/mask_rcnn/mask_rcnn_r50_fpn_1x_coco.yml --use_vdl=true --eval --amp
+python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/mask_rcnn/mask_rcnn_r50_fpn_1x_coco.yml --use_vdl=true --eval
 ```
+
+## Results on BI-V100
+
+<div align="center">
+
+| GPU         | FP32                                 |
+| ----------- | ------------------------------------ |
+| 8 cards     | bbox=38.8,FPS=7.5,BatchSize=1        |
+
+</div>

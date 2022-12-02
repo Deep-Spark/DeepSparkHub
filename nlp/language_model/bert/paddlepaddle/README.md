@@ -23,3 +23,14 @@ Download the [MNLI Dataset](http://www.nyu.edu/projects/bowman/multinli/)
 # Make sure your dataset path is the same as above
 bash train_bert.sh
 ```
+
+
+## Results on BI-V100
+
+<div align="center">
+
+| GPU         | FP32                                 |
+| ----------- | ------------------------------------ |
+| 1 card      | Acc@1=84.5,FPS=5.1,BatchSize=32      |
+
+</div>
