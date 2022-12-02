@@ -7,33 +7,34 @@ One-shot voice conversion (VC), which performs conversion across arbitrary speak
 
 ## Step 1: Preparing datasets
 
-```
-$ mkdir -p /home/data/vqmivc
-$ cd /home/data/vqmivc
-$ wget https://datashare.ed.ac.uk/bitstream/handle/10283/2651/VCTK-Corpus.zip 
-$ unzip VCTK-Corpus.zip
+```shell
+mkdir -p /home/data/vqmivc/
+cd /home/data/vqmivc/
+wget https://datashare.ed.ac.uk/bitstream/handle/10283/3443/VCTK-Corpus-0.92.zip
+unzip VCTK-Corpus-0.92.zip
 ```
 
 ## Step 2: Preprocess
 
-```
-$ cd vqmivc
-$ pip3 install -r requirements_bi.txt
-$ python3 preprocess.py
-$ ln -s /home/data/vqmivc/data data 
+```shell
+cd ${DEEPSPARKHUB_ROOT}/speech/speech_synthesis/vqmivc/pytorch/
+pip3 install -r requirements_bi.txt
+ln -s /home/data/vqmivc/data data
+python3 preprocess.py
 ```
 
 ## Step 3: Training
 
 * Training with mutual information minimization (MIM):
 
-```
-$ python3 train.py use_CSMI=True use_CPMI=True use_PSMI=True
+```shell
+python3 train.py use_CSMI=True use_CPMI=True use_PSMI=True
 ```
 
 * Training without MIM:
-```
-$ python3 train.py use_CSMI=False use_CPMI=False use_PSMI=False 
+
+```shell
+python3 train.py use_CSMI=False use_CPMI=False use_PSMI=False 
 ```
 
 ## Results on BI-V100
