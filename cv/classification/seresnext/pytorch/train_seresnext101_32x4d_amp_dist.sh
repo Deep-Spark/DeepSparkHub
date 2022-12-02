@@ -1,3 +1,4 @@
+#!/bin/bash -ex
 # Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
@@ -12,7 +13,6 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-#!/bin/bash -ex
 # Modify me
 if [ -z "$IMAGENETTE" ];then
 	DATA_PATH=${DATA_PATH:-"/home/datasets/cv/imagenet"}
