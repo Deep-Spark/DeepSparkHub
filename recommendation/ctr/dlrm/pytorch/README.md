@@ -7,22 +7,20 @@ With the advent of deep learning, neural network-based recommendation models hav
 ## Step 1: Installing packages
 
 ```shell
-$ cd ../../
-$ pip3 install -r requirements.txt && python3 ./setup.py install
+pip3 install -r requirements.txt && python3 ./setup.py install
 ```
-
 
 ## Step 2: Preparing datasets
 
 Criteo_Terabyte consists of 23 days data, as it is very large, here only take 3 days data for an example.
 
 ```shell
-$ cd modelzoo/recommendation/ctr/dlrm/pytorch/dlrm/data
-$ bash download_and_preprocess.sh
+# download data
+cd dlrm/data/
+bash download_and_preprocess.sh
 ```
 
-After above steps, can get files: terabyte_processed_test.bin, terabyte_processed_train.bin, terabyte_processed_val.bin .
-
+After above steps, can get files: terabyte_processed_test.bin, terabyte_processed_train.bin, terabyte_processed_val.bin.
 
 
 ## Step 3: Training
@@ -30,13 +28,13 @@ After above steps, can get files: terabyte_processed_test.bin, terabyte_processe
 ### On single GPU
 
 ```shell
-$ python3 -u  scripts/train.py --model_config dlrm/config/official_config.json --dataset /home/datasets/recommendation/Criteo_Terabyte  --lr 0.1 --warmup_steps 2750 --decay_end_lr 0 --decay_steps 27772 --decay_start_step 49315 --batch_size 2048 --epochs 5 |& tee 1card.txt
+python3 -u  scripts/train.py --model_config dlrm/config/official_config.json --dataset /home/datasets/recommendation/Criteo_Terabyte  --lr 0.1 --warmup_steps 2750 --decay_end_lr 0 --decay_steps 27772 --decay_start_step 49315 --batch_size 2048 --epochs 5 |& tee 1card.txt
 ```
 
 ### Multiple GPUs on one machine
 
 ```shell
-$ python3 -u -m torch.distributed.launch --nproc_per_node=8 --use_env scripts/dist_train.py --model_config dlrm/config/official_config.json --dataset /home/datasets/recommendation/Criteo_Terabyte  --lr 0.1 --warmup_steps 2750 --decay_end_lr 0 --decay_steps 27772 --decay_start_step 49315 --batch_size 2048 --epochs 5 |& tee 8cards.txt
+python3 -u -m torch.distributed.launch --nproc_per_node=8 --use_env scripts/dist_train.py --model_config dlrm/config/official_config.json --dataset /home/datasets/recommendation/Criteo_Terabyte  --lr 0.1 --warmup_steps 2750 --decay_end_lr 0 --decay_steps 27772 --decay_start_step 49315 --batch_size 2048 --epochs 5 |& tee 8cards.txt
 ```
 
 ## Results on BI-V100
