@@ -1,3 +1,6 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+
+
 from option import args
 from utils import mkExpDir,Logger
 from dataset import dataloader

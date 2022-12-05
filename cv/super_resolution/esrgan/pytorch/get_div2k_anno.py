@@ -1,3 +1,4 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 import mmcv
 from os import path as osp
 from PIL import Image
