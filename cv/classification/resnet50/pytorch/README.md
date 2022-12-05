@@ -21,17 +21,17 @@ bash amp_1card.sh --data-path /path/to/imagenet
 ```
 ### Multiple GPUs on one machine
 ```bash
-bash fp32_4card.sh --data-path /path/to/imagenet
-bash fp32_8card.sh --data-path /path/to/imagenet
+bash fp32_4cards.sh --data-path /path/to/imagenet
+bash fp32_8cards.sh --data-path /path/to/imagenet
 ```
 ### Multiple GPUs on one machine (AMP)
 ```bash
-bash amp_4card.sh --data-path /path/to/imagenet
-bash amp_8card.sh --data-path /path/to/imagenet
+bash amp_4cards.sh --data-path /path/to/imagenet
+bash amp_8cards.sh --data-path /path/to/imagenet
 ```
 ### Multiple GPUs on two machines
 ```bash
-bash fp32_16card.sh --data-path /path/to/imagenet
+bash fp32_16cards.sh --data-path /path/to/imagenet
 ```
 
 ## Results on BI-V100
