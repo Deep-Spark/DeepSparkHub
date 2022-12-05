@@ -1,3 +1,5 @@
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # CONFIG=$1
 
 # PYTHONPATH="$(dirname $0)/..":$PYTHONPATH \

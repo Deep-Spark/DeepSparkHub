@@ -1,3 +1,5 @@
+
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 /*!
  ******************* BEGIN Caffe Copyright Notice and Disclaimer
  *****************
