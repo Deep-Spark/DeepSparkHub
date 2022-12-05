@@ -7,29 +7,27 @@ A recurrent structure is a popular framework choice for the task of video super-
 ## Step 1: Installing packages
 
 ```shell
-$ sh build_env.sh
+sh build_env.sh
 ```
 
 ## Step 2: Preparing datasets
 
+Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html)
 ```shell
-$ cd /path/to/modelzoo/official/cv/super_resolution/basicVSR/pytorch
-
-# Download REDS
-$ mkdir -p data/REDS
-# Homepage of REDS: https://seungjunnah.github.io/Datasets/reds.html
+mkdir -p data/
+ln -s ${REDS_DATASET_PATH} data/REDS
 ```
 
 ## Step 3: Training
 
 ### One single GPU
 ```shell
-$ python3 train.py <config> [training args]    # config file can be found in the configs directory
+python3 train.py <config> [training args]    # config file can be found in the configs directory
 ```
 
 ### Mutiple GPUs on one machine
 ```shell
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
 
 ## Reference

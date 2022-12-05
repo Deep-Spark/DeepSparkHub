@@ -8,30 +8,27 @@ We proposed an approach named TTVSR to study video super-resolution by leveragin
 ## Step 1: Installing packages
 
 ```shell
-$ pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Step 2: Preparing datasets
 
-
+Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html)
 ```shell
-$ cd /path/to/modelzoo/official/cv/super_resolution/ttvsr/pytorch
-
-# Download REDS
-$ mkdir -p data/REDS
-# Homepage of REDS: https://seungjunnah.github.io/Datasets/reds.html
+mkdir -p data/
+ln -s ${REDS_DATASET_PATH} data/REDS
 ```
 
 ## Step 3: Training
 
 ### One single GPU
 ```shell
-$ python3 train.py <config file> [training args]   # config file can be found in the configs directory
+python3 train.py <config file> [training args]   # config file can be found in the configs directory
 ```
 
 ### Mutiple GPUs on one machine
 ```shell
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
 
 ## Results on BI-V100
