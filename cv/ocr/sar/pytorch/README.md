@@ -6,26 +6,25 @@ Recognizing irregular text in natural scene images is challenging due to the lar
 
 ## Step 1: Installing packages
 
-```
-$ cd /sar/pytorch/csrc
-$ bash clean.sh
-$ bash build.sh
-$ bash install.sh
-$ cd ..
-$ pip3 install -r requirements.txt
+```shell
+cd csrc/
+bash clean.sh
+bash build.sh
+bash install.sh
+cd ..
+pip3 install -r requirements.txt
 ```
 
 ## Step 2: Preparing datasets
 
 ```shell
-$ mkdir data
-$ cd data
+mkdir data/
+cd data/
 ```
 
-https://mmocr.readthedocs.io/zh_CN/latest/datasets/recog.html
+Download datasets from this [page](https://mmocr.readthedocs.io/zh_CN/latest/datasets/recog.html),
+data folder would be like below:
 
-
-- when done data folder looks like
 ```
 ├── mixture
 │   ├── coco_text
@@ -101,12 +100,12 @@ https://mmocr.readthedocs.io/zh_CN/latest/datasets/recog.html
 
 ### Training on single card
 ```shell
-$ python3 train.py configs/sar_r31_parallel_decoder_academic.py
+python3 train.py configs/sar_r31_parallel_decoder_academic.py
 ```
 
 ### Training on mutil-cards
 ```shell
-$ bash dist_train.sh configs/sar_r31_parallel_decoder_academic.py 8
+bash dist_train.sh configs/sar_r31_parallel_decoder_academic.py 8
 ```
 
 ## Reference
