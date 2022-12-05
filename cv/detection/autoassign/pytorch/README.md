@@ -17,6 +17,7 @@ $ MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpytho
 ```bash
 $ cd /path/to/modelzoo/cv/detection/autoassign/pytorch
 $ mkdir -p data && cd data
+$ apt install dos2unix
 # Download from homepage of coco: https://cocodataset.org/
 ```
 
@@ -30,7 +31,7 @@ $ python3 train.py <config file> [training args]   # config file can be found in
 
 ### Multiple GPUs on one machine
 ```bash
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+$ bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
 
 ## Reference
