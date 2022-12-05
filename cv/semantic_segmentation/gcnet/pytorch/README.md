@@ -14,7 +14,7 @@ Global context blocks are applied to multiple layers in a backbone network to co
 
 ```bash
 mkdir data/
-cd data/
+ln -s ${CITYSCAPES_DATASET_PATH} data/cityscapes
 ```
 - convert_datasets
 ```bash
@@ -39,19 +39,18 @@ data/
 
 ### Build Extension
 ```shell
-$ cd /path/to/modelzoo/official/cv/semantic_segmentation/GCNet/pytorch#
-$ MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
-$ pip3 install -r requirements.txt
+MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
+pip3 install -r requirements.txt
 ```
 ## Step 2: Training
 ### Training on single card
 ```shell
-$ bash run_train.sh 
+bash run_train.sh 
 ```
 
 ### Training on mutil-cards
 ```shell
-$ bash dist_train.sh config gcnet_r50-d8_769x769_40k_cityscapes.py 4
+bash dist_train.sh configs/gcnet/gcnet_r50-d8_769x769_40k_cityscapes.py 4
 ```
 
 ## Reference
