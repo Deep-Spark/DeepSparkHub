@@ -12,7 +12,7 @@ model = dict(
         num_propagation_blocks=20,
         num_cleaning_blocks=20,
         dynamic_refine_thres=255,  # change to 1.5 for test
-        spynet_pretrained='pretrained-weights/spynet_20210409-c6c1bd09.pth',
+        spynet_pretrained='pretrained/spynet_20210409-c6c1bd09.pth',
         is_fix_cleaning=False,
         is_sequential_cleaning=False),
     pixel_loss=dict(type='L1Loss', loss_weight=1.0, reduction='mean'),

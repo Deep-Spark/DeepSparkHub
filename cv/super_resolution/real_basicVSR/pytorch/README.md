@@ -25,6 +25,11 @@ $ python3 crop_sub_images.py # cut REDS images into patches for fas
 $ cd ..
 # Homepage of UDM10: https://www.terabox.com/web/share/link?surl=LMuQCVntRegfZSxn7s3hXw&path=%2Fproject%2Fpfnl
 ```
+## Step 3: Download pretrained weights
+$ mkdir pretrained && cd pretrained
+$ wget https://download.openmmlab.com/mmediting/restorers/basicvsr/spynet_20210409-c6c1bd09.pth
+$ wget https://download.openmmlab.com/mmediting/restorers/real_basicvsr/realbasicvsr_wogan_c64b20_2x30x8_lr1e-4_300k_reds_20211027-0e2ff207.pth
+$ wget https://download.pytorch.org/models/vgg19-dcbb9e9d.pth
 
 ## Step 3: Training
 
@@ -35,7 +40,7 @@ $ python3 train.py <config file> [training args]   # config file can be found in
 
 ### Mutiple GPUs on one machine
 ```shell
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+$ bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
 
 ## Reference
