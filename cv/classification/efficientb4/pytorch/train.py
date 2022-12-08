@@ -20,7 +20,7 @@ except:
 
 from torch import nn
 import torch.distributed as dist
-import _torchvision as torchvision
+import torchvision as torchvision
 
 import utils
 

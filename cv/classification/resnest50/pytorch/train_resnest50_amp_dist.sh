@@ -26,5 +26,5 @@ fi
 cd ${ROOT_DIR}
 python3  $PYTHONARG ${ROOT_DIR}/run_train.py \
 	--model resnest50 --dali --dali-cpu  --data-path $DATA_PATH \
-	--opt fused_sgd --batch-size 512 --lr 0.0125  \
+	--opt fused_sgd --batch-size 256 --lr 0.0125  \
 	--amp --nhwc "$@"
