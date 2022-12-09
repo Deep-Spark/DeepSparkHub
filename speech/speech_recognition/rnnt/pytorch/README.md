@@ -13,20 +13,24 @@ bash install.sh
 ## Step 2: Preparing datasets
 download LibriSpeech [http://www.openslr.org/12](http://www.openslr.org/12)
 ```
-bash scripts/download_librispeech.sh $DATASET_DIR
+bash scripts/download_librispeech.sh ${DATA_ROOT_DIR}
 ```
 preprocess LibriSpeech
 ```
-bash scripts/preprocess_librispeech.sh $DATASET_DIR
+bash scripts/preprocess_librispeech.sh ${DATA_ROOT_DIR}
 ```
 
 ## Step 3: Training
+### Setup config yaml
+```shell
+sed -i "s#MODIFY_DATASET_DIR#${DATA_ROOT_DIR}/LibriSpeech#g" configs/baseline_v3-1023sp.yaml
+```
 
 ### Multiple GPUs on one machine
 
 ```
-cd scripts
-bash train_rnnt_1x8.sh $OUTPUT_DIR $DATA_DIR
+mkdir -p output/
+bash scripts/train_rnnt_1x8.sh output/ ${DATA_ROOT_DIR}/LibriSpeech
 ```
 
 Following conditions were tested, you can run any of them below:
