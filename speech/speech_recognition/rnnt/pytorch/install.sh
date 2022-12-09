@@ -13,14 +13,32 @@ yum install -y epel-release
 yum install -y jq
 pip install -r requirements.txt
 
-######## install warprnnt_pytorch
-git clone https://github.com/HawkAaron/warp-transducer deps/warp-transducer
+######## prepare env
+# clean deps/
+rm -rf deps/
+mkdir -p deps/
+# download openmp-13.0.1.src.tar.xz
+cd ./deps
+wget "https://github.com/llvm/llvm-project/releases/download/llvmorg-13.0.1/openmp-13.0.1.src.tar.xz"
+tar -xvJf openmp-13.0.1.src.tar.xz && mv openmp-13.0.1.src openmp
+cd openmp/
+mkdir build && cd build/
+
+OPENMP_INSTALL_PREFIX=/usr/local/llvmopenmp
+cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${OPENMP_INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On -DCMAKE_CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++ -DCMAKE_C_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/gcc ../
+make && make install
+
+cp ${OPENMP_INSTALL_PREFIX}/lib/libomp.so /opt/sw_home/local/lib64/libomp.so
+cp ${OPENMP_INSTALL_PREFIX}/include/omp.h /opt/sw_home/local/lib64/clang/13.0.1/include/omp.h
+
+######## install warp-transducer
+## back to deps/
+cd ../../
+git clone https://github.com/HawkAaron/warp-transducer
 COMMIT_SHA=f546575109111c455354861a0567c8aa794208a2
-cd deps/warp-transducer && git checkout $COMMIT_SHA
+cd warp-transducer && git checkout $COMMIT_SHA
 mkdir build && cd build
 
-######## solve lmp not find error
-cp /opt/sw_home/local/lib64/libomp.so.1 /opt/sw_home/local/lib64/libomp.so
 export CUDA_HOME=/opt/sw_home/local/cuda
 export CC=/opt/sw_home/local/bin/clang
 export CXX=/opt/sw_home/local/bin/clang++
