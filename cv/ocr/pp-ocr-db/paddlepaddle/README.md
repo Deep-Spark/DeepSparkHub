@@ -1,4 +1,4 @@
-# PP-OCR DB
+# PP-OCR-DB
 
 ## Step 1: Installing
 ```bash
@@ -26,7 +26,7 @@ drwxr-xr-x 2 root root    24576 Jul 21 15:53 icdar_c4_train_imgs
 
 ```
 
-## Step 3: Run PP-OCR DB
+## Step 3: Run PP-OCR-DB
 
 ```bash
 # Notice: modify "configs/det/det_mv3_db.yml" file, set the datasets path as yours.
