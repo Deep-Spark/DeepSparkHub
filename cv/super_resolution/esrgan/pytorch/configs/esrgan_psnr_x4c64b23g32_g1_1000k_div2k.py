@@ -1,5 +1,5 @@
  # Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
- exp_name = 'esrgan_psnr_x4c64b23g32_g1_1000k_div2k'
+exp_name = 'esrgan_psnr_x4c64b23g32_g1_1000k_div2k'
 
 scale = 4
 # model settings
