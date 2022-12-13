@@ -23,4 +23,4 @@ set -a
 : ${NUM_GPUS:=1}
 : ${GRAD_ACCUMULATION_STEPS:=64}
 
-bash ./scripts/train_rnnt_dist_1x8.sh "$@"
+bash ./scripts/train_rnnt_1x8.sh "$@"
