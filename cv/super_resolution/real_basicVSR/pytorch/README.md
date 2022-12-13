@@ -8,39 +8,43 @@ The diversity and complexity of degradations in real-world video super-resolutio
 ## Step 1: Installing packages
 
 ```shell
-$ sh build_env.sh
+sh build_env.sh
 ```
 
 ## Step 2: Preparing datasets
 
 ```shell
-$ cd /path/to/modelzoo/official/cv/super_resolution/basicVSR/pytorch
+cd /path/to/modelzoo/official/cv/super_resolution/basicVSR/pytorch
 
 # Download REDS
-$ mkdir -p data/REDS
+mkdir -p data/REDS
 # Homepage of REDS: https://seungjunnah.github.io/Datasets/reds.html
-$ python3 crop_sub_images.py # cut REDS images into patches for fas
+python3 crop_sub_images.py # cut REDS images into patches for fas
 
 # Download UDM10
-$ cd ..
+cd ..
 # Homepage of UDM10: https://www.terabox.com/web/share/link?surl=LMuQCVntRegfZSxn7s3hXw&path=%2Fproject%2Fpfnl
 ```
 ## Step 3: Download pretrained weights
-$ mkdir pretrained && cd pretrained
-$ wget https://download.openmmlab.com/mmediting/restorers/basicvsr/spynet_20210409-c6c1bd09.pth
-$ wget https://download.openmmlab.com/mmediting/restorers/real_basicvsr/realbasicvsr_wogan_c64b20_2x30x8_lr1e-4_300k_reds_20211027-0e2ff207.pth
-$ wget https://download.pytorch.org/models/vgg19-dcbb9e9d.pth
+
+```shell
+mkdir pretrained && cd pretrained
+wget https://download.openmmlab.com/mmediting/restorers/basicvsr/spynet_20210409-c6c1bd09.pth
+wget https://download.openmmlab.com/mmediting/restorers/real_basicvsr/realbasicvsr_wogan_c64b20_2x30x8_lr1e-4_300k_reds_20211027-0e2ff207.pth
+wget https://download.pytorch.org/models/vgg19-dcbb9e9d.pth
+cd ..
+```
 
 ## Step 3: Training
 
 ### Training on single card
 ```shell
-$ python3 train.py <config file> [training args]   # config file can be found in the configs directory
+python3 train.py <config file> [training args]   # config file can be found in the configs directory
 ```
 
 ### Mutiple GPUs on one machine
 ```shell
-$ bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
 
 ## Reference
