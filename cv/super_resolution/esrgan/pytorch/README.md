@@ -26,6 +26,8 @@ $ mkdir -p data/test
 $ cd data/test
 # Home page of Set5: http://people.rennes.inria.fr/Aline.Roumy/results/SR_BMVC12.html
 # Home page of Set14: https://github.com/jbhuang0604/SelfExSR
+
+$ python3 get_div2k_anno.py 
 ```
 
 ## Step 3: Training
@@ -39,7 +41,7 @@ $ python3 train.py <config file> [training args]   # config file can be found in
 ### Mutiple GPUs on one machine
 
 ```shell
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+$ bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
 
 ## Reference
