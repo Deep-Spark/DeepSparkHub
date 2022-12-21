@@ -5,7 +5,7 @@ SqueezeNet is a convolutional neural network that employs design strategies to r
 
 ## Step 1: Installing
 ```bash
-pip3 install -r requirements.txt
+pip3 install torch torchvision
 ```
 :beers: Done!
 
