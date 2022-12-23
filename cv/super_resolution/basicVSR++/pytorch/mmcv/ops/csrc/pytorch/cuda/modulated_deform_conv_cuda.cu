@@ -1,4 +1,4 @@
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+// Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 // Copyright (c) OpenMMLab. All rights reserved
 #include "modulated_deform_conv_cuda_kernel.cuh"
 #include "pytorch_cuda_helper.hpp"
