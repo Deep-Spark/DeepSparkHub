@@ -20,6 +20,7 @@ VOCROOT/
 VOCROOT is your path of the Pascal VOC Dataset.
 ```
 mkdir tfrecords
+pip3 install tf_slim
 python3 convert_voc_sample_tfrecords.py --dataset_directory=./ --output_directory=tfrecords --train_splits VOC2012_sample --validation_splits VOC2012_sample
 
 cd ..
