@@ -50,7 +50,7 @@ export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
 # One GPU
 export CUDA_VISIBLE_DEVICES=0
-python3 tools/train.py --config configs/deeplabv3p/deeplabv3p_resnet50_os8_cityscapes_1024x512_80k.yml --do_eval --use_vdl --save_interval 500 --save_dir output
+python3 train.py --config configs/deeplabv3p/deeplabv3p_resnet50_os8_cityscapes_1024x512_80k.yml --do_eval --use_vdl --save_interval 500 --save_dir output
 
 # Four GPUs
 export CUDA_VISIBLE_DEVICES=0,1,2,3 
