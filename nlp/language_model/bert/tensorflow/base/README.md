@@ -38,3 +38,8 @@ bash run_1card_FPS.sh
 bash run_multi_card_FPS.sh 
 ```
  
+## Result
+
+|               | acc       |       fps |
+| ---           | ---       | ---       |
+|    multi_card |  0.424126  | 0.267241|
