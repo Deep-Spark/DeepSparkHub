@@ -33,3 +33,10 @@ Download the pre-trained VGG-16 model (reduced-fc) from [here](https://drive.goo
 ```
 python3 train_ssd.py --batch_size 16
 ````
+
+
+## Result
+
+|               | acc      |       fps |
+| ---           | ---       | ---       |
+|    multi_card |  0.783513   | 3.177  |
