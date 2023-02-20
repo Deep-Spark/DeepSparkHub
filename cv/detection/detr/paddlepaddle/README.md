@@ -1,17 +1,22 @@
-# 克隆代码
+# DETR
+
+## Model description
+DETR is an object detection model based on transformer. We reproduced the model of the paper.
+
+## 克隆代码
 
 ```
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
 ```
 
-# 安装PaddlePaddle
+## 安装PaddlePaddle
 
 ```
 # CUDA10.2
 python3 -m pip install paddlepaddle-gpu==2.2.2 -i https://mirror.baidu.com/pypi/simple
 ```
 
-# 安装PaddleDetection
+## 安装PaddleDetection
 
 ```
 cd PaddleDetection
@@ -19,13 +24,13 @@ pip install -r requirements.txt
 python3 setup.py install
 ```
 
-# 下载COCO数据集
+## 下载COCO数据集
 
 ```
 python3 dataset/coco/download_coco.py
 ```
 
-# 运行代码
+## 运行代码
 
 ```
 # GPU多卡训练示例
