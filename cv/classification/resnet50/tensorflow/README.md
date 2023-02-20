@@ -28,3 +28,10 @@ bash run_train_resnet50_imagenette.sh
 ```shell
 bash run_train_resnet50_multigpu_imagenette.sh
 ```
+
+
+## Result
+
+|               | acc       |       fps |
+| ---           | ---       | ---       |
+|    multi_card | 0.9860    | 236.9     |
