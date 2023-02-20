@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
@@ -13,7 +14,6 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-#!/bin/bash
 
 set -x
 
