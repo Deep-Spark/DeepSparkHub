@@ -1,17 +1,22 @@
-# 克隆代码
+# RetinaNet
+
+## Model description
+The paper proposes a method to convert a deep learning object detector into an equivalent spiking neural network. The aim is to provide a conversion framework that is not constrained to shallow network structures and classification problems as in state-of-the-art conversion libraries. The results show that models of higher complexity, such as the RetinaNet object detector, can be converted with limited loss in performance.
+
+## 克隆代码
 
 ```
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
 ```
 
-# 安装PaddlePaddle
+## 安装PaddlePaddle
 
 ```
 # CUDA10.2
 python3 -m pip install paddlepaddle-gpu==2.2.2 -i https://mirror.baidu.com/pypi/simple
 ```
 
-# 安装PaddleDetection
+## 安装PaddleDetection
 
 ```
 cd PaddleDetection
@@ -19,13 +24,13 @@ pip install -r requirements.txt
 python3 setup.py install
 ```
 
-# 下载COCO数据集
+## 下载COCO数据集
 
 ```
 python3 dataset/coco/download_coco.py
 ```
 
-# 运行代码
+## 运行代码
 
 ```
 # GPU多卡训练示例
