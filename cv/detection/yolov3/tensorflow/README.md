@@ -35,3 +35,9 @@ Exporting loaded COCO weights as TF checkpoint(yolov3_coco.ckpt)[BaiduCloud](htt
 ```
 bash ./run_training.sh
 ```
+## Result
+
+|               | mAP       |       fps |
+| ---           | ---       | ---       |
+|    multi_card |  33.67%   | 4.34it/s  |
+
