@@ -9,13 +9,6 @@ DETR is an object detection model based on transformer. We reproduced the model 
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
 ```
 
-## 安装PaddlePaddle
-
-```
-# CUDA10.2
-python3 -m pip install paddlepaddle-gpu==2.2.2 -i https://mirror.baidu.com/pypi/simple
-```
-
 ## 安装PaddleDetection
 
 ```

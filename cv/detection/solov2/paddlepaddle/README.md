@@ -9,13 +9,6 @@ SOLOv2 (Segmenting Objects by Locations) is a fast instance segmentation framewo
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
 ```
 
-## 安装PaddlePaddle
-
-```
-# CUDA10.2
-python3 -m pip install paddlepaddle-gpu==2.2.2 -i https://mirror.baidu.com/pypi/simple
-```
-
 ## 安装PaddleDetection
 
 ```
