@@ -1,0 +1,4 @@
+cmake
+SimpleITK
+requests
+googledrivedownloader
