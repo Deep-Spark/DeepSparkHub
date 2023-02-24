@@ -36,6 +36,23 @@ val/ILSVRC2012_val_00000001.JPEG 65
 
 ```bash
 # Make sure your dataset path is the same as above
+# OR
+# Modify the image_root of Train mode and Eval mode in the file: PaddleClas/ppcls/configs/ImageNet/SwinTransformer/SwinTransformer_tiny_patch4_window7_224.yaml
+
+DataLoader:
+  Train:
+    dataset:
+      name: ImageNetDataset
+      image_root: ./dataset/ILSVRC2012/
+      cls_label_path: ./dataset/ILSVRC2012/train_list.txt
+...
+...
+  Eval:
+    dataset: 
+      name: ImageNetDataset
+      image_root: ./dataset/ILSVRC2012/
+      cls_label_path: ./dataset/ILSVRC2012/val_list.txt
+
 cd PaddleClas
 # Link your dataset to default location
 ln -s /home/datasets/imagenet_jpeg/ ./dataset/ILSVRC2012
