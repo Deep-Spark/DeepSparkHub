@@ -38,7 +38,7 @@ val/ILSVRC2012_val_00000001.JPEG 65
 # Make sure your dataset path is the same as above
 #OR
 # Modify the image_root of Train mode and Eval mode in the file: PaddleClas/ppcls/configs/ImageNet/RepVGG/RepVGG_A0.yaml
-```bash
+
 DataLoader:
   Train:
     dataset:
@@ -52,7 +52,6 @@ DataLoader:
       name: ImageNetDataset
       image_root: ./dataset/ILSVRC2012/
       cls_label_path: ./dataset/ILSVRC2012/val_list.txt
-``` 
 
 cd PaddleClas
 # Link your dataset to default location
