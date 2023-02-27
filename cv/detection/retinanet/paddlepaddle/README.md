@@ -44,4 +44,4 @@ python3 tools/train.py -c configs/retinanet/retinanet_r50_fpn_1x_coco.yml --eval
 
 | GPUs | FPS | Train Epochs | Box AP  |
 |------|-----|--------------|------|
-| 1x8  |  | 12           |  |
+| 1x8  | 6.58 | 12           | 37.3 |
