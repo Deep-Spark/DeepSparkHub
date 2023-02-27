@@ -44,4 +44,4 @@ python3 tools/train.py -c configs/solov2/solov2_r50_fpn_1x_coco.yml --eval
 
 | GPUs | FPS | Train Epochs | mAP  |
 |------|-----|--------------|------|
-| 1x8  |  | 12           |  |
+| 1x8  | 6.39 | 12           | 35.4 |
