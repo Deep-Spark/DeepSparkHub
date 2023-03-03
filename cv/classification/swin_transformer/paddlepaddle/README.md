@@ -64,4 +64,4 @@ python3 -u -m paddle.distributed.launch --gpus=0,1,2,3,4,5,6,7 tools/train.py -c
 
 | GPU         | FP32                                 |
 | ----------- | ------------------------------------ |
-| 8 cards     | Acc@1=0.8069                         |
+| 8 cards     | Acc@1=0.8042                         |
