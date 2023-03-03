@@ -62,4 +62,4 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 train.py \
 
 | GPU         | FP32                                 |
 | ----------- | ------------------------------------ |
-| 8 cards     | mIoU =80.36%                         |
+| 8 cards     | mIoU =80.42%                         |
