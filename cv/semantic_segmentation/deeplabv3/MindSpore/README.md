@@ -13,7 +13,8 @@ Refer to [this paper][1] for network details.
 pip3 install -r requirements.txt
 ```
 ## Step 2: Prepare Datasets
-Pascal VOC datasets and Semantic Boundaries Dataset
+
+Pascal VOC datasets [link](https://host.robots.ox.ac.uk/pascal/VOC/), and Semantic Boundaries Dataset: [link](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/semantic_contours/benchmark.tgz)
 
 - Download segmentation dataset.
 
@@ -38,6 +39,7 @@ You can also generate the list file automatically by run script: `python get_dat
  --num_shards                number of shards of the mindrecords
  --shuffle                   shuffle or not
  ```
+
 # [Pretrained models](#contents)
 Please [resnet101](https://download.mindspore.cn/model_zoo/r1.2/resnet101_ascend_v120_imagenet2012_official_cv_bs32_acc78/) download resnet101 here
 
@@ -50,10 +52,14 @@ python3 train.py --data_file=/home/dataset/deeplabv3/vocaug_train.mindrecord0 --
 python3 eval.py --data_root=deeplabv3/ --data_lst=voc_val_lst.txt --batch_size=32 --crop_size=513 --ignore_label=255 --num_classes=21 --model=deeplab_v3_s16 --scales_type=0 --freeze_bn=True --device_target=GPU --ckpt_path=deeplab_v3_s16-200_45.ckpt
 ```
 ### [Evaluation result]
-### 性能数据：BI
-![image](./image2022-9-13_20-29-27.png)
-![image](./image2022-9-13_20-28-42.png)
-### 性能数据：NV 
-![image](./image2022-9-13_13-14-38.png)
-![image](./image2022-9-13_13-14-15.png)
+## Results on BI-V100
 
+| GPUs | per step time  |  Miou  |
+|------|--------------  |--------|
+|  1   |   1.465s       | 0.7386 |
+
+## Results on NV-V100s
+
+| GPUs | per step time  |  MAP  |
+|------|--------------  |-------|
+|  1   |   1.716s       | 0.7453|
