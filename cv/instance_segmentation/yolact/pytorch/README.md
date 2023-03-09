@@ -7,6 +7,9 @@
        ██║   ╚██████╔╝███████╗██║  ██║╚██████╗   ██║   
        ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝   ╚═╝ 
 ```
+A simple, fully convolutional model for real-time instance segmentation. This is the code for papers:
+ - [YOLACT: Real-time Instance Segmentation](https://arxiv.org/abs/1904.02689)
+ - [YOLACT++: Better Real-time Instance Segmentation](https://arxiv.org/abs/1912.06218)
 
 ## Step 1: Installing packages
 ```
@@ -24,7 +27,7 @@ If you want to use YOLACT++, compile deformable convolutional layers (from [DCNv
 ## Step 2: Preparing datasets
 Download the [COCO Dataset](https://cocodataset.org/#home) 
 
-Modify the configuration file(data/coco.yaml)
+Modify the configuration file(data/config.py)
 ```
 $ vim data/config.py
 $ # 'train_images': the path of train images
@@ -66,33 +69,12 @@ YOLACT now supports multiple GPUs seamlessly during training:
  - Then, simply set the batch size to `8*num_gpus` with the training commands above. The training script will automatically scale the hyperparameters to the right values.
    - If you have memory to spare you can increase the batch size further, but keep it a multiple of the number of GPUs you're using.
    - If you want to allocate the images per GPU specific for different GPUs, you can use `--batch_alloc=[alloc]` where [alloc] is a comma seprated list containing the number of images on each GPU. This must sum to `batch_size`.
+ - The learning rate should divide the number of gpus.
 
-## Images
-```Shell
-# Display qualitative results on the specified image.
-python3 eval.py --trained_model=weights/yolact_base_54_800000.pth --score_threshold=0.15 --top_k=15 --image=my_image.png
-
-# Process an image and save it to another file.
-python3 eval.py --trained_model=weights/yolact_base_54_800000.pth --score_threshold=0.15 --top_k=15 --image=input_image.png:output_image.png
-
-# Process a whole folder of images.
-python3 eval.py --trained_model=weights/yolact_base_54_800000.pth --score_threshold=0.15 --top_k=15 --images=path/to/input/folder:path/to/output/folder
+For example: use 8 GPUs to train.
 ```
-## Video
-```Shell
-# Display a video in real-time. "--video_multiframe" will process that many frames at once for improved performance.
-# If you want, use "--display_fps" to draw the FPS directly on the frame.
-python3 eval.py --trained_model=weights/yolact_base_54_800000.pth --score_threshold=0.15 --top_k=15 --video_multiframe=4 --video=my_video.mp4
-
-# Display a webcam feed in real-time. If you have multiple webcams pass the index of the webcam you want instead of 0.
-python3 eval.py --trained_model=weights/yolact_base_54_800000.pth --score_threshold=0.15 --top_k=15 --video_multiframe=4 --video=0
-
-# Process a video and save it to another file. This uses the same pipeline as the ones above now, so it's fast!
-python3 eval.py --trained_model=weights/yolact_base_54_800000.pth --score_threshold=0.15 --top_k=15 --video_multiframe=4 --video=input_video.mp4:output_video.mp4
-```
-As you can tell, `eval.py` can do a ton of stuff. Run the `--help` command to see everything it can do.
-```Shell
-python3 eval.py --help
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+python3 train.py --config=yolact_base_config --batch_size 64 --lr 0.000125
 ```
 
 ## Reference

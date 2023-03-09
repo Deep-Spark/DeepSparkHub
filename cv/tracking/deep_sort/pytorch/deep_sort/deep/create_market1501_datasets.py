@@ -2,8 +2,8 @@ import os
 from PIL import Image
 from shutil import copyfile, copytree, rmtree, move
  
-PATH_DATASET = '/home/datasets/cv/Market-1501-v15.09.15'  # 需要处理的文件夹
-PATH_NEW_DATASET = '/home/wenfeng.zhang/datasets/market1501'  # 处理后的文件夹
+PATH_DATASET = './Market-1501-v15.09.15'  # 需要处理的文件夹
+PATH_NEW_DATASET = './market1501'  # 处理后的文件夹
 PATH_ALL_IMAGES = PATH_NEW_DATASET + '/all_images'
 PATH_TRAIN = PATH_NEW_DATASET + '/train'
 PATH_TEST = PATH_NEW_DATASET + '/test'

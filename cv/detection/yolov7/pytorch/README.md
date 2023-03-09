@@ -17,6 +17,23 @@ $ # path: the root of coco data
 $ # train: the relative path of train images
 $ # val: the relative path of valid images
 ```
+The train2017.txt and val2017.txt file you can get from:
+```
+wget https://github.com/ultralytics/yolov5/releases/download/v1.0/coco2017labels.zip
+```
+The datasets format as follows:
+```
+    coco
+        |- iamges
+            |- train2017
+            |- val2017
+        |- labels
+            |- train2017
+            |- val2017
+        |- train2017.txt
+        |- val2017.txt
+
+    ```
 
 ## Training
 
