@@ -27,12 +27,19 @@ bash train_gcn_1p.sh
 ### [Evaluation]
 
 ```bash
-python3 eval.py --data_dir=../data_mr/cora --device_target="GPU" --model_ckpt ./ckpt/ckpt_gcn-200_1.ckpt &> eval.log &
+cd ..
+python3 eval.py --data_dir=scripts/data_mr/cora --device_target="GPU" --model_ckpt scripts/train/ckpt/ckpt_gcn-200_1.ckpt  &> eval.log &
 ```
 ### [Evaluation result]
 ### 性能数据：BI
-![image](./55kZCH3BzA.jpg)
-![image](./image2022-9-13_17-41-38.png)
+## Results on BI-V100
+
+| GPUs | per step time  |  Acc  |
+|------|--------------  |-------|
+|   1  |   4.454        | 0.8711|
 ### 性能数据：NV 
-![image](./image2022-9-19_11-8-2.png)
-![image](./image2022-9-19_11-3-32.png)
+## Results on NV-V100s
+
+| GPUs | per step time  |  Acc  |
+|------|--------------  |-------|
+|   1  |   5.278        | 0.8659|

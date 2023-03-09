@@ -62,9 +62,14 @@ python3 train.py \
 --output_path './output' > log.txt 2>&1 &
 ```
 ### [Evaluation result]
-### 性能数据：BI
-![image](./image2022-9-12_10-10-42.png)
-![image](./image2022-9-14_21-50-51.png)
-### 性能数据：NV 
-![image](./image2022-9-13_0-21-5.png)
-![image](./image2022-9-14_21-48-26.png)
+## Results on BI-V100
+
+| GPUs | per step time  |  MAP  |
+|------|--------------  |-------|
+|  1*8 |   0.814s       | 0.374 |
+
+## Results on NV-V100s
+
+| GPUs | per step time  |  MAP  |
+|------|--------------  |-------|
+|  1*8 |   0.797s       | 0.369 |
