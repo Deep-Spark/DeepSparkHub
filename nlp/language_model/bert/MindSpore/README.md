@@ -34,11 +34,15 @@ We have provided several kinds of pretrained checkpoint.
 bash scripts/run_squad_gpu_distribute.sh 8
 ```
 ### [Evaluation result]
-### 性能数据：BI
-![image](./image2022-9-14_10-16-48%20(1).png)
-![image](./image2022-9-16_11-15-21.png)
-### 性能数据：NV 
-![image](./image2022-9-16_11-14-57.png)
-![image](./image2022-9-20_11-12-37.png)
+## Results on BI-V100
 
+| GPUs | per step time  |  exact_match  |  F1  |
+|------|--------------  |---------------|------|
+|  1*8 |   1.898s       |   71.9678     |81.422|
+### 性能数据：NV 
+## Results on NV-V100s
+
+| GPUs | per step time  |  exact_match  |  F1  |
+|------|--------------  |---------------|------|
+|  1*8 |   1.877s       |   71.9678     |81.422|
 
