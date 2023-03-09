@@ -41,6 +41,6 @@ Note that:
 
 ## Results on BI-V100
 
-| GPUs | FPS | Train Epochs | Box AP	  |
-|------|-----|--------------|------|
-| 1x8  | 8.24 | 12           | 38.7 |
+| GPUs | FPS | Train Epochs | Box AP|
+|------|-----|--------------|-------|
+| 1x8  | 8.24 | 12          |  38.7 |
