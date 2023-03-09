@@ -23,14 +23,14 @@ python3 setup.py develop
 1. Download
 
     Download [point cloud](https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_velodyne.zip)(29GB), [images](https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_image_2.zip)(12 GB), [calibration files](https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_calib.zip)(16 MB)和[labels](https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_label_2.zip)(5 MB)。
-    Or you can download from fileserve,
-    ```
-    wget http://10.150.9.95/swapp/datasets/cv/3d_detection/kitti.tar.gz
-    tar -xzvf kitti.tar.gz
-    ```
     Format the datasets as follows:
     ```
     kitti
+        |- ImageSets
+            |- train.txt
+            |- val.txt
+            |- test.txt
+            |- trainval.txt
         |- training
             |- calib (#7481 .txt)
             |- image_2 (#7481 .png)
@@ -41,12 +41,17 @@ python3 setup.py develop
             |- image_2 (#7518 .png)
             |- velodyne (#7418 .bin)
     ```
-
+    The train.txt、val.txt、test.txt and trainval.txt you can get from:
+    ```
+    wget https://raw.githubusercontent.com/traveller59/second.pytorch/master/second/data/ImageSets/test.txt
+    wget https://raw.githubusercontent.com/traveller59/second.pytorch/master/second/data/ImageSets/train.txt
+    wget https://raw.githubusercontent.com/traveller59/second.pytorch/master/second/data/ImageSets/val.txt
+    wget https://raw.githubusercontent.com/traveller59/second.pytorch/master/second/data/ImageSets/trainval.txt
+    ```
 2. Pre-process KITTI datasets First
 
     ```
-    cd PointPillars/
-    python pre_process_kitti.py --data_root your_path_to_kitti
+    python3 pre_process_kitti.py --data_root your_path_to_kitti
     ```
 
     Now, we have datasets as follows:
@@ -76,7 +81,6 @@ python3 setup.py develop
 
 ### Single GPU training
 ```
-cd PointPillars/
 python3 train.py --data_root your_path_to_kitti
 ```
 ### Multiple GPU training
@@ -86,32 +90,29 @@ python3 -m torch.distributed.launch --nproc_per_node 8 train_dist.py --data_root
 ## [Evaluation]
 
 ```
-cd PointPillars/
-python3 evaluate.py --ckpt pretrained/epoch_160.pth --data_root your_path_to_kitti 
+python3 evaluate.py --ckpt pretrained/your_weights.pth --data_root your_path_to_kitti 
 ```
 
 ## [Test]
 
 ```
-cd PointPillars/
-
 # 1. infer and visualize point cloud detection
-python3 test.py --ckpt pretrained/epoch_160.pth --pc_path your_pc_path 
+python3 test.py --ckpt pretrained/your_weights.pth --pc_path your_pc_path 
 
 # 2. infer and visualize point cloud detection and gound truth.
-python3 test.py --ckpt pretrained/epoch_160.pth --pc_path your_pc_path --calib_path your_calib_path  --gt_path your_gt_path
+python3 test.py --ckpt pretrained/your_weights.pth --pc_path your_pc_path --calib_path your_calib_path  --gt_path your_gt_path
 
 # 3. infer and visualize point cloud & image detection
-python3 test.py --ckpt pretrained/epoch_160.pth --pc_path your_pc_path --calib_path your_calib_path --img_path your_img_path
+python3 test.py --ckpt pretrained/your_weights.pth --pc_path your_pc_path --calib_path your_calib_path --img_path your_img_path
 
 
 e.g. [infer on val set 000134]
 
-python3 test.py --ckpt pretrained/epoch_160.pth --pc_path /home/lifa/data/KITTI/training/velodyne_reduced/000134.bin
+python3 test.py --ckpt pretrained/your_weights.pth --pc_path /home/lifa/data/KITTI/training/velodyne_reduced/000134.bin
 
 or
 
-python3 test.py --ckpt pretrained/epoch_160.pth --pc_path data/kitti/training/velodyne_reduced/000134.bin --calib_path data/kitti/training/calib/000134.txt --img_path data/kitti/training/image_2/000134.png --gt_path data/kitti/training/label_2/000134.txt
+python3 test.py --ckpt pretrained/your_weights.pth --pc_path data/kitti/training/velodyne_reduced/000134.bin --calib_path data/kitti/training/calib/000134.txt --img_path data/kitti/training/image_2/000134.png --gt_path data/kitti/training/label_2/000134.txt
 
 ```
 
