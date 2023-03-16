@@ -2,7 +2,7 @@
 __pycache__/
 build/
 *.egg-info
-
+data/
 
 # Files
 *.weights
@@ -11,3 +11,4 @@ build/
 *.avi
 *.so
 *.txt
+*.jpg

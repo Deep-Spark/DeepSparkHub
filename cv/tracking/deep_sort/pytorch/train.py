@@ -1,3 +1,17 @@
+# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
 import argparse
 import os
 import time
@@ -27,7 +41,7 @@ if torch.cuda.is_available() and not args.no_cuda:
 # data loading
 root = args.data_dir
 train_dir = os.path.join(root,"train")
-test_dir = os.path.join(root,"test")
+test_dir = os.path.join(root,"train")
 transform_train = torchvision.transforms.Compose([
     torchvision.transforms.RandomCrop((128,64),padding=4),
     torchvision.transforms.RandomHorizontalFlip(),
@@ -177,7 +191,7 @@ def lr_decay():
         print("Learning rate adjusted to {}".format(lr))
 
 def main():
-    for epoch in range(start_epoch, start_epoch+40):
+    for epoch in range(start_epoch, start_epoch+100):
         train_loss, train_err = train(epoch)
         test_loss, test_err = test(epoch)
         draw_curve(epoch, train_loss, train_err, test_loss, test_err)

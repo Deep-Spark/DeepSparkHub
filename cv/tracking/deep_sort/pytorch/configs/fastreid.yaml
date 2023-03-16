@@ -1,3 +1,0 @@
-FASTREID:
-  CFG: "thirdparty/fast-reid/configs/Market1501/bagtricks_R50.yml"
-  CHECKPOINT: "deep_sort/deep/checkpoint/market_bot_R50.pth"
