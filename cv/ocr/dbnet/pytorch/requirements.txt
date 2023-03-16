@@ -1,0 +1,12 @@
+
+
+addict
+yapf
+terminaltables
+pycocotools
+lmdb
+shapely
+pyclipper
+imgaug
+
+
