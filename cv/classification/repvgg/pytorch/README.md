@@ -6,7 +6,7 @@
 ## Step 1: Installing
 
 ```bash
-pip3 install -r requirements.txt
+pip3 install timm yacs
 ```
 
 ## Step 2: Download data
