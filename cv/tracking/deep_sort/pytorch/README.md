@@ -49,6 +49,8 @@ python3 train.py --data-dir your path
 python3 test.py --data-dir your path
 python3 evaluate.py
 ```
+## Results
+Acc top1:0.980
 
 ## Quick Start All Processes
 Please refer to https://github.com/ZQPei/deep_sort_pytorch
