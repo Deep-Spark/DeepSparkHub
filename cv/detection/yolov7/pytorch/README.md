@@ -33,7 +33,7 @@ The datasets format as follows:
         |- train2017.txt
         |- val2017.txt
 
-    ```
+```
 
 ## Training
 
@@ -67,6 +67,11 @@ On image:
 ```
 python3 detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
 ```
+## Results
+| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> |
+| :-- | :-: | :-: | :-: |
+| [**YOLOv7**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt) | 640 | **49.51%** | **68.84%** |
+
 
 ## Reference
 https://github.com/WongKinYiu/yolov7
