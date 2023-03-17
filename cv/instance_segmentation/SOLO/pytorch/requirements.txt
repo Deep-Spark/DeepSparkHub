@@ -1,0 +1,7 @@
+addict
+yapf
+matplotlib
+pycocotools
+six
+terminaltables
+opencv-python
