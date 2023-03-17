@@ -26,10 +26,10 @@ bash run_dist.sh
 ```
 ## Results on BI-V100
 
-| GPUs | Samples/s | Loss   |
+| GPUs | Samples/s | F1     |
 |------|-----------|--------|
-| 1x1  | 29.86     | 0.9861 |
-| 1x8  | 178.906   | 0.9804 |
+| 1x1  | 128.86    | 87     |
+| 1x8  | 208.6     | 78.69  |
 
 ## Reference
 https://github.com/huggingface/
