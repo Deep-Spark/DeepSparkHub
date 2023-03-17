@@ -76,6 +76,11 @@ For example: use 8 GPUs to train.
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 python3 train.py --config=yolact_base_config --batch_size 64 --lr 0.000125
 ```
+## Results
+
+| Image Size | Backbone      |mAP   |                                                                   
+|:----------:|:-------------:|:----:|
+| 550        | Resnet50-FPN  |22.63 | 
 
 ## Reference
 https://github.com/dbolya/yolact
