@@ -1,5 +1,60 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 23.03 Release Notes
+
+### 特性和增强
+
+#### 多框架支持
+新增了对TensorFlow和MindSpore的支持。
+
+#### 模型与算法
+新增了35个算法模型，具体如下。
+
+**TensorFlow**
+
+BERT | ResNet50 | SSD | YOLOv3 | VNet
+-----| -------- | --- | ------ | ----
+
+**MindSpore**
+
+BERT | SSD | DCGAN | DeepLabV3 | GCN
+-----| --- | ----- | --------- | ---
+
+**PaddlePaddle**
+
+Swin Transformer | RepVGG | ResNeSt50 | DeepLabV3+ | BiSeNetV2
+-----------------| ------ | --------- | ---------- | ---------
+
+RetinaNet        | FCOS   | DETR      | CenterNet  | SOLOv2
+-----------------| ------ | --------- | ---------- | ---------
+
+**PyTorch**
+
+RepVGG           | PointPillars | BEVFormer  | YOLACT++ | BERT Question Answering
+-----------------| ------       | ---------  | -------- | ---------
+
+YOLOv7           | FCOS         | Retinaface | DeepSORT | BERT Text Classification
+-----------------| ------       | ---------  | -------- | ---------
+
+Stable Diffusion | DBNet        | SOLO       | BERT NER | BERT Text Summarization
+-----------------| ------       | ---------  | -------- | ---------
+
+### 问题修复
+
+- 更新了ResNet50模型的运行脚本路径。
+- 更新了HashNeRF模型的数据集准备和模型执行步骤。
+
+### 贡献者
+
+感谢以下人员做出的贡献：
+
+shengquannian，吴永乐，may，牛斯克，张文风，la，丁力，song.jian，westnight，
+cheneychen2023，郝燕龙，tonychen，Shikun Li，majorli。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
+---
+
 ## DeepSparkHub 22.12 Release Notes
 
 ### 特性和增强
@@ -38,7 +93,7 @@ Wide&Deep | PaddlePaddle | Criteo_Terabyte
 - vqmivc模型使用数据集问题。([#I63WFR](https://gitee.com/deep-spark/deepsparkhub/issues/I63WFR))
 - APCNet模型readme文档缺少数据集准备步骤。([#I63W7K](https://gitee.com/deep-spark/deepsparkhub/issues/I63W7K))
 - GCNet模型Readme文档缺少数据集存放位置描述。([#I63W8I](https://gitee.com/deep-spark/deepsparkhub/issues/I63W8I))
-- Graph WaveNet模型Readme问题。([#I63WCW](https://gitee.com/deep-spark/deepsparkhub/issues/I63WCW)
+- Graph WaveNet模型Readme问题。([#I63WCW](https://gitee.com/deep-spark/deepsparkhub/issues/I63WCW))
 - 首页readme文档的clip 模型链接有问题。([#I62HM3](https://gitee.com/deep-spark/deepsparkhub/issues/I62HM3))
 - ConvNext,RetinaNet,ACmix readme文档更新下载数据集。([#I6101Y](https://gitee.com/deep-spark/deepsparkhub/issues/I6101Y))
 - semantic_segmentation下模型的readme文档需要补充准备数据集步骤。([#I5Y01H](https://gitee.com/deep-spark/deepsparkhub/issues/I5Y01H))
