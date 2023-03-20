@@ -1,0 +1,11 @@
+__pycache__
+build/
+*.egg-info
+*.so
+*_logs*
+tmp/
+results/
+data/
+pillar_logs/
+pretrained/
+dataset/ImageSets/
