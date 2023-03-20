@@ -45,7 +45,7 @@ python3 train.py --workers 8 --device 0 --batch-size 32 --data data/coco.yaml --
 ```
 ### Multiple GPU training
 ```
-python3 -m torch.distributed.launch --nproc_per_node 4 --master_port 9527 train.py --workers 8 --device 0,1,2,3 --sync-bn --batch-size 128 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
+python3 -m torch.distributed.launch --nproc_per_node 4 --master_port 9527 train.py --workers 8 --device 0,1,2,3 --sync-bn --batch-size 64 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
 ```
 
 ## Transfer learning
@@ -70,7 +70,7 @@ python3 detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source infere
 ## Results
 | Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> |
 | :-- | :-: | :-: | :-: |
-| [**YOLOv7**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt) | 640 | **49.51%** | **68.84%** |
+| [**YOLOv7**](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt) | 640 | **49.4%** | **68.6%** |
 
 
 ## Reference
