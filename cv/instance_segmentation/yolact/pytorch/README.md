@@ -80,7 +80,7 @@ python3 train.py --config=yolact_base_config --batch_size 64 --lr 0.000125
 
 | Image Size | Backbone      |mAP   |                                                                   
 |:----------:|:-------------:|:----:|
-| 550        | Resnet50-FPN  |22.63 | 
+| 550        | Resnet50-FPN  |23.13 |
 
 ## Reference
 https://github.com/dbolya/yolact

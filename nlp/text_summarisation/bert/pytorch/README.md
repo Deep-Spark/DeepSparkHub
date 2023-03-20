@@ -28,8 +28,8 @@ bash train_dist.sh
 
 | GPUs | Samples/s | Loss   |
 |------|-----------|--------|
-| 1x1  | 1834.099  | 0.0281 |
-| 1x8  | 6229.625  | 0.0278 |
+| 1x1  | 16.71  | 1.8038 |
+| 1x8  | 117.576  | 1.8288 |
 
 ## Reference
 https://github.com/huggingface/
