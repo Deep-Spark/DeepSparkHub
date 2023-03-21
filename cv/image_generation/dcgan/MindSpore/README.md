@@ -1,5 +1,5 @@
-
 # DCGAN
+
 ## Model description
 
 The deep convolutional generative adversarial networks (DCGANs) first introduced CNN into the GAN structure, and the strong feature extraction ability of convolution layer was used to improve the generation effect of GAN.

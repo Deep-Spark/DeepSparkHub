@@ -1,10 +1,8 @@
-# Text Classification
-
-# Bert-base WNLI 
+# BERT Text Classification
 
 ## Model description
 
-Bert-base WNLI task Fine-tuning
+BERT-base WNLI task Fine-tuning
 
 ## Step 1: Installing packages
 

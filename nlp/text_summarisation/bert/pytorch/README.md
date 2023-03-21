@@ -1,8 +1,8 @@
-# Bert-base summarization 
+# BERT Text Summarization
 
 ## Model description
 
-Bert-base summarization task Fine-tuning
+BERT-base summarization task Fine-tuning
 
 ## Step 1: Installing packages
 
