@@ -1,8 +1,8 @@
-# Bert-base ner 
+# BERT NER
 
 ## Model description
 
-Bert-base ner task Fine-tuning
+BERT-base NER task Fine-tuning
 
 ## Step 1: Installing packages
 

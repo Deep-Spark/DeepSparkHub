@@ -1,8 +1,8 @@
-# Bert-base squad 
+# BERT Question Answering
 
 ## Model description
 
-Bert-base squad task Fine-tuning
+BERT-base SQuAD task Fine-tuning
 
 ## Step 1: Installing packages
 
