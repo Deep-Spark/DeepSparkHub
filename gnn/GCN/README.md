@@ -1,4 +1,5 @@
 # GCN
+
 ## Model description
 GCN(Graph Convolutional Networks) was proposed in 2016 and designed to do semi-supervised learning on graph-structured data. A scalable approach based on an efficient variant of convolutional neural networks which operate directly on graphs was presented. The model scales linearly in the number of graph edges and learns hidden layer representations that encode both local graph structure and features of nodes.
 
@@ -24,21 +25,22 @@ Note that you can run the scripts based on the dataset mentioned in original pap
 cd scripts 
 bash train_gcn_1p.sh
 ```
-### [Evaluation]
+## Evaluation
 
 ```bash
 cd ..
 python3 eval.py --data_dir=scripts/data_mr/cora --device_target="GPU" --model_ckpt scripts/train/ckpt/ckpt_gcn-200_1.ckpt  &> eval.log &
 ```
-### [Evaluation result]
-### 性能数据：BI
-## Results on BI-V100
+
+## Evaluation result
+
+### Results on BI-V100
 
 | GPUs | per step time  |  Acc  |
 |------|--------------  |-------|
 |   1  |   4.454        | 0.8711|
-### 性能数据：NV 
-## Results on NV-V100s
+
+### Results on NV-V100s
 
 | GPUs | per step time  |  Acc  |
 |------|--------------  |-------|

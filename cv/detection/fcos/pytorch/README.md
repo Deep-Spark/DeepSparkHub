@@ -1,16 +1,17 @@
-# FCOS: Fully Convolutional One-Stage Object Detection
+# FCOS
+
 ## Model description
 FCOS (Fully Convolutional One-Stage Object Detection) is a fast anchor-free object detection framework with strong performance.
 The full paper is available at: [https://arxiv.org/abs/1904.01355](https://arxiv.org/abs/1904.01355). 
 
-## install
+## Install requirements
 
 ```
 pip3 install -r requirements.txt
 python3 setup.py develop
 ```
 
-## datasets
+## Prepare datasets
 ```
 mkdir data
 cd data
