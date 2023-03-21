@@ -1,5 +1,5 @@
-
 # DeepLabV3
+
 ## Model description
 DeepLab is a series of image semantic segmentation models, DeepLabV3 improves significantly over previous versions. Two keypoints of DeepLabV3: Its multi-grid atrous convolution makes it better to deal with segmenting objects at multiple scales, and augmented ASPP makes image-level features available to capture long range information.
 This repository provides a script and recipe to DeepLabV3 model and achieve state-of-the-art performance.

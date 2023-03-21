@@ -1,5 +1,8 @@
 # PSE
 
+## Model description
+[Shape robust text detection with progressive scale expansion network](https://arxiv.org/abs/1903.12473) Wang, Wenhai and Xie, Enze and Li, Xiang and Hou, Wenbo and Lu, Tong and Yu, Gang and Shao, Shuai CVPR, 2019
+
 ## Step 1: Installing
 ```bash
 git clone --recursive https://github.com/PaddlePaddle/PaddleOCR.git

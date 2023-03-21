@@ -1,15 +1,15 @@
-# Fcos
+# FCOS
 
 ## Model description
 FCOS (Fully Convolutional One-Stage Object Detection) is a fast anchor-free object detection framework with strong performance.
 
-## 克隆代码
+## Get PaddleDetection source code
 
 ```
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
 ```
 
-## 安装PaddleDetection
+## Install PaddleDetection
 
 ```
 cd PaddleDetection
@@ -17,13 +17,13 @@ pip install -r requirements.txt
 python3 setup.py install
 ```
 
-## 下载COCO数据集
+## Prepare datasets
 
 ```
 python3 dataset/coco/download_coco.py
 ```
 
-## 运行代码
+## Train
 
 ```
 # GPU多卡训练

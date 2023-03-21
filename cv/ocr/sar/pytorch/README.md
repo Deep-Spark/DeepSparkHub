@@ -1,4 +1,4 @@
-# sar
+# SAR
 
 ## Model description
 
