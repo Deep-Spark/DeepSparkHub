@@ -114,6 +114,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [FCOS](cv/detection/fcos/pytorch/README.md)  | PyTorch | COCO
 [Mask R-CNN](cv/detection/maskrcnn/pytorch/README.md)  | PyTorch | COCO
 [Mask R-CNN](cv/detection/maskrcnn/paddlepaddle/README.md)  | PaddlePaddle | COCO
+[PP-YOLOE](cv/detection/pp-yoloe/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PVANet](cv/detection/pvanet/pytorch/README.md)  | PyTorch | COCO
 [RetinaFace](cv/face/retinaface/pytorch/README.md)  | PyTorch | WiderFace
 [RetinaNet](cv/detection/retinanet/pytorch/README.md)  | PyTorch | COCO
@@ -131,7 +132,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [YOLOv3](cv/detection/yolov3/tensorflow/README.md)  | TensorFlow | COCO
 [YOLOv5](cv/detection/yolov5/pytorch/README.md)  | PyTorch | COCO
 [YOLOv7](cv/detection/yolov7/pytorch/README.md)  | PyTorch | COCO
-[PP-YOLOE](cv/detection/pp-yoloe/paddlepaddle/README.md)  | PaddlePaddle | COCO
 
 ### 3D-Detection
 
@@ -184,6 +184,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [DeepLabV3+](cv/semantic_segmentation/deeplabv3plus/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [DenseASPP](cv/semantic_segmentation/denseaspp/pytorch/README.md)  | PyTorch | COCO
 [DFANet](cv/semantic_segmentation/dfanet/pytorch/README.md)  | PyTorch | COCO
+[dnlnet](cv/semantic_segmentation/dnlnet/paddlepaddle/README.md)  | PaddlePaddle | CityScapes
 [DUNet](cv/semantic_segmentation/dunet/pytorch/README.md)  | PyTorch | COCO
 [EncNet](cv/semantic_segmentation/encnet/pytorch/README.md)  | PyTorch | COCO
 [ENet](cv/semantic_segmentation/enet/pytorch/README.md)  | PyTorch | COCO
@@ -206,7 +207,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [UNet](cv/semantic_segmentation/unet/paddlepaddle/README.md)  | PaddlePaddle | CityScapes
 [VNet](cv/semantic_segmentation/vnet/tensorflow/README.md)  | TensorFlow | Hippocampus
 [3D-UNet](cv/semantic_segmentation/unet3d/pytorch/README.md)  | PyTorch | kits19
-[dnlnet](cv/semantic_segmentation/dnlnet/paddlepaddle/README.md)  | PaddlePaddle | CityScapes
 
 
 ### Super Resolution
@@ -272,11 +272,11 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
+[BERT NER](nlp/ner/bert/pytorch/README.md) | PyTorch | CoNLL-2003
 [BERT Pretraining](nlp/language_model/bert/pytorch/README.md)  | PyTorch | MLCommon Wikipedia (2048_shards_uncompressed)
 [BERT Pretraining](nlp/language_model/bert/paddlepaddle/README.md)  | PaddlePaddle | MNLI
 [BERT Pretraining](nlp/language_model/bert/tensorflow/base/README.md)  | TensorFlow | MNLI
 [BERT Pretraining](nlp/language_model/bert/MindSpore/README.md)  | MindSpore | SQuAD
-[BERT NER](nlp/ner/bert/pytorch/README.md) | PyTorch | CoNLL-2003
 [BERT Text Classification](nlp/text_classification/bert/pytorch/README.md) |PyTorch | GLUE
 [BERT Text Summerization](nlp/text_summarisation/bert/pytorch/README.md) | PyTorch | cnn_dailymail
 [BERT Question Answering](nlp/question_answering/bert/pytorch/README.md) | PyTorch | SQuAD
