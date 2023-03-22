@@ -6,36 +6,58 @@ Detection identifies objects as axis-aligned boxes in an image. Most successful 
 ## Step 1: Installing packages
 
 ```bash
-$ pip3 install -r requirements.txt
-$ # Compile deformable convolutional(DCNv2)
-$ cd $CenterNet_ROOT/src/lib/models/networks/DCNv2
-$ ./make.sh 
-$ # Optional, only required if you are using extrementnet or multi-scale testing
-$ # Compile NMS if want to use multi-scale testing or test ExtremeNet. 
-$ cd $CenterNet_ROOT/src/lib/external
-$ make
+pip3 install -r requirements.txt
+# Compile deformable convolutional(DCNv2)
+cd ./src/lib/models/networks/
+git clone -b pytorch_1.9 https://github.com/lbin/DCNv2.git
+cd ./DCNv2/
+python3 setup.py build develop
+
 ```
 
 ## Step 2: Preparing datasets
 
 ```bash
-$ cd /path/to/modelzoo/cv/detection/centernet/pytorch/data 
+# Go back to the "pytorch/" directory
+cd ../../../../../
+
 # Download from homepage of coco: https://cocodataset.org/
+ln -s ${coco_2017_dataset_path} ./data/coco
+
+# The "data/coco" directory would be look like
+data/coco
+├── annotations
+│   ├── instances_train2017.json
+│   └── instances_val2017.json
+├── train2017
+├── train2017.txt
+├── val2017
+└── val2017.txt
+
+# Prepare offline file "resnet18-5c106cde.pth" if download fails
+wget https://download.pytorch.org/models/resnet18-5c106cde.pth
+mkdir -p /root/.cache/torch/hub/checkpoints/
+mv resnet18-5c106cde.pth /root/.cache/torch/hub/checkpoints/
+
 ```
 
 ## Step 3: Training
 
+### Setup CUDA_VISIBLE_DEVICES variable
+```bash
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+```
+
 ### On single GPU
 ```bash
-$ cd /path/to/modelzoo/cv/detection/centernet/pytorch/src 
-$ # single card
-$ python3 main.py ctdet --batch_size 32 --master_batch 15 --lr 1.25e-4  --gpus 0
+cd ./cv/detection/centernet/pytorch/src
+python3 main.py ctdet --batch_size 32 --master_batch 15 --lr 1.25e-4  --gpus 0
 ```
 
 ### Multiple GPUs on one machine
 ```bash
-$ cd /path/to/modelzoo/cv/detection/centernet/pytorch/src 
-$ bash run.sh
+cd ./cv/detection/centernet/pytorch/src
+bash run.sh
 ```
 
 ## Reference
