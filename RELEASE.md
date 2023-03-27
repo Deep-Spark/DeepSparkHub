@@ -41,6 +41,7 @@ Stable Diffusion | DBNet        | SOLO       | BERT NER | BERT Text Summarizatio
 
 ### 问题修复
 
+- 修复了CenterNet模型缺失make.sh文件的问题。
 - 更新了ResNet50模型的运行脚本路径。
 - 更新了HashNeRF模型的数据集准备和模型执行步骤。
 
