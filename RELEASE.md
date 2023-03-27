@@ -108,7 +108,6 @@ Wide&Deep | PaddlePaddle | Criteo_Terabyte
 
 感谢以下人员做出的贡献：
 
-majorli，张文风，yufei.chen，jeff guo，李睿，sanghui_ilu，westnight，jianyong.jiang，
-may，Shikun Li，shengquan.nian，qiangzibro，hui.sang。
+shengquan.nian，牛冠博，吴永乐，may，majorli6，yue.chang，wenfeng.zhang，丁力，xiaomei.wang，songjian，guanbo，cheneychen2023，Yili
 
 欢迎以任何形式为DeepSparkHub项目贡献。
