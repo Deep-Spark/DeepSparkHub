@@ -48,8 +48,7 @@ Stable Diffusion | DBNet        | SOLO       | BERT NER | BERT Text Summarizatio
 
 感谢以下人员做出的贡献：
 
-shengquannian，吴永乐，may，牛斯克，张文风，la，丁力，song.jian，westnight，
-cheneychen2023，郝燕龙，tonychen，Shikun Li，majorli。
+shengquan.nian，牛冠博，吴永乐，may，majorli6，yue.chang，wenfeng.zhang，丁力，xiaomei.wang，songjian，guanbo，cheneychen2023，Yili。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
 
@@ -108,6 +107,6 @@ Wide&Deep | PaddlePaddle | Criteo_Terabyte
 
 感谢以下人员做出的贡献：
 
-shengquan.nian，牛冠博，吴永乐，may，majorli6，yue.chang，wenfeng.zhang，丁力，xiaomei.wang，songjian，guanbo，cheneychen2023，Yili
+majorli，张文风，yufei.chen，jeff guo，李睿，sanghui_ilu，westnight，jianyong.jiang， may，Shikun Li，shengquan.nian，qiangzibro，hui.sang。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
