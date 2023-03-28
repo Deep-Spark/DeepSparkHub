@@ -10,34 +10,61 @@
 #### 模型与算法
 新增了35个算法模型，具体如下。
 
-**TensorFlow**
-
-BERT | ResNet50 | SSD | YOLOv3 | VNet
------| -------- | --- | ------ | ----
-
-**MindSpore**
-
-BERT | SSD | DCGAN | DeepLabV3 | GCN
------| --- | ----- | --------- | ---
-
-**PaddlePaddle**
-
-Swin Transformer | RepVGG | ResNeSt50 | DeepLabV3+ | BiSeNetV2
------------------| ------ | --------- | ---------- | ---------
-
-RetinaNet        | FCOS   | DETR      | CenterNet  | SOLOv2
------------------| ------ | --------- | ---------- | ---------
-
-**PyTorch**
-
-RepVGG           | PointPillars | BEVFormer  | YOLACT++ | BERT Question Answering
------------------| ------       | ---------  | -------- | ---------
-
-YOLOv7           | FCOS         | Retinaface | DeepSORT | BERT Text Classification
------------------| ------       | ---------  | -------- | ---------
-
-Stable Diffusion | DBNet        | SOLO       | BERT NER | BERT Text Summarization
------------------| ------       | ---------  | -------- | ---------
+<table>
+    <tr><th colspan="5",align="left">TensorFlow</th></tr>
+    <tr>
+        <td>BERT</td>
+        <td>ResNet50</td>
+        <td>SSD</td>
+        <td>VNet</td>
+        <td>YOLOv3</td>
+    </tr>
+    <tr><th colspan="5",align="left">MindSpore</th></tr>
+    <tr>
+        <td>BERT</td>
+        <td>DCGAN</td>
+        <td>DeepLabV3</td>
+        <td>GCN</td>
+        <td>SSD</td>
+    </tr>
+    <tr><th colspan="5",align="left">PyTorch</th></tr>
+    <tr>
+        <td>BERT NER</td>
+        <td>BERT Question<br>Answering</td>
+        <td>BERT Text<br>Classification</td>
+        <td>BERT Text<br>Summarization</td>
+        <td>BEVFormer</td>
+    </tr>
+    <tr>
+        <td>DBNet</td>
+        <td>DeepSORT</td>
+        <td>FCOS</td>
+        <td>PointPillars</td>
+        <td>RepVGG</td>
+    </tr>
+    <tr>
+        <td>Retinaface</td>
+        <td>SOLO</td>
+        <td>Stable Diffusion</td>
+        <td>YOLACT++</td>
+        <td>YOLOv7</td>
+    </tr>
+    <tr><th colspan="5",align="left">PaddlePaddle</th></tr>
+    <tr>
+        <td>BiSeNetV2</td>
+        <td>CenterNet</td>
+        <td>DeepLabV3+</td>
+        <td>DETR</td>
+        <td>FCOS</td>
+    </tr>
+    <tr>
+        <td>RepVGG</td>
+        <td>ResNeSt50</td>
+        <td>RetinaNet</td>
+        <td>SOLOv2</td>
+        <td>Swin<br>Transformer</td>
+    </tr>
+</table>
 
 ### 问题修复
 
