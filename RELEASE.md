@@ -11,7 +11,7 @@
 新增了35个算法模型，具体如下。
 
 <table>
-    <tr><th colspan="5",align="left">TensorFlow</th></tr>
+    <tr><th colspan="5", align="left">TensorFlow</th></tr>
     <tr>
         <td>BERT</td>
         <td>ResNet50</td>
@@ -19,7 +19,7 @@
         <td>VNet</td>
         <td>YOLOv3</td>
     </tr>
-    <tr><th colspan="5",align="left">MindSpore</th></tr>
+    <tr><th colspan="5", align="left">MindSpore</th></tr>
     <tr>
         <td>BERT</td>
         <td>DCGAN</td>
@@ -27,7 +27,7 @@
         <td>GCN</td>
         <td>SSD</td>
     </tr>
-    <tr><th colspan="5",align="left">PyTorch</th></tr>
+    <tr><th colspan="5", align="left">PyTorch</th></tr>
     <tr>
         <td>BERT NER</td>
         <td>BERT Question<br>Answering</td>
@@ -49,7 +49,7 @@
         <td>YOLACT++</td>
         <td>YOLOv7</td>
     </tr>
-    <tr><th colspan="5",align="left">PaddlePaddle</th></tr>
+    <tr><th colspan="5", align="left">PaddlePaddle</th></tr>
     <tr>
         <td>BiSeNetV2</td>
         <td>CenterNet</td>
