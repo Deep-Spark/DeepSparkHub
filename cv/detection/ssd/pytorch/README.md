@@ -8,21 +8,22 @@ We present a method for detecting objects in images using a single deep neural n
 
 ### Download dataset
 
-```
-$ mkdir -p /home/data/perf/ssd
-$ cd /home/data/perf/ssd
-$ wget http://images.cocodataset.org/zips/annotations_trainval2017.zip
-$ wget http://images.cocodataset.org/zips/train2017.zip
-$ wget http://images.cocodataset.org/zips/val2017.zip
-$ unzip annotations_trainval2017.zip
-$ unzip train2017.zip
-$ unzip val2017.zip
+```bash
+mkdir -p /home/data/perf/ssd
+cd /home/data/perf/ssd
+wget http://images.cocodataset.org/zips/annotations_trainval2017.zip
+wget http://images.cocodataset.org/zips/train2017.zip
+wget http://images.cocodataset.org/zips/val2017.zip
+unzip annotations_trainval2017.zip
+unzip train2017.zip
+unzip val2017.zip
 ```
 
 ### Download backbone
-```
+
+```bash
 cd /home/data/perf/ssd
-$ wget https://download.pytorch.org/models/resnet34-333f7ec4.pth
+wget https://download.pytorch.org/models/resnet34-333f7ec4.pth
 ```
 
 
@@ -30,11 +31,12 @@ $ wget https://download.pytorch.org/models/resnet34-333f7ec4.pth
 
 ### Multiple GPUs on one machine
 
-```
-$ cd /path/to/model_zoo/cv/detection/ssd/pytorch/base
-$ source ../iluvatar/config/environment_variables.sh
-$ python3  prepare.py --name iluvatar --data_dir /home/data/perf/ssd
-$ bash run_training.sh --name iluvatar --config V100x1x8 --data_dir /home/data/perf/ssd --backbone_path /home/data/perf/ssd/resnet34-333f7ec4.pth
+```bash
+## 'deepsparkhub_root_path' is the root path of deepsparkhub.
+cd {deepsparkhub_root_path}/cv/detection/ssd/pytorch/base
+source ../iluvatar/config/environment_variables.sh
+python3  prepare.py --name iluvatar --data_dir /home/data/perf/ssd
+bash run_training.sh --name iluvatar --config V100x1x8 --data_dir /home/data/perf/ssd --backbone_path /home/data/perf/ssd/resnet34-333f7ec4.pth
 ```
 
 ## Results on BI-V100
