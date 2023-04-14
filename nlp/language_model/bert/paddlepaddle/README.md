@@ -27,10 +27,6 @@ bash train_bert.sh
 
 ## Results on BI-V100
 
-<div align="center">
-
 | GPU         | FP32                                 |
 | ----------- | ------------------------------------ |
 | 1 card      | Acc@1=84.5,FPS=5.1,BatchSize=32      |
-
-</div>
