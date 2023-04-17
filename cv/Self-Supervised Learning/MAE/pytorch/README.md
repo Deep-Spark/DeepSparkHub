@@ -30,6 +30,7 @@ Download the [pretrain_mae_vit_base_mask_0.75_400e.pth](https://drive.google.com
 ## Finetune
 
 ```
+cd ..
 bash run.sh
 ```
 
