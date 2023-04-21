@@ -15,13 +15,23 @@ pip3 install -r requirements.txt && python3 ./setup.py install
 Criteo_Terabyte consists of 23 days data, as it is very large, here only take 3 days data for an example.
 
 ```shell
-# download data
+# Check gzip version
+gzip -V
+
+# If gzip version is not 1.6+, you need to install gzip 1.6
+wget https://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.gz
+tar -xzf gzip-1.6.tar.gz
+cd gzip-1.6
+./configure && make install
+cd ../
+rm -rf gzip-1.6.tar.gz gzip-1.6/
+
+# Download data
 cd dlrm/data/
 bash download_and_preprocess.sh
 ```
 
-After above steps, can get files: terabyte_processed_test.bin, terabyte_processed_train.bin, terabyte_processed_val.bin.
-
+After above steps, you can get files: terabyte_processed_test.bin, terabyte_processed_train.bin, terabyte_processed_val.bin in "/home/datasets/recommendation/Criteo_Terabyte/".
 
 ## Step 3: Training
 
