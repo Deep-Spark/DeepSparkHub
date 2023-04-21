@@ -9,7 +9,7 @@ echo 'download files ...'
 
 if [ ! -f "day_0" ];then
 echo 'download day_0 ...'
-curl -O https://storage.googleapis.com/criteo-cail-datasets/day_0.gz
+wget -c https://sacriteopcail01.z16.web.core.windows.net/day_0.gz
 gzip -dk day_0.gz
 else
 echo "day_0 has already exist"
@@ -17,7 +17,7 @@ fi
 
 if [ ! -f "day_1" ];then
 echo 'download day_1 ...'
-curl -O https://storage.googleapis.com/criteo-cail-datasets/day_1.gz
+wget -c https://sacriteopcail01.z16.web.core.windows.net/day_1.gz
 gzip -dk day_1.gz
 else
 echo "day_1 has already exist"
@@ -25,7 +25,7 @@ fi
 
 if [ ! -f "day_2" ];then
 echo 'download day_2 ...'
-curl -O https://storage.googleapis.com/criteo-cail-datasets/day_2.gz
+wget -c https://sacriteopcail01.z16.web.core.windows.net/day_2.gz
 gzip -dk day_2.gz
 else
 echo "day_2 has already exist"
