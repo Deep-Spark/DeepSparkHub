@@ -11,25 +11,30 @@ pip3 install pudb "pytorch-lightning==1.5" einops regex ftfy cython webdataset==
 ```
 
 ## Step 2: Preparing datasets
-* Download ImageNet dataset and place it in `/home/datasets/cv/imagenet-mini` as follows:
 
-```
-├── imagenet-mini
-│   ├── train
-|   |   |── n01440764
-|   |   |── n01734418
-|   |   |── ......
-│   ├── val
-|   |   |── n01440764
-|   |   |── n01734418
-|   |   |── ......
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+
+The ImageNet dataset path structure should look like:
+
+```bash
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
 ```
 
 ## Step 3: Training AugVAE(AugVAE-ML)
 
 ```
 $ cd /path/to/L-Verse/pytorch
-$ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python3 train_vae.py --config ./configs/imagenet_augvae_ml.yaml --train_dir /home/datasets/cv/imagenet-mini/train --val_dir /home/datasets/cv/imagenet-mini/val --gpus 4 --batch_size 4 --epochs 2
+$ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python3 train_vae.py --config ./configs/imagenet_augvae_ml.yaml --train_dir /path/to/imagenet/train --val_dir /home/datasets/cv/imagenet-mini/val --gpus 4 --batch_size 4 --epochs 2
 ```
 
 ## Reference

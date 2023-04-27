@@ -8,8 +8,23 @@ The ConvNeXT model was proposed in [A ConvNet for the 2020s](https://arxiv.org/a
 pip install timm==0.4.12 tensorboardX six torch torchvision
 ```
 
-Sign up and login in [imagenet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole imagenet dataset. Specify `/path/to/imagenet` to your imagenet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
+The ImageNet dataset path structure should look like:
+
+```bash
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
+```
 
 ## Step 2: Training
 ### Multiple GPUs on one machine
@@ -22,7 +37,7 @@ python3 -m torch.distributed.launch --nproc_per_node=8 main.py \
                                     --update_freq 4 \
                                     --model_ema true \
                                     --model_ema_eval true \
-                                    --data_path /path/to/imagenet-1k \
+                                    --data_path /path/to/imagenet \
                                     --output_dir /path/to/save_results
 ```
 

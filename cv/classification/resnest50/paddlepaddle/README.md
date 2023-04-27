@@ -12,50 +12,30 @@ pip3 install -r requirements.txt
 
 ## Step 2: Download data
 
-Download the [ImageNet Dataset](https://www.image-net.org/download.php) 
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+
+The ImageNet dataset path structure should look like:
 
 ```bash
-# IMAGENET PATH as follow:
-ls -al /home/datasets/imagenet_jpeg/
-total 52688
-drwxr-xr-x 1002 root root    24576 Mar  1 15:33 train
--rw-r--r--    1 root root 43829433 May 16 07:55 train_list.txt
-drwxr-xr-x 1002 root root    24576 Mar  1 15:41 val
--rw-r--r--    1 root root  2144499 May 16 07:56 val_list.txt
------------------------
-# train_list.txt has the following format
-train/n01440764/n01440764_10026.JPEG 0
-...
-
-# val_list.txt has the following format
-val/ILSVRC2012_val_00000001.JPEG 65
------------------------
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
 ```
 
 ## Step 3: Run ResNeSt50
 
 ```bash
-# Make sure your dataset path is the same as above
-# OR
-# Modify the image_root of Train mode and Eval mode in the file: PaddleClas/ppcls/configs/ImageNet/ResNeSt/ResNeSt50.yaml
-
-DataLoader:
-  Train:
-    dataset:
-      name: ImageNetDataset
-      image_root: ./dataset/ILSVRC2012/
-      cls_label_path: ./dataset/ILSVRC2012/train_list.txt
-...
-...
-  Eval:
-    dataset: 
-      name: ImageNetDataset
-      image_root: ./dataset/ILSVRC2012/
-      cls_label_path: ./dataset/ILSVRC2012/val_list.txt 
-
 cd PaddleClas
 # Link your dataset to default location
-ln -s /home/datasets/imagenet_jpeg/ ./dataset/ILSVRC2012
+ln -s /path/to/imagenet ./dataset/ILSVRC2012
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
 export CUDA_VISIBLE_DEVICES=0,1,2,3

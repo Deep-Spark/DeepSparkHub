@@ -4,9 +4,27 @@
 
 In the field of computer vision, recent works show that a pure MLP architecture mainly stacked by fully-connected layers can achieve competing performance with CNN and transformer. An input image of vision MLP is usually split into multiple tokens (patches), while the existing MLP models directly aggregate them with fixed weights, neglecting the varying semantic information of tokens from different images. To dynamically aggregate tokens, we propose to represent each token as a wave function with two parts, amplitude and phase. Amplitude is the original feature and the phase term is a complex value changing according to the semantic contents of input images. Introducing the phase term can dynamically modulate the relationship between tokens and fixed weights in MLP. Based on the wave-like token representation, we establish a novel Wave-MLP architecture for vision tasks. Extensive experiments demonstrate that the proposed Wave-MLP is superior to the state-of-the-art MLP architectures on various vision tasks such as image classification, object detection and semantic segmentation. The source code is available at https://github.com/huawei-noah/CV-Backbones/tree/master/wavemlp_pytorch and https://gitee.com/mindspore/models/tree/master/research/cv/wave_mlp.
 
-## Step 1: Installing packages
-```
+## Step 1: Installing
+```bash
 pip install thop timm==0.4.5 torchprofile
+```
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+
+The ImageNet dataset path structure should look like:
+
+```bash
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
 ```
 
 ## Step 2: Training
@@ -15,8 +33,8 @@ pip install thop timm==0.4.5 torchprofile
 
 ### Multiple GPUs on one machine
 
-```
-bash run.sh /home/datasets/cv/ImageNet/
+```bash
+bash run.sh /path/to/imagenet/
 ```
 
 ## Results on BI-V100
