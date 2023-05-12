@@ -1,11 +1,13 @@
-# ECA_RESNET152
-## Model description
-An ECA-Net is a type of convolutional neural network that utilises an Efficient Channel Attention module.
+# Dataset Preparation Guide
 
-## Step 1: Installing
-```bash
-pip3 install -r requirements.txt
-```
+This document introduces the dataset format used by DeepSparkHub.
+
+## 1. ImageNet
+
+### 1.1 Introduction
+ImageNet is an image database organized according to the WordNet hierarchy (currently only the nouns), in which each node of the hierarchy is depicted by hundreds and thousands of images. The project has been instrumental in advancing computer vision and deep learning research. The data is available for free to researchers for non-commercial use.
+
+### 1.2 Preparation
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
@@ -25,18 +27,3 @@ imagenet
 └── val_list.txt
 ```
 
-:beers: Done!
-
-## Step 2: Training
-### Multiple GPUs on one machine (AMP)
-Set data path by `export DATA_PATH=/path/to/imagenet`. The following command uses all cards to train:
-
-```bash
-bash train_eca_resnet152_amp_dist.sh
-```
-
-:beers: Done!
-
-
-## Reference
-- [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)
