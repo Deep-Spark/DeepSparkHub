@@ -11,7 +11,7 @@ pip3 install -r requirements.txt
 ```
 ## Step 2: Prepare Datasets
 
-Train DCGAN Dataset used: [Imagenet-1k](<http://www.image-net.org/index>)
+Train DCGAN Dataset used: [Imagenet-1k](http://www.image-net.org/index)
 
 - Dataset size: ~125G, 224*224 colorful images in 1000 classes
     - Train: 120G, 1281167 images
@@ -19,15 +19,28 @@ Train DCGAN Dataset used: [Imagenet-1k](<http://www.image-net.org/index>)
 - Data format: RGB images.
     - Note: Data will be processed in src/dataset.py
 
-```path
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
-└─imagenet_original
-  └─train
+The ImageNet dataset path structure should look like:
+
+```bash
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
 ```
+
 ## Step 3: Training
 ### On single GPU 
 ```bash
-python3 train.py --device_id=2 --data_url=/home/datasets/cv/imagenet/train --train_url=./ --device_target=GPU
+python3 train.py --device_id=2 --data_url=/path/to/imagenet/train --train_url=./ --device_target=GPU
 ```
 ### [Evaluation]
 
