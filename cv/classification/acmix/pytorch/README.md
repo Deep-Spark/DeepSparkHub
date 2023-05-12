@@ -9,13 +9,29 @@ Convolution and self-attention are two powerful techniques for representation le
 pip install termcolor==1.1.0 yacs==0.1.8 timm==0.4.5
 ```
 
-Sign up and login in [imagenet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole imagenet dataset. Specify `/path/to/imagenet` to your imagenet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+
+The ImageNet dataset path structure should look like:
+
+```bash
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
+```
 
 ## Step 2: Training
 
 ### Swin-S + ACmix on ImageNet using 8 cards:
 ```
-bash run.sh 8 acmix_swin_small_patch4_window7_224.yaml <DATA_DIR>
+bash run.sh 8 acmix_swin_small_patch4_window7_224.yaml /path/to/imagenet
 ```
 
 ## Results on BI-V100

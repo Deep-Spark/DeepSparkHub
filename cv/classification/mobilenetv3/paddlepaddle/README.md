@@ -13,17 +13,27 @@ pip3 install -r requirements.txt
 ```
 
 ## Step 2: Prepare Datasets
-Download [ImageNet](https://www.image-net.org/), the path as /home/datasets/imagenet/, then the imagenet path as follows:
-```
-# IMAGENET PATH as follow:
-drwxr-xr-x 1002 root root    24576 Mar  1 15:33 train
--rw-r--r--    1 root root 43829433 May 16 07:55 train_list.txt
-drwxr-xr-x 1002 root root    24576 Mar  1 15:41 val
--rw-r--r--    1 root root  2144499 May 16 07:56 val_list.txt
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+
+The ImageNet dataset path structure should look like:
+
+```bash
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
 ```
 
 ## Step 3: Training
-Notice: modify PaddleClas/ppcls/configs/ImageNet/MobileNetV3/MobileNetV3_small_x1_25.yaml file, modify the datasets path as yours.
+**Notice**: modify PaddleClas/ppcls/configs/ImageNet/MobileNetV3/MobileNetV3_small_x1_25.yaml file, modify the datasets path as yours.
 ```
 cd PaddleClas
 export FLAGS_cudnn_exhaustive_search=True
