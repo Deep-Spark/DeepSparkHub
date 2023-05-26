@@ -17,24 +17,45 @@ python3 setup.py build develop
 
 ## Step 2: Preparing datasets
 
+### Go back to the "pytorch/" directory
 ```bash
-# Go back to the "pytorch/" directory
 cd ../../../../../
+```
 
-# Download from homepage of coco: https://cocodataset.org/
-ln -s ${coco_2017_dataset_path} ./data/coco
+### Download coco2017
 
-# The "data/coco" directory would be look like
-data/coco
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
+
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+coco2017
 ├── annotations
 │   ├── instances_train2017.json
-│   └── instances_val2017.json
+│   ├── instances_val2017.json
+│   └── ...
 ├── train2017
-├── train2017.txt
+│   ├── 000000000009.jpg
+│   ├── 000000000025.jpg
+│   └── ...
 ├── val2017
-└── val2017.txt
+│   ├── 000000000139.jpg
+│   ├── 000000000285.jpg
+│   └── ...
+├── train2017.txt 
+├── val2017.txt 
+└── ...
+```
 
-# Prepare offline file "resnet18-5c106cde.pth" if download fails
+### Set up soft link to coco2017
+
+```bash
+ln -s /path/to/coco2017 ./data/coco
+```
+
+### Prepare offline file "resnet18-5c106cde.pth" if download fails
+
+```bash
 wget https://download.pytorch.org/models/resnet18-5c106cde.pth
 mkdir -p /root/.cache/torch/hub/checkpoints/
 mv resnet18-5c106cde.pth /root/.cache/torch/hub/checkpoints/

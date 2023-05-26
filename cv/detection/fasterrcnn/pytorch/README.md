@@ -12,15 +12,32 @@ bash init_torch.sh
 
 ## Step 2: Preparing datasets
 
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
+
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+coco2017
+├── annotations
+│   ├── instances_train2017.json
+│   ├── instances_val2017.json
+│   └── ...
+├── train2017
+│   ├── 000000000009.jpg
+│   ├── 000000000025.jpg
+│   └── ...
+├── val2017
+│   ├── 000000000139.jpg
+│   ├── 000000000285.jpg
+│   └── ...
+├── train2017.txt
+├── val2017.txt
+└── ...
 ```
-$ mkdir -p <project_path>/datasets/coco
-$ cd <project_path>/datasets/coco
-$ wget http://images.cocodataset.org/zips/annotations_trainval2017.zip
-$ wget http://images.cocodataset.org/zips/train2017.zip
-$ wget http://images.cocodataset.org/zips/val2017.zip
-$ unzip annotations_trainval2017.zip
-$ unzip train2017.zip
-$ unzip val2017.zip
+
+```bash
+mkdir -p <project_path>/datasets/
+ln -s /path/to/coco2017 <project_path>/datasets/coco
 ```
 
 ## Step 3: Training
