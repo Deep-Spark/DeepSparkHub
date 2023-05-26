@@ -27,3 +27,43 @@ imagenet
 └── val_list.txt
 ```
 
+## 2. COCO
+
+### 2.1 Introduction
+
+COCO is a large-scale object detection, segmentation, and captioning dataset. COCO has several features:
+
+- Object segmentation
+- Recognition in context
+- Superpixel stuff segmentation
+- 330K images (>200K labeled)
+- 1.5 million object instances
+- 80 object categories
+- 91 stuff categories
+- 5 captions per image
+- 250,000 people with keypoints
+
+### 2.2 Preparation
+
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
+
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+coco2017
+├── annotations
+│   ├── instances_train2017.json
+│   ├── instances_val2017.json
+│   └── ...
+├── train2017
+│   ├── 000000000009.jpg
+│   ├── 000000000025.jpg
+│   └── ...
+├── val2017
+│   ├── 000000000139.jpg
+│   ├── 000000000285.jpg
+│   └── ...
+├── train2017.txt
+├── val2017.txt
+└── ...
+```

@@ -12,19 +12,36 @@ pip3 install -r requirements.txt
 
 ## Step 2: Preparing datasets
 
-Download and extract the [COCO dataset](https://cocodataset.org/#download)
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
-```shell
-cd coco2017
-unzip -q annotations_trainval2017.zip
-unzip -q train2017.zip
-unzip -q val2017.zip
-unzip -q val2017_mini.zip
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+coco2017
+├── annotations
+│   ├── instances_train2017.json
+│   ├── instances_val2017.json
+│   └── ...
+├── train2017
+│   ├── 000000000009.jpg
+│   ├── 000000000025.jpg
+│   └── ...
+├── val2017
+│   ├── 000000000139.jpg
+│   ├── 000000000285.jpg
+│   └── ...
+├── train2017.txt
+├── val2017.txt
+└── ...
 ```
 
 ## Step 3: Training
 
 ### On single GPU
+
+```shell
+export COCO_DATASET_PATH=/path/to/coco2017
+```
 
 ```shell
 python3 ./tools/train.py --cfg ./configs/coco/w32_512_adam_lr1e-3.yaml --datadir=${COCO_DATASET_PATH} --max_epochs=2
