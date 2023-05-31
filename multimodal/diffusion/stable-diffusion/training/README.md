@@ -5,51 +5,79 @@ Stable Diffusion is a text-to-image latent diffusion model created by the resear
 
 ## Prepare
 
-### Setup env
+### Install zlib-1.2.9
+
+```bash
+wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
+tar xvf zlib-1.2.9.tar.gz
+cd zlib-1.2.9/
+./configure && make install
+cd ..
+rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
+```
+
+### Install openmpi
+
+```bash
+yum install -y openmpi3-devel
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openmpi3/lib/
+```
+
+### Install requirements
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-###  Download
-
-```bash
-$ wget http://10.150.9.95/swapp/datasets/multimodal/stable_diffusion/pokemon-images.zip
-$ unzip pokemon-images.zip
-$ wget http://10.150.9.95/swapp/pretrained/multimodal/stable-diffusion/stable-diffusion-v1-4.zip
-$ unzip stable-diffusion-v1-4.zip
-```
-
 ## Train
 
-### step 1   使用accelerate初始化训练环境
+### Step 1 使用accelerate初始化训练环境
 
 ```bash
 accelerate config  # 这里可以选择单卡或者多卡训练
                    # 这里建议只选择多卡或者单卡，其他优化选项例如：torch dynamo，deepspeed等均不建议使用
-
 ```
 
-for example
-single gpu
+**Single GPU example**
 
 ![image](IMG/single.png)
 
-multi-gpu
+**Multi GPU example**
 
 ![image](IMG/multi.png)
 
-### step 2  开始训练
+### Step 2 开始训练
 
 ```bash
-accelerate launch --mixed_precision="fp16" train_text_to_image.py  --pretrained_model_name_or_path=./stable-diffusion-v1-4  --use_ema  --resolution=512 --center_crop --random_flip  --train_batch_size=1  --gradient_accumulation_steps=4  --gradient_checkpointing  --max_train_steps=15000  --learning_rate=1e-05  --max_grad_norm=1  --lr_scheduler="constant" --lr_warmup_steps=0  --output_dir="sd-pokemon-model"  --caption_column 'additional_feature' --train_data_dir pokemon-images/datasets/images/train
+export MODEL_NAME="CompVis/stable-diffusion-v1-4"
+export dataset_name="lambdalabs/pokemon-blip-captions"
+
+accelerate launch --mixed_precision="fp16"  train_text_to_image.py \
+  --pretrained_model_name_or_path=$MODEL_NAME \
+  --dataset_name=$dataset_name \
+  --use_ema \
+  --resolution=512 --center_crop --random_flip \
+  --train_batch_size=1 \
+  --gradient_accumulation_steps=4 \
+  --gradient_checkpointing \
+  --max_train_steps=15000 \
+  --learning_rate=1e-05 \
+  --max_grad_norm=1 \
+  --lr_scheduler="constant" --lr_warmup_steps=0 \
+  --output_dir="sd-pokemon-model"
 ```
 
 ## Test
+
 ```bash
+## 可以在test.py中修改prompt
 python3 test.py
 ```
-prompt:A pokemon with green eyes and red legs   
 
-## Result
-![image](IMG/pokemon.png)
+## Example
+
+prompt: A pokemon with green eyes and red legs
+
+result:
+
+![image](IMG/result.png)
