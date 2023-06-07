@@ -17,17 +17,41 @@ pip3 install -r requirements.txt
 
 ## Step 2: Download data
 
-Download the [CityScapes Dataset](https://www.cityscapes-dataset.com/) 
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
+
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
+```
 
 ```bash
 # Datasets preprocessing
 pip3 install cityscapesscripts
 
-python3 tools/convert_cityscapes.py --cityscapes_path /home/datasets/cityscapes/ --num_workers 8
+python3 tools/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
 
-python3 tools/create_dataset_list.py /home/datasets/cityscapes --type cityscapes --separator ","
+python3 tools/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
+
 # CityScapes PATH as follow:
-ls -al /home/datasets/cityscapes/
+ls -al /path/to/cityscapes
 total 11567948
 drwxr-xr-x 4 root root         227 Jul 18 03:32 .
 drwxr-xr-x 6 root root         179 Jul 18 06:48 ..
@@ -45,11 +69,12 @@ drwxr-xr-x 5 root root          58 Jul 18 03:30 leftImg8bit
 ## Step 3: Run BiSeNetV2
 
 ```bash
-# Make sure your dataset path is the same as above
-data_dir=${data_dir:-/home/datasets/cityscapes/}
+# Change '/path/to/cityscapes' as your local Cityscapes dataset path
+data_dir=/path/to/cityscapes
 sed -i "s#: data/cityscapes#: ${data_dir}#g" configs/_base_/cityscapes.yml
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
+
 # One GPU
 export CUDA_VISIBLE_DEVICES=0
 python3 train.py --config configs/bisenet/bisenet_cityscapes_1024x1024_160k.yml --do_eval --use_vdl --save_interval 500 --save_dir output

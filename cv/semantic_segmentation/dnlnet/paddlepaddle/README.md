@@ -15,19 +15,44 @@ pip3 install -r requirements.txt
 ```
 
 ## Step 2: Prepare Datasets
-Download [CityScapes](https://www.cityscapes-dataset.com/), the path as /home/datasets/cityscapes/.
-Datasets preprocessing:
+
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
+
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
 ```
+
+Datasets preprocessing:
+```bash
 pip3 install cityscapesscripts
 
-python3 tools/convert_cityscapes.py --cityscapes_path /home/datasets/cityscapes/ --num_workers 8
+python3 tools/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
 
-python3 tools/create_dataset_list.py /home/datasets/cityscapes --type cityscapes --separator ","
+python3 tools/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 ```
 
 then the cityscapes path as follows:
 ```
-root@5574247e63f8:~# ls -al /home/datasets/cityscapes/
+root@5574247e63f8:~# ls -al /path/to/cityscapes
 total 11567948
 drwxr-xr-x 4 root root         227 Jul 18 03:32 .
 drwxr-xr-x 6 root root         179 Jul 18 06:48 ..
