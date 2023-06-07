@@ -67,3 +67,37 @@ coco2017
 ├── val2017.txt
 └── ...
 ```
+
+## 3. Cityscapes
+
+### 3.1 Introduction
+
+Cityscapes is a large-scale dataset for city scene understanding and autonomous driving. It contains 5000 source images, out of which 2975 are pixel-level annotated.
+The dataset focuses on street scenes and provides finely annotated object segmentation with categories such as person, animals, vehicles and road facilities.
+
+### 3.2 Preparation
+
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
+
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
+```

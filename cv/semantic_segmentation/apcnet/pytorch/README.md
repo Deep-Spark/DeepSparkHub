@@ -23,11 +23,34 @@ python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
 
 ## Step 2: Prepare Datasets
 
-Download cityscapes from file server or official website [Cityscapes](https://www.cityscapes-dataset.com)
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
+
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
+```
 
 ```shell
 mkdir -p data/
-ln -s ${CITYSCAPES_DATASET_PATH} data/cityscapes
+ln -s /path/to/cityscapes data/cityscapes
 ```
 
 ## Step 3: Training
