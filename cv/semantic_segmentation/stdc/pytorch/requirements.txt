@@ -1,0 +1,4 @@
+-r requirements/mmcv/runtime.txt
+-r requirements/apcnet.txt
+opencv-python3
+cityscapesscripts
