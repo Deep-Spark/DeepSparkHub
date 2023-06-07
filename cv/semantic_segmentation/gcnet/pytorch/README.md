@@ -9,12 +9,34 @@ Global context blocks are applied to multiple layers in a backbone network to co
 ## Step 1: Installing
 ### Datasets
 
-- download cityscape from file server or official urls
-[Cityscapes](https://www.cityscapes-dataset.com/login/)
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
+
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
+```
 
 ```bash
 mkdir data/
-ln -s ${CITYSCAPES_DATASET_PATH} data/cityscapes
+ln -s /path/to/cityscapes data/cityscapes
 ```
 - convert_datasets
 ```bash

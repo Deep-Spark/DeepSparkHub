@@ -11,26 +11,35 @@ Last, the representation similarity we compute the relation between each pixel a
 ## Step 1: Installing
 ### Datasets
 
-- download cityscape from official urls
-[Cityscapes](https://www.cityscapes-dataset.com/)
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
 
-- when done data folder looks like
-````bash
-data/
-├── cityscapes
-    ├── gtFine
-    │   ├── test
-    │   ├── train
-    │   └── val
-    └── leftImg8bit
-    │   ├── test
-    │   ├── train
-    │   └── val
-    ├── test.lst
-    ├── trainval.lst
-    └── val.lst
-````
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
+```
+
+```bash
+mkdir data/
+ln -s /path/to/cityscapes data/cityscapes
+```
 
 ### Environment
 ```bash
