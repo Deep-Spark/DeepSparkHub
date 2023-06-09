@@ -33,6 +33,7 @@ from models.data_parallel import DataParallel
 from logger import Logger
 from datasets.dataset_factory import get_dataset
 from trains.train_factory import train_factory
+from track import run_track_val
 
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
@@ -178,6 +179,17 @@ def main(opt):
             if epoch % 5 == 0 or epoch >= 25:
                 save_model(os.path.join(opt.save_dir, 'model_{}.pth'.format(epoch)),
                         epoch, model, optimizer)
+
+        if opt.val_intervals > 0 and epoch % opt.val_intervals == 0:
+            if (opt.is_ddp!=1) or ((opt.is_ddp==1) and (opt.local_rank==0)):
+                val_opt = opts().init()
+                val_model_path = os.path.join(opt.save_dir, 'model_val.pth')
+                save_model(val_model_path, epoch, model, optimizer)
+                val_opt.val_mot17 = True
+                val_opt.load_model = val_model_path
+                val_opt.conf_thres = 0.4
+                val_opt.data_dir = './data/MOT'
+                run_track_val(val_opt)
 
     if (opt.is_ddp==1) and (opt.local_rank==0): # DDP
         logger.close()
