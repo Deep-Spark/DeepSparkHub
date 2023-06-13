@@ -1,0 +1,6 @@
+pyyaml>=5.1
+sentencepiece==0.1.86
+tensorboard
+tensorboardX
+typeguard==2.13.3
+textgrid
