@@ -1,0 +1,4 @@
+-r requirements/mmcv/build.txt
+-r requirements/mmcv/optional.txt
+-r requirements/mmcv/runtime.txt
+-r requirements/mmcv/test.txt
