@@ -178,8 +178,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ContextNet](cv/semantic_segmentation/contextnet/pytorch/README.md)  | PyTorch | COCO
 [DabNet](cv/semantic_segmentation/dabnet/pytorch/README.md)  | PyTorch | COCO
 [DANet](cv/semantic_segmentation/danet/pytorch/README.md)  | PyTorch | COCO
-[DeepLab](cv/semantic_segmentation/deeplabv3/pytorch/README.md)  | PyTorch | COCO
-[DeepLab](cv/semantic_segmentation/deeplabv3/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
+[DeepLabV3](cv/semantic_segmentation/deeplabv3/pytorch/README.md)  | PyTorch | COCO
+[DeepLabV3](cv/semantic_segmentation/deeplabv3/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
 [DeepLabV3](cv/semantic_segmentation/deeplabv3/MindSpore/README.md)  | MindSpore | VOC
 [DeepLabV3+](cv/semantic_segmentation/deeplabv3plus/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
 [DenseASPP](cv/semantic_segmentation/denseaspp/pytorch/README.md)  | PyTorch | COCO
@@ -316,7 +316,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[Conformer](speech/speech_recognition/conformer/pytorch/README.md)  | PyTorch | LJSpeech-1.1
+[Conformer](speech/speech_recognition/conformer/pytorch/README.md)  | PyTorch | AISHELL
 [RNN-T](speech/speech_recognition/rnnt/pytorch/README.md)  | PyTorch | LJSpeech
 
 
