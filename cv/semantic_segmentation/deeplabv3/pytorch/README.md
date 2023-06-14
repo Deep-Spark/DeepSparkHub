@@ -1,8 +1,8 @@
-# DeepLab
+# DeepLabV3
 
 ## Model description
 
-DeepLabv3 is a semantic segmentation architecture that improves upon DeepLabv2 with several modifications. 
+DeepLabV3 is a semantic segmentation architecture that improves upon DeepLabV2 with several modifications. 
 To handle the problem of segmenting objects at multiple scales, modules are designed which employ atrous convolution in cascade or in parallel to capture multi-scale context by adopting multiple atrous rates. 
 
 ## Step 1: Installing

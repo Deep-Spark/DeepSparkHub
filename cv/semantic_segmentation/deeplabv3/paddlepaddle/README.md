@@ -1,8 +1,8 @@
-# DeepLab
+# DeepLabV3
 
 ## Model description
 
-DeepLabv3 is a semantic segmentation architecture that improves upon DeepLabv2 with several modifications. 
+DeepLabV3 is a semantic segmentation architecture that improves upon DeepLabV2 with several modifications. 
 To handle the problem of segmenting objects at multiple scales, modules are designed which employ atrous convolution in cascade or in parallel to capture multi-scale context by adopting multiple atrous rates. 
 
 ## Step 1: Installing
@@ -63,7 +63,7 @@ drwxr-xr-x 5 root root          58 Jul 18 03:30 leftImg8bit
 -rw-r--r-- 1 root root       65900 Jul 18 03:32 val.txt
 ```
 
-## Step 3: Run DeepLab
+## Step 3: Run DeepLabV3
 
 ```bash
 # Change '/path/to/cityscapes' as your local Cityscapes dataset path
