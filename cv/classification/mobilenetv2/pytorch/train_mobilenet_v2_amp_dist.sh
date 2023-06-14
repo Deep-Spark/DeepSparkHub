@@ -34,4 +34,4 @@ python3  $PYTHONARG ${ROOT_DIR}/run_train.py \
 	--model mobilenet_v2 --dali --dali-cpu  --data-path $DATA_PATH \
 	--opt fused_sgd --batch-size 64 --lr 0.045 --wd 0.00004 \
 	--lr-step-size 1 --lr-gamma 0.98  \
-	--amp --nhwc --deterministic "$@"
+	--amp --deterministic "$@"
