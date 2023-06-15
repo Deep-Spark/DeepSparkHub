@@ -1,4 +1,6 @@
-## yolov8
+# YOLOv8
+
+## Model Description
 
 [Ultralytics](https://ultralytics.com) [YOLOv8](https://github.com/ultralytics/ultralytics) is a cutting-edge, state-of-the-art (SOTA) model that builds upon the success of previous YOLO versions and introduces new features and improvements to further boost performance and flexibility. YOLOv8 is designed to be fast, accurate, and easy to use, making it an excellent choice for a wide range of object detection and tracking, instance segmentation, image classification and pose estimation tasks.
 
@@ -10,7 +12,7 @@ tar xvf zlib-1.2.9.tar.gz
 cd zlib-1.2.9/
 ./configure && make install
 
-## install libGL
+## Install libGL
 yum install mesa-libGL
 ```
 
