@@ -5,6 +5,9 @@ YOLOv5 🚀 is a family of object detection architectures and models pretrained 
 ## Step 1: Installing packages
 
 ```shell
+# install libGL
+yum install mesa-libGL
+
 pip3 install -r requirements.txt
 ```
 
