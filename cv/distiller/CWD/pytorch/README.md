@@ -11,6 +11,7 @@ Knowledge distillation (KD) has been proven to be a simple and effective tool fo
 
 ## Environment
 
+```bash
 ## install libGL
 yum install mesa-libGL
 
@@ -21,7 +22,7 @@ cd zlib-1.2.9/
 ./configure && make install
 cd ..
 rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
-
+```
 
 ```
 pip3 install cityscapesscripts addict opencv-python
