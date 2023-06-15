@@ -47,22 +47,22 @@ Train the yolov5 model as follows, the train log is saved in ./runs/train/exp
 ### On single GPU
 
     $ cd yolov5 
-    $ python3 train.py --data ./data/coco.yaml --batch-size 32 --cfg ./models/yolov5m.yaml 
+    $ python3 train.py --data ./data/coco.yaml --batch-size 32 --cfg ./models/yolov5s.yaml --weights ''
 
 ### On single GPU (AMP)
 
-    $ python3 train.py --data ./data/coco.yaml --batch-size 32 --cfg ./models/yolov5m.yaml --amp
+    $ python3 train.py --data ./data/coco.yaml --batch-size 32 --cfg ./models/yolov5s.yaml --weights '' --amp
 
 
 ### Multiple GPUs on one machine
 
     $ # eight cards 
-    $ python3 -m torch.distributed.launch --nproc_per_node 8 train.py --data ./data/coco.yaml --batch-size 256 --cfg ./models/yolov5m.yaml --device 0,1,2,3,4,5,6,7  # bash run_dist_training.sh
+    $ python3 -m torch.distributed.launch --nproc_per_node 8 train.py --data ./data/coco.yaml --batch-size 256 --cfg ./models/yolov5s.yaml --weights '' --device 0,1,2,3,4,5,6,7 
 
 ### Multiple GPUs on one machine (AMP)
 
     $ # eight cards 
-    $ python3 -m torch.distributed.launch --nproc_per_node 8 train.py --data ./data/coco.yaml --batch-size 256 --cfg ./models/yolov5m.yaml --device 0,1,2,3,4,5,6,7 --amp
+    $ python3 -m torch.distributed.launch --nproc_per_node 8 train.py --data ./data/coco.yaml --batch-size 256 --cfg ./models/yolov5s.yaml --weights '' --device 0,1,2,3,4,5,6,7 --amp
 
 
 ## Test the detector
@@ -70,8 +70,8 @@ Train the yolov5 model as follows, the train log is saved in ./runs/train/exp
 Test the yolov5 model as follows, the result is saved in ./runs/detect:
 
     $ cd yolov5
-    $ python3 detect.py --source ./data/images/bus.jpg --weight yolov5m.pt --img 640
-    $ python3 detect.py --source ./data/images/zidane.jpg --weight yolov5m.pt --img 640
+    $ python3 detect.py --source ./data/images/bus.jpg --weights yolov5s.pt --img 640
+    $ python3 detect.py --source ./data/images/zidane.jpg --weights yolov5s.pt --img 640
 
 
 ## Results on BI-V100
