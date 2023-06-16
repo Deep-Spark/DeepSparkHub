@@ -1,5 +1,87 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 23.06 Release Notes
+
+### 特性和增强
+
+#### 模型与算法
+
+添加了30个基于PyTorch框架的算法模型，新增了网络剪枝、自监督学习、知识蒸馏这3种模型类别。
+
+<table>
+    <tr>
+        <td>AlphaPose</td>
+        <td>ArcFace</td>
+        <td>ATSS**</td>
+        <td>Attention U-Net</td>
+        <td>BART***</td>
+    </tr>
+    <tr>
+        <td>Cascade R-CNN**</td>
+        <td>CBAM</td>
+        <td>Convolutional***</td>
+        <td>CornerNet**</td>
+        <td>CosFace</td>
+    </tr>
+    <tr>
+        <td>CspDarknet53</td>
+        <td>CWD</td>
+        <td>DCNV2**</td>
+        <td>DDRNet</td>
+        <td>FaceNet</td>
+    </tr>
+    <tr>
+        <td>FasterNet</td>
+        <td>MAE</td>
+        <td>Network Slimming</td>
+        <td>PointNet++</td>
+        <td>RepPoints**</td>
+    </tr>
+    <tr>
+        <td>RKD</td>
+        <td>RoBERTa***</td>
+        <td>STDC</td>
+        <td>Transformer*</td>
+        <td>Transformer***</td>
+    </tr>
+    <tr>
+        <td>U2++ Conformer*</td>
+        <td>UNet++</td>
+        <td>Unified Conformer*</td>
+        <td>YOLOv6</td>
+        <td>YOLOv8</td>
+    </tr>
+    <tr><td colspan="5", align="left">*: WeNet; **: MMDetection; ***: Fairseq</td></tr>
+</table>
+
+30个模型中有12个使用了开源工具箱，包括：
+- Transformer，U2++ Conformer，Unified Conformer模型基于开源的WeNet工具箱，可以便捷的执行数据集准备、模型训练/测试/导出任务。
+- ATSS，Cascade R-CNN，CornerNet，DCNV2，RepPoints模型基于开源的MMDetection工具箱，可以便捷的执行目标检测训练任务。
+- BART，Convoluntional，RoBERTa，Transformer模型基于开源的Fairseq工具箱，可以便捷的执行自然语言处理训练任务。
+
+### 问题修复
+
+- 修复了MobileNetV2和YOLOv5模型参数问题。
+- 修复了LIIF和VGG16模型Python依赖包缺失问题。
+- 修复了Stable Diffusion模型的测试结果图片呈现问题。
+- 更新了DLRM模型数据集获取链接。
+- 新增了Tacotron2、YOLOv5、SATRN模型的性能指标输出。
+- 新增了FairMOT模型的性能指标和精度指标输出。
+
+### 版本关联
+
+DeepSparkHub 23.06版本对应CoreX 3.0.0版本。
+
+### 贡献者
+
+感谢以下人员做出的贡献：
+
+majorli，吴永乐，songjian，丁力，shengquan.nian，may，张文风，chenyingtony，yue.chang，westnight，fhfang，li-shi-kun。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
+---
+
 ## DeepSparkHub 23.03 Release Notes
 
 ### 特性和增强
