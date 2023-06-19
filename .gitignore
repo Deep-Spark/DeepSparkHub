@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.whl
 
 # C extensions
 *.so
@@ -15,3 +16,7 @@ dist/
 *.pth
 
 *.idea
+
+# Docker
+*.run
+3.*/
