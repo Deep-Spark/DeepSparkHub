@@ -2,6 +2,8 @@
 
 DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领域，支持主流市场智能计算场景，包括智慧城市、数字个人、医疗、教育、通信、能源等多个领域。
 
+## 模型列表
+
 注：当前列表中模型主要基于PyTorch框架，基于PaddlePaddle、TensorFlow、MindSpore等框架的模型在逐步添加中。
 
 - Computer Vision
@@ -23,9 +25,9 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
    - [Tracking](#tracking)
    - [Traffic Forecast](#traffic-forecast)
 
-- [Multimodal](#multimodal模型列表)
+- [Multimodal](#multimodal)
 
-- [GNN](#gnn模型列表)
+- [GNN](#gnn)
 
 - Natural Language Processing(NLP)
 
@@ -45,14 +47,14 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
    - [Speech Recognition](#speech-recognition)
    - [Speech Synthesis](#speech-synthesis)
 
-- [3D Reconstruction](#3d-reconstruction模型列表)
+- [3D Reconstruction](#3d-reconstruction)
 
   
 --------
 
-## Computer Vision模型列表
+### Computer Vision
 
-### Classification
+#### Classification
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -102,13 +104,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Wide_ResNet101_2](cv/classification/wide_resnet101_2/pytorch/README.md)  | PyTorch | ImageNet
 [Xception](cv/classification/xception/pytorch/README.md)  | PyTorch | ImageNet
 
-### Face Detection
+#### Face Detection
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [RetinaFace](cv/face/retinaface/pytorch/README.md)  | PyTorch | WiderFace
 
-### Face Recognition
+#### Face Recognition
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -116,7 +118,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [CosFace](cv/face/cosface/pytorch/README.md)  | PyTorch | CASIA-WebFaces&LFW
 [FaceNet](cv/face/facenet/pytorch/README.md)  | PyTorch | CASIA-WebFaces&LFW
 
-### Instance Segmentation
+#### Instance Segmentation
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -124,26 +126,26 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [SOLOv2](cv/detection/solov2/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [YOLACT++](cv/instance_segmentation/yolact/pytorch/README.md)  | PyTorch | COCO
 
-### Image Generation
+#### Image Generation
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [DCGAN](cv/image_generation/dcgan/MindSpore/README.md)  | MindSpore | ImageNet
 
-### Knowledge Distillation
+#### Knowledge Distillation
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [CWD](cv/distiller/CWD/pytorch/README.md)  | PyTorch | Cityscapes
 [RKD](cv/distiller/RKD/pytorch/README.md)  | PyTorch | CUB-200-2011
 
-### Network Pruning
+#### Network Pruning
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [Network Slimming](cv/Pruning/Network-Slimming/pytorch/README.md)  | PyTorch (Fairseq) | CIFAR-10/100
 
-### Object Detection
+#### Object Detection
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -179,7 +181,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [YOLOv7](cv/detection/yolov7/pytorch/README.md)  | PyTorch | COCO
 [YOLOv8](cv/detection/yolov8/pytorch/README.md)  | PyTorch | COCO
 
-### 3D Object Detection
+#### 3D Object Detection
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -187,7 +189,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [PointNet++](cv/3d_detection/pointnet2/pytorch/mmdetection3d/README.md)  | PyTorch | S3DIS
 [PointPillars](cv/3d_detection/pointpillars/pytorch/README.md)  | PyTorch | KITTI
 
-### OCR
+#### OCR
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -198,26 +200,26 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [SAR](cv/ocr/sar/pytorch/README.md)  | PyTorch | OCR_Recog
 [SATRN](cv/ocr/satrn/pytorch/base/README.md)  | PyTorch | OCR_Recog
 
-### Point Cloud
+#### Point Cloud
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [Point-BERT](cv/point_cloud/Point-BERT/pytorch/README.md)  | PyTorch | ShapeNet55 & processed ModelNet
 
-### Pose Estimation
+#### Pose Estimation
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [AlphaPose](cv/pose/alphapose/pytorch/README.md)  | PyTorch | COCO
 [HRNet](cv/pose/hrnet/pytorch/README.md)  | PyTorch | COCO
 
-### Self-Supervised Learning
+#### Self-Supervised Learning
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [MAE](cv/self_supervised_learning/MAE/pytorch/README.md)  | PyTorch | ImageNet
 
-### Semantic Segmentation
+#### Semantic Segmentation
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -262,7 +264,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [UNet++](cv/semantic_segmentation/unet++/pytorch/README.md)  | PyTorch | DRIVE
 [VNet](cv/semantic_segmentation/vnet/tensorflow/README.md)  | TensorFlow | Hippocampus
 
-### Super Resolution
+#### Super Resolution
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -274,19 +276,19 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [TTSR](cv/super_resolution/ttsr/pytorch/README.md)  | PyTorch | CUFED
 [TTVSR](cv/super_resolution/ttvsr/pytorch/README.md)  | PyTorch | REDS
 
-### Tracking
+#### Tracking
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [FairMOT](cv/tracking/fairmot/pytorch/README.md)  | PyTorch | MOT17
 
-### Traffic Forecast
+#### Traffic Forecast
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [Graph WaveNet](cv/traffic_forecast/graph_wavenet/pytorch/README.md)  | PyTorch | METR-LA & PEMS-BAY
 
-## Multimodal模型列表
+### Multimodal
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -294,28 +296,28 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [L-Verse](multimodal/Language-Image_Pre-Training/L-Verse/pytorch/README.md)  | PyTorch | ImageNet
 [Stable Diffusion](multimodal/diffusion/stable-diffusion/training/README.md)  | PyTorch | pokemon-images
 
-## GNN模型列表
+### GNN
 
-### Text Classification
+#### Text Classification
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [GCN](gnn/GCN/README.md)  | MindSpore | Cora&Citeseer
 
-## NLP模型列表
+### NLP
 
-### Cloze Test
+#### Cloze Test
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [GLM](nlp/cloze_test/glm/pytorch/GLMForMultiTokenCloze/README.md)  | PyTorch | GLMForMultiTokenCloze
 
-### Dialogue Generation
+#### Dialogue Generation
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [CPM](nlp/dialogue_generation/cpm/pytorch/README.md)  | PyTorch | STC
 
-### Language Modeling
+#### Language Modeling
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -330,12 +332,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [BERT Question Answering](nlp/question_answering/bert/pytorch/README.md) | PyTorch | SQuAD
 [RoBERTa](fairseq-tools/README_roberta.md)  | PyTorch (Fairseq) | RTE
 
-### Text Correction
+#### Text Correction
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [Ernie](nlp/text_correction/ernie/paddlepaddle/README.md)  | PaddlePaddle | corpus
 
-### Translation
+#### Translation
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -344,15 +346,15 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Transformer](nlp/translation/transformer/paddlepaddle/README.md)  | PaddlePaddle | wmt14-en-de-pre-processed
 [Transformer](fairseq-tools/README_transformer.md)  | PyTorch (Fairseq) | IWSLT14
 
-## Recommendation模型列表
+### Recommendation
 
-### Collaborative Filtering
+#### Collaborative Filtering
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [NCF](recommendation/collaborative_filtering/ncf/pytorch/README.md)  | PyTorch | movielens
 
-### CTR
+#### CTR
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -360,19 +362,19 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [DeepFM](recommendation/deepfm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
 [Wide&Deep](recommendation/wide_deep/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
 
-## Speech模型列表
+### Speech
 
-### Speech Recognition
+#### Speech Recognition
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [Conformer](speech/speech_recognition/conformer/pytorch/README.md)  | PyTorch | AISHELL
 [RNN-T](speech/speech_recognition/rnnt/pytorch/README.md)  | PyTorch | LJSpeech
-[Transformer](speech/speech_recognition/transformer/pytorch/README.md)  | PyTorch | AISHELL
-[U2++ Conformer](speech/speech_recognition/u2++_conformer/pytorch/README.md)  | PyTorch | AISHELL
-[Unified Conformer](speech/speech_recognition/unified_conformer/pytorch/README.md)  | PyTorch | AISHELL
+[Transformer](speech/speech_recognition/transformer/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
+[U2++ Conformer](speech/speech_recognition/u2++_conformer/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
+[Unified Conformer](speech/speech_recognition/unified_conformer/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
 
-### Speech Synthesis
+#### Speech Synthesis
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
@@ -380,11 +382,17 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [vqmivc](speech/speech_synthesis/vqmivc/pytorch/README.md)  | PyTorch | VCTK-Corpus
 [waveglow](speech/speech_synthesis/waveglow/pytorch/README.md)  | PyTorch | LJSpeech
 
-## 3D Reconstruction模型列表
+### 3D Reconstruction
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [ngp-nerf](3d-reconstruction/hashnerf/readme.md)  | PyTorch | fox
+
+-------
+
+## 容器镜像构建方式
+
+社区用户可参考[容器镜像构建说明](docker/Iluvatar/README.md)在本地构建出能够运行DeepSparkHub仓库中模型的容器镜像。
 
 -------
 
