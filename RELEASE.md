@@ -10,48 +10,58 @@
 
 <table>
     <tr>
+        <th rowspan=4>PyTorch</th>
         <td>AlphaPose</td>
         <td>ArcFace</td>
-        <td>ATSS**</td>
         <td>Attention U-Net</td>
-        <td>BART***</td>
-    </tr>
-    <tr>
-        <td>Cascade R-CNN**</td>
         <td>CBAM</td>
-        <td>Convolutional***</td>
-        <td>CornerNet**</td>
         <td>CosFace</td>
     </tr>
     <tr>
         <td>CspDarknet53</td>
         <td>CWD</td>
-        <td>DCNV2**</td>
         <td>DDRNet</td>
         <td>FaceNet</td>
+        <td>FasterNet</td>
     </tr>
     <tr>
-        <td>FasterNet</td>
         <td>MAE</td>
         <td>Network Slimming</td>
         <td>PointNet++</td>
-        <td>RepPoints**</td>
-    </tr>
-    <tr>
         <td>RKD</td>
-        <td>RoBERTa***</td>
         <td>STDC</td>
-        <td>Transformer*</td>
-        <td>Transformer***</td>
     </tr>
     <tr>
-        <td>U2++ Conformer*</td>
         <td>UNet++</td>
-        <td>Unified Conformer*</td>
         <td>YOLOv6</td>
         <td>YOLOv8</td>
+        <td></td>
+        <td></td>
     </tr>
-    <tr><td colspan="5", align="left">*: WeNet; **: MMDetection; ***: Fairseq</td></tr>
+    <tr>
+        <th>PyTorch (WeNet)</th>
+        <td>Transformer</td>
+        <td>U2++ Conformer</td>
+        <td>Unified Conformer</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>PyTorch (MMDetection)</th>
+        <td>ATSS</td>
+        <td>Cascade R-CNN</td>
+        <td>CornerNet</td>
+        <td>DCNV2</td>
+        <td>RepPoints</td>
+    </tr>
+    <tr>
+        <th>PyTorch (Fairseq)</th>
+        <td>BART</td>
+        <td>Convolutional</td>
+        <td>RoBERTa</td>
+        <td>Transformer</td>
+        <td></td>
+    </tr>
 </table>
 
 30个模型中有12个使用了开源工具箱，包括：
@@ -70,7 +80,7 @@
 
 ### 版本关联
 
-DeepSparkHub 23.06版本对应CoreX 3.0.0版本。
+DeepSparkHub 23.06对应天数软件栈3.0.0版本。
 
 ### 贡献者
 
@@ -154,6 +164,10 @@ majorli，吴永乐，songjian，丁力，shengquan.nian，may，张文风，che
 - 更新了ResNet50模型的运行脚本路径。
 - 更新了HashNeRF模型的数据集准备和模型执行步骤。
 
+### 版本关联
+
+DeepSparkHub 23.03对应天数软件栈3.0.0版本。
+
 ### 贡献者
 
 感谢以下人员做出的贡献：
@@ -212,6 +226,10 @@ Wide&Deep | PaddlePaddle | Criteo_Terabyte
 - Point-BERT模型运行报错。([#I64SWK](https://gitee.com/deep-spark/deepsparkhub/issues/I64SWK))
 - RealBasicVSR模型执行报错。([#I64STQ](https://gitee.com/deep-spark/deepsparkhub/issues/I64STQ))
 - HRNet模型运行提示缺少json_tricks等python依赖。([#I63W67](https://gitee.com/deep-spark/deepsparkhub/issues/I63W67))
+
+### 版本关联
+
+DeepSparkHub 22.12对应天数软件栈2.3.0版本。
 
 ### 贡献者
 
