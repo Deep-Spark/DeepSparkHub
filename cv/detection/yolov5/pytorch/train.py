@@ -1,3 +1,18 @@
+# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
+
 """Train a YOLOv5 model on a custom dataset
 
 Usage:
@@ -382,6 +397,10 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
                 f'Using {dataloader.num_workers} dataloader workers\n'
                 f'Logging results to {save_dir}\n'
                 f'Starting training for {epochs} epochs...')
+
+    run_steps = 0
+    time_step = []
+    time_step.append(time.time())
     for epoch in range(start_epoch, epochs):  # epoch ------------------------------------------------------------------
         model.train()
 
@@ -474,11 +493,16 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
 
             # Print
             if RANK in [-1, 0]:
+                time_step.append(time.time())
                 mloss = (mloss * i + loss_items) / (i + 1)  # update mean losses
                 mem = '%.3gG' % (torch.cuda.memory_reserved() / 1E9 if torch.cuda.is_available() else 0)  # (GB)
                 s = ('%10s' * 2 + '%10.4g' * 6) % (
                     f'{epoch}/{epochs - 1}', mem, *mloss, targets.shape[0], imgs.shape[-1])
-                pbar.set_description(s)
+                time_iter = time_step[i+1] - time_step[i]
+                fps = opt.batch_size / time_iter
+                performance = " timer: %.6f sec. || fps: %.3f" % (time_iter, fps)
+
+                pbar.set_description(s + performance)
 
                 if nb > 1000:
                     log_freq = 100

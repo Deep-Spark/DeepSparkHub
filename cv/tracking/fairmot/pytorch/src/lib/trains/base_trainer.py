@@ -12,6 +12,7 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -83,6 +84,7 @@ class BaseTrainer(object):
     num_iters = len(data_loader) if opt.num_iters < 0 else opt.num_iters
     bar = Bar('{}/{}'.format(opt.task, opt.exp_id), max=num_iters)
     end = time.time()
+    total_num = 0
     for iter_id, batch in enumerate(data_loader):
       if iter_id >= num_iters:
         break
@@ -116,6 +118,8 @@ class BaseTrainer(object):
       if not opt.hide_data_time:
         Bar.suffix = Bar.suffix + '|Data {dt.val:.3f}s({dt.avg:.3f}s) ' \
           '|Net {bt.avg:.3f}s'.format(dt=data_time, bt=batch_time)
+      total_num += batch['input'].shape[0]
+      Bar.suffix = Bar.suffix + '|Fps {fps:.3f}'.format(fps=batch['input'].shape[0]/batch_time.avg)
       if opt.print_iter > 0:
         if iter_id % opt.print_iter == 0:
           print('{}/{}| {}'.format(opt.task, opt.exp_id, Bar.suffix)) 
@@ -129,6 +133,7 @@ class BaseTrainer(object):
     bar.finish()
     ret = {k: v.avg for k, v in avg_loss_stats.items()}
     ret['time'] = bar.elapsed_td.total_seconds() / 60.
+    ret['fps'] = total_num / bar.elapsed_td.total_seconds()
     return ret, results
 
   
