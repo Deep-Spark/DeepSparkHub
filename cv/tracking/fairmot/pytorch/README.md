@@ -8,22 +8,23 @@ FairMOT is a model for multi-object tracking which consists of two homogeneous b
 
 ```shell
 $ pip3 install -r requirements.txt
+$ pip3 install pandas progress
 ```
 
 ## Step 2: Preparing data
 
-```shell
-$ cd /path/to/modelzoo/official/cv/tracking/fairmot/pytorch
+### Download MOT17 dataset
 
+- [Baidu NetDisk](https://pan.baidu.com/s/1lHa6UagcosRBz-_Y308GvQ)
+- [Google Drive](https://drive.google.com/file/d/1ET-6w12yHNo8DKevOVgK1dBlYs739e_3/view?usp=sharing)
+- [Original dataset webpage: MOT-17](https://motchallenge.net/data/MOT17/)
+
+```shell
 # Download MOT17
 $ mkdir -p data/MOT
 $ cd data/MOT
 
 ```
-> download MOT17 dataset
-> Baidu NetDisk: [[0]](https://pan.baidu.com/s/1lHa6UagcosRBz-_Y308GvQ)
-> Google Drive: [[0]](https://drive.google.com/file/d/1ET-6w12yHNo8DKevOVgK1dBlYs739e_3/view?usp=sharing)
-> Original dataset webpage: [MOT-17](https://motchallenge.net/data/MOT17/)
 
 ```shell
 $ unzip -q MOT17.zip
@@ -32,21 +33,29 @@ $ mv ./MOT17/train ./MOT17/images/ && mv ./MOT17/test ./MOT17/images/
 
 $ cd ../../
 $ python3 src/gen_labels_17.py
-```
 
+## The dataset path looks like below
+data/
+└── MOT
+    └── MOT17
+        ├── images
+        │   ├── test
+        │   └── train
+        └── labels_with_ids
+            └── train
+```
 
 ### Download Pretrained models
 
-```shell
-$ cd /path/to/modelzoo/official/cv/tracking/fairmot/pytorch
+- DLA-34 COCO pretrained model: [DLA-34 official](https://drive.google.com/file/d/18Q3fzzAsha_3Qid6mn4jcIFPeOGUaj1d)
+- HRNetV2-W18 ImageNet pretrained model: [BaiduYun（Access Code: r5xn)](https://pan.baidu.com/s/1Px_g1E2BLVRkKC5t-b-R5Q)
+- HRNetV2-W18 ImageNet pretrained model: [BaiduYun（Access Code: itc1)](https://pan.baidu.com/s/1xn92PSCg5KtXkKcnnLOycw)
 
+```shell
 # Download ctdet_coco_dla_2x
 $ mkdir -p models
 $ cd models
 ```
-> download models
-> DLA-34 COCO pretrained model: [DLA-34 official](https://drive.google.com/file/d/1pl_-ael8wERdUREEnaIfqOV_VF2bEVRT/view)
-> HRNetV2 ImageNet pretrained model: [HRNetV2-W18 official](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw)， [HRNetV2-W32 official](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w)
 
 ## Step 3: Training
 

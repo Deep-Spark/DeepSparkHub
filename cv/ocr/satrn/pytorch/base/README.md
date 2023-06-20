@@ -22,10 +22,9 @@ $ pip3 install -r requirements.txt
 $ mkdir data
 $ cd data
 ```
-https://mmocr.readthedocs.io/zh_CN/latest/datasets/recog.html
 
+Reffering to [MMOCR Docs](https://mmocr.readthedocs.io/zh_CN/dev-1.x/user_guides/data_prepare/datasetzoo.html) to prepare datasets. Datasets path would look like below:
 
-- when done data folder looks like
 ```
 ├── mixture
 │   ├── coco_text
