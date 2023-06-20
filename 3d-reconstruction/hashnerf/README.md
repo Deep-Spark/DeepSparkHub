@@ -17,8 +17,8 @@ For custom dataset, you should:
 ./data/custom/images/*.jpg.
 3. call the preprocess code: (should install ffmpeg and colmap first! refer to the file for more options)
 ```bash
-python scripts/colmap2nerf.py --video ./data/custom/video.mp4 --run_colmap # if use video
-python scripts/colmap2nerf.py --images ./data/custom/images/ --run_colmap # if use images
+python3 scripts/colmap2nerf.py --video ./data/custom/video.mp4 --run_colmap # if use video
+python3 scripts/colmap2nerf.py --images ./data/custom/images/ --run_colmap # if use images
 ```
 
 ## Step 3: Training and test
@@ -29,11 +29,11 @@ First time running will take some time to compile the CUDA extensions.
 
 ```bash
 # train with fox dataset
-python main_nerf.py data/fox --workspace trial_nerf -O
+python3 main_nerf.py data/fox --workspace trial_nerf -O
 # data/fox is dataset path; --workspace means output path; -O means --fp16 --cuda_ray --preload, which usually gives the best results balanced on speed & performance.
 
 # test mode
-python main_nerf.py data/fox --workspace trial_nerf -O --test
+python3 main_nerf.py data/fox --workspace trial_nerf -O --test
 ```
 
 ```bash
@@ -41,17 +41,17 @@ python main_nerf.py data/fox --workspace trial_nerf -O --test
 # --bound means the scene is assumed to be inside box[-bound, bound]
 # --scale adjusts the camera locaction to make sure it falls inside the above bounding box. 
 # --dt_gamma controls the adaptive ray marching speed, set to 0 turns it off.
-python main_nerf.py data/nerf_synthetic/lego --workspace trial_nerf -O --bound 1.0 --scale 0.8 --dt_gamma 0
+python3 main_nerf.py data/nerf_synthetic/lego --workspace trial_nerf -O --bound 1.0 --scale 0.8 --dt_gamma 0
 ```
 
 ```bash
 # train with custom dataset(you'll need to tune the scale & bound if necessary):
-python main_nerf.py data/custom_data --workspace trial_nerf -O
+python3 main_nerf.py data/custom_data --workspace trial_nerf -O
 ```
 
 ## Results on BI-V100
 
-@@ -65,90 +60,4 @@ python main_nerf.py data/nerf_synthetic/lego --workspace trial_nerf -O
+@@ -65,90 +60,4 @@ python3 main_nerf.py data/nerf_synthetic/lego --workspace trial_nerf -O
 
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
@@ -79,4 +79,4 @@ python main_nerf.py data/custom_data --workspace trial_nerf -O
 **A**: You could try setting `bg_radius` to a large value, e.g., 32. It trains an extra environment map to model the background in realistic photos. A larger `bound` will also help.
 
 
-More information ref:ttps://github.com/ashawkey/torch-ngp
+More information ref: https://github.com/ashawkey/torch-ngp
