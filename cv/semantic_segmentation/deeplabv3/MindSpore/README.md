@@ -14,7 +14,7 @@ pip3 install -r requirements.txt
 ```
 ## Step 2: Prepare Datasets
 
-Pascal VOC datasets [link](https://host.robots.ox.ac.uk/pascal/VOC/), and Semantic Boundaries Dataset: [link](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/semantic_contours/benchmark.tgz)
+Pascal VOC datasets [link](https://pjreddie.com/projects/pascal-voc-dataset-mirror), and Semantic Boundaries Dataset: [link](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/semantic_contours/benchmark.tgz)
 
 - Download segmentation dataset.
 
@@ -28,7 +28,7 @@ JPEGImages/00004.jpg SegmentationClassGray/00004.png
 ......
 ```
 
-You can also generate the list file automatically by run script: `python get_dataset_lst.py --data_root=/PATH/TO/DATA`
+You can also generate the list file automatically by run script: `python3 ./src/data/get_dataset_lst.py --data_root=/PATH/TO/DATA`
 
 - Configure and run build_data.sh to convert dataset to mindrecords. Arguments in scripts/build_data.sh:
 
