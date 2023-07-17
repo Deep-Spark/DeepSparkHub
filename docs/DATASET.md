@@ -1,13 +1,7 @@
-# Dataset Preparation Guide
+#  Preparing Datasets Template
+This document shows “Preparing datasets" template for README.md of new model.
 
-This document introduces the dataset format used by DeepSparkHub.
-
-## 1. ImageNet
-
-### 1.1 Introduction
-ImageNet is an image database organized according to the WordNet hierarchy (currently only the nouns), in which each node of the hierarchy is depicted by hundreds and thousands of images. The project has been instrumental in advancing computer vision and deep learning research. The data is available for free to researchers for non-commercial use.
-
-### 1.2 Preparation
+## ImageNet
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
@@ -27,23 +21,7 @@ imagenet
 └── val_list.txt
 ```
 
-## 2. COCO
-
-### 2.1 Introduction
-
-COCO is a large-scale object detection, segmentation, and captioning dataset. COCO has several features:
-
-- Object segmentation
-- Recognition in context
-- Superpixel stuff segmentation
-- 330K images (>200K labeled)
-- 1.5 million object instances
-- 80 object categories
-- 91 stuff categories
-- 5 captions per image
-- 250,000 people with keypoints
-
-### 2.2 Preparation
+## COCO
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
@@ -68,18 +46,11 @@ coco2017
 └── ...
 ```
 
-## 3. Cityscapes
-
-### 3.1 Introduction
-
-Cityscapes is a large-scale dataset for city scene understanding and autonomous driving. It contains 5000 source images, out of which 2975 are pixel-level annotated.
-The dataset focuses on street scenes and provides finely annotated object segmentation with categories such as person, animals, vehicles and road facilities.
-
-### 3.2 Preparation
+## Cityscapes
 
 Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
-Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure should look like:
 
 ```bash
 cityscapes/
