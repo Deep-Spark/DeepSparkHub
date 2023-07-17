@@ -7,7 +7,7 @@
 2. Commit提交时使用了正确可用的邮箱签名（Y/N）：
 3. 新增/修改源代码已添加必要的License和Copyright头注释（Y/N）：
 4. 经过deepspark-verify:23.09基础验证容器自测至少1个epoch（Y/N）：
-5. 新增模型README文档描述格式遵循[模板格式](https://gitee.com/deep-spark/deepsparkhub/raw/master/docs/MODEL_TEMPLATE.md）：
+5. 新增模型README文档描述格式遵循[模板格式](https://gitee.com/deep-spark/deepsparkhub/raw/master/docs/MODEL_TEMPLATE.md)：
     - 模型放置路径与模型分类一致，示例“cv/classification/resnet50/pytorch/”（Y/N）：
     - 数据集获取链接外部网络能够访问，ImageNet，COCO，Cityscapes获取说明参考[模板格式](https://gitee.com/deep-spark/deepsparkhub/raw/master/docs/DATASET.md)（Y/N）：
 
