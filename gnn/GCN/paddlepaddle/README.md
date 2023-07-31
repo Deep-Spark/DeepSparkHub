@@ -15,9 +15,9 @@ git clone https://github.com/PaddlePaddle/PGL.git
 
 ```
 # Pip the requirements
-pip install pgl
-pip install urllib3==1.23
-pip install networkx
+pip3 install pgl
+pip3 install urllib3==1.23
+pip3 install networkx
 ```
 
 ## Step 2:Preparing datasets
@@ -31,20 +31,21 @@ The datasets  contain three citation networks: CORA, PUBMED, CITESEER.
 ```
 cd PGL/examples/gcn/
 
+# Run on CPU
+python3 train.py --dataset cora
+
 # Run on GPU
 CUDA_VISIBLE_DEVICES=0 python3 train.py --dataset cora
 
-# Run on CPU 
-CUDA_VISIBLE_DEVICES= python3 train.py --dataset cora
 ```
 
 ## Results
+| GPUS      | Datasets | speed    | Accurary |
+| --------- | -------- | -------- | -------- |
+| BI V100×1 | CORA     | 0.0064   | 80.3%    |
+| BI V100×1 | PUBMED   | 0.0076   | 79.0%    |
+| BI V100×1 | CITESEER | 0.0085   | 70.6%    |
 
-| GPUS       | Datasets | Accurary |
-| ---------- | -------- | -------- |
-| BI V100×1 | CORA     | 80.3%    |
-| BI V100×1 | PUBMED   | 79.3%    |
-| BI V100×1 | CITESEER | 71.0%    |
 
 ## Reference
 
