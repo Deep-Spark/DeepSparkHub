@@ -143,7 +143,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[Network Slimming](cv/Pruning/Network-Slimming/pytorch/README.md)  | PyTorch (Fairseq) | CIFAR-10/100
+[Network Slimming](cv/Pruning/Network-Slimming/pytorch/README.md)  | PyTorch | CIFAR-10/100
 
 #### Object Detection
 
@@ -321,7 +321,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[BART](fairseq-tools/README_bart.md)  | PyTorch (Fairseq) | RTE
+[BART](nlp/language_model/bart_fairseq/pytorch/README.md)  | PyTorch (Fairseq) | RTE
 [BERT NER](nlp/ner/bert/pytorch/README.md) | PyTorch | CoNLL-2003
 [BERT Pretraining](nlp/language_model/bert/pytorch/README.md)  | PyTorch | MLCommon Wikipedia (2048_shards_uncompressed)
 [BERT Pretraining](nlp/language_model/bert/paddlepaddle/README.md)  | PaddlePaddle | MNLI
@@ -330,7 +330,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [BERT Text Classification](nlp/text_classification/bert/pytorch/README.md) |PyTorch | GLUE
 [BERT Text Summerization](nlp/text_summarisation/bert/pytorch/README.md) | PyTorch | cnn_dailymail
 [BERT Question Answering](nlp/question_answering/bert/pytorch/README.md) | PyTorch | SQuAD
-[RoBERTa](fairseq-tools/README_roberta.md)  | PyTorch (Fairseq) | RTE
+[RoBERTa](nlp/language_model/roberta_fairseq/pytorch/README.md)  | PyTorch (Fairseq) | RTE
 
 #### Text Correction
 模型名称 | 框架 | 数据集 
@@ -341,10 +341,10 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[Convolutional](fairseq-tools/README_convolutional.md)  | PyTorch (Fairseq) | WMT14
+[Convolutional](nlp/translation/convolutional_fairseq/pytorch/README.md)  | PyTorch (Fairseq) | WMT14
 [T5](nlp/translation/t5/pytorch/README.md)  | PyTorch | wmt14-en-de-pre-processed
 [Transformer](nlp/translation/transformer/paddlepaddle/README.md)  | PaddlePaddle | wmt14-en-de-pre-processed
-[Transformer](fairseq-tools/README_transformer.md)  | PyTorch (Fairseq) | IWSLT14
+[Transformer](nlp/translation/transformer_fairseq/pytorch/README.md)  | PyTorch (Fairseq) | IWSLT14
 
 ### Recommendation
 
@@ -386,7 +386,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[ngp-nerf](3d-reconstruction/hashnerf/readme.md)  | PyTorch | fox
+[ngp-nerf](3d-reconstruction/hashnerf/README.md)  | PyTorch | fox
 
 -------
 
