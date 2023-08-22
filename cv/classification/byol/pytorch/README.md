@@ -11,7 +11,7 @@
 
 ```bash
 ## install libGL
-yum install mesa-libGL
+yum install -y mesa-libGL
 
 ## install zlib
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
@@ -23,22 +23,30 @@ rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
 ```
 
 ```bash
+# install mmcv
 cd deepsparkhub/cv/distiller/CWD/pytorch/mmcv
 bash clean_mmcv.sh
 bash build_mmcv.sh
 bash install_mmcv.sh
-cd deepsparkhub/cv/classification/mocov2/pytorch
-git clone -b main https://github.com/open-mmlab/mmpretrain.git
-cd mmpretrain
-pip3 install -r requirements.txt
-"To avoid errors, let's disable these lines temporarily."
-https://github.com/open-mmlab/mmpretrain/blob/main/mmpretrain/__init__.py#L9C2-L26C36
-vim tools/dist_train.sh
-python > python3
-pip3 install mmengine==0.8.3
-python3 setup.py develop 
-```
 
+# clone mmpretrain
+cd deepsparkhub/cv/classification/byol/pytorch
+git clone https://github.com/open-mmlab/mmpretrain.git
+cd mmpretrain
+git checkout 4d1dbafaa28af29f5cb907588c019ae4878c2d24
+
+pip3 install -r requirements.txt
+
+## To avoid errors, let's disable version assert temporarily.
+sed -i '9,26s/^/# /' mmpretrain/__init__.py
+
+## using python3
+sed -i 's/python /python3 /g' tools/dist_train.sh
+
+# install mmpretrain
+pip3 install mmengine==0.8.3
+python3 setup.py install
+```
 
 ## Step 2: Preparing datasets
 
