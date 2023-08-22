@@ -1,1 +1,0 @@
-_base_ = './deprecated.py'

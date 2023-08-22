@@ -149,13 +149,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[ATSS](cv/detection/mmdetection_tools/ATSS/README.md)  | PyTorch (MMDetection) | COCO
+[ATSS](cv/detection/atss_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
 [AutoAssign](cv/detection/autoassign/pytorch/README.md)  | PyTorch | COCO
-[Cascade R-CNN](cv/detection/mmdetection_tools/cascade_rcnn/READNE.md)  | PyTorch (MMDetection) | COCO
+[Cascade R-CNN](cv/detection/cascade_rcnn_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
 [CenterNet](cv/detection/centernet/pytorch/README.md)  | PyTorch | COCO
 [CenterNet](cv/detection/centernet/paddlepaddle/README.md)  | PaddlePaddle | COCO
-[CornerNet](cv/detection/mmdetection_tools/CornerNet/README.md)  | PyTorch (MMDetection) | COCO
-[DCNV2](cv/detection/mmdetection_tools/DCNV2/README.md)  | PyTorch (MMDetection) | COCO
+[CornerNet](cv/detection/cornernet_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
+[DCNV2](cv/detection/dcnv2_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
 [DeepSORT](cv/tracking/deep_sort/pytorch/README.md)  | PyTorch | Market-1501
 [DETR](cv/detection/detr/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [Faster R-CNN](cv/detection/fasterrcnn/pytorch/README.md)  | PyTorch | COCO
@@ -165,7 +165,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Mask R-CNN](cv/detection/maskrcnn/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PP-YOLOE](cv/detection/pp-yoloe/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PVANet](cv/detection/pvanet/pytorch/README.md)  | PyTorch | COCO
-[RepPoints](cv/detection/mmdetection_tools/reppoints/README.md)  | PyTorch (MMDetection) | COCO
+[RepPoints](cv/detection/reppoints_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
 [RetinaNet](cv/detection/retinanet/pytorch/README.md)  | PyTorch | COCO
 [RetinaNet](cv/detection/retinanet/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [SSD](cv/detection/ssd/pytorch/README.md)  | PyTorch | COCO
