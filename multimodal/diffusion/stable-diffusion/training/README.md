@@ -46,13 +46,15 @@ accelerate config  # 这里可以选择单卡或者多卡训练
 
 ![image](IMG/multi.png)
 
+if you want to train with "fp32"(mixed precision),you can choose "no" 
+
 ### Step 2 开始训练
 
 ```bash
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
 export dataset_name="lambdalabs/pokemon-blip-captions"
 
-accelerate launch --mixed_precision="fp16"  train_text_to_image.py \
+accelerate launch train_text_to_image.py \
   --pretrained_model_name_or_path=$MODEL_NAME \
   --dataset_name=$dataset_name \
   --use_ema \
