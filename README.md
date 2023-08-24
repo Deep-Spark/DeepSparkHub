@@ -368,11 +368,11 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[Conformer](speech/speech_recognition/conformer/pytorch/README.md)  | PyTorch | AISHELL
+[Conformer](speech/speech_recognition/conformer_wenet/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
 [RNN-T](speech/speech_recognition/rnnt/pytorch/README.md)  | PyTorch | LJSpeech
-[Transformer](speech/speech_recognition/transformer/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
-[U2++ Conformer](speech/speech_recognition/u2++_conformer/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
-[Unified Conformer](speech/speech_recognition/unified_conformer/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
+[Transformer](speech/speech_recognition/transformer_wenet/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
+[U2++ Conformer](speech/speech_recognition/u2++_conformer_wenet/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
+[Unified Conformer](speech/speech_recognition/unified_conformer_wenet/pytorch/README.md)  | PyTorch (WeNet) | AISHELL
 
 #### Speech Synthesis
 
