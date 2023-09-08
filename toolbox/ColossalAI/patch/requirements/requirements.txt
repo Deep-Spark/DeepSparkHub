@@ -1,0 +1,11 @@
+numpy
+tqdm
+psutil
+packaging
+pre-commit
+rich
+click
+fabric
+contexttimer
+ninja
+safetensors
