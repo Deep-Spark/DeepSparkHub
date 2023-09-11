@@ -1,4 +1,4 @@
-# HRNet-w32
+# HRNet-W32
 
 ## Model description
 HRNet (High-Resolution Net) is proposed for the task of 2D human pose estimation (Human Pose Estimation or Keypoint Detection), and the network is mainly aimed at the pose assessment of a single individual. Most existing human pose estimation methods recover high-resolution representations from low-resolution representations produced by a high-to-low resolution network. Instead, HRNet maintains high-resolution representations through the whole process. HRNet starts from a high-resolution subnetwork as the first stage, gradually add high-to-low resolution subnetworks one by one to form more stages, and connect the mutli-resolution subnetworks in parallel. Then, HRNet  conducts repeated multi-scale fusions such that each of the high-to-low resolution representations receives information from other parallel representations over and over, leading to rich high-resolution representations. As a result, the predicted keypoint heatmap is potentially more accurate and spatially more precise. 
