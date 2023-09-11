@@ -1,4 +1,4 @@
-# GPT(gpt2-medium-en)
+# GPT2-Medium-EN
 
 ## Model introduction
 GPT-[2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)/[3] is a language generation model obtained by pre-training on a large-scale unlabeled text corpus using the [Transformer](https://arxiv.org/abs/1706.03762)  decoder as the basic component of the network.
