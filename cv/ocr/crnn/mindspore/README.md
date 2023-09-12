@@ -8,9 +8,11 @@ CRNN was a neural network for image based sequence recognition and its Applicati
 
 ## Step 1:Installation
 
-```
-# Pip the requirements
+```shell
+# Install requirements
 pip3 install -r requirements.txt
+
+# Install openmpi
 wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.7.tar.gz
 tar xf openmpi-4.0.7.tar.gz
 cd openmpi-4.0.7/
@@ -65,14 +67,9 @@ python3 eval.py --eval_dataset=iiit5k \
 
 ## Results
 
-| DATASETS   | ACC     | 
-| ---------- | ------  |
-| IIIT5K     | 0.798   |
-
-| GPUS       | FPS     | 
-| ---------- | ------  |
-| BI-V100x 8 | 7976.44 |
-
+| GPUS       | DATASETS   | ACC     |  FPS    | 
+| ---------- | ---------- | ------  | ------  |
+| BI-V100 x8 | IIIT5K     | 0.798   | 7976.44 |
 
 ## Reference
 
