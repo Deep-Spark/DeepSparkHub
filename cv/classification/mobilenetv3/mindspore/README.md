@@ -8,8 +8,11 @@ MobileNetV3 is tuned to mobile phone CPUs through a combination of hardware- awa
 ## Step 1: Installation
 
 ```bash
+# Install requirements
 pip3 install easydict
 yum install mesa-libGL
+
+# Install openmpi
 wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.7.tar.gz
 tar xf openmpi-4.0.7.tar.gz
 cd openmpi-4.0.7/
@@ -19,7 +22,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 ```
 
 
-## Step 2: Prepare Datasets
+## Step 2: Preparing datasets
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
@@ -42,13 +45,11 @@ imagenet
 
 ```bash
 cd ../scripts
-```
-### 1 GPU
-```bash
+
+# 1 GPU
 bash run_train.sh GPU 1 0 /path/to/imagenet/train/
-```
-### 8 GPUs
-```bash
+
+# 8 GPUs
 bash run_train.sh GPU 8 0,1,2,3,4,5,6,7 /path/to/imagenet/train/
 ```
 ## Step 4: Inference
@@ -57,12 +58,12 @@ bash run_train.sh GPU 8 0,1,2,3,4,5,6,7 /path/to/imagenet/train/
 bash run_infer.sh GPU /path/to/imagenet/val/ ../train/checkpointckpt_0/mobilenetv3-300_2135.ckpt
 ```
 
-## Results on BI-V100
+## Results
 <div align="center">
  
-| GPUS       | acc(ckpt107) |  fps   |
-| ---------- | ----------   | ----   |
-| BI V100×8  | 0.55         | 378.43 |
+| GPUS       | ACC (ckpt107) |  FPS   |
+| ---------- | ----------    | ----   |
+| BI-V100 ×8 | 0.55          | 378.43 |
 
 </div>
 
