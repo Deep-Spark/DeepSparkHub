@@ -1,11 +1,7 @@
-# ColossalAI LLaMA-7B
+# Colossal-AI LLaMA-7B
 
 ## Model description
-Llama 7B is part of a collection of foundation language models called **Llama**, which
-range from 7B to 65B parameters. Llama models are trained on trillions of tokens from
-publicly available datasets, and achieve state-of-the-art performance on various natural
-language understanding tasks. Llama 7B is the smallest model in the Llama family, but it
-still has impressive capabilities. It can generate fluent and coherent text, answer
+LLaMA-7B is part of a collection of foundation language models called **LLaMA**, which range from 7B to 65B parameters. LLaMA models are trained on trillions of tokens from publicly available datasets, and achieve state-of-the-art performance on various natural language understanding tasks. LLaMA-7B is the smallest model in the LLaMA family, but it still has impressive capabilities. It can generate fluent and coherent text, answer
 questions, complete sentences, and more.
 
 ColossalChat is the project to implement LLM with RLHF, powered by the Colossal-AI project.
@@ -15,7 +11,7 @@ Coati stands for ColossalAI Talking Intelligence. It is the name for the module 
 ## Step 1: Installation
 
 ### Install ColossalAI
-LLaMA-7B model is using Colossalai toolbox. Before you run this model, you need to setup Colossalai first.
+LLaMA-7B model is using ColossalAI toolbox. Before you run this model, you need to setup ColossalAI first.
 
 ```shell
 cd ../../../../toolbox/ColossalAI/
@@ -49,16 +45,15 @@ torchrun --nnodes=$NODE_NUMS --node_rank=$NODE_RANK --master_addr=$MASTER_ADDR -
     --max_datasets_size 512 \
     --max_epochs 1
 ```
- If the torchrun command cannot be found，you can execute
+ If the torchrun command cannot be found，you can execute:
 ```shell
 ln -s /usr/local/corex-3.1.0/lib64/python3/dist-packages/bin/torchrun /usr/local/bin/
 ```
 ## Results
-| Model       | Train speed     |
+| Model       | Training speed     |
 |-------------|-----------------|
 | LLaMA-7B    | 0.9 samples/sec |
 
-## no
 ## Reference
 
 - [ColossalAI](https://github.com/hpcaitech/ColossalAI)
