@@ -1,4 +1,4 @@
-# dnlnet
+# DNLNet
 
 ## Model description
 [Disentangled Non-Local Neural Networks](https://arxiv.org/abs/2006.06668) Minghao Yin, Zhuliang Yao, Yue Cao, Xiu Li, Zheng Zhang, Stephen Lin, Han Hu

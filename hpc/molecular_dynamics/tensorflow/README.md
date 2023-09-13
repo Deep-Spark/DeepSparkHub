@@ -1,4 +1,4 @@
-# se_e2_a
+# Water/se_e2_a
 ## Model description
 The notation of se_e2_a is short for the Deep Potential Smooth Edition (DeepPot-SE) constructed from all information (both angular and radial) of atomic configurations. The e2 stands for the embedding with two-atoms information. This descriptor was described in detail in the DeepPot-SE paper.
 Note that it is sometimes called a “two-atom embedding descriptor” which means the input of the embedding net is atomic distances. The descriptor does encode multi-body information (both angular and radial information of neighboring atoms).
@@ -12,11 +12,8 @@ pip3 install numpy==1.22.3
 pip3 install deepmd-kit[gpu,cu10,lmp,ipi]==2.2.2
 ```
 
-### Install the DeePMD-kit’s python interface
-Visit the Tianshuzhixin official website(https://support.iluvatar.com/#/DocumentCentre?id=1&nameCenter=2&productId=381380977957597184) - Resource Center page to obtain the Linux version software stack offline installation package:
-If you already have an account, click the "Login" button in the upper right corner to download.
-If you do not have an account, click on the "Login" button in the upper right corner and select "Register" to apply for an account and download it.
-And then download BI_SDK3.1.0(4.57GB)
+### Install the DeePMD-kit’s Python interface
+Visit Iluvatar Corex official website - Resource Center page (https://support.iluvatar.com/#/DocumentCentre?id=1&nameCenter=2&productId=381380977957597184) to obtain the Linux version software stack offline installation package. If you already have an account, click the "Login" button at the upper right corner. If you do not have an account, click the "Login" button and select "Register" to apply for an account. And then download BI_SDK3.1.0 (4.57GB).
 ```
 pip3 install tensorflow-2.6.5+corex.3.1.0-cp38-cp38-linux_x86_64.whl
 sed -i '473s/np.float64/np.float32/' deepmd/env.py
