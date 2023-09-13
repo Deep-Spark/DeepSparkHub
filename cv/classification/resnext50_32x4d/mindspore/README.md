@@ -1,4 +1,4 @@
-# ResNeXt50
+# ResNeXt50_32x4d
 
 ## Model description
 A ResNeXt repeats a building block that aggregates a set of transformations with the same topology. Compared to a ResNet, it exposes a new dimension, cardinality (the size of the set of transformations) , as an essential factor in addition to the dimensions of depth and width.
