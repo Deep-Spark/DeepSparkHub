@@ -1,8 +1,8 @@
-# Inception V3
+# InceptionV3
 
 ## Model description
 
-Inception-v3 is a convolutional neural network architecture from the Inception family that makes several improvements including using Label Smoothing, Factorized 7 x 7 convolutions, and the use of an auxiliary classifer to propagate label information lower down the network (along with the use of batch normalization for layers in the sidehead).
+InceptionV3 is a convolutional neural network architecture from the Inception family that makes several improvements including using Label Smoothing, Factorized 7 x 7 convolutions, and the use of an auxiliary classifer to propagate label information lower down the network (along with the use of batch normalization for layers in the sidehead).
 
 ## Step 1: Installation
 
@@ -49,8 +49,10 @@ bash run_train_inceptionV3_multigpu_imagenet.sh --epoch 200
 
 ## Results
 
-| GPUS       | acc   | fps          |
+| GPUS       | ACC   | FPS          |
 | ---------- | ----- | ------------ |
-| BI V100×8 | 76.4% | 312 images/s |
+| BI-V100 ×8 | 76.4% | 312 images/s |
 
 ## Reference
+
+- [TensorFlow/benchmarks](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks)
