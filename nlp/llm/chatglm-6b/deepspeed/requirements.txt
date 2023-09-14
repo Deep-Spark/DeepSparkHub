@@ -1,0 +1,13 @@
+protobuf
+transformers==4.28.1
+cpm_kernels
+torch>=1.10
+gradio
+mdtex2html
+sentencepiece
+accelerate
+urllib3==1.26.6
+rouge_chinese
+nltk
+jieba
+datasets
