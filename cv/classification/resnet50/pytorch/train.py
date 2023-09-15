@@ -1,5 +1,5 @@
-# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+# Copyright (c) 2022-2023 Iluvatar CoreX. All rights reserved.
 
 import datetime
 import os
@@ -437,13 +437,6 @@ def get_master_addr():
     return "127.0.0.1"
 
 
-def check_args(args):
-    if "MASTER_PORT" in os.environ:
-        args.dist_url = "tcp://{}:{}".format(get_master_addr(), os.environ["MASTER_PORT"])
-    return args
-
-
 if __name__ == "__main__":
     args = get_args_parser().parse_args()
-    args = check_args(args)
     main(args)
