@@ -80,6 +80,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [FasterNet](cv/classification/fasternet/pytorch/README.md)  | PyTorch | ImageNet
 [GoogLeNet](cv/classification/googlenet/pytorch/README.md)  | PyTorch | ImageNet
 [GoogLeNet](cv/classification/googlenet/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
+[InceptionV3](cv/classification/inceptionv3/tensorflow/README.md)  | MindSpore | ImageNet
 [InceptionV3](cv/classification/inceptionv3/pytorch/README.md)  | PyTorch | ImageNet
 [InceptionV4](cv/classification/inceptionv4/pytorch/README.md)  | PyTorch | ImageNet
 [InternImage](cv/classification/internimage/pytorch/README.md)  | PyTorch | ImageNet
@@ -374,6 +375,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
+[ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
 [LLaMA-7B](nlp/llm/llama-7b/colossalai/README.md)  | PyTorch (Colossal-AI) | llama-7b-hf
 
 #### Text Correction
