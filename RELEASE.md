@@ -1,5 +1,91 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 23.09 Release Notes
+
+### 特性和增强
+
+#### 模型与算法
+
+* 新增了30个算法模型。
+
+<table>
+    <tr><th colspan=5>PyTorch</th></tr>
+    <tr>
+        <td>BYOL</td>
+        <td>InternImage</td>
+        <td>MobileOne</td>
+        <td>MoCoV2</td>
+        <td>WSLD</td>
+    </tr>
+    <tr><th colspan=5>TensorFlow</th></tr>
+    <tr>
+        <td>AlexNet</td>
+        <td>DeepLabV3-Plus</td>
+        <td>FaceNet</td>
+        <td>InceptionV3</td>
+        <td>VGG</td>
+    </tr>
+    <tr><th colspan=5>MindSpore</th></tr>
+    <tr>
+        <td>CRNN</td>
+        <td>InceptionV3</td>
+        <td>MobileNetV3</td>
+        <td>OpenPose</td>
+        <td>ResNeXt50</td>
+    </tr>
+    <tr><th colspan=5>PaddlePaddle</th></tr>
+    <tr>
+        <td>DenseNet121</td>
+        <td>GCN</td>
+        <td>GPT2-Medium-EN</td>
+        <td>HRNet-W32</td>
+        <td>MobileNetV3_Large1.0</td>
+    </tr>
+    <tr>
+        <td>MobileSeg</td>
+        <td>OCRNet</td>
+        <td>PP-ASR-Conformer</td>
+        <td>PP-HumanSegV2</td>
+        <td>PP-LCNet</td>
+    </tr>
+    <tr>
+        <td>PP-LiteSeg</td>
+        <td>PP-PicoDet</td>
+        <td>PP-TTS-FastSpeech2</td>
+        <td>PP-TTS-HiFiGAN</td>
+        <td>ShuffleNetV2</td>
+     </tr>
+</table>
+
+* 新增了基于分布式训练框架的大语言模型训练示例。
+    * Colossal-AI LLaMA-7B
+    * DeepSpeed ChatGLM-6B
+* 新增了基于深度学习分子动力学套件的水分子模型训练示例。
+    * DeePMD-kit water/se_e2_a
+
+### 问题修复
+
+- 修复了Stable Diffusion模型的accelerate包版本问题。
+- 修复了PaddlePaddle GCN模型的环境变量设置问题。
+- 修复了PyTorch ResNet50模型的多机训练问题。
+- 更新了MindSpore DeepLabV3模型VOC数据集链接。
+- 新增了DeepSparkHub模型REAME.md文档参考模板。
+- 优化了开源工具箱Fairseq/MMDetection/WeNet的模型存放路径和展示方式。
+
+### 版本关联
+
+DeepSparkHub 23.09对应天数软件栈3.1.0版本。
+
+### 贡献者
+
+感谢以下人员做出的贡献：
+
+majorli，zhaojun0044，songjian，gongyafei，gaiqin_bai，Asltw，张文风，吴永乐，丁力，tonychen，牛斯克，la。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
+---
+
 ## DeepSparkHub 23.06 Release Notes
 
 ### 特性和增强
