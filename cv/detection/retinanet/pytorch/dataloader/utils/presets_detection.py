@@ -1,6 +1,6 @@
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
-
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 
 from . import transforms_det as T
 
