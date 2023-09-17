@@ -1,6 +1,6 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 # Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
-# Copyright (c) OpenMMLab. All rights reserved.
 from mmcv.ops import (RoIAlign, SigmoidFocalLoss, get_compiler_version,
                       get_compiling_cuda_version, nms, roi_align,
                       sigmoid_focal_loss)

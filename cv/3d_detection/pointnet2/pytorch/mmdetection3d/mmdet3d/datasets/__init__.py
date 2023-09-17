@@ -1,6 +1,6 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 # Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
-# Copyright (c) OpenMMLab. All rights reserved.
 from mmdet.datasets.builder import build_dataloader
 from .builder import DATASETS, PIPELINES, build_dataset
 from .custom_3d import Custom3DDataset

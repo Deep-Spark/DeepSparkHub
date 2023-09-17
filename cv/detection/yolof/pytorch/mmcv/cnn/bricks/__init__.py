@@ -1,6 +1,6 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 # Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
-# Copyright (c) OpenMMLab. All rights reserved.
 from .activation import build_activation_layer
 from .conv import build_conv_layer
 from .conv_module import ConvModule

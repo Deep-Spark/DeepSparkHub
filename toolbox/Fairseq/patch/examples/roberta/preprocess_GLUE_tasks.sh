@@ -1,9 +1,10 @@
 #!/bin/bash
 # Copyright (c) Facebook, Inc. and its affiliates.
+# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 #
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 
 
 # raw glue data as downloaded by glue download script (https://gist.github.com/W4ngatang/60c2bdb54d156a41194446737ce03e2e)

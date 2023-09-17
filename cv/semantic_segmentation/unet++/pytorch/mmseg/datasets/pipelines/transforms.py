@@ -1,5 +1,7 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd. All Rights Reserved.
+# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
+
 import copy
 
 import mmcv
