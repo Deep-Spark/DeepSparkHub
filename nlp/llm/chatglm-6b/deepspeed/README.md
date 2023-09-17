@@ -11,29 +11,30 @@ ChatGLM-6B uses technology similar to ChatGPT, optimized for Chinese QA and dial
 pip3 install -r requirements.txt
 
 # Install sqlite
-yum install sqlite-devel
+yum install -y sqlite-devel
 wget https://www.sqlite.org/2018/sqlite-autoconf-3240000.tar.gz
 tar -xvzf sqlite-autoconf-3240000.tar.gz
 cd sqlite-autoconf-3240000/
 ./configure --prefix=/usr/local/sqlite
 make -j4 && make install
+cd ../ && rm -rf sqlite-autoconf-3240000*
 
 # Install Python 3.7.9
+cd ../
 wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
-tar -xf Python-3.7.9.tgz ; cd Python-3.7.9
+tar -xf Python-3.7.9.tgz
+cd Python-3.7.9/
 ./configure --enable-loadable-sqlite-extensions
-make && make install
+make -j4 && make install
+cd ../ && rm -rf Python-3.7.9*
 ```
 
 ### Install DeepSpeed
 ChatGLM-6B model is using DeepSpeed toolbox. Before you run this model, you need to install DeepSpeed first.
 ```shell
-cd ../../../../../toolbox/DeepSpeed/
-yum install libaio libaio-devel -y
-bash clean_deepspeed.sh
-bash build_deepspeed.sh
-bash install_deepspeed.sh
-cd -
+pushd ../../../../toolbox/DeepSpeed/
+bash install_toolbox_deepspeed.sh
+popd
 ```
 
 ## Step 2: Preparing datasets
