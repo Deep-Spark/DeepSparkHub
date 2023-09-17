@@ -1,6 +1,6 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 # Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
-# Copyright (c) OpenMMLab. All rights reserved.
 from mmcv.utils import collect_env as collect_base_env
 from mmcv.utils import get_git_hash
 

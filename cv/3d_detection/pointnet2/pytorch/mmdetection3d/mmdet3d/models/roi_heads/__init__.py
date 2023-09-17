@@ -1,6 +1,6 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 # Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
-# Copyright (c) OpenMMLab. All rights reserved.
 from .base_3droi_head import Base3DRoIHead
 # from .bbox_heads import PartA2BboxHead
 from .h3d_roi_head import H3DRoIHead

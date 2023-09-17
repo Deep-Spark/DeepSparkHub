@@ -1,6 +1,7 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 # Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
-# Copyright (c) OpenMMLab. All rights reserved.
+
 from .anchor import *  # noqa: F401, F403
 from .bbox import *  # noqa: F401, F403
 from .evaluation import *  # noqa: F401, F403
