@@ -1,9 +1,9 @@
 # InceptionV3
 
 ## Model description
-Inception-v3 is a convolutional neural network architecture from the Inception family that makes several improvements including using Label Smoothing, Factorized 7 x 7 convolutions, and the use of an auxiliary classifer to propagate label information lower down the network (along with the use of batch normalization for layers in the sidehead).
+InceptionV3 is a convolutional neural network architecture from the Inception family that makes several improvements including using Label Smoothing, Factorized 7 x 7 convolutions, and the use of an auxiliary classifier to propagate label information lower down the network (along with the use of batch normalization for layers in the sidehead).
 
-## Step 1: Installing
+## Step 1: Installation
 
 ```bash
 yum install -y mesa-libGL
@@ -54,17 +54,17 @@ bash scripts/run_distribute_train_gpu.sh DATA_DIR CKPT_PATH
 # example: bash scripts/run_distribute_train_gpu.sh /path/to/imagenet/train ./ckpt/ 
 ```
 
-## Step 4: Eval
+### Use checkpoint to eval
 ```shell
-cd scripts
+cd scripts/
 DEVICE_ID=0
-bash run_eval_gpu.sh $DEVICE_ID /path/to/imagenet/val /path/to/checkpoint
+bash run_eval_gpu.sh $DEVICE_ID /path/to/imagenet/val/ /path/to/checkpoint
 ```
 
 ## Results
-| GPUS      |    ACC (epoch 108)                   |   FPS |
+| GPUS      |    ACC (epoch 108) | FPS |
 | ----------| --------------------------| ----- | 
-| BI V100×4 |  'Loss': 3.9033, 'Top1-Acc': 0.4847, 'Top5-Acc': 0.7405 | 447.2 |
+| BI V100×4 | 'Loss': 3.9033, 'Top1-Acc': 0.4847, 'Top5-Acc': 0.7405 | 447.2 |
 
 
 ## Reference
