@@ -428,8 +428,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[PP-TTS-FastSpeech2](speech/speech_synthesis/fastspeech2/paddle/README.md)  | PaddlePaddle | CSMSC
-[PP-TTS-HiFiGAN](speech/speech_synthesis/hifigan/paddle/README.md)  | PaddlePaddle | CSMSC
+[PP-TTS-FastSpeech2](speech/speech_synthesis/fastspeech2/paddlepaddle/README.md)  | PaddlePaddle | CSMSC
+[PP-TTS-HiFiGAN](speech/speech_synthesis/hifigan/paddlepaddle/README.md)  | PaddlePaddle | CSMSC
 [Tacotron2](speech/speech_synthesis/tacotron2/pytorch/README.md)  | PyTorch | LJSpeech
 [VQMIVC](speech/speech_synthesis/vqmivc/pytorch/README.md)  | PyTorch | VCTK-Corpus
 [WaveGlow](speech/speech_synthesis/waveglow/pytorch/README.md)  | PyTorch | LJSpeech
