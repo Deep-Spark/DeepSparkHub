@@ -80,8 +80,9 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [FasterNet](cv/classification/fasternet/pytorch/README.md)  | PyTorch | ImageNet
 [GoogLeNet](cv/classification/googlenet/pytorch/README.md)  | PyTorch | ImageNet
 [GoogLeNet](cv/classification/googlenet/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
-[InceptionV3](cv/classification/inceptionv3/tensorflow/README.md)  | MindSpore | ImageNet
+[InceptionV3](cv/classification/inceptionv3/mindspore/README.md)  | MindSpore | ImageNet
 [InceptionV3](cv/classification/inceptionv3/pytorch/README.md)  | PyTorch | ImageNet
+[InceptionV3](cv/classification/inceptionv3/tensorflow/README.md)  | TensorFlow | ImageNet
 [InceptionV4](cv/classification/inceptionv4/pytorch/README.md)  | PyTorch | ImageNet
 [InternImage](cv/classification/internimage/pytorch/README.md)  | PyTorch | ImageNet
 [LeNet](cv/classification/lenet/pytorch/README.md)  | PyTorch | ImageNet
@@ -113,10 +114,11 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ShuffleNetV2](cv/classification/shufflenetv2/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [ShuffleNetV2](cv/classification/shufflenetv2/pytorch/README.md)  | PyTorch | ImageNet
 [SqueezeNet](cv/classification/squeezenet/pytorch/README.md)  | PyTorch | ImageNet
-[Swin Transformer](cv/classification/swin_transformer/pytorch/README.md)  | PyTorch | ImageNet
 [Swin Transformer](cv/classification/swin_transformer/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
-[VGG16](cv/classification/vgg/pytorch/README.md)  | PyTorch | ImageNet
+[Swin Transformer](cv/classification/swin_transformer/pytorch/README.md)  | PyTorch | ImageNet
 [VGG16](cv/classification/vgg/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
+[VGG16](cv/classification/vgg/pytorch/README.md)  | PyTorch | ImageNet
+[VGG16](cv/classification/vgg/tensorflow/README.md)  | TensorFlow | ImageNet
 [Wave-MLP](cv/classification/wavemlp/pytorch/README.md)  | PyTorch | ImageNet
 [Wide_ResNet101_2](cv/classification/wide_resnet101_2/pytorch/README.md)  | PyTorch | ImageNet
 [Xception](cv/classification/xception/pytorch/README.md)  | PyTorch | ImageNet
