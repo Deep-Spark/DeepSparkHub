@@ -150,7 +150,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[DCGAN](cv/image_generation/dcgan/MindSpore/README.md)  | MindSpore | ImageNet
+[DCGAN](cv/image_generation/dcgan/mindspore/README.md)  | MindSpore | ImageNet
 
 #### Knowledge Distillation
 
@@ -193,7 +193,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [SSD](cv/detection/ssd/pytorch/README.md)  | PyTorch | COCO
 [SSD](cv/detection/ssd/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [SSD](cv/detection/ssd/tensorflow/README.md)  | TensorFlow | VOC
-[SSD](cv/detection/ssd/MindSpore/README.md)  | MindSpore | COCO
+[SSD](cv/detection/ssd/mindspore/README.md)  | MindSpore | COCO
 [YOLOF](cv/detection/yolof/pytorch/README.md)  | PyTorch | COCO
 [YOLOv3](cv/detection/yolov3/pytorch/README.md)  | PyTorch | COCO
 [YOLOv3](cv/detection/yolov3/paddlepaddle/README.md)  | PaddlePaddle | COCO
@@ -236,7 +236,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [AlphaPose](cv/pose/alphapose/pytorch/README.md)  | PyTorch | COCO
 [HRNet](cv/pose/hrnet/pytorch/README.md)  | PyTorch | COCO
 [HRNet-W32](cv/pose/hrnet/paddlepaddle/README.md)  | PaddlePaddle | COCO
-[OpenPose](cv/pose/openpose/Mindspore/README.md)  | MindSpore | COCO
+[OpenPose](cv/pose/openpose/mindspore/README.md)  | MindSpore | COCO
 
 #### Self-Supervised Learning
 
@@ -260,7 +260,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [DDRnet](cv/semantic_segmentation/ddrnet/pytorch/README.md)  | PyTorch | Cityscapes
 [DeepLabV3](cv/semantic_segmentation/deeplabv3/pytorch/README.md)  | PyTorch | COCO
 [DeepLabV3](cv/semantic_segmentation/deeplabv3/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
-[DeepLabV3](cv/semantic_segmentation/deeplabv3/MindSpore/README.md)  | MindSpore | VOC
+[DeepLabV3](cv/semantic_segmentation/deeplabv3/mindspore/README.md)  | MindSpore | VOC
 [DeepLabV3+](cv/semantic_segmentation/deeplabv3plus/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
 [DeepLabV3+](cv/semantic_segmentation/deeplabv3plus/tensorflow/README.md) | TensorFlow | Cityscapes
 [DenseASPP](cv/semantic_segmentation/denseaspp/pytorch/README.md)  | PyTorch | COCO
@@ -366,7 +366,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [BERT Pretraining](nlp/language_model/bert/pytorch/README.md)  | PyTorch | MLCommon Wikipedia (2048_shards_uncompressed)
 [BERT Pretraining](nlp/language_model/bert/paddlepaddle/README.md)  | PaddlePaddle | MNLI
 [BERT Pretraining](nlp/language_model/bert/tensorflow/base/README.md)  | TensorFlow | MNLI
-[BERT Pretraining](nlp/language_model/bert/MindSpore/README.md)  | MindSpore | SQuAD
+[BERT Pretraining](nlp/language_model/bert/mindspore/README.md)  | MindSpore | SQuAD
 [BERT Text Classification](nlp/text_classification/bert/pytorch/README.md)  |PyTorch | GLUE
 [BERT Text Summerization](nlp/text_summarisation/bert/pytorch/README.md)  | PyTorch | cnn_dailymail
 [BERT Question Answering](nlp/question_answering/bert/pytorch/README.md)  | PyTorch | SQuAD
