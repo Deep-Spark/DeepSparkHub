@@ -68,4 +68,4 @@ bash run_eval_gpu.sh $DEVICE_ID /path/to/imagenet/val/ /path/to/checkpoint
 
 
 ## Reference
-- [mindspore](https://gitee.com/mindspore/models/tree/master/official/)
+- [MindSpore Models](https://gitee.com/mindspore/models/tree/master/official/)
