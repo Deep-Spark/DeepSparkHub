@@ -1,9 +1,9 @@
 # Pix2pix
 ## Model description
-Pix2pix uses paired images for image translation, which has two different styles of the same image as input, can be used for style transfer. Pix2pix is encouraged by cGAN, cGAN inputs a noisy image and a condition as the supervision information to the generation network, pix2pix uses another style of image as the supervision information input into the generation network, so the fake image is related to another style of image which is input as supervision information, thus realizing the process of image translation.
+Pix2pix uses paired images for image translation, which has two different styles of the same image as input, can be used for style transfer. Pix2pix is encouraged by cGAN, cGAN inputs a noisy image and a condition as the supervision information to the generation network, Pix2pix uses another style of image as the supervision information input into the generation network, so the fake image is related to another style of image which is input as supervision information, thus realizing the process of image translation.
 
-## Step 1: Installing
-```
+## Step 1: Installation
+```bash
 git clone https://github.com/PaddlePaddle/PaddleGAN.git
 ```
 
@@ -14,19 +14,21 @@ pip3 install urllib3==1.26.6
 yum install mesa-libGL -y
 ```
 
-## Step 2: Prepare Datasets
+## Step 2: Preparing Datasets
 
-Paired datasets used by Pix2pix can be download from [here](http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/)
-For example, the structure of facades is as following:
+Datasets used by Pix2pix can be downloaded from [here](http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/).
+
+```bash
+wget http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/facades.tar.gz --no-check-certificate
+```
+
+For example, the path structure of facades is as following:
+
 ```bash
 facades
     ├── test
     ├── train
     └── val
-```
-You can download from wget, download facades from wget for example:
-```bash
-wget http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/facades.tar.gz --no-check-certificate
 ```
 
 ## Training
@@ -38,7 +40,9 @@ mv facades/ data/
 # 1 GPU
 python3 -u tools/main.py --config-file configs/pix2pix_facades.yaml
 ```
-## Evaluating
+
+## Evaluation
+
 ```bash
 python3 tools/main.py --config-file configs/pix2pix_facades.yaml --evaluate-only --load ${PATH_OF_WEIGHT}
 ```
@@ -48,10 +52,10 @@ python3 tools/main.py --config-file configs/pix2pix_facades.yaml --evaluate-only
 |:---:|:---:|:---:|
 |BI-V100|120.5818|16.12240|
 
-The generated image at epoch 200 is shown below:
+The generated images at epoch 200 is shown below:
+
 <img src = 'results.png'>
 
 
 ## Reference
 - [PaddleGAN](https://github.com/PaddlePaddle/PaddleGAN) 
-
