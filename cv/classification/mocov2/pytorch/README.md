@@ -7,13 +7,13 @@
 
 Contrastive unsupervised learning has recently shown encouraging progress, e.g., in Momentum Contrast (MoCo) and SimCLR. In this note, we verify the effectiveness of two of SimCLR’s design improvements by implementing them in the MoCo framework. With simple modifications to MoCo—namely, using an MLP projection head and more data augmentation—we establish stronger baselines that outperform SimCLR and do not require large training batches. We hope this will make state-of-the-art unsupervised learning research more accessible.
 
-## Step 1: Installation
+## Installation
 
 ```bash
-## install libGL
+# install libGL
 yum install mesa-libGL
 
-## install zlib
+# install zlib
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
 tar xvf zlib-1.2.9.tar.gz
 cd zlib-1.2.9/
@@ -48,7 +48,7 @@ pip3 install mmengine==0.8.3
 python3 setup.py install
 ```
 
-## Step 2: Preparing datasets
+## Preparing datasets
 
 Prepare your dataset according to the [docs](https://mmpretrain.readthedocs.io/en/latest/user_guides/dataset_prepare.html#prepare-dataset).
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. 
@@ -70,10 +70,13 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
+## Training
 
-```shell
+```bash
+# get mocov2_resnet50_8xb32-coslr-200e_in1k_20220825-b6d23c86.pth
 wget https://download.openmmlab.com/mmselfsup/1.x/mocov2/mocov2_resnet50_8xb32-coslr-200e_in1k/mocov2_resnet50_8xb32-coslr-200e_in1k_20220825-b6d23c86.pth
+
+# config parameters
 vim configs/mocov2/benchmarks/resnet50_8xb32-linear-steplr-100e_in1k.py
 
 model = dict(
@@ -88,5 +91,6 @@ bash tools/dist_train.sh configs/mocov2/mocov2_resnet50_8xb32-coslr-200e_in1k.py
 |     Model    | FPS (BI x 8)| TOP1 Accuracy |
 | ------------ |  ---------  |--------------:|
 |    MoCoV2    |  4663       |    67.50      |
+
 ## Reference
 https://github.com/open-mmlab/mmpretrain/
