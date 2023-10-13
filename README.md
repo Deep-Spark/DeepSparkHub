@@ -324,15 +324,15 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[GCN](gnn/GCN/mindspore/README.md)  | MindSpore | CORA & Citeseer
-[GCN](gnn/GCN/paddlepaddle/README.md) | PaddlePaddle | CORA & PubMed & Citeseer
+[GCN](gnn/text_classification/GCN/mindspore/README.md)  | MindSpore | CORA & Citeseer
+[GCN](gnn/text_classification/GCN/paddlepaddle/README.md) | PaddlePaddle | CORA & PubMed & Citeseer
 
 ### HPC
 
 #### Molecular Dynamics
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[Water/se_e2_a](hpc/molecular_dynamics/tensorflow/README.md)  | TensorFlow (DeePMD-kit) | data_water
+[Water/se_e2_a](hpc/molecular_dynamics/water_se_e2_a/tensorflow/README.md)  | TensorFlow (DeePMD-kit) | data_water
 
 
 ### Multimodal
@@ -408,8 +408,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [DLRM](recommendation/ctr/dlrm/pytorch/README.md)  | PyTorch | Criteo_Terabyte
-[DeepFM](recommendation/deepfm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
-[Wide&Deep](recommendation/wide_deep/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
+[DeepFM](recommendation/ctr/deepfm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
+[Wide&Deep](recommendation/ctr/wide_deep/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
 
 ### Speech
 
