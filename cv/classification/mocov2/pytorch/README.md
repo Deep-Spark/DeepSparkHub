@@ -24,10 +24,11 @@ rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
 
 ```bash
 # install mmcv
-cd deepsparkhub/cv/distiller/CWD/pytorch/mmcv
+pushd ../../../../toolbox/MMDetection/patch/mmcv/v2.0.0rc4/
 bash clean_mmcv.sh
 bash build_mmcv.sh
 bash install_mmcv.sh
+popd
 
 # clone mmpretrain
 cd deepsparkhub/cv/classification/mocov2/pytorch
@@ -88,9 +89,9 @@ bash tools/dist_train.sh configs/mocov2/mocov2_resnet50_8xb32-coslr-200e_in1k.py
 ```
 
 ## Results
-|     Model    | FPS (BI x 8)| TOP1 Accuracy |
-| ------------ |  ---------  |--------------:|
-|    MoCoV2    |  4663       |    67.50      |
+|     Model    | FPS | TOP1 Accuracy |
+| ------------ |  ---------  |--------------|
+|  BI-V100 x8  |  4663       |    67.50     |
 
 ## Reference
-https://github.com/open-mmlab/mmpretrain/
+- [mmpretrain](https://github.com/open-mmlab/mmpretrain/)
