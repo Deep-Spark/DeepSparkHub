@@ -25,7 +25,7 @@ fi
 # mmcv
 git clone --depth 1 -b v1.5.3 https://github.com/open-mmlab/mmcv.git
 
-cp -r -T patch/mmcv/ mmcv/
+cp -r -T patch/mmcv/v1.5.3 mmcv/
 
 cd mmcv
 

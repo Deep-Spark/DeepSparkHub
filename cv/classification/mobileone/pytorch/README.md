@@ -29,10 +29,11 @@ rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
 
 ```bash
 # install mmcv
-cd deepsparkhub/cv/distiller/CWD/pytorch/mmcv
+pushd ../../../../toolbox/MMDetection/patch/mmcv/v2.0.0rc4/
 bash clean_mmcv.sh
 bash build_mmcv.sh
 bash install_mmcv.sh
+popd
 
 # clone mmpretrain
 cd deepsparkhub/cv/classification/mobileone/pytorch
@@ -77,14 +78,15 @@ imagenet
 
 ## Step 3: Training
 
-```shell
+```bash
 bash tools/dist_train.sh configs/mobileone/mobileone-s0_8xb32_in1k.py 8
 ```
 
 ## Results
-|     Model    | FPS (BI x 8)| TOP1 Accuracy |
-| ------------ |  ---------  |--------------:|
-|    mobileone |    1014     |    71.49      |
+|     GPUs     | FPS         | TOP1 Accuracy |
+| ------------ |  ---------  |-------------- |
+|  BI-V100 x8  |    1014     |    71.49      |
+
 ## Reference
-https://github.com/open-mmlab/mmpretrain/
+- [mmpretrain](https://github.com/open-mmlab/mmpretrain/)
 
