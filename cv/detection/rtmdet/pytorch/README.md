@@ -4,13 +4,13 @@
 
 <!-- [ALGORITHM] -->
 
-## Abstract
+## Model description
 
-In this paper, we aim to design an efficient real-time object detector that exceeds the YOLO series and is easily extensible for many object recognition tasks such as instance segmentation and rotated object detection. To obtain a more efficient model architecture, we explore an architecture that has compatible capacities in the backbone and neck, constructed by a basic building block that consists of large-kernel depth-wise convolutions. We further introduce soft labels when calculating matching costs in the dynamic label assignment to improve accuracy. Together with better training techniques, the resulting object detector, named RTMDet, achieves 52.8% AP on COCO with 300+ FPS on an NVIDIA 3090 GPU, outperforming the current mainstream industrial detectors. RTMDet achieves the best parameter-accuracy trade-off with tiny/small/medium/large/extra-large model sizes for various application scenarios, and obtains new state-of-the-art performance on real-time instance segmentation and rotated object detection. We hope the experimental results can provide new insights into designing versatile real-time object detectors for many object recognition tasks.
+In this paper, we aim to design an efficient real-time object detector that exceeds the YOLO series and is easily extensible for many object recognition tasks such as instance segmentation and rotated object detection. To obtain a more efficient model architecture, we explore an architecture that has compatible capacities in the backbone and neck, constructed by a basic building block that consists of large-kernel depth-wise convolutions. We further introduce soft labels when calculating matching costs in the dynamic label assignment to improve accuracy. Together with better training techniques, the resulting object detector, named RTMDet, achieves 52.8% AP on COCO with 300+ FPS on an NVIDIA 3090 GPU, outperforming the current mainstream industrial detectors. RTMDet achieves the best parameter-accuracy trade-off with tiny/small/medium/large/extra-large model sizes for various application scenarios and obtains new state-of-the-art performance on real-time instance segmentation and rotated object detection. We hope the experimental results can provide new insights into designing versatile real-time object detectors for many object recognition tasks.
 
 ## Step 1: Installation
 
-RTMDet model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
+RTMDet model uses the MMDetection toolbox. Before you run this model, you need to set up MMDetection first.
 
 ```bash
 # Install mmcv
@@ -80,3 +80,12 @@ python3 tools/train.py configs/rtmdet/rtmdet_tiny_8xb32-300e_coco.py
 # Multiple GPUs on one machine
 bash tools/dist_train.sh configs/rtmdet/rtmdet_tiny_8xb32-300e_coco.py 8
 ```
+
+## Results
+
+|GPUs|FPS|box AP|
+|:---:|:---:|:---:|
+|BI-V100|172.5|0.4090|
+
+## Reference
+- [mmdetection](https://github.com/open-mmlab/mmdetection)
