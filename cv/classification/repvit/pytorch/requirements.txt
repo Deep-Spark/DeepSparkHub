@@ -1,0 +1,5 @@
+torch
+timm==0.5.4 
+fvcore
+wandb
+urllib3==1.26.6
