@@ -14,7 +14,7 @@ pip3 install urllib3==1.26.6
 yum install mesa-libGL -y
 ```
 
-## Step 2: Preparing Datasets
+## Step 2: Preparing datasets
 
 Datasets used by Pix2pix can be downloaded from [here](http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/).
 
@@ -31,7 +31,7 @@ facades
     └── val
 ```
 
-## Training
+## Step 3: Training
 
 ```bash
 # move facades dataset to data/ 
@@ -41,7 +41,7 @@ mv facades/ data/
 python3 -u tools/main.py --config-file configs/pix2pix_facades.yaml
 ```
 
-## Evaluation
+## Step 4: Evaluation
 
 ```bash
 python3 tools/main.py --config-file configs/pix2pix_facades.yaml --evaluate-only --load ${PATH_OF_WEIGHT}
