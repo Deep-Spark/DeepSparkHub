@@ -1,5 +1,5 @@
 #  Preparing Datasets Template
-This document shows “Preparing datasets" template for README.md of new model.
+This document shows the “Preparing datasets" template for `README.md` of the new model.
 
 ## ImageNet
 
@@ -19,6 +19,18 @@ imagenet
 │       ├── ILSVRC2012_val_00000293.JPEG
 │       └── ...
 └── val_list.txt
+```
+
+**Tips**
+
+For `PaddleClas` training, the images path in train_list.txt and val_list.txt must contain `train/` and `val/` directories:
+- train_list.txt: train/n01440764/n01440764_10026.JPEG 0
+- val_list.txt: val/n01667114/ILSVRC2012_val_00000229.JPEG 35
+
+```bash
+# add "train/" and "val/" to head of lines
+sed -i 's#^#train/#g' train_list.txt
+sed -i 's#^#val/#g' val_list.txt
 ```
 
 ## COCO
