@@ -5,7 +5,7 @@ The classic DQN algorithm in reinforcement learning is a value-based rather than
 
 + Paper: DQN in [Human-level Control Through Deep Reinforcement Learning](http://www.nature.com/nature/journal/v518/n7540/full/nature14236.html)
 
-## Step 1: Installing
+## Step 1: Installation
 
 ```bash
 git clone  https://github.com/PaddlePaddle/PARL.git
