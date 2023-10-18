@@ -1,66 +1,85 @@
 # STDC
 
-## Model descripstion
+## Model description
 
 We propose a novel and efficient structure named Short-Term Dense Concatenate network (STDC network) by removing structure redundancy. Specifically, we gradually reduce the dimension
 of feature maps and use the aggregation of them for image representation, which forms the basic module of STDC
 network. In the decoder, we propose a Detail Aggregation module by integrating the learning of spatial information into low-level layers in single-stream manner. Finally,
 the low-level features and deep features are fused to predict the final segmentation results. 
 
-## Step 1: Installing
+## Step 1: Installation
 
 ### Install packages
 
-```shell
+```bash
 pip3 install -r requirements.txt
+
 yum install mesa-libGL
+
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
 tar xvf zlib-1.2.9.tar.gz
 cd zlib-1.2.9/
 ./configure && make install
 ```
 
-### Build Extension
+### Build extension
 
-```shell
+```bash
 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
 ```
 
-## Step 2: Prepare Datasets
+## Step 2: Preparing datasets
 
-Download cityscapes from file server or official website [Cityscapes](https://www.cityscapes-dataset.com)
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
-```shell
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure should look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
+```
+
+```bash
 mkdir -p data/
-ln -s ${CITYSCAPES_DATASET_PATH} data/
+ln -s /path/to/cityscapes data/
 ```
 
 ## Step 3: Training
 
 **The available configs are as follows:**
 
-```shell
+- stdc1_512x1024_20k_cityscapes
+- stdc1_512x1024_80k_cityscapes
+- stdc1_in1k-pre_512x1024_80k_cityscapes
+- stdc2_512x1024_80k_cityscapes
+- stdc2_in1k-pre_512x1024_80k_cityscapes
 
-# CityScapes
-stdc1_512x1024_20k_cityscapes
-stdc1_512x1024_80k_cityscapes
-stdc1_in1k-pre_512x1024_80k_cityscapes
-stdc2_512x1024_80k_cityscapes
-stdc2_in1k-pre_512x1024_80k_cityscapes
-```
+```bash
+# Training on multiple cards
+# "config" files can be found in the configs directory
+bash train_dist.sh <config file> <num_gpus> [training args]
 
-### Training on mutil-cards
-```shell
-bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
-```
-
-### Example
-
-```shell
+# Example
 bash train_dist.sh configs/stdc/stdc1_512x1024_80k_cityscapes.py 8
 ```
 
-### Training arguments
+**Training arguments are as follows:**
 
 ```python
 # the dir to save logs and models
@@ -128,14 +147,10 @@ auto-resume: bool = False
 
 ## Results
 
-### Cityscapes
-
-#### Accuracy
-
-| Method | Crop Size | Lr schd | FPS (BI x 8) | mIoU (BI x 8) |
+| GPUs | Crop Size | Lr schd | FPS  | mIoU |
 | ------ | --------- | ------: | --------  |--------------:|
-|  STDC  | 512x1024  |   20000 | 39.38     | 70.74 |
+|  BI-V100 x8 | 512x1024  |   20000 | 39.38     | 70.74 |
 
 ## Reference
--Ref: https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes
--Ref: https://github.com/open-mmlab/mmsegmentation
+- [cityscapes](https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes)
+- [mmsegmentation](https://github.com/open-mmlab/mmsegmentation)
