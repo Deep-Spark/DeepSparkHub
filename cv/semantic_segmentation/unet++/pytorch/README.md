@@ -3,70 +3,64 @@
 ## Model description
 
 We present UNet++, a new, more powerful architecture for medical image segmentation. Our architecture is essentially
-a deeply-supervised encoder-decoder network where the encoder and decoder sub-networks are connected through a series of nested, dense skip
+a deeply supervised encoder-decoder network where the encoder and decoder sub-networks are connected through a series of nested, dense skip
 pathways. The re-designed skip pathways aim at reducing the semantic
 gap between the feature maps of the encoder and decoder sub-networks.
 We argue that the optimizer would deal with an easier learning task when
 the feature maps from the decoder and encoder networks are semantically
 similar.
-## Step 1: Installing
+
+## Step 1: Installation
 
 ### Install packages
 
-```shell
-yum install mesa-libGL
+```bash
+yum install -y mesa-libGL
+
 pip3 install -r requirements.txt
+
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
 tar xvf zlib-1.2.9.tar.gz
 cd zlib-1.2.9/
 ./configure && make install
 ```
 
-### Build Extension
+### Build extension
 
-```shell
+```bash
 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
 ```
 
-## Step 2: Prepare Datasets
+## Step 2: Prepare datasets
 
-### If there is DRIVE dataset locally
+If there is `DRIVE` dataset locally
 
-```shell
+```bash
 mkdir -p data/
 ln -s ${DRIVE_DATASET_PATH} data/
 ```
 
-### If there is not DRIVE dataset locally
+If there is no `DRIVE` dataset locally, you can download `DRIVE` from a file server or
+[DRIVE](https://drive.grand-challenge.org/) official website 
 
-Download DRIVE from file server or official website [DRIVE](https://drive.grand-challenge.org/)
-
-```shell
+```bash
 python3 tools/convert_datasets/drive.py /path/to/training.zip /path/to/test.zip
 ```
 
 ## Step 3: Training
 
-**The available configs are as follows:**
-
-```shell
-
-# DRIVE
-unet++_r34_40k_drive
 
 
-### Training on mutil-cards
-```shell
-bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
-```
+```bash
+# Training on multiple cards
+## "config" files can be found in the configs directory
+bash train_dist.sh <config file> <num_gpus> [training args]  
 
-### Example
-
-```shell
+# Example
 bash train_dist.sh configs/unet++/unet++_r34_40k_drive.py 8
 ```
 
-### Training arguments
+**Training arguments are as follows:**
 
 ```python
 # the dir to save logs and models
@@ -134,14 +128,10 @@ auto-resume: bool = False
 
 ## Results
 
-### Cityscapes
-
-#### Accuracy
-
-| Method | Crop Size | Lr schd | FPS (BI x 8)  | mDice |
+| GPUs| Crop Size | Lr schd | FPS | mDice |
 | ------ | --------- | ------: | --------  |--------------:|
-|  UNet++  | 64x64  |   40000 | 238.9      | 87.52 |
+|  BI-V100 x8 | 64x64  |   40000 | 238.9      | 87.52 |
 
 ## Reference
--Ref: https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes
--Ref: https://github.com/open-mmlab/mmsegmentation
+- [dataset_prepare](https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes)
+- [mmsegmentation](https://github.com/open-mmlab/mmsegmentation)
