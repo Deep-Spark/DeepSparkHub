@@ -1,59 +1,74 @@
 # Attention U-Net: Learning Where to Look for the Pancreas
 
-## Model descripstion
+## Model description
 
 We propose a novel attention gate (AG) model for medical imaging that automatically learns to focus on target structures of varying shapes and sizes. Models trained with AGs implicitly learn to suppress irrelevant regions in an input image while highlighting salient features useful for a specific task. This enables us to eliminate the necessity of using explicit external tissue/organ localisation modules of cascaded convolutional neural networks (CNNs). AGs can be easily integrated into standard CNN architectures such as the U-Net model with minimal computational overhead while increasing the model sensitivity and prediction accuracy. 
 
-## Step 1: Installing
+## Step 1: Installation
 
 ### Install packages
 
-```shell
+```bash
 yum install mesa-libGL
+
 pip3 install -r requirements.txt
+
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
 tar xvf zlib-1.2.9.tar.gz
 cd zlib-1.2.9/
 ./configure && make install
 ```
 
-### Build Extension
+### Build extension
 
-```shell
+```bash
 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
 ```
 
-## Step 2: Prepare Datasets
+## Step 2: Preparing datasets
 
-Download cityscapes from file server or official website [Cityscapes](https://www.cityscapes-dataset.com)
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
-```shell
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure should look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
+```
+
+```bash
 mkdir -p data/
-ln -s ${CITYSCAPES_DATASET_PATH} data/
+ln -s /path/to/cityscapes data/
 ```
 
 ## Step 3: Training
 
-**The available configs are as follows:**
+```bash
+# Training on multiple cards
+# "config" files can be found in the configs directory 
+bash train_dist.sh <config file> <num_gpus> [training args]
 
-```shell
-
-# CityScapes
-attunet_res34_512x1024_160k_cityscapes
-
-
-### Training on mutil-cards
-```shell
-bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
-```
-
-### Example
-
-```shell
+# Example
 bash train_dist.sh configs/attunet/attunet_res34_512x1024_160k_cityscapes.py 8
 ```
 
-### Training arguments
+**Training arguments are as follows:**
 
 ```python
 # the dir to save logs and models
@@ -121,14 +136,10 @@ auto-resume: bool = False
 
 ## Results
 
-### Cityscapes
-
-#### Accuracy
-
-| Method | Crop Size | Lr schd | FPS (BI x 8)  | mIoU (BI x 8) |
+| GPUs | Crop Size | Lr schd | FPS  | mIoU |
 | ------ | --------- | ------: | --------  |--------------:|
-|  ATTUNet  | 512x1024  |   160000 | 54.5180      | 69.39 |
+|  BI-V100 x8 | 512x1024  |   160000 | 54.5180      | 69.39 |
 
 ## Reference
--Ref: https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes
--Ref: https://github.com/open-mmlab/mmsegmentation
+- [cityscapes](https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes)
+- [mmsegmentation](https://github.com/open-mmlab/mmsegmentation)
