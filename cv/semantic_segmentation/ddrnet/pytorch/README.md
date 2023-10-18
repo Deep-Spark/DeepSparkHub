@@ -1,59 +1,74 @@
 # DDRNet
 
-## Model descripstion
+## Model description
 
 we proposed a family of efficient backbones specially designed for real-time semantic segmentation. The proposed deep dual-resolution networks (DDRNets) are composed of two deep branches between which multiple bilateral fusions are performed. Additionally, we design a new contextual information extractor named Deep Aggregation Pyramid Pooling Module (DAPPM) to enlarge effective receptive fields and fuse multi-scale context based on low-resolution feature maps. Our method achieves a new state-of-the-art trade-off between accuracy and speed on both Cityscapes and CamVid dataset. 
 
-## Step 1: Installing
+## Step 1: Installation
 
 ### Install packages
 
-```shell
+```bash
 pip3 install -r requirements.txt
+
 yum install mesa-libGL
+
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
 tar xvf zlib-1.2.9.tar.gz
 cd zlib-1.2.9/
 ./configure && make install
 ```
 
-### Build Extension
+### Build extension
 
-```shell
+```bash
 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
 ```
 
-## Step 2: Prepare Datasets
+## Step 2: Preparing datasets
 
-Download cityscapes from file server or official website [Cityscapes](https://www.cityscapes-dataset.com)
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
-```shell
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure should look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
+```
+
+```bash
 mkdir -p data/
-ln -s ${CITYSCAPES_DATASET_PATH} data/
+ln -s /path/to/cityscapes data/
 ```
 
 ## Step 3: Training
 
-**The available configs are as follows:**
+```bash
+# Training on multiple cards
+# "config" file can be found in the configs directory
+bash train_dist.sh <config file> <num_gpus> [training args]
 
-```shell
-
-# CityScapes
-ddrnet_23_slim_512x1024_160k_cityscapes
-```
-
-### Training on mutil-cards
-```shell
-bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
-```
-
-### Example
-
-```shell
+# Example
 bash train_dist.sh configs/ddrnet/ddrnet_23_slim_512x1024_160k_cityscapes.py 4
 ```
 
-### Training arguments
+**Training arguments are as follows:**
 
 ```python
 # the dir to save logs and models
@@ -121,14 +136,10 @@ auto-resume: bool = False
 
 ## Results
 
-### Cityscapes
-
-#### Accuracy
-
-| Method | Crop Size | Lr schd | FPS (BI x 4)  | mIoU (BI x 8) |
+| GPUs | Crop Size | Lr schd | FPS | mIoU|
 | ------ | --------- | ------: | --------  |--------------:|
-| DDRNet | 512x1024  |   16000 | 33.085   | 74.8 |
+| BI-V100 x8 | 512x1024  |   16000 | 33.085   | 74.8 |
 
 ## Reference
--Ref: https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes
--Ref: https://github.com/open-mmlab/mmsegmentation
+- [cityscapes](https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes)
+- [mmsegmentation](https://github.com/open-mmlab/mmsegmentation)
