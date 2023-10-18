@@ -6,7 +6,6 @@ This repository is built upon BEiT, an unofficial PyTorch implementation of Mask
 ## Environment
 
 ```
-cd MAE-pytorch
 pip3 install -r requirements.txt
 mkdir -p /home/datasets/cv/ImageNet_ILSVRC2012
 mkdir -p pretrain
