@@ -6,7 +6,7 @@ This repo is a pytorch implement of ArcFace, which propose an Additive Angular M
 ## Step 1: Installation
 
 ```bash
-pip3 install requiresments.txt
+pip3 install -r requirements.txt
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
 tar xvf zlib-1.2.9.tar.gz
 cd zlib-1.2.9/
