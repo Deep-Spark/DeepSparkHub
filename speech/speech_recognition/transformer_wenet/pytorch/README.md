@@ -21,7 +21,7 @@ bash install_toolbox_wenet.sh
 Dataset is data_aishell.tgz and resource_aishell.tgz from wenet.
 You could just run the whole script, which will download the dataset automatically.
 
-**You need to modify the path of dataset in run.sh.**
+**You need to modify the path of the dataset in run.sh.**
 
 ```bash
 # Change to the scripts path
@@ -56,11 +56,11 @@ bash run.sh --stage 5 --stop-stage 5
 bash run.sh --stage 6 --stop-stage 6
 ```
 
-## Results on BI-V100
+## Results
 
-| GPUs | FP16  | QPS | WER (ctc_greedy_search )| WER (ctc_prefix_beam_search  ) | WER (attention )| WER (attention_rescoring )|
-|---    |---   |---  |---                       |---                            |---              |---                        |
-| 1x8  | False | 394| 5.78%                    | 5.78%                         | 5.59%           | 5.17%                    |
+| GPUs | FP16  | QPS | WER (ctc_greedy_search)| WER (ctc_prefix_beam_search) | WER (attention)| WER (attention_rescoring)|
+|---   |---   |---  |---                       |---                            |---              |---                    |
+| 1x8  | False | 394| 5.78%                    | 5.78%                         | 5.59%           | 5.17%                 |
 
 ## Reference
-https://github.com/wenet-e2e/wenet
+- [WeNet](https://github.com/wenet-e2e/wenet)
