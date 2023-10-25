@@ -7,7 +7,6 @@ CosFace is a face recognition model that achieves state-of-the-art results by in
 ## Step 1: Installation
 
 ```bash
-pip3 install requiresments.txt
 
 # install zlib
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
