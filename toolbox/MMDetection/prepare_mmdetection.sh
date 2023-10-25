@@ -16,10 +16,31 @@
 
 set -x
 
-
-
-# mmcv
-bash prepare_mmcv.sh v1.5.3
-
 # mmdetection
-bash prepare_mmdetection.sh v2.22.0
+MMDET_VERSION=$1
+
+MMDET_VERSION=${MMDET_VERSION:-v2.22.0}
+
+if [ -d "./mmdetection" ]; then
+  echo "Already installed MMDetection." 
+  exit 0
+fi
+
+echo "=====Prepare mmdetection ${MMDET_VERSION} START====="
+
+git clone --depth 1 -b ${MMDET_VERSION} https://github.com/open-mmlab/mmdetection.git
+
+cp -r -T patch/mmdetection/ mmdetection/
+
+cd mmdetection/
+bash clean_mmdetection.sh
+bash build_mmdetection.sh
+
+# install pip requirements
+pip3 install build_pip/mmdet-*+corex*-py3-none-any.whl
+pip3 install yapf addict opencv-python
+
+# install libGL
+yum install -y mesa-libGL
+echo "=====Prepare mmdetection ${MMDET_VERSION} END====="
+
