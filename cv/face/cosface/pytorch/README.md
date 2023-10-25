@@ -21,7 +21,7 @@ You can download datasets from [BaiduPan](https://pan.baidu.com/s/1qMxFR8H_ih0xm
 ```bash
 # download
 ln -s ${your_path_to_face} datasets ./datasets
-ln -s ${your_path_to_face} lfw/ .
+ln -s ${your_path_to_face} lfw .
 ln -s ${your_path_to_face} lfw_pair.txt .
 
 # preprocess
