@@ -60,7 +60,7 @@ bash run.sh --stage 6 --stop-stage 6
 
 | GPUs | FP16  | QPS | WER (ctc_greedy_search)| WER (ctc_prefix_beam_search) | WER (attention)| WER (attention_rescoring)|
 |---   |---   |---  |---                       |---                            |---              |---                    |
-| 1x8  | False | 394| 5.78%                    | 5.78%                         | 5.59%           | 5.17%                 |
+| BI-V100 x8  | False | 394| 5.78%                    | 5.78%                         | 5.59%           | 5.17%                 |
 
 ## Reference
 - [WeNet](https://github.com/wenet-e2e/wenet)
