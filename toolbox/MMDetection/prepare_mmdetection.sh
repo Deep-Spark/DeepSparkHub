@@ -38,7 +38,9 @@ bash build_mmdetection.sh
 
 # install pip requirements
 pip3 install build_pip/mmdet-*+corex*-py3-none-any.whl
-pip3 install yapf addict opencv-python
+pip3 install yapf==0.31.0 
+pip3 install addict 
+pip3 install opencv-python
 
 # install libGL
 yum install -y mesa-libGL
