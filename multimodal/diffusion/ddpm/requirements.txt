@@ -1,0 +1,4 @@
+absl-py==2.0.0
+scipy==1.5.4
+tensorboardX==2.1
+tqdm==4.55.1
