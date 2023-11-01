@@ -13,6 +13,9 @@ the low-level features and deep features are fused to predict the final segmenta
 git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
 cd PaddleSeg
 pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3
+pip3 install urllib3==1.26.6
+yum install mesa-libGL -y
 ```
 
 ## Step 2: Download data
@@ -76,7 +79,7 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 train.py \
 
 | GPUs | Crop Size | Lr schd | FPS  | mIoU |
 | ------ | --------- | ------: | --------  |--------------:|
-|  BI-V100 x8 | 512x1024  |   80000 | to be updated     | to be updated |
+|  BI-V100 x8 | 512x1024  |   80000 | 14.36     | 0.7466 |
 
 ## Reference
 - [cityscapes](https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes)
