@@ -7,7 +7,7 @@ of feature maps and use the aggregation of them for image representation, which 
 network. In the decoder, we propose a Detail Aggregation module by integrating the learning of spatial information into low-level layers in single-stream manner. Finally,
 the low-level features and deep features are fused to predict the final segmentation results. 
 
-## Step 1: Installing
+## Step 1: Installation
 
 ```bash
 git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
@@ -18,7 +18,7 @@ pip3 install urllib3==1.26.6
 yum install mesa-libGL -y
 ```
 
-## Step 2: Download data
+## Step 2: Preparing datasets
 
 Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
@@ -54,7 +54,7 @@ python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes -
 python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 ```
 
-## Step 3: Run STDC
+## Step 3: Training
 
 ```bash
 # Change '/path/to/cityscapes' as your local Cityscapes dataset path
