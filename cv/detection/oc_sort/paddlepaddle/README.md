@@ -164,8 +164,8 @@ python3 -m paddle.distributed.launch --log_dir=ppyoloe --gpus 0,1,2,3,4,5,6,7 to
 # MOT-17 half dataset training
 python3 -m paddle.distributed.launch --log_dir=ppyoloe --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/mot/bytetrack/detector/ppyoloe_crn_l_36e_640x640_mot17half.yml --eval --amp
 
-# MOT-17 half dataset evaluation
-CUDA_VISIBLE_DEVICES=0 python3 tools/eval.py -c configs/mot/bytetrack/detector/ppyoloe_crn_l_36e_640x640_mot17half.yml
+# MOT-17 half dataset evaluation on tracking
+CUDA_VISIBLE_DEVICES=0 python3 tools/eval_mot.py -c configs/mot/ocsort/ocsort_ppyoloe.yml --scaled=True
 ```
 
 ## Results
