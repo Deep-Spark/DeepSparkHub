@@ -18,9 +18,10 @@ pip3 install urllib3==1.26.6
 pip3 install scikit-learn
 ```
 
-## Step 2: Prepare datasets
+## Step 2: Preparing datasets
 
-- MOT17_ch datasets
+- **MOT17_ch datasets**
+
 ```bash
 cd dataset/mot
 git clone https://github.com/ifzhang/ByteTrack.git
@@ -29,18 +30,58 @@ git clone https://github.com/ifzhang/ByteTrack.git
 Download [MOT17](https://motchallenge.net/), [MOT20](https://motchallenge.net/), [CrowdHuman](https://www.crowdhuman.org/), [Cityperson](https://github.com/Zhongdao/Towards-Realtime-MOT/blob/master/DATASET_ZOO.md), [ETHZ](https://github.com/Zhongdao/Towards-Realtime-MOT/blob/master/DATASET_ZOO.md) and put them under <ByteTrack_HOME>/datasets in the following structure:
 
 ```bash
-datasets
-   |——————mot
-   |        └——————train
-   |        └——————test
-   └——————crowdhuman
-             └——————CrowdHuman_train
-             └——————CrowdHuman_val
-             └——————annotation_train.odgt
-             └——————annotation_val.odgt
-
+datasets/
+├── crowdhuman
+│   ├── CrowdHuman_train01.zip
+│   ├── CrowdHuman_train02.zip
+│   ├── CrowdHuman_train03.zip
+│   ├── CrowdHuman_val.zip
+│   ├── annotation_train.odgt
+│   ├── annotation_val.odgt
+├── data_path
+│   ├── citypersons.train
+│   └── eth.train
+├── mot
+│   └── MOT17.zip
+└── prepare_datasets.sh
 ```
+
+Unzip and organize the path following below steps.
+
+```bash
+# MOT17
+cd mot
+unzip MOT17.zip
+mv MOT17/images/train .
+mv MOT17/images/test .
+
+# CrowdHuman_train
+cd ../crowdhuman
+unzip CrowdHuman_train01.zip -d CrowdHuman_train
+unzip CrowdHuman_train02.zip -d CrowdHuman_train
+unzip CrowdHuman_train03.zip -d CrowdHuman_train
+unzip CrowdHuman_val.zip -d CrowdHuman_val
+mv CrowdHuman_train/Images/* CrowdHuman_train
+mv CrowdHuman_val/Images/* CrowdHuman_val
+```
+
+The datasets path would be look like below.
+
+```bash
+datasets
+   ├── mot
+   │   └── train
+   │   └── test
+   └── crowdhuman
+       ├── CrowdHuman_train
+       ├── CrowdHuman_train
+       ├── CrowdHuman_val
+       ├── annotation_train.odgt
+       └── annotation_val.odgt
+```
+
 Then, you need to turn the datasets to COCO format and mix different training data:
+
 ```bash
 cd <ByteTrack_HOME>
 python3 tools/convert_mot17_to_coco.py
@@ -48,6 +89,7 @@ python3 tools/convert_crowdhuman_to_coco.py
 ```
 
 Mixing different datasets:
+
 ```bash
 cd datasets
 mkdir -p mix_mot_ch/annotations
@@ -61,14 +103,18 @@ ln -s ../crowdhuman/CrowdHuman_val crowdhuman_val
 cd <ByteTrack_HOME>
 python3 tools/mix_data_ablation.py
 ```
+
 Create a data link:
+
 ```bash
 cd PaddleDetection/dataset/mot
 ln -s ByteTrack/datasets/mix_mot_ch mix_mot_ch
 ```
 
-- MOT-17 half train datasets
+- **MOT-17 half train datasets**
+
 Download [MOT17](https://bj.bcebos.com/v1/paddledet/data/mot/MOT17.zip) and put them under <PaddleDetection_HOME>/datasets/mot/ in the following structure:
+
 
 ```bash
 MOT17/
@@ -92,13 +138,16 @@ MOT17/
            ├── gt
            └── img1
 ```
+
 Turn the datasets to COCO format:
+
 ```bash
 cd <ByteTrack_HOME>
 python3 tools/convert_mot17_to_coco.py
 ```
 
 Create a data link:
+
 ```bash
 cd <PaddleDetection_HOME>/datasets/mot/MOT17
 ln -s ../ByteTrack/datasets/mot/annotations ./
@@ -117,7 +166,6 @@ python3 -m paddle.distributed.launch --log_dir=ppyoloe --gpus 0,1,2,3,4,5,6,7 to
 
 # MOT-17 half dataset evaluation
 CUDA_VISIBLE_DEVICES=0 python3 tools/eval.py -c configs/mot/bytetrack/detector/ppyoloe_crn_l_36e_640x640_mot17half.yml
-
 ```
 
 ## Results
