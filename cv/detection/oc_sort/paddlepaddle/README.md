@@ -112,8 +112,11 @@ cd PaddleDetection
 # mix_mot_ch datasets
 python3 -m paddle.distributed.launch --log_dir=ppyoloe --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/mot/bytetrack/detector/yolox_x_24e_800x1440_mix_mot_ch.yml --eval --amp
 
-# MOT-17 half train datasets
+# MOT-17 half dataset training
 python3 -m paddle.distributed.launch --log_dir=ppyoloe --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/mot/bytetrack/detector/ppyoloe_crn_l_36e_640x640_mot17half.yml --eval --amp
+
+# MOT-17 half dataset evaluation
+CUDA_VISIBLE_DEVICES=0 python3 tools/eval.py -c configs/mot/bytetrack/detector/ppyoloe_crn_l_36e_640x640_mot17half.yml
 
 ```
 
