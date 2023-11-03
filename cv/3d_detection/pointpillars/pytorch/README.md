@@ -52,6 +52,7 @@ python3 setup.py develop
 2. Pre-process KITTI datasets First
 
     ```
+    ln -s path/to/kitti/ImageSets ./dataset
     python3 pre_process_kitti.py --data_root your_path_to_kitti
     ```
 
