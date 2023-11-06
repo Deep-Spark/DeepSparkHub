@@ -38,11 +38,13 @@ imagenet
 For `PaddleClas` training, the images path in train_list.txt and val_list.txt must contain `train/` and `val/` directories:
 - train_list.txt: train/n01440764/n01440764_10026.JPEG 0
 - val_list.txt: val/n01667114/ILSVRC2012_val_00000229.JPEG 35
-# add "train/" and "val/" to head of lines
+
 ```bash
+# add "train/" and "val/" to head of lines
 sed -i 's#^#train/#g' train_list.txt
 sed -i 's#^#val/#g' val_list.txt
 ```
+
 ## Step 3: Run ResNet50
 
 ```bash
