@@ -8,6 +8,9 @@ Residual Networks, or ResNets, learn residual functions with reference to the la
 git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
 cd PaddleClas
 pip3 install -r requirements.txt
+yum install mesa-libGL -y
+pip3 install urllib3==1.26.6
+pip3 install protobuf==3.20.3
 ```
 
 ## Step 2: Download data
