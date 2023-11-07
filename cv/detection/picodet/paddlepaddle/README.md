@@ -12,6 +12,7 @@ cd PaddleDetection
 pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 python3 setup.py install
 pip3 install protobuf==3.20.3
+pip3 install numba==0.56.4
 yum install mesa-libGl -y
 ```
 
