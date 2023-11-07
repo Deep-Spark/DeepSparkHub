@@ -45,7 +45,7 @@ vim configs/datasets/coco_detection.yml, set 'dataset_dir' in the configuration 
 single gpu:
 ```bash
 export CUDA_VISIBLE_DEVICES=0
-python3 tools/train.py -c configs/picodet/picodet_l_640_coco_lcne.yml --eval
+python3 tools/train.py -c configs/picodet/picodet_l_640_coco_lcnet.yml --eval
 ```
 multi-gpu:
 ```bash
