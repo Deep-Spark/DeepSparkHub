@@ -34,6 +34,7 @@ git clone https://huggingface.co/bert-base-uncased
 
 ``` shell
 ## config "dataset_name" to be local path of conll2003 if you want to run off-line
+## e.g. --dataset_name /path/to/conll2003
 bash run.sh
 ```
 
@@ -41,6 +42,7 @@ bash run.sh
 
 ```shell
 ## config "dataset_name" to be local path of conll2003 if you want to run off-line
+## e.g. --dataset_name /path/to/conll2003
 bash run_dist.sh
 ```
 ## Results on BI-V100
