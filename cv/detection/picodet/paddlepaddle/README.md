@@ -11,6 +11,8 @@ git clone https://github.com/PaddlePaddle/PaddleDetection.git
 cd PaddleDetection
 pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 python3 setup.py install
+pip3 install protobuf==3.20.3
+yum install mesa-libGl -y
 ```
 
 ## Step 2:Preparing datasets
@@ -48,7 +50,7 @@ python3 tools/train.py -c configs/picodet/picodet_l_640_coco_lcne.yml --eval
 multi-gpu:
 ```bash
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/picodet/picodet_l_640_coco_lcne.yml --eval
+python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/picodet/picodet_l_640_coco_lcnet.yml --eval
 ```
 
 ## Results
