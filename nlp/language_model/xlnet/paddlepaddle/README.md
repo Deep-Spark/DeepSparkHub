@@ -1,30 +1,28 @@
-# XLNet Pretraining
+# XLNet
 
 ## Model description
 
-[XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/abs/1906.08237) It is an unsupervised autoregressive pre-trained language model. Different from traditional one-way autoregressive models, XLNet performs language modeling by maximizing the expectation of all permutations of the input sequence, which allows it to pay attention to contextual information at the same time. In addition, XLNet integrates the [Transformer-XL](https://arxiv.org/abs/1901.02860) model in the pre-training stage, the Segment Recurrent Mechanism and Relative Positional Encoding mechanism in Transformer-XL can support XLNet to accept longer input sequences, which makes XLNet have excellent performance in language tasks with long text sequences.
+[XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/abs/1906.08237) is an unsupervised auto-regressive pre-trained language model. Different from traditional one-way auto-regressive models, XLNet performs language modeling by maximizing the expectation of all permutations of the input sequence, which allows it to pay attention to contextual information at the same time. In addition, XLNet integrates the [Transformer-XL](https://arxiv.org/abs/1901.02860) model in the pre-training stage, the Segment Recurrent Mechanism and Relative Positional Encoding mechanism in Transformer-XL can support XLNet to accept longer input sequences, which makes XLNet have excellent performance in language tasks with long text sequences.
 
-This project is an open source implementation of XLNet on Paddle2.0, including fine-tuning code on [GLUE评测任务](https://gluebenchmark.com/tasks)
+## Step 1: Installation
 
-## Fast Start
+```bash
+pip3 install sentencepiece
+pip3 install urllib3==1.26.6
+pip3 install paddlenlp==2.4.1
+```
 
-### Step1: Environmental Dependence
+### Step 2: Preparing datasets
 
-- sentencepiece
+The dataset included in the GLUE evaluation task has been provided in the form of API in PaddleNLP, no preparation is required in advance. It will be automatically downloaded when executing using `run_glue.py`.
 
-  `pip3 install sentencepiece`
-
-### Step2: Prepare Data
-
-The dataset included in the GLUE evaluation task has been provided in the form of API in paddlenlp, no preparation is required in advance. It will be automatically downloaded when executing using `run_glue.py`.
-
-### Step3: Run Fine-tuning
+### Step 3: Training
 
 Taking the SST-2 task in GLUE as an example, the method of starting Fine-tuning is as follows:
 
-```shell
-unset CUDA_VISIBLE_DEVICES
-python -m paddle.distributed.launch --gpus "0" ./run_glue.py \
+```bash
+# Set --gpus to be "0" if run on 1 GPU
+python3 -m paddle.distributed.launch --gpus "0,1,2,3,4,5,6,7" ./run_glue.py \
     --model_name_or_path xlnet-base-cased \
     --task_name SST-2 \
     --max_seq_length 128 \
@@ -35,6 +33,7 @@ python -m paddle.distributed.launch --gpus "0" ./run_glue.py \
     --save_steps 500 \
     --output_dir ./tmp/
 ```
+
 The parameters are explained as follows:
 - `model_name_or_path` indicates a model with a specific configuration, corresponding to its pre-trained model and the tokenizer used in pre-training. If the model-related content is saved locally, the corresponding directory address can also be provided here.
 - `task_name` indicates the task of Fine-tuning.
@@ -46,21 +45,13 @@ The parameters are explained as follows:
 - `save_steps` indicates the model saving and evaluation interval.
 - `output_dir` indicates the model saving path.
 
-After fine-tuning on each GLUE evaluation task based on `xlnet-base-cased`, the following results are obtained on the verification set by BI150:
+## Results
 
-| Task  | Metric                       | Result             |
+| GPUs  | FPS                       | ACC             |
 |:-----:|:----------------------------:|:------------------:|
-| SST-2 | Accuracy                     |      94.151        |
-| QNLI  | Accuracy                     |      91.579        |
-| CoLA  | Mattehew's corr              |      50.264        |
-| MRPC  | F1/Accuracy                  |   87.813/82.108    |
-| STS-B | Person/Spearman corr         |   87.146/86.867    |
-| QQP   | Accuracy/F1                  |   90.838/87.644    |
-| MNLI  | Matched acc/MisMatched acc   |   87.468/86.859    |
-| RTE   | Accuracy                     |      61.733        |
-| WNLI  | Accuracy                     |      30.986        |
+| BI-V100 x8 | 743.7                   |      0.9450        |
 
 ## Reference
 
 - [XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/abs/1906.08237)
-- [zihangdai/xlnet](https://github.com/zihangdai/xlnet)
+- [PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/language_model/xlnet
