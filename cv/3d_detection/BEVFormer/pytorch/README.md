@@ -1,9 +1,6 @@
-# BEVFormer: a Cutting-edge Baseline for Camera-based Detection
+# BEVFormer
 
 ## Model description
-> **BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers**, ECCV 2022
-> - [Paper in arXiv](http://arxiv.org/abs/2203.17270) 
-
 In this work, the authors present a new framework termed BEVFormer, which learns unified BEV representations with spatiotemporal transformers to support multiple autonomous driving perception tasks. In a nutshell, BEVFormer exploits both spatial and temporal information by interacting with spatial and temporal space through predefined grid-shaped BEV queries. To aggregate spatial information, the authors design a spatial cross-attention that each BEV query extracts the spatial features from the regions of interest across camera views. For temporal information, the authors propose a temporal self-attention to recurrently fuse the history BEV information.
 The proposed approach achieves the new state-of-the-art **56.9\%** in terms of NDS metric on the nuScenes test set, which is **9.0** points higher than previous best arts and on par with the performance of LiDAR-based baselines.
 
@@ -97,3 +94,6 @@ and we provide another script to train BEVFormer with FP16.
 | GPUs |     model      |   NDS  |   mAP  |
 |------|----------------|--------|--------|
 | 1x8  | bevformer_base | 0.3516 | 0.3701 |
+
+## Reference:
+[Paper in arXiv](http://arxiv.org/abs/2203.17270) 
