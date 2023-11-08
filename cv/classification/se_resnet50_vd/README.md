@@ -21,7 +21,7 @@ Sign up and login in [ImageNet official website](https://www.image-net.org/index
 The ImageNet dataset path structure should look like:
 
 ```bash
-imagenet
+ILSVRC2012
 ├── train
 │   └── n01440764
 │       ├── n01440764_10026.JPEG
@@ -34,25 +34,19 @@ imagenet
 └── val_list.txt
 ```
 
-Then move folds under train and val to ILSVRC2012, run:
+**Tips**
+
+For `PaddleClas` training, the image path in train_list.txt and val_list.txt must contain `train/` and `val/` directories:
+
+* train_list.txt: train/n01440764/n01440764_10026.JPEG 0
+* val_list.txt: val/n01667114/ILSVRC2012_val_00000229.JPEG 35
 
 ```
-python3 move_data.py
+# add "train/" and "val/" to head of lines
+sed -i 's#^#train/#g' train_list.txt
+sed -i 's#^#val/#g' val_list.txt
 ```
 
-finally data path would like:
-
-```
-ILSVRC2012
-├── n01440764
-│       ├── ILSVRC2012_val_00000293.JPEG
-│       └── ...
-├── n01443537
-│       ├── ILSVRC2012_val_00000236.JPEG
-│       └── ...
-├── train_list.txt
-└── val_list.txt
-```
 
 ## Step 3: Training
 
