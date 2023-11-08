@@ -1,4 +1,4 @@
-# SOLO: Segmenting Objects by Locations
+# SOLO
 
 ## Model description
 
