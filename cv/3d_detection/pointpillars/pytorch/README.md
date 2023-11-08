@@ -1,4 +1,4 @@
-# [PointPillars: Fast Encoders for Object Detection from Point Clouds](https://arxiv.org/abs/1812.05784) 
+# PointPillars
 
 ## Model description
 A Simple PointPillars PyTorch Implenmentation for 3D Lidar(KITTI) Detection.
@@ -120,4 +120,4 @@ python3 test.py --ckpt pretrained/your_weights.pth --pc_path data/kitti/training
 
 ## Acknowledements
 
-Thanks for the open souce code [mmcv](https://github.com/open-mmlab/mmcv), [mmdet](https://github.com/open-mmlab/mmdetection) and [mmdet3d](https://github.com/open-mmlab/mmdetection3d).
+Fast Encoders for Object Detection from Point Clouds](https://arxiv.org/abs/1812.05784) 
