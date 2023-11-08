@@ -1,0 +1,6 @@
+addict
+pycocotools
+terminaltables
+yapf==0.40.1
+fairscale
+timm
