@@ -8,6 +8,8 @@ We present a new, embarrassingly simple approach to instance segmentation in ima
 
 ```bash
 $ pip3 install -r requirements.txt
+  yum install mesa-libGL
+  pip3 install yapf==0.31.0
 $ MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
 ```
 
