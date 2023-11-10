@@ -34,3 +34,11 @@ ln -s /usr/local/corex-3.1.0/lib64/python3/dist-packages/bin/torchrun /usr/local
 ```
 
 ## Results
+
+| GPUs       | Toolbox   | Model       | Training speed   |
+|:-----------:|:---------:|:----------:|:----------------:|
+| BI-V100 x8 | Megatron-DeepSpeed | LLaMA2-7B |1.263 samples/sec |
+
+## Reference
+
+- [Megatron-DeepSpeed](https://github.com/microsoft/Megatron-DeepSpeed)
