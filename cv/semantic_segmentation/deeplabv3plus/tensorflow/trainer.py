@@ -1,17 +1,17 @@
-# Copyright(c)2023,ShanghaiIluvatarCoreXSemiconductorCo.,Ltd.
-# AllRightsReserved.
+# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 #
-#   LicensedundertheApacheLicense,Version2.0(the"License");youmay
-#   otusethisfileexceptincompliancewiththeLicense.Youmayobtain
-#   acopyoftheLicenseat
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
 #
-#   http://www.apache.org/licenses/LICENSE-2.0
+#         http://www.apache.org/licenses/LICENSE-2.0
 #
-#   Unlessrequiredbyapplicablelaworagreedtoinwriting,software
-#   distributedundertheLicenseisdistributedonan"ASIS"BASIS,WITHOUT
-#   WARRANTIESORCONDITIONSOFANYKIND,eitherexpressorimplied.Seethe
-#   Licenseforthespecificlanguagegoverningpermissionsandlimitations
-#   undertheLicense.
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
 
 """Module for training deeplabv3plus on camvid dataset."""
 
@@ -48,11 +48,15 @@ if __name__ == "__main__":
                         If provided, checkpoint_dir is set to wandb://
                         (Model checkpoints are saved to wandb.)""",
                         default=None)
+    PARSER.add_argument('--data-path', help='dataset')
+    PARSER.add_argument('-b', '--batch-size', type=int)
+    PARSER.add_argument('--epochs', type=int,
+                        help='number of total epochs to run')
     ARGS = PARSER.parse_args()
 
-    CONFIG = CONFIG_MAP[ARGS.config_key]
+    CONFIG = CONFIG_MAP[ARGS.config_key](ARGS)
     if ARGS.wandb_api_key is not None:
         CONFIG['wandb_api_key'] = ARGS.wandb_api_key
         CONFIG['checkpoint_dir'] = "wandb://"
-    TRAINER = Trainer(CONFIG_MAP[ARGS.config_key])
+    TRAINER = Trainer(CONFIG)
     HISTORY = TRAINER.train()
