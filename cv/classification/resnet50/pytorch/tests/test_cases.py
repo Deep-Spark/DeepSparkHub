@@ -22,6 +22,7 @@ import pytest
 
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 PROJECT_DIR = os.path.dirname(CURRENT_DIR)
+OUTPUT_PATH = os.path.join(PROJECT_DIR, 'results')
 DATASETDIR = r'/mnt/datasets/imagenet'
 
 
@@ -31,32 +32,32 @@ def deploy_environment():
     exec_cmd('pip3 install torch torchvision')
 
 
-@pytest.mark.timeout(3600)
+@pytest.mark.timeout(10800)
 def test_samples():
     """Test samples"""
     epochs = 1
-    batch_size = 512
+    batch_size = 280
     cuda_visible_devices = '0'  # example '0,1,2,3,4,5,6,7'
     ix_num_cuda_visible_devices = len(cuda_visible_devices.split(","))
     env = {
         'CUDA_VISIBLE_DEVICES': cuda_visible_devices,
-        'IX_NUM_CUDA_VISIBLE_DEVICES': str(ix_num_cuda_visible_devices)
+        'IX_NUM_CUDA_VISIBLE_DEVICES': str(ix_num_cuda_visible_devices),
+        'MASTER_ADDR': '127.0.0.1'
     }
     python_arg = (
-        "-m torch.distributed.launch "
-        f"--nproc_per_node={ix_num_cuda_visible_devices} "
-        f"--use_env "
+            '-m torch.distributed.launch '
+            f'--nproc_per_node {ix_num_cuda_visible_devices} '
+            '--use_env --master_port 1001'
     ) if ix_num_cuda_visible_devices > 1 else ''
-
     python_cmd = (
         f"cd {PROJECT_DIR};"
-        "python3 -u "
-        f"{python_arg} "
-        "train.py "
+        f"python3 -u {python_arg} train.py "
+        "--model resnet50 "
         f"--epochs {epochs} "
         f"--batch-size {batch_size} "
-        "--lr 1e-2 "
-        "--wd 0.0001 "
+        "--acc-thresh 75.9 "
+        "--dali "
+        f"--output-dir {OUTPUT_PATH} "
         f"--data-path {DATASETDIR} "
     )
     return_code, _ = exec_cmd(python_cmd, env=env)
