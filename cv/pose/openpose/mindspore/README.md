@@ -26,8 +26,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
   ```
   coco2017
   ├── annotations
-  │   ├── instances_train2017.json
-  │   ├── instances_val2017.json
+  │   ├── instances_train2017.json
+  │   ├── instances_val2017.json
   │   └── ...
   ├── train2017
   │   ├── 000000000009.jpg
