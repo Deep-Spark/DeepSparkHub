@@ -15,7 +15,7 @@
 
 python3 -m torch.distributed.launch --nproc_per_node=8 --master_port 12333  \
   run_ner.py \
-  --model_name_or_path bert-base-uncased \
+  --model_name_or_path ./bert-base-uncased \
   --dataset_name conll2003 \
   --output_dir /tmp/test-ner \
   --do_train \
