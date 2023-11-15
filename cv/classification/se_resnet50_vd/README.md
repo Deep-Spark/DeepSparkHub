@@ -47,7 +47,6 @@ sed -i 's#^#train/#g' train_list.txt
 sed -i 's#^#val/#g' val_list.txt
 ```
 
-
 ## Step 3: Training
 
 ```
@@ -58,9 +57,9 @@ python3 -m paddle.distributed.launch --gpus="0,1,2,3" tools/train.py -c ./ppcls/
 
 ## Results
 
-| GPUS | ACC | FPS |
-| ---- | --- | --- |
-|      |     |     |
+| GPUS | ACC    | samples/s |
+| ---- | ------ | --------- |
+| 8    | 79.20% | 139.63    |
 
 ## Reference
 
