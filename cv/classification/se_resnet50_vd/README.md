@@ -9,9 +9,9 @@ The SENet structure is a weighted average between graph channels that can be emb
 ```
 pip3 install -r requirements.txt
 python3 -m pip install urllib3==1.26.6
-yum install libglvnd-glx-1.0.1-0.8.git5baa1e5.el7.x86_64
+yum install -y mesa-libGL
 
-git clone https://github.com/PaddlePaddle/PaddleClas.git
+git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
 ```
 
 ## Step 2: Preparing datasets
@@ -50,16 +50,16 @@ sed -i 's#^#val/#g' val_list.txt
 ## Step 3: Training
 
 ```
-cd PaddleClas
+cd PaddleClas/
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -m paddle.distributed.launch --gpus="0,1,2,3" tools/train.py -c ./ppcls/configs/ImageNet/SENet/SE_ResNet50_vd.yaml
 ```
 
 ## Results
 
-| GPUS | ACC    | samples/s |
+| GPUS | ACC    | FPS |
 | ---- | ------ | --------- |
-| 8    | 79.20% | 139.63    |
+| BI-V100 x8 | 79.20% | 139.63 samples/s |
 
 ## Reference
 
