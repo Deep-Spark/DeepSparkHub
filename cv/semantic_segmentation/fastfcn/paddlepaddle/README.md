@@ -43,10 +43,12 @@ cd PaddleClas
 ln -s /path/to/ADEChallengeData2016 ./data/ADEChallengeData2016
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 python3 -m paddle.distributed.launch --gpus=0,1,2,3,4,5,6,7 tools/train.py --config configs/fastfcn/fastfcn_resnet50_os8_ade20k_480x480_120k.yml
+# eval
+python3 tools/val.py  --config configs/fastfcn/fastfcn_resnet50_os8_ade20k_480x480_120k.yml --model_path output/path/to/model.pdparams
 ```
 
 ## Results on BI-V100
 
-| GPUs        | mIoU        | ips         |
-|:-----------:|:-----------:|:-----------:|
-| BI-V100 x 8 |0.436        | 33.68       |
+| GPUs        | mIoU        | Acc         |Kappa         | Dice         | ips         |
+|:-----------:|:-----------:|:-----------:|:------------:|:------------:|:-----------:|
+| BI-V100 x 8 |0.4312       | 0.8083      | 0.7935       | 0.570        | 33.68       |
