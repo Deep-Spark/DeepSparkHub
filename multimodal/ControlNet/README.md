@@ -41,9 +41,10 @@ python3 tool_add_control_sd21.py ./models/v2-1_512-ema-pruned.ckpt ./models/cont
 Just download the Fill50K dataset from [our huggingface page](https://huggingface.co/lllyasviel/ControlNet) (training/fill50k.zip, the file is only 200M!). Make sure that the data is decompressed as 
 
 ```bash
-ControlNet/training/fill50k/prompt.json
-ControlNet/training/fill50k/source/X.png
-ControlNet/training/fill50k/target/X.png
+training/
+└── fill50k
+    ├── source
+    └── target
 ```
 
 In the folder "fill50k/source", you will have 50k images of circle lines.
