@@ -36,8 +36,6 @@ Set data path by `export DATA_PATH=/path/to/imagenet`. The following command use
 bash train_dpn92_amp_dist.sh
 ```
 
-:beers: Done!
-
 
 ## Reference
 - [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)
