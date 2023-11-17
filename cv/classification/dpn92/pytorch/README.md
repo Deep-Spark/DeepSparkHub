@@ -25,8 +25,6 @@ imagenet
 └── val_list.txt
 ```
 
-:beers: Done!
-
 ## Step2: Training
 
 ### Multiple GPUs on one machine (AMP)
