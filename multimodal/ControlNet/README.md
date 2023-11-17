@@ -13,35 +13,38 @@ But it does not know the meaning of that "Control Image (Source Image)". Our tar
 ## Step 1: Installation
 
 - Install
-    ```bash
-    pip3 install open_clip_torch
-    pip3 install transformers
-    pip3 install einops
-    pip3 install omegaconf
-    pip3 install pytorch-lightning==1.9.5
 
-    ```
+```bash
+pip3 install open_clip_torch transformers einops omegaconf
+pip3 install pytorch-lightning==1.9.5
+pip3 install urllib3==1.26
+yum install -y mesa-libGL
+```
 - Build the Stable Difussion to control
-    You need to decide which Stable Diffusion Model you want to control. In this example, we will just use standard SD1.5. You can download it from the [official page of Stability](https://huggingface.co/runwayml/stable-diffusion-v1-5/tree/main). You want the file ["v1-5-pruned.ckpt"](https://huggingface.co/runwayml/stable-diffusion-v1-5/tree/main). (Or ["v2-1_512-ema-pruned.ckpt"](https://huggingface.co/stabilityai/stable-diffusion-2-1-base/tree/main) if you are using SD2.)
-    ```bash
-    # We provide a simple script for you to achieve this easily. 
+
+You need to decide which Stable Diffusion Model you want to control. In this example, we will just use standard SD1.5. You can download it from the [official page of Stability](https://huggingface.co/runwayml/stable-diffusion-v1-5/tree/main). You want the file ["v1-5-pruned.ckpt"](https://huggingface.co/runwayml/stable-diffusion-v1-5/tree/main). (Or ["v2-1_512-ema-pruned.ckpt"](https://huggingface.co/stabilityai/stable-diffusion-2-1-base/tree/main) if you are using SD2.)
+
+```bash
+# We provide a simple script for you to achieve this easily. 
     
-    #If your SD filename is "./models/v1-5-pruned.ckpt" and you want the script to save the processed model (SD+ControlNet) at location "./models/control_sd15_ini.ckpt", you can just run:
+#If your SD filename is "./models/v1-5-pruned.ckpt" and you want the script to save the processed model (SD+ControlNet) at location "./models/control_sd15_ini.ckpt", you can just run:
 
-    python3 tool_add_control.py ./models/v1-5-pruned.ckpt ./models/control_sd15_ini.ckpt
+python3 tool_add_control.py ./models/v1-5-pruned.ckpt ./models/control_sd15_ini.ckpt
 
-    # Or if you are using SD2:
+# Or if you are using SD2:
 
-    python tool_add_control_sd21.py ./models/v2-1_512-ema-pruned.ckpt ./models/control_sd21_ini.ckpt
+python3 tool_add_control_sd21.py ./models/v2-1_512-ema-pruned.ckpt ./models/control_sd21_ini.ckpt
     ```
 
 ## Step 2: Preparing datasets
 
 Just download the Fill50K dataset from [our huggingface page](https://huggingface.co/lllyasviel/ControlNet) (training/fill50k.zip, the file is only 200M!). Make sure that the data is decompressed as 
 
+```bash
     ControlNet/training/fill50k/prompt.json
     ControlNet/training/fill50k/source/X.png
     ControlNet/training/fill50k/target/X.png
+```
 
 In the folder "fill50k/source", you will have 50k images of circle lines.
 
@@ -59,3 +62,15 @@ python3 tutorial_train.py
 python3 tutorial_train_dist.py
 
 ```
+
+## Results
+
+GPUs | FPS
+---- | ---
+BI-V100 x8 |  5.02 s/it
+
+Go to `./image_log/train/` to check results of images.
+
+## Reference
+
+- [ControlNet](https://github.com/lllyasviel/ControlNet)
