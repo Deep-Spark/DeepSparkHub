@@ -24,7 +24,6 @@ imagenet
 └── val_list.txt
 ```
 
-:beers: Done!
 
 ## Step 2: Training
 ### One single GPU
