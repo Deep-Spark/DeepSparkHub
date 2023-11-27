@@ -26,7 +26,6 @@ imagenet
 └── val_list.txt
 ```
 
-:beers: Done!
 
 ## Step 2: Training
 ### Multiple GPUs on one machine (AMP)
@@ -36,7 +35,6 @@ Set data path by `export DATA_PATH=/path/to/imagenet`. The following command use
 bash train_resnest14_amp_dist.sh
 ```
 
-:beers: Done!
 
 
 ## Reference
