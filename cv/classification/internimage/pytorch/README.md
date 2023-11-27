@@ -72,7 +72,7 @@ python3 -m torch.distributed.launch --nproc_per_node 8 --master_port 12345  main
 # Training on 1 GPU
 export CUDA_VISIBLE_DEVICES=0
 export LOCAL_SIZE=1
-python3 -m torch.distributed.launch --nproc_per_node 1 --master_port 12345  main.py --cfg configs/internimage_t_1k_224.yaml --data-path /path/to/imagenet
+python3 main.py --cfg configs/internimage_t_1k_224.yaml --data-path /path/to/imagenet
 
 ```
 
