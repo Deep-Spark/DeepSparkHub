@@ -1,23 +1,23 @@
 # DeepFM
 
-## Step 1: Installing
+## Step 1: Installation
 
 ```bash
-git clone --recursive https://github.com/PaddlePaddle/PaddleRec.git
+git clone -b release/2.3.0  https://github.com/PaddlePaddle/PaddleRec.git
 cd PaddleRec
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Download data
+## Step 2: Preparing datasets
 
 ```bash
-cd PaddleRec
-cd datasets/criteo/
+pushd datasets/criteo/
 sh run.sh
+popd
 ```
 
 
-## Step 3: Run DeepFM
+## Step 3: Training
 
 ```bash
 cd models/rank/deepfm
@@ -29,3 +29,6 @@ python3 -u ../../../tools/trainer.py -m config_bigdata.yaml
 # Eval
 python3 -u ../../../tools/infer.py -m config_bigdata.yaml
 ```
+
+## Reference
+- [PaddleRec](https://github.com/PaddlePaddle/PaddleRec.git)
