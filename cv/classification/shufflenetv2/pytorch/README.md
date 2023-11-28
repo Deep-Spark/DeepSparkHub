@@ -24,7 +24,6 @@ imagenet
 └── val_list.txt
 ```
 
-:beers: Done!
 
 ## Step 2: Training
 ### Multiple GPUs on one machine
@@ -33,7 +32,6 @@ Set data path by `export DATA_PATH=/path/to/imagenet`. The following command use
 ```bash
 bash train_shufflenet_v2_x2_0_amp_dist.sh
 ```
-:beers: Done!
 
 
 ## Reference
