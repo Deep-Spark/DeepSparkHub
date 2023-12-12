@@ -51,6 +51,7 @@ sed -i 's/sklearn/scikit-learn/g' requirements/tests.txt
 sed -i 's/python /python3 /g' tools/dist_train.sh
 mv ../convex_assigner.py mmrotate/core/bbox/assigners/convex_assigner.py
 mv ../bbox_nms_rotated.py mmrotate/core/post_processing/bbox_nms_rotated.py
+mv ../schedule_1x.py configs/_base_/schedules/schedule_1x.py
 pip3 install -r requirements.txt
 pip3 install shapely
 python3 setup.py develop
