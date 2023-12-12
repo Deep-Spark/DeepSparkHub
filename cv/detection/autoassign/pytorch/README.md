@@ -15,9 +15,9 @@ $ MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpytho
 ## Step 2: Preparing datasets
 
 ```bash
-$ cd cv/detection/autoassign/pytorch
 $ apt install dos2unix
-$ mkdir -p data && cd data
+$ mkdir -p data 
+$ ln -s /path/to/coco/ ./data
 ```
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
