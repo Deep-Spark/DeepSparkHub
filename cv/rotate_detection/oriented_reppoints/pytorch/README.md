@@ -1,14 +1,6 @@
 # Oriented RepPoints
 
-> [Oriented RepPoints for Aerial Object Detection](https://openaccess.thecvf.com/content/CVPR2022/papers/Li_Oriented_RepPoints_for_Aerial_Object_Detection_CVPR_2022_paper.pdf)
-
-<!-- [ALGORITHM] -->
-
 ## Model description
-
-<div align=center>
-<img src="https://raw.githubusercontent.com/zytx121/image-host/main/imgs/oriented_reppoints.png" width="800"/>
-</div>
 
 In contrast to the generic object, aerial targets are often non-axis aligned with arbitrary orientations having
 the cluttered surroundings. Unlike the mainstreamed approaches regressing the bounding box orientations, this paper
@@ -21,7 +13,7 @@ able to capture the non-axis aligned features from adjacent objects or backgroun
 introduced to penalize the outlier points for roust adaptive learning. Experimental results on four challenging
 aerial datasets including DOTA, HRSC2016, UCAS-AOD and DIOR-R, demonstrate the efficacy of our proposed approach.
 
-## Installation
+## Step 1: Installation
 
 ```bash
 # Install mmcv
@@ -59,9 +51,9 @@ python3 setup.py develop
 pip3 install urllib3==1.26.6
 ```
 
-## Preparing datasets
+## Step 2: Preparing datasets
 
-## Get the DOTA dataset
+### Get the DOTA dataset
 
 The dota dataset can be downloaded from [here](https://captain-whu.github.io/DOTA/dataset.html).
 The data structure is as follows:
@@ -82,7 +74,7 @@ mmrotate/data/DOTA/
     └── labelTxt-v1.5
 ```
 
-## Split dota dataset
+### Split dota dataset
 
 Please crop the original images into 1024×1024 patches with an overlap of 200.
 
@@ -94,7 +86,7 @@ python3 tools/data/dota/split/img_split.py --base-json \
   tools/data/dota/split/split_configs/ss_test.json
 ```
 
-## Change root path in base config
+### Change root path in base config
 
 Please change `data_root` in `configs/_base_/datasets/dotav1.py` to split DOTA dataset.
 
@@ -103,7 +95,7 @@ sed -i 's#data/split_1024_dota1_0/#data/split_ss_dota/#g' configs/_base_/dataset
 ```
 
 
-##  Training
+## Step 3: Training
 
 
 ```bash
