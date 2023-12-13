@@ -13,7 +13,7 @@ bash setup.sh
 ## Step 2: Preparing data
 
 ```bash
-./weights/download_weights.sh
+bash weights/download_weights.sh
 ```
 
 ```bash
