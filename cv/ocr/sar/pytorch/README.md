@@ -18,8 +18,8 @@ pip3 install -r requirements.txt
 ## Step 2: Preparing datasets
 
 ```shell
-mkdir data/
-cd data/
+mkdir data
+ln -s /path/to/mixture ./data/
 ```
 
 Download datasets from this [page](https://mmocr.readthedocs.io/zh_CN/latest/datasets/recog.html),
