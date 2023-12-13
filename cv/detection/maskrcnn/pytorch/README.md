@@ -6,8 +6,7 @@ Nuclei segmentation is both an important and in some ways ideal task for modern 
 
 ## Step 1: Installing packages
 ```
-cd pytorch
-pip3 -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Step 2: Preparing datasets
