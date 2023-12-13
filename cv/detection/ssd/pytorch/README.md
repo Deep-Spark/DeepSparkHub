@@ -8,11 +8,6 @@ We present a method for detecting objects in images using a single deep neural n
 
 ### Download dataset
 
-```bash
-mkdir -p /home/data/perf/ssd
-cd /home/data/perf/ssd
-```
-
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
 Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
@@ -34,6 +29,12 @@ coco2017
 ├── train2017.txt
 ├── val2017.txt
 └── ...
+```
+
+```bash
+mkdir -p /home/data/perf/ssd
+cd /home/data/perf/ssd
+ln -s /path/to/coco/ /home/data/perf/ssd
 ```
 
 ### Download backbone
