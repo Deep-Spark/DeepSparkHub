@@ -24,6 +24,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
    - [Traffic Forecast](#traffic-forecast)
 
 - Graph Neural Network (GNN)
+
   - [Graph Attention](#graph-attention)
   - [Node Classification](#node-classification)
   - [Text Classification](#text-classification)
@@ -46,7 +47,9 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 - Recommendation
 
    - [Collaborative Filtering](#collaborative-filtering)
-   - [CTR](#ctr)
+   - [Click Through Rate](#click-through-rate)
+
+- Reinforement Learning(#reinforement-learning)
 
 - Speech
 
@@ -408,6 +411,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [BERT Question Answering](nlp/question_answering/bert/pytorch/README.md)  | PyTorch | SQuAD
 [GPT2-Medium-EN](nlp/llm/GPT/paddlepaddle/README.md)  | PaddlePaddle | SST-2
 [RoBERTa](nlp/language_model/roberta_fairseq/pytorch/README.md)  | PyTorch (Fairseq) | RTE
+[XLNet](nlp/language_model/xlnet/paddlepaddle/README.md)  | PaddlePaddle | SST-2
 
 #### Large Language Model (LLM)
 
@@ -440,13 +444,24 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 -------- | ------ | ---- 
 [NCF](recommendation/collaborative_filtering/ncf/pytorch/README.md)  | PyTorch | movielens
 
-#### CTR
+#### Click Through Rate
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [DLRM](recommendation/ctr/dlrm/pytorch/README.md)  | PyTorch | Criteo_Terabyte
+[DLRM](recommendation/ctr/dlrm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
+[FFM](recommendation/ctr/ffm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
 [DeepFM](recommendation/ctr/deepfm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
 [Wide&Deep](recommendation/ctr/wide_deep/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
+[xDeepFM](recommendation/ctr/xdeepfm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
+
+
+### Reinforement Learning
+
+模型名称 | 框架 | 数据集 
+-------- | ------ | ---- 
+[DQN](Reinforement_Learning/DQN/paddlepaddle/README.md)  | PaddlePaddle | CartPole-v0
+
 
 ### Speech
 
