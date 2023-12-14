@@ -24,7 +24,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
    - [Traffic Forecast](#traffic-forecast)
 
 - Graph Neural Network (GNN)
-  
+  - [Graph Attention](#graph-attention)
+  - [Node Classification](#node-classification)
   - [Text Classification](#text-classification)
 
 - High Performance Computing (HPC)
@@ -78,6 +79,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ECA_MobileNet_V2](cv/classification/eca_mobilenet_v2/pytorch/README.md)  | PyTorch | ImageNet
 [ECA_RESNET152](cv/classification/eca_resnet152/pytorch/README.md)  | PyTorch | ImageNet
 [Efficientb4](cv/classification/efficientb4/pytorch/README.md)  | PyTorch | ImageNet
+[EfficientNetB0](cv/classification/efficientnet_b0/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [FasterNet](cv/classification/fasternet/pytorch/README.md)  | PyTorch | ImageNet
 [GoogLeNet](cv/classification/googlenet/pytorch/README.md)  | PyTorch | ImageNet
 [GoogLeNet](cv/classification/googlenet/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
@@ -99,6 +101,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [RepVGG](cv/classification/repvgg/pytorch/README.md)  | PyTorch | ImageNet
 [RepVGG](cv/classification/repvgg/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [RepViT](cv/classification/repvit/pytorch/README.md)  | PyTorch | ImageNet
+[Res2Net50_14w_8s](cv/classification/Res2Net50_14w_8s/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [ResNeSt14](cv/classification/resnest14/pytorch/README.md)  | PyTorch | ImageNet
 [ResNeSt50](cv/classification/resnest50/pytorch/README.md)  | PyTorch | ImageNet
 [ResNeSt50](cv/classification/resnest50/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
@@ -113,6 +116,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ResNeXt50_32x4d](cv/classification/resnext50_32x4d/mindspore/README.md) | MindSpore | ImageNet
 [ResNeXt50_32x4d](cv/classification/resnext50_32x4d/pytorch/README.md)  | PyTorch | ImageNet
 [ResNeXt101_32x8d](cv/classification/resnext101_32x8d/pytorch/README.md)  | PyTorch | ImageNet
+[SE_ResNet50_vd](cv/classification/se_resnet50_vd/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [SEResNeXt](cv/classification/seresnext/pytorch/README.md)  | PyTorch | ImageNet
 [ShuffleNetV2](cv/classification/shufflenetv2/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [ShuffleNetV2](cv/classification/shufflenetv2/pytorch/README.md)  | PyTorch | ImageNet
@@ -124,6 +128,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [VGG16](cv/classification/vgg/tensorflow/README.md)  | TensorFlow | ImageNet
 [Wave-MLP](cv/classification/wavemlp/pytorch/README.md)  | PyTorch | ImageNet
 [Wide_ResNet101_2](cv/classification/wide_resnet101_2/pytorch/README.md)  | PyTorch | ImageNet
+[Xception](cv/classification/xception/paddlepaddle/README.md)  | PaddlePaddle | ImageNet
 [Xception](cv/classification/xception/pytorch/README.md)  | PyTorch | ImageNet
 
 #### Face Detection
@@ -137,6 +142,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [ArcFace](cv/face/arcface/pytorch/README.md)  | PyTorch | CASIA-WebFaces&LFW
+[BlazeFace](cv/face/blazeface/paddlepaddle/README.md)  | PaddlePaddle | WIDER-FACE
 [CosFace](cv/face/cosface/pytorch/README.md)  | PyTorch | CASIA-WebFaces&LFW
 [FaceNet](cv/face/facenet/pytorch/README.md)  | PyTorch | CASIA-WebFaces&LFW
 [FaceNet](cv/face/facenet/tensorflow/README.md) | TensorFlow | CASIA-WebFaces&LFW
@@ -155,6 +161,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [DCGAN](cv/image_generation/dcgan/mindspore/README.md)  | MindSpore | ImageNet
+[Pix2pix](cv/image_generation/Pix2pix/paddlepaddle/README.md)  | PaddlePaddle | facades
 
 #### Knowledge Distillation
 
@@ -189,6 +196,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [FCOS](cv/detection/fcos/pytorch/README.md)  | PyTorch | COCO
 [Mask R-CNN](cv/detection/maskrcnn/pytorch/README.md)  | PyTorch | COCO
 [Mask R-CNN](cv/detection/maskrcnn/paddlepaddle/README.md)  | PaddlePaddle | COCO
+[OC_SORT](cv/detection/oc_sort/paddlepaddle/README.md)  | PaddlePaddle | MOT17
 [Oriented RepPoints](cv/detection/oriented_reppoints/pytorch/README.md)  | PyTorch | DOTA
 [PP-PicoDet](cv/detection/picodet/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PP-YOLOE](cv/detection/pp-yoloe/paddlepaddle/README.md)  | PaddlePaddle | COCO
@@ -279,6 +287,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ENet](cv/semantic_segmentation/enet/pytorch/README.md)  | PyTorch | COCO
 [ERFNet](cv/semantic_segmentation/erfnet/pytorch/README.md)  | PyTorch | COCO
 [ESPNet](cv/semantic_segmentation/espnet/pytorch/README.md)  | PyTorch | COCO
+[FastFCN](cv/semantic_segmentation/fastfcn/paddlepaddle/README.md)  | PyTorch | ADE20K
 [FastSCNN](cv/semantic_segmentation/fastscnn/pytorch/README.md)  | PyTorch | COCO
 [FCN](cv/semantic_segmentation/fcn/pytorch/README.md)  | PyTorch | COCO
 [FPENet](cv/semantic_segmentation/fpenet/pytorch/README.md)  | PyTorch | COCO
@@ -292,11 +301,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [OCNet](cv/semantic_segmentation/ocnet/pytorch/README.md)  | PyTorch | COCO
 [OCRNet](cv/semantic_segmentation/ocrnet/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
 [OCRNet](cv/semantic_segmentation/ocrnet/pytorch/README.md)  | PyTorch | Cityscapes
+[PP-HumanSegV1](cv/semantic_segmentation/pp_humansegv1/paddlepaddle/README.md)  | PaddlePaddle | PP-HumanSeg14K
 [PP-HumanSegV2](cv/semantic_segmentation/pp_humansegv2/paddlepaddle/README.md)  | PaddlePaddle | PP-HumanSeg14K
 [PP-LiteSeg](cv/semantic_segmentation/pp_liteseg/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
 [PSANet](cv/semantic_segmentation/psanet/pytorch/README.md)  | PyTorch | COCO
 [RefineNet](cv/semantic_segmentation/refinenet/pytorch/README.md)  | PyTorch | COCO
 [SegNet](cv/semantic_segmentation/segnet/pytorch/README.md)  | PyTorch | COCO
+[STDC](cv/semantic_segmentation/stdc/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
 [STDC](cv/semantic_segmentation/stdc/pytorch/README.md)  | PyTorch | Cityscapes
 [UNet](cv/semantic_segmentation/unet/pytorch/README.md)  | PyTorch | COCO
 [UNet](cv/semantic_segmentation/unet/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
@@ -319,6 +330,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
+[ByteTrack](cv/tracking/bytetrack/paddlepaddle/README.md)  | PaddlePaddle | MOT17
 [FairMOT](cv/tracking/fairmot/pytorch/README.md)  | PyTorch | MOT17
 
 #### Traffic Forecast
@@ -329,12 +341,25 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### GNN
 
+#### Graph Attention
+
+模型名称 | 框架 | 数据集 
+-------- | ------ | ---- 
+[GAT](gnn/graph_attention/gat/paddlepaddle/README.md)  | PaddlePaddle | CORA
+
+#### Node Classification
+
+模型名称 | 框架 | 数据集 
+-------- | ------ | ---- 
+[GraphSAGE](gnn/node_classification/graphsage/paddlepaddle/README.md) | PaddlePaddle | Reddit
+
 #### Text Classification
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [GCN](gnn/text_classification/GCN/mindspore/README.md)  | MindSpore | CORA & Citeseer
 [GCN](gnn/text_classification/GCN/paddlepaddle/README.md) | PaddlePaddle | CORA & PubMed & Citeseer
+
 
 ### HPC
 
