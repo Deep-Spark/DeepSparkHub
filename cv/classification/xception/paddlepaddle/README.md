@@ -1,4 +1,4 @@
-# Xception41
+# Xception
 
 ## Model description
 
