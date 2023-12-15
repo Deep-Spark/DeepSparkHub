@@ -37,7 +37,7 @@ bash dist_train.sh <config file> <num_gpus> [training args]    # config file can
 ### Example
 
 ```shell
-bash dist_train.sh configs/esrgan_psnr_x4c64b23g32_g1_1000k_div2k.py 8
+bash dist_train.sh configs/restorers/liif/liif_edsr_norm_c64b16_g1_1000k_div2k.py 8
 ```
 ## Results on BI-V100
 
