@@ -1,4 +1,4 @@
-# [Learning Continuous Image Representation with Local Implicit Image Function](https://arxiv.org/abs/2012.09161)
+# LIIF[Learning Continuous Image Representation with Local Implicit Image Function]
 
 ## Model description
 
@@ -45,4 +45,5 @@ bash dist_train.sh <config file> <num_gpus> [training args]    # config file can
 
 ## Reference
 https://github.com/open-mmlab/mmediting
+https://arxiv.org/abs/2012.09161
 
