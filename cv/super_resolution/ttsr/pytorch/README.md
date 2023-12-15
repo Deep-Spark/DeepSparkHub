@@ -20,8 +20,10 @@ cd data
 # the folder would be like:
 data/CUFED/
 └── train
-    ├── input
-    └── ref
+├  ├── input
+├  └── ref
+└── test
+   └── CUFED5
 ```
 
 ## Step 3: Training
@@ -32,10 +34,8 @@ data/CUFED/
 CUDA_VISIBLE_DEVICES=${gpu_id_1,gpu_id_2,...} bash train.sh ${num_gpus}
 ```
 
-For example, GPU 5 and GPU 7 are available for use and you can use these two GPUs as follows:
-
 ```bash
-CUDA_VISIBLE_DEVICES=5,7 bash train.sh 2
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 bash train.sh 8
 ```
 
 ## Reference
