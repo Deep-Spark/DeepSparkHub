@@ -491,7 +491,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[NGP-NeRF](3d-reconstruction/ngp-nerf/pytorch/README.md)  | PyTorch | fox
+[HashNeRF](3d-reconstruction/ngp-nerf/pytorch/README.md)  | PyTorch | fox
 
 -------
 
