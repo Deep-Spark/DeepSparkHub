@@ -75,7 +75,7 @@ DeepSparkHub 23.12对应天数软件栈3.1.0版本。
 
 感谢以下人员做出的贡献：
 
-TBU
+majorli，songjian，may，jun.zhao，wz50525，gaiqin_bai，郝燕龙，巩亚飞，张文风，li.ding，Asltw，吴永乐，westnight，shengquan.nian，la。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
 
