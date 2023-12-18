@@ -5,27 +5,27 @@
 Scene text recognition (STR) is the task of recognizing character sequences in natural scenes. While there have been great advances in STR methods, current methods still fail to recognize texts in arbitrary shapes, such as heavily curved or rotated texts, which are abundant in daily life (e.g. restaurant signs, product labels, company logos, etc). This paper introduces a novel architecture to recognizing texts of arbitrary shapes, named Self-Attention Text Recognition Network (SATRN), which is inspired by the Transformer. SATRN utilizes the self-attention mechanism to describe two-dimensional (2D) spatial dependencies of characters in a scene text image. Exploiting the full-graph propagation of self-attention, SATRN can recognize texts with arbitrary arrangements and large inter-character spacing. As a result, SATRN outperforms existing STR models by a large margin of 5.7 pp on average in "irregular text" benchmarks. We provide empirical analyses that illustrate the inner mechanisms and the extent to which the model is applicable (e.g. rotated and multi-line text). We will open-source the code.
 
 
-## Step 1: Installing packages
+## Step 1: Installation
 
-```
-$ cd /satrn/pytorch/base/csrc
-$ bash clean.sh
-$ bash build.sh
-$ bash install.sh
-$ cd ..
-$ pip3 install -r requirements.txt
+```bash
+cd /satrn/pytorch/base/csrc
+bash clean.sh
+bash build.sh
+bash install.sh
+cd ..
+pip3 install -r requirements.txt
 ```
 
 ## Step 2: Preparing datasets
 
-```shell
-$ mkdir data
-$ cd data
+```bash
+mkdir data
+cd data
 ```
 
 Reffering to [MMOCR Docs](https://mmocr.readthedocs.io/zh_CN/dev-1.x/user_guides/data_prepare/datasetzoo.html) to prepare datasets. Datasets path would look like below:
 
-```
+```bash
 ├── mixture
 │   ├── coco_text
 │   │   ├── train_label.txt
@@ -99,13 +99,13 @@ Reffering to [MMOCR Docs](https://mmocr.readthedocs.io/zh_CN/dev-1.x/user_guides
 ## Step 3: Training
 
 ### Training on single card
-```shell
-$ python3 train.py configs/models/satrn_academic.py
+```bash
+python3 train.py configs/models/satrn_academic.py
 ```
 
 ### Training on mutil-cards
-```shell
-$ bash dist_train.sh configs/models/satrn_academic.py 8
+```bash
+bash dist_train.sh configs/models/satrn_academic.py 8
 ```
 
 ## Results on BI-V100
