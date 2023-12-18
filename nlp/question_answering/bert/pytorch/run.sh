@@ -15,7 +15,7 @@
 
 
 python3 run_qa.py \
-  --model_name_or_path bert-base-uncased \
+  --model_name_or_path ./bert-base-uncased \
   --dataset_name squad \
   --do_train \
   --do_eval \
