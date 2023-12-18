@@ -4,7 +4,7 @@
 
 Recognizing irregular text in natural scene images is challenging due to the large variance in text appearance, such as curvature, orientation and distortion. Most existing approaches rely heavily on sophisticated model designs and/or extra fine-grained annotations, which, to some extent, increase the difficulty in algorithm implementation and data collection. In this work, we propose an easy-to-implement strong baseline for irregular scene text recognition, using off-the-shelf neural network components and only word-level annotations. It is composed of a 31-layer ResNet, an LSTM-based encoder-decoder framework and a 2-dimensional attention module. Despite its simplicity, the proposed method is robust and achieves state-of-the-art performance on both regular and irregular scene text recognition benchmarks.
 
-## Step 1: Installing packages
+## Step 1: Installation
 
 ```shell
 cd csrc/
@@ -17,15 +17,14 @@ pip3 install -r requirements.txt
 
 ## Step 2: Preparing datasets
 
-```shell
+```bash
 mkdir data
-ln -s /path/to/mixture ./data/
+cd data
 ```
 
-Download datasets from this [page](https://mmocr.readthedocs.io/zh_CN/latest/datasets/recog.html),
-data folder would be like below:
+Reffering to [MMOCR Docs](https://mmocr.readthedocs.io/zh_CN/dev-1.x/user_guides/data_prepare/datasetzoo.html) to prepare datasets. Datasets path would look like below:
 
-```
+```bash
 ├── mixture
 │   ├── coco_text
 │   │   ├── train_label.txt
@@ -99,12 +98,12 @@ data folder would be like below:
 ## Step 3: Training
 
 ### Training on single card
-```shell
+```bash
 python3 train.py configs/sar_r31_parallel_decoder_academic.py
 ```
 
 ### Training on mutil-cards
-```shell
+```bash
 bash dist_train.sh configs/sar_r31_parallel_decoder_academic.py 8
 ```
 
