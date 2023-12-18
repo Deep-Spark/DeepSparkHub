@@ -1,6 +1,6 @@
-# Pix2pix
+# Pix2Pix
 ## Model description
-Pix2pix uses paired images for image translation, which has two different styles of the same image as input, can be used for style transfer. Pix2pix is encouraged by cGAN, cGAN inputs a noisy image and a condition as the supervision information to the generation network, Pix2pix uses another style of image as the supervision information input into the generation network, so the fake image is related to another style of image which is input as supervision information, thus realizing the process of image translation.
+Pix2Pix uses paired images for image translation, which has two different styles of the same image as input, can be used for style transfer. Pix2pix is encouraged by cGAN, cGAN inputs a noisy image and a condition as the supervision information to the generation network, Pix2pix uses another style of image as the supervision information input into the generation network, so the fake image is related to another style of image which is input as supervision information, thus realizing the process of image translation.
 
 ## Step 1: Installation
 ```bash
@@ -16,7 +16,7 @@ yum install mesa-libGL -y
 
 ## Step 2: Preparing datasets
 
-Datasets used by Pix2pix can be downloaded from [here](http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/).
+Datasets used by Pix2Pix can be downloaded from [here](http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/).
 
 ```bash
 wget http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/facades.tar.gz --no-check-certificate
