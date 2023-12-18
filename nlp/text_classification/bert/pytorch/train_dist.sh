@@ -17,7 +17,7 @@
 export TASK_NAME=WNLI
 python3  -m torch.distributed.launch --nproc_per_node=8 --master_port 12333 \
   run_glue.py \
-  --model_name_or_path bert-base-cased \
+  --model_name_or_path ./bert-base-cased \
   --task_name $TASK_NAME \
   --do_train \
   --do_eval \
