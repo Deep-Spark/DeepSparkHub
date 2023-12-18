@@ -1,5 +1,86 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 23.12 Release Notes
+
+### 特性和增强
+
+#### 模型与算法
+
+* 新增了30个算法模型。
+
+<table>
+    <tr><th colspan=6>PyTorch</th></tr>
+    <tr>
+        <td>ACNet</td>
+        <td>Co-DETR</td>
+        <td>ControlNet</td>
+        <td>DBNet++</td>
+        <td>DDPM</td>
+        <td>Efficient Conformer V2</td>
+    </tr>
+    <tr>
+        <td>Mask2Former</td>
+        <td>Oriented RepPoints</td>
+        <td>RepMLP</td>
+        <td>RepViT</td>
+        <td>RTMDet</td>
+        <td>SOLOv2</td>
+    </tr>
+    <tr><th colspan=6>PaddlePaddle</th></tr>
+    <tr>
+        <td>BlazeFace</td>
+        <td>ByteTrack</td>
+        <td>DLRM</td>
+        <td>DQN</td>
+        <td>EfficientNetB0</td>
+        <td>FastFCN</td>    
+    </tr>
+    <tr>
+        <td>FFM</td>
+        <td>GAT</td>
+        <td>GraphSAGE</td>
+        <td>Pix2Pix</td>
+        <td>PP-HumanSegV1</td>
+        <td>Res2Net50_14w_8s</td>
+    </tr>
+    <tr>
+        <td>SE_ResNet50_vd</td>
+        <td>STDC</td>
+        <td>PP-TTS-FastSpeech2</td>
+        <td>Xception41</td>
+        <td>xDeepFM</td>
+        <td>XLNet</td>
+     </tr>
+</table>
+
+* 新增了基于分布式训练框架的大语言模型训练示例。
+    * Megatron-DeepSpeed LLaMA2-7B
+
+### 问题修复
+
+- 修复了YOLOv5模型训练过程中数值类型报错问题。
+- 修复了ESRGAN，LIIF，TTSR模型配置文件路径问题。
+- 修复了YOLOv3模型安装脚本sudo报错问题。
+- 修复了SOLO模型依赖的yapf模块版本问题。
+- 修复了YOLOF模型mmcv版本兼容问题。
+- 改进了BERT系列模型对本地离线运行的支持。
+- 改进了MMDetection工具箱不同版本的安装流程。
+
+
+### 版本关联
+
+DeepSparkHub 23.12对应天数软件栈3.1.0版本。
+
+### 贡献者
+
+感谢以下人员做出的贡献：
+
+TBU
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
+---
+
 ## DeepSparkHub 23.09 Release Notes
 
 ### 特性和增强
