@@ -7,7 +7,7 @@ Far beyond learning long-range interactions of natural language, transformers ar
 ## Step 1: Installing packages
 
 ```
-pip3 install pudb "pytorch-lightning==1.5" einops regex ftfy cython webdataset==0.2.20 pillow wandb sklearn tensorboard
+pip3 install pudb "pytorch-lightning==1.5" einops regex ftfy cython webdataset==0.2.20 pillow wandb scikit-learn tensorboard
 ```
 
 ## Step 2: Preparing datasets
