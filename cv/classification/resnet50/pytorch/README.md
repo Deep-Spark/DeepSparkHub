@@ -2,10 +2,7 @@
 ## Model description
 Residual Networks, or ResNets, learn residual functions with reference to the layer inputs, instead of learning unreferenced functions. Instead of hoping each few stacked layers directly fit a desired underlying mapping, residual nets let these layers fit a residual mapping.
 
-## Step 1: Installing
-```bash
-pip3 install torch torchvision
-```
+## Step 1: Preparing
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
@@ -25,7 +22,7 @@ imagenet
 └── val_list.txt
 ```
 
-:beers: Done!
+
 
 ## Step 2: Training
 
