@@ -8,13 +8,12 @@ The diversity and complexity of degradations in real-world video super-resolutio
 ## Step 1: Installing packages
 
 ```shell
-sh build_env.sh
+bash build_env.sh
 ```
 
 ## Step 2: Preparing datasets
 
 ```shell
-cd /path/to/modelzoo/official/cv/super_resolution/basicVSR/pytorch
 
 # Download REDS
 mkdir -p data/REDS
@@ -46,6 +45,10 @@ python3 train.py <config file> [training args]   # config file can be found in t
 ```shell
 bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
+### Example
 
+```shell
+python3 train.py configs/real_basicvsr/realbasicvsr_wogan_c64b20_2x30x8_lr1e-4_300k_reds.py
+```
 ## Reference
 https://github.com/open-mmlab/mmediting

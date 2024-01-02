@@ -30,6 +30,11 @@ python3 train.py <config file> [training args]   # config file can be found in t
 ```shell
 bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
+### Example
+
+```shell
+bash dist_train.sh configs/TTVSR_reds4.py 8
+```
 
 ## Results on BI-V100
 

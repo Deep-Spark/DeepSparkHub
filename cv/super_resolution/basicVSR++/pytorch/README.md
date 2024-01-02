@@ -29,6 +29,11 @@ python3 train.py <config> [training args]    # config file can be found in the c
 ```shell
 bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
 ```
+### Example
+
+```shell
+bash dist_train.sh configs/basicvsr_plusplus/basicvsr_plusplus_c64n7_8x1_600k_reds4.py 8
+```
 
 ## Reference
 https://github.com/open-mmlab/mmediting
