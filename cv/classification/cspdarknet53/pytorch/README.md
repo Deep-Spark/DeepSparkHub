@@ -7,8 +7,6 @@ This is an implementation of CSPDarknet53 in pytorch.
 ## Step 1: Installing
 
 ```bash
-pip3 install torch
-pip3 install torchvision
 pip3 install torchsummary
 ```
 
