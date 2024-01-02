@@ -34,7 +34,8 @@ imagenet
 
 ```
 $ cd /path/to/L-Verse/pytorch
-$ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python3 train_vae.py --config ./configs/imagenet_augvae_ml.yaml --train_dir /path/to/imagenet/train --val_dir /home/datasets/cv/imagenet-mini/val --gpus 4 --batch_size 4 --epochs 2
+$ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 
+$ python3 train_vae.py --config ./configs/imagenet_augvae_ml.yaml --train_dir /path/to/imagenet/train --val_dir /path/to/imagenet/val --gpus 8 --batch_size 4 --epochs 2
 ```
 
 ## Reference
