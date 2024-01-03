@@ -19,8 +19,9 @@ unzip VCTK-Corpus-0.92.zip
 ```shell
 cd ${DEEPSPARKHUB_ROOT}/speech/speech_synthesis/vqmivc/pytorch/
 pip3 install -r requirements_bi.txt
-ln -s /home/data/vqmivc/data data
+ln -s /home/data/vqmivc .
 python3 preprocess.py
+ln -s vqmivc/data .
 ```
 
 ## Step 3: Training
@@ -28,6 +29,7 @@ python3 preprocess.py
 * Training with mutual information minimization (MIM):
 
 ```shell
+export HYDRA_FULL_ERROR=1
 python3 train.py use_CSMI=True use_CPMI=True use_PSMI=True
 ```
 
