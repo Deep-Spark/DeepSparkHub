@@ -9,7 +9,7 @@ Contrastive Language-Image Pre-training (CLIP), consisting of a simplified versi
 
 ```shell
 cd multimodal/Language-Image_Pre-Training/clip/pytorch
-pip3 install ftfy regex tqdm pytorch torchvision
+pip3 install ftfy regex tqdm
 ```
 
 ## Step 2: Preparing datasets
