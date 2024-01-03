@@ -46,9 +46,9 @@ cityscapes/
 # Datasets preprocessing
 pip3 install cityscapesscripts
 
-python3 tools/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
+python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
 
-python3 tools/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
+python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 
 # CityScapes PATH as follow:
 ls -al /path/to/cityscapes
