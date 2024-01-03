@@ -13,6 +13,9 @@ On top of the two paths, we introduce a new Feature Fusion Module to combine fea
 git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
 cd PaddleSeg
 pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 
+pip3 install urllib3==1.26.6
+yum install mesa-libGL
 ```
 
 ## Step 2: Download data
