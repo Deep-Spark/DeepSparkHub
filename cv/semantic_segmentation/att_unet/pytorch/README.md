@@ -65,7 +65,7 @@ ln -s /path/to/cityscapes data/
 bash train_dist.sh <config file> <num_gpus> [training args]
 
 # Example
-bash train_dist.sh configs/attunet/attunet_res34_512x1024_160k_cityscapes.py 8
+bash train_dist.sh configs/att_unet/attunet_r34_512x1024_160k_cityscapes.py 8
 ```
 
 **Training arguments are as follows:**
