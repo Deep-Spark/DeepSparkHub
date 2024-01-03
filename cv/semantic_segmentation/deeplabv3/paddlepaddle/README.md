@@ -11,6 +11,9 @@ To handle the problem of segmenting objects at multiple scales, modules are desi
 git clone --recursive https://github.com/PaddlePaddle/PaddleSeg.git
 cd PaddleSeg
 pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 
+pip3 install urllib3==1.26.6
+yum install mesa-libGL
 ```
 
 ## Step 2: Download data
@@ -44,9 +47,9 @@ cityscapes/
 # Datasets preprocessing
 pip3 install cityscapesscripts
 
-python3 tools/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
+python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
 
-python3 tools/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
+python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 # CityScapes PATH as follow:
 ls -al /path/to/cityscapes
 total 11567948
