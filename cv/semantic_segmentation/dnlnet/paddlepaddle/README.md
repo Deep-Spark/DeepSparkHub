@@ -6,12 +6,12 @@
 
 ## Step 1: Installing
 ```
-git clone https://github.com/PaddlePaddle/PaddleSeg.git
-```
-
-```
+git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
 cd PaddleSeg
 pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 
+pip3 install urllib3==1.26.6
+yum install mesa-libGL
 ```
 
 ## Step 2: Prepare Datasets
@@ -45,9 +45,9 @@ Datasets preprocessing:
 ```bash
 pip3 install cityscapesscripts
 
-python3 tools/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
+python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
 
-python3 tools/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
+python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 ```
 
 then the cityscapes path as follows:
