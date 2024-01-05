@@ -49,7 +49,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
    - [Collaborative Filtering](#collaborative-filtering)
    - [Click Through Rate](#click-through-rate)
 
-- [Reinforement Learning](#reinforement-learning)
+- [Reinforcement Learning](#reinforcement-learning)
 
 - Speech
 
