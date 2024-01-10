@@ -47,8 +47,7 @@ coco2014
 ## Step 3: Training
 
 ### 8 GPUs on one machine
-1. Set 'image_root' in configs/caption_coco.yaml to '/path/to/coco2014/'
-2. 
+Set 'image_root' in configs/caption_coco.yaml to '/path/to/coco2014/'
 ```bash
 rm -rf train_caption.py
 mv ../train_caption.py .
@@ -56,7 +55,7 @@ python3 -m torch.distributed.run --nproc_per_node=8 train_caption.py
 ```
 ## Step 4: Evaluting
 
-1. Set 'pretrained' in configs/caption_coco.yaml to 'output/Caption_coco/checkpoint_best.pth'
+Set 'pretrained' in configs/caption_coco.yaml to 'output/Caption_coco/checkpoint_best.pth'
 ```bash
 python3 -m torch.distributed.run --nproc_per_node=8 train_caption.py --evaluate
 ```
@@ -66,3 +65,6 @@ python3 -m torch.distributed.run --nproc_per_node=8 train_caption.py --evaluate
 | GPUS      |    Bleu score                 |
 | ----------| ------------------------------|
 | BI V100×8 |                               |
+
+## Reference
+https://github.com/salesforce/BLIP
