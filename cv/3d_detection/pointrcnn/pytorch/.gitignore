@@ -3,7 +3,8 @@
 /output
 *.cu.o
 /data
-**/build_*
+**/build
+**/build_pip
 *.png
 **/*.egg-info
 **/dist
