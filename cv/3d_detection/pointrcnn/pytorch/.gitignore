@@ -1,0 +1,10 @@
+*__pycache__*
+*_ext*
+/output
+*.cu.o
+/data
+**/build_*
+*.png
+**/*.egg-info
+**/dist
+tools/gt_database/
