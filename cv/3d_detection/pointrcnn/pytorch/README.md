@@ -28,7 +28,7 @@ cd ..
 Download the kitti dataset from <http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>
 
 Download the "planes" subdataset from <https://drive.google.com/file/d/1d5mq0RXRnvHPVeKx6Q612z0YRO1t2wAp/view?usp=sharing>
-
+```
 PointRCNN
 ├── data
 │   ├── KITTI
@@ -41,6 +41,7 @@ PointRCNN
 ├── lib
 ├── pointnet2_lib
 ├── tools
+```
 ```bash
 cd tools
 python3 generate_gt_database.py --class_name 'Car' --split train
@@ -82,4 +83,4 @@ python3 eval_rcnn.py --cfg_file cfgs/default.yaml --ckpt ../output/rcnn/default/
 
 
 ## Reference
-https://github.com/sshaoshuai/PointRCNN
+- [PointRCNN](https://github.com/sshaoshuai/PointRCNN)

@@ -2,7 +2,9 @@
 *_ext*
 /output
 *.cu.o
-/data
+aug_scene
+object
+train_planes.zip
 **/build
 **/build_pip
 *.png
