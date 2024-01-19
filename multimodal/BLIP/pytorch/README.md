@@ -9,10 +9,12 @@ Vision-Language Pre-training (VLP) has advanced the performance for many vision-
 
 ```bash
 yum install mesa-libGL
+yum install -y java-1.8.0-openjdk
 git clone https://github.com/salesforce/BLIP.git
 cd BLIP
 pip3 install -r requirements.txt
 pip3 install ruamel_yaml
+pip3 install urllib3==1.26.6
 ```
 ## Step 2: Preparing datasets
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO2014 dataset.
@@ -32,7 +34,6 @@ coco2014
 │   ├── COCO_val2014_000000000042.jpg
 │   ├── COCO_val2014_000000000073.jpg
 │   └── ...
-├── train2017.txt 
 ├── labels
 │   ├── train2014
 │       ├── COCO_train2014_000000000009.txt
@@ -62,9 +63,9 @@ python3 -m torch.distributed.run --nproc_per_node=8 train_caption.py --evaluate
 
 ## Results
 
-| GPUS      |    Bleu score                 |
-| ----------| ------------------------------|
-| BI V100×8 |                               |
+| GPUS      |    Bleu score                                              | train performance|
+| ----------| -----------------------------------------------------------|------------------|
+| BI V100×8 |  Bleu_1: 0.797, Bleu_2: 0.644,Bleu_3: 0.503, ,Bleu_4: 0.388|   1.9790 s / it  |
 
 ## Reference
-https://github.com/salesforce/BLIP
+- [BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation](https://github.com/salesforce/BLIP)
