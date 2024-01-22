@@ -1,5 +1,5 @@
 *__pycache__*
-*_ext*
+*build_ext*
 /output
 *.cu.o
 aug_scene
