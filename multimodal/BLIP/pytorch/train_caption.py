@@ -1,12 +1,13 @@
 '''
  * Copyright (c) 2022, salesforce.com, inc.
  * All rights reserved.
+ * Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+ * All Rights Reserved.
  * SPDX-License-Identifier: BSD-3-Clause
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  * By Junnan Li
 '''
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
+
 import argparse
 import os
 import ruamel.yaml as YAML
