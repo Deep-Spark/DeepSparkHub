@@ -49,12 +49,14 @@ coco2014
 
 ### 8 GPUs on one machine
 Set 'image_root' in configs/caption_coco.yaml to '/path/to/coco2014/'
+
 ```bash
 rm -rf train_caption.py
 mv ../train_caption.py .
 python3 -m torch.distributed.run --nproc_per_node=8 train_caption.py 
 ```
-## Step 4: Evaluting
+
+## Step 4: Evaluation
 
 Set 'pretrained' in configs/caption_coco.yaml to 'output/Caption_coco/checkpoint_best.pth'
 ```bash
@@ -63,9 +65,9 @@ python3 -m torch.distributed.run --nproc_per_node=8 train_caption.py --evaluate
 
 ## Results
 
-| GPUS      |    Bleu score                                              | train performance|
+| GPUs      |    Bleu score                                              | Training performance|
 | ----------| -----------------------------------------------------------|------------------|
 | BI V100×8 |  Bleu_1: 0.797, Bleu_2: 0.644,Bleu_3: 0.503, ,Bleu_4: 0.388|   1.9790 s / it  |
 
 ## Reference
-- [BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation](https://github.com/salesforce/BLIP)
+- [BLIP](https://github.com/salesforce/BLIP)
