@@ -376,6 +376,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
+[BLIP](multimodal/BLIP/pytorch/README.md)  | PyTorch | COCO
 [CLIP](multimodal/Language-Image_Pre-Training/clip/pytorch/README.md)  | PyTorch | CIFAR100
 [ControlNet](multimodal/diffusion/ControlNet/README.md)  | PyTorch | Fill50K
 [DDPM](multimodal/diffusion/ddpm/README.md)  | PyTorch | CIFAR-10
