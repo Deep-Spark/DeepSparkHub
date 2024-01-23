@@ -236,6 +236,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [CRNN](cv/ocr/crnn/mindspore/README.md)  | MindSpore | OCR_Recog
 [CRNN](cv/ocr/crnn/paddlepaddle/README.md)  | PaddlePaddle | LMDB
 [DBNet](cv/ocr/dbnet/pytorch/README.md)  | PyTorch | ICDAR2015
+[DBNet++](cv/ocr/dbnetpp/paddlepaddle/README.md)  | PaddlePaddle | ICDAR2015
 [DBNet++](cv/ocr/dbnetpp/pytorch/README.md)  | PyTorch | ICDAR2015
 [PP-OCR-DB](cv/ocr/pp-ocr-db/paddlepaddle/README.md)  | PaddlePaddle | ICDAR2015
 [PSE](cv/ocr/pse/paddlepaddle/README.md)  | PaddlePaddle | OCR_Recog
