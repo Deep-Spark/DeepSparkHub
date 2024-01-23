@@ -16,6 +16,7 @@ dist/
 *.pth
 
 *.idea
+*.log
 
 # Docker
 *.run
