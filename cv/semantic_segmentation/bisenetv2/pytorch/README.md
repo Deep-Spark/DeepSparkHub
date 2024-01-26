@@ -29,5 +29,4 @@ $ bash train.sh {num_gpus} configs/bisenetv2_city.py
 
 
 * Reference
-
-https://github.com/CoinCheung/BiSeNet/tree/master
+[BiSeNet](https://github.com/CoinCheung/BiSeNet/tree/master)  
