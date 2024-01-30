@@ -1,0 +1,60 @@
+# Megatron-DeepSpeed LLaMA2-7B SFT
+
+## Model description
+
+LLaMA2 is a large language model released by Meta in 2023, with parameters ranging from 7B to 70B. Compared to LLaMA, the training corpus of LLaMA2 is 40% longer, and the context length has been upgraded from 2048 to 4096, allowing for understanding and generating longer texts.
+
+## Step 1: Installation
+
+```
+# Install sqlite3
+wget https://sqlite.org/2019/sqlite-autoconf-3290000.tar.gz
+tar zxvf sqlite-autoconf-3290000.tar.gz
+cd sqlite-autoconf-3290000
+./configure
+make && make install
+cd ..
+
+wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tar.xz
+tar xvf Python-3.7.9.tar.xz
+cd Python-3.7.9
+./configure LDFLAGS="-L/usr/local/lib" CPPFLAGS="-I/usr/local/include" --prefix=/usr/bin
+make && make install
+
+cp /usr/bin/lib/python3.7/lib-dynload/_sqlite3.cpython-37m-x86_64-linux-gnu.so /usr/local/lib/python3.7/lib-dynload/_sqlite3.so
+```
+
+```
+bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
+```
+
+## Step 2: Preparing datasets
+
+```
+cd dataset
+bash download_and_convert_dataset.sh
+```
+
+## Step 3: Download and convert HF weight
+
+You can download huggingface llama2-7b pretrained model from [here](https://huggingface.co/meta-llama/Llama-2-7b), and use below script to convert it.
+
+```
+cd checkpoints
+bash convert_hf_2_meg.sh
+```
+
+## Step 4: Training
+
+```
+cd examples/llama2
+bash run_meg_llama2_7b_sft.sh
+```
+
+If the torchrun command cannot be found，you can execute:
+
+```
+ln -s /usr/local/corex-3.1.0/lib64/python3/dist-packages/bin/torchrun /usr/local/bin/
+```
+
+## Results
