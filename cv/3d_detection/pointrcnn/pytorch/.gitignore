@@ -1,0 +1,14 @@
+*__pycache__*
+*build_ext*
+/output
+*.cu.o
+aug_scene
+object
+train_planes.zip
+**/build
+**/build_pip
+*.png
+**/*.egg-info
+**/dist
+tools/gt_database/
+*.log
