@@ -11,3 +11,4 @@ train_planes.zip
 **/*.egg-info
 **/dist
 tools/gt_database/
+*.log

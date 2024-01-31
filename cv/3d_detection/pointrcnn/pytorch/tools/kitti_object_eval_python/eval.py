@@ -1,3 +1,6 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
+
 import numpy as np
 import numba
 import io as sysio

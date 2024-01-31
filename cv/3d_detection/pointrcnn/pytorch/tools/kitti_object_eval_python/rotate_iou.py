@@ -2,6 +2,8 @@
 # Based on https://github.com/hongzhenwang/RRPN-revise
 # Licensed under The MIT License
 # Author: yanyan, scrin@foxmail.com
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 #####################
 import math
 

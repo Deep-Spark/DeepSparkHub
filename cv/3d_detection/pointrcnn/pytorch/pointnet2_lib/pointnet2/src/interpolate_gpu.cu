@@ -1,3 +1,6 @@
+// Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+// All Rights Reserved.
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>

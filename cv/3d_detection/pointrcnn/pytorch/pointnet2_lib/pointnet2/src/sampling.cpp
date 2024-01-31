@@ -1,3 +1,6 @@
+// Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+// All Rights Reserved.
+
 #include <torch/serialize/tensor.h>
 #include <ATen/cuda/CUDAContext.h>
 #include <ATen/cuda/CUDAEvent.h>

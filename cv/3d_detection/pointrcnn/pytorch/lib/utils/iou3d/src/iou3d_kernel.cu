@@ -2,6 +2,8 @@
 3D IoU Calculation and Rotated NMS(modified from 2D NMS written by others)
 Written by Shaoshuai Shi
 All Rights Reserved 2018. 
+Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+All Rights Reserved.
 */
 
 #include <stdio.h>
