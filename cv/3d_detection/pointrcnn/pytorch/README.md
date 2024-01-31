@@ -13,7 +13,7 @@ pip3 install easydict tensorboardX shapely fire scikit-image
 bash build_and_install.sh
 
 ## install numba
-pushd numba
+pushd numba/
 bash clean_numba.sh
 bash build_numba.sh
 bash install_numba.sh
@@ -42,7 +42,7 @@ PointRCNN
 
 Generate gt database
 ```bash
-pushd tools
+pushd tools/
 python3 generate_gt_database.py --class_name 'Car' --split train
 popd
 ```
@@ -52,7 +52,7 @@ popd
 ### Training of RPN stage
 
 ```bash
-cd tools
+pushd tools/
 
 # Single GPU training
 export CUDA_VISIBLE_DEVICES=0
@@ -60,24 +60,33 @@ python3 train_rcnn.py --cfg_file cfgs/default.yaml --batch_size 16 --train_mode 
 
 # Multiple GPU training
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python3 train_rcnn.py --cfg_file cfgs/default.yaml --batch_size 32 --train_mode rpn --epochs 200 --mgpus
+
+popd
 ```
 
 ### Training of RCNN stage
 
 ```bash
+pushd tools/
+
 # Single GPU training
 export CUDA_VISIBLE_DEVICES=0
 python3 train_rcnn.py --cfg_file cfgs/default.yaml --batch_size 32 --train_mode rcnn --epochs 70  --ckpt_save_interval 2 --rpn_ckpt ../output/rpn/default/ckpt/checkpoint_epoch_200.pth
 
 # Multiple GPU training
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python3 train_rcnn.py --cfg_file cfgs/default.yaml --batch_size 32 --train_mode rcnn --epochs 70  --ckpt_save_interval 2 --rpn_ckpt ../output/rpn/default/ckpt/checkpoint_epoch_200.pth --mgpus
+
+popd
 ```
 ## Step 4: Evaluation
 
 ```bash
-cd tools
+pushd tools/
+
 python3 eval_rcnn.py --cfg_file cfgs/default.yaml --ckpt ../output/rpn/default/ckpt/checkpoint_epoch_200.pth --batch_size 4 --eval_mode rpn 
 python3 eval_rcnn.py --cfg_file cfgs/default.yaml --ckpt ../output/rcnn/default/ckpt/checkpoint_epoch_70.pth --batch_size 4 --eval_mode rcnn
+
+popd
 ```
 
 ## Results
