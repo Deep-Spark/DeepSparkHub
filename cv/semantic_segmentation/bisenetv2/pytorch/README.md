@@ -1,4 +1,4 @@
-# BiSeNet
+SeNet
 
 ## Model description
 
@@ -9,11 +9,21 @@ BiSeNet V2 is a two-pathway architecture for real-time semantic segmentation. On
 
 ```shell
 $ pip3 install -r requirements.txt
+$ yum install mesa-libGL -y  # if libGL.so.1 error
 ```
 
 ## Step 2: Preparing datasets
 
+### first
 Download cityscapes from [website](https://www.cityscapes-dataset.com/)
+### second
+```bash
+$ mv /path/to/leftImg8bit_trainvaltest.zip datasets/cityscapes
+$ mv /path/to/gtFine_trainvaltest.zip datasets/cityscapes
+$ cd datasets/cityscapes
+$ unzip leftImg8bit_trainvaltest.zip
+$ unzip gtFine_trainvaltest.zip
+```
 
 ## Step 3: Training
 
@@ -29,4 +39,5 @@ $ bash train.sh {num_gpus} configs/bisenetv2_city.py
 
 
 * Reference
-[BiSeNet](https://github.com/CoinCheung/BiSeNet/tree/master)  
+[BiSeNet](https://github.com/CoinCheung/BiSeNet/tree/master)
+
