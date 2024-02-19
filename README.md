@@ -273,6 +273,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Attention U-net](cv/semantic_segmentation/att_unet/pytorch/README.md)  | PyTorch | Cityscapes
 [BiSeNet](cv/semantic_segmentation/bisenet/pytorch/README.md)  | PyTorch | COCO
 [BiSeNetV2](cv/semantic_segmentation/bisenetv2/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
+[BiSeNetV2](cv/semantic_segmentation/bisenetv2/pytorch/README.md)  | PyTorch | Cityscapes
 [CGNet](cv/semantic_segmentation/cgnet/pytorch/README.md)  | PyTorch | COCO
 [ContextNet](cv/semantic_segmentation/contextnet/pytorch/README.md)  | PyTorch | COCO
 [DabNet](cv/semantic_segmentation/dabnet/pytorch/README.md)  | PyTorch | COCO
