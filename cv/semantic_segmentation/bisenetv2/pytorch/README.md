@@ -39,5 +39,5 @@ bash train.sh 8 configs/bisenetv2_city.py
 | BiSeNetV2 | 156.81 s/it | 73.42 | 74.67 | 74.99 | 75.71 |
 
 * Reference
-[BiSeNet](https://github.com/CoinCheung/BiSeNet)
+[BiSeNet](https://github.com/CoinCheung/BiSeNet/tree/master)
 
