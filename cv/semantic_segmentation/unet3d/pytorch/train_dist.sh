@@ -31,7 +31,7 @@ if [ ! -d ${SAVE_CKPT} ]; then
 fi
 
 python3 -u -m torch.distributed.launch --nproc_per_node=${NUM_GPUS} \
-main.py --data_dir data/kits19/train \
+--use_env main.py --data_dir data/kits19/train \
 --epochs ${MAX_EPOCHS} \
 --evaluate_every ${EVALUATE_EVERY} \
 --start_eval_at ${START_EVAL_AT} \
