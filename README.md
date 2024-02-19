@@ -203,6 +203,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Oriented RepPoints](cv/detection/oriented_reppoints/pytorch/README.md)  | PyTorch | DOTA
 [PP-PicoDet](cv/detection/picodet/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PP-YOLOE](cv/detection/pp-yoloe/paddlepaddle/README.md)  | PaddlePaddle | COCO
+[PP-YOLOE+](cv/detection/pp_yoloe+/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PVANet](cv/detection/pvanet/pytorch/README.md)  | PyTorch | COCO
 [RepPoints](cv/detection/reppoints_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
 [RetinaNet](cv/detection/retinanet/pytorch/README.md)  | PyTorch | COCO
