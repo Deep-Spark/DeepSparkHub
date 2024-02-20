@@ -38,7 +38,7 @@ mv Llama-2-7b-hf/ datasets/
 Fine-tuning
 
 ```bash
-cd training/step2_reward_model_finetuning/
+cd training/step2_reward_model_finetuning/training_scripts/llama2/
 bash ./run_llama2_7b.sh
 ```
 
