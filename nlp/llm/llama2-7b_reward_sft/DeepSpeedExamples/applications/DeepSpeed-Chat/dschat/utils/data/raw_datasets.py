@@ -1,4 +1,6 @@
 # Copyright (c) Microsoft Corporation.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
 import os
