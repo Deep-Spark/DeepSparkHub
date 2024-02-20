@@ -423,6 +423,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
 [LLaMA-7B](nlp/llm/llama-7b/colossalai/README.md)  | PyTorch (Colossal-AI) | llama-7b-hf
 [LLaMA2-7B](nlp/llm/llama2-7b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
+[LLaMA2-7B Reward Model Finetuning](nlp/llm/llama2-7b_reward_sft/deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Dahoas/rm-static
 [LLaMA2-7B SFT](nlp/llm/llama2-7b_sft/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | gpt_small-117M
 
 #### Text Correction
