@@ -15,10 +15,10 @@ if [ "$ZERO_STAGE" == "" ]; then
 fi
 mkdir -p $OUTPUT
 
-deepspeed main.py \
-   --data_path "/home/datasets/nlp/Dahoas/rm-static/data" \
+deepspeed ../../main.py \
+   --data_path "../../../../datasets/Dahoas/rm-static/" \
    --data_split 2,4,4 \
-   --model_name_or_path /home/model_zoo/nlp/Llama-2-7b-hf \
+   --model_name_or_path "../../../../datasets/Llama-2-7b-hf/" \
    --per_device_train_batch_size 8 \
    --per_device_eval_batch_size 8 \
    --max_seq_len 512 \
