@@ -1,0 +1,24 @@
+# configuration file used by run_coverage.py
+[run]
+branch = True
+source = numba
+concurrency = multiprocessing
+parallel = True
+
+[report]
+
+omit =
+    */__main__.py
+    # Vendored packages
+    numba/misc/appdirs.py
+    numba/cloudpickle/__init__.py
+    numba/cloudpickle/cloudpickle.py
+    numba/cloudpickle/cloudpickle_fast.py
+    numba/cloudpickle/compat.py
+    numba/_version.py
+
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+
+[html]

@@ -1,0 +1,2 @@
+tabulate
+urllib3==1.25.10
