@@ -216,6 +216,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [YOLOv3](cv/detection/yolov3/pytorch/README.md)  | PyTorch | COCO
 [YOLOv3](cv/detection/yolov3/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [YOLOv3](cv/detection/yolov3/tensorflow/README.md)  | TensorFlow | VOC
+[YOLOv5](cv/detection/yolov5/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [YOLOv5](cv/detection/yolov5/pytorch/README.md)  | PyTorch | COCO
 [YOLOv6](cv/detection/yolov6/pytorch/README.md)  | PyTorch | COCO
 [YOLOv7](cv/detection/yolov7/pytorch/README.md)  | PyTorch | COCO
