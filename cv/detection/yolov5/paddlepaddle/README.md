@@ -32,7 +32,7 @@ python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c ${
 
 ## Results
 GPUs|Model|FPS|ACC
-----|---|---
+----|---|---|---
 BI-V100 x8|YOLOv5-n| 10.9788 images/s | bbox ap: 0.259
 
 ## Reference
