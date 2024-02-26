@@ -203,6 +203,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Oriented RepPoints](cv/detection/oriented_reppoints/pytorch/README.md)  | PyTorch | DOTA
 [PP-PicoDet](cv/detection/picodet/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PP-YOLOE](cv/detection/pp-yoloe/paddlepaddle/README.md)  | PaddlePaddle | COCO
+[PP-YOLOE+](cv/detection/pp_yoloe+/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [PVANet](cv/detection/pvanet/pytorch/README.md)  | PyTorch | COCO
 [RepPoints](cv/detection/reppoints_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
 [RetinaNet](cv/detection/retinanet/pytorch/README.md)  | PyTorch | COCO
@@ -216,6 +217,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [YOLOv3](cv/detection/yolov3/pytorch/README.md)  | PyTorch | COCO
 [YOLOv3](cv/detection/yolov3/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [YOLOv3](cv/detection/yolov3/tensorflow/README.md)  | TensorFlow | VOC
+[YOLOv5](cv/detection/yolov5/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [YOLOv5](cv/detection/yolov5/pytorch/README.md)  | PyTorch | COCO
 [YOLOv6](cv/detection/yolov6/pytorch/README.md)  | PyTorch | COCO
 [YOLOv7](cv/detection/yolov7/pytorch/README.md)  | PyTorch | COCO
@@ -226,6 +228,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
 [BEVFormer](cv/3d_detection/BEVFormer/pytorch/README.md)  | PyTorch | nuScenes&CAN bus
+[CenterPoint](cv/3d_detection/centerpoint/pytorch/README.md)  | PyTorch | nuScenes
 [PAConv](cv/3d_detection/PAConv/pytorch/README.md)  | PyTorch | S3DIS
 [PointNet++](cv/3d_detection/pointnet2/pytorch/mmdetection3d/README.md)  | PyTorch | S3DIS
 [PointPillars](cv/3d_detection/pointpillars/pytorch/README.md)  | PyTorch | KITTI
@@ -240,6 +243,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [DBNet++](cv/ocr/dbnetpp/paddlepaddle/README.md)  | PaddlePaddle | ICDAR2015
 [DBNet++](cv/ocr/dbnetpp/pytorch/README.md)  | PyTorch | ICDAR2015
 [PP-OCR-DB](cv/ocr/pp-ocr-db/paddlepaddle/README.md)  | PaddlePaddle | ICDAR2015
+[PP-OCR-EAST](cv/ocr/pp-ocr-east/paddlepaddle/README.md)  | PaddlePaddle | ICDAR2015
 [PSE](cv/ocr/pse/paddlepaddle/README.md)  | PaddlePaddle | OCR_Recog
 [SAR](cv/ocr/sar/pytorch/README.md)  | PyTorch | OCR_Recog
 [SATRN](cv/ocr/satrn/pytorch/base/README.md)  | PyTorch | OCR_Recog
@@ -274,6 +278,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Attention U-net](cv/semantic_segmentation/att_unet/pytorch/README.md)  | PyTorch | Cityscapes
 [BiSeNet](cv/semantic_segmentation/bisenet/pytorch/README.md)  | PyTorch | COCO
 [BiSeNetV2](cv/semantic_segmentation/bisenetv2/paddlepaddle/README.md)  | PaddlePaddle | Cityscapes
+[BiSeNetV2](cv/semantic_segmentation/bisenetv2/pytorch/README.md)  | PyTorch | Cityscapes
 [CGNet](cv/semantic_segmentation/cgnet/pytorch/README.md)  | PyTorch | COCO
 [ContextNet](cv/semantic_segmentation/contextnet/pytorch/README.md)  | PyTorch | COCO
 [DabNet](cv/semantic_segmentation/dabnet/pytorch/README.md)  | PyTorch | COCO
@@ -423,6 +428,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
 [LLaMA-7B](nlp/llm/llama-7b/colossalai/README.md)  | PyTorch (Colossal-AI) | llama-7b-hf
 [LLaMA2-7B](nlp/llm/llama2-7b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
+[LLaMA2-7B Reward Model Finetuning](nlp/llm/llama2-7b_reward_sft/deepspeed/README.md)  | PyTorch (DeepSpeed) | Dahoas/rm-static
 [LLaMA2-7B SFT](nlp/llm/llama2-7b_sft/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | gpt_small-117M
 
 #### Text Correction

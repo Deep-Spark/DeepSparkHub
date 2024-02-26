@@ -1,0 +1,3 @@
+[submodule "third_party/pybind11"]
+	path = third_party/pybind11
+	url = ssh://git@bitbucket.iluvatar.ai:7999/adapt/pybind11.git
