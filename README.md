@@ -229,6 +229,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 -------- | ------ | ---- 
 [BEVFormer](cv/3d_detection/BEVFormer/pytorch/README.md)  | PyTorch | nuScenes&CAN bus
 [CenterPoint](cv/3d_detection/centerpoint/pytorch/README.md)  | PyTorch | nuScenes
+[PAConv](cv/3d_detection/PAConv/pytorch/README.md)  | PyTorch | S3DIS
 [PointNet++](cv/3d_detection/pointnet2/pytorch/mmdetection3d/README.md)  | PyTorch | S3DIS
 [PointPillars](cv/3d_detection/pointpillars/pytorch/README.md)  | PyTorch | KITTI
 
