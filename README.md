@@ -246,6 +246,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [PP-OCR-EAST](cv/ocr/pp-ocr-east/paddlepaddle/README.md)  | PaddlePaddle | ICDAR2015
 [PSE](cv/ocr/pse/paddlepaddle/README.md)  | PaddlePaddle | OCR_Recog
 [SAR](cv/ocr/sar/pytorch/README.md)  | PyTorch | OCR_Recog
+[SAST](cv/ocr/sast/paddlepaddle/README.md)  | PaddlePaddle | ICDAR2015
 [SATRN](cv/ocr/satrn/pytorch/base/README.md)  | PyTorch | OCR_Recog
 
 #### Point Cloud
