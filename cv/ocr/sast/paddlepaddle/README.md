@@ -1,13 +1,18 @@
 # SAST
 
-## Step 1: Installing
+## Description
+
+SAST is a cutting-edge segmentation-based text detector designed for recognizing scene text of arbitrary shapes. Leveraging a context attended multi-task learning framework anchored on a Fully Convolutional Network (FCN), it adeptly learns geometric properties to reconstruct text regions into polygonal shapes. Incorporating a Context Attention Block, SAST captures long-range pixel dependencies for improved segmentation accuracy, while its Point-to-Quad assignment method efficiently clusters pixels into text instances by merging high-level and low-level information. Demonstrated to be highly effective across several benchmarks like ICDAR2015 and SCUT-CTW1500, SAST not only shows superior accuracy but also operates efficiently, achieving significant performance metrics such as running at 27.63 FPS on a NVIDIA Titan Xp with a high detection accuracy, making it a notable solution for arbitrary-shaped text detection challenges.
+
+## Step 1: Installation
+
 ```bash
-git clone --recursive https://github.com/PaddlePaddle/PaddleOCR.git
-cd PaddleOCR
+git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleOCR.git
+cd PaddleOCR/
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Download data
+## Step 2: Preparing datasets
 
 Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015) 
 
@@ -26,15 +31,24 @@ drwxr-xr-x 2 root root    24576 Jul 21 15:53 icdar_c4_train_imgs
 
 ```
 
-## Step 3: Run PP-OCR-DB
+## Step 3: Training
 
 ```bash
-# Notice: modify "configs/det/det_mv3_db.yml" file, set the datasets path as yours.
+# Notice: modify "configs/det/det_r50_vd_sast_icdar15.yml" file, set the datasets path as yours.
 wget -P ./pretrain_models/ https://paddleocr.bj.bcebos.com/pretrained/ResNet50_vd_ssld_pretrained.pdparams
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
-export CUDA_VISIBLE_DEVICES=0,1,2,3
-python3 -u -m paddle.distributed.launch --gpus '0,1,2,3' tools/train.py -c configs/det/det_r50_vd_sast_icdar15.yml -o Global.use_visualdl=True \
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+python3 -u -m paddle.distributed.launch --gpus '0,1,2,3,4,5,6,7' tools/train.py -c configs/det/det_r50_vd_sast_icdar15.yml -o Global.use_visualdl=True \
 >train.log 2>&1 &
 ```
+
+## Results
+
+GPUs|FPS|ACC
+----|---|---
+BI-V100 x8| ips: 11.24631 samples/s | hmean: 0.817155756207675
+
+## Reference
+- [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR.git)
 
