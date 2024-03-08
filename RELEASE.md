@@ -1,5 +1,55 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 24.03 Release Notes
+
+### 特性和增强
+
+#### 模型与算法
+
+* 新增了10个算法模型。
+
+<table>
+    <tr align="left"><th colspan=6>PyTorch</th></tr>
+    <tr>
+        <td>BiSeNetV2</td>
+        <td>BLIP</td>
+        <td>CenterPoint</td>
+        <td>PAConv</td>
+        <td>PointRCNN</td>
+    </tr>
+    <tr align="left"><th colspan=6>PaddlePaddle</th></tr>
+    <tr>
+        <td>DBNet++</td>
+        <td>PP-OCR-EAST</td>
+        <td>PP-YOLOE+</td>
+        <td>SAST</td>
+        <td>YOLOv5</td>    
+    </tr>
+</table>
+
+* 新增了基于分布式训练框架的大语言模型训练示例。
+    * Megatron-DeepSpeed LLaMA2-7B SFT
+    * DeepSpeed LLaMa2-7B Reward Model Finetuning
+
+### 问题修复
+
+- TBU
+
+
+### 版本关联
+
+DeepSparkHub 24.03对应天数软件栈3.1.1版本。
+
+### 贡献者
+
+感谢以下人员做出的贡献：
+
+TBU。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
+---
+
 ## DeepSparkHub 23.12 Release Notes
 
 ### 特性和增强
@@ -9,7 +59,7 @@
 * 新增了30个算法模型。
 
 <table>
-    <tr><th colspan=6>PyTorch</th></tr>
+    <tr align="left"><th colspan=6>PyTorch</th></tr>
     <tr>
         <td>ACNet</td>
         <td>Co-DETR</td>
@@ -26,7 +76,7 @@
         <td>RTMDet</td>
         <td>SOLOv2</td>
     </tr>
-    <tr><th colspan=6>PaddlePaddle</th></tr>
+    <tr align="left"><th colspan=6>PaddlePaddle</th></tr>
     <tr>
         <td>BlazeFace</td>
         <td>ByteTrack</td>
@@ -90,7 +140,7 @@ majorli，songjian，may，jun.zhao，wz50525，gaiqin_bai，郝燕龙，巩亚�
 * 新增了30个算法模型。
 
 <table>
-    <tr><th colspan=5>PyTorch</th></tr>
+    <tr align="left"><th colspan=5>PyTorch</th></tr>
     <tr>
         <td>BYOL</td>
         <td>InternImage</td>
@@ -98,7 +148,7 @@ majorli，songjian，may，jun.zhao，wz50525，gaiqin_bai，郝燕龙，巩亚�
         <td>MoCoV2</td>
         <td>WSLD</td>
     </tr>
-    <tr><th colspan=5>TensorFlow</th></tr>
+    <tr align="left"><th colspan=5>TensorFlow</th></tr>
     <tr>
         <td>AlexNet</td>
         <td>DeepLabV3-Plus</td>
@@ -106,7 +156,7 @@ majorli，songjian，may，jun.zhao，wz50525，gaiqin_bai，郝燕龙，巩亚�
         <td>InceptionV3</td>
         <td>VGG</td>
     </tr>
-    <tr><th colspan=5>MindSpore</th></tr>
+    <tr align="left"><th colspan=5>MindSpore</th></tr>
     <tr>
         <td>CRNN</td>
         <td>InceptionV3</td>
@@ -114,7 +164,7 @@ majorli，songjian，may，jun.zhao，wz50525，gaiqin_bai，郝燕龙，巩亚�
         <td>OpenPose</td>
         <td>ResNeXt50</td>
     </tr>
-    <tr><th colspan=5>PaddlePaddle</th></tr>
+    <tr align="left"><th colspan=5>PaddlePaddle</th></tr>
     <tr>
         <td>DenseNet121</td>
         <td>GCN</td>
