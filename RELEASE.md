@@ -33,8 +33,11 @@
 
 ### 问题修复
 
-- TBU
-
+- 修复了DeepLabV3+ PaddlePaddle模型依赖安装不全的问题。
+- 修复了MobileSeg 和Attention U-Net模型训练步骤路径错误问题。
+- 修复了GLM模型安装与准备步骤中的路径导引有误的问题。
+- 清除了Swin Transformer模型目录下的冗余pycache文件。
+- 完善了basicVSR++，basicVSR，RealBasicVSR，TTVSR模型的执行代码示例。
 
 ### 版本关联
 
@@ -44,7 +47,7 @@ DeepSparkHub 24.03对应天数软件栈3.1.1版本。
 
 感谢以下人员做出的贡献：
 
-TBU。
+majorli，songjian，xiaomei.wang，李一力，gaiqin.bai，wenfeng.zhang，吴永乐，sanghui_ilu，shengquan.nian，yanlong.hao，zhaojun0044，李永康，小豆子。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
 
