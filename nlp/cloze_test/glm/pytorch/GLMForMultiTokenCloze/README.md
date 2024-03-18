@@ -6,15 +6,15 @@ There have been various types of pretraining architectures including autoencodin
 
 ## Step 1: Installing packages
 
-```
-$ bash prepare_environment.sh
+```bash
+cd nlp/cloze_test/glm/pytorch/GLMForMultiTokenCloze/base
+bash prepare_environment.sh
 ```
 
 ## Step 2: Preparing data
 
-```
-$ cd nlp/cloze_test/glm/pytorch/GLMForMultiTokenCloze/base
-$ bash preparedata.sh /home/data/perf/glm
+```bash
+bash preparedata.sh /home/data/perf/glm
 ```
 
 ## Step 3: Preparing data prepare pretrained weights
@@ -22,9 +22,11 @@ $ bash preparedata.sh /home/data/perf/glm
 download from [glm github](https://github.com/THUDM/GLM)
 [model release page](https://mailstsinghuaeducn-my.sharepoint.com/personal/duzx16_mails_tsinghua_edu_cn/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fduzx16%5Fmails%5Ftsinghua%5Fedu%5Fcn%2FDocuments%2Fmodels&ga=1) download `glm-large-blank.tar.bz2`
 
-```
-$ cd /home/data/perf/glm
-$ tar -jxvf glm-large-blank.tar.bz2
+```bash
+mkdir -p /home/data/perf/glm
+pushd /home/data/perf/glm
+tar -jxvf glm-large-blank.tar.bz2
+popd
 ```
 
 
@@ -32,10 +34,9 @@ $ tar -jxvf glm-large-blank.tar.bz2
    
 ### Multiple GPUs on one machine
 
- ```bash
- $ cd nlp/cloze_test/glm/pytorch/GLMForMultiTokenCloze/base
- $ bash run.sh
- ```
+```bash
+bash run.sh
+```
 
 ## Results on BI-V100
 
