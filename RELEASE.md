@@ -28,8 +28,8 @@
 </table>
 
 * 新增了基于分布式训练框架的大语言模型训练示例。
-    * Megatron-DeepSpeed LLaMA2-7B SFT
-    * DeepSpeed LLaMa2-7B Reward Model Finetuning
+    * Megatron-DeepSpeed Llama-2-7B SFT
+    * DeepSpeed Llama-2-7B Reward Model Finetuning
 
 ### 问题修复
 
