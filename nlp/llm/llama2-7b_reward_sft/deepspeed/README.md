@@ -1,4 +1,4 @@
-# LLaMa2 7B Reward Model Finetuning
+# DeepSpeed Llama-2-7B Reward Model Finetuning
 
 ## Model description
 LLaMA2 is a large language model released by Meta in 2023, with parameters ranging from 7B to 70B. Compared to LLaMA, the training corpus of LLaMA2 is 40% longer, and the context length has been upgraded from 2048 to 4096, allowing for understanding and generating longer texts. 
