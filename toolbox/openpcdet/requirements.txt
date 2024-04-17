@@ -1,0 +1,4 @@
+scikit-image
+pyquaternion
+easydict
+tensorboardX
