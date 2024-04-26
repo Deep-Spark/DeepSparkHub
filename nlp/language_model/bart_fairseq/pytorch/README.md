@@ -1,15 +1,17 @@
 # BART
 
 ## Model description
+
 BART is sequence-to-sequence model trained with denoising as pretraining
 objective. We show that this pretraining objective is more generic and
-show that we can match RoBERTa results on SQuAD and GLUE and gain 
-state-of-the-art results on summarization (XSum, CNN dataset), 
+show that we can match RoBERTa results on SQuAD and GLUE and gain
+state-of-the-art results on summarization (XSum, CNN dataset),
 long form generative question answering (ELI5) and dialog response
-genration (ConvAI2). 
+genration (ConvAI2).
 
 ## Step 1: Installation
-Bart model is using Fairseq toolbox. Before you run this model, 
+
+Bart model is using Fairseq toolbox. Before you run this model,
 you need to setup Fairseq first.
 
 ```bash
@@ -39,20 +41,22 @@ tar -xzvf bart.large.tar.gz
 ```
 
 ## Step 3: Training
+
 ```bash
 # Finetune on CLUE RTE task
 bash bart.sh
 
 # Inference on GLUE RTE task
-`
 python3 bart.py
 ```
 
 ## Results
 
-| GPUs | QPS | Train Epochs | Accuracy  |
-|------|-----|--------------|------|
-| BI-v100 x8  | 113.18 | 10           | 83.8 |
+
+| GPUs       | QPS    | Train Epochs | Accuracy |
+| ------------ | -------- | -------------- | ---------- |
+| BI-v100 x8 | 113.18 | 10           | 83.8     |
 
 ## Reference
+
 - [Fairseq](https://github.com/facebookresearch/fairseq/tree/v0.10.2)
