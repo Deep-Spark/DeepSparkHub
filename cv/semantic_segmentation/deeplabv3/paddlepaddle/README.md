@@ -72,11 +72,12 @@ drwxr-xr-x 5 root root          58 Jul 18 03:30 leftImg8bit
 # Change '/path/to/cityscapes' as your local Cityscapes dataset path
 data_dir=/path/to/cityscapes
 sed -i "s#: data/cityscapes#: ${data_dir}#g" configs/_base_/cityscapes.yml
+
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
 export CUDA_VISIBLE_DEVICES=0,1,2,3 
-python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 train.py \
-       --config configs/deeplabv3/deeplabv3_resnet50_os8_cityscapes_1024x512_80k.yml \
-       --do_eval \
-       --use_vdl
+python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 tools/train.py \
+    --config configs/deeplabv3/deeplabv3_resnet50_os8_cityscapes_1024x512_80k.yml \
+    --do_eval \
+    --use_vdl
 ```

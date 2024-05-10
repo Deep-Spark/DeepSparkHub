@@ -5,7 +5,7 @@
 A novel Bilateral Segmentation Network (BiSeNet).
 First design a Spatial Path with a small stride to preserve the spatial information and generate high-resolution features.
 Meanwhile, a Context Path with a fast downsampling strategy is employed to obtain sufficient receptive field.
-On top of the two paths, we introduce a new Feature Fusion Module to combine features efficiently. 
+On top of the two paths, we introduce a new Feature Fusion Module to combine features efficiently.
 
 ## Step 1: Installing
 
@@ -16,6 +16,7 @@ pip3 install -r requirements.txt
 pip3 install protobuf==3.20.3 
 pip3 install urllib3==1.26.6
 yum install mesa-libGL
+python3 setup.py install
 ```
 
 ## Step 2: Download data
@@ -50,7 +51,6 @@ cityscapes/
 pip3 install cityscapesscripts
 
 python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
-
 python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 
 # CityScapes PATH as follow:
@@ -80,16 +80,17 @@ export FLAGS_cudnn_batchnorm_spatial_persistent=True
 
 # One GPU
 export CUDA_VISIBLE_DEVICES=0
-python3 train.py --config configs/bisenet/bisenet_cityscapes_1024x1024_160k.yml --do_eval --use_vdl --save_interval 500 --save_dir output
+python3 tools/train.py --config configs/bisenet/bisenet_cityscapes_1024x1024_160k.yml --do_eval --use_vdl --save_interval 500 --save_dir output
 
 # Four GPUs
 export CUDA_VISIBLE_DEVICES=0,1,2,3 
-python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 train.py \
+python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 tools/train.py \
        --config configs/bisenet/bisenet_cityscapes_1024x1024_160k.yml \
        --do_eval \
        --use_vdl
 ```
 
-| GPU         | FP32                                 |
-| ----------- | ------------------------------------ |
-| 8 cards     | mIoU=73.45%                          |
+
+| GPU     | FP32        |
+| --------- | ------------- |
+| 8 cards | mIoU=73.45% |

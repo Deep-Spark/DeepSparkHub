@@ -2,8 +2,8 @@
 
 ## Model description
 
-DeepLabv3 is a semantic segmentation architecture that improves upon DeepLabv2 with several modifications. 
-To handle the problem of segmenting objects at multiple scales, modules are designed which employ atrous convolution in cascade or in parallel to capture multi-scale context by adopting multiple atrous rates. 
+DeepLabv3 is a semantic segmentation architecture that improves upon DeepLabv2 with several modifications.
+To handle the problem of segmenting objects at multiple scales, modules are designed which employ atrous convolution in cascade or in parallel to capture multi-scale context by adopting multiple atrous rates.
 
 ## Step 1: Installing
 
@@ -48,8 +48,8 @@ cityscapes/
 pip3 install cityscapesscripts
 
 python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
-
 python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
+
 # CityScapes PATH as follow:
 ls -al /path/to/cityscapes
 total 11567948
@@ -72,20 +72,26 @@ drwxr-xr-x 5 root root          58 Jul 18 03:30 leftImg8bit
 # Change '/path/to/cityscapes' as your local Cityscapes dataset path
 data_dir=/path/to/cityscapes
 sed -i "s#: data/cityscapes#: ${data_dir}#g" configs/_base_/cityscapes.yml
+
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
 # One GPU
 export CUDA_VISIBLE_DEVICES=0
-python3 train.py --config configs/deeplabv3p/deeplabv3p_resnet50_os8_cityscapes_1024x512_80k.yml --do_eval --use_vdl --save_interval 500 --save_dir output
+python3 tools/train.py --config configs/deeplabv3p/deeplabv3p_resnet50_os8_cityscapes_1024x512_80k.yml \
+    --do_eval \
+    --use_vdl \
+    --save_interval 500 \
+    --save_dir output
 
 # Four GPUs
 export CUDA_VISIBLE_DEVICES=0,1,2,3 
-python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 train.py \
-       --config configs/deeplabv3p/deeplabv3p_resnet50_os8_cityscapes_1024x512_80k.yml \
-       --do_eval \
-       --use_vdl
+python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 tools/train.py \
+    --config configs/deeplabv3p/deeplabv3p_resnet50_os8_cityscapes_1024x512_80k.yml \
+    --do_eval \
+    --use_vdl
 ```
 
-| GPU         | FP32                                 |
-| ----------- | ------------------------------------ |
-| 8 cards     | mIoU =80.42%                         |
+
+| GPU     | FP32         |
+| --------- | -------------- |
+| 8 cards | mIoU =80.42% |
