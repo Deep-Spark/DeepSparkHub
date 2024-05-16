@@ -1,4 +1,4 @@
-# RLHF
+# Llama2-7B RLHF
 
 In this example, we use [Llama2-7b](https://huggingface.co/meta-llama/Llama-2-7b) and [Tiny-llama-1.1B](https://huggingface.co/TinyLlama/TinyLlama-1.1B-intermediate-step-240k-503b) to do RLHF training. You can get them in huggingface through links provided.
 
