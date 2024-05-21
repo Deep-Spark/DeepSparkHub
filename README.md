@@ -427,8 +427,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集 
 -------- | ------ | ---- 
-[ChatGLM-6B](nlp/llm/ChatGLM2-6b-sft/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
-[ChatGLM2-6B SFT](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch | ADGEN & chatglm2-6b
+[ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
+[ChatGLM2-6B SFT](nlp/llm/ChatGLM2-6b-sft/README.md)  | PyTorch | ADGEN & chatglm2-6b
 [LLaMA-7B](nlp/llm/llama-7b/colossalai/README.md)  | PyTorch (Colossal-AI) | llama-7b-hf
 [Llama-2-7B](nlp/llm/llama2-7b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
 [Llama-2-7B Reward Model Finetuning](nlp/llm/llama2-7b_reward_sft/deepspeed/README.md)  | PyTorch (DeepSpeed) | Dahoas/rm-static
