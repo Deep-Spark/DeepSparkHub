@@ -12,7 +12,11 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-NUM_GPUS=$1
+# export NUM_GPUS=8
+[ -z $NUM_GPUS ] && {
+    echo "Please export NUM_GPUS=X before run script!"
+    exit 1
+}
 
 SEED=1234
 MAX_EPOCHS=5000
@@ -27,30 +31,29 @@ SAVE_CKPT="./ckpt_full"
 LOG_NAME='full_train_log.json'
 
 if [ ! -d ${SAVE_CKPT} ]; then
-    mkdir ${SAVE_CKPT};
+    mkdir ${SAVE_CKPT}
 fi
 
 python3 -u -m torch.distributed.launch --nproc_per_node=${NUM_GPUS} \
---use_env main.py --data_dir data/kits19/train \
---epochs ${MAX_EPOCHS} \
---evaluate_every ${EVALUATE_EVERY} \
---start_eval_at ${START_EVAL_AT} \
---quality_threshold ${QUALITY_THRESHOLD} \
---batch_size ${BATCH_SIZE} \
---optimizer sgd \
---ga_steps ${GRADIENT_ACCUMULATION_STEPS} \
---learning_rate ${LEARNING_RATE} \
---seed ${SEED} \
---lr_warmup_epochs ${LR_WARMUP_EPOCHS} \
---output-dir ${SAVE_CKPT} \
---log_name ${LOG_NAME}
-"$@"
+    --use_env main.py --data_dir data/kits19/train \
+    --epochs ${MAX_EPOCHS} \
+    --evaluate_every ${EVALUATE_EVERY} \
+    --start_eval_at ${START_EVAL_AT} \
+    --quality_threshold ${QUALITY_THRESHOLD} \
+    --batch_size ${BATCH_SIZE} \
+    --optimizer sgd \
+    --ga_steps ${GRADIENT_ACCUMULATION_STEPS} \
+    --learning_rate ${LEARNING_RATE} \
+    --seed ${SEED} \
+    --lr_warmup_epochs ${LR_WARMUP_EPOCHS} \
+    --output-dir ${SAVE_CKPT} \
+    --log_name ${LOG_NAME} \
+    "$@"
 
-if [ $? -eq 0 ];then
+if [ $? -eq 0 ]; then
     echo 'converged to the target value 0.908 of epoch 3820 in full train, stage-wise training succeed'
     exit 0
 else
     echo 'not converged to the target value, training fail'
     exit 1
 fi
-
