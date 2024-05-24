@@ -2,7 +2,7 @@
 
 ## Model description
 
-Llama 2 is a large language model released by Meta in 2023, with parameters ranging from 7B to 70B. Compared to LLaMA, the training corpus of Llama 2 is 40% longer, and the context length has been upgraded from 2048 to 4096, allowing for understanding and generating longer texts.
+BLOOM is an autoregressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks.
 
 
 ## Step 1: Preparing datasets
@@ -19,7 +19,13 @@ mkdir -p checkpoint && cd checkpoint
 # you can download weights from hugginface, website here: https://huggingface.co/bigscience/bloom-7b1
 ```
 
-## Step 3: Training
+## Step 3: installation
+```
+cd firefly
+bash build_firefly.sh && bash install firefly
+```
+
+## Step 4: Training
 
 
 ```

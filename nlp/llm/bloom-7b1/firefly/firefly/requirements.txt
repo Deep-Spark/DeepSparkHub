@@ -1,0 +1,16 @@
+accelerate
+transformers>=4.35,<4.38
+peft==0.6.2
+loguru
+numpy
+pandas
+tqdm
+sentencepiece
+tiktoken
+einops
+httpx
+scipy
+astunparse
+datasets
+trl
+tensorboardX
