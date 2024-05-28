@@ -222,6 +222,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [YOLOv6](cv/detection/yolov6/pytorch/README.md)  | PyTorch | COCO
 [YOLOv7](cv/detection/yolov7/pytorch/README.md)  | PyTorch | COCO
 [YOLOv8](cv/detection/yolov8/pytorch/README.md)  | PyTorch | COCO
+[YOLOv9](cv/detection/yolov9/pytorch/README.md)  | PyTorch | COCO
 
 #### 3D Object Detection
 
