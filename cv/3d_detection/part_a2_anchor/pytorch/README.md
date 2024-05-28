@@ -1,13 +1,18 @@
 # Part-A2-Anchor
 
 ## Model description
+
 3D object detection from LiDAR point cloud is a challenging problem in 3D scene understanding and has many practical applications. In this paper, we extend our preliminary work PointRCNN to a novel and strong point-cloud-based 3D object detection framework, the part-aware and aggregation neural network (Part-A2 net). The whole framework consists of the part-aware stage and the part-aggregation stage. Firstly, the part-aware stage for the first time fully utilizes free-of-charge part supervisions derived from 3D ground-truth boxes to simultaneously predict high quality 3D proposals and accurate intra-object part locations. The predicted intra-object part locations within the same proposal are grouped by our new-designed RoI-aware point cloud pooling module, which results in an effective representation to encode the geometry-specific features of each 3D proposal. Then the part-aggregation stage learns to re-score the box and refine the box location by exploring the spatial relationship of the pooled intra-object part locations. Extensive experiments are conducted to demonstrate the performance improvements from each component of our proposed framework. Our Part-A2 net outperforms all existing 3D detection methods and achieves new state-of-the-art on KITTI 3D object detection dataset by utilizing only the LiDAR point cloud data.
 
 ## Step 1: Installation
-```
+
+```bash
 ## install libGL and libboost
 yum install mesa-libGL
 yum install boost-devel
+
+## switch to devtoolset-7 env
+source /opt/rh/devtoolset-7/enable
 
 # Install spconv
 cd toolbox/spconv
@@ -23,10 +28,12 @@ bash install_openpcdet.sh
 ```
 
 ## Step 2: Preparing datasets
+
 Download the kitti dataset from <http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>
 
 Download the "planes" subdataset from <https://drive.google.com/file/d/1d5mq0RXRnvHPVeKx6Q612z0YRO1t2wAp/view?usp=sharing>
-```
+
+```bash
 OpenPCDet
 ├── data
 │   ├── kitti
@@ -39,7 +46,7 @@ OpenPCDet
 ├── tools
 ```
 
-```
+```bash
 # Modify the `DATA_PATH` in the kitti_dataset.yaml to your own
 cd toolbox/openpcdet
 python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml
