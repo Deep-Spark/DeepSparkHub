@@ -8,15 +8,13 @@ Qwen-7B is the 7B-parameter version of the large language model series, Qwen (ab
 
 ```bash
 # install firefly
-cd Qwen
+pushd <deepsparkhub_root>/toolbox/firefly
 pip3 install -r requirements.txt
-cd firely
 python3 setup.py develop
+popd
 ```
 
 ## Step 2: Preparing datasets and checkpoints
-
-
 
 ```bash
 pip install modelscope
@@ -27,22 +25,16 @@ mv /root/.cache/modelscope/hub/qwen/Qwen-7B /home/model_zoo/nlp
 
 ## Step 3: Training
 
-### Full
-
 ```bash
-bash train.sh 16 configs/qwen-7b-sft-full.json full  
+# how to train
 
-```
+# train with sft full
+bash train.sh 16 configs/qwen-7b-sft-full.json full
 
-### Lora
-
-``` bash
+# train with Lora
 bash train.sh 1 configs/qwen-7b-sft-lora.json lora
-```
 
-### Ptuning-V2
-
-``` bash
+# train with Ptuning-V2
 bash train.sh 1 configs/qwen-7b-sft-ptuning_v2.json ptuning_v2
 ```
 
@@ -56,4 +48,4 @@ bash train.sh 1 configs/qwen-7b-sft-ptuning_v2.json ptuning_v2
 
 ## Reference
 
-- [Firefly] https://github.com/yangjianxin1/Firefly
+- [Firefly](https://github.com/yangjianxin1/Firefly)
