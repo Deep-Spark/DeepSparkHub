@@ -207,6 +207,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [RepPoints](cv/detection/reppoints_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
 [RetinaNet](cv/detection/retinanet/pytorch/README.md)  | PyTorch | COCO
 [RetinaNet](cv/detection/retinanet/paddlepaddle/README.md)  | PaddlePaddle | COCO
+[RT-DETR](cv/detection/rt-detr/pytorch/README.md)  | PyTorch | COCO
 [RTMDet](cv/detection/rtmdet/pytorch/README.md)  | PyTorch | COCO
 [SSD](cv/detection/ssd/pytorch/README.md)  | PyTorch | COCO
 [SSD](cv/detection/ssd/paddlepaddle/README.md)  | PaddlePaddle | COCO
