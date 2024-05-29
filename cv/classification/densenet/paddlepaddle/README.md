@@ -1,8 +1,11 @@
 # DenseNet
+
 ## Model description
+
 A DenseNet is a type of convolutional neural network that utilises dense connections between layers, through Dense Blocks, where we connect all layers (with matching feature-map sizes) directly with each other. To preserve the feed-forward nature, each layer obtains additional inputs from all preceding layers and passes on its own feature-maps to all subsequent layers.
 
 ## Step 1: Installation
+
 ```bash
 git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
 
@@ -18,6 +21,7 @@ python3 setup.py install
 ```
 
 ## Step 2: Preparing Datasets
+
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
@@ -58,4 +62,5 @@ python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/c
 | BI-V100 x 4 | 0.757       | 0.925          |   171          |
 
 ## Reference
+
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)
