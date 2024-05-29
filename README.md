@@ -6,22 +6,22 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 - Computer Vision
 
-   - [Classification](#classification)
-   - [Face Detection](#face-detection)
-   - [Face Recognition](#face-recognition)
-   - [Instance Segmentation](#instance-segmentation)
-   - [Knowledge Distillation](#knowledge-distillation)
-   - [Network Pruning](#network-pruning)
-   - [Object Detection](#object-detection)
-   - [3D Object Detection](#3d-object-detection)
-   - [OCR](#ocr)
-   - [Point Cloud](#point-cloud)
-   - [Pose Estimation](#pose-estimation)
-   - [Self-Supervised Learning](#self-supervised-learning)
-   - [Semantic Segmentation](#semantic-segmentation)
-   - [Super Resolution](#super-resolution)
-   - [Tracking](#tracking)
-   - [Traffic Forecast](#traffic-forecast)
+  - [Classification](#classification)
+  - [Face Detection](#face-detection)
+  - [Face Recognition](#face-recognition)
+  - [Instance Segmentation](#instance-segmentation)
+  - [Knowledge Distillation](#knowledge-distillation)
+  - [Network Pruning](#network-pruning)
+  - [Object Detection](#object-detection)
+  - [3D Object Detection](#3d-object-detection)
+  - [OCR](#ocr)
+  - [Point Cloud](#point-cloud)
+  - [Pose Estimation](#pose-estimation)
+  - [Self-Supervised Learning](#self-supervised-learning)
+  - [Semantic Segmentation](#semantic-segmentation)
+  - [Super Resolution](#super-resolution)
+  - [Tracking](#tracking)
+  - [Traffic Forecast](#traffic-forecast)
 
 - Graph Neural Network (GNN)
 
@@ -37,24 +37,24 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 - Natural Language Processing (NLP)
 
-   - [Cloze Test](#cloze-test)
-   - [Dialogue Generation](#dialogue-generation)
-   - [Language Modeling](#language-modeling)
-   - [Large Language Model (LLM)](#large-language-model-llm)
-   - [Text Correction](#text-correction)
-   - [Translation](#translation)
+  - [Cloze Test](#cloze-test)
+  - [Dialogue Generation](#dialogue-generation)
+  - [Language Modeling](#language-modeling)
+  - [Large Language Model (LLM)](#large-language-model-llm)
+  - [Text Correction](#text-correction)
+  - [Translation](#translation)
 
 - Recommendation
 
-   - [Collaborative Filtering](#collaborative-filtering)
-   - [Click Through Rate](#click-through-rate)
+  - [Collaborative Filtering](#collaborative-filtering)
+  - [Click Through Rate](#click-through-rate)
 
 - [Reinforcement Learning](#reinforcement-learning)
 
 - Speech
 
-   - [Speech Recognition](#speech-recognition)
-   - [Speech Synthesis](#speech-synthesis)
+  - [Speech Recognition](#speech-recognition)
+  - [Speech Synthesis](#speech-synthesis)
 
 - [3D Reconstruction](#3d-reconstruction)
 
@@ -377,14 +377,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [GCN](gnn/text_classification/GCN/mindspore/README.md)  | MindSpore | CORA & Citeseer
 [GCN](gnn/text_classification/GCN/paddlepaddle/README.md) | PaddlePaddle | CORA & PubMed & Citeseer
 
-
 ### HPC
 
 #### Molecular Dynamics
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
 [Water/se_e2_a](hpc/molecular_dynamics/water_se_e2_a/tensorflow/README.md)  | TensorFlow (DeePMD-kit) | data_water
-
 
 ### Multimodal
 
@@ -476,13 +474,11 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Wide&Deep](recommendation/ctr/wide_deep/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
 [xDeepFM](recommendation/ctr/xdeepfm/paddlepaddle/README.md)  | PaddlePaddle | Criteo_Terabyte
 
-
-### Reinforement Learning
+### Reinforcement Learning
 
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
-[DQN](Reinforement_Learning/DQN/paddlepaddle/README.md)  | PaddlePaddle | CartPole-v0
-
+[DQN](reinforcement_learning/DQN/paddlepaddle/README.md)  | PaddlePaddle | CartPole-v0
 
 ### Speech
 
@@ -514,13 +510,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 -------- | ------ | ----
 [HashNeRF](3d-reconstruction/ngp-nerf/pytorch/README.md)  | PyTorch | fox
 
--------
+--------
 
 ## 容器镜像构建方式
 
 社区用户可参考[容器镜像构建说明](docker/Iluvatar/README.md)在本地构建出能够运行DeepSparkHub仓库中模型的容器镜像。
 
--------
+--------
 
 ## 社区
 
@@ -539,4 +535,3 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 ## 许可证
 
 本项目许可证遵循[Apache-2.0](LICENSE)。
-
