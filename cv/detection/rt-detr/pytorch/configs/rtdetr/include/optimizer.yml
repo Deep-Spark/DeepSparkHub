@@ -8,7 +8,7 @@ ema:
 
 find_unused_parameters: True 
 
-epoches: 1 # 72
+epoches: 72
 clip_max_norm: 0.1
 
 optimizer:
