@@ -381,6 +381,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 ### HPC
 
 #### Molecular Dynamics
+
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
 [Water/se_e2_a](hpc/molecular_dynamics/water_se_e2_a/tensorflow/README.md)  | TensorFlow (DeePMD-kit) | data_water
@@ -431,6 +432,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
+[Baichuan2-7B](nlp/llm/baichuan2-7b/Baichuan2/README.md)  | PyTorch | baichuan2-7b-base
 [Bloom-7B1](nlp/llm/bloom-7b1/firefly/README.md)  | PyTorch (Firefly) | school_math_0.25M & bloom-7b1
 [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
 [ChatGLM2-6B SFT](nlp/llm/ChatGLM2-6b-sft/README.md)  | PyTorch | ADGEN & chatglm2-6b
@@ -527,7 +529,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### 交流
 
-请联系 contact@deepspark.org.cn。
+请联系 <contact@deepspark.org.cn>。
 
 ### 贡献
 
