@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -13,14 +13,6 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-
-EXIT_STATUS=0
-check_status() {
-    if ((${PIPESTATUS[0]} != 0)); then
-        EXIT_STATUS=1
-    fi
-}
-
-python3 test.py --task val --data data/coco128.yaml --weights weights/yolov5s.pt 2>&1 | tee inferencelog.log
-check_status
-exit ${EXIT_STATUS}
+cd ..
+bash run_dist_training.sh --data ./data/coco128.yaml "$@"
+cd -

@@ -335,7 +335,7 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
         logger.info('Using SyncBatchNorm()')
 
     # Trainloader
-    dataloader, dataset = create_dataloader(train_path, imgsz, batch_size // WORLD_SIZE, gs, single_cls,
+    dataloader, dataset = create_dataloader(train_path, imgsz, batch_size, gs, single_cls,
                                             hyp=hyp, augment=False, cache=opt.cache_images, rect=opt.rect, rank=RANK,
                                             workers=workers,
                                             image_weights=opt.image_weights, quad=opt.quad, prefix=colorstr('train: '))
@@ -345,7 +345,7 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
 
     # Process 0
     if RANK in [-1, 0]:
-        testloader = create_dataloader(test_path, imgsz_test, batch_size // WORLD_SIZE * 2, gs, single_cls,
+        testloader = create_dataloader(test_path, imgsz_test, batch_size, gs, single_cls,
                                        hyp=hyp, cache=opt.cache_images and not notest, rect=True, rank=-1,
                                        workers=workers,
                                        pad=0.5, prefix=colorstr('val: '))[0]
@@ -397,10 +397,6 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
                 f'Using {dataloader.num_workers} dataloader workers\n'
                 f'Logging results to {save_dir}\n'
                 f'Starting training for {epochs} epochs...')
-
-    run_steps = 0
-    time_step = []
-    time_step.append(time.time())
     for epoch in range(start_epoch, epochs):  # epoch ------------------------------------------------------------------
         model.train()
 
@@ -426,11 +422,13 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
         if RANK != -1:
             dataloader.sampler.set_epoch(epoch)
         pbar = enumerate(dataloader)
-        logger.info(('\n' + '%10s' * 8) % ('Epoch', 'gpu_mem', 'box', 'obj', 'cls', 'total', 'labels', 'img_size'))
+        logger.info(('\n' + '%10s' * 8) % ('Epoch', 'gpu_mem', 'box', 'obj', 'cls', 'total', 'img_size', "total_fps"))
         if RANK in [-1, 0]:
             pbar = tqdm(pbar, total=nb)  # progress bar
         optimizer.zero_grad()
         for i, (imgs, targets, paths, _) in pbar:  # batch -------------------------------------------------------------
+            step_start_time = time.time()
+
             ni = i + nb * epoch  # number integrated batches (since train start)
             imgs = imgs.to(device, non_blocking=True).float() / 255.0  # uint8 to float32, 0-255 to 0.0-1.0
 
@@ -470,6 +468,10 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
                 if opt.quad:
                     loss *= 4.
 
+            if not math.isfinite(loss[0]):
+                print("Loss is {}, stopping training".format(loss[0]))
+                sys.exit(1)
+
             # Backward
             if opt.amp:
                 scaler.scale(loss).backward()
@@ -491,18 +493,18 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
                     ema.update(model)
                 last_opt_step = ni
 
+            step_end_time = time.time()
+            fps = len(imgs) / (step_end_time - step_start_time)
+            if torch.distributed.is_initialized():
+                fps = fps * torch.distributed.get_world_size()
+
             # Print
             if RANK in [-1, 0]:
-                time_step.append(time.time())
                 mloss = (mloss * i + loss_items) / (i + 1)  # update mean losses
                 mem = '%.3gG' % (torch.cuda.memory_reserved() / 1E9 if torch.cuda.is_available() else 0)  # (GB)
                 s = ('%10s' * 2 + '%10.4g' * 6) % (
-                    f'{epoch}/{epochs - 1}', mem, *mloss, targets.shape[0], imgs.shape[-1])
-                time_iter = time_step[i+1] - time_step[i]
-                fps = opt.batch_size / time_iter
-                performance = " timer: %.6f sec. || fps: %.3f" % (time_iter, fps)
-
-                pbar.set_description(s + performance)
+                    f'{epoch}/{epochs - 1}', mem, *mloss, imgs.shape[-1], fps)
+                pbar.set_description(s)
 
                 if nb > 1000:
                     log_freq = 100
@@ -677,7 +679,7 @@ def parse_opt(known=False):
     parser.add_argument('--bbox_interval', type=int, default=-1, help='Set bounding-box image logging interval for W&B')
     parser.add_argument('--save_period', type=int, default=-1, help='Log model after every "save_period" epoch')
     parser.add_argument('--artifact_alias', type=str, default="latest", help='version of dataset artifact to be used')
-    parser.add_argument('--local_rank', type=int, default=-1, help='DDP parameter, do not modify')
+    parser.add_argument('--local_rank', '--local-rank', type=int, default=-1, help='DDP parameter, do not modify')
     parser.add_argument('--amp', action='store_true', default=False, help='use amp to train and test')
     opt = parser.parse_known_args()[0] if known else parser.parse_args()
     return opt
@@ -709,6 +711,12 @@ def main(opt):
 
     print("Global setting:", LOCAL_RANK, RANK, WORLD_SIZE)
 
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(opt)
+    except:
+        pass
+
     # DDP mode
     device = select_device(opt.device, batch_size=opt.batch_size)
     if LOCAL_RANK != -1:
@@ -724,7 +732,7 @@ def main(opt):
             dist_backend = os.environ[DIST_BACKEND_ENV]
 
         dist.init_process_group(backend=dist_backend, rank=RANK, world_size=WORLD_SIZE)
-        assert opt.batch_size % WORLD_SIZE == 0, '--batch-size must be multiple of CUDA device count'
+        # assert opt.batch_size % WORLD_SIZE == 0, '--batch-size must be multiple of CUDA device count'
         assert not opt.image_weights, '--image-weights argument is not compatible with DDP training'
 
     # Train

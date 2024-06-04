@@ -1,3 +1,6 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
+
 """Utilities and tools for tracking runs with Weights & Biases."""
 import logging
 import os
@@ -18,7 +21,7 @@ try:
     from wandb import init, finish
 except ImportError:
     wandb = None
-
+wandb = None
 RANK = int(os.getenv('RANK', -1))
 WANDB_ARTIFACT_PREFIX = 'wandb-artifact://'
 
