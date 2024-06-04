@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -14,13 +14,25 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+start_time=$(date +%s)
+unset no_proxy use_proxy https_proxy http_proxy
 EXIT_STATUS=0
 check_status() {
-    if ((${PIPESTATUS[0]} != 0)); then
-        EXIT_STATUS=1
-    fi
+	if ((${PIPESTATUS[0]} != 0)); then
+		EXIT_STATUS=1
+	fi
 }
 
-python3 test.py --task val --data data/coco128.yaml --weights weights/yolov5s.pt 2>&1 | tee inferencelog.log
+python3 -m torch.distributed.launch --nproc_per_node=16 \
+	train.py --batch-size 32 \
+	--data ./data/coco.yaml --weights "" \
+	--cfg models/yolov5m.yaml --workers 16 \
+	--epochs 3 --linear-lr "$@"
 check_status
+
+wait
+
+end_time=$(date +%s)
+e2e_time=$(($end_time - $start_time))
+echo "end to end time: $e2e_time" >>total_time.log
 exit ${EXIT_STATUS}
