@@ -16,9 +16,9 @@
 
 if [[ "$(uname)" == "Linux" ]]; then
     if command -v apt &> /dev/null; then
-        apt install -y numactl
+        apt install -y numactl libgl1-mesa-dev
     elif command -v yum &> /dev/null; then
-        yum install -y numactl
+        yum install -y numactl mesa-libGL
     else
         echo "Unsupported package manager"
         exit 1

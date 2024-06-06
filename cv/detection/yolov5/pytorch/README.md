@@ -5,8 +5,7 @@ YOLOv5 🚀 is a family of object detection architectures and models pretrained 
 ## Step 1: Installing packages
 
 ```shell
-# install libGL
-yum install -y mesa-libGL
+# install libGL, requirements.
 bash init.sh
 ```
 
@@ -92,9 +91,11 @@ $ python3 -m torch.distributed.launch --nproc_per_node 8 \
 
 Test the yolov5 model as follows, the result is saved in ./runs/detect:
 
-$ cd yolov5
+```bash
 $ python3 detect.py --source ./data/images/bus.jpg --weights yolov5s.pt --img 640
+
 $ python3 detect.py --source ./data/images/zidane.jpg --weights yolov5s.pt --img 640
+```
 
 ## Results on BI-V100
 

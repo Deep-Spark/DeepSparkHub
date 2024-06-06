@@ -15,6 +15,8 @@
 #    under the License.
 
 pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 urllib3==1.26.6
+
 PY_VERSION=$(python3 -V 2>&1 | awk '{print $2}' | awk -F '.' '{print $2}')
 if [ "$PY_VERSION" == "10" ]; then
    pip3 install numpy==1.22.4
@@ -23,4 +25,17 @@ else
    pip3 install opencv-contrib-python==4.4.0.46
 fi
 
-python3 setup.py develop
+# libGL
+if [[ "$(uname)" == "Linux" ]]; then
+   if command -v apt &>/dev/null; then
+      apt install -y libgl1-mesa-dev
+   elif command -v yum &>/dev/null; then
+      yum install -y mesa-libGL
+   else
+      echo "Unsupported package manager"
+      exit 1
+   fi
+else
+   echo "Unsupported operating system"
+   exit 1
+fi

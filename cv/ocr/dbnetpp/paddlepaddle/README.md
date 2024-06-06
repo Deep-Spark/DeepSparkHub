@@ -15,9 +15,10 @@ yes | cp -rf ../../../../toolbox/PaddleOCR/* PaddleOCR/
 cd PaddleOCR
 
 # install requirements.
-pip3 install protobuf==3.20.3 urllib3==1.26.6
-yum install -y mesa-libGL
 bash ../init.sh
+
+# build PaddleOCR
+python3 setup.py develop
 ```
 
 ## Step 2: Preparing datasets
