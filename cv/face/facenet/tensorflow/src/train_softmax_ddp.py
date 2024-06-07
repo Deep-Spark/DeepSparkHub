@@ -3,6 +3,8 @@
 # MIT License
 # 
 # Copyright (c) 2016 David Sandberg
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +23,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 from __future__ import absolute_import
 from __future__ import division
@@ -31,15 +31,15 @@ from __future__ import print_function
 import horovod 
 import horovod.tensorflow as hvd
 
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
-
 from datetime import datetime
+import os
 import os.path
 import time
+import math
 import sys
 import random
-
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 import numpy as np
 import importlib
 import argparse
@@ -51,9 +51,17 @@ import tf_slim as slim
 from tensorflow.python.ops import data_flow_ops
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import array_ops
-import os
-#gpus = tf.config.list_physical_devices(device_type='GPU')
-#tf.config.experimental.set_visible_devices(devices=gpus[0:16], device_type='GPU')
+
+import time
+fw = None
+# 训练总时长
+total_training_time = 0 
+# 训练总样本数量
+total_samples = 0
+# 评估总时长
+total_eval_time = 0  
+# 总时间
+total_time = 0
 
 def main(args):
     
@@ -62,27 +70,28 @@ def main(args):
 
     subdir = datetime.strftime(datetime.now(), '%Y%m%d-%H%M%S')
     log_dir = os.path.join(os.path.expanduser(args.logs_base_dir), subdir)
-    if not os.path.isdir(log_dir):  # Create the log directory if it doesn't exist
-        os.makedirs(log_dir)
+    if hvd.rank() == 0:
+        if not os.path.isdir(log_dir):  # Create the log directory if it doesn't exist
+            os.makedirs(log_dir)
     model_dir = os.path.join(os.path.expanduser(args.models_base_dir), subdir)
-    if not os.path.isdir(model_dir):  # Create the model directory if it doesn't exist
-        os.makedirs(model_dir)
+    if hvd.rank() == 0:
+        if not os.path.isdir(model_dir):  # Create the model directory if it doesn't exist
+            os.makedirs(model_dir)
 
     stat_file_name = os.path.join(log_dir, 'stat.h5')
 
     # Write arguments to a text file
-    facenet.write_arguments_to_file(args, os.path.join(log_dir, 'arguments.txt'))
+    if hvd.rank() == 0:
+        facenet.write_arguments_to_file(args, os.path.join(log_dir, 'arguments.txt'))
         
     # Store some git revision info in a text file in the log directory
     src_path,_ = os.path.split(os.path.realpath(__file__))
-    facenet.store_revision_info(src_path, log_dir, ' '.join(sys.argv))
+    if hvd.rank() == 0:
+        facenet.store_revision_info(src_path, log_dir, ' '.join(sys.argv))
 
     np.random.seed(seed=args.seed)
     random.seed(args.seed)
-
-    hvd.init()
-
-    #os.environ['CUDA_VISIBLE_DEVICES'] = str(hvd.local_rank())
+    os.environ['PYTHONHASHSEED'] = str(args.seed)
 
     dataset = facenet.get_dataset(args.data_dir)
     if args.filter_filename:
@@ -96,15 +105,17 @@ def main(args):
         
     nrof_classes = len(train_set)
     
-    print('Model directory: %s' % model_dir)
-    print('Log directory: %s' % log_dir)
+    if hvd.rank() == 0:
+        print('Model directory: %s' % model_dir)
+        print('Log directory: %s' % log_dir)
     pretrained_model = None
     if args.pretrained_model:
         pretrained_model = os.path.expanduser(args.pretrained_model)
         print('Pre-trained model: %s' % pretrained_model)
     
     if args.lfw_dir:
-        print('LFW directory: %s' % args.lfw_dir)
+        if hvd.rank() == 0:
+            print('LFW directory: %s' % args.lfw_dir)
         # Read the file containing the pairs used for testing
         pairs = lfw.read_pairs(os.path.expanduser(args.lfw_pairs))
         # Get the paths for the corresponding images
@@ -119,23 +130,24 @@ def main(args):
         assert len(image_list)>0, 'The training set should not be empty'
         
         val_image_list, val_label_list = facenet.get_image_paths_and_labels(val_set)
-
+        
+        args.epoch_size = len(image_list) // (args.batch_size * hvd.size())
+        
         # Create a queue that produces indices into the image_list and label_list 
         labels = ops.convert_to_tensor(label_list, dtype=tf.int32)
         range_size = array_ops.shape(labels)[0]
         index_queue = tf.train.range_input_producer(range_size, num_epochs=None,
-                             shuffle=True, seed=None, capacity=32)
+                             shuffle=True, seed=args.seed, capacity=32)
         
-        index_dequeue_op = index_queue.dequeue_many(args.batch_size*args.epoch_size, 'index_dequeue')
+        index_dequeue_op = index_queue.dequeue_many(args.batch_size*args.epoch_size*hvd.size(), 'index_dequeue')
         
         learning_rate_placeholder = tf.placeholder(tf.float32, name='learning_rate')
         batch_size_placeholder = tf.placeholder(tf.int32, name='batch_size')
-        print('batch_size_placeholder',batch_size_placeholder)
         phase_train_placeholder = tf.placeholder(tf.bool, name='phase_train')
         image_paths_placeholder = tf.placeholder(tf.string, shape=(None,1), name='image_paths')
         labels_placeholder = tf.placeholder(tf.int32, shape=(None,1), name='labels')
         control_placeholder = tf.placeholder(tf.int32, shape=(None,1), name='control')
-        
+
         nrof_preprocess_threads = 4
         input_queue = data_flow_ops.FIFOQueue(capacity=2000000,
                                     dtypes=[tf.string, tf.int32, tf.int32],
@@ -148,20 +160,19 @@ def main(args):
         image_batch = tf.identity(image_batch, 'input')
         label_batch = tf.identity(label_batch, 'label_batch')
         
-        print('Number of classes in training set: %d' % nrof_classes)
-        print('Number of examples in training set: %d' % len(image_list))
-
-        print('Number of classes in validation set: %d' % len(val_set))
-        print('Number of examples in validation set: %d' % len(val_image_list))
-        
-        print('Building training graph')
+        if hvd.rank() == 0:
+            print('Number of classes in training set: %d' % nrof_classes)
+            print('Number of examples in training set: %d' % len(image_list))
+            print('Number of classes in validation set: %d' % len(val_set))
+            print('Number of examples in validation set: %d' % len(val_image_list))
+            print('Building training graph')
         
         # Build the inference graph
         prelogits, _ = network.inference(image_batch, args.keep_probability, 
             phase_train=phase_train_placeholder, bottleneck_layer_size=args.embedding_size, 
-            weight_decay=args.weight_decay)
+            weight_decay=args.weight_decay, seed=args.seed)
         logits = slim.fully_connected(prelogits, len(train_set), activation_fn=None, 
-                weights_initializer=slim.initializers.xavier_initializer(), 
+                weights_initializer=slim.initializers.xavier_initializer(seed=args.seed), 
                 weights_regularizer=slim.l2_regularizer(args.weight_decay),
                 scope='Logits', reuse=False)
 
@@ -211,29 +222,19 @@ def main(args):
         gpu_options.allow_growth = True
         
         config = tf.ConfigProto(gpu_options=gpu_options)
-        #config.gpu_options.visible_device_list = str(hvd.local_rank())
         os.environ['CUDA_VISIBLE_DEVICES'] = str(hvd.local_rank())
         config.log_device_placement = False
 
-        # sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False))
-        # sess = tf.Session(config=config)
         sess = tf.train.MonitoredTrainingSession(config=config, hooks=hooks)
-        # sess.run(tf.global_variables_initializer())
-        # sess.run(tf.local_variables_initializer())
+
         summary_writer = tf.summary.FileWriter(log_dir, sess.graph)
         coord = tf.train.Coordinator()
         tf.train.start_queue_runners(coord=coord, sess=sess)
 
-        # with sess.as_default():
         with tf.train.MonitoredTrainingSession(config=config, hooks=hooks) as sess:
             if pretrained_model:
-                print('----------------------Restoring pretrained model: %s' % pretrained_model)
+                print('Restoring pretrained model: %s' % pretrained_model)
                 saver.restore(sess, pretrained_model)
-
-                # ckpt = tf.train.get_checkpoint_state(pretrained_model) 
-                # if ckpt and ckpt.model_checkpoint_path: 
-                #     saver.restore(sess, ckpt.model_checkpoint_path)
-                #     print("--------------------------------restore module success!")
 
             # Training and validation loop
             if hvd.rank() == 0:
@@ -258,8 +259,22 @@ def main(args):
                 'time_evaluate': np.zeros((args.max_nrof_epochs,), np.float32),
                 'prelogits_hist': np.zeros((args.max_nrof_epochs, 1000), np.float32),
               }
+            # 声明为全局变量
+            global fw
+            global total_training_time
+            global total_samples
+            global total_eval_time 
+            global total_time
+            # 声明fps日志打印路径
+            fps_dir = 'log/'
+            if hvd.rank() == 0:
+                os.makedirs(fps_dir, exist_ok=True)
+                fw = open(os.path.join(fps_dir, f'fps.txt'), 'a+', encoding='utf-8')
+
             for epoch in range(1, args.max_nrof_epochs+1):
                 step = sess.run(global_step, feed_dict=None)
+                # one epoch开始时间
+                epoch_start = time.time()
                 # Train for one epoch
                 t = time.time()
                 cont = train(args, sess, epoch, image_list, label_list, index_dequeue_op, enqueue_op, image_paths_placeholder, labels_placeholder,
@@ -285,10 +300,14 @@ def main(args):
                     save_variables_and_metagraph(sess, saver, summary_writer, model_dir, subdir, epoch)
 
                 # Evaluate on LFW
+                # 评估精度
+                acc = 0
+                # one epoch评估开始
+                eval_start = time.time()
                 t = time.time()
                 if args.lfw_dir:
                     if hvd.rank() == 0:
-                        evaluate(sess, enqueue_op, image_paths_placeholder, labels_placeholder, phase_train_placeholder, batch_size_placeholder, control_placeholder, 
+                        acc = evaluate(sess, enqueue_op, image_paths_placeholder, labels_placeholder, phase_train_placeholder, batch_size_placeholder, control_placeholder, 
                             embeddings, label_batch, lfw_paths, actual_issame, args.lfw_batch_size, args.lfw_nrof_folds, log_dir, step, summary_writer, stat, epoch, 
                             args.lfw_distance_metric, args.lfw_subtract_mean, args.lfw_use_flipped_images, args.use_fixed_image_standardization)
                 stat['time_evaluate'][epoch-1] = time.time() - t
@@ -298,6 +317,26 @@ def main(args):
                     with h5py.File(stat_file_name, 'w') as f:
                         for key, value in stat.items():
                             f.create_dataset(key, data=value)
+                
+                # one epoch结束时间 
+                epoch_end = time.time()
+                # 计算一个epoch评估时长
+                cur_epoch_eval_time = epoch_end - eval_start
+                # 计算总共评估时长
+                total_eval_time += cur_epoch_eval_time
+                # 计算总时长
+                total_time += (epoch_end - epoch_start)
+                if (fw is not None) and (hvd.rank() == 0):
+                    fw.write('Epoch: {}\tCurrent End Time: {}\n'.format(epoch, epoch_end))
+                    fw.write('Epoch: {}\tCurrent Eval Time: {}\n'.format(epoch, cur_epoch_eval_time))
+                    fw.write('Epoch: {}\tCurrent Acc(%) Score: {}\n'.format(epoch, acc))
+                    fw.write('Epoch: {}\tAll Train Samples: {}\n'.format(epoch, total_samples))
+                    fw.write('Epoch: {}\tAll Train Time: {}\n'.format(epoch, total_training_time))
+                    fw.write('Epoch: {}\tAll Eval Time: {}\n'.format(epoch, total_eval_time))
+                    fw.write('Epoch: {}\tAll Time: {}\n'.format(epoch, total_time))
+                    fw.flush()
+            if (fw is not None) and (hvd.rank() == 0):
+                fw.close()
 
     return model_dir
   
@@ -352,8 +391,12 @@ def train(args, sess, epoch, image_list, label_list, index_dequeue_op, enqueue_o
         return False 
 
     index_epoch = sess.run(index_dequeue_op)
-    label_epoch = np.array(label_list)[index_epoch]
-    image_epoch = np.array(image_list)[index_epoch]
+
+    images_per_gpu = args.batch_size*args.epoch_size
+    start_index = hvd.rank() * images_per_gpu
+    end_index = (hvd.rank() + 1) * images_per_gpu
+    label_epoch = np.array(label_list)[index_epoch[start_index : end_index]]
+    image_epoch = np.array(image_list)[index_epoch[start_index : end_index]]
     
     # Enqueue one epoch of image paths and labels
     labels_array = np.expand_dims(np.array(label_epoch),1)
@@ -362,10 +405,25 @@ def train(args, sess, epoch, image_list, label_list, index_dequeue_op, enqueue_o
     control_array = np.ones_like(labels_array) * control_value
     sess.run(enqueue_op, {image_paths_placeholder: image_paths_array, labels_placeholder: labels_array, control_placeholder: control_array})
 
+    # one epoch开始时间
+    epoch_start = time.time()
+    # one epoch样本数量
+    epoch_samples = 0
+    # 一个epoch训练时长
+    cur_epoch_train_time = 0
+    
+    global total_samples
+    global fw
+    global total_training_time
+
     # Training loop
     train_time = 0
     all_fps=[]
     while batch_number < args.epoch_size:
+        total_samples += (args.batch_size * hvd.size())
+        epoch_samples += (args.batch_size * hvd.size())
+        # one step开始时间
+        train_start_time = time.time()
         start_time = time.time()
         feed_dict = {learning_rate_placeholder: lr, phase_train_placeholder:True, batch_size_placeholder:args.batch_size}
         tensor_list = [loss, train_op, step, reg_losses, prelogits, cross_entropy_mean, learning_rate, prelogits_norm, accuracy, prelogits_center_loss]
@@ -374,8 +432,12 @@ def train(args, sess, epoch, image_list, label_list, index_dequeue_op, enqueue_o
             summary_writer.add_summary(summary_str, global_step=step_)
         else:
             loss_, _, step_, reg_losses_, prelogits_, cross_entropy_mean_, lr_, prelogits_norm_, accuracy_, center_loss_ = sess.run(tensor_list, feed_dict=feed_dict)
-         
+        
         duration = time.time() - start_time
+        cur_epoch_train_time += (time.time() - train_start_time)
+        if not math.isfinite(loss_):
+            print("Loss is {}, stopping training".format(loss_))
+            sys.exit(1)
         stat['loss'][step_-1] = loss_
         stat['center_loss'][step_-1] = center_loss_
         stat['reg_loss'][step_-1] = np.sum(reg_losses_)
@@ -394,6 +456,15 @@ def train(args, sess, epoch, image_list, label_list, index_dequeue_op, enqueue_o
         train_time += duration
     if hvd.rank() == 0:
         print("AVG FPS: ", sum(all_fps)/len(all_fps))
+    # 计算训练总时间
+    total_training_time += cur_epoch_train_time
+    if (fw is not None) and (hvd.rank() == 0):
+        fw.write('Epoch: {}\tCurrent Start Time: {}\n'.format(epoch, epoch_start))
+        fw.write('Epoch: {}\tCurrent Train Samples: {}\n'.format(epoch, epoch_samples))
+        fw.write('Epoch: {}\tCurrent Train Time: {}\n'.format(epoch, cur_epoch_train_time))
+        fw.write('Epoch: {}\tCurrent Epoch FPS: {}\n'.format(epoch, epoch_samples / cur_epoch_train_time))
+        fw.flush()
+    
     # Add validation loss and accuracy to summary
     summary = tf.Summary()
     #pylint: disable=maybe-no-member
@@ -502,7 +573,7 @@ def evaluate(sess, enqueue_op, image_paths_placeholder, labels_placeholder, phas
         f.write('%d\t%.5f\t%.5f\n' % (step, np.mean(accuracy), val))
     stat['lfw_accuracy'][epoch-1] = np.mean(accuracy)
     stat['lfw_valrate'][epoch-1] = val
-
+    return np.mean(accuracy)
 
 def save_variables_and_metagraph(sess, saver, summary_writer, model_dir, model_name, step):
     # Save the model checkpoint
@@ -516,7 +587,6 @@ def save_variables_and_metagraph(sess, saver, summary_writer, model_dir, model_n
             session = session._sess
         return session
 
-    # saver.save(sess, checkpoint_path, global_step=step, write_meta_graph=False)
     saver.save(get_session(sess), checkpoint_path, global_step=step, write_meta_graph=False)
     save_time_variables = time.time() - start_time
     print('Variables saved in %.2f seconds' % save_time_variables)
@@ -558,7 +628,7 @@ def parse_arguments(argv):
     parser.add_argument('--image_size', type=int,
         help='Image size (height, width) in pixels.', default=160)
     parser.add_argument('--epoch_size', type=int,
-        help='Number of batches per epoch.', default=125)
+        help='Number of batches per epoch.', default=1000)
     parser.add_argument('--embedding_size', type=int,
         help='Dimensionality of the embedding.', default=128)
     parser.add_argument('--random_crop', 
@@ -632,8 +702,22 @@ def parse_arguments(argv):
     parser.add_argument('--lfw_subtract_mean',
         help='Subtract feature mean before calculating distance.', action='store_true')
     return parser.parse_args(argv)
-  
+
 
 if __name__ == '__main__':
+    hvd.init()
+    time_fw = None
+    
+    # time_fw为存储时间日志的文件对象，文件绝对路径为'log/time.txt'
+    if hvd.rank() == 0:
+        print("[info] hvd.size = ", hvd.size())
+        os.makedirs('log/', exist_ok=True)
+        time_fw = open(os.path.join('log/', f'time.txt'), 'a+', encoding='utf-8')
+        # time_fw写入程序开始执行的时间
+        time_fw.write('Start Time: {:.6f}\n'.format(time.time()))
     main(parse_arguments(sys.argv[1:]))
- 
+    # 记录程序结束的时间
+    if hvd.rank() == 0:
+        time_fw.write('End Time: {}\n'.format(time.time()))
+        time_fw.flush()
+        time_fw.close()

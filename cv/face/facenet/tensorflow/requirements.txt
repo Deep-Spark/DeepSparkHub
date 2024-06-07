@@ -1,4 +1,5 @@
-scipy
+#tensorflow==1.7
+#scipy
 scikit-learn
 opencv-python
 h5py

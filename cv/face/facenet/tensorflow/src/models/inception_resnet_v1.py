@@ -1,4 +1,6 @@
 # Copyright 2016 The TensorFlow Authors. All Rights Reserved.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,8 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
+
 """Contains the definition of the Inception Resnet V1 architecture.
 As described in http://arxiv.org/abs/1602.07261.
   Inception-v4, Inception-ResNet and the Impact of Residual Connections
@@ -130,7 +131,7 @@ def reduction_b(net):
     return net
   
 def inference(images, keep_probability, phase_train=True, 
-              bottleneck_layer_size=128, weight_decay=0.0, reuse=None):
+              bottleneck_layer_size=128, weight_decay=0.0, reuse=None, seed=None):
     batch_norm_params = {
         # Decay for the moving averages.
         'decay': 0.995,
@@ -143,18 +144,19 @@ def inference(images, keep_probability, phase_train=True,
     }
     
     with slim.arg_scope([slim.conv2d, slim.fully_connected],
-                        weights_initializer=slim.initializers.xavier_initializer(), 
+                        weights_initializer=slim.initializers.xavier_initializer(seed=seed), 
                         weights_regularizer=slim.l2_regularizer(weight_decay),
                         normalizer_fn=slim.batch_norm,
                         normalizer_params=batch_norm_params):
         return inception_resnet_v1(images, is_training=phase_train,
-              dropout_keep_prob=keep_probability, bottleneck_layer_size=bottleneck_layer_size, reuse=reuse)
+              dropout_keep_prob=keep_probability, bottleneck_layer_size=bottleneck_layer_size, reuse=reuse, seed=seed)
 
 
 def inception_resnet_v1(inputs, is_training=True,
                         dropout_keep_prob=0.8,
                         bottleneck_layer_size=128,
                         reuse=None, 
+                        seed=None,
                         scope='InceptionResnetV1'):
     """Creates the Inception Resnet V1 model.
     Args:
@@ -238,7 +240,7 @@ def inception_resnet_v1(inputs, is_training=True,
                     net = slim.flatten(net)
           
                     net = slim.dropout(net, dropout_keep_prob, is_training=is_training,
-                                       scope='Dropout')
+                                       scope='Dropout', seed=seed)
           
                     end_points['PreLogitsFlatten'] = net
                 

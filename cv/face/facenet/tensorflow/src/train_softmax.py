@@ -3,6 +3,8 @@
 # MIT License
 # 
 # Copyright (c) 2016 David Sandberg
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +23,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -46,6 +47,23 @@ from tensorflow.python.ops import data_flow_ops
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import array_ops
 
+RANK_ID = 0
+if "RANK_ID" in os.environ:
+    RANK_ID = int(os.environ["RANK_ID"])
+RANK_SIZE = 1
+if "RANK_SIZE" in os.environ:
+    RANK_SIZE = int(os.environ["RANK_SIZE"])
+
+def broadcast_global_variables(root_rank):
+    op_list = []
+    for var in tf.global_variables():
+        if "float" in var.dtype.name:
+            inputs = [var]
+            outputs = hccl_ops.broadcast(tensor=inputs, root_rank=root_rank)
+            if outputs is not None:
+                op_list.append(outputs[0].op)
+                op_list.append(tf.assign(var, outputs[0]))
+    return tf.group(op_list)
 def main(args):
   
     network = importlib.import_module(args.model_def)
@@ -109,14 +127,13 @@ def main(args):
         # Create a queue that produces indices into the image_list and label_list 
         labels = ops.convert_to_tensor(label_list, dtype=tf.int32)
         range_size = array_ops.shape(labels)[0]
-        index_queue = tf.train.range_input_producer(range_size, num_epochs=None, 
+        index_queue = tf.train.range_input_producer(range_size, num_epochs=None,
                              shuffle=True, seed=None, capacity=32)
         
         index_dequeue_op = index_queue.dequeue_many(args.batch_size*args.epoch_size, 'index_dequeue')
         
         learning_rate_placeholder = tf.placeholder(tf.float32, name='learning_rate')
         batch_size_placeholder = tf.placeholder(tf.int32, name='batch_size')
-        print('batch_size_placeholder',batch_size_placeholder)
         phase_train_placeholder = tf.placeholder(tf.bool, name='phase_train')
         image_paths_placeholder = tf.placeholder(tf.string, shape=(None,1), name='image_paths')
         labels_placeholder = tf.placeholder(tf.int32, shape=(None,1), name='labels')
@@ -192,10 +209,14 @@ def main(args):
         # Start running operations on the Graph.
         gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=args.gpu_memory_fraction)
         gpu_options.allow_growth = True
-        
         sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False))
         sess.run(tf.global_variables_initializer())
         sess.run(tf.local_variables_initializer())
+        if RANK_SIZE > 1:
+            bcast_global_variables_op =  broadcast_global_variables(root_rank=0)
+            sess.run(bcast_global_variables_op)
+        train_op = util.set_iteration_per_loop(sess, apply_gradient_op, args.iterations_per_loop)
+
         summary_writer = tf.summary.FileWriter(log_dir, sess.graph)
         coord = tf.train.Coordinator()
         tf.train.start_queue_runners(coord=coord, sess=sess)
@@ -203,13 +224,8 @@ def main(args):
         with sess.as_default():
 
             if pretrained_model:
-                print('----------------------Restoring pretrained model: %s' % pretrained_model)
+                print('Restoring pretrained model: %s' % pretrained_model)
                 saver.restore(sess, pretrained_model)
-
-                #ckpt = tf.train.get_checkpoint_state(pretrained_model) 
-                #if ckpt and ckpt.model_checkpoint_path: 
-                #    saver.restore(sess, ckpt.model_checkpoint_path)
-                #    print("--------------------------------restore module success!")
 
             # Training and validation loop
             print('Running training')
@@ -233,6 +249,16 @@ def main(args):
                 'time_evaluate': np.zeros((args.max_nrof_epochs,), np.float32),
                 'prelogits_hist': np.zeros((args.max_nrof_epochs, 1000), np.float32),
               }
+            # 声明为全局变量
+            global fw
+            global total_training_time
+            global total_samples
+            global total_eval_time 
+            global total_time
+            # 声明fps日志打印路径
+            fps_dir = 'log/'
+            os.makedirs(fps_dir, exist_ok=True)
+            fw = open(os.path.join(fps_dir, f'fps.txt'), 'a+', encoding='utf-8')
             for epoch in range(1,args.max_nrof_epochs+1):
                 step = sess.run(global_step, feed_dict=None)
                 # Train for one epoch
@@ -267,7 +293,7 @@ def main(args):
 
                 print('Saving statistics')
                 with h5py.File(stat_file_name, 'w') as f:
-                    for key, value in stat.items():
+                    for key, value in stat.iteritems():
                         f.create_dataset(key, data=value)
     
     return model_dir
@@ -292,7 +318,6 @@ def filter_dataset(dataset, data_filename, percentile, min_nrof_images_per_class
         for i in indices:
             label = label_list[i]
             image = image_list[i]
-            print("image:{}".format(image))
             if image in filtered_dataset[label].image_paths:
                 filtered_dataset[label].image_paths.remove(image)
             if len(filtered_dataset[label].image_paths)<min_nrof_images_per_class:
@@ -585,7 +610,15 @@ def parse_arguments(argv):
     parser.add_argument('--lfw_subtract_mean', 
         help='Subtract feature mean before calculating distance.', action='store_true')
     return parser.parse_args(argv)
-  
 
 if __name__ == '__main__':
+    # time_fw为存储时间日志的文件对象，文件绝对路径为'log/time.txt'
+    os.makedirs('log/', exist_ok=True)
+    time_fw = open(os.path.join('log/', f'time.txt'), 'a+', encoding='utf-8')
+    # time_fw写入程序开始执行的时间
+    time_fw.write('Start Time: {:.6f}\n'.format(time.time()))
     main(parse_arguments(sys.argv[1:]))
+    # 记录程序结束的时间
+    time_fw.write('End Time: {}\n'.format(time.time()))
+    time_fw.flush()
+    time_fw.close()
