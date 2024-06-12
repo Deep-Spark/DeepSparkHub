@@ -1,4 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,9 +33,11 @@ import re
 import threading
 import time
 import traceback
+import sys
 
 from absl import flags as absl_flags
 import numpy as np
+import math
 
 import six
 from six.moves import xrange  # pylint: disable=redefined-builtin
@@ -184,7 +188,7 @@ flags.DEFINE_boolean('collect_eval_results_async', False,
                      'the SSD model.')
 flags.DEFINE_integer('num_warmup_batches', None,
                      'number of batches to run before timing')
-flags.DEFINE_integer('autotune_threshold', 2,
+flags.DEFINE_integer('autotune_threshold', None,
                      'The autotune threshold for the models')
 # TODO(tucker): change num_gpus to num_devices
 flags.DEFINE_integer('num_gpus', 1, 'the number of GPUs to run on')
@@ -318,7 +322,7 @@ flags.DEFINE_string('partitioned_graph_file_prefix', None,
                     'with the given prefix.')
 flags.DEFINE_enum('optimizer', 'sgd', ('momentum', 'sgd', 'rmsprop', 'adam'),
                   'Optimizer to use')
-flags.DEFINE_float('init_learning_rate', 0.045,
+flags.DEFINE_float('init_learning_rate', None,
                    'Initial learning rate for training.')
 flags.DEFINE_string('piecewise_learning_rate_schedule', None,
                     'Specifies a piecewise learning rate schedule based on the '
@@ -329,10 +333,10 @@ flags.DEFINE_string('piecewise_learning_rate_schedule', None,
                     'paramater is 0.3;10;0.2;25;0.1, the learning rate is 0.3 '
                     'for the first 10 epochs, then is 0.2 for the next 15 '
                     'epochs, then is 0.1 until training ends.')
-flags.DEFINE_float('num_epochs_per_decay', 2,
+flags.DEFINE_float('num_epochs_per_decay', 0,
                    'Steps after which learning rate decays. If 0, the learning '
                    'rate does not decay.')
-flags.DEFINE_float('learning_rate_decay_factor', 0.94,
+flags.DEFINE_float('learning_rate_decay_factor', 0,
                    'Learning rate decay factor. Decay by this factor every '
                    '`num_epochs_per_decay` epochs. If 0, learning rate does '
                    'not decay.')
@@ -881,6 +885,9 @@ def benchmark_one_step(sess,
     lossval = results['average_loss']
   else:
     lossval = 0.
+  if not math.isfinite(lossval):
+    print("Loss is {}, stopping training".format(lossval))
+    sys.exit(1)
   if image_producer is not None:
     image_producer.notify_image_consumption()
   train_time = time.time() - start_time
