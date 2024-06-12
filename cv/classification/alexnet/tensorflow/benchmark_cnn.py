@@ -1,4 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,9 +33,11 @@ import re
 import threading
 import time
 import traceback
+import sys
 
 from absl import flags as absl_flags
 import numpy as np
+import math
 
 import six
 from six.moves import xrange  # pylint: disable=redefined-builtin
@@ -881,6 +885,9 @@ def benchmark_one_step(sess,
     lossval = results['average_loss']
   else:
     lossval = 0.
+  if not math.isfinite(lossval):
+    print("Loss is {}, stopping training".format(lossval))
+    sys.exit(1)
   if image_producer is not None:
     image_producer.notify_image_consumption()
   train_time = time.time() - start_time
