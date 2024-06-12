@@ -3,6 +3,8 @@
 # MIT License
 # 
 # Copyright (c) 2016 David Sandberg
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +25,6 @@
 # SOFTWARE.
 
 # pylint: disable=missing-docstring
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -107,7 +107,7 @@ FLIP = 16
 def create_input_pipeline(input_queue, image_size, nrof_preprocess_threads, batch_size_placeholder, hvd_rank=-1, hvd=None):
 
     if hvd_rank == -1:
-        with tf.name_scope("tempscope"):    
+        with tf.name_scope("tempscope"),tf.device('/cpu:0'):    
             images_and_labels_list = []
             for _ in range(nrof_preprocess_threads):
                 filenames, label, control = input_queue.dequeue()
@@ -143,84 +143,33 @@ def create_input_pipeline(input_queue, image_size, nrof_preprocess_threads, batc
 
             return image_batch, label_batch
     else:
-        with tf.name_scope("tempscope"):    
-            images_and_labels_list = []
-            for _ in range(nrof_preprocess_threads):
-                filenames, label, control = input_queue.dequeue()
-                images = []
-                for filename in tf.unstack(filenames):
-                    file_contents = tf.read_file(filename)
-                    image = tf.image.decode_image(file_contents, 3)
-                    image = tf.cond(get_control_flag(control[0], RANDOM_ROTATE),
-                                    lambda:tf.py_func(random_rotate_image, [image], tf.uint8), 
-                                    lambda:tf.identity(image))
-                    image = tf.cond(get_control_flag(control[0], RANDOM_CROP), 
-                                    lambda:tf.random_crop(image, image_size + (3,)), 
-                                    lambda:tf.image.resize_image_with_crop_or_pad(image, image_size[0], image_size[1]))
-                    image = tf.cond(get_control_flag(control[0], RANDOM_FLIP),
-                                    lambda:tf.image.random_flip_left_right(image),
-                                    lambda:tf.identity(image))
-                    image = tf.cond(get_control_flag(control[0], FIXED_STANDARDIZATION),
-                                    lambda:(tf.cast(image, tf.float32) - 127.5)/128.0,
-                                    lambda:tf.cast(tf.image.per_image_standardization(image),tf.float32),tf.float32)
-                    image = tf.cond(get_control_flag(control[0], FLIP),
-                                    lambda:tf.image.flip_left_right(image),
-                                    lambda:tf.identity(image))
-                    #pylint: disable=no-member
-                    image.set_shape(image_size + (3,))
-                    images.append(image)
-                    images_and_labels_list.append([images, label])
-            
-            diff_value = hvd.size() - len(images_and_labels_list)
-            if diff_value > 0:
-                for i in range(diff_value):
-                    images_and_labels_list.append(images_and_labels_list[i])
-            images_and_labels_list = [x for i, x in enumerate(images_and_labels_list) if i % hvd.size() == hvd.rank()]
-            image_batch, label_batch = tf.train.batch_join(
-                images_and_labels_list, batch_size=batch_size_placeholder, 
-                shapes=[image_size + (3,), ()], enqueue_many=True,
-                capacity=4 * nrof_preprocess_threads * 100,
+        with tf.name_scope("tempscope"),tf.device('/cpu:0'):    
+            filename, label, control = input_queue.dequeue()
+            file_contents = tf.read_file(filename[0])
+            image = tf.image.decode_image(file_contents, 3)
+            image = tf.cond(get_control_flag(control[0], RANDOM_ROTATE),
+                            lambda:tf.py_func(random_rotate_image, [image], tf.uint8), 
+                            lambda:tf.identity(image))
+            image = tf.cond(get_control_flag(control[0], RANDOM_CROP), 
+                            lambda:tf.random_crop(image, image_size + (3,)), 
+                            lambda:tf.image.resize_image_with_crop_or_pad(image, image_size[0], image_size[1]))
+            image = tf.cond(get_control_flag(control[0], RANDOM_FLIP),
+                            lambda:tf.image.random_flip_left_right(image),
+                            lambda:tf.identity(image))
+            image = tf.cond(get_control_flag(control[0], FIXED_STANDARDIZATION),
+                            lambda:(tf.cast(image, tf.float32) - 127.5)/128.0,
+                            lambda:tf.cast(tf.image.per_image_standardization(image),tf.float32),tf.float32)
+            image = tf.cond(get_control_flag(control[0], FLIP),
+                            lambda:tf.image.flip_left_right(image),
+                            lambda:tf.identity(image))
+            #pylint: disable=no-member
+            image.set_shape(image_size + (3,))
+            image_batch, label_batch = tf.train.batch(
+                [image, label[0]],
+                batch_size=batch_size_placeholder, shapes=[image_size+(3, ), ()],
+                capacity=4 * nrof_preprocess_threads * 100, num_threads=nrof_preprocess_threads,
                 allow_smaller_final_batch=True)
-
             return image_batch, label_batch
-
-def create_input_pipeline_(input_queue, image_size, nrof_preprocess_threads, batch_size_placeholder):
-
-      with tf.name_scope("tempscope"):    
-          images_and_labels_list = []
-          for _ in range(nrof_preprocess_threads):
-              filenames, label, control = input_queue.dequeue()
-              images = []
-              for filename in tf.unstack(filenames):
-                  file_contents = tf.read_file(filename)
-                  image = tf.image.decode_image(file_contents, 3)
-                  image = tf.cond(get_control_flag(control[0], RANDOM_ROTATE),
-                                  lambda:tf.py_func(random_rotate_image, [image], tf.uint8), 
-                                  lambda:tf.identity(image))
-                  image = tf.cond(get_control_flag(control[0], RANDOM_CROP), 
-                                  lambda:tf.random_crop(image, image_size + (3,)), 
-                                  lambda:tf.image.resize_image_with_crop_or_pad(image, image_size[0], image_size[1]))
-                  image = tf.cond(get_control_flag(control[0], RANDOM_FLIP),
-                                  lambda:tf.image.random_flip_left_right(image),
-                                  lambda:tf.identity(image))
-                  image = tf.cond(get_control_flag(control[0], FIXED_STANDARDIZATION),
-                                  lambda:(tf.cast(image, tf.float32) - 127.5)/128.0,
-                                  lambda:tf.cast(tf.image.per_image_standardization(image),tf.float32),tf.float32)
-                  image = tf.cond(get_control_flag(control[0], FLIP),
-                                  lambda:tf.image.flip_left_right(image),
-                                  lambda:tf.identity(image))
-                  #pylint: disable=no-member
-                  image.set_shape(image_size + (3,))
-                  images.append(image)
-              images_and_labels_list.append([images, label])
-
-          image_batch, label_batch = tf.train.batch_join(
-              images_and_labels_list, batch_size=batch_size_placeholder, 
-              shapes=[image_size + (3,), ()], enqueue_many=True,
-              capacity=4 * nrof_preprocess_threads * 100,
-              allow_smaller_final_batch=True)
-
-          return image_batch, label_batch
 
 
 def get_control_flag(control, field):
@@ -256,9 +205,9 @@ def train(total_loss, global_step, optimizer, learning_rate, moving_average_deca
     # Generate moving averages of all losses and associated summaries.
     loss_averages_op = _add_loss_summaries(total_loss)
 
-    if hvd is not None:
-        lr_scaler = hvd.size()
-        learning_rate = learning_rate * lr_scaler 
+    # if hvd is not None:
+    #     lr_scaler = hvd.size()
+    #     learning_rate = learning_rate * lr_scaler
 
     # Compute gradients.
     with tf.control_dependencies([loss_averages_op]):
@@ -277,7 +226,7 @@ def train(total_loss, global_step, optimizer, learning_rate, moving_average_deca
             raise ValueError('Invalid optimization algorithm')
         
         if hvd is not None:
-            opt = hvd.DistributedOptimizer(opt, op=hvd.Average)
+            opt = hvd.DistributedOptimizer(opt, op=hvd.Sum,groups=1)
 
         #opt=tf.train.experimental.enable_mixed_precision_graph_rewrite(opt)
 
