@@ -23,7 +23,7 @@ export TF_CPP_MIN_LOG_LEVEL=1
 #TRAIN_EPOCHS=10
 # optional optimizer: adam, rmsprop, momentum, sgd
 OPTIMIZER=momentum
-DATE=`date +%Y%m%d%H%M%S`
+DATE=$(date +%Y%m%d%H%M%S)
 
 LOG_DIR="logs/vgg16_multigpu"
 DATA_DIR=./imagenet_tfrecord
@@ -35,16 +35,14 @@ mkdir -p ${BASE_DIR}
 rm -rf ${TRAIN_DIR}
 
 EXIT_STATUS=0
-check_status()
-{
+check_status() {
     if ((${PIPESTATUS[0]} != 0)); then
         EXIT_STATUS=1
     fi
 }
 
 i=0
-for arg in "$@"
-do
+for arg in "$@"; do
     if [[ $arg =~ "--epoch" ]]; then
         new_args[$i]="--num_epochs"
     else
@@ -55,15 +53,13 @@ done
 
 source ./get_num_devices.sh
 
-UMD_WAITAFTERLAUNCH=1 python3 -u tf_cnn_benchmarks.py\
- --data_name=imagenet --data_dir=${DATA_DIR}\
- --data_format=NCHW --batch_size=${BATCH_SIZE}\
- --model=vgg16 --optimizer=${OPTIMIZER} --num_gpus=${IX_NUM_CUDA_VISIBLE_DEVICES}\
- --weight_decay=1e-4 --train_dir=${TRAIN_DIR}\
- --eval_during_training_every_n_epochs=2\
- --num_eval_epochs=1 --datasets_use_caching\
- --stop_at_top_1_accuracy=0.9 --all_reduce_spec=pscpu\
- --num_intra_threads=1 --num_inter_threads=1 "${new_args[@]}" 2>&1 | tee ${LOG_DIR}/${DATE}_${TRAIN_EPOCHS}_${BATCH_SIZE}_${OPTIMIZER}.log; [[ ${PIPESTATUS[0]} == 0 ]] || exit
-
+UMD_WAITAFTERLAUNCH=1 python3 -u tf_cnn_benchmarks.py --data_name=imagenet --data_dir=${DATA_DIR} \
+    --data_format=NCHW --batch_size=${BATCH_SIZE} \
+    --model=vgg16 --optimizer=${OPTIMIZER} --num_gpus=${IX_NUM_CUDA_VISIBLE_DEVICES} \
+    --weight_decay=1e-4 --train_dir=${TRAIN_DIR} \
+    --eval_during_training_every_n_epochs=2 --num_eval_epochs=1 --datasets_use_caching \
+    --stop_at_top_1_accuracy=0.9 --all_reduce_spec=pscpu --num_intra_threads=1 \
+    --num_inter_threads=1 "${new_args[@]}" 2>&1 | tee ${LOG_DIR}/${DATE}_${TRAIN_EPOCHS}_${BATCH_SIZE}_${OPTIMIZER}.log
+[[ ${PIPESTATUS[0]} == 0 ]] || exit
 
 exit ${EXIT_STATUS}
