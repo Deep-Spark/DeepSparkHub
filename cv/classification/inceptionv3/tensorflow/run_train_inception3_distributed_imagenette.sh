@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -14,9 +14,5 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-: ${DATA_DIR:="./"}
-
-if [ ! -d "./imagenette" ]; then
-    echo "Make soft link form ${DATA_DIR} to tf_cnn_benckmarks"
-    ln -s "${DATA_DIR}/imagenette_tfrecord" imagenette
-fi
+bash ./run_train_distributed_imagenette.sh inception3 "$@"
+exit $?
