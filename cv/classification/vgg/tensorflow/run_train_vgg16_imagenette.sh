@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -14,17 +14,19 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+bash ./get_imagenette.sh
+
 export TF_CUDNN_USE_AUTOTUNE=1
 export TF_CPP_MIN_LOG_LEVEL=1
 
-: ${BATCH_SIZE:=256}
+: ${BATCH_SIZE:=32}
 #TRAIN_EPOCHS=10
 # optional optimizer: adam, rmsprop, momentum, sgd
 OPTIMIZER=momentum
 DATE=$(date +%Y%m%d%H%M%S)
 
 LOG_DIR="logs/vgg16"
-DATA_DIR=./imagenet_tfrecord
+DATA_DIR=./imagenette
 BASE_DIR=train_dir
 TRAIN_DIR=${BASE_DIR}/vgg16
 
@@ -49,13 +51,12 @@ for arg in "$@"; do
     let i++
 done
 
-python3 -u tf_cnn_benchmarks.py --data_name=imagenet --data_dir=${DATA_DIR} \
+python3 -u tf_cnn_benchmarks.py --data_name=imagenette --data_dir=${DATA_DIR} \
     --data_format=NCHW --batch_size=${BATCH_SIZE} \
     --model=vgg16 --optimizer=${OPTIMIZER} --num_gpus=1 \
     --weight_decay=1e-4 --train_dir=${TRAIN_DIR} \
-    --eval_during_training_every_n_epochs=2 \
-    --num_eval_epochs=1 --datasets_use_caching \
-    --stop_at_top_1_accuracy=0.9 --num_intra_threads=1 \
+    --eval_during_training_every_n_epochs=2 --num_eval_epochs=1 \
+    --datasets_use_caching --stop_at_top_1_accuracy=0.9 --num_intra_threads=1 \
     --num_inter_threads=1 "${new_args[@]}" 2>&1 | tee ${LOG_DIR}/${DATE}_${TRAIN_EPOCHS}_${BATCH_SIZE}_${OPTIMIZER}.log
 [[ ${PIPESTATUS[0]} == 0 ]] || exit
 

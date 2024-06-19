@@ -1,7 +1,8 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -33,9 +34,11 @@ import re
 import threading
 import time
 import traceback
+import sys
 
 from absl import flags as absl_flags
 import numpy as np
+import math
 
 import six
 from six.moves import xrange  # pylint: disable=redefined-builtin
@@ -170,7 +173,7 @@ flags.DEFINE_integer('num_batches', None, 'number of batches to run, excluding '
 flags.DEFINE_integer('num_eval_batches', None,
                      'number of eval batches to run, excluding warmup. '
                      'Defaults to --num_batches')
-flags.DEFINE_float('num_epochs', 100,
+flags.DEFINE_float('num_epochs', 90,
                    'number of epochs to run, excluding warmup. '
                    'This and --num_batches cannot both be specified.')
 flags.DEFINE_float('num_eval_epochs', None,
@@ -322,7 +325,7 @@ flags.DEFINE_enum('optimizer', 'sgd', ('momentum', 'sgd', 'rmsprop', 'adam'),
                   'Optimizer to use')
 flags.DEFINE_float('init_learning_rate', None,
                    'Initial learning rate for training.')
-flags.DEFINE_string('piecewise_learning_rate_schedule', "0.01;30;0.001;60;0.0001;90;0.00001",
+flags.DEFINE_string('piecewise_learning_rate_schedule', None,
                     'Specifies a piecewise learning rate schedule based on the '
                     'number of epochs. This is the form LR0;E1;LR1;...;En;LRn, '
                     'where each LRi is a learning rate and each Ei is an epoch '
@@ -331,10 +334,10 @@ flags.DEFINE_string('piecewise_learning_rate_schedule', "0.01;30;0.001;60;0.0001
                     'paramater is 0.3;10;0.2;25;0.1, the learning rate is 0.3 '
                     'for the first 10 epochs, then is 0.2 for the next 15 '
                     'epochs, then is 0.1 until training ends.')
-flags.DEFINE_float('num_epochs_per_decay', None,
+flags.DEFINE_float('num_epochs_per_decay', 0,
                    'Steps after which learning rate decays. If 0, the learning '
                    'rate does not decay.')
-flags.DEFINE_float('learning_rate_decay_factor', None,
+flags.DEFINE_float('learning_rate_decay_factor', 0,
                    'Learning rate decay factor. Decay by this factor every '
                    '`num_epochs_per_decay` epochs. If 0, learning rate does '
                    'not decay.')
@@ -358,7 +361,7 @@ flags.DEFINE_float('adam_beta2', 0.999, 'Beta2 term for the Adam optimizer')
 flags.DEFINE_float('adam_epsilon', 1e-8, 'Epsilon term for the Adam optimizer')
 flags.DEFINE_float('gradient_clip', None,
                    'Gradient clipping magnitude. Disabled by default.')
-flags.DEFINE_float('weight_decay', 0.0001,
+flags.DEFINE_float('weight_decay', 0.00004,
                    'Weight decay factor for training.')
 flags.DEFINE_float('gpu_memory_frac_for_testing', 0,
                    'If non-zero, the fraction of GPU memory that will be used. '
@@ -883,6 +886,9 @@ def benchmark_one_step(sess,
     lossval = results['average_loss']
   else:
     lossval = 0.
+  if not math.isfinite(lossval):
+    print("Loss is {}, stopping training".format(lossval))
+    sys.exit(1)
   if image_producer is not None:
     image_producer.notify_image_consumption()
   train_time = time.time() - start_time
@@ -1196,7 +1202,6 @@ def get_learning_rate(params, global_step, num_examples_per_epoch, model,
       learning_rate = get_piecewise_learning_rate(
           params.piecewise_learning_rate_schedule,
           global_step, num_batches_per_epoch)
-      print("learning_rate",learning_rate)
     elif params.init_learning_rate is not None:
       learning_rate = params.init_learning_rate
       if (params.num_epochs_per_decay > 0 and
