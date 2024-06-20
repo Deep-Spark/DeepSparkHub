@@ -68,9 +68,9 @@ scp -r ../../dataset/gpt_small_117M/gpt_small_117M_text_document ${user_name}@${
 
 ## Results
 
-|  GPUs   |              Model              | Training speed |
-| :-----: | :-----------------------------: | :------------: |
-| BI-V150 | Llama2-13B (Megatron-DeepSpeed) |                |
+|  GPUs   | Nodes |              Model              | GBS | DP  | TP  | PP  | Training speed |
+| :-----: | ----- | :-----------------------------: | --- | --- | --- | --- | :------------: |
+| BI-V150 | 2     | Llama2-13B (Megatron-DeepSpeed) | 32  | 1   | 4   | 8   |     439.94     |
 
 ## Reference
 
