@@ -9,7 +9,7 @@ Aquila 2 is a large language model released by Beijing Zhiyuan Artificial Intell
 1. Configure the same runing environment on each node and make sure the docker container names are the same
 2. Set ssh non-encryption connection on docker container:
 
-```bash 
+```bash
 # a. Generate the secret key on master node:
 ssh-keygen
 

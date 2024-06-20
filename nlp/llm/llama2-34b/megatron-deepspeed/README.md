@@ -70,7 +70,7 @@ scp -r ../../dataset/gpt_small_117M/gpt_small_117M_text_document ${user_name}@${
 
 |  GPUs   |              Model              | Training speed |
 | :-----: | :-----------------------------: | :------------: |
-| BI-V150 | LLama2-34B (Megatron-DeepSpeed) |                |
+| BI-V150 | Llama2-34B (Megatron-DeepSpeed) |                |
 
 ## Reference
 

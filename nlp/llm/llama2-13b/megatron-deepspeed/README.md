@@ -9,7 +9,7 @@ Llama 2 is a large language model released by Meta in 2023, with parameters rang
 1. Configure the same runing environment on each node and make sure the docker container names are the same
 2. Set ssh non-encryption connection on docker container:
 
-```bash 
+```bash
 # a. Generate the secret key on master node:
 ssh-keygen
 
@@ -70,7 +70,7 @@ scp -r ../../dataset/gpt_small_117M/gpt_small_117M_text_document ${user_name}@${
 
 |  GPUs   |              Model              | Training speed |
 | :-----: | :-----------------------------: | :------------: |
-| BI-V150 | LLama2-13B (Megatron-DeepSpeed) |                |
+| BI-V150 | Llama2-13B (Megatron-DeepSpeed) |                |
 
 ## Reference
 
