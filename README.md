@@ -435,12 +435,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Baichuan2-7B](nlp/llm/baichuan2-7b/Baichuan2/README.md)  | PyTorch | baichuan2-7b-base
 [Bloom-7B1](nlp/llm/bloom-7b1/firefly/README.md)  | PyTorch (Firefly) | school_math_0.25M & bloom-7b1
 [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
-[ChatGLM2-6B SFT](nlp/llm/ChatGLM2-6b-sft/README.md)  | PyTorch | ADGEN & chatglm2-6b
+[ChatGLM2-6B SFT](nlp/llm/ChatGLM2-6b-sft/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm2-6b
 [LLaMA-7B](nlp/llm/llama-7b/colossalai/README.md)  | PyTorch (Colossal-AI) | llama-7b-hf
-[Llama-2-7B](nlp/llm/llama2-7b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
-[Llama-2-7B Reward Model Finetuning](nlp/llm/llama2-7b_reward_sft/deepspeed/README.md)  | PyTorch (DeepSpeed) | Dahoas/rm-static
-[Llama-7B RLHF](nlp/llm/llama2-7b_rlhf/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | llama2-7b&tiny-llama
-[Llama-2-7B SFT](nlp/llm/llama2-7b_sft/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | gpt_small-117M
+[Llama2-7B](nlp/llm/llama2-7b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
+[Llama2-7B Reward Model Finetuning](nlp/llm/llama2-7b_reward_sft/deepspeed/README.md)  | PyTorch (DeepSpeed) | Dahoas/rm-static
+[Llama2-7B RLHF](nlp/llm/llama2-7b_rlhf/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | llama2-7b&tiny-llama
+[Llama2-7B SFT](nlp/llm/llama2-7b_sft/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | gpt_small-117M
 [QWen-7B](nlp/llm/qwen-7b/firefly/README.md)  | PyTorch (Firefly) | qwen-7b
 
 #### Text Correction
