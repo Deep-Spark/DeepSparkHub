@@ -1,5 +1,61 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 24.06 Release Notes
+
+### 特性和增强
+
+#### 模型与算法
+
+* 新增了7个PyTorch训练模型和对[OpenPCDet](https://github.com/open-mmlab/OpenPCDet)工具箱的支持
+
+<table>
+    <tr align="left"><th colspan=5>PyTorch</th></tr>
+    <tr>
+        <td>Part-A2-Anchor</td>
+        <td>Part-A2-Free</td>
+        <td>PointRCNN-IoU</td>
+        <td>RT-DETR</td>
+    </tr>
+    <tr>
+        <td>SECOND</td>
+        <td>SECOND-IoU</td>
+        <td>YOLOv9</td>
+        <td></td>
+    </tr>
+</table>
+
+* 新增了8个大语言模型相关训练示例。
+  * Aquila2-34B (Megatron-DeepSpeed)
+  * Baichuan2-7B SFT (DeepSpeed)
+  * Bloom-7B1 SFT LoRA (Firefly)
+  * ChatGLM2-6B SFT (DeepSpeed)
+  * Llama2-7B RLHF (Megatron-DeepSpeed)
+  * Llama2-13B (Megatron-DeepSpeed)
+  * Llama2-34B (Megatron-DeepSpeed)
+  * Qwen-7B SFT LoRA Ptuning-V2 (Firefly)
+
+### 问题修复
+
+* 修复了CenterNet PyTorch模型的DCNv2 版本不配套的问题。
+* 修复了BERT Pytorch模型的h5py依赖库版本不对的问题。
+* 修复了YOLOv7模型在PyTorch 2.x版本训练启动报错的问题。
+* 同步了YOLOv5，FaceNet，AlexNet，InceptionV3，VGG16模型的代码。
+* 完善了BiSeNetV2，DeepLabV3，SSD，YOLOv5模型的说明文档。
+
+### 版本关联
+
+DeepSparkHub 24.06对应天数软件栈3.4.0版本。
+
+### 贡献者
+
+感谢以下人员做出的贡献：
+
+majorli，Jino Yang，李一力，shengquan.nian，wenfeng.zhang，吴永乐，zhaojun0044，xiaomei.wang，gaiqin.bai，sanghui-ilu。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
+---
+
 ## DeepSparkHub 24.03 Release Notes
 
 ### 特性和增强
