@@ -1,4 +1,4 @@
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -12,8 +12,6 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-
-
 
 import torchvision
 
@@ -30,12 +28,14 @@ Examples:
 """
 
 
-def get_transform(train, base_size, crop_size):
-    return presets.SegmentationPresetTrain(base_size, crop_size) if train else presets.SegmentationPresetEval(crop_size)
+def get_transform(train):
+    base_size = 520
+    crop_size = 480
+    return presets.SegmentationPresetTrain(base_size, crop_size) if train else presets.SegmentationPresetEval(base_size)
 
 
-def get_dataset(dir_path, name, image_set, base_size=540, crop_size=512):
-    transform = get_transform(image_set == 'train', base_size, crop_size)
+def get_dataset(dir_path, name, image_set):
+    transform = get_transform(image_set == 'train')
     # name = 'camvid'
     def sbd(*args, **kwargs):
         return torchvision.datasets.SBDataset(*args, mode='segmentation', **kwargs)
