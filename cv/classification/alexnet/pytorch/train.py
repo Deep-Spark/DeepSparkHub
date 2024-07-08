@@ -1,5 +1,5 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -16,8 +16,10 @@
 
 import datetime
 import os
+import sys
 
 import time
+import math
 
 import torch
 import torch.utils.data
@@ -88,6 +90,10 @@ def train_one_epoch(model, criterion, optimizer, data_loader, device, epoch, pri
 
         acc1, acc5 = accuracy(output, target, topk=(1, 5))
         batch_size = image.shape[0]
+        loss_value = loss.item()
+        if not math.isfinite(loss_value):
+            print("Loss is {}, stopping training".format(loss_value))
+            sys.exit(1)
         metric_logger.update(loss=loss.item(), lr=optimizer.param_groups[0]["lr"])
         metric_logger.meters['acc1'].update(acc1.item(), n=batch_size)
         metric_logger.meters['acc5'].update(acc5.item(), n=batch_size)
@@ -209,29 +215,29 @@ def main(args):
 
     print("Start training")
     start_time = time.time()
+    best_acc = 0
     for epoch in range(args.start_epoch, args.epochs):
         epoch_start_time = time.time()
         if args.distributed and not args.dali:
             data_loader.sampler.set_epoch(epoch)
         train_one_epoch(model, criterion, optimizer, data_loader, device, epoch, args.print_freq, args.amp, use_dali=args.dali)
         lr_scheduler.step()
-        evaluate(model, criterion, data_loader_test, device=device, use_dali=args.dali)
-        if args.output_dir:
-            checkpoint = {
-                'model': model_without_ddp.state_dict(),
-                'optimizer': optimizer.state_dict(),
-                'lr_scheduler': lr_scheduler.state_dict(),
-                'epoch': epoch,
-                'args': args}
-            save_on_master(
-                checkpoint,
-                os.path.join(args.output_dir, 'model_{}.pth'.format(epoch)))
-            save_on_master(
-                checkpoint,
-                os.path.join(args.output_dir, 'checkpoint.pth'))
-            epoch_total_time = time.time() - epoch_start_time
-            epoch_total_time_str = str(datetime.timedelta(seconds=int(epoch_total_time)))
-            print('epoch time {}'.format(epoch_total_time_str))
+        acc_avg = evaluate(model, criterion, data_loader_test, device=device, use_dali=args.dali)
+        if acc_avg > best_acc:
+            if args.output_dir:
+                checkpoint = {
+                    'model': model_without_ddp.state_dict(),
+                    'optimizer': optimizer.state_dict(),
+                    'lr_scheduler': lr_scheduler.state_dict(),
+                    'epoch': epoch,
+                    'args': args}
+                save_on_master(
+                    checkpoint,
+                    os.path.join(args.output_dir, 'model_best.pth'))
+                epoch_total_time = time.time() - epoch_start_time
+                epoch_total_time_str = str(datetime.timedelta(seconds=int(epoch_total_time)))
+                print('epoch time {}'.format(epoch_total_time_str))
+            best_acc = acc_avg
 
         if args.dali:
             data_loader.reset()
@@ -302,7 +308,7 @@ def get_args_parser(add_help=True):
     )
 
     # distributed training parameters
-    parser.add_argument('--local_rank', default=-1, type=int,
+    parser.add_argument('--local_rank', '--local-rank', default=-1, type=int,
                         help='Local rank')
     parser.add_argument('--world-size', default=1, type=int,
                         help='number of distributed processes')
@@ -314,4 +320,9 @@ def get_args_parser(add_help=True):
 
 if __name__ == "__main__":
     args = get_args_parser().parse_args()
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(args)
+    except:
+        pass
     main(args)
