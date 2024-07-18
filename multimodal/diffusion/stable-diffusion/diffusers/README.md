@@ -1,4 +1,4 @@
-table Diffusion
+# Stable Diffusion
 
 ## Model description
 
@@ -7,8 +7,15 @@ Stable Diffusion is a latent text-to-image diffusion model.
 ## Step 1: Installation
 
 - Install
-
 ```bash
+wget http://files.deepspark.org.cn:880/deepspark/add-ons/deepspeed-0.14.3+corex.20240718020249-cp310-cp310-linux_x86_64.whl
+wget http://files.deepspark.org.cn:880/deepspark/add-ons/diffusers-0.22.0-py3-none-any.whl
+wget http://files.deepspark.org.cn:880/deepspark/add-ons/transformers-4.38.1-py3-none-any.whl
+```
+```bash
+pip3 install deepspeed-0.14.3+corex.20240718020249-cp310-cp310-linux_x86_64.whl
+pip3 install diffusers-0.22.0-py3-none-any.whl
+pip3 install transformers-4.38.1-py3-none-any.whl
 pip3 install -r requirements.txt
 pip3 install pillow --upgrade
 ```
