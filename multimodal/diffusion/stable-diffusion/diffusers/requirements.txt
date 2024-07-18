@@ -1,0 +1,5 @@
+accelerate
+datasets
+ftfy
+Jinja2
+peft==0.7.0
