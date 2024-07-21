@@ -1,0 +1,36 @@
+{
+    "output_dir": "output/firefly-qwen-14b-full",
+    "model_name_or_path": "/home/model_zoo/nlp/Qwen1___5-14B",
+    "deepspeed": "configs/ds_config/ds_z3_config_bf16.json",
+    "train_file": "/home/datasets/nlp/school_math_0.25M.jsonl",
+    "num_train_epochs": 1,
+    "max_steps": 50,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 1e-5,
+    "max_seq_length": 2048,
+    "logging_steps": 200,
+    "save_steps": 500,
+    "save_total_limit": 1,
+    "lr_scheduler_type": "cosine",
+    "warmup_steps": 1000,
+
+    "template_name": "llama2",
+    "peft_type": "full",
+    "task_type": "sft",
+
+    "gradient_checkpointing": true,
+    "disable_tqdm": false,
+    "optim": "adamw_hf",
+    "seed": 42,
+    "bf16": true,
+    "report_to": "tensorboard",
+    "dataloader_num_workers": 5,
+    "save_strategy": "steps",
+    "weight_decay": 0,
+    "max_grad_norm": 1.0,
+    "remove_unused_columns": false
+}
+
+
+
