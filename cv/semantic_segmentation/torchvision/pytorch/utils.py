@@ -1,6 +1,4 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 from collections import defaultdict, deque
 import datetime
@@ -72,3 +70,38 @@ def collate_fn(batch):
     batched_imgs = cat_list(images, fill_value=0)
     batched_targets = cat_list(targets, fill_value=255)
     return batched_imgs, batched_targets
+
+
+def nhwc_collate_fn(fp16=False, padding_channel=False):
+    dtype = torch.float32
+    if fp16:
+        dtype = torch.float16
+    def _collect_fn(batch):
+        batch = collate_fn(batch)
+        if not padding_channel:
+            return batch
+        batch = list(batch)
+        image = batch[0]
+        zeros = image.new_zeros(image.shape[0], image.shape[2], image.shape[3], 1)
+        image = torch.cat([image.permute(0, 2, 3, 1), zeros], dim=-1).permute(0, 3, 1, 2)
+        image = image.to(memory_format=torch.channels_last, dtype=dtype)
+        batch[0] = image
+        return batch
+
+    return _collect_fn
+
+
+def padding_conv_channel_to_4(conv: torch.nn.Conv2d):
+    new_conv = torch.nn.Conv2d(
+        4, conv.out_channels,
+        kernel_size=conv.kernel_size,
+        stride=conv.stride,
+        padding=conv.padding,
+        dilation=conv.dilation,
+        bias=conv.bias is not None
+    )
+    weight_shape = conv.weight.shape
+    padding_weight = conv.weight.new_zeros(weight_shape[0], 1, *weight_shape[2:])
+    new_conv.weight = torch.nn.Parameter(torch.cat([conv.weight, padding_weight], dim=1))
+    new_conv.bias = conv.bias
+    return new_conv
