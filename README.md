@@ -395,7 +395,10 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ControlNet](multimodal/diffusion/ControlNet/README.md)  | PyTorch | Fill50K
 [DDPM](multimodal/diffusion/ddpm/README.md)  | PyTorch | CIFAR-10
 [L-Verse](multimodal/Language-Image_Pre-Training/L-Verse/pytorch/README.md)  | PyTorch | ImageNet
-[Stable Diffusion](multimodal/diffusion/stable-diffusion/training/README.md)  | PyTorch | pokemon-images
+[Stable Diffusion 1.4](multimodal/diffusion/stable-diffusion/training/README.md)  | PyTorch | pokemon-images
+[Stable Diffusion 1.5](multimodal/diffusion/stable-diffusion/sd_1.5/README.md)  | PyTorch | pokemon-images
+[Stable Diffusion 2.1](multimodal/diffusion/stable-diffusion/sd_2.1/README.md)  | PyTorch | pokemon-images
+[Stable Diffusion XL](multimodal/diffusion/stable-diffusion/sd_xl/README.md)  | PyTorch | pokemon-images
 
 ### NLP
 
