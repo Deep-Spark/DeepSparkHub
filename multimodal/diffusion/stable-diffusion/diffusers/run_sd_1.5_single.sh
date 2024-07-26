@@ -38,8 +38,8 @@ accelerate launch --config_file configs/single_config.yaml --mixed_precision="fp
   --max_grad_norm=1 \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
-  --output_dir="sd-pokemon-model-3" \
-  --max_train_steps=100 \
+  --output_dir="sd-pokemon-model-single" \
+  --max_train_steps=15000 \
   --NHWC \
   --dataloader_num_workers=32 \
   --apex_fused_adam 

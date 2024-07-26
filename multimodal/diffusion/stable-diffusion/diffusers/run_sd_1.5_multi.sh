@@ -39,8 +39,8 @@ accelerate launch --config_file configs/default_config.yaml --mixed_precision="f
   --max_grad_norm=1 \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
-  --output_dir="sd-pokemon-model-3" \
-  --max_train_steps=100 \
+  --output_dir="sd-pokemon-model-multi" \
+  --max_train_steps=900 \
   --NHWC \
   --dataloader_num_workers=32 \
   --apex_fused_adam 
