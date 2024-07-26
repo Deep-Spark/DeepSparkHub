@@ -1,4 +1,4 @@
-# Stable Diffusion 2.1
+# Stable Diffusion XL
 
 ## Model description
 
@@ -10,11 +10,13 @@ You just need to run the script, and it will automatically download the required
 
 ### Weights
 
-Download the stabilityai/stable-diffusion-2-1-base from [huggingface page](https://huggingface.co/stabilityai/stable-diffusion-2-1-base).
+Download the stabilityai/stable-diffusion-xl-base-1.0 from [huggingface page](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0).
+
+Download the madebyollin/sdxl-vae-fp16-fix from [huggingface page](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix).
 
 ### Datasets
 
-Download the lambdalabs/pokemon-blip-captions  from [huggingface page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
+dataset: download the lambdalabs/pokemon-blip-captions  from [huggingface page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
 
 ## Step 2: Installation
 
@@ -33,24 +35,21 @@ If you have downloaded the weights and dataset, please export the environment va
 ```bash
 export MODEL_PATH=/path/to/sd_weights
 export DATASET_PATH=/path/to/data
+export VAE_PATH=/path/to/vae_weights
 ```
 
 ```bash
 # Go to diffusers path
 cd ${PROJ_ROOT}/multimodal/diffusion/stable-diffusion/diffusers
 
-# Single GPU
-bash run_sd_2.1_single.sh
-
-# Multi GPUs
-bash run_sd_2.1_multi.sh
+bash run_sd_xl.sh
 ```
 
 ## Results
 
-| Model  | GPUs    | ips_per_device | ips_per_gpu |
-| ------ | ------- | -------------- | ----------- |
-| SD 2.1 | BI-V150 |                |             |
+| Model | GPUs    | ips_per_device | ips_per_gpu |
+| ----- | ------- | -------------- | ----------- |
+| SD XL | BI-V150 |                |             |
 
 ## Reference
 
