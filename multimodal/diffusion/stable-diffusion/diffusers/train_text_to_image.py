@@ -924,6 +924,7 @@ def main():
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
         iter_start = time.time()
+        ips_per_device = ips_per_gpu = 0
         for step, batch in enumerate(train_dataloader):
             with accelerator.accumulate(unet):
                 # Convert images to latent space
