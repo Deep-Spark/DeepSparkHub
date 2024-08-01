@@ -24,7 +24,7 @@ rm -rf datasets
 
 mkdir -p /home/model_zoo/nlp
 pip install modelscope
-python3 ./get_Qwen1.5-7B.py --model=Qwen1.5-7B
+python3 ./get_Qwen1.5.py --model=Qwen1.5-7B
 mv /root/.cache/modelscope/hub/qwen/Qwen1___5-7B /home/model_zoo/nlp
 ```
 
