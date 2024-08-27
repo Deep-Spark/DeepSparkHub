@@ -1046,10 +1046,12 @@ def main():
                         # 这段代码是为了解决NHWC时保存模型出错
                         if args.NHWC:
                             origin_model = accelerator._models[0]
-                            model = origin_model.to(memory_format=torch.contiguous_format)
-                            accelerator._models[0] = model
-                        accelerator.save_state(save_path)
-                        logger.info(f"Saved state to {save_path}")
+                            accelerator._models[0] = origin_model.to(memory_format=torch.contiguous_format)
+                            accelerator.save_state(save_path)
+                            accelerator._models[0] = origin_model.to(memory_format=torch.channels_last)
+                        else:
+                            accelerator.save_state(save_path)
+                            logger.info(f"Saved state to {save_path}")
 
             logs = {"step_loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], 
                     "ips_per_device": ips_per_device, "ips_per_gpu": ips_per_gpu}

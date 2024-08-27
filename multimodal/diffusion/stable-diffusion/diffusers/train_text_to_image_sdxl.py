@@ -169,7 +169,7 @@ def parse_args(input_args=None):
         help=(
             "The name of the Dataset (from the HuggingFace hub) to train on (could be your own, possibly private,"
             " dataset). It can also be a path pointing to a local copy of a dataset in your filesystem,"
-            " or to a folder containing files that 🤗 Datasets can understand."
+            " or to a folder containing files that ðŸ¤— Datasets can understand."
         ),
     )
     parser.add_argument(
@@ -701,7 +701,7 @@ def main(args):
         text_encoder_two = text_encoder_cls_two.from_pretrained(
             args.pretrained_model_name_or_path, subfolder="text_encoder_2", revision=args.revision, variant=args.variant
         )
-        # vae 因为需要用float32的缘故，其中的attn部分需要用native实现，因为flash-attn 不支持float32
+        # vae å› ä¸ºéœ€è¦�ç”¨float32çš„ç¼˜æ•…ï¼Œå…¶ä¸­çš„attnéƒ¨åˆ†éœ€è¦�ç”¨nativeå®žçŽ°ï¼Œå› ä¸ºflash-attn ä¸�æ”¯æŒ�float32
         origin_attn = os.environ.get("USE_NATIVE_ATTN", 0)
         os.environ["USE_NATIVE_ATTN"] = "1"
         vae = AutoencoderKL.from_pretrained(
@@ -768,7 +768,7 @@ def main(args):
                     model.save_pretrained(os.path.join(output_dir, "unet"))
 
                     # make sure to pop weight so that corresponding model is not saved again
-                    weights.pop()
+                    # weights.pop()
 
         def load_model_hook(models, input_dir):
             if args.use_ema:
@@ -1222,13 +1222,15 @@ def main(args):
                                     shutil.rmtree(removing_checkpoint)
 
                         save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
-                        #if args.NHWC:
-                        #    origin_model = accelerator._models[0]
-                        #    model = origin_model.to(memory_format=torch.contiguous_format)
-                        #    accelerator._models[0] = model
-
-                        accelerator.save_state(save_path)
-                        logger.info(f"Saved state to {save_path}")
+                        # è¿™æ®µä»£ç �æ˜¯ä¸ºäº†è§£å†³NHWCæ—¶ä¿�å­˜æ¨¡åž‹å‡ºé”™
+                        if args.NHWC:
+                            origin_model = accelerator._models[0]
+                            accelerator._models[0] = origin_model.to(memory_format=torch.contiguous_format)
+                            accelerator.save_state(save_path)
+                            accelerator._models[0] = origin_model.to(memory_format=torch.channels_last)
+                        else:
+                            accelerator.save_state(save_path)
+                            logger.info(f"Saved state to {save_path}")
 
             logs = {"step_loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], 
                     "ips_per_device": ips_per_device, "ips_per_gpu": ips_per_gpu}
