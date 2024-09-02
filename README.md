@@ -186,6 +186,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ATSS](cv/detection/atss_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
 [AutoAssign](cv/detection/autoassign/pytorch/README.md)  | PyTorch | COCO
 [Cascade R-CNN](cv/detection/cascade_rcnn_mmdet/pytorch/README.md)  | PyTorch (MMDetection) | COCO
+[CenterMask2](cv/detection/centermask2/pytorch/README.md)  | PyTorch | COCO
 [CenterNet](cv/detection/centernet/pytorch/README.md)  | PyTorch | COCO
 [CenterNet](cv/detection/centernet/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [Co-DETR](cv/detection/co-detr/pytorch/README.md)  | PyTorch | COCO
@@ -223,6 +224,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [YOLOv7](cv/detection/yolov7/pytorch/README.md)  | PyTorch | COCO
 [YOLOv8](cv/detection/yolov8/pytorch/README.md)  | PyTorch | COCO
 [YOLOv9](cv/detection/yolov9/pytorch/README.md)  | PyTorch | COCO
+[YOLOv10](cv/detection/yolov10/pytorch/README.md)  | PyTorch | COCO
 
 #### 3D Object Detection
 
@@ -440,7 +442,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Bloom-7B1](nlp/llm/bloom-7b1/firefly/README.md)  | PyTorch (Firefly) | school_math_0.25M & bloom-7b1
 [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
 [ChatGLM2-6B SFT](nlp/llm/ChatGLM2-6b-sft/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm2-6b
-[ChatGLM3-6B SFT](nlp/llm/chatglm3-6b/deepspeed/finetune_demo/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm3-6b
+[ChatGLM3-6B](nlp/llm/chatglm3-6b/deepspeed/finetune_demo/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm3-6b
 [Llama-7B](nlp/llm/llama-7b/colossalai/README.md)  | PyTorch (Colossal-AI) | llama-7b-hf
 [Llama2-7B](nlp/llm/llama2-7b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
 [Llama2-7B Reward Model Finetuning](nlp/llm/llama2-7b_reward_sft/deepspeed/README.md)  | PyTorch (DeepSpeed) | Dahoas/rm-static
