@@ -1,4 +1,4 @@
-# ChatGLM3-6b
+# ChatGLM3-6B
 
 ## Model description
 
@@ -14,20 +14,24 @@ pip3 install -r requirements.txt
 ## Step 2: Preparing datasets and checkpoints
 
 ```bash
-mkdir -p data && cd data
-wget https://cloud.tsinghua.edu.cn/f/b3f119a008264b1cabd1/?dl=1 && mv index.html?dl=1 AdvertiseGen.tar.gz
-tar -zxvf AdvertiseGen.tar.gz
-cd .. && python3 process_data.py
+# Get AdvertiseGen.tar.gz
+mkdir -p data
+
+pushd data
+wget -O AdvertiseGen.tar.gz https://cloud.tsinghua.edu.cn/f/b3f119a008264b1cabd1/?dl=1
+tar xf AdvertiseGen.tar.gz
+popd
+
+python3 process_data.py
 ```
 
 ```bash
-mkdir -p checkpoint && cd checkpoint
-```
+# Get chatglm3-6b from https://modelscope.cn/models/ZhipuAI/chatglm3-6b or huggingface.
+mkdir -p checkpoint
 
-get model chatglm3-6b from modelscope (<https://modelscope.cn/models/ZhipuAI/chatglm3-6b>) or huggingface.
-
-```bash
+pushd checkpoint
 tar -zxvf chatglm3-6b.tar.gz
+popd
 ```
 
 ## Step 3: Training
@@ -35,10 +39,11 @@ tar -zxvf chatglm3-6b.tar.gz
 ```bash
 bash run.sh {config_file} {num_gpus} 
 
-# for example
+# 1 GPU
 bash run.sh configs/lora.yaml 1
 bash run.sh configs/ptuning_v2.yaml 1
 
+# Multi GPUs
 bash run.sh configs/lora.yaml 16
 bash run.sh configs/ptuning_v2.yaml 16
 bash run.sh configs/sft.yaml 16
@@ -46,13 +51,13 @@ bash run.sh configs/sft.yaml 16
 
 ## Results
 
-| No. | model      | peft      | num_gpus | train_samples_per_second |
-| --- | ---------- | --------- | -------- | ------------------------ |
-| 1   | ChatGLM-6b | Lora      | 1        | 2.11                     |
-| 2   | ChatGLM-6b | ptuning_v2| 1        | 8.889                    |
-| 3   | ChatGLM-6b | Lora      | 16       | 32.639                   |
-| 4   | ChatGLM-6b | ptuning_v2| 16       | 115.763                  |
-| 5   | ChatGLM-6b | sft       | 16       | 5.99                     |
+| GPUs    | model      | peft       | num_gpus | train_samples_per_second |
+| ------- | ---------- | ---------- | -------- | ------------------------ |
+| BI-V150 | ChatGLM-6B | Lora       | 1        | 2.11                     |
+| BI-V150 | ChatGLM-6B | ptuning_v2 | 1        | 8.889                    |
+| BI-V150 | ChatGLM-6B | Lora       | 16       | 32.639                   |
+| BI-V150 | ChatGLM-6B | ptuning_v2 | 16       | 115.763                  |
+| BI-V150 | ChatGLM-6B | sft        | 16       | 5.99                     |
 
 ## Reference
 
