@@ -1,3 +1,6 @@
+# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
+
 """ PyTorch ChatGLM model. """
 
 import math
