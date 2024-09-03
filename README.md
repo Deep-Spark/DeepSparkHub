@@ -436,7 +436,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
 [Aquila2-34B](nlp/llm/aquila2-34b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
-[Baichuan2-7B](nlp/llm/baichuan2-7b/Baichuan2/README.md)  | PyTorch | baichuan2-7b-base
+[Baichuan2-7B](nlp/llm/baichuan2-7b/Baichuan2/README.md)  | PyTorch (DeepSpeed) | baichuan2-7b-base
 [Bloom-7B1](nlp/llm/bloom-7b1/firefly/README.md)  | PyTorch (Firefly) | school_math_0.25M & bloom-7b1
 [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
 [ChatGLM2-6B SFT](nlp/llm/ChatGLM2-6b-sft/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm2-6b
