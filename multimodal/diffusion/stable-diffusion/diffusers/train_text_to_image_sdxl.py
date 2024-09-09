@@ -768,7 +768,8 @@ def main(args):
                     model.save_pretrained(os.path.join(output_dir, "unet"))
 
                     # make sure to pop weight so that corresponding model is not saved again
-                    # weights.pop()
+                    if len(weights) > 0:
+                        weights.pop()
 
         def load_model_hook(models, input_dir):
             if args.use_ema:
@@ -1199,38 +1200,37 @@ def main(args):
                 ips_per_device = total_batch_size / iter_elapse / accelerator.num_processes
                 ips_per_gpu = ips_per_device * 2
 
-                if accelerator.is_main_process:
-                    if global_step % args.checkpointing_steps == 0:
-                        # _before_ saving state, check if this save would set us over the `checkpoints_total_limit`
-                        if args.checkpoints_total_limit is not None:
-                            checkpoints = os.listdir(args.output_dir)
-                            checkpoints = [d for d in checkpoints if d.startswith("checkpoint")]
-                            checkpoints = sorted(checkpoints, key=lambda x: int(x.split("-")[1]))
+                if global_step % args.checkpointing_steps == 0:
+                    # _before_ saving state, check if this save would set us over the `checkpoints_total_limit`
+                    if args.checkpoints_total_limit is not None:
+                        checkpoints = os.listdir(args.output_dir)
+                        checkpoints = [d for d in checkpoints if d.startswith("checkpoint")]
+                        checkpoints = sorted(checkpoints, key=lambda x: int(x.split("-")[1]))
 
-                            # before we save the new checkpoint, we need to have at _most_ `checkpoints_total_limit - 1` checkpoints
-                            if len(checkpoints) >= args.checkpoints_total_limit:
-                                num_to_remove = len(checkpoints) - args.checkpoints_total_limit + 1
-                                removing_checkpoints = checkpoints[0:num_to_remove]
+                        # before we save the new checkpoint, we need to have at _most_ `checkpoints_total_limit - 1` checkpoints
+                        if len(checkpoints) >= args.checkpoints_total_limit:
+                            num_to_remove = len(checkpoints) - args.checkpoints_total_limit + 1
+                            removing_checkpoints = checkpoints[0:num_to_remove]
 
-                                logger.info(
-                                    f"{len(checkpoints)} checkpoints already exist, removing {len(removing_checkpoints)} checkpoints"
-                                )
-                                logger.info(f"removing checkpoints: {', '.join(removing_checkpoints)}")
+                            logger.info(
+                                f"{len(checkpoints)} checkpoints already exist, removing {len(removing_checkpoints)} checkpoints"
+                            )
+                            logger.info(f"removing checkpoints: {', '.join(removing_checkpoints)}")
 
-                                for removing_checkpoint in removing_checkpoints:
-                                    removing_checkpoint = os.path.join(args.output_dir, removing_checkpoint)
-                                    shutil.rmtree(removing_checkpoint)
+                            for removing_checkpoint in removing_checkpoints:
+                                removing_checkpoint = os.path.join(args.output_dir, removing_checkpoint)
+                                shutil.rmtree(removing_checkpoint)
 
-                        save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
-                        # è¿™æ®µä»£ç �æ˜¯ä¸ºäº†è§£å†³NHWCæ—¶ä¿�å­˜æ¨¡åž‹å‡ºé”™
-                        if args.NHWC:
-                            origin_model = accelerator._models[0]
-                            accelerator._models[0] = origin_model.to(memory_format=torch.contiguous_format)
-                            accelerator.save_state(save_path)
-                            accelerator._models[0] = origin_model.to(memory_format=torch.channels_last)
-                        else:
-                            accelerator.save_state(save_path)
-                            logger.info(f"Saved state to {save_path}")
+                    save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
+                    # è¿™æ®µä»£ç �æ˜¯ä¸ºäº†è§£å†³NHWCæ—¶ä¿�å­˜æ¨¡åž‹å‡ºé”™
+                    if args.NHWC:
+                        origin_model = accelerator._models[0]
+                        accelerator._models[0] = origin_model.to(memory_format=torch.contiguous_format)
+                        accelerator.save_state(save_path)
+                        accelerator._models[0] = origin_model.to(memory_format=torch.channels_last)
+                    else:
+                        accelerator.save_state(save_path)
+                        logger.info(f"Saved state to {save_path}")
 
             logs = {"step_loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], 
                     "ips_per_device": ips_per_device, "ips_per_gpu": ips_per_gpu}
