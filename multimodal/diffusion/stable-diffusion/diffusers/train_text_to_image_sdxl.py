@@ -169,7 +169,7 @@ def parse_args(input_args=None):
         help=(
             "The name of the Dataset (from the HuggingFace hub) to train on (could be your own, possibly private,"
             " dataset). It can also be a path pointing to a local copy of a dataset in your filesystem,"
-            " or to a folder containing files that 🤗 Datasets can understand."
+            " or to a folder containing files that ðŸ¤— Datasets can understand."
         ),
     )
     parser.add_argument(
@@ -701,7 +701,7 @@ def main(args):
         text_encoder_two = text_encoder_cls_two.from_pretrained(
             args.pretrained_model_name_or_path, subfolder="text_encoder_2", revision=args.revision, variant=args.variant
         )
-        # vae 因为需要用float32的缘故，其中的attn部分需要用native实现，因为flash-attn 不支持float32
+        # vae å› ä¸ºéœ€è¦�ç”¨float32çš„ç¼˜æ•…ï¼Œå…¶ä¸­çš„attnéƒ¨åˆ†éœ€è¦�ç”¨nativeå®žçŽ°ï¼Œå› ä¸ºflash-attn ä¸�æ”¯æŒ�float32
         origin_attn = os.environ.get("USE_NATIVE_ATTN", 0)
         os.environ["USE_NATIVE_ATTN"] = "1"
         vae = AutoencoderKL.from_pretrained(
@@ -768,7 +768,8 @@ def main(args):
                     model.save_pretrained(os.path.join(output_dir, "unet"))
 
                     # make sure to pop weight so that corresponding model is not saved again
-                    weights.pop()
+                    if len(weights) > 0:
+                        weights.pop()
 
         def load_model_hook(models, input_dir):
             if args.use_ema:
@@ -1078,6 +1079,7 @@ def main(args):
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
         iter_start = time.time()
+        ips_per_device = ips_per_gpu = 0
         for step, batch in enumerate(train_dataloader):
             with accelerator.accumulate(unet):
                 # Sample noise that we'll add to the latents
@@ -1198,34 +1200,35 @@ def main(args):
                 ips_per_device = total_batch_size / iter_elapse / accelerator.num_processes
                 ips_per_gpu = ips_per_device * 2
 
-                if accelerator.is_main_process:
-                    if global_step % args.checkpointing_steps == 0:
-                        # _before_ saving state, check if this save would set us over the `checkpoints_total_limit`
-                        if args.checkpoints_total_limit is not None:
-                            checkpoints = os.listdir(args.output_dir)
-                            checkpoints = [d for d in checkpoints if d.startswith("checkpoint")]
-                            checkpoints = sorted(checkpoints, key=lambda x: int(x.split("-")[1]))
+                if global_step % args.checkpointing_steps == 0:
+                    # _before_ saving state, check if this save would set us over the `checkpoints_total_limit`
+                    if args.checkpoints_total_limit is not None:
+                        checkpoints = os.listdir(args.output_dir)
+                        checkpoints = [d for d in checkpoints if d.startswith("checkpoint")]
+                        checkpoints = sorted(checkpoints, key=lambda x: int(x.split("-")[1]))
 
-                            # before we save the new checkpoint, we need to have at _most_ `checkpoints_total_limit - 1` checkpoints
-                            if len(checkpoints) >= args.checkpoints_total_limit:
-                                num_to_remove = len(checkpoints) - args.checkpoints_total_limit + 1
-                                removing_checkpoints = checkpoints[0:num_to_remove]
+                        # before we save the new checkpoint, we need to have at _most_ `checkpoints_total_limit - 1` checkpoints
+                        if len(checkpoints) >= args.checkpoints_total_limit:
+                            num_to_remove = len(checkpoints) - args.checkpoints_total_limit + 1
+                            removing_checkpoints = checkpoints[0:num_to_remove]
 
-                                logger.info(
-                                    f"{len(checkpoints)} checkpoints already exist, removing {len(removing_checkpoints)} checkpoints"
-                                )
-                                logger.info(f"removing checkpoints: {', '.join(removing_checkpoints)}")
+                            logger.info(
+                                f"{len(checkpoints)} checkpoints already exist, removing {len(removing_checkpoints)} checkpoints"
+                            )
+                            logger.info(f"removing checkpoints: {', '.join(removing_checkpoints)}")
 
-                                for removing_checkpoint in removing_checkpoints:
-                                    removing_checkpoint = os.path.join(args.output_dir, removing_checkpoint)
-                                    shutil.rmtree(removing_checkpoint)
+                            for removing_checkpoint in removing_checkpoints:
+                                removing_checkpoint = os.path.join(args.output_dir, removing_checkpoint)
+                                shutil.rmtree(removing_checkpoint)
 
-                        save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
-                        #if args.NHWC:
-                        #    origin_model = accelerator._models[0]
-                        #    model = origin_model.to(memory_format=torch.contiguous_format)
-                        #    accelerator._models[0] = model
-
+                    save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
+                    # è¿™æ®µä»£ç �æ˜¯ä¸ºäº†è§£å†³NHWCæ—¶ä¿�å­˜æ¨¡åž‹å‡ºé”™
+                    if args.NHWC:
+                        origin_model = accelerator._models[0]
+                        accelerator._models[0] = origin_model.to(memory_format=torch.contiguous_format)
+                        accelerator.save_state(save_path)
+                        accelerator._models[0] = origin_model.to(memory_format=torch.channels_last)
+                    else:
                         accelerator.save_state(save_path)
                         logger.info(f"Saved state to {save_path}")
 

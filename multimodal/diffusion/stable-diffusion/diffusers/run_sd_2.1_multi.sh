@@ -15,10 +15,11 @@
 
 export CLIP_FLASH_ATTN=1
 export USE_NHWC_GN=1
-export USE_IXFORMER_GEGLU=1
+export USE_IXFORMER_GEGLU=0
 export USE_APEX_LN=1
 export ENABLE_FLASH_ATTENTION_WITH_IXDNN=1
-echo $ENABLE_FLASH_ATTENTION_WITH_IXDNN
+export ENABLE_FLASH_ATTENTION_WITH_HEAD_DIM_PADDING=1
+
 
 export MODEL_PATH=${MODEL_PATH:-stabilityai/stable-diffusion-2-1-base}
 export DATASET_PATH=${DATASET_PATH:-lambdalabs/pokemon-blip-captions}
