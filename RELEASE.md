@@ -1,5 +1,54 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 24.09 Release Notes
+
+### 特性和增强
+
+#### 模型与算法
+
+* 新增了5个PyTorch训练模型，其中3个为Stable Diffusion模型
+
+<table>
+    <tr align="left"><th colspan=5>PyTorch</th></tr>
+    <tr>
+        <td>Stable Diffusion 1.5</td>
+        <td>Stable Diffusion 2.1</td>
+        <td>Stable Diffusion XL</td>
+    </tr>
+    <tr>
+        <td>CenterMask2</td>
+        <td>YOLOv10</td>
+        <td></td>
+    </tr>
+</table>
+
+* 新增了4个大语言模型相关训练示例。
+  * ChatGLM3-6B (DeepSpeed)
+  * Llama3-8B (Megatron-DeepSpeed)
+  * Qwen1.5-7B (Firefly)
+  * Qwen1.5-14B (Firefly)
+
+### 问题修复
+
+* 修复了HardNet PyTorch模型的torchvision导入报错的问题。
+* 同步了AlexNet，EfficientNet_B4等PyTorch模型的代码。
+* 同步了AlexNet，FaceNet，InceptionV3，VGG16等TensorFlow模型的代码。
+* 同步了工具箱Megatron-Deepspeed大语言模型框架的代码。
+
+### 版本关联
+
+DeepSparkHub 24.09对应天数软件栈4.1.1版本。
+
+### 贡献者
+
+感谢以下人员做出的贡献：
+
+李一力，sanghui-ilu，majorli，Jino Yang，吴永乐。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
+---
+
 ## DeepSparkHub 24.06 Release Notes
 
 ### 特性和增强
