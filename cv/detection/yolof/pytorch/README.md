@@ -6,11 +6,10 @@ This paper revisits feature pyramids networks (FPN) for one-stage detectors and 
 
 ## Step 1: Installing packages
 
-```
+```bash
 pip3 install -r requirements.txt
 MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
 ```
-
 
 ## Step 2: Preparing datasets
 
@@ -46,19 +45,22 @@ ln -s /path/to/coco2017 data/coco
 
 #### Training on a single GPU
 
-```
+```bash
 bash train.sh
 ```
 
 #### Training on multiple GPUs
 
-```
+```bash
 bash train_dist.sh ${CONFIG_FILE} ${GPU_NUM} [optional arguments]
 ```
+
 for example,
-```
+
+```bash
 bash train_dist.sh configs/yolof/yolof_r50_c5_8x8_1x_coco.py 8
 ```
 
 ## Reference
-https://github.com/open-mmlab/mmdetection
+
+- [mmdetection](https://github.com/open-mmlab/mmdetection)
