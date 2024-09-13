@@ -1,3 +1,0 @@
-imgaug
-terminaltables
-torchsummary
