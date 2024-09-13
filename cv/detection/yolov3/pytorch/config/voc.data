@@ -1,4 +1,0 @@
-classes= 20
-train=data/voc/train.txt
-valid=data/voc/valid.txt
-names=data/voc.names
