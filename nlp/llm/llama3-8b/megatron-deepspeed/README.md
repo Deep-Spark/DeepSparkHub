@@ -8,8 +8,8 @@ Llama 3 is an auto-regressive language model that uses an optimized transformer 
 
 ```bash
 # Clone
-git clone https://gitee.com/deep-spark/Megatron-DeepSpeed.git
-cd Megatron-DeepSpeed/
+cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
+
 # Install
 bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
 pip3 install urllib3==1.23

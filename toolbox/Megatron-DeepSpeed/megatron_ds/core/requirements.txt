@@ -1,0 +1,11 @@
+pybind11
+torch
+regex
+sentencepiece
+einops == 0.6.1
+deepspeed
+transformers
+nltk
+accelerate
+tiktoken
+blobfile
