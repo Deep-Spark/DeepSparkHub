@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 # Copyright 2024 The HuggingFace Inc. team. All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +20,9 @@ import math
 import os
 import random
 import shutil
+from contextlib import nullcontext
 from pathlib import Path
+import time
 
 import accelerate
 import datasets
@@ -46,7 +46,7 @@ from transformers.utils import ContextManagers
 import diffusers
 from diffusers import AutoencoderKL, DDPMScheduler, StableDiffusionPipeline, UNet2DConditionModel
 from diffusers.optimization import get_scheduler
-from diffusers.training_utils import EMAModel, compute_snr
+from diffusers.training_utils import EMAModel, compute_dream_and_update_latents, compute_snr
 from diffusers.utils import check_min_version, deprecate, is_wandb_available, make_image_grid
 from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
 from diffusers.utils.import_utils import is_xformers_available
@@ -58,12 +58,12 @@ if is_wandb_available():
 
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
-check_min_version("0.27.0")
+check_min_version("0.29.0")
 
 logger = get_logger(__name__, log_level="INFO")
 
 DATASET_NAME_MAPPING = {
-    "lambdalabs/pokemon-blip-captions": ("image", "text"),
+    "lambdalabs/naruto-blip-captions": ("image", "text"),
 }
 
 
@@ -166,7 +166,12 @@ def log_validation(vae, text_encoder, tokenizer, unet, args, accelerator, weight
 
     images = []
     for i in range(len(args.validation_prompts)):
-        with torch.autocast("cuda"):
+        if torch.backends.mps.is_available():
+            autocast_ctx = nullcontext()
+        else:
+            autocast_ctx = torch.autocast(accelerator.device.type)
+
+        with autocast_ctx:
             image = pipeline(args.validation_prompts[i], num_inference_steps=20, generator=generator).images[0]
 
         images.append(image)
@@ -358,6 +363,20 @@ def parse_args():
         "More details here: https://arxiv.org/abs/2303.09556.",
     )
     parser.add_argument(
+        "--dream_training",
+        action="store_true",
+        help=(
+            "Use the DREAM training method, which makes training more efficient and accurate at the ",
+            "expense of doing an extra forward pass. See: https://arxiv.org/abs/2312.00210",
+        ),
+    )
+    parser.add_argument(
+        "--dream_detail_preservation",
+        type=float,
+        default=1.0,
+        help="Dream detail preservation factor p (should be greater than 0; default=1.0, as suggested in the paper)",
+    )
+    parser.add_argument(
         "--use_8bit_adam", action="store_true", help="Whether or not to use 8-bit Adam from bitsandbytes."
     )
     parser.add_argument(
@@ -382,7 +401,7 @@ def parse_args():
     parser.add_argument(
         "--dataloader_num_workers",
         type=int,
-        default=16,
+        default=0,
         help=(
             "Number of subprocesses to use for data loading. 0 means that the data will be loaded in the main process."
         ),
@@ -489,7 +508,7 @@ def parse_args():
         action="store_true",
         help="Whether or not using fused_adam optimizer",
     )
-
+    
     args = parser.parse_args()
     env_local_rank = int(os.environ.get("LOCAL_RANK", -1))
     if env_local_rank != -1 and env_local_rank != args.local_rank:
@@ -535,6 +554,10 @@ def main():
         project_config=accelerator_project_config,
     )
 
+    # Disable AMP for MPS.
+    if torch.backends.mps.is_available():
+        accelerator.native_amp = False
+
     # Make one log on every process with the configuration for debugging.
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -564,7 +587,6 @@ def main():
             repo_id = create_repo(
                 repo_id=args.hub_model_id or Path(args.output_dir).name, exist_ok=True, token=args.hub_token
             ).repo_id
-
     # Load scheduler, tokenizer and models.
     noise_scheduler = DDPMScheduler.from_pretrained(args.pretrained_model_name_or_path, subfolder="scheduler")
     tokenizer = CLIPTokenizer.from_pretrained(
@@ -601,6 +623,7 @@ def main():
     unet = UNet2DConditionModel.from_pretrained(
         args.pretrained_model_name_or_path, subfolder="unet", revision=args.non_ema_revision
     )
+
     # Freeze vae and text_encoder and set unet to trainable
     vae.requires_grad_(False)
     text_encoder.requires_grad_(False)
@@ -685,10 +708,11 @@ def main():
             )
 
         optimizer_cls = bnb.optim.AdamW8bit
+        
     elif args.apex_fused_adam:
         import apex
         optimizer_cls = apex.optimizers.FusedAdam
-         
+        
     else:
         optimizer_cls = torch.optim.AdamW
 
@@ -783,17 +807,12 @@ def main():
         examples["pixel_values"] = [train_transforms(image) for image in images]
         examples["input_ids"] = tokenize_captions(examples)
         return examples
-
+    
     with accelerator.main_process_first():
         if args.max_train_samples is not None:
             dataset["train"] = dataset["train"].shuffle(seed=args.seed).select(range(args.max_train_samples))
         # Set the training transforms
         train_dataset = dataset["train"].with_transform(preprocess_train)
-    
-    # for testing ips
-    from datasets import concatenate_datasets
-    train_dataset = concatenate_datasets([train_dataset for i in range(10)])
-    
 
     def collate_fn(examples):
         pixel_values = torch.stack([example["pixel_values"] for example in examples])
@@ -808,8 +827,6 @@ def main():
         collate_fn=collate_fn,
         batch_size=args.train_batch_size,
         num_workers=args.dataloader_num_workers,
-        pin_memory=True,
-        prefetch_factor = 2
     )
 
     # Scheduler and math around the number of training steps.
@@ -843,7 +860,6 @@ def main():
     elif accelerator.mixed_precision == "bf16":
         weight_dtype = torch.bfloat16
         args.mixed_precision = accelerator.mixed_precision
-
     # Move text_encode and vae to gpu and cast to weight_dtype
     text_encoder.to(accelerator.device, dtype=weight_dtype)
     vae.to(accelerator.device, dtype=weight_dtype)
@@ -920,12 +936,11 @@ def main():
     if args.NHWC:
         unet = unet.to(memory_format=torch.channels_last)
         vae = vae.to(memory_format=torch.channels_last)
-        
-    import time
+
     for epoch in range(first_epoch, args.num_train_epochs):
         train_loss = 0.0
-        iter_start = time.time()
         ips_per_device = ips_per_gpu = 0
+        iter_start = time.time()
         for step, batch in enumerate(train_dataloader):
             with accelerator.accumulate(unet):
                 # Convert images to latent space
@@ -970,11 +985,21 @@ def main():
                 else:
                     raise ValueError(f"Unknown prediction type {noise_scheduler.config.prediction_type}")
 
+                if args.dream_training:
+                    noisy_latents, target = compute_dream_and_update_latents(
+                        unet,
+                        noise_scheduler,
+                        timesteps,
+                        noise,
+                        noisy_latents,
+                        target,
+                        encoder_hidden_states,
+                        args.dream_detail_preservation,
+                    )
+
                 # Predict the noise residual and compute loss
                 if args.NHWC:
                     noisy_latents = noisy_latents.to(memory_format=torch.channels_last)
-                    # timesteps = timesteps.to(memory_format=torch.channels_last)
-                    # encoder_hidden_states = encoder_hidden_states.to(memory_format=torch.channels_last)
                 model_pred = unet(noisy_latents, timesteps, encoder_hidden_states, return_dict=False)[0]
 
                 if args.snr_gamma is None:
@@ -1043,7 +1068,6 @@ def main():
                                 shutil.rmtree(removing_checkpoint)
 
                     save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
-                    # 这段代码是为了解决NHWC时保存模型出错
                     if args.NHWC:
                         origin_model = accelerator._models[0]
                         accelerator._models[0] = origin_model.to(memory_format=torch.contiguous_format)
@@ -1051,9 +1075,9 @@ def main():
                         accelerator._models[0] = origin_model.to(memory_format=torch.channels_last)
                     else:
                         accelerator.save_state(save_path)
-                        logger.info(f"Saved state to {save_path}")
+                    logger.info(f"Saved state to {save_path}")
 
-            logs = {"step_loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], 
+            logs = {"step_loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0],
                     "ips_per_device": ips_per_device, "ips_per_gpu": ips_per_gpu}
             progress_bar.set_postfix(**logs)
 

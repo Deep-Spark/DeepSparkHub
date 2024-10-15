@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 # Copyright 2024 The HuggingFace Inc. team. All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,9 +23,10 @@ import math
 import os
 import random
 import shutil
+from contextlib import nullcontext
 from pathlib import Path
+import os
 import time
-
 import accelerate
 import datasets
 import numpy as np
@@ -36,9 +35,8 @@ import torch.nn.functional as F
 import torch.utils.checkpoint
 import transformers
 from accelerate import Accelerator
-from accelerate.state import AcceleratorState
 from accelerate.logging import get_logger
-from accelerate.utils import ProjectConfiguration, set_seed
+from accelerate.utils import DistributedType, ProjectConfiguration, set_seed
 from datasets import concatenate_datasets, load_dataset
 from huggingface_hub import create_repo, upload_folder
 from packaging import version
@@ -46,7 +44,6 @@ from torchvision import transforms
 from torchvision.transforms.functional import crop
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
-from transformers.utils import ContextManagers
 
 import diffusers
 from diffusers import AutoencoderKL, DDPMScheduler, StableDiffusionXLPipeline, UNet2DConditionModel
@@ -54,18 +51,22 @@ from diffusers.optimization import get_scheduler
 from diffusers.training_utils import EMAModel, compute_snr
 from diffusers.utils import check_min_version, is_wandb_available
 from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
-from diffusers.utils.import_utils import is_xformers_available
+from diffusers.utils.import_utils import is_torch_npu_available, is_xformers_available
 from diffusers.utils.torch_utils import is_compiled_module
+
+from accelerate.state import AcceleratorState
+from transformers.utils import ContextManagers
 
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
-check_min_version("0.27.0")
+check_min_version("0.29.0")
 
 logger = get_logger(__name__)
-
+if is_torch_npu_available():
+    torch.npu.config.allow_internal_format = False
 
 DATASET_NAME_MAPPING = {
-    "lambdalabs/pokemon-blip-captions": ("image", "text"),
+    "lambdalabs/naruto-blip-captions": ("image", "text"),
 }
 
 
@@ -169,7 +170,7 @@ def parse_args(input_args=None):
         help=(
             "The name of the Dataset (from the HuggingFace hub) to train on (could be your own, possibly private,"
             " dataset). It can also be a path pointing to a local copy of a dataset in your filesystem,"
-            " or to a folder containing files that ðŸ¤— Datasets can understand."
+            " or to a folder containing files that 🤗 Datasets can understand."
         ),
     )
     parser.add_argument(
@@ -465,6 +466,9 @@ def parse_args(input_args=None):
     )
     parser.add_argument("--local_rank", type=int, default=-1, help="For distributed training: local_rank")
     parser.add_argument(
+        "--enable_npu_flash_attention", action="store_true", help="Whether or not to use npu flash attention."
+    )
+    parser.add_argument(
         "--enable_xformers_memory_efficient_attention", action="store_true", help="Whether or not to use xformers."
     )
     parser.add_argument("--noise_offset", type=float, default=0, help="The scale of noise offset.")
@@ -546,7 +550,6 @@ def compute_vae_encodings(batch, vae):
     memory_format = torch.channels_last if int(os.environ["USE_NHWC_GN"]) else torch.contiguous_format
     images = batch.pop("pixel_values")
     pixel_values = torch.stack(list(images))
-    pixel_values = pixel_values.to(memory_format=torch.contiguous_format).float()
     pixel_values = pixel_values.to(vae.device, dtype=vae.dtype, memory_format=memory_format)
 
     with torch.no_grad():
@@ -610,12 +613,22 @@ def main(args):
 
     accelerator_project_config = ProjectConfiguration(project_dir=args.output_dir, logging_dir=logging_dir)
 
+    if torch.backends.mps.is_available() and args.mixed_precision == "bf16":
+        # due to pytorch#99272, MPS does not yet support bfloat16.
+        raise ValueError(
+            "Mixed precision training with bfloat16 is not supported on MPS. Please use fp16 (recommended) or fp32 instead."
+        )
+
     accelerator = Accelerator(
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         mixed_precision=args.mixed_precision,
         log_with=args.report_to,
         project_config=accelerator_project_config,
     )
+
+    # Disable AMP for MPS.
+    if torch.backends.mps.is_available():
+        accelerator.native_amp = False
 
     if args.report_to == "wandb":
         if not is_wandb_available():
@@ -666,17 +679,6 @@ def main(args):
         use_fast=False,
     )
 
-    # import correct text encoder classes
-    text_encoder_cls_one = import_model_class_from_model_name_or_path(
-        args.pretrained_model_name_or_path, args.revision
-    )
-    text_encoder_cls_two = import_model_class_from_model_name_or_path(
-        args.pretrained_model_name_or_path, args.revision, subfolder="text_encoder_2"
-    )
-
-    # Load scheduler and models
-    noise_scheduler = DDPMScheduler.from_pretrained(args.pretrained_model_name_or_path, subfolder="scheduler")
-    
     def deepspeed_zero_init_disabled_context_manager():
         """
         returns either a context list that includes one that will disable zero.Init or an empty context list
@@ -687,21 +689,31 @@ def main(args):
 
         return [deepspeed_plugin.zero3_init_context_manager(enable=False)]
     
-    vae_path = (
-        args.pretrained_model_name_or_path
-        if args.pretrained_vae_model_name_or_path is None
-        else args.pretrained_vae_model_name_or_path
+
+    # import correct text encoder classes
+    text_encoder_cls_one = import_model_class_from_model_name_or_path(
+        args.pretrained_model_name_or_path, args.revision
     )
-    
+    text_encoder_cls_two = import_model_class_from_model_name_or_path(
+        args.pretrained_model_name_or_path, args.revision, subfolder="text_encoder_2"
+    )
+
+    # Load scheduler and models
+    noise_scheduler = DDPMScheduler.from_pretrained(args.pretrained_model_name_or_path, subfolder="scheduler")
+    # Check for terminal SNR in combination with SNR Gamma
     with ContextManagers(deepspeed_zero_init_disabled_context_manager()):
-            # Check for terminal SNR in combination with SNR Gamma
         text_encoder_one = text_encoder_cls_one.from_pretrained(
             args.pretrained_model_name_or_path, subfolder="text_encoder", revision=args.revision, variant=args.variant
         )
         text_encoder_two = text_encoder_cls_two.from_pretrained(
             args.pretrained_model_name_or_path, subfolder="text_encoder_2", revision=args.revision, variant=args.variant
         )
-        # vae å› ä¸ºéœ€è¦�ç”¨float32çš„ç¼˜æ•…ï¼Œå…¶ä¸­çš„attnéƒ¨åˆ†éœ€è¦�ç”¨nativeå®žçŽ°ï¼Œå› ä¸ºflash-attn ä¸�æ”¯æŒ�float32
+        vae_path = (
+            args.pretrained_model_name_or_path
+            if args.pretrained_vae_model_name_or_path is None
+            else args.pretrained_vae_model_name_or_path
+        )
+        # vae 因为需要用float32的缘故，其中的attn部分需要用native实现，因为flash-attn 不支持float32
         origin_attn = os.environ.get("USE_NATIVE_ATTN", 0)
         os.environ["USE_NATIVE_ATTN"] = "1"
         vae = AutoencoderKL.from_pretrained(
@@ -711,6 +723,7 @@ def main(args):
             variant=args.variant,
         )
         os.environ["USE_NATIVE_ATTN"] = origin_attn
+        
     unet = UNet2DConditionModel.from_pretrained(
         args.pretrained_model_name_or_path, subfolder="unet", revision=args.revision, variant=args.variant
     )
@@ -742,7 +755,12 @@ def main(args):
             args.pretrained_model_name_or_path, subfolder="unet", revision=args.revision, variant=args.variant
         )
         ema_unet = EMAModel(ema_unet.parameters(), model_cls=UNet2DConditionModel, model_config=ema_unet.config)
-
+    if args.enable_npu_flash_attention:
+        if is_torch_npu_available():
+            logger.info("npu flash attention enabled.")
+            unet.enable_npu_flash_attention()
+        else:
+            raise ValueError("npu flash attention requires torch_npu extensions and is supported only on npu devices.")
     if args.enable_xformers_memory_efficient_attention:
         if is_xformers_available():
             import xformers
@@ -768,7 +786,7 @@ def main(args):
                     model.save_pretrained(os.path.join(output_dir, "unet"))
 
                     # make sure to pop weight so that corresponding model is not saved again
-                    if len(weights) > 0:
+                    if weights:
                         weights.pop()
 
         def load_model_hook(models, input_dir):
@@ -944,7 +962,6 @@ def main(args):
         train_dataset_with_vae = train_dataset.map(
             compute_vae_encodings_fn,
             batched=True,
-            # batch_size=args.train_batch_size * accelerator.num_processes * args.gradient_accumulation_steps,\
             batch_size=args.train_batch_size,
             new_fingerprint=new_fingerprint_for_vae,
         )
@@ -953,6 +970,7 @@ def main(args):
         )
         precomputed_dataset = precomputed_dataset.with_transform(preprocess_train)
 
+    del compute_vae_encodings_fn, compute_embeddings_fn, text_encoder_one, text_encoder_two
     del text_encoders, tokenizers, vae
     gc.collect()
     torch.cuda.empty_cache()
@@ -973,7 +991,7 @@ def main(args):
         }
 
     # DataLoaders creation:
-    # for testing ips
+    # for testing ips on small dataset, like pokenman. If dataset is not small, delete here.
     precomputed_dataset = concatenate_datasets([precomputed_dataset for i in range(10)])
     
     train_dataloader = torch.utils.data.DataLoader(
@@ -1024,6 +1042,11 @@ def main(args):
         model = model._orig_mod if is_compiled_module(model) else model
         return model
 
+    if torch.backends.mps.is_available() or "playground" in args.pretrained_model_name_or_path:
+        autocast_ctx = nullcontext()
+    else:
+        autocast_ctx = torch.autocast(accelerator.device.type)
+
     # Train!
     total_batch_size = args.train_batch_size * accelerator.num_processes * args.gradient_accumulation_steps
 
@@ -1072,7 +1095,7 @@ def main(args):
         # Only show the progress bar once on each machine.
         disable=not accelerator.is_local_main_process,
     )
-    
+
     if args.NHWC:
         unet = unet.to(memory_format=torch.channels_last)
 
@@ -1127,7 +1150,6 @@ def main(args):
                 prompt_embeds = batch["prompt_embeds"].to(accelerator.device)
                 pooled_prompt_embeds = batch["pooled_prompt_embeds"].to(accelerator.device)
                 unet_added_conditions.update({"text_embeds": pooled_prompt_embeds})
-                
                 if args.NHWC:
                     noisy_model_input = noisy_model_input.to(memory_format=torch.channels_last)
                 model_pred = unet(
@@ -1200,39 +1222,41 @@ def main(args):
                 ips_per_device = total_batch_size / iter_elapse / accelerator.num_processes
                 ips_per_gpu = ips_per_device * 2
 
-                if global_step % args.checkpointing_steps == 0:
-                    # _before_ saving state, check if this save would set us over the `checkpoints_total_limit`
-                    if args.checkpoints_total_limit is not None:
-                        checkpoints = os.listdir(args.output_dir)
-                        checkpoints = [d for d in checkpoints if d.startswith("checkpoint")]
-                        checkpoints = sorted(checkpoints, key=lambda x: int(x.split("-")[1]))
+                # DeepSpeed requires saving weights on every device; saving weights only on the main process would cause issues.
+                if accelerator.distributed_type == DistributedType.DEEPSPEED or accelerator.is_main_process:
+                    if global_step % args.checkpointing_steps == 0:
+                        # _before_ saving state, check if this save would set us over the `checkpoints_total_limit`
+                        if args.checkpoints_total_limit is not None:
+                            checkpoints = os.listdir(args.output_dir)
+                            checkpoints = [d for d in checkpoints if d.startswith("checkpoint")]
+                            checkpoints = sorted(checkpoints, key=lambda x: int(x.split("-")[1]))
 
-                        # before we save the new checkpoint, we need to have at _most_ `checkpoints_total_limit - 1` checkpoints
-                        if len(checkpoints) >= args.checkpoints_total_limit:
-                            num_to_remove = len(checkpoints) - args.checkpoints_total_limit + 1
-                            removing_checkpoints = checkpoints[0:num_to_remove]
+                            # before we save the new checkpoint, we need to have at _most_ `checkpoints_total_limit - 1` checkpoints
+                            if len(checkpoints) >= args.checkpoints_total_limit:
+                                num_to_remove = len(checkpoints) - args.checkpoints_total_limit + 1
+                                removing_checkpoints = checkpoints[0:num_to_remove]
 
-                            logger.info(
-                                f"{len(checkpoints)} checkpoints already exist, removing {len(removing_checkpoints)} checkpoints"
-                            )
-                            logger.info(f"removing checkpoints: {', '.join(removing_checkpoints)}")
+                                logger.info(
+                                    f"{len(checkpoints)} checkpoints already exist, removing {len(removing_checkpoints)} checkpoints"
+                                )
+                                logger.info(f"removing checkpoints: {', '.join(removing_checkpoints)}")
 
-                            for removing_checkpoint in removing_checkpoints:
-                                removing_checkpoint = os.path.join(args.output_dir, removing_checkpoint)
-                                shutil.rmtree(removing_checkpoint)
+                                for removing_checkpoint in removing_checkpoints:
+                                    removing_checkpoint = os.path.join(args.output_dir, removing_checkpoint)
+                                    shutil.rmtree(removing_checkpoint)
 
-                    save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
-                    # è¿™æ®µä»£ç �æ˜¯ä¸ºäº†è§£å†³NHWCæ—¶ä¿�å­˜æ¨¡åž‹å‡ºé”™
-                    if args.NHWC:
-                        origin_model = accelerator._models[0]
-                        accelerator._models[0] = origin_model.to(memory_format=torch.contiguous_format)
-                        accelerator.save_state(save_path)
-                        accelerator._models[0] = origin_model.to(memory_format=torch.channels_last)
-                    else:
-                        accelerator.save_state(save_path)
-                        logger.info(f"Saved state to {save_path}")
+                        save_path = os.path.join(args.output_dir, f"checkpoint-{global_step}")
+                        # 这段代码是为了解决NHWC时保存模型出错
+                        if args.NHWC:
+                            origin_model = accelerator._models[0]
+                            accelerator._models[0] = origin_model.to(memory_format=torch.contiguous_format)
+                            accelerator.save_state(save_path)
+                            accelerator._models[0] = origin_model.to(memory_format=torch.channels_last)
+                        else:
+                            accelerator.save_state(save_path)
+                            logger.info(f"Saved state to {save_path}")
 
-            logs = {"step_loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], 
+            logs = {"step_loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0],
                     "ips_per_device": ips_per_device, "ips_per_gpu": ips_per_gpu}
             progress_bar.set_postfix(**logs)
 
@@ -1276,7 +1300,7 @@ def main(args):
                 generator = torch.Generator(device=accelerator.device).manual_seed(args.seed) if args.seed else None
                 pipeline_args = {"prompt": args.validation_prompt}
 
-                with torch.cuda.amp.autocast():
+                with autocast_ctx:
                     images = [
                         pipeline(**pipeline_args, generator=generator, num_inference_steps=25).images[0]
                         for _ in range(args.num_validation_images)
@@ -1299,6 +1323,10 @@ def main(args):
                 del pipeline
                 torch.cuda.empty_cache()
 
+                if args.use_ema:
+                    # Switch back to the original UNet parameters.
+                    ema_unet.restore(unet.parameters())
+
     accelerator.wait_for_everyone()
     if accelerator.is_main_process:
         unet = unwrap_model(unet)
@@ -1315,8 +1343,8 @@ def main(args):
         )
         pipeline = StableDiffusionXLPipeline.from_pretrained(
             args.pretrained_model_name_or_path,
-            unet=unet,
-            vae=vae,
+            unet=unet.to(memory_format=torch.contiguous_format) if args.NHWC else unet,
+            vae=vae.to(memory_format=torch.contiguous_format) if args.NHWC else vae,
             revision=args.revision,
             variant=args.variant,
             torch_dtype=weight_dtype,
@@ -1331,7 +1359,8 @@ def main(args):
         if args.validation_prompt and args.num_validation_images > 0:
             pipeline = pipeline.to(accelerator.device)
             generator = torch.Generator(device=accelerator.device).manual_seed(args.seed) if args.seed else None
-            with torch.cuda.amp.autocast():
+
+            with autocast_ctx:
                 images = [
                     pipeline(args.validation_prompt, num_inference_steps=25, generator=generator).images[0]
                     for _ in range(args.num_validation_images)
