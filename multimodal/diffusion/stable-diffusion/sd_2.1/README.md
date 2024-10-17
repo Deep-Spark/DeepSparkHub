@@ -19,7 +19,7 @@ Download the lambdalabs/pokemon-blip-captions  from [huggingface page](https://h
 ## Step 2: Installation
 
 ```bash
-pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/diffusers-0.22.0-py3-none-any.whl
+pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/diffusers-0.29.0-py3-none-any.whl
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/transformers-4.38.1-py3-none-any.whl
 pip3 install -r requirements.txt
 pip3 install pillow --upgrade
