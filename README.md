@@ -400,6 +400,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Stable Diffusion 1.4](multimodal/diffusion/stable-diffusion/training/README.md)  | PyTorch | pokemon-images
 [Stable Diffusion 1.5](multimodal/diffusion/stable-diffusion/sd_1.5/README.md)  | PyTorch | pokemon-images
 [Stable Diffusion 2.1](multimodal/diffusion/stable-diffusion/sd_2.1/README.md)  | PyTorch | pokemon-images
+[Stable Diffusion 3](multimodal/diffusion/stable-diffusion/sd_3/README.md)  | PyTorch | pokemon-images
 [Stable Diffusion XL](multimodal/diffusion/stable-diffusion/sd_xl/README.md)  | PyTorch | pokemon-images
 
 ### NLP
