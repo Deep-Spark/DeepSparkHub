@@ -21,7 +21,7 @@ dataset: download the diffusers/dog-example from [huggingface page](https://hugg
 ```bash
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/diffusers-0.29.0-py3-none-any.whl
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/transformers-4.38.1-py3-none-any.whl
-pip3 install -r requirements.txt
+pip3 install -r ../diffusers/requirements.txt
 pip3 install pillow --upgrade
 ```
 
@@ -44,9 +44,9 @@ bash run_sd3_dreambooth.sh
 
 ## Results
 
-| Model  | GPUs    | ips_per_device | ips_per_gpu |
-| ------ | ------- | -------------- | ----------- |
-| SD3    | BI-V150 | 4.34           | 8.68        |
+| Model | GPUs    | ips_per_device | ips_per_gpu |
+| ----- | ------- | -------------- | ----------- |
+| SD3   | BI-V150 | 4.34           | 8.68        |
 
 ## Reference
 
