@@ -455,6 +455,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [QWen-7B](nlp/llm/qwen-7b/firefly/README.md)  | PyTorch (Firefly) | qwen-7b
 [QWen1.5-7B](nlp/llm/qwen1.5-7b/firefly/README.md)  | PyTorch (Firefly) | school_math
 [QWen1.5-14B](nlp/llm/qwen1.5-14b/firefly/README.md)  | PyTorch (Firefly) | school_math
+[QWen2.5-7B](nlp/llm/qwen2.5-7b/LLaMA-Factory/README.md)  | PyTorch (LLaMA-Factory) | qwen2.5-7b
 
 #### Text Correction
 
