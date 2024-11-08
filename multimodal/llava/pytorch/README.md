@@ -9,9 +9,12 @@ architecture.
 ## Step 1: Preparation
 
 ```bash
+# Clone LLaVA Repo
 git clone --depth 1 https://github.com/haotian-liu/LLaVA
 cd LLaVA/
 git checkout c121f0432da27facab705978f83c4ada465e46fd
+
+# Prepare dirs.
 mkdir -p checkpoints/
 mkdir -p data/
 ```
@@ -32,7 +35,6 @@ and put it at `data/`.
 ## Step 2: Installation
 
 ```bash
-
 pip3 install -e .
 pip3 install -e ".[train]"
 pip3 install protobuf
@@ -41,6 +43,7 @@ pip3 install protobuf
 ## Step 3: Training
 
 ```bash
+mv ../train.sh ./
 bash train.sh
 ```
 
