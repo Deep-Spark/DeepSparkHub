@@ -396,6 +396,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [CLIP](multimodal/Language-Image_Pre-Training/clip/pytorch/README.md)  | PyTorch | CIFAR100
 [ControlNet](multimodal/diffusion/ControlNet/README.md)  | PyTorch | Fill50K
 [DDPM](multimodal/diffusion/ddpm/README.md)  | PyTorch | CIFAR-10
+[LLaVA](multimodal/llava/pytorch/README.md)  | PyTorch | LLaVA-Pretrain
 [L-Verse](multimodal/Language-Image_Pre-Training/L-Verse/pytorch/README.md)  | PyTorch | ImageNet
 [Stable Diffusion 1.4](multimodal/diffusion/stable-diffusion/training/README.md)  | PyTorch | pokemon-images
 [Stable Diffusion 1.5](multimodal/diffusion/stable-diffusion/sd_1.5/README.md)  | PyTorch | pokemon-images
