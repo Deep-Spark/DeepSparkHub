@@ -21,3 +21,9 @@ dist/
 # Docker
 *.run
 3.*/
+
+# binary
+*.tar
+*.zip
+*.tgz
+*.gz
