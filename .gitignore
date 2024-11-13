@@ -28,3 +28,4 @@ dist/
 *.tgz
 *.gz
 *.meta
+*.ipynb
