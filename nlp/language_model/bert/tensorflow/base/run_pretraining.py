@@ -995,7 +995,7 @@ def main(_):
   '''
   if FLAGS.do_eval:
     if FLAGS.horovod:
-      if hvd.rank() is not 0:
+      if hvd.rank() != 0:
         return
     converged = False
     num_steps_between_eval = math.ceil(FLAGS.samples_between_eval / global_batch_size)

@@ -1,4 +1,4 @@
-# BERT Pretraining
+    # BERT Pretraining
 
 ## Model description
 BERT, or Bidirectional Encoder Representations from Transformers, improves upon standard Transformers by removing the unidirectionality constraint by using a masked language model (MLM) pre-training objective. The masked language model randomly masks some of the tokens from the input, and the objective is to predict the original vocabulary id of the masked word based only on its context. Unlike left-to-right language model pre-training, the MLM objective enables the representation to fuse the left and the right context, which allows us to pre-train a deep bidirectional Transformer. In addition to the masked language model, BERT uses a next sentence prediction task that jointly pre-trains text-pair representations.
@@ -9,6 +9,12 @@ BERT, or Bidirectional Encoder Representations from Transformers, improves upon 
 
 ```shell
 bash init_tf.sh
+wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.7.tar.gz
+tar xf openmpi-4.0.7.tar.gz
+cd openmpi-4.0.7/
+./configure --prefix=/usr/local/bin --with-orte
+make -j4 && make install
+export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
 ```
 
 ### Download datasets
@@ -34,12 +40,22 @@ tips: you can git clone this repo in other place ,we need the bert_pretrain_tf_r
 ### Training on single card
 
 ```shell
-bash run_1card_FPS.sh
+bash run_1card_FPS.sh --input_files_dir=/path/to/bert_pretrain_tf_records/train_data \
+        --init_checkpoint=/path/to/bert_pretrain_ckpt_tf/model.ckpt-28252 \
+        --eval_files_dir=/path/to/bert_pretrain_tf_records/eval_data \
+        --train_batch_size=6 \
+        --bert_config_file=/path/to/bert_pretrain_ckpt_tf/bert_config.json
 ```
 
 ### Training on mutil-cards
 ```shell
-bash run_multi_card_FPS.sh 
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export IX_NUM_CUDA_VISIBLE_DEVICES=8
+bash run_multi_card_FPS.sh --input_files_dir=/path/to/bert_pretrain_tf_records/train_data \
+        --init_checkpoint=/path/to/bert_pretrain_ckpt_tf/model.ckpt-28252 \
+        --eval_files_dir=/path/to/bert_pretrain_tf_records/eval_data \
+        --train_batch_size=6 \
+        --bert_config_file=/path/to/bert_pretrain_ckpt_tf/bert_config.json
 ```
  
 ## Result

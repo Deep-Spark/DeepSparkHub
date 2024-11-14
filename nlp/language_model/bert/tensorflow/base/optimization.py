@@ -84,7 +84,7 @@ def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps, manual_fp
   if hvd and (num_accumulation_steps == 1 or (not allreduce_post_accumulation)):
     optimizer = hvd.DistributedOptimizer(optimizer, sparse_as_dense=True)
   if use_fp16:
-    loss_scaler = tf.train.experimental.DynamicLossScale(
+    loss_scaler = tf.compat.v1.mixed_precision.DynamicLossScale(
         initial_loss_scale=init_loss_scale, increment_period=1000, multiplier=2.0)
     optimizer = tf.compat.v1.train.experimental.enable_mixed_precision_graph_rewrite(optimizer, loss_scaler)
     loss_scale_value = tf.identity(loss_scaler(), name="loss_scale")

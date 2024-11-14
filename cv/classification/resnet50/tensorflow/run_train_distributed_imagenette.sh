@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2023-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -13,7 +13,6 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-
 
 bash ./get_imagenette.sh
 
@@ -43,7 +42,7 @@ done
 echo "## Training model: ${model}"
 
 
-: ${BATCH_SIZE:=32}
+: ${BATCH_SIZE:=16}
 # TRAIN_EPOCHS=10
 # optional optimizer: momentum, rmsprop, momentum, sgd
 OPTIMIZER=momentum
@@ -111,6 +110,7 @@ function ctrl_c() {
   for pid in "${pid_list[@]}"; do
     echo "Killing pid ${pid}"
     kill ${pid}
+    wait ${pid}
   done
   exit 0
 }
