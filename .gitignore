@@ -29,3 +29,4 @@ dist/
 *.gz
 *.meta
 *.ipynb
+*.gif
