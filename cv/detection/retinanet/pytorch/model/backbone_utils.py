@@ -1,4 +1,3 @@
-import sys
 import warnings
 from torch import nn
 from torchvision.ops.feature_pyramid_network import FeaturePyramidNetwork, LastLevelMaxPool
@@ -7,10 +6,6 @@ from torchvision.ops import misc as misc_nn_ops
 from .model_utils import IntermediateLayerGetter
 from . import mobilenet
 from . import resnet
-
-
-def padding_channel():
-    return "--padding-channel" in sys.argv
 
 
 class BackboneWithFPN(nn.Module):
@@ -97,10 +92,6 @@ def resnet_fpn_backbone(
     backbone = resnet.__dict__[backbone_name](
         pretrained=pretrained,
         norm_layer=norm_layer)
-
-    if padding_channel():
-        from utils import padding_conv_channel_to_4
-        backbone.conv1 = padding_conv_channel_to_4(backbone.conv1)
 
     # select layers that wont be frozen
     assert 0 <= trainable_layers <= 5

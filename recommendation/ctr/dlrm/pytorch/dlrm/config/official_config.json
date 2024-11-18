@@ -43,5 +43,5 @@
   ],
   "embedding_dim": 64,
   "interaction_op": "dot",
-  "hash_indices": true
+  "hash_indices": false
 }

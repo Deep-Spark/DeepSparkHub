@@ -1,0 +1,43 @@
+- KEY:
+    NAME:  train_batch_size
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lr_boundaries
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lr_rates
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  actual_selfplay_games_per_generation
+    REQ:   AT_LEAST_ONE
+    CHECK:
+      - "v['value'] >= 8192"
+
+- KEY:
+    NAME:  min_selfplay_games_per_generation
+    REQ:   EXACTLY_ONE
+    CHECK:
+      - "v['value'] == 8192"
+
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'epoch_num' in v['metadata']"
+    ATLEAST_ONE_CHECK: "v['value'] >= 0.5 and v['value'] < 1.0"
+
+- KEY:
+    NAME: block_start
+
+- KEY:
+    NAME: block_stop
+
+- KEY:
+    NAME: train_samples
+
+- KEY:
+    NAME: eval_samples
+

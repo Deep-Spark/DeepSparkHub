@@ -1,0 +1,117 @@
+{
+    "deepcam_ref_128": {
+        "Benchmark": "deepcam",
+        "BS": 128,
+        "Epochs to converge": [ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 ],
+        "Hyperparams": {
+            "batchnorm_groupsize": 1,
+            "global_batch_size": 128,
+            "gradient_accumulation_frequency": 1,
+            "opt_betas": [ 0.9, 0.999 ],
+            "opt_bias_correction": true,
+            "opt_eps": 1e-06,
+            "opt_grad_averaging": true,
+            "opt_lr": 0.001,
+            "opt_max_grad_norm": 1.0,
+            "opt_weight_decay": 0.01,
+            "opt_name": "LAMB",
+            "scheduler_decay_rate": "0.1",
+            "scheduler_lr_warmup_factor": 1.0,
+            "scheduler_lr_warmup_steps": 0,
+            "scheduler_milestones": [ 8192, 16384 ],
+            "scheduler_type": "multistep"
+        }
+    },
+    "deepcam_ref_256": {
+        "Benchmark": "deepcam",
+        "BS": 256,
+        "Epochs to converge": [ 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 ],
+        "Hyperparams": {
+            "batchnorm_groupsize": 1,
+            "global_batch_size": 256,
+            "gradient_accumulation_frequency": 1,
+            "opt_betas": [ 0.9, 0.999 ],
+            "opt_bias_correction": true,
+            "opt_eps": 1e-06,
+            "opt_grad_averaging": true,
+            "opt_lr": 0.002,
+            "opt_max_grad_norm": 1.0,
+            "opt_weight_decay": 0.01,
+            "opt_name": "LAMB",
+            "scheduler_decay_rate": 0.1,
+            "scheduler_lr_warmup_factor": 1.0,
+            "scheduler_lr_warmup_steps": 0,
+            "scheduler_milestones": [ 4096, 8192 ],
+            "scheduler_type": "multistep"
+        }
+    },
+    "deepcam_ref_512": {
+        "Benchmark": "deepcam",
+        "BS": 512,
+        "Epochs to converge": [ 11, 11, 11, 11, 11, 10, 16, 12, 11, 11, 11, 10, 11, 11, 11, 10, 11, 11, 11, 11, 11, 11, 11, 12, 11, 11, 11, 11, 13, 10, 11, 13, 11, 11, 11, 10, 14, 10, 10, 10 ],
+        "Hyperparams": {
+            "batchnorm_groupsize": 1,
+            "global_batch_size": 512,
+            "gradient_accumulation_frequency": 1,
+            "opt_betas": [ 0.9, 0.999 ],
+            "opt_bias_correction": true,
+            "opt_eps": 1e-06,
+            "opt_grad_averaging": true,
+            "opt_lr": 0.004,
+            "opt_max_grad_norm": 1.0,
+            "opt_weight_decay": 0.01,
+            "opt_name": "LAMB",
+            "scheduler_decay_rate": 0.1,
+            "scheduler_lr_warmup_factor": 1.0,
+            "scheduler_lr_warmup_steps": 100,
+            "scheduler_milestones": [ 2048, 4096 ],
+            "scheduler_type": "multistep"
+        }
+    },
+    "deepcam_ref_1024": {
+        "Benchmark": "deepcam",
+        "BS": 1024,
+        "Epochs to converge": [ 13, 13, 12, 13, 13, 13, 14, 13, 13, 13 ],
+        "Hyperparams": {
+            "batchnorm_groupsize": 1,
+            "global_batch_size": 1024,
+            "gradient_accumulation_frequency": 1,
+            "opt_betas": [ 0.9, 0.999 ],
+            "opt_bias_correction": true,
+            "opt_eps": 1e-06,
+            "opt_grad_averaging": true,
+            "opt_lr": 0.004,
+            "opt_max_grad_norm": 1.0,
+            "opt_weight_decay": 0.01,
+            "opt_name": "LAMB",
+            "scheduler_decay_rate": 0.1,
+            "scheduler_lr_warmup_factor": 1.0,
+            "scheduler_lr_warmup_steps": 200,
+            "scheduler_milestones": [ 1100, 4096 ],
+            "scheduler_type": "multistep"
+        }
+    },
+    "deepcam_ref_2048": {
+        "Benchmark": "deepcam",
+        "BS": 2048,
+        "Epochs to converge": [ 23, 23, 22, 23, 22, 26, 22, 22, 24, 22 ],
+        "Hyperparams": {
+            "batchnorm_groupsize": 1,
+            "global_batch_size": 2048,
+            "gradient_accumulation_frequency": 1,
+            "opt_betas": [ 0.9, 0.999 ],
+            "opt_bias_correction": true,
+            "opt_eps": 1e-06,
+            "opt_grad_averaging": true,
+            "opt_lr": 0.0055,
+            "opt_max_grad_norm": 1.0,
+            "opt_weight_decay": 0.01,
+            "opt_name": "LAMB",
+            "scheduler_decay_rate": "0.1",
+            "scheduler_lr_warmup_factor": 1.0,
+            "scheduler_lr_warmup_steps": 400,
+            "scheduler_milestones": [ 800 ],
+            "scheduler_type": "multistep"
+        }
+    }
+}

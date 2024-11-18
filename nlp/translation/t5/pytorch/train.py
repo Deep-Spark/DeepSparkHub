@@ -8,22 +8,16 @@ import numpy as np
 
 import datasets
 from datasets import load_from_disk
-from datasets import load_dataset
 
 import transformers
-from transformers import (
-    AutoModelForSeq2SeqLM,
-    AutoConfig,
-    HfArgumentParser,
-    set_seed,
-    T5Config,
-    AutoTokenizer,
-    MBartTokenizer,
-    MBartTokenizerFast,
-    T5ForConditionalGeneration,
-    default_data_collator,
-    DataCollatorForSeq2Seq,
-)
+from transformers import (HfArgumentParser,
+                          set_seed,
+                          T5Config,
+                          AutoTokenizer,
+                          T5ForConditionalGeneration,
+                          default_data_collator,
+                          DataCollatorForSeq2Seq,
+                          )
 from trainer_seq2seq import Seq2SeqTrainer
 from training_args_seq2seq import Seq2SeqTrainingArguments
 
@@ -33,7 +27,7 @@ CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
 sys.path.append(CUR_DIR)
 from sacrebleu_datasets.sacrebleu import Sacrebleu
-
+os.environ["WANDB_DISABLED"] = "true"
 
 
 @dataclass
@@ -267,6 +261,12 @@ def main():
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments([model_args, data_args, training_args])
+    except:
+        pass
+
     # Setup logging
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -306,55 +306,21 @@ def main():
     # Set seed before initializing model.
     set_seed(training_args.seed)
 
-    # Get the datasets: you can either provide your own JSON training and evaluation files (see below)
-    # or just provide the name of one of the public datasets available on the hub at https://huggingface.co/datasets/
-    # (the dataset will be downloaded automatically from the datasets Hub).
-    #
-    # For translation, only JSON files are supported, with one field named "translation" containing two keys for the
-    # source and target languages (unless you adapt what follows).
-    #
-    # In distributed training, the load_dataset function guarantee that only one local process can concurrently
-    # download the dataset.
-    raw_datasets = load_dataset(
-        data_args.dataset_name,
-        data_args.dataset_config_name,
-        cache_dir=model_args.cache_dir,
-        use_auth_token=True if model_args.use_auth_token else None,
-    )
+    # data should be ./wmt14_data/
+    dataset_path = os.path.join(
+        CUR_DIR, 'wmt14_data/wmt14-en-de-pre-processed')
+    raw_datasets = load_from_disk(dataset_path)
 
-    # download model & vocab.
-    config = AutoConfig.from_pretrained(
-        model_args.config_name if model_args.config_name else model_args.model_name_or_path,
-        cache_dir=model_args.cache_dir,
-        revision=model_args.model_revision,
-        use_auth_token=True if model_args.use_auth_token else None,
-    )
-
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_args.tokenizer_name if model_args.tokenizer_name else model_args.model_name_or_path,
-        cache_dir=model_args.cache_dir,
-        use_fast=model_args.use_fast_tokenizer,
-        revision=model_args.model_revision,
-        use_auth_token=True if model_args.use_auth_token else None,
-    )
+    config_dir = os.path.join(CUR_DIR, 'pretrained/t5_small')
+    # load model config
+    config = T5Config.from_pretrained(config_dir)
+    # load tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(config_dir)
     # load pretrained model
-    model = AutoModelForSeq2SeqLM.from_pretrained(
-        model_args.model_name_or_path,
-        from_tf=bool(".ckpt" in model_args.model_name_or_path),
-        config=config,
-        cache_dir=model_args.cache_dir,
-        revision=model_args.model_revision,
-        use_auth_token=True if model_args.use_auth_token else None,
-    )
+    model = T5ForConditionalGeneration.from_pretrained(config_dir)
 
     # The number of new tokens in the embedding matrix. Increasing the size will add newly initialized vectors at the end. Reducing the size will remove vectors from the end
     model.resize_token_embeddings(len(tokenizer))
-
-    if model.config.decoder_start_token_id is None and isinstance(tokenizer, (MBartTokenizer, MBartTokenizerFast)):
-        if isinstance(tokenizer, MBartTokenizer):
-            model.config.decoder_start_token_id = tokenizer.lang_code_to_id[data_args.target_lang]
-        else:
-            model.config.decoder_start_token_id = tokenizer.convert_tokens_to_ids(data_args.target_lang)
 
     if model.config.decoder_start_token_id is None:
         raise ValueError("Make sure that `config.decoder_start_token_id` is correctly defined")
@@ -488,6 +454,8 @@ def main():
         if data_args.ignore_pad_token_for_loss:
             # Replace -100 in the labels as we can't decode them.
             labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
+            labels = np.where(labels < len(tokenizer), labels, tokenizer.pad_token_id)
+            labels = np.where(labels >=0 , labels, tokenizer.pad_token_id)
         decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
 
         # Some simple post-processing
@@ -588,10 +556,10 @@ def main():
     if len(languages) > 0:
         kwargs["language"] = languages
 
-    if training_args.push_to_hub:
-        trainer.push_to_hub(**kwargs)
-    else:
-        trainer.create_model_card(**kwargs)
+    # if training_args.push_to_hub:
+    #     trainer.push_to_hub(**kwargs)
+    # else:
+    #     trainer.create_model_card(**kwargs)
 
     return results
     

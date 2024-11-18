@@ -9,4 +9,4 @@
 SCRIPT_DIR=$(cd `dirname $0`; pwd)
 PROJECT_DIR=$SCRIPT_DIR/..
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-bash $SCRIPT_DIR/train_resnet50_imagenet_dist_2x8_torch.sh --batch-size 300 --dali $@
+bash $SCRIPT_DIR/train_resnet50_imagenet_dist_2x8_torch.sh --batch-size 300 $@

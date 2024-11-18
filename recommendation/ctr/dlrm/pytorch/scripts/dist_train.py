@@ -1,17 +1,17 @@
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
-#    Licensed under the Apache License, Version 2.0 (the "License"); you may
-#    not use this file except in compliance with the License. You may obtain
-#    a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
 #
-#         http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
-#    Unless required by applicable law or agreed to in writing, software
-#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-#    License for the specific language governing permissions and limitations
-#    under the License.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import datetime
 import json
 import itertools
@@ -30,7 +30,7 @@ from apex import amp
 from apex import optimizers as apex_optim
 from apex import parallel
 
-from dlrm import dist_model
+from dlrm import dist_model, mlperf_logger
 from dlrm.data import dataset
 from dlrm.utils import distributed as dist
 from dlrm.utils import metrics
@@ -52,6 +52,10 @@ def main(argv):
     rank, world_size, gpu = dist.init_distributed_mode(backend=FLAGS.backend, use_gpu=use_gpu)
     if world_size == 1:
         raise NotImplementedError("This file is only for distributed training.")
+
+    mlperf_logger.mlperf_submission_log('dlrm')
+    mlperf_logger.log_event(key=mlperf_logger.constants.SEED, value=FLAGS.seed)
+    mlperf_logger.log_event(key=mlperf_logger.constants.GLOBAL_BATCH_SIZE, value=FLAGS.batch_size)
 
     # Only print cmd args on rank 0
     if rank == 0:
@@ -117,7 +121,7 @@ def main(argv):
     # defining a train function
 
     # Print per 16384 * 2000 samples by default
-    default_print_freq = 100
+    default_print_freq = 16384 * 2000 // FLAGS.batch_size
     print_freq = default_print_freq if FLAGS.print_freq is None else FLAGS.print_freq
 
     metric_logger = utils.MetricLogger(delimiter="  ")
@@ -132,7 +136,16 @@ def main(argv):
     local_embedding_device_mapping = torch.tensor(
         device_mapping['embedding'][rank], device=FLAGS.device, dtype=torch.long)
 
-    # # LR is logged twice for now because of a compliance checker bug
+    # LR is logged twice for now because of a compliance checker bug
+    mlperf_logger.log_event(key=mlperf_logger.constants.OPT_BASE_LR, value=FLAGS.lr)
+    mlperf_logger.log_event(key=mlperf_logger.constants.OPT_LR_WARMUP_STEPS, value=FLAGS.warmup_steps)
+
+    # use logging keys from the official HP table and not from the logging library
+    mlperf_logger.log_event(key='sgd_opt_base_learning_rate', value=FLAGS.lr)
+    mlperf_logger.log_event(key='lr_decay_start_steps', value=FLAGS.decay_start_step)
+    mlperf_logger.log_event(key='sgd_opt_learning_rate_decay_steps', value=FLAGS.decay_steps)
+    mlperf_logger.log_event(key='sgd_opt_learning_rate_decay_poly_power', value=FLAGS.decay_power)
+
     lr_scheduler = utils.LearningRateScheduler(optimizers=[mlp_optimizer, embedding_optimizer],
                                                base_lrs=[scaled_lrs, [scaled_lrs[0]]],
                                                warmup_steps=FLAGS.warmup_steps,
@@ -145,11 +158,20 @@ def main(argv):
     data_stream = torch.cuda.Stream()
     eval_data_cache = [] if FLAGS.cache_eval_data else None
 
+    start_time = time()
+    stop_time = time()
+
     print("Creating data loaders")
     dist_dataset_args = {
         "numerical_features": rank == 0,
         "categorical_features": device_mapping['embedding'][rank]
     }
+
+    mlperf_logger.barrier()
+    mlperf_logger.log_end(key=mlperf_logger.constants.INIT_STOP)
+    mlperf_logger.barrier()
+    mlperf_logger.log_start(key=mlperf_logger.constants.RUN_START)
+    mlperf_logger.barrier()
 
     data_loader_train, data_loader_test = dataset.get_data_loader(
         FLAGS.dataset, FLAGS.batch_size, FLAGS.test_batch_size, FLAGS.device,
@@ -158,27 +180,24 @@ def main(argv):
 
     steps_per_epoch = len(data_loader_train)
 
-    print(f"train dataloader length:{steps_per_epoch}")
-    print(f"test dataloader length:{len(data_loader_test)}")
-
     # Default 20 tests per epoch
     test_freq = FLAGS.test_freq if FLAGS.test_freq is not None else steps_per_epoch // 20
 
-    global_step = 0
-    stop_time_print = time()
-    start_time = time()
-    stop_time = time()
-
-    total_time = 0
-    total_samples = 0
-    samp_per_secs = []
     for epoch in range(FLAGS.epochs):
-        step = 0
         epoch_start_time = time()
 
+        mlperf_logger.barrier()
+        mlperf_logger.log_start(key=mlperf_logger.constants.BLOCK_START,
+                                metadata={mlperf_logger.constants.FIRST_EPOCH_NUM: epoch + 1,
+                                          mlperf_logger.constants.EPOCH_COUNT: 1})
+        mlperf_logger.barrier()
+        mlperf_logger.log_start(key=mlperf_logger.constants.EPOCH_START,
+                                metadata={mlperf_logger.constants.EPOCH_NUM: epoch + 1})
+
+        if FLAGS.profile_steps is not None:
+            torch.cuda.profiler.start()
         for step, (numerical_features, categorical_features, click) in enumerate(
                 dataset.prefetcher(iter(data_loader_train), data_stream)):
-            t1 = time()
             torch.cuda.current_stream().wait_stream(data_stream)
 
             global_step = steps_per_epoch * epoch + step
@@ -193,9 +212,20 @@ def main(argv):
 
             last_batch_size = None
             if click.shape[0] != FLAGS.batch_size: # last batch
-                # for example,batchsize is 2048, 8 gpus, total sample number is 265, then gpu0 has 256(2048/8) samples, gpu1 has 9 samples,
-                # and other gpus has none sample
-                continue
+                last_batch_size = click.shape[0]
+                logging.debug("Pad the last batch of size %d to %d", last_batch_size, FLAGS.batch_size)
+                padding_size = FLAGS.batch_size - last_batch_size
+                padding_numiercal = torch.empty(
+                    padding_size, numerical_features.shape[1],
+                    device=numerical_features.device, dtype=numerical_features.dtype)
+                numerical_features = torch.cat((numerical_features, padding_numiercal), dim=0)
+                if categorical_features is not None:
+                    padding_categorical = torch.ones(
+                        padding_size, categorical_features.shape[1],
+                        device=categorical_features.device, dtype=categorical_features.dtype)
+                    categorical_features = torch.cat((categorical_features, padding_categorical), dim=0)
+                padding_click = torch.empty(padding_size, device=click.device, dtype=click.dtype)
+                click = torch.cat((click, padding_click))
 
             bottom_out = model.bottom_model(numerical_features, categorical_features)
 
@@ -204,7 +234,20 @@ def main(argv):
                 bottom_out, batch_size_per_gpu, config['embedding_dim'], vectors_per_gpu)
 
             if last_batch_size is not None:
-               pass
+                partial_rank = math.ceil(last_batch_size / batch_size_per_gpu)
+                if rank == partial_rank:
+                    top_out = model.top_model(from_bottom[:last_batch_size % batch_size_per_gpu]).squeeze().float()
+                    loss = loss_fn(
+                        top_out,
+                        click[rank * batch_size_per_gpu : (rank + 1) * batch_size_per_gpu][
+                            :last_batch_size % batch_size_per_gpu])
+                elif rank < partial_rank:
+                    loss = loss_fn(
+                        model.top_model(from_bottom).squeeze().float(),
+                        click[rank * batch_size_per_gpu : (rank + 1) * batch_size_per_gpu])
+                else:
+                    # Back propgate nothing for padded samples
+                    loss = 0. * model.top_model(from_bottom).squeeze().float().mean()
             else:
                 loss = loss_fn(
                     model.top_model(from_bottom).squeeze().float(),
@@ -224,45 +267,81 @@ def main(argv):
             mlp_optimizer.step()
             embedding_optimizer.step()
 
-            total_time += time() - t1
-            total_samples += numerical_features.shape[0]*world_size
-
-            if global_step == 0:
+            moving_loss_stream.wait_stream(torch.cuda.current_stream())
+            with torch.cuda.stream(moving_loss_stream):
+                moving_loss += loss
+            if step == 0:
                 print(F"Started epoch {epoch}...")
-            elif global_step % print_freq == 0:
+            elif step % print_freq == 0:
                 torch.cuda.synchronize()
                 # Averaging cross a print_freq period to reduce the error.
                 # An accurate timing needs synchronize which would slow things down.
                 metric_logger.update(
-                    step_time=(time() - stop_time_print) * 1000 / print_freq,
-                    loss=loss.item() / (FLAGS.loss_scale if FLAGS.fp16 else 1),
+                    step_time=(time() - stop_time) * 1000 / print_freq,
+                    loss=moving_loss.item() / print_freq / (FLAGS.loss_scale if FLAGS.fp16 else 1),
                     lr=mlp_optimizer.param_groups[1]["lr"] * (FLAGS.loss_scale if FLAGS.fp16 else 1))
-                stop_time_print = time()
-                samp_per_sec = total_samples / total_time
-                samp_per_secs.append(samp_per_sec)
+                stop_time = time()
+                eta_str = datetime.timedelta(seconds=int(metric_logger.step_time.avg / 1000 * (steps_per_epoch - step)))
                 metric_logger.print(
-                    header=F"Epoch:[{epoch}/{FLAGS.epochs}] [{global_step}/{steps_per_epoch*FLAGS.epochs}]  speed: {format(samp_per_sec, '0.2f')+' records/s'}")
+                    header=F"Epoch:[{epoch}/{FLAGS.epochs}] [{step}/{steps_per_epoch}]  eta: {eta_str}")
                 moving_loss = 0.
                 with torch.cuda.stream(moving_loss_stream):
                     moving_loss = 0.
 
             if global_step % test_freq == 0 and global_step > 0 and global_step / steps_per_epoch >= FLAGS.test_after:
+                mlperf_epoch_index = global_step / steps_per_epoch + 1
+
+                mlperf_logger.barrier()
+                mlperf_logger.log_start(key=mlperf_logger.constants.EVAL_START,
+                                        metadata={mlperf_logger.constants.EPOCH_NUM: mlperf_epoch_index})
                 auc = dist_evaluate(model, data_loader_test, eval_data_cache)
-                print(F"Epoch {epoch} step {global_step}. auc {auc:.6f}")
+                mlperf_logger.log_event(key=mlperf_logger.constants.EVAL_ACCURACY,
+                                        value=float(auc),
+                                        metadata={mlperf_logger.constants.EPOCH_NUM: mlperf_epoch_index})
+                print(F"Epoch {epoch} step {step}. auc {auc:.6f}")
                 stop_time = time()
+                mlperf_logger.barrier()
+                mlperf_logger.log_end(key=mlperf_logger.constants.EVAL_STOP,
+                                      metadata={mlperf_logger.constants.EPOCH_NUM: mlperf_epoch_index})
 
                 if auc > FLAGS.auc_threshold:
+                    mlperf_logger.barrier()
+                    mlperf_logger.log_end(key=mlperf_logger.constants.RUN_STOP,
+                                          metadata={mlperf_logger.constants.STATUS: mlperf_logger.constants.SUCCESS})
+
+                    mlperf_logger.barrier()
+                    mlperf_logger.log_end(key=mlperf_logger.constants.EPOCH_STOP,
+                                          metadata={mlperf_logger.constants.EPOCH_NUM: epoch + 1})
+                    mlperf_logger.barrier()
+                    mlperf_logger.log_end(key=mlperf_logger.constants.BLOCK_STOP,
+                                          metadata={mlperf_logger.constants.FIRST_EPOCH_NUM: epoch + 1})
+
                     run_time_s = int(stop_time - start_time)
                     print(F"Hit target accuracy AUC {FLAGS.auc_threshold} at epoch "
                           F"{global_step/steps_per_epoch:.2f} in {run_time_s}s. "
-                          F"Average training speed {np.array(samp_per_secs).mean():.1f} records/s.")
+                          F"Average speed {global_step * FLAGS.batch_size / run_time_s:.1f} records/s.")
                     return
 
+            if FLAGS.profile_steps is not None and global_step == FLAGS.profile_steps:
+                torch.cuda.profiler.stop()
+                logging.warning("Profile run, stopped at step %d.", global_step)
+                return
+
+        mlperf_logger.barrier()
+        mlperf_logger.log_end(key=mlperf_logger.constants.EPOCH_STOP,
+                              metadata={mlperf_logger.constants.EPOCH_NUM: epoch + 1})
+        mlperf_logger.barrier()
+        mlperf_logger.log_end(key=mlperf_logger.constants.BLOCK_STOP,
+                              metadata={mlperf_logger.constants.FIRST_EPOCH_NUM: epoch + 1})
 
         epoch_stop_time = time()
         epoch_time_s = epoch_stop_time - epoch_start_time
         print(F"Finished epoch {epoch} in {datetime.timedelta(seconds=int(epoch_time_s))}. "
-              F"Average training speed {np.array(samp_per_secs).mean():.1f} records/s.")
+              F"Average speed {steps_per_epoch * FLAGS.batch_size / epoch_time_s:.1f} records/s.")
+
+    # mlperf_logger.barrier()
+    # mlperf_logger.log_end(key=mlperf_logger.constants.RUN_STOP,
+    #                       metadata={mlperf_logger.constants.STATUS: mlperf_logger.constants.ABORTED})
 
 def dist_evaluate(model, data_loader, data_cache):
     """Test distributed DLRM model
@@ -347,4 +426,8 @@ def dist_evaluate(model, data_loader, data_cache):
     return auc
 
 if __name__ == '__main__':
+
+    mlperf_logger.config_logger('dlrm')
+    mlperf_logger.log_start(key=mlperf_logger.constants.INIT_START, log_all_ranks=True)
+
     app.run(main)

@@ -1,18 +1,17 @@
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
-#    Licensed under the Apache License, Version 2.0 (the "License"); you may
-#    not use this file except in compliance with the License. You may obtain
-#    a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
 #
-#         http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
-#    Unless required by applicable law or agreed to in writing, software
-#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-#    License for the specific language governing permissions and limitations
-#    under the License.
-
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Reference training script
 Only Criteo data is supported at the moment, one hot embedding.
 """
@@ -21,8 +20,11 @@ import functools
 import itertools
 import json
 import os
+import sys
+import math
 from pprint import pprint
 from time import time
+
 from absl import app
 from absl import flags
 
@@ -34,7 +36,6 @@ from dlrm.data import dataset
 from dlrm.utils import metrics
 
 import utils
-import numpy as np
 
 FLAGS = flags.FLAGS
 
@@ -68,7 +69,7 @@ flags.DEFINE_enum("dataset_type", "memmap", ["bin", "memmap", "dist"], "Which da
 flags.DEFINE_boolean("use_embedding_ext", True, "Use embedding cuda extension. If False, use Pytorch embedding")
 
 # Saving and logging flags
-flags.DEFINE_string("output_dir", ".", "path where to save")
+flags.DEFINE_string("output_dir", "/tmp", "path where to save")
 flags.DEFINE_integer("test_freq", None, "#steps test. If None, 20 tests per epoch per MLperf rule.")
 flags.DEFINE_float("test_after", 0, "Don't test the model unless this many epochs has been completed")
 flags.DEFINE_integer("print_freq", None, "#steps per pring")
@@ -81,12 +82,16 @@ flags.DEFINE_boolean("fp16", True, "Use fp16")
 flags.DEFINE_float("loss_scale", 1024, "Static loss scale for fp16")
 
 #Accuracy flags
-# flags.DEFINE_float("auc_threshold", 0.8025, "Target AUC.") #original target
-flags.DEFINE_float("auc_threshold", 0.8, "Target AUC.")   #current target, according the dataset, if not use full dataset, may can not hit original target
+flags.DEFINE_float("auc_threshold", 0.8025, "Target AUC.")
 
 flags.mark_flags_as_required(["dataset", "model_config"])
 
 def main(argv):
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(FLAGS)
+    except:
+        pass
     if FLAGS.seed is not None:
         torch.manual_seed(FLAGS.seed)
 
@@ -98,9 +103,6 @@ def main(argv):
     data_loader_train, data_loader_test = dataset.get_data_loader(
         FLAGS.dataset, FLAGS.batch_size, FLAGS.test_batch_size, FLAGS.device,
         dataset_type=FLAGS.dataset_type, shuffle=FLAGS.shuffle)
-
-    print(f"train dataloader length:{len(data_loader_train)}")
-    print(f"test dataloader length:{len(data_loader_test)}")
 
     print("Creating model")
     with open(FLAGS.model_config, "r") as f:
@@ -156,7 +158,7 @@ def train(model, loss_fn, optimizer, data_loader_train, data_loader_test, scaled
         scaled_lr (float)
     """
     # Print per 16384 * 2000 samples by default
-    default_print_freq = 100
+    default_print_freq = 16384 * 2000 // FLAGS.batch_size
     print_freq = default_print_freq if FLAGS.print_freq is None else FLAGS.print_freq
 
     steps_per_epoch = len(data_loader_train)
@@ -177,25 +179,19 @@ def train(model, loss_fn, optimizer, data_loader_train, data_loader_test, scaled
                                                decay_power=FLAGS.decay_power,
                                                end_lr_factor=FLAGS.decay_end_lr / FLAGS.lr)
 
-    global_step = 0
+    step = 0
     start_time = time()
     stop_time = time()
-    stop_time_print = time()
-
-    total_time = 0
-    total_samples = 0
-    samp_per_secs = []
     for epoch in range(FLAGS.epochs):
-        step = 0
         epoch_start_time = time()
 
         for numerical_features, categorical_features, click in data_loader_train:
-            t1 = time()
             global_step = steps_per_epoch * epoch + step
             lr_scheduler.step()
 
             output = model(numerical_features, categorical_features).squeeze()
             loss = loss_fn(output, click)
+
             optimizer.zero_grad()
             if FLAGS.fp16:
                 loss *= FLAGS.loss_scale
@@ -204,43 +200,47 @@ def train(model, loss_fn, optimizer, data_loader_train, data_loader_test, scaled
             else:
                 loss.backward()
             optimizer.step()
-
+            loss_value = loss.item()
+            if not math.isfinite(loss_value):
+                print("Loss is {}, stopping training".format(loss_value))
+                sys.exit(1)
             # Cancel loss scale for logging if fp16 is used
             metric_logger.update(
                 loss=loss.item() / (FLAGS.loss_scale if FLAGS.fp16 else 1),
                 lr=optimizer.param_groups[0]["lr"] * (FLAGS.loss_scale if FLAGS.fp16 else 1))
 
-            total_time += time() - t1
-            total_samples += numerical_features.shape[0]
-
-            if global_step % print_freq == 0:
+            if step % print_freq == 0:
                 # Averaging cross a print_freq period to reduce the error.
                 # An accurate timing needs synchronize which would slow things down.
-
-                metric_logger.update(step_time=(time() - stop_time_print) / print_freq)
-                stop_time_print = time()
-                samp_per_sec = total_samples / total_time
-                samp_per_secs.append(samp_per_sec)
+                metric_logger.update(step_time=(time() - stop_time) / print_freq)
+                stop_time = time()
+                eta_str = datetime.timedelta(seconds=int(metric_logger.step_time.global_avg * (steps_per_epoch - step)))
                 metric_logger.print(
-                    header=F"Epoch:[{epoch}/{FLAGS.epochs}] [{global_step}/{steps_per_epoch*FLAGS.epochs}]  speed: {format(samp_per_sec, '0.2f')+' records/s'}")
+                    header=F"Epoch:[{epoch}/{FLAGS.epochs}] [{step}/{steps_per_epoch}]  eta: {eta_str}")
 
             if global_step % test_freq == 0 and global_step > 0 and global_step / steps_per_epoch >= FLAGS.test_after:
                 loss, auc = evaluate(model, loss_fn, data_loader_test)
-                print(F"Epoch {epoch} step {global_step}. Test loss {loss:.4f}, auc {auc:.6f}")
+                if not math.isfinite(loss):
+                    print("Loss is {}, stopping training".format(loss))
+                    sys.exit(1)
+                if not math.isfinite(auc):
+                    print("AUC is {}, stopping training".format(auc))
+                    sys.exit(1)
+                print(F"Epoch {epoch} step {step}. Test loss {loss:.4f}, auc {auc:.6f}")
                 stop_time = time()
 
                 if auc >= FLAGS.auc_threshold:
                     run_time_s = int(stop_time - start_time)
-                    print(F"Hit target accuracy AUC {FLAGS.auc_threshold} at epoch {epoch}"
-                          F"{global_step/steps_per_epoch*FLAGS.epochs:.2f} in {run_time_s}s. "
-                          F"Average training speed {np.array(samp_per_secs).mean():.1f} records/s.")
+                    print(F"Hit target accuracy AUC {FLAGS.auc_threshold} at epoch "
+                          F"{global_step/steps_per_epoch:.2f} in {run_time_s}s. "
+                          F"Average speed {global_step * FLAGS.batch_size / run_time_s:.1f} records/s.")
                     return
             step += 1
 
         epoch_stop_time = time()
         epoch_time_s = epoch_stop_time - epoch_start_time
         print(F"Finished epoch {epoch} in {datetime.timedelta(seconds=int(epoch_time_s))}. "
-              F"Average training speed {np.array(samp_per_secs).mean():.1f} records/s.")
+              F"Average speed {steps_per_epoch * FLAGS.batch_size / epoch_time_s:.1f} records/s.")
 
 
 def evaluate(model, loss_fn, data_loader):
@@ -275,6 +275,7 @@ def evaluate(model, loss_fn, data_loader):
             if step % print_freq == 0:
                 metric_logger.update(step_time=(time() - stop_time) / print_freq)
                 stop_time = time()
+                metric_logger.print(header=F"Test: [{step}/{steps_per_epoch}]")
 
         auc = metrics.roc_auc_score(torch.cat(y_true), torch.sigmoid(torch.cat(y_score)))
 

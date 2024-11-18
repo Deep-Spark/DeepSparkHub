@@ -18,7 +18,7 @@ def init_dist(launcher, backend='nccl', **kwargs):
     DIST_BACKEND_ENV = "PT_DIST_BACKEND"
     if DIST_BACKEND_ENV in os.environ:
         print("WARN: Use the distributed backend of the environment.")
-        return os.environ[DIST_BACKEND_ENV]
+        backend = os.environ[DIST_BACKEND_ENV]
 
     if mp.get_start_method(allow_none=True) is None:
         mp.set_start_method('spawn')

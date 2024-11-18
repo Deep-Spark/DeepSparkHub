@@ -1,0 +1,61 @@
+- BEGIN:
+    CODE: >
+        s.update({
+            'initialized_tensors': []
+        })
+- KEY:
+    NAME: weights_initialization
+    REQ: AT_LEAST_ONE
+    CHECK:
+        - "'tensor' in v['metadata']"
+    POST: >
+        s['initialized_tensors'] += [v['metadata']['tensor']]
+- END:
+    CHECK: >
+        sorted(s['initialized_tensors']) == sorted([
+            "embeddings",
+            "bottom_mlp_dense1",
+            "bottom_mlp_dense2",
+            "bottom_mlp_dense3",
+            "top_mlp_dense1",
+            "top_mlp_dense2",
+            "top_mlp_dense3",
+            "top_mlp_dense4",
+            "top_mlp_dense5",
+        ])
+
+- KEY:
+    NAME:  global_batch_size
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  opt_base_learning_rate
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  opt_learning_rate_warmup_steps
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lr_decay_start_steps
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  sgd_opt_base_learning_rate
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  sgd_opt_learning_rate_decay_poly_power
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] == 2 "
+
+- KEY:
+    NAME:  sgd_opt_learning_rate_decay_steps
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'epoch_num' in v['metadata']"
+    ATLEAST_ONE_CHECK: "v['value'] >= 0.8025 and v['value'] < 1.0"

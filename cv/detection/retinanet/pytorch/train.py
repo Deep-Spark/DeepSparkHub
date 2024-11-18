@@ -1,6 +1,6 @@
-# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
+# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 r"""PyTorch Detection Training.
 
@@ -43,7 +43,7 @@ def get_args_parser(add_help=True):
 
     parser.add_argument('--data-path', default='/datasets01/COCO/022719/', help='dataset')
     parser.add_argument('--dataset', default='voc', help='dataset')
-    parser.add_argument('--model', default='retinanet_resnet50_fpn', help='model')
+    parser.add_argument('--model', default='maskrcnn_resnet50_fpn', help='model')
     parser.add_argument('--device', default='cuda', help='device')
     parser.add_argument('-b', '--batch-size', default=2, type=int,
                         help='images per gpu, the total batch size is $NGPU x batch_size')
@@ -95,13 +95,11 @@ def get_args_parser(add_help=True):
     )
 
     # distributed training parameters
-    parser.add_argument('--local_rank', default=-1, type=int,
+    parser.add_argument('--local_rank', '--local-rank', default=-1, type=int,
                         help='Local rank')
     parser.add_argument('--world-size', default=1, type=int,
                         help='number of distributed processes')
     parser.add_argument('--dist-url', default='env://', help='url used to set up distributed training')
-    parser.add_argument('--nhwc', action='store_true', help='Use NHWC')
-    parser.add_argument('--padding-channel', action='store_true', help='Padding the channels of image to 4')
     parser.add_argument('--amp', action='store_true', help='Automatic Mixed Precision training')
     parser.add_argument('--seed', default=42, type=int, help='Random seed')
     return parser
@@ -117,6 +115,7 @@ def main(args):
     device = torch.device(args.device)
 
     utils.manual_seed(args.seed, deterministic=False)
+    # torch.backends.cudnn.benchmark = True
 
     # Data loading code
     print("Loading data")
@@ -156,21 +155,15 @@ def main(args):
         if args.rpn_score_thresh is not None:
             kwargs["rpn_score_thresh"] = args.rpn_score_thresh
 
-    model = retinanet_resnet50_fpn(num_classes=num_classes,
-                                   pretrained=args.pretrained,
-                                   min_size=512, max_size=512,
-                                   nhwc=args.nhwc,
-                                   **kwargs)
+    model = retinanet_resnet50_fpn(num_classes=num_classes, pretrained=args.pretrained,
+                                                              **kwargs)
     model.to(device)
     if args.distributed and args.sync_bn:
         model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
-    if args.nhwc:
-        model = model.cuda().to(memory_format=torch.channels_last)
-
     model_without_ddp = model
     if args.distributed:
-        model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu])
+        model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu], find_unused_parameters=True)
         model_without_ddp = model.module
 
     params = [p for p in model.parameters() if p.requires_grad]
@@ -231,23 +224,11 @@ def main(args):
     print('Training time {}'.format(total_time_str))
 
 
-def check_agrs(args):
-    pass
-
-
-def train_model(model_cls=None):
-    args = get_args_parser().parse_args()
-    check_agrs(args)
-
-    if hasattr(torch, "corex") and args.dali:
-        args.dali_cpu = True
-
-    if model_cls is not None:
-        args.model_cls = model_cls
-    main(args)
-
-
 if __name__ == "__main__":
     args = get_args_parser().parse_args()
-    check_agrs(args)
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(args)
+    except:
+        pass
     main(args)

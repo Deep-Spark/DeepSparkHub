@@ -1,0 +1,5 @@
+- KEY:
+    NAME:  submission_benchmark
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] in ['deepcam', 'cosmoflow', 'oc20'] "
+    POST:  " enqueue_config('hpc_1.0.0/open_{}.yaml'.format(v['value'])) "

@@ -1,0 +1,192 @@
+{
+
+  "resnet_ref_1632":
+  {
+    "Benchmark": "resnet",
+    "BS": 1632,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 7.4,
+      "opt_end_learning_rate": 1e-4,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 2,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 5.0e-5,
+      "opt_learning_rate_decay_steps": 35,
+      "model_bn_span": 204
+    },
+    "Epochs to converge": [
+      34, 34, 34, 35, 35,
+      37, 35, 35, 33, 35,
+      35, 37, 37, 35, 35,
+      34, 35
+    ]
+  },
+
+  "resnet_ref_2048":
+  {
+    "Benchmark": "resnet",
+    "BS": 2048,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 8.5,
+      "opt_end_learning_rate": 1e-4,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 5,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 2e-3,
+      "opt_learning_rate_decay_steps": 22530,
+      "model_bn_span": 64
+    },
+    "Epochs to converge": [
+      38, 39, 38, 39, 38, 39, 38, 39, 38, 38]
+  },
+
+  "resnet_ref_3264":
+  {
+    "Benchmark": "resnet",
+    "BS": 3264,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 10.5,
+      "opt_end_learning_rate": 0.0001,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 2,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 0.00005,
+      "opt_learning_rate_decay_steps": 37,
+      "model_bn_span": 204
+    },
+    "Epochs to converge": [
+      36, 35, 34, 34, 36, 35, 35, 35, 35, 37,
+      35, 35, 35, 36, 35
+    ]
+  },
+
+  "resnet_ref_4096":
+  {
+    "Benchmark": "resnet",
+    "BS": 4096,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 10,
+      "opt_end_learning_rate": 1e-4,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 5,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 2e-3,
+      "opt_learning_rate_decay_steps": 42,
+      "model_bn_span": 64
+    },
+    "Epochs to converge": [
+      39, 42, 40, 41, 39, 40, 41, 39, 40, 39]
+  },
+
+  "resnet_ref_8192":
+  {
+    "Benchmark": "resnet",
+    "BS": 8192,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 17,
+      "opt_end_learning_rate": 1e-4,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 5,
+      "opt_momentum": 0.9,
+      "opt_weight_decay": 2e-4,
+      "opt_learning_rate_decay_steps": 6095,
+      "model_bn_span": 64
+    },
+    "Epochs to converge": [
+      42, 44, 43, 41, 41, 41, 42, 42, 43, 41]
+  },
+
+  "resnet_ref_13056":
+  {
+    "Benchmark": "resnet",
+    "BS": 13056,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 12.8,
+      "opt_end_learning_rate": 0.0001,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 9,
+      "opt_momentum": 0.94,
+      "opt_weight_decay": 2.5e-5,
+      "opt_learning_rate_decay_steps": 48,
+      "model_bn_span": 204
+    },
+    "Epochs to converge": [
+      44, 45, 47, 45, 45, 45, 45, 44, 44, 44, 45, 45, 45, 45, 44, 44
+    ]
+  },
+
+  "resnet_ref_32768":
+  {
+    "Benchmark": "resnet",
+    "BS": 32768,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 21.2,
+      "opt_end_learning_rate": 1e-4,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 16,
+      "opt_momentum": 0.94,
+      "opt_weight_decay": 2e-5,
+      "opt_learning_rate_decay_steps": 58,
+      "model_bn_span": 128
+    },
+    "Epochs to converge": [
+      56, 56, 55, 56, 56, 56, 56, 56, 57, 56]
+  },
+
+  "resnet_ref_64480":
+  {
+    "Benchmark": "resnet",
+    "BS": 64480,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 26,
+      "opt_end_learning_rate": 0.0001,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 31,
+      "opt_momentum": 0.951807,
+      "opt_weight_decay": 0.0001,
+      "opt_learning_rate_decay_steps": 90,
+      "model_bn_span": 155
+    },
+    "Epochs to converge": [
+      88, 87, 86, 86, 86, 86, 86, 86, 84, 86
+    ]
+  },
+
+  "resnet_ref_65536":
+  {
+    "Benchmark": "resnet",
+    "BS": 65536,
+    "Hyperparams": {
+      "optimizer": "lars",
+      "opt_base_learning_rate": 24.699,
+      "opt_end_learning_rate": 1e-4,
+      "opt_learning_rate_decay_poly_power": 2,
+      "epsilon": 0,
+      "opt_learning_rate_warmup_epochs": 31,
+      "opt_momentum": 0.951807,
+      "opt_weight_decay": 1e-4,
+      "opt_learning_rate_decay_steps": 1133,
+      "model_bn_span": 128
+    },
+    "Epochs to converge": [
+      83, 85, 84, 86, 85, 85, 83, 84, 85, 85]
+  }
+
+}
+

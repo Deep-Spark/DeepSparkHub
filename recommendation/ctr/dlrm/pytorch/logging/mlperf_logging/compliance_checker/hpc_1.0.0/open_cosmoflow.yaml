@@ -1,0 +1,6 @@
+- KEY:
+    NAME:  eval_error
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'epoch_num' in v['metadata']"
+    ATLEAST_ONE_CHECK: "v['value'] <= 0.124 and v['value'] > 0."

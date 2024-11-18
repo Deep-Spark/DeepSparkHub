@@ -77,7 +77,7 @@ def evaluate(flags, model, loader, loss_fn, score_fn, device, epoch=0, is_distri
     eval_metrics = {"epoch": epoch,
                     "L1 dice": scores[-2],
                     "L2 dice": scores[-1],
-                    "mean_dice": (scores[-1] + scores[-2]) / 2,
+                    "mean_dice": round((scores[-1] + scores[-2]) / 2, 3),
                     "eval_loss": eval_loss}
 
     return eval_metrics

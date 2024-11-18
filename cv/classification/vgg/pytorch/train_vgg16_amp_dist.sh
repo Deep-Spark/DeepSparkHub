@@ -30,7 +30,7 @@ if [ ! -z "${DEBUG}" ];then
 	PYTHONAR="${PYTHONAR} -m pdb"
 fi
 cd ${ROOT_DIR}
-python3  $PYTHONARG ${ROOT_DIR}/run_train.py  \
-	--model vgg16 --dali --dali-cpu  --data-path $DATA_PATH  \
-	--opt fused_sgd --batch-size 200 --lr 1e-2   \
-	--amp --nhwc "$@"
+python3  $PYTHONARG train.py  \
+	--model vgg16 --data-path $DATA_PATH  \
+	--batch-size 128 --lr 1e-3   \
+	--amp --wd 0.0001 "$@"

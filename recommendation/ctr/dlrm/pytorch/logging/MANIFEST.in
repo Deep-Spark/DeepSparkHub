@@ -1,0 +1,3 @@
+include VERSION
+include mlperf_logging/compliance_checker/**/*.yaml
+include mlperf_logging/rcp_checker/**/*.json

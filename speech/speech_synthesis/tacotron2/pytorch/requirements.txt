@@ -1,10 +1,8 @@
-matplotlib==3.3.4
-numpy==1.18.5
+matplotlib
+numpy
 inflect==0.2.5
-librosa==0.9.2
-scipy==1.5.4
+scipy
 Unidecode==1.0.22
-numba==0.48.0
+numba
+librosa==0.9.2
 pillow
-urllib3==1.26.13
-tensorflow==1.15.2

@@ -1,0 +1,146 @@
+{
+
+  "unet3d_ref_2_fp32":
+  {
+    "Benchmark": "unet3d",
+    "Creator": "NVIDIA",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TBD",
+    "BS": 2,
+    "Hyperparams": {
+      "opt_base_learning_rate": 0.8,
+      "opt_momentum": 0.9,
+      "opt_learning_rate_warmup_epochs": 200,
+      "opt_initial_learning_rate": 1e-4,
+      "opt_learning_rate_decay_boundary_epochs": [],
+      "opt_learning_rate_decay_factor": 1.0,
+      "opt_weight_decay": 0.0
+    },
+    "Epochs to converge": [
+      3420, 3420, 1440, 2320, 2940, 2240, 2600, 2840, 3320, 2360,
+      4040, 2920, 3360, 2080, 3060, 2900, 4000, 3120, 2120, 2540,
+      1880, 2640, 2660, 2160, 1420, 2880, 2360, 2260, 2900, 2640,
+      2380, 3060, 1880, 2420, 2560, 2580, 2180, 2960, 2480, 2140,
+      3500, 2420, 2500, 3860, 1620, 2260, 2160, 1280, 2320, 2140,
+      2580, 3020, 2480, 3300, 2140, 3400, 2940, 2520, 3680, 3380,
+      3080, 2660, 2980, 2740, 2140, 2140, 3000, 2820, 2960, 2420,
+      2760, 2940, 3280, 2660, 2200, 1660, 1520, 2320, 2180, 2280,
+      2960, 2140, 3280, 2980, 3580, 3280, 3420]
+  },
+
+  "unet3d_ref_32_fp32":
+  {
+    "Benchmark": "unet3d",
+    "Creator": "NVIDIA",
+    "When": "Prior to 1.0 submission",
+    "Platform": "TBD",
+    "BS": 32,
+    "Hyperparams": {
+      "opt_base_learning_rate": 4.0,
+      "opt_momentum": 0.9,
+      "opt_learning_rate_warmup_epochs": 1000,
+      "opt_initial_learning_rate": 1e-4,
+      "opt_learning_rate_decay_boundary_epochs": [],
+      "opt_learning_rate_decay_factor": 1.0,
+      "opt_weight_decay": 0.0
+    },
+    "Epochs to converge": [
+      1775, 1955, 1649, 1901, 1793, 1667, 2261, 2333, 2009, 1559,
+      1523, 1667, 1793, 1901, 1775, 1847, 1667, 1757, 2099, 2081,
+      1793, 1757, 1847, 2549, 1703, 2585, 2207, 1523, 1847, 1793,
+      2927, 2189, 1865, 1703, 1757, 1901, 1397, 2063, 1703, 1451,
+      2585, 1757, 1757, 2081, 1793, 2099, 2315, 1541, 1883, 3233,
+      1901, 2333, 2909, 1793, 2369, 2171, 2063, 2063, 2441, 2081,
+      2837, 1955, 2459, 1541, 2153, 1829, 1739, 2171, 1847, 2405,
+      1739, 2459, 1919, 1469, 1991, 1991, 1487, 1955, 1361, 2711,
+      1775, 1433, 1901
+    ]
+  },
+
+  "unet3d_ref_56":
+  {
+    "Benchmark": "unet3d",
+    "Creator": "NVIDIA",
+    "When": "At 1.0 submission",
+    "Platform": "TBD",
+    "BS": 56,
+    "Hyperparams": {
+      "opt_base_learning_rate": 2.0,
+      "opt_momentum": 0.9,
+      "opt_learning_rate_warmup_epochs": 1000,
+      "opt_initial_learning_rate": 1e-4,
+      "opt_learning_rate_decay_boundary_epochs": [],
+      "opt_learning_rate_decay_factor": 1.0,
+      "opt_weight_decay": 0.0
+    },
+    "Epochs to converge": [
+      1780, 2080, 2780, 2640, 2020, 2420, 2820, 2320, 1720, 2280,
+      1760, 2420, 2000, 1280, 3120, 1880, 1740, 2200, 1760, 2340,
+      2180, 2120, 1900, 2200, 2020, 1660, 2040, 2220, 2420, 2100,
+      2560, 2700, 3040, 1580, 1360, 3200, 2100, 1540, 1800, 1720,
+      1720, 3300, 2860, 2540, 2880, 2860, 1760, 2560, 2480, 2240,
+      2340, 1540, 2340, 2600, 2160, 2560, 2980, 2460, 2360, 3020,
+      1620, 3040, 2780, 2600, 1540, 1640, 1780, 1320, 1480, 3460,
+      1740, 1660, 2280, 2000, 2320, 2360, 1680, 2200, 1880, 2180,
+      1740, 2240, 2280, 2180, 2880, 3040, 1760, 1720
+    ]
+  },
+
+  "unet3d_ref_80":
+  {
+    "Benchmark": "unet3d",
+    "Creator": "NVIDIA",
+    "When": "At 1.0 submission",
+    "Platform": "TBD",
+    "BS": 80,
+    "Hyperparams": {
+      "opt_base_learning_rate": 1.5,
+      "opt_momentum": 0.9,
+      "opt_learning_rate_warmup_epochs": 1000,
+      "opt_initial_learning_rate": 1e-4,
+      "opt_learning_rate_decay_boundary_epochs": [],
+      "opt_learning_rate_decay_factor": 1.0,
+      "opt_weight_decay": 0.0
+    },
+    "Epochs to converge": [
+      1428, 1862, 1988, 1400, 1582, 1344, 1540, 1176, 1484, 1302,
+      1582, 1694, 1694, 1848, 1274, 1456, 1414, 1582, 2002, 1148,
+      1372, 1428, 1876, 1540, 1470, 1442, 1148, 1918, 1372, 2492,
+      1736, 1862, 1288, 1680, 2086, 1708, 1708, 1834, 2450, 1330,
+      1764, 1162, 1498, 1792, 1820, 1386, 1400, 1302, 1540, 1680,
+      2226, 1582, 2002, 1484, 1288, 1512, 1792, 1540, 1960, 1806,
+      1442, 1330, 1540, 1498, 2002, 2100, 1344, 1596, 1862, 2226,
+      1400, 1344, 1708, 1372, 1484, 1512, 1918, 1260, 2016, 1470
+    ]
+  },
+
+  "unet3d_ref_84":
+  {
+    "Benchmark": "unet3d",
+    "Creator": "NVIDIA",
+    "When": "At 1.1 submission",
+    "Platform": "TBD",
+    "BS": 84,
+    "Hyperparams": {
+      "opt_base_learning_rate": 1.5,
+      "opt_momentum": 0.9,
+      "opt_learning_rate_warmup_epochs": 1500,
+      "opt_initial_learning_rate": 1e-4,
+      "opt_learning_rate_decay_boundary_epochs": [],
+      "opt_learning_rate_decay_factor": 1.0,
+      "opt_weight_decay": 0.0
+    },
+    "Epochs to converge": [
+      2500, 2420, 2500, 2440, 2160, 2020, 2340, 2900, 2760, 1980,
+      2380, 1900, 2420, 1660, 2600, 1800, 1840, 2140, 2180, 2020,
+      2280, 2820, 2060, 2380, 2180, 2960, 1960, 2200, 2700, 1880,
+      2180, 1720, 2800, 2220, 2440, 2360, 2340, 1940, 2040, 2280,
+      1960, 2260, 2400, 2680, 2180, 2240, 2240, 2240, 2280, 1740,
+      1360, 2500, 2260, 2300, 2680, 2120, 2200, 2460, 1880, 2400,
+      2320, 2120, 1940, 2580, 1520, 2680, 1960, 2040, 2620, 2600,
+      2140, 2060, 2180, 1620, 2040, 2080, 2580, 1980, 2040, 2480
+      ]
+  }
+
+}
+

@@ -1,7 +1,6 @@
-# Copyright (c) Open-MMLab. All rights reserved.
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2023-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
-
+# Copyright (c) Open-MMLab. All rights reserved.
 import os.path as osp
 import platform
 import shutil
@@ -15,12 +14,7 @@ from .base_runner import BaseRunner
 from .builder import RUNNERS
 from .checkpoint import save_checkpoint
 from .utils import get_host_info
-import torch.distributed as dist
 
-def get_world_size():
-    if dist.is_initialized():
-        return dist.get_world_size()
-    return 1
 
 @RUNNERS.register_module()
 class EpochBasedRunner(BaseRunner):
@@ -52,20 +46,13 @@ class EpochBasedRunner(BaseRunner):
         self._max_iters = self._max_epochs * len(self.data_loader)
         self.call_hook('before_train_epoch')
         time.sleep(2)  # Prevent possible deadlock during epoch transition
-        all_fps = []
         for i, data_batch in enumerate(self.data_loader):
             self._inner_iter = i
-            batchsize=data_batch['img'].shape[0]
             self.call_hook('before_train_iter')
-            start_time = time.time()
             self.run_iter(data_batch, train_mode=True, **kwargs)
-            end_time = time.time()
-            fps = batchsize / (end_time - start_time) *get_world_size()
-            # print ("fps",fps)
-            all_fps.append(fps)
             self.call_hook('after_train_iter')
             self._iter += 1
-        print('Avgfps img/s:', sum(all_fps) / len(all_fps))
+
         self.call_hook('after_train_epoch')
         self._epoch += 1
 

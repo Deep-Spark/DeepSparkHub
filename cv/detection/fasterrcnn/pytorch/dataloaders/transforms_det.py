@@ -1,4 +1,5 @@
-# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 
@@ -7,8 +8,8 @@ from typing import List, Tuple, Dict, Optional
 import torch
 from torch import nn, Tensor
 import torchvision
-from torchvision.transforms import functional as F
 from torchvision.transforms import transforms as T
+from . import functional as F
 
 
 def _flip_coco_person_keypoints(kps, width):
@@ -37,7 +38,7 @@ class RandomHorizontalFlip(T.RandomHorizontalFlip):
         if torch.rand(1) < self.p:
             image = F.hflip(image)
             if target is not None:
-                width, _ = F.get_image_size(image)
+                width, _ = F._get_image_size(image)
                 target["boxes"][:, [0, 2]] = width - target["boxes"][:, [2, 0]]
                 if "masks" in target:
                     target["masks"] = target["masks"].flip(-1)
@@ -80,7 +81,7 @@ class RandomIoUCrop(nn.Module):
             elif image.ndimension() == 2:
                 image = image.unsqueeze(0)
 
-        orig_w, orig_h = F.get_image_size(image)
+        orig_w, orig_h = F._get_image_size(image)
 
         while True:
             # sample an option
@@ -161,7 +162,7 @@ class RandomZoomOut(nn.Module):
         if torch.rand(1) < self.p:
             return image, target
 
-        orig_w, orig_h = F.get_image_size(image)
+        orig_w, orig_h = F._get_image_size(image)
 
         r = self.side_range[0] + torch.rand(1) * (self.side_range[1] - self.side_range[0])
         canvas_width = int(orig_w * r)
@@ -230,7 +231,7 @@ class RandomPhotometricDistort(nn.Module):
                 image = self._contrast(image)
 
         if r[6] < self.p:
-            channels = F.get_image_num_channels(image)
+            channels = F._get_image_num_channels(image)
             permutation = torch.randperm(channels)
 
             is_pil = F._is_pil_image(image)

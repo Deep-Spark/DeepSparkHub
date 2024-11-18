@@ -1,0 +1,10 @@
+# Scheduler Parameters
+- KEY:
+    NAME:  scheduler_milestones
+    REQ:   EXACTLY_ONE
+    CHECK: " len(v['value']) >= 0 "
+
+- KEY:
+    NAME:  scheduler_decay_rate
+    REQ:   EXACTLY_ONE
+    CHECK: " v['value'] <= 1. "

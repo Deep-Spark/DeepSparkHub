@@ -20,5 +20,11 @@ for i in range(num_gpus):
     workers.append(p)
     argslist = argslist[:-1]
 
-for p in workers:
+returncode = 0
+
+for i, p in enumerate(workers):
     p.wait()
+    if p.returncode != 0:
+        returncode = 1
+
+exit(returncode)

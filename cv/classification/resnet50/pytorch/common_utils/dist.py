@@ -1,4 +1,5 @@
-# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 
@@ -6,7 +7,6 @@ from collections import defaultdict, deque
 import datetime
 import errno
 import os
-import json
 import time
 
 import torch
@@ -57,20 +57,10 @@ def save_on_master(*args, **kwargs):
     if is_main_process():
         torch.save(*args, **kwargs)
 
-def append_on_master(data, filename):
-    if is_main_process():
-        with open(filename, "a") as f:
-            f.write(data)
-
-def write_on_master(data, filename):
-    if is_main_process():
-        with open(filename, "w") as write_file:
-            json.dump(data, write_file, indent=4)
 
 def get_dist_backend(args=None):
     DIST_BACKEND_ENV = "PT_DIST_BACKEND"
     if DIST_BACKEND_ENV in os.environ:
-        print("WARN: Use the distributed backend of the environment.")
         return os.environ[DIST_BACKEND_ENV]
 
     if args is None:

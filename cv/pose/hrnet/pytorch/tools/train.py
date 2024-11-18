@@ -198,6 +198,14 @@ def main_worker(
     cfg.LOG_DIR = args.log_dir
     cfg.TRAIN.END_EPOCH = args.max_epochs
     cfg.freeze()
+    if "BATCH_SIZE" in os.environ:
+        cfg.TRAIN.IMAGES_PER_GPU = int(os.environ["BATCH_SIZE"])
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(cfg)
+    except:
+        pass
+
 
     # setup logger
     logger, _ = setup_logger(final_output_dir, args.rank, 'train')

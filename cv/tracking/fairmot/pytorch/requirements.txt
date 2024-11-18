@@ -12,3 +12,4 @@ openpyxl
 Pillow
 tensorboardX
 fvcore
+numpy>=1.23.5

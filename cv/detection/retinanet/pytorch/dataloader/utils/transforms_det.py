@@ -1,8 +1,8 @@
-# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
+# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
-import sys
+
 from typing import List, Tuple, Dict, Optional
 
 import torch
@@ -10,10 +10,6 @@ from torch import nn, Tensor
 import torchvision
 from torchvision.transforms import transforms as T
 from . import functional as F
-
-
-def padding_channel():
-    return "--padding-channel" in sys.argv
 
 
 def _flip_coco_person_keypoints(kps, width):
@@ -54,18 +50,9 @@ class RandomHorizontalFlip(T.RandomHorizontalFlip):
 
 
 class ToTensor(nn.Module):
-
-    def __init__(self):
-        super(ToTensor, self).__init__()
-        self.zeros = None
-
     def forward(self, image: Tensor,
                 target: Optional[Dict[str, Tensor]] = None) -> Tuple[Tensor, Optional[Dict[str, Tensor]]]:
         image = F.to_tensor(image)
-        if padding_channel():
-            zeros = image.new_zeros((image.shape[1], image.shape[2], 1))
-            image = torch.cat([image.permute(1, 2, 0), zeros], dim=-1).permute(2, 0, 1)
-
         return image, target
 
 
