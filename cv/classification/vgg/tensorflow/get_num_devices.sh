@@ -1,4 +1,5 @@
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+#!/bin/bash
+# Copyright (c) 2023-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -18,8 +19,8 @@ if [ -n "$devices"  ]; then
     _devices=(${devices//,/ })
     num_devices=${#_devices[@]}
 else
-    num_devices=8
-    export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+    num_devices=2
+    export CUDA_VISIBLE_DEVICES=0,1
     echo "Not found CUDA_VISIBLE_DEVICES, set nproc_per_node = ${num_devices}"
 fi
 export IX_NUM_CUDA_VISIBLE_DEVICES=${num_devices}

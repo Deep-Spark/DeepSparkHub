@@ -13,7 +13,8 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-
+pip3 uninstall -y protobuf
+pip3 install "protobuf<4.0.0"
 pip3 install git+https://github.com/mlperf/logging.git
 pip3 install git+https://github.com/NVIDIA/dllogger.git
-pip3 install pandas==0.24
+pip3 install pandas==1.3.5
