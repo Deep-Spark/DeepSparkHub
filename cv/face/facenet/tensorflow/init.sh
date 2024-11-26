@@ -12,7 +12,8 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.PY_VERSION=$(python3 -V 2>&1|awk '{print $2}'|awk -F '.' '{print $2}')
+# limitations under the License.
+PY_VERSION=$(python3 -V 2>&1|awk '{print $2}'|awk -F '.' '{print $2}')
 if [ "$PY_VERSION" == "10" ] || [ "$PY_VERSION" == "8" ] || [ "$PY_VERSION" == "9" ];
 then
    pip3 install -r requirements.txt
