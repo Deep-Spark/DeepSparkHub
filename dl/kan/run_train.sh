@@ -1,0 +1,1 @@
+python3 ./train_kan.py --steps 100
