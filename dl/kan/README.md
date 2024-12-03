@@ -18,5 +18,5 @@ $ bash ./run_train.sh
 
 ## Reference
 
-- [pykan](https://github.com/KindXiaoming/pykan)
+- [pykan](https://github.com/KindXiaoming/pykan/tree/master/kan)
 
