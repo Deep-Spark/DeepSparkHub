@@ -6,6 +6,7 @@ Kolmogorov-Arnold Networks (KANs) are promising alternatives of Multi-Layer Perc
 
 ## Run
 ```shell
+$ pip3 install -r requirements.txt
 $ bash ./run_train.sh
 
 ```
