@@ -1,4 +1,4 @@
-# Megatron-DeepSpeed Llama-2-7B
+# Llama-2-7B (Megatron-DeepSpeed)
 
 ## Model description
 
@@ -6,30 +6,30 @@ Llama 2 is a large language model released by Meta in 2023, with parameters rang
 
 ## Step 1: Installation
 
-```
+```sh
 bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
 pip3 install urllib3==1.23
 ```
 
 ## Step 2: Preparing datasets
 
-```
+```sh
 cd dataset
 mkdir BookCorpusDataset && cd BookCorpusDataset
-wget https://the-eye.eu/public/AI/pile_neox/data/BookCorpusDataset_text_document.bin
-wget https://the-eye.eu/public/AI/pile_neox/data/BookCorpusDataset_text_document.idx
+wget https://files.deepspark.org.cn:880/deepspark/data/datasets/BookCorpusDataset_text_document.bin
+wget https://files.deepspark.org.cn:880/deepspark/data/datasets/BookCorpusDataset_text_document.idx
 ```
 
 ## Step 3: Training
 
-```
+```sh
 export NCCL_SOCKET_IFNAME="eth0"
 bash run_llama2_7b_1node.sh
 ```
 
 If the torchrun command cannot be found，you can execute:
 
-```
+```sh
 ln -s /usr/local/corex-3.1.0/lib64/python3/dist-packages/bin/torchrun /usr/local/bin/
 ```
 
