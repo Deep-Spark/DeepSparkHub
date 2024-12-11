@@ -6,7 +6,6 @@ data/
 venv/
 *.idea/
 *.so
-*.yaml
 *.pth
 *.pkl
 *.zip
