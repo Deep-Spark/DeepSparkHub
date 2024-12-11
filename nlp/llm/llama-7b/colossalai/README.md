@@ -14,7 +14,7 @@ Coati stands for ColossalAI Talking Intelligence. It is the name for the module 
 LLaMA-7B model is using ColossalAI toolbox. Before you run this model, you need to setup ColossalAI first.
 
 ```shell
-cd ../../../../toolbox/ColossalAI/
+cd ../../../../toolbox/ColossalAI/v0.3.0/
 bash install_toolbox_colossalai.sh
 ```
 

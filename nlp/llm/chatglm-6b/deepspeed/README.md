@@ -32,7 +32,7 @@ cd ../ && rm -rf Python-3.7.9*
 ### Install DeepSpeed
 ChatGLM-6B model is using DeepSpeed toolbox. Before you run this model, you need to install DeepSpeed first.
 ```shell
-pushd ../../../../toolbox/DeepSpeed/
+pushd ../../../../toolbox/DeepSpeed/v0.9.2/
 bash install_toolbox_deepspeed.sh
 popd
 ```
