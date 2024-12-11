@@ -1,25 +1,24 @@
-# Copyright (c) ifzhang. All Rights Reserved.
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
-#    Licensed under the Apache License, Version 2.0 (the "License"); you may
-#    not use this file except in compliance with the License. You may obtain
-#    a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
 #
-#         http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
-#    Unless required by applicable law or agreed to in writing, software
-#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-#    License for the specific language governing permissions and limitations
-#    under the License.
-
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
+# Copyright (c) ifzhang. All Rights Reserved.
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import ast
 import argparse
 import os
 import sys
@@ -32,7 +31,7 @@ class opts(object):
     self.parser.add_argument('--dataset', default='jde', help='jde')
     self.parser.add_argument('--exp_id', default='default')
     self.parser.add_argument('--test', action='store_true')
-    self.parser.add_argument('--load_model', default='./models/ctdet_coco_dla_2x.pth',
+    self.parser.add_argument('--load_model', default='../../../../../data/model_zoo/ctdet_coco_dla_2x.pth',
                              help='path to pretrained model')
     self.parser.add_argument('--resume', action='store_true',
                              help='resume an experiment. '
@@ -51,7 +50,7 @@ class opts(object):
                              help='random seed') # from CornerNet
 
     # log
-    self.parser.add_argument('--print_iter', type=int, default=0, 
+    self.parser.add_argument('--print_iter', type=int, default=10, 
                              help='disable progress bar and print to screen.')
     self.parser.add_argument('--hide_data_time', action='store_true',
                              help='not display time during training.')
@@ -84,20 +83,6 @@ class opts(object):
     self.parser.add_argument('--input_w', type=int, default=-1, 
                              help='input width. -1 for default from dataset.')
     
-    # using DP
-    self.parser.add_argument('--is_dp', type=int, default=-1,
-                             help='default: is using dp')
-    # using DDP
-    self.parser.add_argument('--is_ddp', type=int, default=-1,
-                             help='default: is using ddp')
-    self.parser.add_argument('--ddp_gpus', type=int, default=4,
-                             help='default: is using ddp gpus num')
-    # Backend nccl
-    self.parser.add_argument('--ddp_backend', type=str, default='nccl',
-                             help='default: nccl ')
-    self.parser.add_argument('--local_rank', type=int, default=-1,
-                             help='default: -1 ')
-    
     # train
     self.parser.add_argument('--lr', type=float, default=1e-4,
                              help='learning rate for batch size 12.')
@@ -111,7 +96,7 @@ class opts(object):
                              help='batch size on the master gpu.')
     self.parser.add_argument('--num_iters', type=int, default=-1,
                              help='default: #samples / batch_size.')
-    self.parser.add_argument('--val_intervals', type=int, default=1,
+    self.parser.add_argument('--val_intervals', type=int, default=5,
                              help='number of epochs to run validation.')
     self.parser.add_argument('--trainval', action='store_true',
                              help='include validation in training and '
@@ -133,8 +118,8 @@ class opts(object):
     self.parser.add_argument('--val_mot15', default=False, help='val mot15')
     self.parser.add_argument('--test_mot15', default=False, help='test mot15')
     self.parser.add_argument('--val_mot16', default=False, help='val mot16 or mot15')
-    self.parser.add_argument('--test_mot17',type=ast.literal_eval, default=False, help='test mot17')
-    self.parser.add_argument('--val_mot17',type=ast.literal_eval, default=True, help='val mot17')
+    self.parser.add_argument('--test_mot17', default=False, help='test mot17')
+    self.parser.add_argument('--val_mot17', default=True, help='val mot17')
     self.parser.add_argument('--val_mot20', default=False, help='val mot20')
     self.parser.add_argument('--test_mot20', default=False, help='test mot20')
     self.parser.add_argument('--val_hie', default=False, help='val hie')
@@ -188,6 +173,8 @@ class opts(object):
                              help='category specific bounding box size.')
     self.parser.add_argument('--not_reg_offset', action='store_true',
                              help='not regress local offset.')
+
+    self.parser.add_argument('--target_loss', type=float, default=20.0)
 
   def parse(self, args=''):
     if args == '':

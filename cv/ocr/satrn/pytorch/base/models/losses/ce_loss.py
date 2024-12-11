@@ -1,4 +1,7 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+import sys
+import math
+import torch
 import torch.nn as nn
 
 from models.builder import LOSSES
@@ -58,6 +61,11 @@ class CELoss(nn.Module):
         outputs, targets = self.format(outputs, targets_dict)
 
         loss_ce = self.loss_ce(outputs, targets.to(outputs.device))
+
+        if not math.isfinite(torch.mean(loss_ce)):
+            print("Loss is {}, stopping training".format(torch.mean(loss_ce)))
+            sys.exit(1)
+
         losses = dict(loss_ce=loss_ce)
 
         return losses

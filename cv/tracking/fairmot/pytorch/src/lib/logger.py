@@ -1,17 +1,17 @@
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
-#    Licensed under the Apache License, Version 2.0 (the "License"); you may
-#    not use this file except in compliance with the License. You may obtain
-#    a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
 #
-#         http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
-#    Unless required by applicable law or agreed to in writing, software
-#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-#    License for the specific language governing permissions and limitations
-#    under the License.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -21,7 +21,7 @@ import os
 import time
 import sys
 import torch
-USE_TENSORBOARD = True
+USE_TENSORBOARD = False
 try:
   import tensorboardX
   print('Using tensorboardX')
@@ -35,8 +35,7 @@ class Logger(object):
       os.makedirs(opt.save_dir)
     if not os.path.exists(opt.debug_dir):
       os.makedirs(opt.debug_dir)
-
-    self.opt = opt
+   
     time_str = time.strftime('%Y-%m-%d-%H-%M')
 
     args = dict((name, getattr(opt, name)) for name in dir(opt)
@@ -54,23 +53,13 @@ class Logger(object):
           
     log_dir = opt.save_dir + '/logs_{}'.format(time_str)
     if USE_TENSORBOARD:
-      if (opt.is_ddp==1) and (opt.local_rank==0):
-        self.writer = tensorboardX.SummaryWriter(log_dir=log_dir)
-      elif (opt.is_ddp==1): 
-        pass
-      else:
-        self.writer = tensorboardX.SummaryWriter(log_dir=log_dir)
+      self.writer = tensorboardX.SummaryWriter(log_dir=log_dir)
     else:
       if not os.path.exists(os.path.dirname(log_dir)):
         os.mkdir(os.path.dirname(log_dir))
       if not os.path.exists(log_dir):
         os.mkdir(log_dir)
-    if (opt.is_ddp==1) and (opt.local_rank==0):
-      self.log = open(log_dir + '/log.txt', 'w')
-    elif (opt.is_ddp==1):
-      pass
-    else:
-      self.log = open(log_dir + '/log.txt', 'w')
+    self.log = open(log_dir + '/log.txt', 'w')
     try:
       os.system('cp {}/opt.txt {}/'.format(opt.save_dir, log_dir))
     except:
@@ -94,9 +83,4 @@ class Logger(object):
   def scalar_summary(self, tag, value, step):
     """Log a scalar variable."""
     if USE_TENSORBOARD:
-      if (self.opt.is_ddp==1) and (self.opt.local_rank==0):
-        self.writer.add_scalar(tag, value, step)
-      elif (self.opt.is_ddp==1):
-        pass
-      else:
-        self.writer.add_scalar(tag, value, step)
+      self.writer.add_scalar(tag, value, step)

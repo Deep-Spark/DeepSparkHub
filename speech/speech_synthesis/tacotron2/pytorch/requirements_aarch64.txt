@@ -1,0 +1,8 @@
+matplotlib==3.5.2
+numpy==1.26.0
+inflect==0.2.5
+librosa==0.10.2.post1
+scipy==1.12.0
+Unidecode==1.0.22
+numba==0.60.0
+pillow

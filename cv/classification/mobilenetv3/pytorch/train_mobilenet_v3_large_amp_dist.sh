@@ -30,9 +30,9 @@ if [ ! -z "${DEBUG}" ];then
 	PYTHONAR="${PYTHONAR} -m pdb"
 fi
 cd ${ROOT_DIR}
-python3  $PYTHONARG ${ROOT_DIR}/run_train.py  \
-	--model mobilenet_v3_large --dali --dali-cpu   \
-	--data-path $DATA_PATH  \
-	--opt rmsprop --batch-size 64  \
-	--lr 0.001 --wd 0.00001 --lr-step-size 2 --lr-gamma 0.973  \
+python3  $PYTHONARG train.py  \
+	--model mobilenet_v3_large   \
+	--data-path $DATA_PATH --epochs 300 \
+	--opt sgd --batch-size 512  \
+	--lr 0.1 --wd 0.00001 --lr-step-size 2 --lr-gamma 0.973  \
 	--amp --auto-augment imagenet --random-erase 0.2 "$@"

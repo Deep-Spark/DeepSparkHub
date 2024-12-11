@@ -31,6 +31,6 @@ if [ ! -z "${DEBUG}" ];then
 fi
 cd ${ROOT_DIR}
 python3  $PYTHONARG ${ROOT_DIR}/run_train.py  \
-	--model inception_v3 --dali --dali-cpu  --data-path $DATA_PATH  \
-	--opt sgd --batch-size 300 --lr 1e-2 --crop-size 299   \
-	--amp --nhwc "$@"
+	--model inception_v3 --data-path $DATA_PATH  \
+	--batch-size 128 \
+	--amp --wd 0.000001 "$@"

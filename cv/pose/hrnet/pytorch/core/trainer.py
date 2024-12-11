@@ -7,7 +7,9 @@
 
 import logging
 import os
+import sys
 import time
+import math
 
 import torch
 from utils.utils import AverageMeter
@@ -65,6 +67,10 @@ def do_train(cfg, model, data_loader, loss_factory, optimizer, epoch,
                         pull_loss.item(), images.size(0)
                     )
                     loss = loss + pull_loss
+
+        if not math.isfinite(loss):
+            print("Loss is {}, stopping training".format(loss))
+            sys.exit(1)
 
         # compute gradient and do update step
         optimizer.zero_grad()

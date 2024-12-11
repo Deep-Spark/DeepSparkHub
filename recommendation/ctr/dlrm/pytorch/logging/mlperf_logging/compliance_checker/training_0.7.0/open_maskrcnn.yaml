@@ -1,0 +1,12 @@
+
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'BBOX' in v['value']"
+        - "'SEGM' in v['value']"
+        - "'epoch_num' in v['metadata']"
+    POST: " s['accuracy_printed'] = True "
+    ATLEAST_ONE_CHECK: "v['value']['BBOX'] >= 0.377 and v['value']['BBOX'] < 1.0 and v['value']['SEGM'] >= 0.339 and v['value']['SEGM'] < 1.0"
+
+

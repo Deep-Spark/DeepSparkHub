@@ -1,12 +1,13 @@
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
-# Copyright (c) 2022-2023 Iluvatar CoreX. All rights reserved.
 
 import datetime
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import time
+import math
 
 import torch
 import torch.utils.data
@@ -21,14 +22,13 @@ except:
 
 from torch import nn
 import torch.distributed as dist
-import _torchvision as torchvision
-from torch.distributed.optim import ZeroRedundancyOptimizer
+import torchvision
 
-import utils
+from utils_ import (MetricLogger, SmoothedValue, accuracy, mkdir,\
+                    init_distributed_mode, manual_seed,\
+                    is_main_process, save_on_master, get_world_size)
 
 from dataloader.classification import get_datasets, create_dataloader
-from common_utils import LabelSmoothingCrossEntropy
-import apex
 
 
 def compute_loss(model, image, target, criterion):
@@ -44,40 +44,19 @@ def compute_loss(model, image, target, criterion):
 
 def train_one_epoch(model, criterion, optimizer, data_loader, device, epoch, print_freq, amp=False, use_dali=False):
     model.train()
-    metric_logger = utils.MetricLogger(delimiter="  ")
-    metric_logger.add_meter('lr', utils.SmoothedValue(window_size=1, fmt='{value}'))
-    metric_logger.add_meter('img/s', utils.SmoothedValue(window_size=10, fmt='{value}'))
+    metric_logger = MetricLogger(delimiter="  ")
+    metric_logger.add_meter('lr', SmoothedValue(window_size=1, fmt='{value}'))
+    metric_logger.add_meter('img/s', SmoothedValue(window_size=10, fmt='{value}'))
 
     header = 'Epoch: [{}]'.format(epoch)
     all_fps = []
-    t_all_load = 0.
-    t_before_load = time.time()
     for data in metric_logger.log_every(data_loader, print_freq, header):
         if use_dali:
             image, target = data[0]["data"], data[0]["label"][:, 0].long()
         else:
             image, target = data
         start_time = time.time()
-        # NHWC or NCHW for data
-        if args.channels_last:
-            if not args.amp:
-                raise Exception("Channels last (NHWC) should be used only in AMP")
-            image, target = image.to(device, memory_format=torch.channels_last, dtype=torch.float16, non_blocking=True), target.to(device, non_blocking=True)
-        else:
-            image, target = image.to(device, non_blocking=True), target.to(device, non_blocking=True)
-
-        # Benchmark data loading
-        t_after_load = time.time()
-        t_all_load += t_after_load - t_before_load
-        if args.test_loading:
-            t_before_load = time.time()
-            metric_logger.update(loss=0, lr=0)
-            metric_logger.meters['acc1'].update(0, n=args.batch_size)
-            metric_logger.meters['acc5'].update(0, n=args.batch_size)
-            metric_logger.meters['img/s'].update(0)
-            all_fps.append(0)
-            continue
-
+        image, target = image.to(device), target.to(device)
         if autocast is None or not amp:
             loss, output = compute_loss(model, image, target, criterion)
         else:
@@ -96,28 +75,28 @@ def train_one_epoch(model, criterion, optimizer, data_loader, device, epoch, pri
         torch.cuda.synchronize()
         end_time = time.time()
 
-        acc1, acc5 = utils.accuracy(output, target, topk=(1, 5))
+        acc1, acc5 = accuracy(output, target, topk=(1, 5))
+        if not (math.isfinite(acc1) and math.isfinite(acc5)):
+            print("Accuracy exploded (corrupted by Inf or Nan)")
+            sys.exit(1)
         batch_size = image.shape[0]
+        loss_value = loss.item()
+        if not math.isfinite(loss_value):
+            print("Loss is {}, stopping training".format(loss_value))
+            sys.exit(1)
         metric_logger.update(loss=loss.item(), lr=optimizer.param_groups[0]["lr"])
         metric_logger.meters['acc1'].update(acc1.item(), n=batch_size)
         metric_logger.meters['acc5'].update(acc5.item(), n=batch_size)
-        fps = batch_size / (end_time - start_time) * utils.get_world_size()
+        fps = batch_size / (end_time - start_time) * get_world_size()
         metric_logger.meters['img/s'].update(fps)
         all_fps.append(fps)
-        t_before_load = time.time()
 
-    print('Data loading of epoch {}:'.format(epoch), datetime.timedelta(seconds=t_all_load))
-    if args.test_loading:
-        return t_all_load
     print(header, 'Avg img/s:', sum(all_fps) / len(all_fps))
-    return sum(all_fps) / len(all_fps)
 
 
 def evaluate(model, criterion, data_loader, device, print_freq=100, use_dali=False):
-    if args.test_loading:
-        return 0,0
     model.eval()
-    metric_logger = utils.MetricLogger(delimiter="  ")
+    metric_logger = MetricLogger(delimiter="  ")
     header = 'Test:'
     with torch.no_grad():
         for data in metric_logger.log_every(data_loader, print_freq, header):
@@ -125,23 +104,12 @@ def evaluate(model, criterion, data_loader, device, print_freq=100, use_dali=Fal
                 image, target = data[0]["data"], data[0]["label"][:, 0].long()
             else:
                 image, target = data
-            if args.channels_last:
-                if not args.amp:
-                    raise Exception("Channels last (NHWC) should be used only in AMP")
-                image, target = image.to(device, memory_format=torch.channels_last, dtype=torch.float16, non_blocking=True), target.to(device, non_blocking=True)
-            else:
-                image, target = image.to(device, non_blocking=True), target.to(device, non_blocking=True)
             image = image.to(device, non_blocking=True)
             target = target.to(device, non_blocking=True)
-
-            if autocast is None or not args.amp:
-                output = model(image)
-            else:
-                with autocast():
-                    output = model(image)
+            output = model(image)
             loss = criterion(output, target)
 
-            acc1, acc5 = utils.accuracy(output, target, topk=(1, 5))
+            acc1, acc5 = accuracy(output, target, topk=(1, 5))
             # FIXME need to take into account that the datasets
             # could have been padded in distributed setup
             batch_size = image.shape[0]
@@ -153,44 +121,8 @@ def evaluate(model, criterion, data_loader, device, print_freq=100, use_dali=Fal
 
     print(' * Acc@1 {top1.global_avg:.3f} Acc@5 {top5.global_avg:.3f}'
           .format(top1=metric_logger.acc1, top5=metric_logger.acc5))
-    return metric_logger.acc1.global_avg, metric_logger.acc5.global_avg
+    return metric_logger.acc1.global_avg
 
-def _get_optimizer(args, model):
-    opt_name = args.opt.lower()
-    if opt_name == 'sgd':
-        if args.use_zero:
-            # model has to be ddp
-            print("use zero optimizer sgd")
-            optimizer = ZeroRedundancyOptimizer(
-                    model.parameters(),
-                    optimizer_class=torch.optim.SGD,
-                    lr=args.lr, momentum=args.momentum,
-                    weight_decay=args.weight_decay
-                    )
-
-        else:
-            optimizer = torch.optim.SGD(
-                model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
-    elif opt_name == 'rmsprop':
-        if args.use_zero:
-            # model has to be ddp
-            print("use zero optimizer rmsprop")
-            optimizer = ZeroRedundancyOptimizer(
-                    model.parameters(),
-                    optimizer_class=torch.optim.RMSprop,
-                    lr=args.lr, momentum=args.momentum,
-                    weight_decay=args.weight_decay, eps=0.0316, alpha=0.9
-                    )
-        else:
-            optimizer = torch.optim.RMSprop(model.parameters(), lr=args.lr, momentum=args.momentum,
-                                        weight_decay=args.weight_decay, eps=0.0316, alpha=0.9)
-    elif opt_name == 'fusedsgd':
-        optimizer = apex.optimizers.FusedSGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
-    elif opt_name == 'fusedadam':
-        optimizer = apex.optimizers.FusedAdam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
-    else:
-        raise RuntimeError("Invalid optimizer {}. Only SGD and RMSprop are supported.".format(args.opt))
-    return optimizer
 
 def _get_cache_path(filepath):
     import hashlib
@@ -201,17 +133,15 @@ def _get_cache_path(filepath):
 
 
 def main(args):
-
-    utils.init_distributed_mode(args)
-    print(args)
     if args.output_dir:
-        name = '_'.join(list(map(str, [args.model, args.batch_size, args.lr, args.dali, args.amp, args.opt])))
-        args.output_dir = os.path.join(args.output_dir, name)
-        utils.mkdir(args.output_dir)
+        mkdir(args.output_dir)
+
+    init_distributed_mode(args)
+    print(args)
 
     device = torch.device(args.device)
 
-    utils.manual_seed(args.seed, deterministic=False)
+    manual_seed(args.seed, deterministic=False)
     # torch.backends.cudnn.benchmark = True
 
     # WARN:
@@ -228,34 +158,39 @@ def main(args):
     num_classes = len(os.listdir(train_dir))
     if 0 < num_classes < 13:
         if global_batch_size > 512:
-            if utils.is_main_process():
+            if is_main_process():
                 print("WARN: Updating global batch size to 512, avoid non-convergence when training small dataset.")
             args.batch_size = 512 // num_gpu
 
+    if args.pretrained:
+        num_classes = 1000
+
     data_loader, data_loader_test = create_dataloader(train_dir, val_dir, args)
-    
-    print(f"Creating model {args.model}")
-    model = torchvision.models.__dict__[args.model](pretrained=args.pretrained)
-    if args.channels_last:
-        model.conv1 = nn.Conv2d(4,64,kernel_size=7, stride=2, padding=3, bias=False)
-        model = model.to(memory_format=torch.channels_last, device=device)
-    else:
-        model.to(device)
+
+    print("Creating model")
+    model = torchvision.models.__dict__[args.model](pretrained=args.pretrained, num_classes=num_classes)
+    model.to(device)
     if args.distributed and args.sync_bn:
         model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
-    # criterion = nn.CrossEntropyLoss()
-    criterion = LabelSmoothingCrossEntropy()
+    criterion = nn.CrossEntropyLoss()
 
+    opt_name = args.opt.lower()
+    if opt_name == 'sgd':
+        optimizer = torch.optim.SGD(
+            model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
+    elif opt_name == 'rmsprop':
+        optimizer = torch.optim.RMSprop(model.parameters(), lr=args.lr, momentum=args.momentum,
+                                        weight_decay=args.weight_decay, eps=0.0316, alpha=0.9)
+    else:
+        raise RuntimeError("Invalid optimizer {}. Only SGD and RMSprop are supported.".format(args.opt))
+
+    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=args.lr_step_size, gamma=args.lr_gamma)
 
     model_without_ddp = model
     if args.distributed:
         model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu])
         model_without_ddp = model.module
-
-    optimizer = _get_optimizer(args, model)
-    # lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=args.lr_step_size, gamma=args.lr_gamma)
-    lr_scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30, 60, 80 ,90], gamma=args.lr_gamma)
 
     if args.resume:
         checkpoint = torch.load(args.resume, map_location='cpu')
@@ -270,54 +205,29 @@ def main(args):
 
     print("Start training")
     start_time = time.time()
-    max_avg = 0
-
-    # Test for data loading
-    t_avg = 0
-    if args.test_loading:
-        args.print_freq=100000
-        args.epochs=1
+    best_acc = 0
     for epoch in range(args.start_epoch, args.epochs):
         epoch_start_time = time.time()
         if args.distributed and not args.dali:
             data_loader.sampler.set_epoch(epoch)
-        fps = train_one_epoch(model, criterion, optimizer, data_loader, device, epoch, args.print_freq, args.amp, use_dali=args.dali)
-        if args.test_loading:
-            t_avg += fps
+        train_one_epoch(model, criterion, optimizer, data_loader, device, epoch, args.print_freq, args.amp, use_dali=args.dali)
         lr_scheduler.step()
-
-        acc_avg, acc_avg5 = evaluate(model, criterion, data_loader_test, device=device, use_dali=args.dali)
-        args.acc1 = round(acc_avg, 4)
-        args.acc5 = round(acc_avg5, 4)
-        args.fps = round(fps, 2)
-
-        if args.output_dir and (epoch % 10 == 0 or acc_avg > max_avg):
-            checkpoint = {
-                'model': model_without_ddp.state_dict(),
-                'optimizer': optimizer.state_dict(),
-                'lr_scheduler': lr_scheduler.state_dict(),
-                'epoch': epoch,
-                'args': args}
-            utils.save_on_master(
-                checkpoint,
-                os.path.join(args.output_dir, 'model_{}.pth'.format(epoch)))
-            utils.save_on_master(
-                checkpoint,
-                os.path.join(args.output_dir, 'checkpoint.pth'))
-            if acc_avg > max_avg:
-                max_avg = acc_avg
-                utils.save_on_master(
+        acc_avg = evaluate(model, criterion, data_loader_test, device=device, use_dali=args.dali)
+        if acc_avg > best_acc:
+            if args.output_dir:
+                checkpoint = {
+                    'model': model_without_ddp.state_dict(),
+                    'optimizer': optimizer.state_dict(),
+                    'lr_scheduler': lr_scheduler.state_dict(),
+                    'epoch': epoch,
+                    'args': args}
+                save_on_master(
                     checkpoint,
-                    os.path.join(args.output_dir, 'best_model.pth'))
-                utils.write_on_master(args.__dict__, os.path.join(args.output_dir, 'best.log'))
-
-        epoch_total_time = time.time() - epoch_start_time
-        epoch_total_time_str = str(datetime.timedelta(seconds=int(epoch_total_time)))
-        print('Epoch time {}'.format(epoch_total_time_str))
-
-        if acc_avg > args.acc_thresh:
-            print("The accuracy has been exceeded {},and the training is terminated at epoch {}".format(args.acc_thresh, epoch))
-            break
+                    os.path.join(args.output_dir, 'model_best.pth'))
+                epoch_total_time = time.time() - epoch_start_time
+                epoch_total_time_str = str(datetime.timedelta(seconds=int(epoch_total_time)))
+                print('epoch time {}'.format(epoch_total_time_str))
+            best_acc = acc_avg
 
         if args.dali:
             data_loader.reset()
@@ -326,15 +236,6 @@ def main(args):
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
     print('Training time {}'.format(total_time_str))
-    
-    if args.test_loading:
-        has_dali = 'w' if args.dali else 'w/o'
-        mode = 'AMP' if args.amp else 'FP32'
-        msg = "DATA-LOAD: {}, {} cards, {} DALI:{}\n".format(mode, args.world_size, has_dali, datetime.timedelta(seconds=t_avg))
-        print(msg)
-    # post log saving
-    args.training_time = total_time_str
-    utils.write_on_master(args.__dict__, os.path.join(args.output_dir, 'best.log'))
 
 
 def get_args_parser(add_help=True):
@@ -347,25 +248,15 @@ def get_args_parser(add_help=True):
     parser.add_argument('-b', '--batch-size', default=32, type=int)
     parser.add_argument('--epochs', default=90, type=int, metavar='N',
                         help='number of total epochs to run')
-    parser.add_argument('-j', '--workers', default=16, type=int, metavar='N',
-                        help='number of data loading workers (default: 16)')
+    parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
+                        help='number of data loading workers (default: 4)')
     parser.add_argument('--opt', default='sgd', type=str, help='optimizer')
-    parser.add_argument('--lr', 
-                        # default=0.1, 
-                        default=0.128, 
-                        type=float, 
-                        help='initial learning rate')
+    parser.add_argument('--lr', default=0.1, type=float, help='initial learning rate')
     parser.add_argument('--momentum', default=0.9, type=float, metavar='M',
                         help='momentum')
-    parser.add_argument('--wd', '--weight-decay', 
-                        # default=1e-4, 
-                        default=2e-4, 
-                        type=float,
+    parser.add_argument('--wd', '--weight-decay', default=1e-4, type=float,
                         metavar='W', help='weight decay (default: 1e-4)',
                         dest='weight_decay')
-    parser.add_argument('--acc-thresh',
-                        default=75.0, type=float,
-                        help='accuracy threshold')
     parser.add_argument('--lr-step-size', default=30, type=int, help='decrease lr every step-size epochs')
     parser.add_argument('--lr-gamma', default=0.1, type=float, help='decrease lr by a factor of lr-gamma')
     parser.add_argument('--print-freq', default=10, type=int, help='print frequency')
@@ -373,10 +264,6 @@ def get_args_parser(add_help=True):
     parser.add_argument('--resume', default='', help='resume from checkpoint')
     parser.add_argument('--start-epoch', default=0, type=int, metavar='N',
                         help='start epoch')
-    parser.add_argument(
-        "--channels-last",
-        action="store_true",
-    )
     parser.add_argument(
         "--cache-dataset",
         dest="cache_dataset",
@@ -411,32 +298,21 @@ def get_args_parser(add_help=True):
     )
 
     # distributed training parameters
-    parser.add_argument('--local_rank', default=-1, type=int,
+    parser.add_argument('--local_rank', '--local-rank', default=-1, type=int,
                         help='Local rank')
     parser.add_argument('--world-size', default=1, type=int,
                         help='number of distributed processes')
     parser.add_argument('--dist-url', default='env://', help='url used to set up distributed training')
     parser.add_argument('--amp', action='store_true', help='Automatic Mixed Precision training')
     parser.add_argument('--seed', default=42, type=int, help='Random seed')
-    parser.add_argument(
-        "--use-zero",
-        dest="use_zero",
-        help="Use ZeroRedundancyOptimizer when distributed traning",
-        action="store_true",
-    )
-    parser.add_argument(
-        "--test-loading",
-        action="store_true",
-    )
     return parser
-
-
-def get_master_addr():
-    if "MASTER_ADDR" in os.environ:
-        return os.environ["MASTER_ADDR"]
-    return "127.0.0.1"
 
 
 if __name__ == "__main__":
     args = get_args_parser().parse_args()
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(args)
+    except:
+        pass
     main(args)

@@ -1,0 +1,108 @@
+- BEGIN:
+    CODE: >
+        s.update({
+            'initialized_tensors': []
+        })
+- KEY:
+    NAME: weights_initialization
+    REQ: AT_LEAST_ONE
+    CHECK:
+        - "'tensor' in v['metadata']"
+    POST: >
+        s['initialized_tensors'] += [v['metadata']['tensor']]
+- END:
+    CHECK: >
+        sorted(s['initialized_tensors']) == sorted([
+            "conv2d/kernel",
+            "batch_normalization/gamma",
+            "batch_normalization/beta",
+            "conv2d_1/kernel",
+            "batch_normalization_1/gamma",
+            "batch_normalization_1/beta",
+            "conv2d_2/kernel",
+            "batch_normalization_2/gamma",
+            "batch_normalization_2/beta",
+            "conv2d_3/kernel",
+            "batch_normalization_3/gamma",
+            "batch_normalization_3/beta",
+            "conv2d_4/kernel",
+            "batch_normalization_4/gamma",
+            "batch_normalization_4/beta",
+            "conv2d_5/kernel",
+            "batch_normalization_5/gamma",
+            "batch_normalization_5/beta",
+            "conv2d_6/kernel",
+            "batch_normalization_6/gamma",
+            "batch_normalization_6/beta",
+            "conv2d_7/kernel",
+            "batch_normalization_7/gamma",
+            "batch_normalization_7/beta",
+            "conv2d_8/kernel",
+            "batch_normalization_8/gamma",
+            "batch_normalization_8/beta",
+            "conv2d_9/kernel",
+            "batch_normalization_9/gamma",
+            "batch_normalization_9/beta",
+            "conv2d_10/kernel",
+            "batch_normalization_10/gamma",
+            "batch_normalization_10/beta",
+            "conv2d_11/kernel",
+            "batch_normalization_11/gamma",
+            "batch_normalization_11/beta",
+            "conv2d_12/kernel",
+            "batch_normalization_12/gamma",
+            "batch_normalization_12/beta",
+            "conv2d_13/kernel",
+            "dense/kernel",
+            "dense/bias",
+            "conv2d_14/kernel",
+            "dense_1/kernel",
+            "dense_1/bias",
+            "dense_2/kernel",
+            "dense_2/bias",
+            "global_step",
+        ])
+
+- KEY:
+    NAME:  train_batch_size
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lr_boundaries
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  lr_rates
+    REQ:   EXACTLY_ONE
+
+- KEY:
+    NAME:  actual_selfplay_games_per_generation
+    REQ:   AT_LEAST_ONE
+    CHECK:
+      - "v['value'] >= 8192"
+
+- KEY:
+    NAME:  min_selfplay_games_per_generation
+    REQ:   EXACTLY_ONE
+    CHECK:
+      - "v['value'] == 8192"
+
+- KEY:
+    NAME:  eval_accuracy
+    REQ:   AT_LEAST_ONE
+    CHECK:
+        - "'epoch_num' in v['metadata']"
+    ATLEAST_ONE_CHECK: "v['value'] >= 0.5 and v['value'] < 1.0"
+
+- KEY:
+    NAME: block_start
+
+- KEY:
+    NAME: block_stop
+
+- KEY:
+    NAME: train_samples
+
+- KEY:
+    NAME: eval_samples
+

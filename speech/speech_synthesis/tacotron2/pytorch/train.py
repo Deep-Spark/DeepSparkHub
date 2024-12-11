@@ -1,6 +1,5 @@
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2023-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
-
 import os
 import sys
 import time
@@ -28,6 +27,25 @@ def reduce_tensor(tensor, n_gpus):
     return rt
 
 
+def get_dist_backend(args=None):
+    DIST_BACKEND_ENV = "PT_DIST_BACKEND"
+    if DIST_BACKEND_ENV in os.environ:
+        return os.environ[DIST_BACKEND_ENV]
+
+    if args is None:
+        args = dict()
+
+    backend_attr_name = "dist_backend"
+
+    if hasattr(args, backend_attr_name):
+        return getattr(args, backend_attr_name)
+
+    if backend_attr_name in args:
+        return args[backend_attr_name]
+
+    return "nccl"
+
+
 def init_distributed(hparams, n_gpus, rank, group_name):
     assert torch.cuda.is_available(), "Distributed mode requires CUDA."
     print("Initializing Distributed")
@@ -36,8 +54,9 @@ def init_distributed(hparams, n_gpus, rank, group_name):
     torch.cuda.set_device(rank % torch.cuda.device_count())
 
     # Initialize distributed communication
+    dist_backend = get_dist_backend()
     dist.init_process_group(
-        backend=hparams.dist_backend, init_method=hparams.dist_url,
+        backend=dist_backend, init_method=hparams.dist_url,
         world_size=n_gpus, rank=rank, group_name=group_name)
 
     print("Done initializing distributed")
@@ -134,13 +153,8 @@ def validate(model, criterion, valset, iteration, batch_size, n_gpus,
 
         val_loss = 0.0
         for i, batch in enumerate(val_loader):
-            start = time.perf_counter()
             x, y = model.parse_batch(batch)
             y_pred = model(x)
-            mel = y_pred[0]
-            num_mels = mel.size(0) * mel.size(2)
-            duration = time.perf_counter() - start
-            throughput = num_mels / duration
             loss = criterion(y_pred, y)
             if distributed_run:
                 reduced_val_loss = reduce_tensor(loss.data, n_gpus).item()
@@ -151,7 +165,7 @@ def validate(model, criterion, valset, iteration, batch_size, n_gpus,
 
     model.train()
     if rank == 0:
-        print("Validation loss {}: {:9f}  ThroughPut {:.3f}samples/s".format(iteration, val_loss, throughput))
+        print("Validation loss {}: {:9f}  ".format(iteration, val_loss))
         logger.log_validation(val_loss, model, y, y_pred, iteration)
     
     if val_loss <= args.target_val_loss:
@@ -225,10 +239,7 @@ def train(output_directory, log_directory, checkpoint_path, warm_start, n_gpus,
 
             model.zero_grad()
             x, y = model.parse_batch(batch)
-
             y_pred = model(x)
-            mel = y_pred[0]
-            num_mels = mel.size(0) * mel.size(2)
 
             loss = criterion(y_pred, y)
             if hparams.distributed_run:
@@ -253,9 +264,8 @@ def train(output_directory, log_directory, checkpoint_path, warm_start, n_gpus,
 
             if not is_overflow and rank == 0:
                 duration = time.perf_counter() - start
-                throughput = num_mels / duration
-                print("Train loss {} {:.6f} Grad Norm {:.6f} Timer {:.3f}s/it ThroughPut {:.3f}samples/s".format(
-                    iteration, reduced_loss, grad_norm, duration, throughput))
+                print("Train loss {} {:.6f} Grad Norm {:.6f} {:.2f}s/it".format(
+                    iteration, reduced_loss, grad_norm, duration))
                 logger.log_training(
                     reduced_loss, grad_norm, learning_rate, duration, iteration)
 
@@ -300,10 +310,15 @@ if __name__ == '__main__':
     parser.add_argument('--hparams', type=str,
                         required=False, help='comma separated name=value pairs')
     parser.add_argument('--target_val_loss', type=float,
-                        default=0.5, help='the validate loss of target')
+                        default=5.0, help='the validate loss of target')
 
     args = parser.parse_args()
     hparams = create_hparams(args.hparams)
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments([args, hparams])
+    except:
+        pass
 
     torch.backends.cudnn.enabled = hparams.cudnn_enabled
     torch.backends.cudnn.benchmark = hparams.cudnn_benchmark
@@ -318,7 +333,3 @@ if __name__ == '__main__':
                  args.warm_start, args.n_gpus, args.rank, args.group_name, hparams)
     status = "success" if flag else "aborted"
     print("Traning Status:", status)
-    if flag:
-        sys.exit(1)
-    else:
-        sys.exit(0)

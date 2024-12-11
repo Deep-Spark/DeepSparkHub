@@ -24,7 +24,6 @@ cd $PROJECT_DIR
 python3 train.py \
 	--model resnet50 \
 	--epochs 90 \
-	--acc-thresh 75.9 \
 	--output-dir ${OUTPUT_PATH} \
 	"$@";check_status
 

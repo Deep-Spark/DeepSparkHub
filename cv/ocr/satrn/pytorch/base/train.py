@@ -76,7 +76,7 @@ def parse_args():
         choices=['none', 'pytorch', 'slurm', 'mpi'],
         default='none',
         help='Options for job launcher.')
-    parser.add_argument('--local_rank', type=int, default=0)
+    parser.add_argument('--local_rank', '--local-rank', type=int, default=0)
     parser.add_argument('--fake-data-root', type=str, default="data/mixture")
     parser.add_argument('--data-root', type=str, default=None)
     parser.add_argument('--total_epochs', type=int, default=5)
@@ -236,6 +236,13 @@ def main():
 
     # add an attribute for visualization convenience
     model.CLASSES = datasets[0].CLASSES
+
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(cfg)
+    except:
+        pass
+
     train_detector(
         model,
         datasets,

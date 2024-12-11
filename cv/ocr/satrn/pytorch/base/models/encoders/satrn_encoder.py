@@ -68,7 +68,8 @@ class SatrnEncoder(BaseEncoder):
             valid_ratios = [
                 img_meta.get('valid_ratio', 1.0) for img_meta in img_metas
             ]
-        feat += self.position_enc(feat)
+        # feat += self.position_enc(feat)
+        feat = feat + self.position_enc(feat)
         n, c, h, w = feat.size()
         mask = feat.new_zeros((n, h, w))
         for i, valid_ratio in enumerate(valid_ratios):

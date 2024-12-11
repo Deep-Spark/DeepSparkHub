@@ -62,5 +62,5 @@ def get_mot_train(img_root, label_category):
 
 if __name__ == "__main__":
     for name in ['train']:
-        gen_labels_mot('./data/MOT/MOT17', name)
-        get_mot_train('./data/MOT/MOT17', name)
+        gen_labels_mot('../../../../../data/datasets/MOT17', name)
+        get_mot_train('../../../../../data/datasets/MOT17', name)

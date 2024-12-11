@@ -23,6 +23,11 @@ from ixpylogger import TrainingLogger
 
 def main():
     flags = PARSER.parse_args()
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(flags)
+    except:
+        pass
     
     logger = TrainingLogger(log_name=flags.log_name)
     

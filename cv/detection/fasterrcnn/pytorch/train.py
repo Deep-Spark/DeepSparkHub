@@ -1,4 +1,5 @@
-# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 r"""PyTorch Detection Training.
@@ -37,13 +38,30 @@ from model import create_model
 from model.generalized_rcnn_transform import GeneralizedRCNNTransform
 from torchvision.models.detection.backbone_utils import resnet_fpn_backbone, _validate_trainable_layers
 from torchvision.ops.feature_pyramid_network import LastLevelP6P7
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
+import torchvision.models.resnet
+print("WARN: Using pretrained weights from torchvision-0.9.")
+torchvision.models.resnet.model_urls = {
+    'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
+    'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
+    'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+    'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
+    'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
+    'resnext50_32x4d': 'https://download.pytorch.org/models/resnext50_32x4d-7cdf4587.pth',
+    'resnext101_32x8d': 'https://download.pytorch.org/models/resnext101_32x8d-8ba56ff5.pth',
+    'wide_resnet50_2': 'https://download.pytorch.org/models/wide_resnet50_2-95faca4d.pth',
+    'wide_resnet101_2': 'https://download.pytorch.org/models/wide_resnet101_2-32ee1156.pth',
+}
+
 
 def get_args_parser(add_help=True):
     import argparse
     parser = argparse.ArgumentParser(description='PyTorch Detection Training', add_help=add_help)
 
     parser.add_argument('--data-path', default='/datasets01/COCO/022719/', help='dataset')
-    parser.add_argument('--dataset', default='coco', help='dataset')
+    parser.add_argument('--dataset', default='voc', help='dataset')
     parser.add_argument('--device', default='cuda', help='device')
     parser.add_argument('-b', '--batch-size', default=2, type=int,
                         help='images per gpu, the total batch size is $NGPU x batch_size')
@@ -100,7 +118,7 @@ def get_args_parser(add_help=True):
     )
 
     # distributed training parameters
-    parser.add_argument('--local_rank', default=-1, type=int,
+    parser.add_argument('--local_rank', '--local-rank', default=-1, type=int,
                         help='Local rank')
     parser.add_argument('--world-size', default=1, type=int,
                         help='number of distributed processes')
@@ -172,7 +190,7 @@ def main(args):
         image_std = [0.229, 0.224, 0.225]
         model.transform = GeneralizedRCNNTransform(800, 1333, image_mean, image_std, fixed_size=(800, 800))
     trainable_backbone_layers = _validate_trainable_layers(True, None, 5, 5)
-    model.bachbone = resnet_fpn_backbone('resnet50', True, norm_layer=torch.nn.BatchNorm2d,
+    model.backbone = resnet_fpn_backbone('resnet50', True, norm_layer=torch.nn.BatchNorm2d,
                                          returned_layers=[2, 3, 4], extra_blocks=LastLevelP6P7(256, 256),
                                          trainable_layers=trainable_backbone_layers)
 
@@ -247,4 +265,9 @@ def main(args):
 
 if __name__ == "__main__":
     args = get_args_parser().parse_args()
+    try:
+        from dltest import show_training_arguments
+        show_training_arguments(args)
+    except:
+        pass
     main(args)

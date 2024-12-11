@@ -38,16 +38,6 @@ export DATA_PATH=/path/to/imagenet
 # Multiple GPUs on one machine
 bash train_vgg16_amp_dist.sh
 ```
-Install zlib-1.2.9 if reports "iZLIB_1.2.9 not found" when run train_vgg16_amp_dist.sh
-
-```bash
-wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
-tar xvf zlib-1.2.9.tar.gz
-cd zlib-1.2.9/
-./configure && make install
-cd ../
-rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
-```
 
 ## Reference
 - [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)

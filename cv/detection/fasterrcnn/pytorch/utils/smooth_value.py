@@ -1,4 +1,5 @@
-# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 
@@ -38,7 +39,7 @@ class SmoothedValue(object):
         """
         if not is_dist_avail_and_initialized():
             return
-        t = torch.tensor([self.count, self.total], dtype=torch.float64, device='cuda')
+        t = torch.tensor([self.count, self.total], dtype=torch.float32, device='cuda')
         dist.barrier()
         dist.all_reduce(t)
         t = t.tolist()

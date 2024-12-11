@@ -96,8 +96,8 @@ class TextLoggerHook(LoggerHook):
                 log_str += f'time: {log_dict["time"]:.3f}, ' \
                            f'data_time: {log_dict["data_time"]:.3f}, '
                 # statistic memory
-                if torch.cuda.is_available():
-                    log_str += f'memory: {log_dict["memory"]}, '
+                #if torch.cuda.is_available():
+                    #log_str += f'memory: {log_dict["memory"]}, '
         else:
             # val/test time
             # here 1000 is the length of the val dataloader
@@ -115,7 +115,8 @@ class TextLoggerHook(LoggerHook):
             # these items have been in log_str
             if name in [
                     'mode', 'Epoch', 'iter', 'lr', 'time', 'data_time',
-                    'memory', 'epoch'
+                    #'memory', 'epoch'
+                    'epoch'
             ]:
                 continue
             if isinstance(val, float):
@@ -167,10 +168,10 @@ class TextLoggerHook(LoggerHook):
                 assert isinstance(lr_, list)
                 log_dict['lr'].update({k: lr_[0]})
 
-        if 'time' in runner.log_buffer.output:
+        #if 'time' in runner.log_buffer.output:
             # statistic memory
-            if torch.cuda.is_available():
-                log_dict['memory'] = self._get_max_memory(runner)
+            #if torch.cuda.is_available():
+                #log_dict['memory'] = self._get_max_memory(runner)
 
         log_dict = dict(log_dict, **runner.log_buffer.output)
 

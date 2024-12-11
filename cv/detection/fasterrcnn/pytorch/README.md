@@ -6,6 +6,12 @@ State-of-the-art object detection networks depend on region proposal algorithms 
 
 ## Step 1: Installing packages
 ```
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-dev
+
 cd <project_path>/start_scripts
 bash init_torch.sh
 ```
@@ -35,23 +41,18 @@ coco2017
 └── ...
 ```
 
-```bash
-mkdir -p <project_path>/datasets/
-ln -s /path/to/coco2017 <project_path>/datasets/coco
-```
-
 ## Step 3: Training
 
 ### On single GPU (AMP)
 ```
 cd <project_path>/start_scripts
-bash train_fasterrcnn_resnet50_amp_torch.sh
+bash train_fasterrcnn_resnet50_amp_torch.sh --dataset coco --data-path /path/to/coco2017
 ```
 
 ### Multiple GPUs on one machine
 ```
 cd <project_path>/start_scripts
-bash train_fasterrcnn_resnet50_amp_dist_torch.sh
+bash train_fasterrcnn_resnet50_amp_dist_torch.sh --dataset coco --data-path /path/to/coco2017
 ```
 
 ## Reference

@@ -1,6 +1,6 @@
-# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 # Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
+# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 import datetime
 import os
@@ -201,7 +201,6 @@ def main(args):
 
     print("Start training")
     start_time = time.time()
-    best_acc = 0
     for epoch in range(args.start_epoch, args.epochs):
         epoch_start_time = time.time()
         if args.distributed and not args.dali:
@@ -212,21 +211,23 @@ def main(args):
         if acc_avg > args.acc_thresh:
             print("The accuracy has been exceeded {},and the training is terminated at epoch {}".format(args.acc_thresh, epoch))
             return
-        if acc_avg > best_acc:
-            if args.output_dir:
-                checkpoint = {
-                    'model': model_without_ddp.state_dict(),
-                    'optimizer': optimizer.state_dict(),
-                    'lr_scheduler': lr_scheduler.state_dict(),
-                    'epoch': epoch,
-                    'args': args}
-                utils.save_on_master(
-                    checkpoint,
-                    os.path.join(args.output_dir, 'model_best.pth'))
-                epoch_total_time = time.time() - epoch_start_time
-                epoch_total_time_str = str(datetime.timedelta(seconds=int(epoch_total_time)))
-                print('epoch time {}'.format(epoch_total_time_str))
-            best_acc = acc_avg
+
+        if args.output_dir:
+            checkpoint = {
+                'model': model_without_ddp.state_dict(),
+                'optimizer': optimizer.state_dict(),
+                'lr_scheduler': lr_scheduler.state_dict(),
+                'epoch': epoch,
+                'args': args}
+            utils.save_on_master(
+                checkpoint,
+                os.path.join(args.output_dir, 'model_{}.pth'.format(epoch)))
+            utils.save_on_master(
+                checkpoint,
+                os.path.join(args.output_dir, 'checkpoint.pth'))
+            epoch_total_time = time.time() - epoch_start_time
+            epoch_total_time_str = str(datetime.timedelta(seconds=int(epoch_total_time)))
+            print('epoch time {}'.format(epoch_total_time_str))
 
         if args.dali:
             data_loader.reset()

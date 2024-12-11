@@ -5,6 +5,7 @@ import numpy as np
 from .dist import *
 from .metric_logger import *
 from .smooth_value import *
+from .misc import *
 
 
 def collate_fn(batch):

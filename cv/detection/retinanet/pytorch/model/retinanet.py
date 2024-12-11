@@ -1,5 +1,4 @@
 import math
-import sys
 from collections import OrderedDict
 import warnings
 
@@ -22,10 +21,6 @@ from torchvision.ops import boxes as box_ops
 __all__ = [
     "RetinaNet", "retinanet_resnet50_fpn"
 ]
-
-
-def padding_channel():
-    return "--padding-channel" in sys.argv
 
 
 def _sum(x: List[Tensor]) -> Tensor:
@@ -330,8 +325,7 @@ class RetinaNet(nn.Module):
                  nms_thresh=0.5,
                  detections_per_img=300,
                  fg_iou_thresh=0.5, bg_iou_thresh=0.4,
-                 topk_candidates=1000,
-                 nhwc=False):
+                 topk_candidates=1000):
         super().__init__()
 
         if not hasattr(backbone, "out_channels"):
@@ -355,8 +349,6 @@ class RetinaNet(nn.Module):
             head = RetinaNetHead(backbone.out_channels, anchor_generator.num_anchors_per_location()[0], num_classes)
         self.head = head
 
-        self.nhwc = nhwc
-
         if proposal_matcher is None:
             proposal_matcher = det_utils.Matcher(
                 fg_iou_thresh,
@@ -371,11 +363,6 @@ class RetinaNet(nn.Module):
             image_mean = [0.485, 0.456, 0.406]
         if image_std is None:
             image_std = [0.229, 0.224, 0.225]
-
-        if padding_channel():
-            image_mean.append(0)
-            image_std.append(1)
-
         self.transform = GeneralizedRCNNTransform(min_size, max_size, image_mean, image_std)
 
         self.score_thresh = score_thresh
@@ -506,8 +493,6 @@ class RetinaNet(nn.Module):
 
         # transform the input
         images, targets = self.transform(images, targets)
-        if self.nhwc:
-            images.tensors = images.tensors.to(memory_format=torch.channels_last)
 
         # Check for degenerate boxes
         # TODO: Move this to a function

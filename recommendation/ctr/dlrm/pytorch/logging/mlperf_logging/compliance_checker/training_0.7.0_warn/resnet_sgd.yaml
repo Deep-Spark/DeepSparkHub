@@ -1,0 +1,6 @@
+
+- KEY:
+    NAME:  opt_learning_rate_decay_boundary_epochs
+    REQ:   EXACTLY_ONE
+    CHECK: " len(v['value']) > 0"
+

@@ -1,0 +1,41 @@
+{
+    "oc20_ref_256": {
+        "Benchmark": "oc20",
+        "BS": 256,
+        "Epochs to converge": [ 20, 18, 20, 20, 22, 18, 19, 19, 21, 21 ],
+        "Hyperparams": {
+            "global_batch_size": 256,
+            "opt_base_learning_rate": 0.0004,
+            "opt_learning_rate_warmup_steps": 31252,
+            "opt_learning_rate_warmup_factor": 0.2,
+            "opt_learning_rate_decay_boundary_steps": [ 125008, 187512, 250016 ],
+            "opt_learning_rate_decay_factor": 0.1
+        }
+    },
+    "oc20_ref_1024": {
+        "Benchmark": "oc20",
+        "BS": 1024,
+        "Epochs to converge": [ 23, 25, 22, 25, 25, 25, 25, 24, 23, 25 ],
+        "Hyperparams": {
+            "global_batch_size": 1024,
+            "opt_base_learning_rate": 0.0012,
+            "opt_learning_rate_warmup_steps": 7816,
+            "opt_learning_rate_warmup_factor": 0.2,
+            "opt_learning_rate_decay_boundary_steps": [ 31264, 46896 ],
+            "opt_learning_rate_decay_factor": 0.1
+        }
+    },
+    "oc20_ref_2048": {
+        "Benchmark": "oc20",
+        "BS": 2048,
+        "Epochs to converge": [ 33, 32, 33, 33, 33, 34, 33, 33, 30, 33 ],
+        "Hyperparams": {
+            "global_batch_size": 2048,
+            "opt_base_learning_rate": 0.0016,
+            "opt_learning_rate_warmup_steps": 3908,
+            "opt_learning_rate_warmup_factor": 0.2,
+            "opt_learning_rate_decay_boundary_steps": [ 23448, 31264 ],
+            "opt_learning_rate_decay_factor": 0.1
+        }
+    }
+}

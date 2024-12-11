@@ -1,4 +1,5 @@
-# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
+# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 
@@ -56,6 +57,25 @@ def save_on_master(*args, **kwargs):
         torch.save(*args, **kwargs)
 
 
+def get_dist_backend(args=None):
+    DIST_BACKEND_ENV = "PT_DIST_BACKEND"
+    if DIST_BACKEND_ENV in os.environ:
+        return os.environ[DIST_BACKEND_ENV]
+
+    if args is None:
+        args = dict()
+
+    backend_attr_name = "dist_backend"
+
+    if hasattr(args, backend_attr_name):
+        return getattr(args, backend_attr_name)
+
+    if backend_attr_name in args:
+        return args[backend_attr_name]
+
+    return "nccl"
+
+
 def init_distributed_mode(args):
     if 'RANK' in os.environ and 'WORLD_SIZE' in os.environ:
         args.rank = int(os.environ["RANK"])
@@ -72,12 +92,9 @@ def init_distributed_mode(args):
     args.distributed = True
 
     torch.cuda.set_device(args.gpu)
-    if hasattr(args, "dist_backend"):
-        dist_backend = args.dist_backend
-    else:
-        dist_backend = "nccl"
-    print('| distributed init (rank {}): {}'.format(
-        args.rank, args.dist_url), flush=True)
+    dist_backend = get_dist_backend(args)
+    print('| distributed init (rank {}, backend {}): {}'.format(
+        args.rank, dist_backend, args.dist_url), flush=True)
     torch.distributed.init_process_group(backend=dist_backend, init_method=args.dist_url,
                                          world_size=args.world_size, rank=args.rank)
     torch.distributed.barrier()

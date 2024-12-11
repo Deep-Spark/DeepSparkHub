@@ -6,7 +6,7 @@ from torch.nn import functional as F
 from typing import Any, Callable, Dict, List, Optional, Sequence
 
 from .model_utils import load_state_dict_from_url
-from torchvision.models.mobilenetv2 import _make_divisible, ConvBNActivation
+from torchvision.models.mobilenetv2 import _make_divisible, Conv2dNormActivation
 
 
 __all__ = ["MobileNetV3", "mobilenet_v3_large", "mobilenet_v3_small"]
@@ -72,19 +72,19 @@ class InvertedResidual(nn.Module):
 
         # expand
         if cnf.expanded_channels != cnf.input_channels:
-            layers.append(ConvBNActivation(cnf.input_channels, cnf.expanded_channels, kernel_size=1,
+            layers.append(Conv2dNormActivation(cnf.input_channels, cnf.expanded_channels, kernel_size=1,
                                            norm_layer=norm_layer, activation_layer=activation_layer))
 
         # depthwise
         stride = 1 if cnf.dilation > 1 else cnf.stride
-        layers.append(ConvBNActivation(cnf.expanded_channels, cnf.expanded_channels, kernel_size=cnf.kernel,
+        layers.append(Conv2dNormActivation(cnf.expanded_channels, cnf.expanded_channels, kernel_size=cnf.kernel,
                                        stride=stride, dilation=cnf.dilation, groups=cnf.expanded_channels,
                                        norm_layer=norm_layer, activation_layer=activation_layer))
         if cnf.use_se:
             layers.append(se_layer(cnf.expanded_channels))
 
         # project
-        layers.append(ConvBNActivation(cnf.expanded_channels, cnf.out_channels, kernel_size=1, norm_layer=norm_layer,
+        layers.append(Conv2dNormActivation(cnf.expanded_channels, cnf.out_channels, kernel_size=1, norm_layer=norm_layer,
                                        activation_layer=nn.Identity))
 
         self.block = nn.Sequential(*layers)
@@ -136,7 +136,7 @@ class MobileNetV3(nn.Module):
 
         # building first layer
         firstconv_output_channels = inverted_residual_setting[0].input_channels
-        layers.append(ConvBNActivation(3, firstconv_output_channels, kernel_size=3, stride=2, norm_layer=norm_layer,
+        layers.append(Conv2dNormActivation(3, firstconv_output_channels, kernel_size=3, stride=2, norm_layer=norm_layer,
                                        activation_layer=nn.Hardswish))
 
         # building inverted residual blocks
@@ -146,7 +146,7 @@ class MobileNetV3(nn.Module):
         # building last several layers
         lastconv_input_channels = inverted_residual_setting[-1].out_channels
         lastconv_output_channels = 6 * lastconv_input_channels
-        layers.append(ConvBNActivation(lastconv_input_channels, lastconv_output_channels, kernel_size=1,
+        layers.append(Conv2dNormActivation(lastconv_input_channels, lastconv_output_channels, kernel_size=1,
                                        norm_layer=norm_layer, activation_layer=nn.Hardswish))
 
         self.features = nn.Sequential(*layers)
