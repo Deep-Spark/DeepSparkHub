@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import bisect
 import os.path as osp
@@ -55,7 +57,7 @@ class EvalHook(BaseEvalHook):
 
         from dbnet_det.apis import single_gpu_test
 
-        # Changed results to self.results so that dbnet_detWandbHook can access
+        # Changed results to self.results so that MMDetWandbHook can access
         # the evaluation results and log them to wandb.
         results = single_gpu_test(runner.model, self.dataloader, show=False)
         self.latest_results = results
@@ -121,7 +123,7 @@ class DistEvalHook(BaseDistEvalHook):
 
         from dbnet_det.apis import multi_gpu_test
 
-        # Changed results to self.results so that dbnet_detWandbHook can access
+        # Changed results to self.results so that MMDetWandbHook can access
         # the evaluation results and log them to wandb.
         results = multi_gpu_test(
             runner.model,

@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import warnings
 
@@ -5,7 +7,7 @@ import torch.nn as nn
 from dbnet_cv.cnn import ACTIVATION_LAYERS as DBNET_CV_ACTIVATION_LAYERS
 from dbnet_cv.cnn import UPSAMPLE_LAYERS as DBNET_CV_UPSAMPLE_LAYERS
 from dbnet_cv.utils import Registry, build_from_cfg
-from dbnet_det.models.builder import BACKBONES as dbnet_det_BACKBONES
+from dbnet_det.models.builder import BACKBONES as MMDET_BACKBONES
 
 CONVERTORS = Registry('convertor')
 ENCODERS = Registry('encoder')
@@ -14,7 +16,7 @@ PREPROCESSOR = Registry('preprocessor')
 POSTPROCESSOR = Registry('postprocessor')
 
 UPSAMPLE_LAYERS = Registry('upsample layer', parent=DBNET_CV_UPSAMPLE_LAYERS)
-BACKBONES = Registry('models', parent=dbnet_det_BACKBONES)
+BACKBONES = Registry('models', parent=MMDET_BACKBONES)
 LOSSES = BACKBONES
 DETECTORS = BACKBONES
 ROI_EXTRACTORS = BACKBONES

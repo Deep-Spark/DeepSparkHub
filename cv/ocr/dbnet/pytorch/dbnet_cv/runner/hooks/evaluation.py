@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import os.path as osp
 import warnings
@@ -371,7 +373,7 @@ class EvalHook(Hook):
             # If the performance of model is pool, the `eval_res` may be an
             # empty dict and it will raise exception when `self.save_best` is
             # not None. More details at
-            # https://github.com/open-mmlab/dbnet_detection/issues/6265.
+            # https://github.com/open-mmlab/mmdetection/issues/6265.
             if not eval_res:
                 warnings.warn(
                     'Since `eval_res` is an empty dict, the behavior to save '

@@ -1,6 +1,8 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 """Modified from https://github.com/open-
-mmlab/dbnet_detection/blob/master/tools/analysis_tools/analyze_logs.py."""
+mmlab/mmdetection/blob/master/tools/analysis_tools/analyze_logs.py."""
 import argparse
 import json
 from collections import defaultdict

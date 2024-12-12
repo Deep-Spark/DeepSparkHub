@@ -1,0 +1,2 @@
+dbnet_cv-full>=1.3.8
+mmdet>=2.21.0

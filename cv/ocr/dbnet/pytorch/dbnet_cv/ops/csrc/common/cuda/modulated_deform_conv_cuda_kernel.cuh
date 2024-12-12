@@ -1,3 +1,5 @@
+/* Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd. */
+/* All Rights Reserved. */
 /*!
  ******************* BEGIN Caffe Copyright Notice and Disclaimer
  *****************
@@ -61,7 +63,7 @@
  */
 
 // modified from
-// https://github.com/chengdazhi/Deformable-Convolution-V2-PyTorch/blob/dbnet_detection/dbnet_det/ops/dcn/src/deform_conv_cuda_kernel.cu
+// https://github.com/chengdazhi/Deformable-Convolution-V2-PyTorch/blob/mmdetection/mmdet/ops/dcn/src/deform_conv_cuda_kernel.cu
 
 #ifndef MODULATED_DEFORM_CONV_CUDA_KERNEL_CUH
 #define MODULATED_DEFORM_CONV_CUDA_KERNEL_CUH

@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 
@@ -30,7 +32,7 @@ test_pipeline_1333_736 = [
     dict(type='LoadImageFromFile', color_type='color_ignore_orientation'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(1280, 736),  # used by Resize
+        img_scale=(1333, 736),  # used by Resize
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),

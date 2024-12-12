@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 # from .csp_darknet import CSPDarknet
 # from .darknet import Darknet
@@ -6,7 +8,7 @@
 # from .efficientnet import EfficientNet
 # from .hourglass import HourglassNet
 # from .hrnet import HRNet
-from .mobilenet_v3 import MobileNetV3
+# from .mobilenet_v2 import MobileNetV2
 # from .pvt import PyramidVisionTransformer, PyramidVisionTransformerV2
 # from .regnet import RegNet
 # from .res2net import Res2Net
@@ -24,7 +26,3 @@ from .resnet import ResNet, ResNetV1d
 #     'SwinTransformer', 'PyramidVisionTransformer',
 #     'PyramidVisionTransformerV2', 'EfficientNet'
 # ]
-__all__ = [
-     'ResNet', 
-    'MobileNetV3'
-]

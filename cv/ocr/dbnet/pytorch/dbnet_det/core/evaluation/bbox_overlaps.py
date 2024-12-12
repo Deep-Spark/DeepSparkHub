@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import numpy as np
 
@@ -15,7 +17,7 @@ def bbox_overlaps(bboxes1,
         mode (str): IOU (intersection over union) or IOF (intersection
             over foreground)
         use_legacy_coordinate (bool): Whether to use coordinate system in
-            dbnet_det v1.x. which means width, height should be
+            mmdet v1.x. which means width, height should be
             calculated as 'x2 - x1 + 1` and 'y2 - y1 + 1' respectively.
             Note when function is used in `VOCDataset`, it should be
             True to align with the official implementation

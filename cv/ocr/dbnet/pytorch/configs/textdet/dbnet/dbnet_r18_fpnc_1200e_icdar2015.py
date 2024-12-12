@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 _base_ = [
     '../../_base_/default_runtime.py',
     '../../_base_/schedules/schedule_sgd_1200e.py',
@@ -29,5 +31,5 @@ data = dict(
         type='UniformConcatDataset',
         datasets=test_list,
         pipeline=test_pipeline_1333_736))
-fp16 = dict(loss_scale='dynamic')
+
 evaluation = dict(interval=100, metric='hmean-iou')

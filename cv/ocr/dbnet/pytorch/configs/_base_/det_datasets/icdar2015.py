@@ -1,5 +1,7 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 dataset_type = 'IcdarDataset'
-data_root = 'data/icdar2015'
+data_root = 'OCR_Detect'
 
 train = dict(
     type=dataset_type,

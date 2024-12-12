@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import torch
 import torch.nn as nn
@@ -141,7 +143,7 @@ class RoIAlign(nn.Module):
             output sample. 0 to take samples densely for current models.
         pool_mode (str, 'avg' or 'max'): pooling mode in each bin.
         aligned (bool): if False, use the legacy implementation in
-            dbnet_detection. If True, align the results more perfectly.
+            MMDetection. If True, align the results more perfectly.
         use_torchvision (bool): whether to use roi_align from torchvision.
 
     Note:

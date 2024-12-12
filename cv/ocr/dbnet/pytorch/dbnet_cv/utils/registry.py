@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import inspect
 import warnings
@@ -104,7 +106,7 @@ class Registry:
             children registry could be built from parent. Default: None.
         scope (str, optional): The scope of registry. It is the key to search
             for children registry. If not specified, scope will be the name of
-            the package where class is defined, e.g. dbnet_det, mmcls, mmseg.
+            the package where class is defined, e.g. mmdet, mmcls, mmseg.
             Default: None.
     """
 
@@ -151,12 +153,12 @@ class Registry:
         The name of the package where registry is defined will be returned.
 
         Example:
-            >>> # in dbnet_det/models/backbone/resnet.py
+            >>> # in mmdet/models/backbone/resnet.py
             >>> MODELS = Registry('models')
             >>> @MODELS.register_module()
             >>> class ResNet:
             >>>     pass
-            The scope of ``ResNet`` will be ``dbnet_det``.
+            The scope of ``ResNet`` will be ``mmdet``.
 
         Returns:
             str: The inferred scope name.
@@ -177,8 +179,8 @@ class Registry:
         The first scope will be split from key.
 
         Examples:
-            >>> Registry.split_scope_key('dbnet_det.ResNet')
-            'dbnet_det', 'ResNet'
+            >>> Registry.split_scope_key('mmdet.ResNet')
+            'mmdet', 'ResNet'
             >>> Registry.split_scope_key('ResNet')
             None, 'ResNet'
 
@@ -244,11 +246,11 @@ class Registry:
 
         Example:
             >>> models = Registry('models')
-            >>> dbnet_det_models = Registry('models', parent=models)
-            >>> @dbnet_det_models.register_module()
+            >>> mmdet_models = Registry('models', parent=models)
+            >>> @mmdet_models.register_module()
             >>> class ResNet:
             >>>     pass
-            >>> resnet = models.build(dict(type='dbnet_det.ResNet'))
+            >>> resnet = models.build(dict(type='mmdet.ResNet'))
         """
 
         assert isinstance(registry, Registry)

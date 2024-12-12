@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 from collections.abc import Sequence
 
@@ -78,7 +80,7 @@ def eval_recalls(gts,
         logger (logging.Logger | str | None): The way to print the recall
             summary. See `dbnet_cv.utils.print_log()` for details. Default: None.
         use_legacy_coordinate (bool): Whether use coordinate system
-            in dbnet_det v1.x. "1" was added to both height and width
+            in mmdet v1.x. "1" was added to both height and width
             which means w, h should be
             computed as 'x2 - x1 + 1` and 'y2 - y1 + 1'. Default: False.
 
