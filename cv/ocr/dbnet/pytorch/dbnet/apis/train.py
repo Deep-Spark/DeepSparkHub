@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import warnings
 
@@ -171,7 +173,7 @@ def init_random_seed(seed=None, device='cuda'):
 
     # Make sure all ranks share the same random seed to prevent
     # some potential bugs. Please refer to
-    # https://github.com/open-mmlab/dbnet_detection/issues/6339
+    # https://github.com/open-mmlab/mmdetection/issues/6339
     rank, world_size = get_dist_info()
     seed = np.random.randint(2**31)
     if world_size == 1:

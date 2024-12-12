@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import math
 
@@ -226,7 +228,7 @@ class RandomRotateTextDet:
 @PIPELINES.register_module()
 class ColorJitter:
     """An interface for torch color jitter so that it can be invoked in
-    dbnet_detection pipeline."""
+    mmdetection pipeline."""
 
     def __init__(self, **kwargs):
         self.transform = transforms.ColorJitter(**kwargs)
@@ -338,7 +340,7 @@ class ScaleAspectJitter(Resize):
 @PIPELINES.register_module()
 class AffineJitter:
     """An interface for torchvision random affine so that it can be invoked in
-    dbnet_det pipeline."""
+    mmdet pipeline."""
 
     def __init__(self,
                  degrees=4,

@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import torch
 
@@ -29,7 +31,7 @@ class SingleStageTextDetector(SingleStageDetector):
                 has: 'img_shape', 'scale_factor', 'flip', and may also contain
                 'filename', 'ori_shape', 'pad_shape', and 'img_norm_cfg'.
                 For details on the values of these keys, see
-                :class:`dbnet_det.datasets.pipelines.Collect`.
+                :class:`mmdet.datasets.pipelines.Collect`.
         Returns:
             dict[str, Tensor]: A dictionary of loss components.
         """

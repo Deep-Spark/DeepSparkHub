@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 _base_ = [
     '../../_base_/default_runtime.py',
     '../../_base_/schedules/schedule_sgd_1200e.py',
@@ -13,7 +15,6 @@ train_pipeline_r50dcnv2 = {{_base_.train_pipeline_r50dcnv2}}
 test_pipeline_4068_1024 = {{_base_.test_pipeline_4068_1024}}
 
 # load_from = 'checkpoints/textdet/dbnet/res50dcnv2_synthtext.pth'
-# fp16 = dict(loss_scale='dynamic')
 
 data = dict(
     samples_per_gpu=8,
@@ -32,6 +33,5 @@ data = dict(
         type='UniformConcatDataset',
         datasets=test_list,
         pipeline=test_pipeline_4068_1024))
-fp16 = dict(loss_scale='dynamic')
-evaluation = dict(interval=1, metric='hmean-iou')
-# fp16 = dict(loss_scale='dynamic')
+
+evaluation = dict(interval=100, metric='hmean-iou')

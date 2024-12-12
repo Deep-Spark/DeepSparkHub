@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import torch
 import torch.nn.functional as F
@@ -88,8 +90,7 @@ class DBLoss(nn.Module):
 
         assert gt.max() <= 1 and gt.min() >= 0
         assert pred.max() <= 1 and pred.min() >= 0
-        
-        loss = F.binary_cross_entropy_with_logits(pred, gt, reduction='none')
+        loss = F.binary_cross_entropy(pred, gt, reduction='none')
         positive_loss = loss * positive.float()
         negative_loss = loss * negative.float()
 

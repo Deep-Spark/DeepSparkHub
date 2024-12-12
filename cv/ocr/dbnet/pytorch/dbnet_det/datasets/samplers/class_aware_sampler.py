@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import math
 
@@ -18,7 +20,7 @@ class ClassAwareSampler(Sampler):
     Neural Networks <https://arxiv.org/abs/1512.05830>`_
 
     The implementation logic is referred to
-    https://github.com/Sense-X/TSD/blob/master/dbnet_det/datasets/samplers/distributed_classaware_sampler.py
+    https://github.com/Sense-X/TSD/blob/master/mmdet/datasets/samplers/distributed_classaware_sampler.py
 
     Args:
         dataset: Dataset used for sampling.

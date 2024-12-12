@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 model = dict(
     type='DBNet',
     backbone=dict(
@@ -15,17 +17,7 @@ model = dict(
     bbox_head=dict(
         type='DBHead',
         in_channels=256,
-        loss=dict(type='DBLoss', alpha=5.0, beta=10.0, bbce_loss=False),
+        loss=dict(type='DBLoss', alpha=5.0, beta=10.0, bbce_loss=True),
         postprocessor=dict(type='DBPostprocessor', text_repr_type='quad')),
     train_cfg=None,
     test_cfg=None)
-
-
-
-# backbone=dict(
-#         type='MobileNetV3',
-#         arch='small',
-#         out_indices=(0, 1, 12),
-#         norm_cfg=dict(type='BN', requires_grad=True),
-#         init_cfg=dict(type='Pretrained', checkpoint='open-mmlab://contrib/mobilenet_v3_small')
-#         ),

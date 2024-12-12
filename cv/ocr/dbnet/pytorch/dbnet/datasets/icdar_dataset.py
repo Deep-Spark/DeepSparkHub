@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import dbnet_cv
 import numpy as np
@@ -40,7 +42,7 @@ class IcdarDataset(CocoDataset):
         super().__init__(ann_file, pipeline, classes, data_root, img_prefix,
                          seg_prefix, proposal_file, test_mode, filter_empty_gt)
 
-        # Set dummy flags just to be compatible with dbnet_det
+        # Set dummy flags just to be compatible with MMDet
         self.flag = np.zeros(len(self), dtype=np.uint8)
 
     def load_annotations(self, ann_file):

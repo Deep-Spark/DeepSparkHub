@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import os.path as osp
 
@@ -49,7 +51,7 @@ class LoadImageFromFile:
         """Call functions to load image and get image meta information.
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded image and meta information.
@@ -154,7 +156,7 @@ class LoadMultiChannelImageFromFiles:
         information.
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded images and meta information.
@@ -246,7 +248,7 @@ class LoadAnnotations:
         """Private function to load bounding box annotations.
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded bounding box annotations.
@@ -278,7 +280,7 @@ class LoadAnnotations:
         """Private function to load label annotations.
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded label annotations.
@@ -335,7 +337,7 @@ class LoadAnnotations:
         """Private function to load mask annotations.
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded mask annotations.
@@ -381,7 +383,7 @@ class LoadAnnotations:
         """Call function to load multiple types annotations.
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded bounding box, label, mask and
@@ -458,7 +460,7 @@ class LoadPanopticAnnotations(LoadAnnotations):
         `num_things + num_stuff - 1`, 255 means the ignored label (`VOID`).
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded mask and semantic segmentation
@@ -501,7 +503,7 @@ class LoadPanopticAnnotations(LoadAnnotations):
         """Call function to load multiple types panoptic annotations.
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded bounding box, label, mask and
@@ -540,7 +542,7 @@ class LoadProposals:
         """Call function to load proposals from file.
 
         Args:
-            results (dict): Result dict from :obj:`dbnet_det.CustomDataset`.
+            results (dict): Result dict from :obj:`mmdet.CustomDataset`.
 
         Returns:
             dict: The dict contains loaded proposal annotations.

@@ -1,15 +1,17 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import warnings
 
 from dbnet_det.models.detectors import \
-    SingleStageDetector as dbnet_det_SingleStageDetector
+    SingleStageDetector as MMDET_SingleStageDetector
 
 from dbnet.models.builder import (DETECTORS, build_backbone, build_head,
                                   build_neck)
 
 
 @DETECTORS.register_module()
-class SingleStageDetector(dbnet_det_SingleStageDetector):
+class SingleStageDetector(MMDET_SingleStageDetector):
     """Base class for single-stage detectors.
 
     Single-stage detectors directly and densely predict bounding boxes on the
@@ -24,7 +26,7 @@ class SingleStageDetector(dbnet_det_SingleStageDetector):
                  test_cfg=None,
                  pretrained=None,
                  init_cfg=None):
-        super(dbnet_det_SingleStageDetector, self).__init__(init_cfg=init_cfg)
+        super(MMDET_SingleStageDetector, self).__init__(init_cfg=init_cfg)
         if pretrained:
             warnings.warn('DeprecationWarning: pretrained is deprecated, '
                           'please use "init_cfg" instead')
