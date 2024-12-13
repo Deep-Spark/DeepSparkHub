@@ -1,5 +1,3 @@
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 import bisect
 import os.path as osp

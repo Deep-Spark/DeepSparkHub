@@ -1,5 +1,3 @@
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 from .backbones import *  # noqa: F401,F403
 from .builder import (BACKBONES, DETECTORS, HEADS, LOSSES, NECKS,

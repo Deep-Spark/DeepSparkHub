@@ -1,5 +1,3 @@
-# Copyright (c) 2023-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 # Copyright (c) Open-MMLab. All rights reserved.
 import os.path as osp
 import platform

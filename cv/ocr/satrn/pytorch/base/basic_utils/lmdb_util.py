@@ -46,7 +46,3 @@ def lmdb_converter(img_list_file, output, batch_size=1000, coding='utf-8'):
         value = str(len(lines)).encode(coding)
         txn.put(key, value)
     print('done', flush=True)
-
-
-
-

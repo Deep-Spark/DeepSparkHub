@@ -21,5 +21,5 @@ __all__ = [
     'equal_len', 'is_2dlist', 'valid_boundary', 'lmdb_converter',
     'drop_orientation', 'convert_annotations', 'is_not_png', 'list_to_file',
     'list_from_file', 'is_on_same_line', 'stitch_boxes_into_lines',
-    'StringStrip', 'revert_sync_batchnorm' 
+    'StringStrip', 'revert_sync_batchnorm'
 ]
