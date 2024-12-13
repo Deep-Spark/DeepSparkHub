@@ -56,15 +56,15 @@ assert (dbnet_cv_version >= digit_version(dbnet_cv_minimum_version)
     f'Please use DBNET_CV >= {dbnet_cv_minimum_version}, ' \
     f'<= {dbnet_cv_maximum_version} instead.'
 
-# dbnet_det_minimum_version = '2.21.0'
-# dbnet_det_maximum_version = '3.0.0'
-# dbnet_det_version = digit_version(dbnet_det.__version__)
+# mmdet_minimum_version = '2.21.0'
+# mmdet_maximum_version = '3.0.0'
+# mmdet_version = digit_version(mmdet.__version__)
 
-# assert (dbnet_det_version >= digit_version(dbnet_det_minimum_version)
-#         and dbnet_det_version <= digit_version(dbnet_det_maximum_version)), \
-#     f'dbnet_detection {dbnet_det.__version__} is incompatible ' \
+# assert (mmdet_version >= digit_version(mmdet_minimum_version)
+#         and mmdet_version <= digit_version(mmdet_maximum_version)), \
+#     f'MMDetection {mmdet.__version__} is incompatible ' \
 #     f'with MMOCR {__version__}. ' \
-#     f'Please use dbnet_detection >= {dbnet_det_minimum_version}, ' \
-#     f'<= {dbnet_det_maximum_version} instead.'
+#     f'Please use MMDetection >= {mmdet_minimum_version}, ' \
+#     f'<= {mmdet_maximum_version} instead.'
 
 __all__ = ['__version__', 'short_version', 'digit_version']

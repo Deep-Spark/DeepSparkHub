@@ -85,7 +85,6 @@ class DBHead(HeadMixin, BaseModule):
 
     def _init_thr(self, inner_channels, bias=False):
         in_channels = inner_channels
-        
         seq = Sequential(
             nn.Conv2d(
                 in_channels, inner_channels // 4, 3, padding=1, bias=bias),

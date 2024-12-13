@@ -1,5 +1,4 @@
-# Copyright (c) 2022-2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
+# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 import datetime

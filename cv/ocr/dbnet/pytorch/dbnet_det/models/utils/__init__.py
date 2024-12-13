@@ -1,5 +1,3 @@
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 # from .brick_wrappers import AdaptiveAvgPool2d, adaptive_avg_pool2d
 # from .builder import build_linear_layer, build_transformer

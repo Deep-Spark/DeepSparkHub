@@ -1,6 +1,5 @@
+# Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
-# Copyright (c) 2022, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 import math
 import sys
