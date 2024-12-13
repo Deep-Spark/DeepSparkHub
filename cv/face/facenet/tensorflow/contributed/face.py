@@ -3,8 +3,6 @@
 # MIT License
 #
 # Copyright (c) 2017 François Gervais
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 #
 # This is the work of David Sandberg and shanren7 remodelled into a
 # high level container. It's an attempt to simplify the use of such
