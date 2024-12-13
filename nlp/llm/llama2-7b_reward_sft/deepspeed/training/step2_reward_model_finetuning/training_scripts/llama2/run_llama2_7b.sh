@@ -1,7 +1,5 @@
 #!/bin/bash
 # Copyright (c) Microsoft Corporation.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
 # DeepSpeed Team
@@ -15,10 +13,10 @@ if [ "$ZERO_STAGE" == "" ]; then
 fi
 mkdir -p $OUTPUT
 
-deepspeed ../../main.py \
-   --data_path "../../../../datasets/Dahoas/rm-static/" \
+deepspeed main.py \
+   --data_path Dahoas/rm-static \
    --data_split 2,4,4 \
-   --model_name_or_path "../../../../datasets/Llama-2-7b-hf/" \
+   --model_name_or_path meta-llama/Llama-2-7b-hf \
    --per_device_train_batch_size 8 \
    --per_device_eval_batch_size 8 \
    --max_seq_len 512 \
@@ -33,6 +31,6 @@ deepspeed ../../main.py \
    --gradient_checkpointing \
    --zero_stage $ZERO_STAGE \
    --deepspeed \
-   --output_dir $OUTPUT \
    --offload \
-   |& tee $OUTPUT/training.log
+   --output_dir $OUTPUT \
+   &> $OUTPUT/training.log
