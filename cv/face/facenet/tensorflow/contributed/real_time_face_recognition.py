@@ -6,8 +6,6 @@ Based on code from https://github.com/shanren7/real_time_face_recognition
 # MIT License
 #
 # Copyright (c) 2017 François Gervais
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
