@@ -4,62 +4,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ## 模型列表
 
-- Computer Vision
-
-  - [Classification](#classification)
-  - [Face Detection](#face-detection)
-  - [Face Recognition](#face-recognition)
-  - [Instance Segmentation](#instance-segmentation)
-  - [Knowledge Distillation](#knowledge-distillation)
-  - [Network Pruning](#network-pruning)
-  - [Object Detection](#object-detection)
-  - [3D Object Detection](#3d-object-detection)
-  - [OCR](#ocr)
-  - [Point Cloud](#point-cloud)
-  - [Pose Estimation](#pose-estimation)
-  - [Self-Supervised Learning](#self-supervised-learning)
-  - [Semantic Segmentation](#semantic-segmentation)
-  - [Super Resolution](#super-resolution)
-  - [Tracking](#tracking)
-  - [Traffic Forecast](#traffic-forecast)
-
-- Graph Neural Network (GNN)
-
-  - [Graph Attention](#graph-attention)
-  - [Node Classification](#node-classification)
-  - [Text Classification](#text-classification)
-
-- High Performance Computing (HPC)
-
-  - [Molecular Dynamics](#molecular-dynamics)
-
-- [Multimodal](#multimodal)
-
-- Natural Language Processing (NLP)
-
-  - [Cloze Test](#cloze-test)
-  - [Dialogue Generation](#dialogue-generation)
-  - [Language Modeling](#language-modeling)
-  - [Large Language Model (LLM)](#large-language-model-llm)
-  - [Text Correction](#text-correction)
-  - [Translation](#translation)
-
-- Recommendation
-
-  - [Collaborative Filtering](#collaborative-filtering)
-  - [Click Through Rate](#click-through-rate)
-
-- [Reinforcement Learning](#reinforcement-learning)
-
-- Speech
-
-  - [Speech Recognition](#speech-recognition)
-  - [Speech Synthesis](#speech-synthesis)
-
-- [3D Reconstruction](#3d-reconstruction)
-
---------
-
 ### Computer Vision
 
 #### Classification
@@ -197,6 +141,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Faster R-CNN](cv/detection/fasterrcnn/pytorch/README.md)  | PyTorch | COCO
 [FCOS](cv/detection/fcos/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [FCOS](cv/detection/fcos/pytorch/README.md)  | PyTorch | COCO
+[Mamba-YOLO](cv/detection/mamba_yolo/pytorch/README.md)  | PyTorch | COCO
 [Mask R-CNN](cv/detection/maskrcnn/pytorch/README.md)  | PyTorch | COCO
 [Mask R-CNN](cv/detection/maskrcnn/paddlepaddle/README.md)  | PaddlePaddle | COCO
 [OC_SORT](cv/detection/oc_sort/paddlepaddle/README.md)  | PaddlePaddle | MOT17
@@ -388,6 +333,14 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 -------- | ------ | ----
 [Water/se_e2_a](hpc/molecular_dynamics/water_se_e2_a/tensorflow/README.md)  | TensorFlow (DeePMD-kit) | data_water
 
+###  Methodology
+
+#### Kolmogorov-Arnold Networks
+
+模型名称 | 框架 | 数据集
+-------- | ------ | ----
+[KAN](methodology/kolmogorov_arnold_networks/kan/pytorch/README.md)  | PyTorch | -
+
 ### Multimodal
 
 模型名称 | 框架 | 数据集
@@ -396,7 +349,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [CLIP](multimodal/Language-Image_Pre-Training/clip/pytorch/README.md)  | PyTorch | CIFAR100
 [ControlNet](multimodal/diffusion/ControlNet/README.md)  | PyTorch | Fill50K
 [DDPM](multimodal/diffusion/ddpm/README.md)  | PyTorch | CIFAR-10
-[LLaVA](multimodal/llava/pytorch/README.md)  | PyTorch | LLaVA-Pretrain
+[LLaVA 1.5](multimodal/llava/pytorch/README.md)  | PyTorch | LLaVA-Pretrain
 [L-Verse](multimodal/Language-Image_Pre-Training/L-Verse/pytorch/README.md)  | PyTorch | ImageNet
 [Stable Diffusion 1.4](multimodal/diffusion/stable-diffusion/training/README.md)  | PyTorch | pokemon-images
 [Stable Diffusion 1.5](multimodal/diffusion/stable-diffusion/sd_1.5/README.md)  | PyTorch | pokemon-images
@@ -445,6 +398,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm-6b
 [ChatGLM2-6B SFT](nlp/llm/ChatGLM2-6b-sft/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm2-6b
 [ChatGLM3-6B](nlp/llm/chatglm3-6b/deepspeed/finetune_demo/README.md)  | PyTorch (DeepSpeed) | ADGEN & chatglm3-6b
+[DeepSeekMoE 7B](nlp/llm/deepseek_moe_7b/colossalai/README.md)  | PyTorch (ColossalAI) | deepseek-moe-16b-base
 [Llama-7B](nlp/llm/llama-7b/colossalai/README.md)  | PyTorch (Colossal-AI) | llama-7b-hf
 [Llama2-7B](nlp/llm/llama2-7b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
 [Llama2-7B Reward Model Finetuning](nlp/llm/llama2-7b_reward_sft/deepspeed/README.md)  | PyTorch (DeepSpeed) | Dahoas/rm-static
@@ -452,11 +406,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Llama2-7B SFT](nlp/llm/llama2-7b_sft/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | gpt_small-117M
 [Llama2-13B](nlp/llm/llama2-13b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
 [Llama2-34B](nlp/llm/llama2-34b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
-[Llama3-8B](nlp/llm/llama3-8b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
+[Llama3-8B](nlp/llm/llama3_8b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
+[Llama3-8B SFT](nlp/llm/llama3_8b/ColossalAI/applications/Colossal-LLaMA/README.md)  | PyTorch (ColossalAI) | school_math_0.25M
 [QWen-7B](nlp/llm/qwen-7b/firefly/README.md)  | PyTorch (Firefly) | qwen-7b
 [QWen1.5-7B](nlp/llm/qwen1.5-7b/firefly/README.md)  | PyTorch (Firefly) | school_math
 [QWen1.5-14B](nlp/llm/qwen1.5-14b/firefly/README.md)  | PyTorch (Firefly) | school_math
-[QWen2.5-7B](nlp/llm/qwen2.5-7b/LLaMA-Factory/README.md)  | PyTorch (LLaMA-Factory) | qwen2.5-7b
+[Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/LLaMA-Factory/README.md)  | PyTorch (LLaMA-Factory) | qwen2.5-7b
 
 #### Text Correction
 
