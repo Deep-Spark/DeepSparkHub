@@ -392,7 +392,7 @@ class PipelineModule(nn.Module):
         else:
             activation_checkpoint_interval = self.activation_checkpoint_interval
         checkpoint_num_layers = 0
-        if activation_checkpoint_interval == 0:
+        if (activation_checkpoint_interval == 0) or (self.activation_checkpoint_interval == 0):
             func = exec_range_func(0, len(self.forward_funcs))
             x = func(forward_input)
         else:
