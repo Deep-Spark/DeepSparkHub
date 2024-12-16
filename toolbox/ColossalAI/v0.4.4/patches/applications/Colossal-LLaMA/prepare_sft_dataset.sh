@@ -10,7 +10,7 @@ mkdir -p $DATA_INPUT_DIRS
 
 if [[ ! -f $DATA_INPUT_DIRS"school_math_0.25M_convert.jsonl" ]]; then
     if [[ ! -f $DATA_INPUT_DIRS"../school_math_0.25M.jsonl" ]]; then
-        wget http://sw.iluvatar.ai/download/apps/llm-modelzoo/dataset/school_math_0.25M.jsonl
+        wget http://files.deepspark.org.cn:880/deepspark/school_math_0.25M.jsonl
         mv school_math_0.25M.jsonl $DATA_INPUT_DIRS"../"
     fi
 
