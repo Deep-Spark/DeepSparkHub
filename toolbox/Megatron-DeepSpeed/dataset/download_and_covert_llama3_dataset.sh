@@ -3,7 +3,7 @@ set -euox pipefail
 
 CUR_DIR=$(pwd)
 if [[ ! -f $CUR_DIR/small-117M.train.jsonl ]]; then
-    wget http://10.150.9.95/swapp/datasets/nlp/gpt-2-output-dataset/small-117M.train.jsonl
+    wget http://files.deepspark.org.cn:880/deepspark/small-117M.train.jsonl
 fi
 
 PROJ_HOME=$(dirname "$PWD")
