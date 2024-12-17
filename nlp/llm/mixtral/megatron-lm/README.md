@@ -1,4 +1,4 @@
-# Mixtral （Megatron-LM)
+# Mixtral 8x7B (Megatron-LM)
 
 ## Model description
 
