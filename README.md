@@ -403,11 +403,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Llama2-7B](nlp/llm/llama2-7b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
 [Llama2-7B Reward Model Finetuning](nlp/llm/llama2-7b_reward_sft/deepspeed/README.md)  | PyTorch (DeepSpeed) | Dahoas/rm-static
 [Llama2-7B RLHF](nlp/llm/llama2-7b_rlhf/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | llama2-7b&tiny-llama
-[Llama2-7B SFT](nlp/llm/llama2-7b_sft/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | gpt_small-117M
+[Llama2-7B SFT](nlp/llm/llama2-7b_sft/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | GPT Small-117M
 [Llama2-13B](nlp/llm/llama2-13b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
 [Llama2-34B](nlp/llm/llama2-34b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
 [Llama3-8B](nlp/llm/llama3_8b/megatron-deepspeed/README.md)  | PyTorch (Megatron-DeepSpeed) | Bookcorpus
 [Llama3-8B SFT](nlp/llm/llama3_8b/ColossalAI/applications/Colossal-LLaMA/README.md)  | PyTorch (ColossalAI) | school_math_0.25M
+[Mamba-2](nlp/llm/mamba-2/megatron-lm/README.md)  | PyTorch (Megatron-LM) | GPT Small-117M
+[Mixtral 8x7B](nlp/llm/mixtral/megatron-lm/README.md)  | PyTorch (Megatron-LM) | GPT Small-117M
 [QWen-7B](nlp/llm/qwen-7b/firefly/README.md)  | PyTorch (Firefly) | qwen-7b
 [QWen1.5-7B](nlp/llm/qwen1.5-7b/firefly/README.md)  | PyTorch (Firefly) | school_math
 [QWen1.5-14B](nlp/llm/qwen1.5-14b/firefly/README.md)  | PyTorch (Firefly) | school_math
