@@ -1,5 +1,60 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 24.12 Release Notes
+
+### 特性和增强
+
+#### 模型与算法
+
+* 新增了4个PyTorch训练模型，其中2个为Multimodal模型
+* 新增了5个大模型训练示例，涉及ColossalAI，Megatron-LM和LLaMA-Factory
+
+<table>
+    <tr align="left"><th colspan=5>PyTorch</th></tr>
+    <tr>
+        <td>KAN</td>
+        <td>Mamba-YOLO</td>
+        <td>LLaVA 1.5</td>
+    </tr>
+    <tr>
+        <td>Stable Diffusion 3</td>
+        <td></td>
+        <td></td>
+    </tr>
+        <tr align="left"><th colspan=5>大模型</th></tr>
+    <tr>
+        <td>DeepSeek MoE 7B (ColossalAI)</td>
+        <td>Llama3-8B SFT (ColossalAI)</td>
+        <td>Mamba-2 (Megatron-LM)</td>
+    </tr>
+    <tr>
+        <td>Mixtral 8x7B (Megatron-LM)</td>
+        <td>Qwen2.5-7B SFT (LLaMA-Factory)</td>
+        <td></td>
+    </tr>
+</table>
+
+### 问题修复
+
+* 更新了Llama2-7B (Megatron-DeepSpeed)模型的数据集链接。
+* 同步了DBNet、Fast R-CNN和GoogLeNet等PyTorch模型的代码。
+* 同步了BERT Base、FaceNet和ResNet50等TensorFlow模型的代码。
+* 同步了ClossalAI、Megatron-DeepSpeed和OpenPCDet工具箱的代码。
+
+### 版本关联
+
+DeepSparkHub 24.12对应天数软件栈4.1.1版本。
+
+### 贡献者
+
+感谢以下人员做出的贡献：
+
+李一力，sanghui-ilu，majorli6，honglyua，吴永乐。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
+---
+
 ## DeepSparkHub 24.09 Release Notes
 
 ### 特性和增强
