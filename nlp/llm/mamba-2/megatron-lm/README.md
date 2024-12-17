@@ -36,4 +36,4 @@ bash train.sh
 
 ## Reference
 
-- [Megatron-LM](https://github.com/NVIDIA/Megatron-LM/tree/main/examples/mixtral)
+- [Megatron-LM](https://github.com/NVIDIA/Megatron-LM/tree/main/examples/mamba)
