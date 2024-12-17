@@ -12,7 +12,7 @@ pip3 uninstall -y megatron-lm
 
 # clone and install
 git clone https://github.com/NVIDIA/Megatron-LM.git
-cd Megatron-LM/ && git checkout bd677bfb13ac2f19deaa927adc6da6f9201d66aa
+(cd Megatron-LM/ && git checkout bd677bfb13ac2f19deaa927adc6da6f9201d66aa)
 ## apply patch
 cp -r -T ../../../../toolbox/Megatron-LM/patch ./Megatron-LM/
 ## install
