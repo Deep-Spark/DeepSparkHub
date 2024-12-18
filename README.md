@@ -507,6 +507,14 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 请参见 [DeepSparkHub Contributing Guidelines](CONTRIBUTING.md)。
 
+### 免责声明
+
+DeepSparkHub仅提供公共数据集的下载和预处理脚本。这些数据集不属于DeepSparkHub，DeepSparkHub也不对其质量或维护负责。请确保您具有这些数据集的使用许可，基于这些数据集训练的模型仅可用于非商业研究和教育。
+
+致数据集所有者：
+
+如果不希望您的数据集公布在DeepSparkHub上或希望更新DeepSparkHub中属于您的数据集，请在Gitee或Github上提交issue，我们将按您的issue删除或更新。衷心感谢您对我们社区的支持和贡献。
+
 ## 许可证
 
 本项目许可证遵循[Apache-2.0](LICENSE)。
