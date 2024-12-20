@@ -15,7 +15,9 @@ apt install -y libgl1-mesa-dev
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Preparing datasets
+## Step 2: Preparing datasets and model
+
+Download from https://download.pytorch.org/models/resnet50-0676ba61.pth and mv to /root/.cache/torch/hub/checkpoints/
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
@@ -48,13 +50,13 @@ ln -s /path/to/coco2017 ./datasets/coco
 ## Step 3: Training
 
 ### Single Card
-python train.py --data-path ./datasets/coco --dataset coco --model maskrcnn_resnet50_fpn --lr 0.001 --batch-size 4
+python3 train.py --data-path ./datasets/coco --dataset coco --model maskrcnn_resnet50_fpn --lr 0.001 --batch-size 4
 
 ### AMP 
-python train.py --data-path ./datasets/coco --dataset coco --model maskrcnn_resnet50_fpn --lr 0.001 --batch-size 1 --amp
+python3 train.py --data-path ./datasets/coco --dataset coco --model maskrcnn_resnet50_fpn --lr 0.001 --batch-size 1 --amp
 
 ### DDP
 ```
-python -m torch.distributed.launch --nproc_per_node=8 --use_env train.py\
+python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py\
     --data-path ./datasets/coco --dataset coco --model maskrcnn_resnet50_fpn --wd 0.000001 --lr 0.001 --batch-size 4
 ```
