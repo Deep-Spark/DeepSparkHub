@@ -8,6 +8,12 @@ Scene text recognition (STR) is the task of recognizing character sequences in n
 ## Step 1: Installation
 
 ```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-dev
+
 cd /satrn/pytorch/base/csrc
 bash clean.sh
 bash build.sh
