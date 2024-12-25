@@ -21,6 +21,13 @@ pip3 install urllib3==1.26.15
 yum install -y mesa-libGL
 ```
 
+### (3) download repo
+```bash
+git clone https://github.com/Sense-X/Co-DETR.git
+cd /path/to/Co-DETR
+git checkout bf3d49d7c02929788dfe2f251b6b01cbe196b736
+```
+
 ## Step 2: Preparing datasets
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
@@ -57,7 +64,7 @@ ln -s /path/to/coco ./data
 ```bash
 # One GPU
 export CUDA_VISIBLE_DEVICES=0
-python3 train.py projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_coco.py --work-dir path_to_exp --no-validate --auto-resume
+python3 tools/train.py projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_coco.py --work-dir path_to_exp --no-validate --auto-resume
 
 # Eight GPUs
 bash tools/dist_train.sh projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_coco.py 8 path_to_exp --no-validate --auto-resume
