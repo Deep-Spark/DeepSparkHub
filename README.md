@@ -207,7 +207,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
-[Point-BERT](cv/point_cloud/Point-BERT/pytorch/README.md) | PyTorch | ShapeNet55 & processed ModelNet
+[Point-BERT](cv/point_cloud/point-bert/pytorch/README.md) | PyTorch | ShapeNet55 & processed ModelNet
 
 #### Pose Estimation
 
