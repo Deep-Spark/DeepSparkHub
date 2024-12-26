@@ -29,6 +29,9 @@ imagenet
 ## Step 2: Training
 ### Multiple GPUs on one machine
 ```bash
+git clone https://github.com/facebookresearch/ConvNeXt.git
+cd /path/to/ConvNeXt
+git checkout 048efcea897d999aed302f2639b6270aedf8d4c8
 python3 -m torch.distributed.launch --nproc_per_node=8 main.py \
                                     --model convnext_tiny \
                                     --drop_path 0.1 \

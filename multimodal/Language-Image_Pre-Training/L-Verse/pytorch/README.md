@@ -32,10 +32,12 @@ imagenet
 
 ## Step 3: Training AugVAE(AugVAE-ML)
 
-```
-$ cd /path/to/L-Verse/pytorch
-$ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 
-$ python3 train_vae.py --config ./configs/imagenet_augvae_ml.yaml --train_dir /path/to/imagenet/train --val_dir /path/to/imagenet/val --gpus 8 --batch_size 4 --epochs 2
+```bash
+git clone https://github.com/tgisaturday/L-Verse.git
+cd /path/to/L-Verse/pytorch
+git checkout 504a6bf740812bdd2022f31f969968ec31794033
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 
+python3 train_vae.py --config ./configs/imagenet_augvae_ml.yaml --train_dir /path/to/imagenet/train --val_dir /path/to/imagenet/val --gpus 8 --batch_size 4 --epochs 2
 ```
 
 ## Reference
