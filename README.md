@@ -384,7 +384,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [BERT Text Classification](nlp/text_classification/bert/pytorch/README.md) |PyTorch | GLUE
 [BERT Text Summerization](nlp/text_summarisation/bert/pytorch/README.md) | PyTorch | cnn_dailymail
 [BERT Question Answering](nlp/question_answering/bert/pytorch/README.md) | PyTorch | SQuAD
-[GPT2-Medium-EN](nlp/llm/GPT/paddlepaddle/README.md) | PaddlePaddle | SST-2
+[GPT2-Medium-EN](nlp/llm/gpt2-medium-en/paddlepaddle/README.md) | PaddlePaddle | SST-2
 [RoBERTa](nlp/language_model/roberta_fairseq/pytorch/README.md) | PyTorch (Fairseq) | RTE
 [XLNet](nlp/language_model/xlnet/paddlepaddle/README.md) | PaddlePaddle | SST-2
 
@@ -453,7 +453,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
-[DQN](reinforcement_learning/DQN/paddlepaddle/README.md) | PaddlePaddle | CartPole-v0
+[DQN](reinforcement_learning/q-learning-networks/dqn/paddlepaddle/README.md) | PaddlePaddle | CartPole-v0
 
 ### Speech
 
@@ -483,7 +483,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
-[HashNeRF](3d-reconstruction/ngp-nerf/pytorch/README.md) | PyTorch | fox
+[HashNeRF](3d-reconstruction/hashnerf/pytorch/README.md) | PyTorch | fox
 
 --------
 
