@@ -19,11 +19,11 @@ set -euox pipefail
 
 CUR_DIR=$(pwd)
 if [[ ! -f $CUR_DIR/small-117M.train.jsonl ]]; then
-    wget http://files.deepspark.org.cn:880/deepspark/small-117M.train.jsonl
+    wget http://files.deepspark.org.cn:880/deepspark/data/datasets/small-117M.train.jsonl
 fi
 
 if [[ ! -f $CUR_DIR/tokenizer.model ]]; then
-    wget -O tokenizer.model http://files.deepspark.org.cn:880/deepspark/megatron-lm_tokenizer.model
+    wget -O tokenizer.model http://files.deepspark.org.cn:880/deepspark/data/tokenizer/megatron-lm_tokenizer.model
 fi
 
 PROJ_HOME=$(dirname "$PWD")

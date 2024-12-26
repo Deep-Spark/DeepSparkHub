@@ -31,7 +31,7 @@ pip3 install --upgrade https://github.com/unlimblue/KNN_CUDA/releases/download/0
 cd data/ShapeNet55-34
 
 if [[ ! -f "ShapeNet55.zip" ]]; then
-    wget http://files.deepspark.org.cn:880/deepspark/ShapeNet55.zip
+    wget http://files.deepspark.org.cn:880/deepspark/data/datasets/ShapeNet55.zip
     unzip ShapeNet55.zip
     mv ShapeNet55/shapenet_pc/ .
     rm -r ShapeNet55
@@ -42,7 +42,7 @@ cd -
 cd ./data/ModelNet/modelnet40_normal_resampled
 
 if [[ ! -f "processed_ModelNet.zip" ]]; then
-    wget http://files.deepspark.org.cn:880/deepspark/processed_ModelNet.zip
+    wget http://files.deepspark.org.cn:880/deepspark/data/datasets/processed_ModelNet.zip
     unzip processed_ModelNet.zip
     mv processed_ModelNet/* .
 fi

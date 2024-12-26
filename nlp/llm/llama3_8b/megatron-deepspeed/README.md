@@ -20,7 +20,7 @@ pip3 install urllib3==1.23
 ```bash
 pushd dataset
 # get gpt_small_117M_llama3.tar
-wget http://files.deepspark.org.cn:880/deepspark/gpt_small_117M_llama3.tar
+wget http://files.deepspark.org.cn:880/deepspark/data/datasets/gpt_small_117M_llama3.tar
 tar -xf gpt_small_117M_llama3.tar
 rm -f gpt_small_117M_llama3.tar
 popd
