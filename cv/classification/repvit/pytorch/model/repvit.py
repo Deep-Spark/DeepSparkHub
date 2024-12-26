@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 import torch.nn as nn
 
 def _make_divisible(v, divisor, min_value=None):

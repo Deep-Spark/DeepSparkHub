@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 import torch.nn as nn
 from torch.autograd import Function
 from torch.autograd.function import once_differentiable

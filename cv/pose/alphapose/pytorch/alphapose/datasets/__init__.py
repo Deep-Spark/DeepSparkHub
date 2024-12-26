@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 from .coco_det import Mscoco_det
 from .concat_dataset import ConcatDataset
 from .custom import CustomDataset

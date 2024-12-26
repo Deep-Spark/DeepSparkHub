@@ -1,3 +1,5 @@
+/* Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd. */
+/* All Rights Reserved. */
 /**********************************
  * Original Author: Haoqiang Fan
  * Modified by: Kaichun Mo

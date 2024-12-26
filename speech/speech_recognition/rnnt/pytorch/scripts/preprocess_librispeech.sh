@@ -1,3 +1,6 @@
+#!/bin/bash
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
 # Copyright (c) 2019-2020, NVIDIA CORPORATION. All rights reserved.
 #
@@ -13,7 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/usr/bin/env bash
 
 DATA_DIR=$1
 

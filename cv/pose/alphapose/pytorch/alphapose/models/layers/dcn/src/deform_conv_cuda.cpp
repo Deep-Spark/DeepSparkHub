@@ -1,3 +1,5 @@
+/* Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd. */
+/* All Rights Reserved. */
 // modify from
 // https://github.com/chengdazhi/Deformable-Convolution-V2-PyTorch/blob/mmdetection/mmdet/ops/dcn/src/deform_conv_cuda.c
 

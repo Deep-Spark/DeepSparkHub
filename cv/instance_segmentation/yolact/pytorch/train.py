@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 from data import *
 from utils.augmentations import SSDAugmentation, BaseTransform
 from utils.functions import MovingAverage, SavePath
