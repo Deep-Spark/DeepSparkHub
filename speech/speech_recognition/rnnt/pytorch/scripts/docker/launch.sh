@@ -1,3 +1,6 @@
+#!/bin/bash
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) 2019-2020, NVIDIA CORPORATION. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +16,6 @@
 # limitations under the License.
 
 
-#!/bin/bash
 
 LOG_DIR=$1
 

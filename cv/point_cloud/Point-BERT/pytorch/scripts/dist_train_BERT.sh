@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 
 set -x
 NGPUS=$1

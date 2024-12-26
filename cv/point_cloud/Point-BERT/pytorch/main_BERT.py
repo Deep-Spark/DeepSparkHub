@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 from sklearn.svm import LinearSVC
 from tools import BERT_pretrain_run_net as pretrain
 from tools import BERT_finetune_run_net as finetune

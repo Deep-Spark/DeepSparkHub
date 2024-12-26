@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # 2022.02.14-Changed for main script for wavemlp model
 #            Huawei Technologies Co., Ltd. <foss@huawei.com>
 #!/usr/bin/env python

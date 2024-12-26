@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 """
 reference
 - https://github.com/pytorch/vision/blob/main/references/detection/utils.py

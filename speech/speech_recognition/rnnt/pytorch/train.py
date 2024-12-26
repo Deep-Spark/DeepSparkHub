@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) 2022 Iluvatar CoreX. All rights reserved.
 # Copyright (c) 2019-2020, NVIDIA CORPORATION. All rights reserved.
 #

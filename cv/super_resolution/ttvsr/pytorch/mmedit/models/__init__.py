@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 from .backbones import *  # noqa: F401, F403
 from .base import BaseModel
 from .builder import (build, build_backbone, build_component, build_loss,

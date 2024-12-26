@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 from .fastpose import FastPose
 # from .fastpose_duc import FastPose_DUC
 from .hrnet import PoseHighResolutionNet
