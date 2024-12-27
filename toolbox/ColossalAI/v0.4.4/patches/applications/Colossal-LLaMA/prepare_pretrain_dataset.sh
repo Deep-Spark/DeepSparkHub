@@ -6,7 +6,7 @@ CUR_DIR=$(cd "$(dirname "$0")";pwd)
 cd ${CUR_DIR}
 
 if [[ ! -f $CUR_DIR/small-117M.train.jsonl ]]; then
-    wget http://files.deepspark.org.cn:880/deepspark/small-117M.train.jsonl
+    wget http://files.deepspark.org.cn:880/deepspark/data/datasets/small-117M.train.jsonl
 fi
 
 DATA_INPUT_DIRS=$CUR_DIR

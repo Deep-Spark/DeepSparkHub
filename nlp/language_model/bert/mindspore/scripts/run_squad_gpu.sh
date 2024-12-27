@@ -34,7 +34,7 @@ mkdir -p squad
 training_tf_record_file=squad/train.tf_record
 if [[ ! -f "${training_tf_record_file}" ]]; then
   cd squad
-  wget http://files.deepspark.org.cn:880/deepspark/squad_data_with_tf_record.tar
+  wget http://files.deepspark.org.cn:880/deepspark/data/datasets/squad_data_with_tf_record.tar
   tar xvf squad_data_with_tf_record.tar
   rm -rf squad_data_with_tf_record.tar
   cd -

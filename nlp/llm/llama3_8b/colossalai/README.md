@@ -13,7 +13,7 @@ One recommended link: "<https://modelscope.cn/models/LLM-Research/Meta-Llama-3-8
 mkdir -p /home/model_zoos/
 mv <Path>/Meta-Llama-3-8B /home/model_zoos/
 
-wget http://files.deepspark.org.cn:880/deepspark/tokenizer.model
+wget http://files.deepspark.org.cn:880/deepspark/data/tokenizer/tokenizer.model
 cp tokenizer.model /home/model_zoos/Meta-Llama-3-8B
 ```
 
@@ -29,7 +29,7 @@ cd applications/Colossal-LLaMA
 pip3 install -e . 
 
 # preparing datasets
-wget http://files.deepspark.org.cn:880/deepspark/school_math_0.25M.jsonl
+wget http://files.deepspark.org.cn:880/deepspark/data/datasets/school_math_0.25M.jsonl
 mkdir -p dataset/school_math/convert/
 mv school_math_0.25M.jsonl dataset/school_math
 bash ./prepare_sft_dataset.sh llama3
