@@ -30,6 +30,7 @@ echo "=====Prepare mmdetection ${MMDET_VERSION} START====="
 
 git clone --depth 1 -b ${MMDET_VERSION} https://github.com/open-mmlab/mmdetection.git
 
+# configs/rtmdet reference from https://github.com/open-mmlab/mmdetection/tree/fe3f809a0a514189baf889aa358c498d51ee36cd/configs/rtmdet which is first added in v3.0.0rc1
 cp -r -T patch/mmdetection/ mmdetection/
 
 cd mmdetection/
