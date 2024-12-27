@@ -7,13 +7,22 @@ Detection identifies objects as axis-aligned boxes in an image. Most successful 
 ## Step 1: Installing packages
 
 ```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
 pip3 install -r requirements.txt
+git clone https://github.com/xingyizhou/CenterNet.git
+git checkout 4c50fd3a46bdf63dbf2082c5cbb3458d39579e6c
+
 # Compile deformable convolutional(DCNv2)
 cd ./src/lib/models/networks/
+rm -rf DCNv2
 git clone -b pytorch_1.11 https://github.com/lbin/DCNv2.git
 cd ./DCNv2/
 python3 setup.py build develop
-
 ```
 
 ## Step 2: Preparing datasets
@@ -61,7 +70,6 @@ ln -s /path/to/coco2017 ./data/coco
 wget https://download.pytorch.org/models/resnet18-5c106cde.pth
 mkdir -p /root/.cache/torch/hub/checkpoints/
 mv resnet18-5c106cde.pth /root/.cache/torch/hub/checkpoints/
-
 ```
 
 ## Step 3: Training
@@ -76,16 +84,15 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
 ```bash
 cd ./cv/detection/centernet/pytorch/src
-python3 main.py ctdet --batch_size 32 --master_batch 15 --lr 1.25e-4  --gpus 0
+touch lib/datasets/__init__.py
+python3 main.py ctdet --arch res_18 --batch_size 32 --master_batch 15 --lr 1.25e-4  --gpus 0
 ```
 
 ### Multiple GPUs on one machine
 
 ```bash
-cd ./cv/detection/centernet/pytorch/src
-bash run.sh
+python3 main.py ctdet --arch res_18 --batch_size 128 --master_batch 60 --lr 1.25e-4  --gpus 0,1,2,3,4,5,6,7
 ```
 
 ## Reference
-
-https://github.com/bubbliiiing/centernet-pytorch
+https://github.com/xingyizhou/CenterNet
