@@ -11,4 +11,4 @@ PROJECT_DIR=$SCRIPT_DIR/..
 export MASTER_ADDR=127.0.0.1
 export MASTER_PORT=1001
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-bash $SCRIPT_DIR/train_resnet50_imagenet_dist_1x4_torch.sh --batch-size 480 --amp --channels-last --dali $@
+bash $SCRIPT_DIR/train_resnet50_imagenet_dist_1x4_torch.sh --batch-size 480 --amp --dali $@

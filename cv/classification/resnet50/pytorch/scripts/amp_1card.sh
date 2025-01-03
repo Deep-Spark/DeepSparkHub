@@ -9,4 +9,4 @@
 SCRIPT_DIR=$(cd `dirname $0`; pwd)
 PROJECT_DIR=$SCRIPT_DIR/..
 export CUDA_VISIBLE_DEVICES=0
-bash $SCRIPT_DIR/train_resnet50_imagenet.sh --batch-size 300 --amp --channels-last --dali $@
+bash $SCRIPT_DIR/train_resnet50_imagenet.sh --batch-size 300 --amp --dali $@
