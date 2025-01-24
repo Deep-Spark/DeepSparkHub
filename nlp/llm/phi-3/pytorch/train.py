@@ -30,6 +30,7 @@ from transformers import (
     pipeline
 )
 from trl import SFTTrainer
+from models.modeling_phi3 import Phi3ForCausalLM
 
 
 def parse_args():
@@ -105,7 +106,8 @@ def main():
     else:
         bnb_config = None
 
-    model = AutoModelForCausalLM.from_pretrained(
+    #model = AutoModelForCausalLM.from_pretrained(
+    model = Phi3ForCausalLM.from_pretrained(
             cfg.model_id, torch_dtype=compute_dtype, trust_remote_code=True, quantization_config=bnb_config,
             attn_implementation=attn_implementation)
     
@@ -125,6 +127,7 @@ def main():
             bf16 = torch.cuda.is_bf16_supported(),
             eval_steps=100,
             num_train_epochs=1,
+            # max_steps=10,
             warmup_ratio=0.1,
             lr_scheduler_type="linear",
             report_to=None,
