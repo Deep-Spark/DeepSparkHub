@@ -1,0 +1,10 @@
+transformers
+peft
+accelerate
+datasets
+trl
+python-dotenv
+absl-py
+nltk
+rouge_score
+wandb
