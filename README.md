@@ -136,7 +136,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [Co-DETR](cv/detection/co-detr/pytorch/README.md) | PyTorch | COCO
 [CornerNet](cv/detection/cornernet_mmdet/pytorch/README.md) | PyTorch (MMDetection) | COCO
 [DCNV2](cv/detection/dcnv2_mmdet/pytorch/README.md) | PyTorch (MMDetection) | COCO
-[DeepSORT](cv/tracking/deep_sort/pytorch/README.md) | PyTorch | Market-1501
 [DETR](cv/detection/detr/paddlepaddle/README.md) | PaddlePaddle | COCO
 [Faster R-CNN](cv/detection/fasterrcnn/pytorch/README.md) | PyTorch | COCO
 [FCOS](cv/detection/fcos/paddlepaddle/README.md) | PaddlePaddle | COCO
@@ -291,11 +290,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [TTSR](cv/super_resolution/ttsr/pytorch/README.md) | PyTorch | CUFED
 [TTVSR](cv/super_resolution/ttvsr/pytorch/README.md) | PyTorch | REDS
 
-#### Tracking
+#### Multi-Object Tracking
 
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
 [ByteTrack](cv/tracking/bytetrack/paddlepaddle/README.md) | PaddlePaddle | MOT17
+[DeepSORT](cv/tracking/deep_sort/pytorch/README.md) | PyTorch | Market-1501
 [FairMOT](cv/tracking/fairmot/pytorch/README.md) | PyTorch | MOT17
 
 #### Traffic Forecast
