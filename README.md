@@ -186,6 +186,15 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 [SECOND](cv/3d_detection/second/pytorch/README.md) | PyTorch | KITTI
 [SECOND-IoU](cv/3d_detection/second_iou/pytorch/README.md) | PyTorch | KITTI
 
+#### GNN (Graph Neural Network)
+
+模型名称 | 框架 | 数据集
+-------- | ------ | ----
+[GAT](cv/gnn/gat/paddlepaddle/README.md) | PaddlePaddle | CORA
+[GCN](cv/gnn/GCN/mindspore/README.md) | MindSpore | CORA & Citeseer
+[GCN](cv/gnn/GCN/paddlepaddle/README.md) | PaddlePaddle | CORA & PubMed & Citeseer
+[GraphSAGE](cv/gnn/graphsage/paddlepaddle/README.md) | PaddlePaddle | Reddit
+
 #### OCR
 
 模型名称 | 框架 | 数据集
@@ -303,27 +312,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 模型名称 | 框架 | 数据集
 -------- | ------ | ----
 [Graph WaveNet](cv/traffic_forecast/graph_wavenet/pytorch/README.md) | PyTorch | METR-LA & PEMS-BAY
-
-### GNN
-
-#### Graph Attention
-
-模型名称 | 框架 | 数据集
--------- | ------ | ----
-[GAT](gnn/graph_attention/gat/paddlepaddle/README.md) | PaddlePaddle | CORA
-
-#### Node Classification
-
-模型名称 | 框架 | 数据集
--------- | ------ | ----
-[GraphSAGE](gnn/node_classification/graphsage/paddlepaddle/README.md) | PaddlePaddle | Reddit
-
-#### Text Classification
-
-模型名称 | 框架 | 数据集
--------- | ------ | ----
-[GCN](gnn/text_classification/GCN/mindspore/README.md) | MindSpore | CORA & Citeseer
-[GCN](gnn/text_classification/GCN/paddlepaddle/README.md) | PaddlePaddle | CORA & PubMed & Citeseer
 
 ### HPC
 
