@@ -449,15 +449,15 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Recommendation Systems
 
-| Model                                                               | Framework | Dataset   |
-|---------------------------------------------------------------------|-----------|-----------|
-| [NCF](recommendation/collaborative_filtering/ncf/pytorch/README.md) | PyTorch   | movielens |
-| [DLRM](recommendation/ctr/dlrm/pytorch/README.md)                | PyTorch      | Criteo_Terabyte |
-| [DLRM](recommendation/ctr/dlrm/paddlepaddle/README.md)           | PaddlePaddle | Criteo_Terabyte |
-| [FFM](recommendation/ctr/ffm/paddlepaddle/README.md)             | PaddlePaddle | Criteo_Terabyte |
-| [DeepFM](recommendation/ctr/deepfm/paddlepaddle/README.md)       | PaddlePaddle | Criteo_Terabyte |
-| [Wide&Deep](recommendation/ctr/wide_deep/paddlepaddle/README.md) | PaddlePaddle | Criteo_Terabyte |
-| [xDeepFM](recommendation/ctr/xdeepfm/paddlepaddle/README.md)     | PaddlePaddle | Criteo_Terabyte |
+| Model                                                                              | Framework    | Dataset         |
+|------------------------------------------------------------------------------------|--------------|-----------------|
+| [DeepFM](miscellaneous/recommendation_systems/deepfm/paddlepaddle/README.md)       | PaddlePaddle | Criteo_Terabyte |
+| [DLRM](miscellaneous/recommendation_systems/dlrm/pytorch/README.md)                | PyTorch      | Criteo_Terabyte |
+| [DLRM](miscellaneous/recommendation_systems/dlrm/paddlepaddle/README.md)           | PaddlePaddle | Criteo_Terabyte |
+| [FFM](miscellaneous/recommendation_systems/ffm/paddlepaddle/README.md)             | PaddlePaddle | Criteo_Terabyte |
+| [NCF](miscellaneous/recommendation_systems/ncf/pytorch/README.md)                  | PyTorch      | movielens       |
+| [Wide&Deep](miscellaneous/recommendation_systems/wide_deep/paddlepaddle/README.md) | PaddlePaddle | Criteo_Terabyte |
+| [xDeepFM](miscellaneous/recommendation_systems/xdeepfm/paddlepaddle/README.md)     | PaddlePaddle | Criteo_Terabyte |
 
 --------
 
