@@ -320,22 +320,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 |----------------------------------------------------------------------|-----------|--------------------|
 | [Graph WaveNet](cv/traffic_forecast/graph_wavenet/pytorch/README.md) | PyTorch   | METR-LA & PEMS-BAY |
 
-### HPC
-
-#### Molecular Dynamics
-
-| Model                                                                      | Framework               | Dataset    |
-|----------------------------------------------------------------------------|-------------------------|------------|
-| [Water/se_e2_a](hpc/molecular_dynamics/water_se_e2_a/tensorflow/README.md) | TensorFlow (DeePMD-kit) | data_water |
-
-### Methodology
-
-#### Kolmogorov-Arnold Networks
-
-| Model                                                               | Framework | Dataset |
-|---------------------------------------------------------------------|-----------|---------|
-| [KAN](methodology/kolmogorov_arnold_networks/kan/pytorch/README.md) | PyTorch   | -       |
-
 ### Multimodal
 
 | Model                                                                            | Framework | Dataset        |
@@ -352,7 +336,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [Stable Diffusion 3](multimodal/diffusion/stable-diffusion/sd_3/README.md)       | PyTorch   | dog-example    |
 | [Stable Diffusion XL](multimodal/diffusion/stable-diffusion/sd_xl/README.md)     | PyTorch   | pokemon-images |
 
-### NLP
+### NLP (Natural Language Processing)
 
 #### Cloze Test
 
@@ -473,6 +457,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [Tacotron2](speech/speech_synthesis/tacotron2/pytorch/README.md)                 | PyTorch      | LJSpeech    |
 | [VQMIVC](speech/speech_synthesis/vqmivc/pytorch/README.md)                       | PyTorch      | VCTK-Corpus |
 | [WaveGlow](speech/speech_synthesis/waveglow/pytorch/README.md)                   | PyTorch      | LJSpeech    |
+
+### Others
+
+| Model                                                          | Framework | Dataset |
+|----------------------------------------------------------------|-----------|---------|
+| [KAN](others/kolmogorov_arnold_networks/kan/pytorch/README.md) | PyTorch   | -       |
 
 --------
 
