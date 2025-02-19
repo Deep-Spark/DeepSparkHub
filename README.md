@@ -434,29 +434,29 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 |------------------------------------------------------------------------------|--------------|-------------|
 | [DQN](reinforcement_learning/q-learning-networks/dqn/paddlepaddle/README.md) | PaddlePaddle | CartPole-v0 |
 
-### Speech
+### Audio
 
 #### Speech Recognition
 
 | Model                                                                                              | Framework       | Dataset  |
 |----------------------------------------------------------------------------------------------------|-----------------|----------|
-| [Conformer](speech/speech_recognition/conformer_wenet/pytorch/README.md)                           | PyTorch (WeNet) | AISHELL  |
-| [Efficient Conformer v2](speech/speech_recognition/efficient_conformer_v2_wenet/pytorch/README.md) | PyTorch (WeNet) | AISHELL  |
-| [PP-ASR-Conformer](speech/speech_recognition/conformer/paddlepaddle/README.md)                     | PaddlePaddle    | AISHELL  |
-| [RNN-T](speech/speech_recognition/rnnt/pytorch/README.md)                                          | PyTorch         | LJSpeech |
-| [Transformer](speech/speech_recognition/transformer_wenet/pytorch/README.md)                       | PyTorch (WeNet) | AISHELL  |
-| [U2++ Conformer](speech/speech_recognition/u2++_conformer_wenet/pytorch/README.md)                 | PyTorch (WeNet) | AISHELL  |
-| [Unified Conformer](speech/speech_recognition/unified_conformer_wenet/pytorch/README.md)           | PyTorch (WeNet) | AISHELL  |
+| [Conformer](audio/speech_recognition/conformer_wenet/pytorch/README.md)                           | PyTorch (WeNet) | AISHELL  |
+| [Efficient Conformer v2](audio/speech_recognition/efficient_conformer_v2_wenet/pytorch/README.md) | PyTorch (WeNet) | AISHELL  |
+| [PP-ASR-Conformer](audio/speech_recognition/conformer/paddlepaddle/README.md)                     | PaddlePaddle    | AISHELL  |
+| [RNN-T](audio/speech_recognition/rnnt/pytorch/README.md)                                          | PyTorch         | LJSpeech |
+| [Transformer](audio/speech_recognition/transformer_wenet/pytorch/README.md)                       | PyTorch (WeNet) | AISHELL  |
+| [U2++ Conformer](audio/speech_recognition/u2++_conformer_wenet/pytorch/README.md)                 | PyTorch (WeNet) | AISHELL  |
+| [Unified Conformer](audio/speech_recognition/unified_conformer_wenet/pytorch/README.md)           | PyTorch (WeNet) | AISHELL  |
 
 #### Speech Synthesis
 
 | Model                                                                            | Framework    | Dataset     |
 |----------------------------------------------------------------------------------|--------------|-------------|
-| [PP-TTS-FastSpeech2](speech/speech_synthesis/fastspeech2/paddlepaddle/README.md) | PaddlePaddle | CSMSC       |
-| [PP-TTS-HiFiGAN](speech/speech_synthesis/hifigan/paddlepaddle/README.md)         | PaddlePaddle | CSMSC       |
-| [Tacotron2](speech/speech_synthesis/tacotron2/pytorch/README.md)                 | PyTorch      | LJSpeech    |
-| [VQMIVC](speech/speech_synthesis/vqmivc/pytorch/README.md)                       | PyTorch      | VCTK-Corpus |
-| [WaveGlow](speech/speech_synthesis/waveglow/pytorch/README.md)                   | PyTorch      | LJSpeech    |
+| [PP-TTS-FastSpeech2](audio/speech_synthesis/fastspeech2/paddlepaddle/README.md) | PaddlePaddle | CSMSC       |
+| [PP-TTS-HiFiGAN](audio/speech_synthesis/hifigan/paddlepaddle/README.md)         | PaddlePaddle | CSMSC       |
+| [Tacotron2](audio/speech_synthesis/tacotron2/pytorch/README.md)                 | PyTorch      | LJSpeech    |
+| [VQMIVC](audio/speech_synthesis/vqmivc/pytorch/README.md)                       | PyTorch      | VCTK-Corpus |
+| [WaveGlow](audio/speech_synthesis/waveglow/pytorch/README.md)                   | PyTorch      | LJSpeech    |
 
 ### Others
 
