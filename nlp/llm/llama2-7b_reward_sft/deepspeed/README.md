@@ -1,11 +1,14 @@
-# DeepSpeed Llama-2-7B Reward Model Finetuning
+# DeepSpeed Llama-2-7B RMF (DeepSpeed)
 
 ## Model description
-LLaMA2 is a large language model released by Meta in 2023, with parameters ranging from 7B to 70B. Compared to LLaMA, the training corpus of LLaMA2 is 40% longer, and the context length has been upgraded from 2048 to 4096, allowing for understanding and generating longer texts. 
+
+LLaMA2 is a large language model released by Meta in 2023, with parameters ranging from 7B to 70B. Compared to LLaMA,
+the training corpus of LLaMA2 is 40% longer, and the context length has been upgraded from 2048 to 4096, allowing for
+understanding and generating longer texts.
 
 ## Step 1: Installation
 
-```bash
+```sh
 cd deepsparkhub/nlp/llm/llama2-7b_reward_sft/deepspeed
 pip install -r requirements.txt
 pip install -e .
@@ -13,9 +16,7 @@ pip install -e .
 
 ## Step 2: Preparing datasets
 
-Prepare datasets and pretrained model weight
-
-```bash
+```sh
 # Install lfs
 wget https://packagecloud.io/github/git-lfs/packages/el/7/git-lfs-2.13.2-1.el7.x86_64.rpm/download -O lfs.rpm
 rpm -ivh lfs.rpm
@@ -35,18 +36,17 @@ mv Llama-2-7b-hf/ datasets/
 
 ## Step 3: Training
 
-Fine-tuning
-
-```bash
+```sh
 cd training/step2_reward_model_finetuning/training_scripts/llama2/
 bash ./run_llama2_7b.sh
 ```
 
 ## Results
-| GPUs       | Epochs | FPS | ACC  |
-|------------|--------|-----|------|
+
+| GPUs       | Epochs | FPS                     | ACC    |
+|------------|--------|-------------------------|--------|
 | BI-V100 x8 | 1      | AvgSamplesPerSec: 1.948 | 0.6821 |
 
-
 ## Reference
-- [DeepSpeed-Chat] (https://github.com/microsoft/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat)
+
+- [DeepSpeedExamples](https://github.com/microsoft/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat)

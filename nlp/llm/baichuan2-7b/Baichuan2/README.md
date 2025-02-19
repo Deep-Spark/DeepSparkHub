@@ -1,14 +1,18 @@
-# Baichuan2-7B
+# Baichuan2-7B (DeepSpeed)
 
 ## Model description
 
-Baichuan 2 is the new generation of open-source large language models launched by Baichuan Intelligent Technology. It was trained on a high-quality corpus with 2.6 trillion tokens.  Baichuan 2 achieved the best performance of its size on multiple authoritative Chinese, English, and multi-language general and domain-specific benchmarks. All versions are fully open to academic research. Developers only need to apply via email and obtain official commercial permission to use it for free commercially.
+Baichuan 2 is the new generation of open-source large language models launched by Baichuan Intelligent Technology. It
+was trained on a high-quality corpus with 2.6 trillion tokens.  Baichuan 2 achieved the best performance of its size on
+multiple authoritative Chinese, English, and multi-language general and domain-specific benchmarks. All versions are
+fully open to academic research. Developers only need to apply via email and obtain official commercial permission to
+use it for free commercially.
 
 ## Step 1: Preparing datasets
 
 Load model weight, and fix configuration_baichuan.py
   
-```bash
+```sh
 pip install modelscope
 cd fine-tune/
 python3 ./get_Baichuan2_model.py
@@ -23,7 +27,7 @@ wget -c --no-check-certificate https://raw.githubusercontent.com/baichuan-inc/Ba
 
 ## Step 2: Installation
 
-```bash
+```sh
 cd ../
 pip install -r requirements.txt
 
@@ -35,16 +39,16 @@ pip install -r requirements.txt
 
 Fine-tuning
 
-```bash
+```sh
 bash ./run_sft.sh
 ```
 
 ## Results
 
 | GPUs       | Epochs | train_samples_per_second |
-|------------|--------|-----|
-| BI-V150 x8 | 1      | 10.674 |
+|------------|--------|--------------------------|
+| BI-V150 x8 | 1      | 10.674                   |
 
 ## Reference
 
-- [Baichuan2] <https://github.com/baichuan-inc/Baichuan2>
+- [Baichuan2](https://github.com/baichuan-inc/Baichuan2)

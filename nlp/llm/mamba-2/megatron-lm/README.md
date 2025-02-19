@@ -2,7 +2,10 @@
 
 ## Model description
 
-Mamba-2 is a cutting-edge state space model (SSM) architecture designed as a highly efficient alternative to traditional Transformer-based large language models (LLMs). It is the second version of the Mamba model and builds on the strengths of its predecessor by offering faster inference, improved scalability for long sequences, and lower computational complexity.
+Mamba-2 is a cutting-edge state space model (SSM) architecture designed as a highly efficient alternative to traditional
+Transformer-based large language models (LLMs). It is the second version of the Mamba model and builds on the strengths
+of its predecessor by offering faster inference, improved scalability for long sequences, and lower computational
+complexity.
 
 ## Step 1: Installation
 
@@ -29,7 +32,7 @@ bash download_and_convert_dataset.sh
 
 ## Step 3: Training
 
-```bash
+```sh
 cd examples/mamba
 bash train.sh
 ```
