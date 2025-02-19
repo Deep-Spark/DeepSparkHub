@@ -409,25 +409,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [Transformer](nlp/translation/transformer/paddlepaddle/README.md)        | PaddlePaddle      | WMT14   |
 | [Transformer](nlp/translation/transformer_fairseq/pytorch/README.md)     | PyTorch (Fairseq) | IWSLT14 |
 
-### Recommendation
-
-#### Collaborative Filtering
-
-| Model                                                               | Framework | Dataset   |
-|---------------------------------------------------------------------|-----------|-----------|
-| [NCF](recommendation/collaborative_filtering/ncf/pytorch/README.md) | PyTorch   | movielens |
-
-#### Click Through Rate
-
-| Model                                                            | Framework    | Dataset         |
-|------------------------------------------------------------------|--------------|-----------------|
-| [DLRM](recommendation/ctr/dlrm/pytorch/README.md)                | PyTorch      | Criteo_Terabyte |
-| [DLRM](recommendation/ctr/dlrm/paddlepaddle/README.md)           | PaddlePaddle | Criteo_Terabyte |
-| [FFM](recommendation/ctr/ffm/paddlepaddle/README.md)             | PaddlePaddle | Criteo_Terabyte |
-| [DeepFM](recommendation/ctr/deepfm/paddlepaddle/README.md)       | PaddlePaddle | Criteo_Terabyte |
-| [Wide&Deep](recommendation/ctr/wide_deep/paddlepaddle/README.md) | PaddlePaddle | Criteo_Terabyte |
-| [xDeepFM](recommendation/ctr/xdeepfm/paddlepaddle/README.md)     | PaddlePaddle | Criteo_Terabyte |
-
 ### Reinforcement Learning
 
 | Model                                                                        | Framework    | Dataset     |
@@ -458,11 +439,25 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [VQMIVC](audio/speech_synthesis/vqmivc/pytorch/README.md)                       | PyTorch      | VCTK-Corpus |
 | [WaveGlow](audio/speech_synthesis/waveglow/pytorch/README.md)                   | PyTorch      | LJSpeech    |
 
-### Others
+### Miscellaneous
 
-| Model                                                          | Framework | Dataset |
-|----------------------------------------------------------------|-----------|---------|
-| [KAN](others/kolmogorov_arnold_networks/kan/pytorch/README.md) | PyTorch   | -       |
+#### Kolmogorov-Arnold Networks
+
+| Model                                                                 | Framework | Dataset |
+|-----------------------------------------------------------------------|-----------|---------|
+| [KAN](miscellaneous/kolmogorov_arnold_networks/kan/pytorch/README.md) | PyTorch   | -       |
+
+#### Recommendation Systems
+
+| Model                                                               | Framework | Dataset   |
+|---------------------------------------------------------------------|-----------|-----------|
+| [NCF](recommendation/collaborative_filtering/ncf/pytorch/README.md) | PyTorch   | movielens |
+| [DLRM](recommendation/ctr/dlrm/pytorch/README.md)                | PyTorch      | Criteo_Terabyte |
+| [DLRM](recommendation/ctr/dlrm/paddlepaddle/README.md)           | PaddlePaddle | Criteo_Terabyte |
+| [FFM](recommendation/ctr/ffm/paddlepaddle/README.md)             | PaddlePaddle | Criteo_Terabyte |
+| [DeepFM](recommendation/ctr/deepfm/paddlepaddle/README.md)       | PaddlePaddle | Criteo_Terabyte |
+| [Wide&Deep](recommendation/ctr/wide_deep/paddlepaddle/README.md) | PaddlePaddle | Criteo_Terabyte |
+| [xDeepFM](recommendation/ctr/xdeepfm/paddlepaddle/README.md)     | PaddlePaddle | Criteo_Terabyte |
 
 --------
 
