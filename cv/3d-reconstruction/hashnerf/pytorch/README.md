@@ -1,23 +1,29 @@
 # HashNeRF
 
 ## Model description
-A PyTorch implementation (Hash) of the NeRF part (grid encoder, density grid ray sampler) in instant-ngp, as described in Instant Neural Graphics Primitives with a Multiresolution Hash Encoding.
+
+A PyTorch implementation (Hash) of the NeRF part (grid encoder, density grid ray sampler) in instant-ngp, as described
+in Instant Neural Graphics Primitives with a Multiresolution Hash Encoding.
 
 ## Step 1: Installation
-```bash
+
+```sh
 pip3 install -r requirements.txt
 ```
 
 ## Step 2: Preparing datasets
 
-We use the same data format as instant-ngp, [fox](https://github.com/NVlabs/instant-ngp/tree/master/data/nerf/fox) and blender dataset [nerf_synthetic](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1).Please download and put them under `./data`.
+We use the same data format as instant-ngp, [fox](https://github.com/NVlabs/instant-ngp/tree/master/data/nerf/fox) and
+blender dataset [nerf_synthetic](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1).Please
+download and put them under `./data`.
 
 For custom dataset, you should:
-1. take a video / many photos from different views 
+
+1. take a video / many photos from different views
 2. put the video under a path like ./data/custom/video.mp4 or the images under ./data/custom/images/*.jpg.
 3. call the preprocess code: (should install ffmpeg and colmap first! refer to the file for more options)
 
-```bash
+```sh
 python3 scripts/colmap2nerf.py --video ./data/custom/video.mp4 --run_colmap # if use video
 python3 scripts/colmap2nerf.py --images ./data/custom/images/ --run_colmap # if use images
 ```
@@ -28,16 +34,18 @@ python3 scripts/colmap2nerf.py --images ./data/custom/images/ --run_colmap # if 
 
 First time running will take some time to compile the CUDA extensions.
 
-```bash
+```sh
 # train with fox dataset
 python3 main_nerf.py data/fox --workspace trial_nerf -O
-# data/fox is dataset path; --workspace means output path; -O means --fp16 --cuda_ray --preload, which usually gives the best results balanced on speed & performance.
+
+# data/fox is dataset path; --workspace means output path;
+# -O means --fp16 --cuda_ray --preload, which usually gives the best results balanced on speed & performance.
 
 # test mode
 python3 main_nerf.py data/fox --workspace trial_nerf -O --test
 ```
 
-```bash
+```sh
 # train with the blender dataset, you should add `--bound 1.0 --scale 0.8 --dt_gamma 0`
 # --bound means the scene is assumed to be inside box[-bound, bound]
 # --scale adjusts the camera locaction to make sure it falls inside the above bounding box. 
@@ -45,15 +53,12 @@ python3 main_nerf.py data/fox --workspace trial_nerf -O --test
 python3 main_nerf.py data/nerf_synthetic/lego --workspace trial_nerf -O --bound 1.0 --scale 0.8 --dt_gamma 0
 ```
 
-```bash
+```sh
 # train with custom dataset(you'll need to tune the scale & bound if necessary):
 python3 main_nerf.py data/custom_data --workspace trial_nerf -O
 ```
 
-## Results on BI-V100
-
-@@ -65,90 +60,4 @@ python3 main_nerf.py data/nerf_synthetic/lego --workspace trial_nerf -O
-
+## Results
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 |----------------------|------------------------------------------|-------------|----------|------------|-------------|-------------------------|-----------|

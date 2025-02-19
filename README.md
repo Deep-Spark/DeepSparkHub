@@ -187,6 +187,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [SECOND](cv/3d_detection/second/pytorch/README.md)                      | PyTorch   | KITTI            |
 | [SECOND-IoU](cv/3d_detection/second_iou/pytorch/README.md)              | PyTorch   | KITTI            |
 
+#### 3D Reconstruction
+
+| Model                                                    | Framework | Dataset |
+|----------------------------------------------------------|-----------|---------|
+| [HashNeRF](cv/3d-reconstruction/hashnerf/pytorch/README.md) | PyTorch   | fox     |
+
 #### GNN (Graph Neural Network)
 
 | Model                                                | Framework    | Dataset                  |
@@ -377,7 +383,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [RoBERTa](nlp/language_model/roberta_fairseq/pytorch/README.md)            | PyTorch (Fairseq) | RTE                |
 | [XLNet](nlp/language_model/xlnet/paddlepaddle/README.md)                   | PaddlePaddle      | SST-2              |
 
-#### Large Language Model (LLM)
+#### LLM (Large Language Model)
 
 | Model                                                                 | Framework | ToolBox            | Dataset/Weight        |
 |-----------------------------------------------------------------------|-----------|--------------------|-----------------------|
@@ -467,12 +473,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [Tacotron2](speech/speech_synthesis/tacotron2/pytorch/README.md)                 | PyTorch      | LJSpeech    |
 | [VQMIVC](speech/speech_synthesis/vqmivc/pytorch/README.md)                       | PyTorch      | VCTK-Corpus |
 | [WaveGlow](speech/speech_synthesis/waveglow/pytorch/README.md)                   | PyTorch      | LJSpeech    |
-
-### 3D Reconstruction
-
-| Model                                                    | Framework | Dataset |
-|----------------------------------------------------------|-----------|---------|
-| [HashNeRF](3d-reconstruction/hashnerf/pytorch/README.md) | PyTorch   | fox     |
 
 --------
 
