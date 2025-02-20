@@ -2,7 +2,9 @@
 
 ## Model description
 
-The Llama 3 Herd of models natively supports multilinguality, coding, reasoning, and tool usage. Our largest model is dense Transformer with 405B parameters, processing information in a context window of up to 128K tokens, Llama 3 8B is the smallest model of Llama 3 Herd of models.
+The Llama 3 Herd of models natively supports multilinguality, coding, reasoning, and tool usage. Our largest model is
+dense Transformer with 405B parameters, processing information in a context window of up to 128K tokens, Llama 3 8B is
+the smallest model of Llama 3 Herd of models.
 
 ## Step 1: Preparing checkpoints
 
@@ -19,7 +21,8 @@ cp tokenizer.model /home/model_zoos/Meta-Llama-3-8B
 
 ## Step 2: Installation and preparing datasets
 
-You should ensure that the corresponding version of ColossalAI has been installed in the iluvatar environment. Then install applications as follows:
+You should ensure that the corresponding version of ColossalAI has been installed in the iluvatar environment. Then
+install applications as follows:
 
 ```sh
 git clone -b v0.4.4 https://github.com/hpcaitech/ColossalAI.git --depth=1
@@ -43,10 +46,10 @@ bash run_llama3_8b_sft_3d.sh
 
 ## Results
 
-| model     | peft        |    num_gpus        |train_samples_per_second |
-| --------- | ----------- | ------------------ | ----------------------  |
-| llama3-8b | Full sft    | 16                 |         1.53            |
+| model     | peft     | num_gpus | train_samples_per_second |
+|-----------|----------|----------|--------------------------|
+| Llama3-8B | Full sft | 16       | 1.53                     |
 
 ## Reference
 
-- [ColossalAI (tag:v0.4.4)](https://github.com/hpcaitech/ColossalAI/tree/main/applications/Colossal-LLaMA)
+- [ColossalAI](https://github.com/hpcaitech/ColossalAI/tree/v0.4.4/applications/Colossal-LLaMA)

@@ -2,7 +2,9 @@
 
 ## Model description
 
-The Mixtral model is a Mixture of Experts (MoE)-based large language model developed by Mistral AI, an innovative company focusing on open-source AI models. Mixtral is designed to achieve high performance while maintaining computational efficiency, making it an excellent choice for real-world applications.
+The Mixtral model is a Mixture of Experts (MoE)-based large language model developed by Mistral AI, an innovative
+company focusing on open-source AI models. Mixtral is designed to achieve high performance while maintaining
+computational efficiency, making it an excellent choice for real-world applications.
 
 ## Step 1: Installation
 
@@ -29,7 +31,7 @@ bash download_and_convert_dataset.sh
 
 ## Step 3: Training
 
-```bash
+```sh
 cd examples/mixtral
 bash train_mixtral_8x7b_distributed.sh
 ```

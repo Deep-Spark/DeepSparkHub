@@ -2,25 +2,30 @@
 
 ## Model description
 
-Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text input.
+Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text
+input.
 
 ## Step 1: Preparation
 
-You just need to run the script, and it will automatically download the required data and weights. Or you can manually download the weights and data locally.
+You just need to run the script, and it will automatically download the required data and weights. Or you can manually
+download the weights and data locally.
 
 ### Weights
 
-Download the stabilityai/stable-diffusion-xl-base-1.0 from [huggingface page](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0).
+Download the stabilityai/stable-diffusion-xl-base-1.0 from [huggingface
+page](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0).
 
-Download the madebyollin/sdxl-vae-fp16-fix from [huggingface page](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix).
+Download the madebyollin/sdxl-vae-fp16-fix from [huggingface
+page](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix).
 
 ### Datasets
 
-dataset: download the lambdalabs/pokemon-blip-captions  from [huggingface page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
+dataset: download the lambdalabs/pokemon-blip-captions  from [huggingface
+page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
 
 ## Step 2: Installation
 
-```bash
+```sh
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/diffusers-0.27.0-py3-none-any.whl
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/transformers-4.38.1-py3-none-any.whl
 pip3 install huggingface-hub==0.25.2
@@ -32,24 +37,18 @@ pip3 install pillow --upgrade
 
 If you have downloaded the weights and dataset, please export the environment variables like below.
 
-```bash
+```sh
 export MODEL_PATH=/path/to/sd_weights
 export DATASET_PATH=/path/to/data
 export VAE_PATH=/path/to/vae_weights
 ```
 
-```bash
+```sh
 # Go to diffusers path
 cd ${PROJ_ROOT}/multimodal/diffusion/stable-diffusion/diffusers
 
 bash run_sd_xl.sh
 ```
-
-## Results
-
-| Model | GPUs    | ips_per_device | ips_per_gpu |
-| ----- | ------- | -------------- | ----------- |
-| SD XL | BI-V150 |                |             |
 
 ## Reference
 

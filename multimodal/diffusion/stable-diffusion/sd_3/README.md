@@ -2,19 +2,23 @@
 
 ## Model description
 
-Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text input.
+Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text
+input.
 
 ## Step 1: Preparation
 
-You just need to run the script, and it will automatically download the required data and weights. Or you can manually download the weights and data locally.
+You just need to run the script, and it will automatically download the required data and weights. Or you can manually
+download the weights and data locally.
 
 ### Weights
 
-Download the stabilityai/stable-diffusion-3-medium-diffusers from [huggingface page](https://huggingface.co/stabilityai/stable-diffusion-3-medium-diffusers).
+Download the stabilityai/stable-diffusion-3-medium-diffusers from [huggingface
+page](https://huggingface.co/stabilityai/stable-diffusion-3-medium-diffusers).
 
 ### Datasets
 
-dataset: download the diffusers/dog-example from [huggingface page](https://huggingface.co/datasets/diffusers/dog-example).
+dataset: download the diffusers/dog-example from [huggingface
+page](https://huggingface.co/datasets/diffusers/dog-example).
 
 ## Step 2: Installation
 

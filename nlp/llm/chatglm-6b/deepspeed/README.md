@@ -1,12 +1,19 @@
-# DeepSpeed ChatGLM-6B
+# ChatGLM-6B (DeepSpeed)
 
 ## Model description
-ChatGLM-6B is an open bilingual language model based on [General Language Model (GLM)](https://github.com/THUDM/GLM) framework, with 6.2 billion parameters. With the quantization technique, users can deploy locally on consumer-grade graphics cards (only 6GB of GPU memory is required at the INT4 quantization level). 
 
-ChatGLM-6B uses technology similar to ChatGPT, optimized for Chinese QA and dialogue. The model is trained for about 1T tokens of Chinese and English corpus, supplemented by supervised fine-tuning, feedback bootstrap, and reinforcement learning wit human feedback. With only about 6.2 billion parameters, the model is able to generate answers that are in line with human preference.
+ChatGLM-6B is an open bilingual language model based on [General Language Model (GLM)](https://github.com/THUDM/GLM)
+framework, with 6.2 billion parameters. With the quantization technique, users can deploy locally on consumer-grade
+graphics cards (only 6GB of GPU memory is required at the INT4 quantization level).
+
+ChatGLM-6B uses technology similar to ChatGPT, optimized for Chinese QA and dialogue. The model is trained for about 1T
+tokens of Chinese and English corpus, supplemented by supervised fine-tuning, feedback bootstrap, and reinforcement
+learning wit human feedback. With only about 6.2 billion parameters, the model is able to generate answers that are in
+line with human preference.
 
 ## Step 1: Installation
-```shell
+
+```sh
 # Install requirements
 pip3 install -r requirements.txt
 
@@ -30,8 +37,10 @@ cd ../ && rm -rf Python-3.7.9*
 ```
 
 ### Install DeepSpeed
+
 ChatGLM-6B model is using DeepSpeed toolbox. Before you run this model, you need to install DeepSpeed first.
-```shell
+
+```sh
 pushd ../../../../toolbox/DeepSpeed/v0.9.2/
 bash install_toolbox_deepspeed.sh
 popd
@@ -39,11 +48,16 @@ popd
 
 ## Step 2: Preparing datasets
 
-ADGEN is a large-scale dataset for advertisement text generation proposed by researchers from Hong Kong University of Science and Technology in 2018.
-Go to [Google Drive](https://drive.google.com/file/d/13_vf0xRTQsyneRKdD1bZIr93vBGOczrk/view?usp=sharing) or [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/b3f119a008264b1cabd1/?dl=1), download the processed ADGEN dataset, and decompress AdvertiseGen directory.
+ADGEN is a large-scale dataset for advertisement text generation proposed by researchers from Hong Kong University of
+Science and Technology in 2018. Go to [Google
+Drive](https://drive.google.com/file/d/13_vf0xRTQsyneRKdD1bZIr93vBGOczrk/view?usp=sharing) or [Tsinghua
+Cloud](https://cloud.tsinghua.edu.cn/f/b3f119a008264b1cabd1/?dl=1), download the processed ADGEN dataset, and decompress
+AdvertiseGen directory.
 
-If you want to load the model locally, you can download the model implementation ( `13GB` ) from [Hugging Face Hub](https://huggingface.co/THUDM/chatglm-6b) 
-```shell
+If you want to load the model locally, you can download the model implementation ( `13GB` ) from [Hugging Face
+Hub](https://huggingface.co/THUDM/chatglm-6b)
+
+```sh
 # Install lfs
 yum install -y rh-git218-git-lfs.x86_64
 source /opt/rh/rh-git218/enable
@@ -54,16 +68,20 @@ git clone https://huggingface.co/THUDM/chatglm-6b
 ```
 
 ## Step 3: Training
+
 If you load the model locally, you can change `THUDM/chatglm-6b` in `ds_train_finetune.sh` to your local model path.
 
-```shell
+```sh
 cd ptuning/
 bash ds_train_finetune.sh
 ```
+
 ## Results
-| GPUs       | Toolbox   | Model       | Training speed   |
-|:-----------:|:---------:|:----------:|:----------------:|
-| BI-V100 x8 | DeepSpeed | ChatGLM-6B |0.995 samples/sec |
+
+| GPUs       | Toolbox   | Model      | Training speed    |
+|------------|-----------|------------|-------------------|
+| BI-V100 x8 | DeepSpeed | ChatGLM-6B | 0.995 samples/sec |
 
 ## Reference
-[THUDM/ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B)
+
+- [THUDM/ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B)

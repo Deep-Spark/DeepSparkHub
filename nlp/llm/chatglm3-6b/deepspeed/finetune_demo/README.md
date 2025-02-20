@@ -1,19 +1,21 @@
-# ChatGLM3-6B
+# ChatGLM3-6B (DeepSpeed)
 
 ## Model description
 
-ChatGLM3 is a generation of pre-trained dialogue models jointly released by Zhipu AI and Tsinghua KEG. ChatGLM3-6B is the open-source model in the ChatGLM3 series, maintaining many excellent features of the first two generations such as smooth dialogue and low deployment threshold.
+ChatGLM3 is a generation of pre-trained dialogue models jointly released by Zhipu AI and Tsinghua KEG. ChatGLM3-6B is
+the open-source model in the ChatGLM3 series, maintaining many excellent features of the first two generations such as
+smooth dialogue and low deployment threshold.
 
 ## Step 1: Installation
 
-```bash
+```sh
 cd finetune_demo
 pip3 install -r requirements.txt
 ```
 
 ## Step 2: Preparing datasets and checkpoints
 
-```bash
+```sh
 # Get AdvertiseGen.tar.gz
 mkdir -p data
 
@@ -25,7 +27,7 @@ popd
 python3 process_data.py
 ```
 
-```bash
+```sh
 # Get chatglm3-6b from https://modelscope.cn/models/ZhipuAI/chatglm3-6b or huggingface.
 mkdir -p checkpoint
 
@@ -36,7 +38,7 @@ popd
 
 ## Step 3: Training
 
-```bash
+```sh
 bash run.sh {config_file} {num_gpus} 
 
 # 1 GPU
@@ -52,7 +54,7 @@ bash run.sh configs/sft.yaml 16
 ## Results
 
 | GPUs    | model      | peft       | num_gpus | train_samples_per_second |
-| ------- | ---------- | ---------- | -------- | ------------------------ |
+|---------|------------|------------|----------|--------------------------|
 | BI-V150 | ChatGLM-6B | Lora       | 1        | 2.11                     |
 | BI-V150 | ChatGLM-6B | ptuning_v2 | 1        | 8.889                    |
 | BI-V150 | ChatGLM-6B | Lora       | 16       | 32.639                   |
