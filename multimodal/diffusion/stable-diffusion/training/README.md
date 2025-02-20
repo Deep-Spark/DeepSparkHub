@@ -1,7 +1,11 @@
 # Stable Diffusion
 
 ## Model description
-Stable Diffusion is a text-to-image latent diffusion model created by the researchers and engineers from CompVis, Stability AI, LAION and RunwayML. It's trained on 512x512 images from a subset of the LAION-5B database. This model uses a frozen CLIP ViT-L/14 text encoder to condition the model on text prompts. With its 860M UNet and 123M text encoder, the model is relatively lightweight and runs on a GPU with at least 4GB VRAM. See the model card for more information.
+
+Stable Diffusion is a text-to-image latent diffusion model created by the researchers and engineers from CompVis,
+Stability AI, LAION and RunwayML. It's trained on 512x512 images from a subset of the LAION-5B database. This model uses
+a frozen CLIP ViT-L/14 text encoder to condition the model on text prompts. With its 860M UNet and 123M text encoder,
+the model is relatively lightweight and runs on a GPU with at least 4GB VRAM. See the model card for more information.
 
 ## Prepare
 
@@ -34,19 +38,20 @@ pip3 install -r requirements.txt
 ### Step 1 使用accelerate初始化训练环境
 
 ```bash
-accelerate config  # 这里可以选择单卡或者多卡训练
-                   # 这里建议只选择多卡或者单卡，其他优化选项例如：torch dynamo，deepspeed等均不建议使用
+# 这里可以选择单卡或者多卡训练
+# 这里建议只选择多卡或者单卡，其他优化选项例如：torch dynamo，deepspeed等均不建议使用
+accelerate config 
 ```
 
-**Single GPU example**
+#### Single GPU example
 
 ![image](IMG/single.png)
 
-**Multi GPU example**
+#### Multi GPU example
 
 ![image](IMG/multi.png)
 
-if you want to train with "fp32"(mixed precision),you can choose "no" 
+if you want to train with "fp32"(mixed precision),you can choose "no"
 
 ### Step 2 开始训练
 
@@ -80,6 +85,6 @@ python3 test.py
 
 prompt: A pokemon with green eyes and red legs
 
-result:
+## Results
 
 ![image](IMG/result.png)

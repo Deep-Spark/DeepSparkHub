@@ -2,19 +2,23 @@
 
 ## Model description
 
-Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text input.
+Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text
+input.
 
 ## Step 1: Preparation
 
-You just need to run the script, and it will automatically download the required data and weights. Or you can manually download the weights and data locally.
+You just need to run the script, and it will automatically download the required data and weights. Or you can manually
+download the weights and data locally.
 
 ### Weights
 
-Download the stabilityai/stable-diffusion-2-1-base from [huggingface page](https://huggingface.co/stabilityai/stable-diffusion-2-1-base).
+Download the stabilityai/stable-diffusion-2-1-base from [huggingface
+page](https://huggingface.co/stabilityai/stable-diffusion-2-1-base).
 
 ### Datasets
 
-Download the lambdalabs/pokemon-blip-captions  from [huggingface page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
+Download the lambdalabs/pokemon-blip-captions  from [huggingface
+page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
 
 ## Step 2: Installation
 
@@ -44,12 +48,6 @@ bash run_sd_2.1_single.sh
 # Multi GPUs
 bash run_sd_2.1_multi.sh
 ```
-
-## Results
-
-| Model  | GPUs    | ips_per_device | ips_per_gpu |
-| ------ | ------- | -------------- | ----------- |
-| SD 2.1 | BI-V150 |                |             |
 
 ## Reference
 

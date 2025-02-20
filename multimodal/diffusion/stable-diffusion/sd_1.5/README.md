@@ -2,19 +2,23 @@
 
 ## Model description
 
-Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text input.
+Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text
+input.
 
 ## Step 1: Preparation
 
-You just need to run the script, and it will automatically download the required data and weights. Or you can manually download the weights and data locally.
+You just need to run the script, and it will automatically download the required data and weights. Or you can manually
+download the weights and data locally.
 
 ### Weights
 
-Download the runwayml/stable-diffusion-v1-5 from [huggingface page](https://huggingface.co/runwayml/stable-diffusion-v1-5).
+Download the runwayml/stable-diffusion-v1-5 from [huggingface
+page](https://huggingface.co/runwayml/stable-diffusion-v1-5).
 
 ### Datasets
 
-dataset: download the lambdalabs/pokemon-blip-captions  from [huggingface page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
+dataset: download the lambdalabs/pokemon-blip-captions  from [huggingface
+page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
 
 ## Step 2: Installation
 

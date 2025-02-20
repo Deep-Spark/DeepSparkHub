@@ -2,25 +2,21 @@
 
 ## Model description
 
-Unofficial PyTorch implementation of Denoising Diffusion Probabilistic Models. This implementation follows the most of details in official TensorFlow implementation. 
+Unofficial PyTorch implementation of Denoising Diffusion Probabilistic Models. This implementation follows the most of details in official TensorFlow implementation.
 
 ## Step 1: Installation
 
-
-```bash
+```sh
 pip3 install -U pip setuptools
 pip3 install -r requirements.txt
 pip3 install protobuf==3.20.3
 yum install -y mesa-libGL 
 pip3 install urllib3==1.26.6
-
 ```
-
 
 ## Step 2: Preparing datasets
 
-
-```bash
+```sh
 mkdir -p stats && cd stats
 ```
 
@@ -30,15 +26,14 @@ Download precalculated statistic for dataset:
 
 the dataset structure sholud look like:
 
-```
+```sh
 stats
 └── cifar10.train.npz
 ```
 
 ## Step 3: Training
 
-
-```bash
+```sh
 cd ..
 
 # 8 GPUs
@@ -57,7 +52,7 @@ python3 main.py --train \
 
 ## Step 4: Evaluate
 
-```
+```sh
 # 8 GPUs
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
@@ -76,14 +71,14 @@ python3 main.py \
     --eval
 ```
 
-
 ## Results
 
-| GPUs | FPS  |
-| ------ | -------- |
+| GPUs       | FPS       |
+|------------|-----------|
 | BI-V100 x8 | 1.65 it/s |
 
 ![image](images/cifar10_samples.png)
 
 ## Reference
-- [DDPM](https://github.com/w86763777/pytorch-ddpm/tree/master)
+
+- [pytorch-ddpm](https://github.com/w86763777/pytorch-ddpm/tree/master)
