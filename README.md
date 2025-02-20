@@ -439,25 +439,25 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [VQMIVC](audio/speech_synthesis/vqmivc/pytorch/README.md)                       | PyTorch      | VCTK-Corpus |
 | [WaveGlow](audio/speech_synthesis/waveglow/pytorch/README.md)                   | PyTorch      | LJSpeech    |
 
-### Miscellaneous
+### Others
 
 #### Kolmogorov-Arnold Networks
 
 | Model                                                                 | Framework | Dataset |
 |-----------------------------------------------------------------------|-----------|---------|
-| [KAN](miscellaneous/kolmogorov_arnold_networks/kan/pytorch/README.md) | PyTorch   | -       |
+| [KAN](others/kolmogorov_arnold_networks/kan/pytorch/README.md) | PyTorch   | -       |
 
 #### Recommendation Systems
 
 | Model                                                                              | Framework    | Dataset         |
 |------------------------------------------------------------------------------------|--------------|-----------------|
-| [DeepFM](miscellaneous/recommendation_systems/deepfm/paddlepaddle/README.md)       | PaddlePaddle | Criteo_Terabyte |
-| [DLRM](miscellaneous/recommendation_systems/dlrm/pytorch/README.md)                | PyTorch      | Criteo_Terabyte |
-| [DLRM](miscellaneous/recommendation_systems/dlrm/paddlepaddle/README.md)           | PaddlePaddle | Criteo_Terabyte |
-| [FFM](miscellaneous/recommendation_systems/ffm/paddlepaddle/README.md)             | PaddlePaddle | Criteo_Terabyte |
-| [NCF](miscellaneous/recommendation_systems/ncf/pytorch/README.md)                  | PyTorch      | movielens       |
-| [Wide&Deep](miscellaneous/recommendation_systems/wide_deep/paddlepaddle/README.md) | PaddlePaddle | Criteo_Terabyte |
-| [xDeepFM](miscellaneous/recommendation_systems/xdeepfm/paddlepaddle/README.md)     | PaddlePaddle | Criteo_Terabyte |
+| [DeepFM](others/recommendation_systems/deepfm/paddlepaddle/README.md)       | PaddlePaddle | Criteo_Terabyte |
+| [DLRM](others/recommendation_systems/dlrm/pytorch/README.md)                | PyTorch      | Criteo_Terabyte |
+| [DLRM](others/recommendation_systems/dlrm/paddlepaddle/README.md)           | PaddlePaddle | Criteo_Terabyte |
+| [FFM](others/recommendation_systems/ffm/paddlepaddle/README.md)             | PaddlePaddle | Criteo_Terabyte |
+| [NCF](others/recommendation_systems/ncf/pytorch/README.md)                  | PyTorch      | movielens       |
+| [Wide&Deep](others/recommendation_systems/wide_deep/paddlepaddle/README.md) | PaddlePaddle | Criteo_Terabyte |
+| [xDeepFM](others/recommendation_systems/xdeepfm/paddlepaddle/README.md)     | PaddlePaddle | Criteo_Terabyte |
 
 --------
 
