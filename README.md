@@ -314,12 +314,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [DeepSORT](cv/tracking/deep_sort/pytorch)       | PyTorch      | Market-1501 |
 | [FairMOT](cv/tracking/fairmot/pytorch)          | PyTorch      | MOT17       |
 
-#### Traffic Forecast
-
-| Model                                                      | Framework | Dataset            |
-|------------------------------------------------------------|-----------|--------------------|
-| [Graph WaveNet](cv/traffic_forecast/graph_wavenet/pytorch) | PyTorch   | METR-LA & PEMS-BAY |
-
 ### LLM (Large Language Model)
 
 | Model                                                       | Framework | ToolBox            | Dataset/Weight        |
@@ -440,6 +434,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [WaveGlow](audio/speech_synthesis/waveglow/pytorch)                   | PyTorch      | LJSpeech    |
 
 ### Others
+
+#### Graph Machine Learning
+
+| Model                                                                | Framework | Dataset            |
+|----------------------------------------------------------------------|-----------|--------------------|
+| [Graph WaveNet](others/graph_machine_learning/graph_wavenet/pytorch) | PyTorch   | METR-LA & PEMS-BAY |
 
 #### Kolmogorov-Arnold Networks
 
