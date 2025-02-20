@@ -398,7 +398,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                                     | Framework    | Dataset|
 |-----------------------------------------------------------|--------------|--------|
-| [Ernie](nlp/text_correction/ernie/paddlepaddle/README.md) | PaddlePaddle | corpus |
+| [ERNIE](nlp/text_correction/ernie/paddlepaddle/README.md) | PaddlePaddle | corpus |
 
 #### Translation
 

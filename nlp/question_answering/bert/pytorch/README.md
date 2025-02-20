@@ -27,7 +27,7 @@ git clone https://huggingface.co/bert-base-uncased
 
 ## Step 3: Training
 
-**Make sure you've got "bert-base-uncased" ready in ./bert-base-uncased**
+> Make sure you've got "bert-base-uncased" ready in ./bert-base-uncased
 
 ### On single GPU
 
@@ -44,12 +44,14 @@ bash run.sh
 ## e.g. --dataset_name /path/to/squad
 bash run_dist.sh
 ```
-## Results on BI-V100
 
-| GPUs | Samples/s | F1     |
-|------|-----------|--------|
-| 1x1  | 128.86    | 87     |
-| 1x8  | 208.6     | 78.69  |
+## Results
+
+| GPUs | Samples/s | F1    |
+|------|-----------|-------|
+| 1x1  | 128.86    | 87    |
+| 1x8  | 208.6     | 78.69 |
 
 ## Reference
-https://github.com/huggingface/
+
+- [bert-base-uncased](https://huggingface.co/bert-base-uncased)
