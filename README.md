@@ -80,16 +80,16 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Face Detection
 
-| Model                                    | Framework | Dataset   |
-|------------------------------------------|-----------|-----------|
-| [RetinaFace](cv/face/retinaface/pytorch) | PyTorch   | WiderFace |
+| Model                                    | Framework | Dataset    |
+|------------------------------------------|-----------|------------|
+| [RetinaFace](cv/face/retinaface/pytorch) | PyTorch   | WIDER FACE |
 
 #### Face Recognition
 
 | Model                                       | Framework    | Dataset            |
 |---------------------------------------------|--------------|--------------------|
 | [ArcFace](cv/face/arcface/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
-| [BlazeFace](cv/face/blazeface/paddlepaddle) | PaddlePaddle | WIDER-FACE         |
+| [BlazeFace](cv/face/blazeface/paddlepaddle) | PaddlePaddle | WIDER FACE         |
 | [CosFace](cv/face/cosface/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
 | [FaceNet](cv/face/facenet/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
 | [FaceNet](cv/face/facenet/tensorflow)       | TensorFlow   | CASIA-WebFaces&LFW |
@@ -117,12 +117,6 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [CWD](cv/distiller/CWD/pytorch)   | PyTorch   | Cityscapes   |
 | [RKD](cv/distiller/RKD/pytorch)   | PyTorch   | CUB-200-2011 |
 | [WSLD](cv/distiller/WSLD/pytorch) | PyTorch   | ImageNet     |
-
-#### Network Pruning
-
-| Model                                                   | Framework | Dataset      |
-|---------------------------------------------------------|-----------|--------------|
-| [Network Slimming](cv/Pruning/Network-Slimming/pytorch) | PyTorch   | CIFAR-10/100 |
 
 #### Object Detection
 
@@ -446,6 +440,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | Model                                                | Framework | Dataset |
 |------------------------------------------------------|-----------|---------|
 | [KAN](others/kolmogorov_arnold_networks/kan/pytorch) | PyTorch   | -       |
+
+#### Model Pruning
+
+| Model                                                             | Framework | Dataset      |
+|-------------------------------------------------------------------|-----------|--------------|
+| [Network Slimming](others/model_pruning/network-slimming/pytorch) | PyTorch   | CIFAR-10/100 |
 
 #### Recommendation Systems
 
