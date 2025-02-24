@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 from mmdet.models.losses import FocalLoss, SmoothL1Loss, binary_cross_entropy
 from .axis_aligned_iou_loss import AxisAlignedIoULoss, axis_aligned_iou_loss

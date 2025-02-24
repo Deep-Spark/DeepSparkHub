@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 from mmdet.models.backbones import SSDVGG, HRNet, ResNet, ResNetV1d, ResNeXt
 from .dgcnn import DGCNNBackbone

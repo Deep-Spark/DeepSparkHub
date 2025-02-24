@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # model settings
 voxel_size = [0.05, 0.05, 0.1]
 point_cloud_range = [0, -40, -3, 70.4, 40, 1]

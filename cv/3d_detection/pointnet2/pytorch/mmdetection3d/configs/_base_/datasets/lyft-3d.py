@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # If point cloud range is changed, the models should also change their point
 # cloud range accordingly
 point_cloud_range = [-80, -80, -5, 80, 80, 3]

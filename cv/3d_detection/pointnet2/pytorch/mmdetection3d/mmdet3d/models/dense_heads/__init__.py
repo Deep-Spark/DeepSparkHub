@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # Copyright (c) OpenMMLab. All rights reserved.
 from .anchor3d_head import Anchor3DHead
 from .anchor_free_mono3d_head import AnchorFreeMono3DHead
