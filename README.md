@@ -107,19 +107,19 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Face Detection
 
-| Model                                    | Framework | Dataset    |
-|------------------------------------------|-----------|------------|
-| [RetinaFace](cv/face/retinaface/pytorch) | PyTorch   | WIDER FACE |
+| Model                                              | Framework | Dataset    |
+|----------------------------------------------------|-----------|------------|
+| [RetinaFace](cv/face_detection/retinaface/pytorch) | PyTorch   | WIDER FACE |
 
 #### Face Recognition
 
-| Model                                       | Framework    | Dataset            |
-|---------------------------------------------|--------------|--------------------|
-| [ArcFace](cv/face/arcface/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
-| [BlazeFace](cv/face/blazeface/paddlepaddle) | PaddlePaddle | WIDER FACE         |
-| [CosFace](cv/face/cosface/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
-| [FaceNet](cv/face/facenet/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
-| [FaceNet](cv/face/facenet/tensorflow)       | TensorFlow   | CASIA-WebFaces&LFW |
+| Model                                                   | Framework    | Dataset            |
+|---------------------------------------------------------|--------------|--------------------|
+| [ArcFace](cv/face_recognition//arcface/pytorch)         | PyTorch      | CASIA-WebFaces&LFW |
+| [BlazeFace](cv/face_recognition/blazeface/paddlepaddle) | PaddlePaddle | WIDER FACE         |
+| [CosFace](cv/face_recognition/cosface/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
+| [FaceNet](cv/face_recognition/facenet/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
+| [FaceNet](cv/face_recognition/facenet/tensorflow)       | TensorFlow   | CASIA-WebFaces&LFW |
 
 #### Instance Segmentation
 
