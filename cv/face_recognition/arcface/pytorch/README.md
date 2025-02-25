@@ -1,7 +1,11 @@
 # ArcFace
 
 ## Model description
-This repo is a pytorch implement of ArcFace, which propose an Additive Angular Margin Loss to obtain highly discriminative features for face recognition. The proposed ArcFace has a clear geometric interpretation due to the exact correspondence to the geodesic distance on the hypersphere. ArcFace consistently outperforms the state-of-the-art and can be easily implemented with negligible computational overhead
+
+This repo is a pytorch implement of ArcFace, which propose an Additive Angular Margin Loss to obtain highly
+discriminative features for face recognition. The proposed ArcFace has a clear geometric interpretation due to the exact
+correspondence to the geodesic distance on the hypersphere. ArcFace consistently outperforms the state-of-the-art and
+can be easily implemented with negligible computational overhead
 
 ## Step 1: Installation
 
@@ -36,10 +40,10 @@ bash run.sh $GPUS
 
 ## Results
 
-|   model |    FPS | LFW_Accuracy     |
+|   Model |    FPS | LFW_Accuracy     |
 |---------|--------| -----------------|
-| arcface | 38.272 | 0.99000+-0.00615 |
+| ArcFace | 38.272 | 0.99000+-0.00615 |
 
 ## Reference
-- [arcface-pytorch](https://github.com/bubbliiiing/arcface-pytorch)
 
+- [arcface-pytorch](https://github.com/bubbliiiing/arcface-pytorch)
