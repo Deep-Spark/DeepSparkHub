@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 _base_ = './htc_without_semantic_r50_fpn_1x_nuim.py'
 model = dict(
     roi_head=dict(

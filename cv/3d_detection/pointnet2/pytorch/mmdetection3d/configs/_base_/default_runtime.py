@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 checkpoint_config = dict(interval=1)
 # yapf:disable push
 # By default we use textlogger hook and tensorboard

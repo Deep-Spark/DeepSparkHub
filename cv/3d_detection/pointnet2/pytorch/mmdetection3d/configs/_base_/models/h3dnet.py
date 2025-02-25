@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 primitive_z_cfg = dict(
     type='PrimitiveHead',
     num_dims=2,

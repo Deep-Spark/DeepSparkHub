@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # dataset settings
 # D5 in the config name means the whole dataset is divided into 5 folds
 # We only use one fold for efficient experiments

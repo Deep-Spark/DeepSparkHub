@@ -1,3 +1,5 @@
+# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# All Rights Reserved.
 # This schedule is mainly used by models with dynamic voxelization
 # optimizer
 lr = 0.003  # max learning rate
