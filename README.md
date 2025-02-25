@@ -115,7 +115,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                                   | Framework    | Dataset            |
 |---------------------------------------------------------|--------------|--------------------|
-| [ArcFace](cv/face_recognition//arcface/pytorch)         | PyTorch      | CASIA-WebFaces&LFW |
+| [ArcFace](cv/face_recognition/arcface/pytorch)         | PyTorch      | CASIA-WebFaces&LFW |
 | [BlazeFace](cv/face_recognition/blazeface/paddlepaddle) | PaddlePaddle | WIDER FACE         |
 | [CosFace](cv/face_recognition/cosface/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
 | [FaceNet](cv/face_recognition/facenet/pytorch)          | PyTorch      | CASIA-WebFaces&LFW |
