@@ -1,17 +1,19 @@
 # Transformer
 
 ## Model description
+
 The following instructions can be used to train a Transformer model on the IWSLT'14 German to English dataset.
 
 ## Step 1: Installation
-Transformer model is using Fairseq toolbox. Before you run this model, 
-you need to setup Fairseq first.
+
+Transformer model is using Fairseq toolbox. Before you run this model, you need to setup Fairseq first.
 
 ```bash
 # Go to "toolbox/Fairseq" directory in root path
 cd ../../../../toolbox/Fairseq/
 bash install_toolbox_fairseq.sh
 ```
+
 ## Step 2: Preparing datasets
 
 ```bash
@@ -57,9 +59,10 @@ fairseq-generate data-bin/iwslt14.tokenized.de-en \
 
 ## Results
 
-| GPUs | QPS | Train Epochs | Bleu  |
-|------|-----|--------------|------|
-| BI-v100 x8  | 3204.78 | 100           | 35.07 |
+| GPUs       | QPS     | Train Epochs | Bleu  |
+|------------|---------|--------------|-------|
+| BI-v100 x8 | 3204.78 | 100          | 35.07 |
 
 ## Reference
+
 - [Fairseq](https://github.com/facebookresearch/fairseq/tree/v0.10.2)

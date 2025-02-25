@@ -1,11 +1,12 @@
 # Convolutional
 
 ## Model description
-The following instructions can be used to train a Convolutional translation model on the WMT English to German dataset. 
+
+The following instructions can be used to train a Convolutional translation model on the WMT English to German dataset.
 
 ## Step 1: Installation
-Convolutional model is using Fairseq toolbox. Before you run this model, 
-you need to setup Fairseq first.
+
+Convolutional model is using Fairseq toolbox. Before you run this model, you need to setup Fairseq first.
 
 ```bash
 # Go to "toolbox/Fairseq" directory in root path
@@ -53,9 +54,10 @@ fairseq-generate data-bin/wmt17_en_de \
 
 ## Results
 
-| GPUs | QPS | Train Epochs | Evaluate_Bleu  |
-|------|-----|--------------|------------|
-| BI-v100 x8  | 1650.49 | 100           | 25.55 |
+| GPUs       | QPS     | Train Epochs | Evaluate_Bleu |
+|------------|---------|--------------|---------------|
+| BI-v100 x8 | 1650.49 | 100          | 25.55         |
 
 ## Reference
+
 - [Fairseq](https://github.com/facebookresearch/fairseq/tree/v0.10.2)

@@ -1,17 +1,27 @@
-# Ernie
+# ERNIE
 
+## Introduction
+
+ERNIE (Enhanced Representation through Knowledge Integration) is a family of large-scale pre-trained language models
+developed by Baidu. ERNIE is designed to improve on traditional language models by incorporating knowledge from various
+sources, such as structured knowledge graphs, and by integrating multiple linguistic features, including syntax,
+semantics, and common sense. The model achieves this by using a knowledge-enhanced pre-training approach, which helps
+ERNIE better understand and generate more accurate and contextually aware language representations.
 
 ## Step 1: Installing
-```
+
+```sh
 git clone https://github.com/PaddlePaddle/PaddleNLP.git
 ```
-```
+
+```sh
 cd PaddleNLP
 pip3 install -r requirements.txt
 ```
 
 ## Step 2: Training
-```
+
+```sh
 cd examples/text_correction/ernie-csc
 pip3 install -r requirements.txt
 
@@ -26,4 +36,5 @@ python3 -u train.py --batch_size 32 --logging_steps 100 --epochs 10 --learning_r
 ```
 
 ## Reference
+
 - [PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP)

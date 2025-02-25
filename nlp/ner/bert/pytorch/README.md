@@ -25,10 +25,9 @@ git lfs install
 git clone https://huggingface.co/bert-base-uncased
 ```
 
-
 ## Step 3: Training
 
-**Make sure you've got "bert-base-uncased" ready in ./bert-base-uncased**
+> Make sure you've got "bert-base-uncased" ready in ./bert-base-uncased.
 
 ### On single GPU
 
@@ -45,12 +44,14 @@ bash run.sh
 ## e.g. --dataset_name /path/to/conll2003
 bash run_dist.sh
 ```
+
 ## Results on BI-V100
 
-| GPUs | Samples/s  | Loss |
-|------|------|----|
-| 1x1  | 100 | 0.0696 |
-| 1x8  | 252 | 0.0688 |
+| GPUs | Samples/s | Loss   |
+|------|-----------|--------|
+| 1x1  | 100       | 0.0696 |
+| 1x8  | 252       | 0.0688 |
 
 ## Reference
-https://github.com/huggingface/
+
+- [bert-base-uncased](https://huggingface.co/bert-base-uncased)

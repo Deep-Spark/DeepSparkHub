@@ -1,14 +1,14 @@
 # RoBERTa
 
 ## Model description
-RoBERTa iterates on BERT's pretraining procedure, including training the model 
-longer, with bigger batches over more data; removing the next sentence prediction
-objective; training on longer sequences; and dynamically changing the masking
-pattern applied to the training data.
+
+RoBERTa iterates on BERT's pretraining procedure, including training the model longer, with bigger batches over more
+data; removing the next sentence prediction objective; training on longer sequences; and dynamically changing the
+masking pattern applied to the training data.
 
 ## Step 1: Installation
-RoBERTa model is using Fairseq toolbox. Before you run this model, 
-you need to setup Fairseq first.
+
+RoBERTa model is using Fairseq toolbox. Before you run this model, you need to setup Fairseq first.
 
 ```bash
 # Go to "toolbox/Fairseq" directory in root path
@@ -48,9 +48,10 @@ python3 roberta.py
 
 ## Results
 
-| GPUs | QPS | Train Epochs | Accuracy  |
-|------|-----|--------------|------|
-| BI-v100 x8  | 207.5 | 10           | 86.3 |
+| GPUs       | QPS   | Train Epochs | Accuracy |
+|------------|-------|--------------|----------|
+| BI-v100 x8 | 207.5 | 10           | 86.3     |
 
 ## Reference
+
 - [Fairseq](https://github.com/facebookresearch/fairseq/tree/v0.10.2)

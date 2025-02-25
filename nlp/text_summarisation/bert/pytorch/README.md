@@ -24,12 +24,10 @@ bash train.sh
 ```shell
 bash train_dist.sh
 ```
-## Results on BI-V100
+
+## Results
 
 | GPUs | Samples/s | Loss   |
 |------|-----------|--------|
-| 1x1  | 16.71  | 1.8038 |
-| 1x8  | 117.576  | 1.8288 |
-
-## Reference
-https://github.com/huggingface/
+| 1x1  | 16.71     | 1.8038 |
+| 1x8  | 117.576   | 1.8288 |
