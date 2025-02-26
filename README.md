@@ -306,6 +306,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [PP-HumanSegV2](cv/semantic_segmentation/pp_humansegv2/paddlepaddle) | PaddlePaddle | PP-HumanSeg14K |
 | [PP-LiteSeg](cv/semantic_segmentation/pp_liteseg/paddlepaddle)       | PaddlePaddle | Cityscapes     |
 | [PSANet](cv/semantic_segmentation/psanet/pytorch)                    | PyTorch      | COCO           |
+| [PSPNet](cv/semantic_segmentation/pspnet/pytorch)                    | PyTorch      | Cityscapes     |
 | [RefineNet](cv/semantic_segmentation/refinenet/pytorch)              | PyTorch      | COCO           |
 | [SegNet](cv/semantic_segmentation/segnet/pytorch)                    | PyTorch      | COCO           |
 | [STDC](cv/semantic_segmentation/stdc/paddlepaddle)                   | PaddlePaddle | Cityscapes     |
@@ -323,7 +324,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [basicVSR](cv/super_resolution/basicvsr/pytorch)          | PyTorch   | REDS    |
 | [ESRGAN](cv/super_resolution/esrgan/pytorch)              | PyTorch   | DIV2K   |
 | [LIIF](cv/super_resolution/liif/pytorch)                  | PyTorch   | DIV2K   |
-| [RealBasicVSR](cv/super_resolution/real_basicVSR/pytorch) | PyTorch   | REDS    |
+| [RealBasicVSR](cv/super_resolution/real_basicvsr/pytorch) | PyTorch   | REDS    |
 | [TTSR](cv/super_resolution/ttsr/pytorch)                  | PyTorch   | CUFED   |
 | [TTVSR](cv/super_resolution/ttvsr/pytorch)                | PyTorch   | REDS    |
 
