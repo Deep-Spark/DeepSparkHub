@@ -10,10 +10,10 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | Model                                                       | Framework | ToolBox            | Dataset/Weight        |
 |-------------------------------------------------------------|-----------|--------------------|-----------------------|
 | [Aquila2-34B](nlp/llm/aquila2-34b/megatron-deepspeed)       | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
-| [Baichuan2-7B](nlp/llm/baichuan2-7b/Baichuan2)              | PyTorch   | DeepSpeed          | baichuan2-7b-base     |
+| [Baichuan2-7B](nlp/llm/baichuan2-7b/baichuan2)              | PyTorch   | DeepSpeed          | baichuan2-7b-base     |
 | [Bloom-7B1](nlp/llm/bloom-7b1/firefly)                      | PyTorch   | Firefly            | school_math_0.25M     |
 | [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed)                  | PyTorch   | DeepSpeed          | ADGEN & chatglm-6b    |
-| [ChatGLM2-6B SFT](nlp/llm/ChatGLM2-6b-sft)                  | PyTorch   | DeepSpeed          | ADGEN & chatglm2-6b   |
+| [ChatGLM2-6B SFT](nlp/llm/chatglm2-6b-sft)                  | PyTorch   | DeepSpeed          | ADGEN & chatglm2-6b   |
 | [ChatGLM3-6B](nlp/llm/chatglm3-6b/deepspeed/finetune_demo)  | PyTorch   | DeepSpeed          | ADGEN & chatglm3-6b   |
 | [DeepSeekMoE 7B](nlp/llm/deepseek_moe_7b/colossalai)        | PyTorch   | ColossalAI         | deepseek-moe-16b-base |
 | [Llama-7B](nlp/llm/llama-7b/colossalai)                     | PyTorch   | ColossalAI         | llama-7b-hf           |
@@ -30,7 +30,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [QWen-7B](nlp/llm/qwen-7b/firefly)                          | PyTorch   | Firefly            | qwen-7b               |
 | [QWen1.5-7B](nlp/llm/qwen1.5-7b/firefly)                    | PyTorch   | Firefly            | school_math           |
 | [QWen1.5-14B](nlp/llm/qwen1.5-14b/firefly)                  | PyTorch   | Firefly            | school_math           |
-| [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/LLaMA-Factory)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b            |
+| [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/llama-factory)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b            |
 
 ### Computer Vision
 
@@ -75,7 +75,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [RepVGG](cv/classification/repvgg/pytorch)                                    | PyTorch      | ImageNet |
 | [RepVGG](cv/classification/repvgg/paddlepaddle)                               | PaddlePaddle | ImageNet |
 | [RepViT](cv/classification/repvit/pytorch)                                    | PyTorch      | ImageNet |
-| [Res2Net50_14w_8s](cv/classification/Res2Net50_14w_8s/paddlepaddle)           | PaddlePaddle | ImageNet |
+| [Res2Net50_14w_8s](cv/classification/res2net50_14w_8s/paddlepaddle)           | PaddlePaddle | ImageNet |
 | [ResNeSt14](cv/classification/resnest14/pytorch)                              | PyTorch      | ImageNet |
 | [ResNeSt50](cv/classification/resnest50/pytorch)                              | PyTorch      | ImageNet |
 | [ResNeSt50](cv/classification/resnest50/paddlepaddle)                         | PaddlePaddle | ImageNet |
@@ -125,7 +125,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                               | Framework    | Dataset |
 |-----------------------------------------------------|--------------|---------|
-| [SOLO](cv/instance_segmentation/SOLO/pytorch)       | PyTorch      | COCO    |
+| [SOLO](cv/instance_segmentation/solo/pytorch)       | PyTorch      | COCO    |
 | [SOLOv2](cv/detection/solov2/paddlepaddle)          | PaddlePaddle | COCO    |
 | [SOLOv2](cv/instance_segmentation/solov2/pytorch)   | PyTorch      | COCO    |
 | [YOLACT++](cv/instance_segmentation/yolact/pytorch) | PyTorch      | COCO    |
@@ -135,15 +135,15 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | Model                                               | Framework    | Dataset  |
 |-----------------------------------------------------|--------------|----------|
 | [DCGAN](cv/image_generation/dcgan/mindspore)        | MindSpore    | ImageNet |
-| [Pix2Pix](cv/image_generation/Pix2pix/paddlepaddle) | PaddlePaddle | facades  |
+| [Pix2Pix](cv/image_generation/pix2pix/paddlepaddle) | PaddlePaddle | facades  |
 
 #### Knowledge Distillation
 
 | Model                             | Framework | Dataset      |
 |-----------------------------------|-----------|--------------|
-| [CWD](cv/distiller/CWD/pytorch)   | PyTorch   | Cityscapes   |
-| [RKD](cv/distiller/RKD/pytorch)   | PyTorch   | CUB-200-2011 |
-| [WSLD](cv/distiller/WSLD/pytorch) | PyTorch   | ImageNet     |
+| [CWD](cv/distiller/cwd/pytorch)   | PyTorch   | Cityscapes   |
+| [RKD](cv/distiller/rkd/pytorch)   | PyTorch   | CUB-200-2011 |
+| [WSLD](cv/distiller/wsld/pytorch) | PyTorch   | ImageNet     |
 
 #### Object Detection
 
@@ -196,9 +196,9 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                                         | Framework | Dataset          |
 |---------------------------------------------------------------|-----------|------------------|
-| [BEVFormer](cv/3d_detection/BEVFormer/pytorch)                | PyTorch   | nuScenes&CAN bus |
+| [BEVFormer](cv/3d_detection/bevformer/pytorch)                | PyTorch   | nuScenes&CAN bus |
 | [CenterPoint](cv/3d_detection/centerpoint/pytorch)            | PyTorch   | nuScenes         |
-| [PAConv](cv/3d_detection/PAConv/pytorch)                      | PyTorch   | S3DIS            |
+| [PAConv](cv/3d_detection/paconv/pytorch)                      | PyTorch   | S3DIS            |
 | [Part-A2-Anchor](cv/3d_detection/part_a2_anchor/pytorch)      | PyTorch   | KITTI            |
 | [Part-A2-Free](cv/3d_detection/part_a2_free/pytorch)          | PyTorch   | KITTI            |
 | [PointNet++](cv/3d_detection/pointnet2/pytorch/mmdetection3d) | PyTorch   | S3DIS            |
@@ -258,7 +258,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                          | Framework | Dataset  |
 |------------------------------------------------|-----------|----------|
-| [MAE](cv/self_supervised_learning/MAE/pytorch) | PyTorch   | ImageNet |
+| [MAE](cv/self_supervised_learning/mae/pytorch) | PyTorch   | ImageNet |
 
 #### Semantic Segmentation
 
@@ -297,7 +297,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [ICNet](cv/semantic_segmentation/icnet/pytorch)                      | PyTorch      | COCO           |
 | [LedNet](cv/semantic_segmentation/lednet/pytorch)                    | PyTorch      | COCO           |
 | [LinkNet](cv/semantic_segmentation/linknet/pytorch)                  | PyTorch      | COCO           |
-| [Mask2Former](cv/semantic_segmentation/Mask2Former/pytorch)          | PyTorch      | Cityscapes     |
+| [Mask2Former](cv/semantic_segmentation/mask2former/pytorch)          | PyTorch      | Cityscapes     |
 | [MobileSeg](cv/semantic_segmentation/mobileseg/paddlepaddle)         | PaddlePaddle | Cityscapes     |
 | [OCNet](cv/semantic_segmentation/ocnet/pytorch)                      | PyTorch      | COCO           |
 | [OCRNet](cv/semantic_segmentation/ocrnet/paddlepaddle)               | PaddlePaddle | Cityscapes     |
@@ -319,8 +319,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                                     | Framework | Dataset |
 |-----------------------------------------------------------|-----------|---------|
-| [basicVSR++](cv/super_resolution/basicVSR++/pytorch)      | PyTorch   | REDS    |
-| [basicVSR](cv/super_resolution/basicVSR/pytorch)          | PyTorch   | REDS    |
+| [basicVSR++](cv/super_resolution/basicvsr++/pytorch)      | PyTorch   | REDS    |
+| [basicVSR](cv/super_resolution/basicvsr/pytorch)          | PyTorch   | REDS    |
 | [ESRGAN](cv/super_resolution/esrgan/pytorch)              | PyTorch   | DIV2K   |
 | [LIIF](cv/super_resolution/liif/pytorch)                  | PyTorch   | DIV2K   |
 | [RealBasicVSR](cv/super_resolution/real_basicVSR/pytorch) | PyTorch   | REDS    |
@@ -339,12 +339,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                                                  | Framework | Dataset        |
 |------------------------------------------------------------------------|-----------|----------------|
-| [BLIP](multimodal/BLIP/pytorch)                                        | PyTorch   | COCO           |
-| [CLIP](multimodal/Language-Image_Pre-Training/clip/pytorch)            | PyTorch   | CIFAR100       |
-| [ControlNet](multimodal/diffusion/ControlNet)                          | PyTorch   | Fill50K        |
+| [BLIP](multimodal/blip/pytorch)                                        | PyTorch   | COCO           |
+| [CLIP](multimodal/language-image_pre-training/clip/pytorch)            | PyTorch   | CIFAR100       |
+| [ControlNet](multimodal/diffusion/controlnet)                          | PyTorch   | Fill50K        |
 | [DDPM](multimodal/diffusion/ddpm)                                      | PyTorch   | CIFAR-10       |
 | [LLaVA 1.5](multimodal/llava/pytorch)                                  | PyTorch   | LLaVA-Pretrain |
-| [L-Verse](multimodal/Language-Image_Pre-Training/L-Verse/pytorch)      | PyTorch   | ImageNet       |
+| [L-Verse](multimodal/language-image_pre-training/l-verse/pytorch)      | PyTorch   | ImageNet       |
 | [Stable Diffusion 1.4](multimodal/diffusion/stable-diffusion/training) | PyTorch   | pokemon-images |
 | [Stable Diffusion 1.5](multimodal/diffusion/stable-diffusion/sd_1.5)   | PyTorch   | pokemon-images |
 | [Stable Diffusion 2.1](multimodal/diffusion/stable-diffusion/sd_2.1)   | PyTorch   | pokemon-images |
