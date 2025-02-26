@@ -1,4 +1,4 @@
-# Stable Diffusion
+# Stable Diffusion 1.4
 
 ## Model description
 
@@ -30,6 +30,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openmpi3/lib/
 ### Install requirements
 
 ```bash
+
 pip3 install -r requirements.txt
 ```
 
