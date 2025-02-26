@@ -338,19 +338,19 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### Multimodal
 
-| Model                                                                  | Framework | Dataset        |
-|------------------------------------------------------------------------|-----------|----------------|
-| [BLIP](multimodal/blip/pytorch)                                        | PyTorch   | COCO           |
-| [CLIP](multimodal/language-image_pre-training/clip/pytorch)            | PyTorch   | CIFAR100       |
-| [ControlNet](multimodal/diffusion/controlnet)                          | PyTorch   | Fill50K        |
-| [DDPM](multimodal/diffusion/ddpm)                                      | PyTorch   | CIFAR-10       |
-| [LLaVA 1.5](multimodal/llava/pytorch)                                  | PyTorch   | LLaVA-Pretrain |
-| [L-Verse](multimodal/language-image_pre-training/l-verse/pytorch)      | PyTorch   | ImageNet       |
-| [Stable Diffusion 1.4](multimodal/diffusion/stable-diffusion/training) | PyTorch   | pokemon-images |
-| [Stable Diffusion 1.5](multimodal/diffusion/stable-diffusion/sd_1.5)   | PyTorch   | pokemon-images |
-| [Stable Diffusion 2.1](multimodal/diffusion/stable-diffusion/sd_2.1)   | PyTorch   | pokemon-images |
-| [Stable Diffusion 3](multimodal/diffusion/stable-diffusion/sd_3)       | PyTorch   | dog-example    |
-| [Stable Diffusion XL](multimodal/diffusion/stable-diffusion/sd_xl)     | PyTorch   | pokemon-images |
+| Model                                                                           | Framework | Dataset        |
+|---------------------------------------------------------------------------------|-----------|----------------|
+| [BLIP](multimodal/vision-language_model/blip/pytorch)                           | PyTorch   | COCO           |
+| [CLIP](multimodal/contrastive_learning/clip/pytorch)                            | PyTorch   | CIFAR100       |
+| [ControlNet](multimodal/diffusion_model/controlnet)                             | PyTorch   | Fill50K        |
+| [DDPM](multimodal/diffusion_model/ddpm)                                         | PyTorch   | CIFAR-10       |
+| [LLaVA 1.5](multimodal/vision-language_model/llava/pytorch)                     | PyTorch   | LLaVA-Pretrain |
+| [L-Verse](multimodal/vision-language_model/l-verse/pytorch)                     | PyTorch   | ImageNet       |
+| [Stable Diffusion 1.4](multimodal/diffusion_model/stable-diffusion-1.4/pytorch) | PyTorch   | pokemon-images |
+| [Stable Diffusion 1.5](multimodal/diffusion_model/stable-diffusion-1.5/pytorch) | PyTorch   | pokemon-images |
+| [Stable Diffusion 2.1](multimodal/diffusion_model/stable-diffusion-2.1/pytorch) | PyTorch   | pokemon-images |
+| [Stable Diffusion 3](multimodal/diffusion_model/stable-diffusion-3/pytorch)     | PyTorch   | dog-example    |
+| [Stable Diffusion XL](multimodal/diffusion_model/stable-diffusion-xl/pytorch)   | PyTorch   | pokemon-images |
 
 ### NLP (Natural Language Processing)
 

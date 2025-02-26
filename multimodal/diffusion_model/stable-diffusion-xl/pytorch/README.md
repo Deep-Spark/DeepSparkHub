@@ -45,7 +45,7 @@ export VAE_PATH=/path/to/vae_weights
 
 ```sh
 # Go to diffusers path
-cd ${PROJ_ROOT}/multimodal/diffusion/stable-diffusion/diffusers
+cd ${PROJ_ROOT}/toolbox/diffusers
 
 bash run_sd_xl.sh
 ```

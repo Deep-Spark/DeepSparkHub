@@ -1,4 +1,4 @@
-# Stable Diffusion 3
+# Stable Diffusion 2.1
 
 ## Model description
 
@@ -12,20 +12,20 @@ download the weights and data locally.
 
 ### Weights
 
-Download the stabilityai/stable-diffusion-3-medium-diffusers from [huggingface
-page](https://huggingface.co/stabilityai/stable-diffusion-3-medium-diffusers).
+Download the stabilityai/stable-diffusion-2-1-base from [huggingface
+page](https://huggingface.co/stabilityai/stable-diffusion-2-1-base).
 
 ### Datasets
 
-dataset: download the diffusers/dog-example from [huggingface
-page](https://huggingface.co/datasets/diffusers/dog-example).
+Download the lambdalabs/pokemon-blip-captions  from [huggingface
+page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
 
 ## Step 2: Installation
 
 ```bash
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/diffusers-0.29.0-py3-none-any.whl
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/transformers-4.38.1-py3-none-any.whl
-pip3 install -r ../diffusers/requirements.txt
+pip3 install -r requirements.txt
 pip3 install pillow --upgrade
 ```
 
@@ -40,17 +40,14 @@ export DATASET_PATH=/path/to/data
 
 ```bash
 # Go to diffusers path
-cd ${PROJ_ROOT}/multimodal/diffusion/stable-diffusion/diffusers
+cd ${PROJ_ROOT}/toolbox/diffusers
 
-# train
-bash run_sd3_dreambooth.sh
+# Single GPU
+bash run_sd_2.1_single.sh
+
+# Multi GPUs
+bash run_sd_2.1_multi.sh
 ```
-
-## Results
-
-| Model | GPUs    | ips_per_device | ips_per_gpu |
-| ----- | ------- | -------------- | ----------- |
-| SD3   | BI-V150 | 4.34           | 8.68        |
 
 ## Reference
 

@@ -1,4 +1,4 @@
-# Stable Diffusion 2.1
+# Stable Diffusion 1.5
 
 ## Model description
 
@@ -12,12 +12,12 @@ download the weights and data locally.
 
 ### Weights
 
-Download the stabilityai/stable-diffusion-2-1-base from [huggingface
-page](https://huggingface.co/stabilityai/stable-diffusion-2-1-base).
+Download the runwayml/stable-diffusion-v1-5 from [huggingface
+page](https://huggingface.co/runwayml/stable-diffusion-v1-5).
 
 ### Datasets
 
-Download the lambdalabs/pokemon-blip-captions  from [huggingface
+dataset: download the lambdalabs/pokemon-blip-captions  from [huggingface
 page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
 
 ## Step 2: Installation
@@ -40,14 +40,20 @@ export DATASET_PATH=/path/to/data
 
 ```bash
 # Go to diffusers path
-cd ${PROJ_ROOT}/multimodal/diffusion/stable-diffusion/diffusers
+cd ${PROJ_ROOT}/toolbox/diffusers
 
 # Single GPU
-bash run_sd_2.1_single.sh
+bash run_sd_1.5_single.sh
 
 # Multi GPUs
-bash run_sd_2.1_multi.sh
+bash run_sd_1.5_multi.sh
 ```
+
+## Results
+
+| Model  | GPUs    | ips_per_device | ips_per_gpu |
+| ------ | ------- | -------------- | ----------- |
+| SD 1.5 | BI-V150 | 6.76           | 13.5        |
 
 ## Reference
 
