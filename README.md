@@ -7,30 +7,30 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### LLM (Large Language Model)
 
-| Model                                                       | Framework | ToolBox            | Dataset/Weight        |
-|-------------------------------------------------------------|-----------|--------------------|-----------------------|
-| [Aquila2-34B](nlp/llm/aquila2-34b/megatron-deepspeed)       | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
-| [Baichuan2-7B](nlp/llm/baichuan2-7b/baichuan2)              | PyTorch   | DeepSpeed          | baichuan2-7b-base     |
-| [Bloom-7B1](nlp/llm/bloom-7b1/firefly)                      | PyTorch   | Firefly            | school_math_0.25M     |
-| [ChatGLM-6B](nlp/llm/chatglm-6b/deepspeed)                  | PyTorch   | DeepSpeed          | ADGEN & chatglm-6b    |
-| [ChatGLM2-6B SFT](nlp/llm/chatglm2-6b-sft)                  | PyTorch   | DeepSpeed          | ADGEN & chatglm2-6b   |
-| [ChatGLM3-6B](nlp/llm/chatglm3-6b/deepspeed/finetune_demo)  | PyTorch   | DeepSpeed          | ADGEN & chatglm3-6b   |
-| [DeepSeekMoE 7B](nlp/llm/deepseek_moe_7b/colossalai)        | PyTorch   | ColossalAI         | deepseek-moe-16b-base |
-| [Llama-7B](nlp/llm/llama-7b/colossalai)                     | PyTorch   | ColossalAI         | llama-7b-hf           |
-| [Llama2-7B](nlp/llm/llama2-7b/megatron-deepspeed)           | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
-| [Llama2-7B RMF](nlp/llm/llama2-7b_reward_sft/deepspeed)     | PyTorch   | DeepSpeed          | Dahoas/rm-static      |
-| [Llama2-7B RLHF](nlp/llm/llama2-7b_rlhf/megatron-deepspeed) | PyTorch   | Megatron-DeepSpeed | llama2-7b&tiny-llama  |
-| [Llama2-7B SFT](nlp/llm/llama2-7b_sft/megatron-deepspeed)   | PyTorch   | Megatron-DeepSpeed | GPT Small-117M        |
-| [Llama2-13B](nlp/llm/llama2-13b/megatron-deepspeed)         | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
-| [Llama2-34B](nlp/llm/llama2-34b/megatron-deepspeed)         | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
-| [Llama3-8B](nlp/llm/llama3_8b/megatron-deepspeed)           | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
-| [Llama3-8B SFT](nlp/llm/llama3_8b/colossalai)               | PyTorch   | ColossalAI         | school_math_0.25M     |
-| [Mamba-2](nlp/llm/mamba-2/megatron-lm)                      | PyTorch   | Megatron-LM        | GPT Small-117M        |
-| [Mixtral 8x7B](nlp/llm/mixtral/megatron-lm)                 | PyTorch   | Megatron-LM        | GPT Small-117M        |
-| [QWen-7B](nlp/llm/qwen-7b/firefly)                          | PyTorch   | Firefly            | qwen-7b               |
-| [QWen1.5-7B](nlp/llm/qwen1.5-7b/firefly)                    | PyTorch   | Firefly            | school_math           |
-| [QWen1.5-14B](nlp/llm/qwen1.5-14b/firefly)                  | PyTorch   | Firefly            | school_math           |
-| [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/llama-factory)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b            |
+| Model                                                 | Framework | ToolBox            | Dataset/Weight        |
+|-------------------------------------------------------|-----------|--------------------|-----------------------|
+| [Aquila2-34B](nlp/llm/aquila2-34b/pytorch)            | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
+| [Baichuan2-7B](nlp/llm/baichuan2-7b/pytorch)          | PyTorch   | DeepSpeed          | baichuan2-7b-base     |
+| [Bloom-7B1](nlp/llm/bloom-7b1/pytorch)                | PyTorch   | Firefly            | school_math_0.25M     |
+| [ChatGLM-6B](nlp/llm/chatglm-6b/pytorch)              | PyTorch   | DeepSpeed          | ADGEN & chatglm-6b    |
+| [ChatGLM2-6B SFT](nlp/llm/chatglm2-6b-sft/pytorch)    | PyTorch   | DeepSpeed          | ADGEN & chatglm2-6b   |
+| [ChatGLM3-6B](nlp/llm/chatglm3-6b/pytorch)            | PyTorch   | DeepSpeed          | ADGEN & chatglm3-6b   |
+| [DeepSeekMoE 7B](nlp/llm/deepseek_moe_7b/pytorch)     | PyTorch   | ColossalAI         | deepseek-moe-16b-base |
+| [Llama-7B](nlp/llm/llama-7b/pytorch)                  | PyTorch   | ColossalAI         | llama-7b-hf           |
+| [Llama2-7B](nlp/llm/llama2-7b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
+| [Llama2-7B RMF](nlp/llm/llama2-7b_reward_sft/pytorch) | PyTorch   | DeepSpeed          | Dahoas/rm-static      |
+| [Llama2-7B RLHF](nlp/llm/llama2-7b_rlhf/pytorch)      | PyTorch   | Megatron-DeepSpeed | llama2-7b&tiny-llama  |
+| [Llama2-7B SFT](nlp/llm/llama2-7b_sft/pytorch)        | PyTorch   | Megatron-DeepSpeed | GPT Small-117M        |
+| [Llama2-13B](nlp/llm/llama2-13b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
+| [Llama2-34B](nlp/llm/llama2-34b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
+| [Llama3-8B](nlp/llm/llama3_8b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus            |
+| [Llama3-8B SFT](nlp/llm/llama3_8b_sft/pytorch)        | PyTorch   | ColossalAI         | school_math_0.25M     |
+| [Mamba-2](nlp/llm/mamba-2/pytorch)                    | PyTorch   | Megatron-LM        | GPT Small-117M        |
+| [Mixtral 8x7B](nlp/llm/mixtral/pytorch)               | PyTorch   | Megatron-LM        | GPT Small-117M        |
+| [QWen-7B](nlp/llm/qwen-7b/pytorch)                    | PyTorch   | Firefly            | qwen-7b               |
+| [QWen1.5-7B](nlp/llm/qwen1.5-7b/pytorch)              | PyTorch   | Firefly            | school_math           |
+| [QWen1.5-14B](nlp/llm/qwen1.5-14b/pytorch)            | PyTorch   | Firefly            | school_math           |
+| [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/pytorch)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b            |
 
 ### Computer Vision
 
