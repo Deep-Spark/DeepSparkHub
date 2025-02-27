@@ -7,7 +7,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### LLM (Large Language Model)
 
-| Model                                                 | Framework | ToolBox            | Dataset/Weight        | SDK |
+| Model                                                 | Framework | ToolBox            | Dataset/Weight        | IXUCA SDK |
 |-------------------------------------------------------|-----------|--------------------|-----------------------|-------|
 |  [Aquila2-34B](nlp/llm/aquila2-34b/pytorch)             |  PyTorch    |  Megatron-DeepSpeed  |  Bookcorpus             | 4.1.1 |
 |  [Baichuan2-7B](nlp/llm/baichuan2-7b/pytorch)           |  PyTorch    |  DeepSpeed           |  baichuan2-7b-base      | 4.1.1 |
@@ -36,7 +36,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Classification
 
-| Model                                                                         | Framework    | Dataset  | SDK |
+| Model                                                                         | Framework    | Dataset  | IXUCA SDK |
 |-------------------------------------------------------------------------------|--------------|----------|-------|
 |  [ACmix](cv/classification/acmix/pytorch)                                       |  PyTorch       |  ImageNet  | 2.2.0 |
 |  [ACNet](cv/classification/acnet/pytorch)                                       |  PyTorch       |  ImageNet  | 3.1.0 |
@@ -107,13 +107,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Face Detection
 
-| Model                                              | Framework | Dataset    | SDK |
+| Model                                              | Framework | Dataset    | IXUCA SDK |
 |----------------------------------------------------|-----------|------------|-------|
 |  [RetinaFace](cv/face_detection/retinaface/pytorch)  |  PyTorch    |  WIDER FACE  | 3.0.0 |
 
 #### Face Recognition
 
-| Model                                                   | Framework    | Dataset            | SDK |
+| Model                                                   | Framework    | Dataset            | IXUCA SDK |
 |---------------------------------------------------------|--------------|--------------------|-------|
 |  [ArcFace](cv/face_recognition/arcface/pytorch)          |  PyTorch       |  CASIA-WebFaces&LFW  | 3.0.0 |
 |  [BlazeFace](cv/face_recognition/blazeface/paddlepaddle)  |  PaddlePaddle  |  WIDER FACE          | 3.1.0 |
@@ -123,7 +123,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Instance Segmentation
 
-| Model                                               | Framework    | Dataset | SDK |
+| Model                                               | Framework    | Dataset | IXUCA SDK |
 |-----------------------------------------------------|--------------|---------|-------|
 |  [SOLO](cv/instance_segmentation/solo/pytorch)        |  PyTorch       |  COCO     | 3.0.0 |
 |  [SOLOv2](cv/detection/solov2/paddlepaddle)           |  PaddlePaddle  |  COCO     | 3.0.0 |
@@ -132,14 +132,14 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Image Generation
 
-| Model                                               | Framework    | Dataset  | SDK |
+| Model                                               | Framework    | Dataset  | IXUCA SDK |
 |-----------------------------------------------------|--------------|----------|-------|
 |  [DCGAN](cv/image_generation/dcgan/mindspore)         |  MindSpore     |  ImageNet  | 3.0.0 |
 |  [Pix2Pix](cv/image_generation/pix2pix/paddlepaddle)  |  PaddlePaddle  |  facades   | 3.1.0 |
 
 #### Knowledge Distillation
 
-| Model                             | Framework | Dataset      | SDK |
+| Model                             | Framework | Dataset      | IXUCA SDK |
 |-----------------------------------|-----------|--------------|-------|
 |  [CWD](cv/distiller/cwd/pytorch)    |  PyTorch    |  Cityscapes    | 3.0.0 |
 |  [RKD](cv/distiller/rkd/pytorch)    |  PyTorch    |  CUB-200-2011  | 3.0.0 |
@@ -147,7 +147,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Object Detection
 
-| Model                                                         | Framework             | Dataset | SDK |
+| Model                                                         | Framework             | Dataset | IXUCA SDK |
 |---------------------------------------------------------------|-----------------------|---------|-------|
 |  [ATSS](cv/detection/atss_mmdet/pytorch)                        |  PyTorch (MMDetection)  |  COCO     | 3.0.0 |
 |  [AutoAssign](cv/detection/autoassign/pytorch)                  |  PyTorch                |  COCO     | 2.2.0 |
@@ -194,7 +194,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### 3D Object Detection
 
-| Model                                                         | Framework | Dataset          | SDK |
+| Model                                                         | Framework | Dataset          | IXUCA SDK |
 |---------------------------------------------------------------|-----------|------------------|-------|
 |  [BEVFormer](cv/3d_detection/bevformer/pytorch)                 |  PyTorch    |  nuScenes&CAN bus  | 3.0.0 |
 |  [CenterPoint](cv/3d_detection/centerpoint/pytorch)             |  PyTorch    |  nuScenes          | 3.1.1 |
@@ -210,13 +210,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### 3D Reconstruction
 
-| Model                                             | Framework | Dataset | SDK |
+| Model                                             | Framework | Dataset | IXUCA SDK |
 |---------------------------------------------------|-----------|---------|-------|
 |  [HashNeRF](cv/3d-reconstruction/hashnerf/pytorch)  |  PyTorch    |  fox      | 2.2.0 |
 
 #### GNN (Graph Neural Network)
 
-| Model                                      | Framework    | Dataset                  | SDK |
+| Model                                      | Framework    | Dataset                  | IXUCA SDK |
 |--------------------------------------------|--------------|--------------------------|-------|
 |  [GAT](cv/gnn/gat/paddlepaddle)              |  PaddlePaddle  |  CORA                      | 3.1.0 |
 |  [GCN](cv/gnn/GCN/mindspore)                 |  MindSpore     |  CORA & Citeseer           | 3.0.0 |
@@ -225,7 +225,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### OCR
 
-| Model                                          | Framework    | Dataset   | SDK |
+| Model                                          | Framework    | Dataset   | IXUCA SDK |
 |------------------------------------------------|--------------|-----------|-------|
 |  [CRNN](cv/ocr/crnn/mindspore)                   |  MindSpore     |  OCR_Recog  | 3.1.0 |
 |  [CRNN](cv/ocr/crnn/paddlepaddle)                |  PaddlePaddle  |  LMDB       | 2.3.0 |
@@ -241,13 +241,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Point Cloud
 
-| Model                                           | Framework | Dataset                         | SDK |
+| Model                                           | Framework | Dataset                         | IXUCA SDK |
 |-------------------------------------------------|-----------|---------------------------------|-------|
 |  [Point-BERT](cv/point_cloud/point-bert/pytorch)  |  PyTorch    |  ShapeNet55 & processed ModelNet  | 2.2.0 |
 
 #### Pose Estimation
 
-| Model                                   | Framework    | Dataset | SDK |
+| Model                                   | Framework    | Dataset | IXUCA SDK |
 |-----------------------------------------|--------------|---------|-------|
 |  [AlphaPose](cv/pose/alphapose/pytorch)   |  PyTorch       |  COCO     | 3.0.0 |
 |  [HRNet](cv/pose/hrnet/pytorch)           |  PyTorch       |  COCO     | 2.2.0 |
@@ -256,13 +256,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Self-Supervised Learning
 
-| Model                                          | Framework | Dataset  | SDK |
+| Model                                          | Framework | Dataset  | IXUCA SDK |
 |------------------------------------------------|-----------|----------|-------|
 |  [MAE](cv/self_supervised_learning/mae/pytorch)  |  PyTorch    |  ImageNet  | 3.0.0 |
 
 #### Semantic Segmentation
 
-| Model                                                                | Framework    | Dataset        | SDK |
+| Model                                                                | Framework    | Dataset        | IXUCA SDK |
 |----------------------------------------------------------------------|--------------|----------------|-------|
 |  [3D-UNet](cv/semantic_segmentation/unet3d/pytorch)                    |  PyTorch       |  kits19          | 2.2.0 |
 |  [APCNet](cv/semantic_segmentation/apcnet/pytorch)                     |  PyTorch       |  Cityscapes      | 2.2.0 |
@@ -318,7 +318,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Super Resolution
 
-| Model                                                     | Framework | Dataset | SDK |
+| Model                                                     | Framework | Dataset | IXUCA SDK |
 |-----------------------------------------------------------|-----------|---------|-------|
 |  [basicVSR++](cv/super_resolution/basicvsr++/pytorch)       |  PyTorch    |  REDS     | 2.2.0 |
 |  [basicVSR](cv/super_resolution/basicvsr/pytorch)           |  PyTorch    |  REDS     | 2.2.0 |
@@ -330,7 +330,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Multi-Object Tracking
 
-| Model                                           | Framework    | Dataset     | SDK |
+| Model                                           | Framework    | Dataset     | IXUCA SDK |
 |-------------------------------------------------|--------------|-------------|-------|
 |  [ByteTrack](cv/multi_object_tracking/bytetrack/paddlepaddle)  |  PaddlePaddle  |  MOT17        | 3.1.0 |
 |  [DeepSORT](cv/multi_object_tracking/deep_sort/pytorch)        |  PyTorch       |  Market-1501  | 3.0.0 |
@@ -338,7 +338,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### Multimodal
 
-| Model                                                                           | Framework | Dataset        | SDK |
+| Model                                                                           | Framework | Dataset        | IXUCA SDK |
 |---------------------------------------------------------------------------------|-----------|----------------|-------|
 |  [BLIP](multimodal/vision-language_model/blip/pytorch)                            |  PyTorch    |  COCO            | 3.1.1 |
 |  [CLIP](multimodal/contrastive_learning/clip/pytorch)                             |  PyTorch    |  CIFAR100        | 2.2.0 |
@@ -356,19 +356,19 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Cloze Test
 
-| Model                                                   | Framework | Dataset               | SDK |
+| Model                                                   | Framework | Dataset               | IXUCA SDK |
 |---------------------------------------------------------|-----------|-----------------------|-------|
 |  [GLM](nlp/cloze_test/glm/pytorch/GLMForMultiTokenCloze)  |  PyTorch    |  GLMForMultiTokenCloze  | 2.2.0 |
 
 #### Dialogue Generation
 
-| Model                                      | Framework | Dataset | SDK |
+| Model                                      | Framework | Dataset | IXUCA SDK |
 |--------------------------------------------|-----------|---------|-------|
 |  [CPM](nlp/dialogue_generation/cpm/pytorch)  |  PyTorch    |  STC      | 2.2.0 |
 
 #### Language Modeling
 
-| Model                                                            | Framework         | Dataset            | SDK |
+| Model                                                            | Framework         | Dataset            | IXUCA SDK |
 |------------------------------------------------------------------|-------------------|--------------------|-------|
 |  [BART](nlp/language_model/bart_fairseq/pytorch)                   |  PyTorch (Fairseq)  |  RTE                 | 3.0.0 |
 |  [BERT NER](nlp/ner/bert/pytorch)                                  |  PyTorch            |  CoNLL-2003          | 3.0.0 |
@@ -385,13 +385,13 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Text Correction
 
-| Model                                           | Framework    | Dataset | SDK |
+| Model                                           | Framework    | Dataset | IXUCA SDK |
 |-------------------------------------------------|--------------|---------|-------|
 |  [ERNIE](nlp/text_correction/ernie/paddlepaddle)  |  PaddlePaddle  |  corpus   | 2.3.0 |
 
 #### Translation
 
-| Model                                                          | Framework         | Dataset | SDK |
+| Model                                                          | Framework         | Dataset | IXUCA SDK |
 |----------------------------------------------------------------|-------------------|---------|-------|
 |  [Convolutional](nlp/translation/convolutional_fairseq/pytorch)  |  PyTorch (Fairseq)  |  WMT14    | 3.0.0 |
 |  [T5](nlp/translation/t5/pytorch)                                |  PyTorch            |  WMT14    | 2.2.0 |
@@ -400,7 +400,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### Reinforcement Learning
 
-| Model                                                              | Framework    | Dataset     | SDK |
+| Model                                                              | Framework    | Dataset     | IXUCA SDK |
 |--------------------------------------------------------------------|--------------|-------------|-------|
 |  [DQN](reinforcement_learning/q-learning-networks/dqn/paddlepaddle)  |  PaddlePaddle  |  CartPole-v0  | 3.1.0 |
 
@@ -408,7 +408,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Speech Recognition
 
-| Model                                                                                   | Framework       | Dataset  | SDK |
+| Model                                                                                   | Framework       | Dataset  | IXUCA SDK |
 |-----------------------------------------------------------------------------------------|-----------------|----------|-------|
 |  [Conformer](audio/speech_recognition/conformer_wenet/pytorch)                            |  PyTorch (WeNet)  |  AISHELL   | 2.2.0 |
 |  [Efficient Conformer v2](audio/speech_recognition/efficient_conformer_v2_wenet/pytorch)  |  PyTorch (WeNet)  |  AISHELL   | 3.1.0 |
@@ -420,7 +420,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Speech Synthesis
 
-| Model                                                                 | Framework    | Dataset     | SDK |
+| Model                                                                 | Framework    | Dataset     | IXUCA SDK |
 |-----------------------------------------------------------------------|--------------|-------------|-------|
 |  [PP-TTS-FastSpeech2](audio/speech_synthesis/fastspeech2/paddlepaddle)  |  PaddlePaddle  |  CSMSC        | 3.1.0 |
 |  [PP-TTS-HiFiGAN](audio/speech_synthesis/hifigan/paddlepaddle)          |  PaddlePaddle  |  CSMSC        | 3.1.0 |
@@ -432,25 +432,25 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 #### Graph Machine Learning
 
-| Model                                                                | Framework | Dataset            | SDK |
+| Model                                                                | Framework | Dataset            | IXUCA SDK |
 |----------------------------------------------------------------------|-----------|--------------------|-------|
 |  [Graph WaveNet](others/graph_machine_learning/graph_wavenet/pytorch)  |  PyTorch    |  METR-LA & PEMS-BAY  | 2.2.0 |
 
 #### Kolmogorov-Arnold Networks
 
-| Model                                                | Framework | Dataset | SDK |
+| Model                                                | Framework | Dataset | IXUCA SDK |
 |------------------------------------------------------|-----------|---------|-------|
 |  [KAN](others/kolmogorov_arnold_networks/kan/pytorch)  |  PyTorch    |  -        | 4.1.1 |
 
 #### Model Pruning
 
-| Model                                                             | Framework | Dataset      | SDK |
+| Model                                                             | Framework | Dataset      | IXUCA SDK |
 |-------------------------------------------------------------------|-----------|--------------|-------|
 |  [Network Slimming](others/model_pruning/network-slimming/pytorch)  |  PyTorch    |  CIFAR-10/100  | 3.0.0 |
 
 #### Recommendation Systems
 
-| Model                                                             | Framework    | Dataset         | SDK |
+| Model                                                             | Framework    | Dataset         | IXUCA SDK |
 |-------------------------------------------------------------------|--------------|-----------------|-------|
 |  [DeepFM](others/recommendation_systems/deepfm/paddlepaddle)        |  PaddlePaddle  |  Criteo_Terabyte  | 2.3.0 |
 |  [DLRM](others/recommendation_systems/dlrm/pytorch)                 |  PyTorch       |  Criteo_Terabyte  | 2.2.0 |
