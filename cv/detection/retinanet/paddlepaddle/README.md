@@ -13,7 +13,13 @@ single-stage approaches, offering an excellent balance between performance and e
 ### Prepare Resources
 
 ```bash
-git clone https://github.com/PaddlePaddle/PaddleDetection.git
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleDetection.git -b release2.6 --depth=1
 
 cd PaddleDetection/
 # Get COCO Dataset

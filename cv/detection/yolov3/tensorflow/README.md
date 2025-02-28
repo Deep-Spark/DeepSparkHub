@@ -40,6 +40,12 @@ Exporting loaded COCO weights as TF checkpoint(yolov3_coco.ckpt)[BaiduCloud](htt
 ### Install Dependencies
 
 ```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
 bash init_tf.sh
 ```
 

@@ -47,14 +47,16 @@ sed -i 's#^#val/#g' val_list.txt
 ### Install Dependencies
 
 ```bash
+# Install libGL
+## CentOS
 yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
-git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas/
+git clone https://github.com/PaddlePaddle/PaddleClas.git -b release/2.6 --depth=1
+cd PaddleClas
 pip3 install -r requirements.txt
-pip3 install paddleclas
-pip3 install protobuf==3.20.3
-pip3 install urllib3==1.26.15
+python3 setup.py install
 
 ```
 

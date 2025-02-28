@@ -152,9 +152,13 @@ ln -s ../ByteTrack/datasets/mot/annotations ./
 ### Install Dependencies
 
 ```bash
-yum install mesa-libGL -y
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
-git clone https://github.com/PaddlePaddle/PaddleDetection.git
+git clone https://github.com/PaddlePaddle/PaddleDetection.git -b release2.6 --depth=1
 cd PaddleDetection/
 
 pip3 install -r requirements.txt

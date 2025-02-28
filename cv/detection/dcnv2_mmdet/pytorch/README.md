@@ -78,6 +78,5 @@ bash tools/dist_train.sh configs/dcnv2/faster-rcnn_r50-mdconv-c3-c5_fpn_1x_coco.
  |-------|------------|------|
  | DCNv2 | BI-V100 x8 | 41.2 |
 
-## References
-
-- [Paper](https://arxiv.org/abs/1811.11168)
+## Reference
+[mmdetection](https://github.com/open-mmlab/mmdetection)

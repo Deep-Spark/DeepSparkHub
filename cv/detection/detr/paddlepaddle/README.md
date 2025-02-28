@@ -13,7 +13,13 @@ while achieving competitive performance on benchmarks like COCO, offering a new 
 ### Prepare Resources
 
 ```bash
-git clone https://github.com/PaddlePaddle/PaddleDetection.git
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleDetection.git -b release2.6 --depth=1
 
 cd PaddleDetection/
 # Get COCO Dataset
@@ -52,3 +58,7 @@ python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c co
 | Model | GPU        | learning rate | FPS   | Train Epochs | Box AP |
 |-------|------------|---------------|-------|--------------|--------|
 | DETR  | BI-V100 x8 | 0.00001       | 14.64 | 1            | 42.0   |
+
+## Reference
+
+- [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)

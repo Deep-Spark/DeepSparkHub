@@ -17,7 +17,7 @@
 export TF_CUDNN_USE_AUTOTUNE=1
 export TF_CPP_MIN_LOG_LEVEL=1
 
-: ${BATCH_SIZE:=256}
+: ${BATCH_SIZE:=32}
 #TRAIN_EPOCHS=10
 # optional optimizer: adam, rmsprop, momentum, sgd
 OPTIMIZER=momentum

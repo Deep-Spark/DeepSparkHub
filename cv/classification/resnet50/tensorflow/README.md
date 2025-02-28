@@ -39,3 +39,6 @@ bash run_train_resnet50_multigpu_imagenette.sh
 | Model    | GPU        | acc    | fps   |
 |----------|------------|--------|-------|
 | ResNet50 | BI-V100 x8 | 0.9860 | 236.9 |
+
+## Reference
+- [TensorFlow/benchmarks](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks)

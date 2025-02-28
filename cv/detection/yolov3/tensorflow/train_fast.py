@@ -227,6 +227,8 @@ class YoloTrain(object):
             self.summary_writer.add_summary(summary, global_step_val)
             pbar.set_description("train loss: %.2f" % train_step_loss)
 
+        # fix epoch not assign
+        epoch = 1+self.first_stage_epochs+self.second_stage_epochs
         train_epoch_loss = np.mean(train_epoch_loss)
         log_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         print("=> Epoch: %2d Time: %s Train loss: %.2f..."

@@ -13,7 +13,13 @@ tasks while maintaining real-time capabilities, making it suitable for various c
 ### Prepare Resources
 
 ```bash
-git clone https://github.com/PaddlePaddle/PaddleDetection.git
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleDetection.git -b release2.6 --depth=1
 
 cd PaddleDetection/
 # Get COCO Dataset
@@ -47,3 +53,7 @@ python3 tools/train.py -c configs/solov2/solov2_r50_fpn_1x_coco.yml --eval
 | Model  | GPU        | FPS  | Train Epochs | mAP  |
 |--------|------------|------|--------------|------|
 | SOLOv2 | BI-V100 x8 | 6.39 | 12           | 35.4 |
+
+## Reference
+
+- [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)

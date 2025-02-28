@@ -61,7 +61,7 @@ one should execute:
 ```bash
 git clone https://github.com/youngwanLEE/centermask2.git
 cd centermask2
-python3 train_net.py --config-file "configs/centermask/centermask_V_39_eSE_FPN_ms_3x.yaml" --num-gpus 8
+python3 train_net.py --config-file configs/centermask/centermask_R_50_FPN_ms_3x.yaml --num-gpus 8
 ```
 
 ## References

@@ -6,7 +6,7 @@ import os.path as ospath
 from argparse import ArgumentParser, REMAINDER
 from functools import partial, wraps
 from typing import NamedTuple
-import platform
+# import platform # python3.5已弃用
 
 
 # =========================================================
@@ -268,12 +268,27 @@ def install_extensions():
 
     return exec_shell_cmds(cmds)
 
+def get_linux_distro():
+    try:
+        with open('/etc/os-release') as f:
+            for line in f:
+                if line.startswith('NAME='):
+                    # 提取 NAME 字段的值（例如 "Ubuntu" 或 "CentOS"）
+                    name = line.split('=')[1].strip().strip('"')
+                    if 'Ubuntu' in name:
+                        return 'Ubuntu'
+                    elif 'CentOS' in name:
+                        return 'CentOS'
+                    else:
+                        return name  # 返回其他发行版名称
+    except FileNotFoundError:
+        return 'Unknown Linux distribution'
 
 def pipelines():
-    plat = [x.lower() for x in platform.platform().split("-")]
-    if "centos" in plat:
+    plat = get_linux_distro().lower()
+    if "centos" == plat:
         res = [install_yum_packages]
-    elif "debian" in plat or "ubuntu" in plat:
+    elif "ubuntu" == plat:
         res = [install_apt_packages]
     else:
         raise Exception("Invalid Platform, only support Centos and Debian!")

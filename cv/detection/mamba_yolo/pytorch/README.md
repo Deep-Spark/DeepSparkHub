@@ -49,9 +49,8 @@ vim ultralytics/cfg/datasets/coco.yaml
 
 ```sh
 pip3 install seaborn thop timm einops
-
 git clone --depth 1 https://gitee.com/deep-spark/deepsparkhub-GPL.git
-cd cv/detection/mamba-yolo/pytorch
+cd deepsparkhub-GPL/cv/detection/mamba-yolo/pytorch
 
 cd selective_scan && pip install . && cd ..
 pip install -v -e .

@@ -77,6 +77,5 @@ bash tools/dist_train.sh configs/reppoints/reppoints-moment_r101-dconv-c3-c5_fpn
 |-----------|------------|----------|
 | RepPoints | BI-V100 x8 | MAP=43.2 |
 
-## References
-
-- [Paper](https://arxiv.org/abs/1904.11490)
+## Reference
+[mmdetection](https://github.com/open-mmlab/mmdetection)

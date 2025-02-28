@@ -51,10 +51,6 @@ git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
 cd mmdetection
 pip install -v -e .
 
-# Install requirements
-pip3 install -r requirements.txt
-pip3 install urllib3==1.26.15
-
 # Download repo
 git clone https://github.com/Sense-X/Co-DETR.git
 cd /path/to/Co-DETR
@@ -72,12 +68,9 @@ ln -s /path/to/coco ./data
 export CUDA_VISIBLE_DEVICES=0
 python3 tools/train.py projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_coco.py --work-dir path_to_exp --no-validate --auto-resume
 
-# Eight GPUs
-bash tools/dist_train.sh projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_coco.py 8 path_to_exp --no-validate --auto-resume
-
-# Evaluation
-export CUDA_VISIBLE_DEVICES=0
-PYTHONPATH=".:$PYTHONPATH" python3 tools/test.py projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_coco.py path_to_exp/latest.pth --eval bbox
+sed -i 's/python /python3 /g' tools/dist_train.sh
+# Multiple GPUs on one machine
+bash tools/dist_train.sh  projects/CO-DETR/configs/codino/co_dino_5scale_r50_lsj_8xb2_1x_coco.py 8
 ```
 
 ## Model Results
@@ -86,7 +79,5 @@ PYTHONPATH=".:$PYTHONPATH" python3 tools/test.py projects/configs/co_deformable_
 |---------|------------|------|--------------|--------|
 | Co-DETR | BI-V100 x8 | 9.02 | 12           | 0.428  |
 
-## References
-
-- [Paper](https://arxiv.org/pdf/2211.12860.pdf)
-- [Co-DETR](https://github.com/Sense-X/Co-DETR)
+## Reference
+[mmdetection](https://github.com/open-mmlab/mmdetection)
