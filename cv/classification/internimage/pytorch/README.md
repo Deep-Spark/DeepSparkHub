@@ -12,8 +12,11 @@
 -  `PyTorch>=1.10.0` and `torchvision>=0.9.0` with `CUDA>=10.2`
 
 ```bash
-## Install libGL
+# Install libGL
+## CentOS
 yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
 ## Install mmcv
 cd mmcv/

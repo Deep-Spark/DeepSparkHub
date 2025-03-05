@@ -7,8 +7,16 @@ This paper revisits feature pyramids networks (FPN) for one-stage detectors and 
 ## Step 1: Installing packages
 
 ```bash
-pip3 install -r requirements.txt
-MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 
 ## Step 2: Preparing datasets
@@ -39,26 +47,27 @@ coco2017
 ```bash
 mkdir -p data
 ln -s /path/to/coco2017 data/coco
+
+# Prepare resnet50_caffe-788b5fa3.pth, skip this if fast network
+mkdir -p /root/.cache/torch/hub/checkpoints/
+wget -O /root/.cache/torch/hub/checkpoints/resnet50_caffe-788b5fa3.pth https://download.openmmlab.com/pretrain/third_party/resnet50_caffe-788b5fa3.pth
 ```
 
-## Step 2: Training
+## Step 3: Training
 
 #### Training on a single GPU
 
 ```bash
-bash train.sh
+python3 tools/train.py configs/yolof/yolof_r50-c5_8xb8-1x_coco.py
 ```
 
 #### Training on multiple GPUs
 
 ```bash
-bash train_dist.sh ${CONFIG_FILE} ${GPU_NUM} [optional arguments]
-```
+sed -i 's/python /python3 /g' tools/dist_train.sh
 
-for example,
-
-```bash
-bash train_dist.sh configs/yolof/yolof_r50_c5_8x8_1x_coco.py 8
+# Multiple GPUs on one machine
+bash tools/dist_train.sh configs/yolof/yolof_r50-c5_8xb8-1x_coco.py 8
 ```
 
 ## Reference

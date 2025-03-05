@@ -7,19 +7,16 @@ In this work, we aim at building a simple, direct, and fast instance segmentatio
 ## Step 1: Installation
 
 ```bash
-# Install mmcv
-pushd ../../../../toolbox/MMDetection
-bash prepare_mmcv.sh v2.0.0rc4
-popd
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
-# Install mmdetection
-git clone -b v3.2.0 https://github.com/open-mmlab/mmdetection.git
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
 cd mmdetection
-pip3 install -r requirements.txt
-python3 setup.py develop
-
-# Install mmengine
-pip3 install mmengine==0.8.3
+pip install -v -e .
 
 # Prepare resnet50-0676ba61.pth, skip this if fast network
 mkdir -p /root/.cache/torch/hub/checkpoints/
@@ -27,9 +24,7 @@ wget https://download.pytorch.org/models/resnet50-0676ba61.pth -O /root/.cache/t
 
 # Install others
 pip3 install yapf==0.31.0 urllib3==1.26.18
-yum install -y mesa-libGL
 ```
-
 
 ## Step 2: Preparing datasets
 

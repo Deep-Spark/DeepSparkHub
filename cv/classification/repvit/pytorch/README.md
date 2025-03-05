@@ -10,9 +10,10 @@ Recently, lightweight Vision Transformers (ViTs) demonstrate superior performanc
 ## Step 1: Installation
 
 ```bash
-
+git clone https://github.com/THU-MIG/RepViT.git
+cd RepViT
+git checkout 298f42075eda5d2e6102559fad260c970769d34e
 pip3 install -r requirements.txt
-
 ```
 
 ## Step 2: Preparing datasets
@@ -60,4 +61,4 @@ wandb: (3) Don't visualize my results
 |BI-V100 x8|1.5984 s / it| Acc@1 78.53% |
 
 ## Reference
-- [RepViT](https://github.com/THU-MIG/RepViT)
+[RepViT](https://github.com/THU-MIG/RepViT/tree/298f42075eda5d2e6102559fad260c970769d34e)

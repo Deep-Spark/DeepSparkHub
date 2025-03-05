@@ -1,1 +1,0 @@
-PORT=12345 ./tools/dist_test.sh configs/sem_fpn/fpn_repvit_m1_1_ade20k_40k.py seg_pretrain/repvit_m1_1_ade20k.pth 8 --eval mIoU

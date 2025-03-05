@@ -7,22 +7,19 @@ Recently, segmentation-based scene text detection methods have drawn extensive a
 ## Step 1: Installation
 
 ```bash
-# Install mmcv
-pushd ../../../../toolbox/MMDetection
-bash prepare_mmcv.sh v2.0.0rc4
-popd
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
-# Install  mmdet and mmocr
-pip3 install mmdet==3.1.0
+# Install mmdet and mmocr
+pip3 install mmdet==3.3.0
 
 git clone -b v1.0.1 https://github.com/open-mmlab/mmocr.git
 cd mmocr
 pip3 install -r requirements.txt
 python3 setup.py develop
-
-# Install mmengine
-pip3 install mmengine==0.8.3
-yum install -y mesa-libGL
 
 # Prepare resnet50-0676ba61.pth, skip this if fast network
 mkdir -p /root/.cache/torch/hub/checkpoints/
@@ -41,6 +38,8 @@ python3 tools/dataset_converters/prepare_dataset.py icdar2015 --task textdet
 ```bash
 sed -i 's/val_interval=20/val_interval=1200/g' configs/textdet/_base_/schedules/schedule_sgd_1200e.py
 sed -i 's/python /python3 /g' tools/dist_train.sh
+# match mmdet 3.3.0
+sed -i 's/3.2.0/3.4.0/g' mmocr/__init__.py
 
 # On single GPU
 python3 tools/train.py configs/textdet/dbnetpp/dbnetpp_resnet50_fpnc_1200e_icdar2015.py

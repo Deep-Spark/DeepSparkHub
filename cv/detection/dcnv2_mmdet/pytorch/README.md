@@ -9,9 +9,16 @@ The superior performance of Deformable Convolutional Networks arises from its ab
 DCNv2 model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
 
 ```bash
-# Go to "toolbox/MMDetection" directory in root path
-cd ../../../../toolbox/MMDetection/
-bash install_toolbox_mmdetection.sh
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 
 ## Step 2: Preparing datasets
@@ -48,10 +55,12 @@ mkdir -p data/
 ln -s /path/to/coco2017 data/coco
 
 # On single GPU
-python3 tools/train.py configs/dcnv2/faster_rcnn_r50_fpn_mdconv_c3-c5_1x_coco.py
+python3 tools/train.py configs/dcnv2/faster-rcnn_r50-mdconv-c3-c5_fpn_1x_coco.py
+
+sed -i 's/python /python3 /g' tools/dist_train.sh
 
 # Multiple GPUs on one machine
-bash tools/dist_train.sh configs/dcnv2/faster_rcnn_r50_fpn_mdconv_c3-c5_1x_coco.py 8
+bash tools/dist_train.sh configs/dcnv2/faster-rcnn_r50-mdconv-c3-c5_fpn_1x_coco.py 8
 ```
 
 ## Results

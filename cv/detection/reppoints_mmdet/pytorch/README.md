@@ -7,9 +7,16 @@ Modern object detectors rely heavily on rectangular bounding boxes, such as anch
 ## Step 1: Installation
 RepPoints model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
 ```bash
-# Go to "toolbox/MMDetection" directory in root path
-cd ../../../../../toolbox/MMDetection/
-bash install_toolbox_mmdetection.sh
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 
 ## Step 2: Preparing datasets
@@ -46,10 +53,12 @@ mkdir -p data/
 ln -s /path/to/coco2017 data/coco
 
 # On single GPU
-python3 tools/train.py configs/reppoints/reppoints_moment_r101_fpn_dconv_c3-c5_gn-neck+head_2x_coco.py
+python3 tools/train.py configs/reppoints/reppoints-moment_r101-dconv-c3-c5_fpn-gn_head-gn_2x_coco.py
+
+sed -i 's/python /python3 /g' tools/dist_train.sh
 
 # Multiple GPUs on one machine
-bash tools/dist_train.sh configs/reppoints/reppoints_moment_r101_fpn_dconv_c3-c5_gn-neck+head_2x_coco.py 8
+bash tools/dist_train.sh configs/reppoints/reppoints-moment_r101-dconv-c3-c5_fpn-gn_head-gn_2x_coco.py 8
 ```
 
 ## Results

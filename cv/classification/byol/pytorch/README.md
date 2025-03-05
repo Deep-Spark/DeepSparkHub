@@ -10,25 +10,11 @@
 ## Step 1: Installation
 
 ```bash
-## install libGL
+# Install libGL
+## CentOS
 yum install -y mesa-libGL
-
-## install zlib
-wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
-tar xvf zlib-1.2.9.tar.gz
-cd zlib-1.2.9/
-./configure && make install
-cd ..
-rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
-```
-
-```bash
-# install mmcv
-pushd ../../../../toolbox/MMDetection/patch/mmcv/v2.0.0rc4/
-bash clean_mmcv.sh
-bash build_mmcv.sh
-bash install_mmcv.sh
-popd
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
 # clone mmpretrain
 cd deepsparkhub/cv/classification/byol/pytorch
@@ -45,7 +31,6 @@ sed -i '9,26s/^/# /' mmpretrain/__init__.py
 sed -i 's/python /python3 /g' tools/dist_train.sh
 
 # install mmpretrain
-pip3 install mmengine==0.8.3
 python3 setup.py install
 ```
 
@@ -74,12 +59,14 @@ imagenet
 ## Step 3: Training
 
 ```bash
+mkdir -p data
+ln -s /path/to/imagenet data/imagenet
+
 wget https://download.openmmlab.com/mmselfsup/1.x/byol/byol_resnet50_16xb256-coslr-200e_in1k/byol_resnet50_16xb256-coslr-200e_in1k_20220825-de817331.pth
 vim configs/byol/benchmarks/resnet50_8xb512-linear-coslr-90e_in1k.py
 model = dict(
     backbone=dict(
-        frozen_stages=4,
-        init_cfg=dict(type='Pretrained', checkpoint='./byol_resnet50_16xb256-coslr-200e_in1k/byol_resnet50_16xb256-coslr-200e_in1k_20220825-de817331.pth', prefix='backbone.')))
+        frozen_stages=4,init_cfg=dict(type='Pretrained', checkpoint='./byol_resnet50_16xb256-coslr-200e_in1k_20220825-de817331.pth', prefix='backbone.')))
 bash tools/dist_train.sh configs/byol/benchmarks/resnet50_8xb512-linear-coslr-90e_in1k.py 8
 ```
 
