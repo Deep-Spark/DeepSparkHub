@@ -7,10 +7,20 @@ We present a new, embarrassingly simple approach to instance segmentation in ima
 ## Step 1: Installing packages
 
 ```bash
-$ pip3 install -r requirements.txt
-  yum install mesa-libGL
-  pip3 install yapf==0.31.0
-$ MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
+
+# Prepare resnet50-0676ba61.pth, skip this if fast network
+mkdir -p /root/.cache/torch/hub/checkpoints/
+wget https://download.pytorch.org/models/resnet50-0676ba61.pth -O /root/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
 ```
 
 ## Step 2: Preparing datasets
@@ -19,7 +29,6 @@ $ MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpytho
 $ mkdir -p data/coco
 $ cd data/coco
 ```
-
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
 Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
@@ -43,19 +52,18 @@ coco2017
 └── ...
 ```
 
-
 ## Step 3: Training
 
 ### One single GPU
-
 ```bash
-bash train.sh
+python3 tools/train.py configs/solo/solo_r50_fpn_1x_coco.py
 ```
 
 ### Multiple GPUs on one machine
 
 ```bash
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/solo/solo_r50_fpn_1x_coco.py 8
 ```
 
 ## Results on BI-V100
@@ -63,5 +71,4 @@ $ bash train_dist.sh <config file> <num_gpus> [training args]    # config file c
 Average Precision (AP) @[ loU=0.50:0.95 | area= all | maxDets=1001 ] = 0.361
 
 ## Reference
-
-Reference: https://github.com/WXinlong/SOLO
+[mmdetection](https://github.com/open-mmlab/mmdetection)
