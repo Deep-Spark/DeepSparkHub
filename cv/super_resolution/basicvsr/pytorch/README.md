@@ -7,12 +7,23 @@ BasicVSR is a video super-resolution pipeline including optical flow and residua
 ## Step 1: Installing packages
 
 ```shell
-sh build_env.sh
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/open-mmlab/mmagic.git -b v1.2.0 --depth=1
+cd mmagic/
+pip3 install -e . -v
+
+sed -i 's/diffusers.models.unet_2d_condition/diffusers.models.unets.unet_2d_condition/g' mmagic/models/editors/vico/vico_utils.py
+pip install albumentations
 ```
 
 ## Step 2: Preparing datasets
 
-Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html)
+Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html) or you can follow tools/dataset_converters/reds/README.md
 ```shell
 mkdir -p data/
 ln -s ${REDS_DATASET_PATH} data/REDS
@@ -22,17 +33,14 @@ ln -s ${REDS_DATASET_PATH} data/REDS
 
 ### One single GPU
 ```shell
-python3 train.py <config file> [training args]   # config file can be found in the configs directory
+python3 tools/train.py configs/basicvsr/basicvsr_2xb4_reds4.py
 ```
 
 ### Mutiple GPUs on one machine
 ```shell
-bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/basicvsr/basicvsr_2xb4_reds4.py 8
 ```
-### Example
 
-```shell
-bash dist_train.sh configs/basicvsr/basicvsr_reds4.py 8
-```
 ## Reference
-https://github.com/open-mmlab/mmediting
+[mmagic](https://github.com/open-mmlab/mmagic)
