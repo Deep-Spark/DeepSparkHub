@@ -1,1 +1,0 @@
-PORT=12345 ./dist_test.sh configs/mask_rcnn_repvit_m1_1_fpn_1x_coco.py det_pretrain/repvit_m1_1_coco.pth 8 --eval bbox segm

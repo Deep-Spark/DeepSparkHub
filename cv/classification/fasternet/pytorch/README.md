@@ -55,7 +55,7 @@ FasterNet-T0 training on ImageNet-1K with a 1-GPU node:
 ```bash
 # You can change the dataset path '--data_dir' according to your own dataset path !!!
 python3 train_test.py -g 0 --num_nodes 1 -n 4 -b 512 -e 2000 \
-                      --data_dir /path/to/imagenet \
+                      --data_dir ./imagenet \
                       --pin_memory --wandb_project_name fasternet \
                       --model_ckpt_dir ./model_ckpt/$(date +'%Y%m%d_%H%M%S') \
                       --cfg cfg/fasternet_t0.yaml

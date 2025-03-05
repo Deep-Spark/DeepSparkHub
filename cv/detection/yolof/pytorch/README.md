@@ -63,4 +63,4 @@ bash train_dist.sh configs/yolof/yolof_r50_c5_8x8_1x_coco.py 8
 
 ## Reference
 
-- [mmdetection](https://github.com/WXinlong/SOLO/tree/f4cd03b9404e3bd84ca0be45966fb61d20d2efe6)
+- [mmdetection](https://github.com/open-mmlab/mmdetection)
