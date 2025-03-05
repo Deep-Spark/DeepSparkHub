@@ -7,6 +7,23 @@ It is based on the Non-Local Network, but it modifies the architecture so less c
 Global context blocks are applied to multiple layers in a backbone network to construct the GCNet.
 
 ## Step 1: Installing
+### Install packages
+
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install mmsegmentation
+git clone -b v1.2.2 https://github.com/open-mmlab/mmsegmentation.git --depth=1
+cd mmsegmentation/
+pip install -v -e .
+
+pip install ftfy
+```
+
 ### Datasets
 
 Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
@@ -59,22 +76,17 @@ data/
     └── val.lst
 ```
 
-### Build Extension
-```shell
-MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
-pip3 install -r requirements.txt
-```
 ## Step 2: Training
 ### Training on single card
 ```shell
-bash run_train.sh 
+python3 tools/train.py configs/gcnet/gcnet_r50-d8_4xb2-40k_cityscapes-769x769.py
 ```
 
 ### Training on mutil-cards
 ```shell
-bash dist_train.sh configs/gcnet/gcnet_r50-d8_769x769_40k_cityscapes.py 4
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/gcnet/gcnet_r50-d8_4xb2-40k_cityscapes-769x769.py 8
 ```
 
 ## Reference
-
-Ref: https://github.com/LikeLy-Journey/SegmenTron 
+[mmsegmentation](https://github.com/open-mmlab/mmsegmentation)
