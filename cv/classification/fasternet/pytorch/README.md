@@ -71,6 +71,4 @@ To train other FasterNet variants, `--cfg` need to be changed. You may also want
 
 ## Reference
 
-- [timm](https://github.com/rwightman/pytorch-image-models)
-- [ConvNeXt](https://github.com/facebookresearch/ConvNeXt)
-- [mmdetection](https://github.com/open-mmlab/mmdetection)
+[FasterNet](https://github.com/JierunChen/FasterNet/tree/e8fba4465ae912359c9f661a72b14e39347e4954)

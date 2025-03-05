@@ -29,10 +29,11 @@ Enter the data/s3dis/ folder, then prepare the dataset according to readme instr
 
 ```bash
 # Single GPU training
-python3 train.py configs/paconv/paconv_cuda_ssg_8x8_cosine_200e_s3dis_seg-3d-13class.py
+python3 tools/train.py configs/paconv/paconv_cuda_ssg_8x8_cosine_200e_s3dis_seg-3d-13class.py
 
 # Multiple GPU training
-bash dist_train.sh configs/paconv/paconv_cuda_ssg_8x8_cosine_200e_s3dis_seg-3d-13class.py 8
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/paconv/paconv_cuda_ssg_8x8_cosine_200e_s3dis_seg-3d-13class.py 8
 ```
 
 ## Results
@@ -44,4 +45,4 @@ results | 0.9488  | 0.9838 | 0.8184 | 0.0000 | 0.1682 | 0.5836 | 0.7387 | 0.7782
 fps = batchsize*8/1batchtime = 65.3 samples/sec
 
 ## Reference
-- [mmdetection3d](https://github.com/open-mmlab/mmdetection3d/tree/v1.4.0)
+[mmdetection3d](https://github.com/open-mmlab/mmdetection3d/tree/v1.4.0)

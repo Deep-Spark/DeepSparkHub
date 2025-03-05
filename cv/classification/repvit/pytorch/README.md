@@ -60,4 +60,4 @@ wandb: (3) Don't visualize my results
 |BI-V100 x8|1.5984 s / it| Acc@1 78.53% |
 
 ## Reference
-- [RepViT](https://github.com/THU-MIG/RepViT)
+- [RepViT](https://github.com/THU-MIG/RepViT/tree/4df6086a198bc1c7278ed1124b6f6409ff42148c)

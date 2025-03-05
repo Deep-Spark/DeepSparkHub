@@ -121,3 +121,6 @@ python3 test.py --ckpt pretrained/your_weights.pth --pc_path data/kitti/training
 ## Acknowledements
 
 Fast Encoders for Object Detection from Point Clouds](https://arxiv.org/abs/1812.05784) 
+
+## Reference
+[PointPillars](https://github.com/zhulf0804/PointPillars/tree/b9948e73505c8d6bfa631ffdf76c7148e82c5942)
