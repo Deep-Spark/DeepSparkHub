@@ -9,16 +9,22 @@ In this paper, we present a novel collaborative hybrid assignments training sche
 3. **State-of-the-art performance**: Co-DETR with [ViT-L](https://github.com/baaivision/EVA/tree/master/EVA-02) (304M parameters) is **the first model to achieve 66.0 AP on COCO test-dev.**
 
 ## Step 1: Installation
-### (1) install MMCV
 ```bash
-# Go to "toolbox/MMDetection" directory in root path
-bash install_toolbox_mmdetection.sh
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 ### (2) install other
 ```bash
 pip3 install -r requirements.txt
 pip3 install urllib3==1.26.15
-yum install -y mesa-libGL
 ```
 
 ### (3) download repo

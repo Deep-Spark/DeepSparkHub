@@ -10,25 +10,11 @@ Contrastive unsupervised learning has recently shown encouraging progress, e.g.,
 ## Installation
 
 ```bash
-# install libGL
-yum install mesa-libGL
-
-# install zlib
-wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
-tar xvf zlib-1.2.9.tar.gz
-cd zlib-1.2.9/
-./configure && make install
-cd ..
-rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
-```
-
-```bash
-# install mmcv
-pushd ../../../../toolbox/MMDetection/patch/mmcv/v2.0.0rc4/
-bash clean_mmcv.sh
-bash build_mmcv.sh
-bash install_mmcv.sh
-popd
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
 # clone mmpretrain
 cd deepsparkhub/cv/classification/mocov2/pytorch
@@ -45,7 +31,6 @@ sed -i '9,26s/^/# /' mmpretrain/__init__.py
 sed -i 's/python /python3 /g' tools/dist_train.sh
 
 # install mmpretrain
-pip3 install mmengine==0.8.3
 python3 setup.py install
 ```
 

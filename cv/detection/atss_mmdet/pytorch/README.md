@@ -9,9 +9,16 @@ Object detection has been dominated by anchor-based detectors for several years.
 ATSS model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
 
 ```bash
-# Go to "toolbox/MMDetection" directory in root path
-cd ../../../../toolbox/MMDetection/
-bash install_toolbox_mmdetection.sh
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 
 ## Step 2: Preparing datasets
@@ -47,8 +54,14 @@ cd mmdetection/
 mkdir -p data/
 ln -s /path/to/coco2017 data/coco
 
+# Prepare resnet50-0676ba61.pth, skip this if fast network
+mkdir -p /root/.cache/torch/hub/checkpoints/
+wget https://download.pytorch.org/models/resnet50-0676ba61.pth -O /root/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
+
 # On single GPU
 python3 tools/train.py configs/atss/atss_r50_fpn_1x_coco.py
+
+sed -i 's/python /python3 /g' tools/dist_train.sh
 
 # Multiple GPUs on one machine
 bash tools/dist_train.sh configs/atss/atss_r50_fpn_1x_coco.py 8

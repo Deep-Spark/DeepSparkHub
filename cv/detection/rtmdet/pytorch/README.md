@@ -13,33 +13,16 @@ In this paper, we aim to design an efficient real-time object detector that exce
 RTMDet model uses the MMDetection toolbox. Before you run this model, you need to set up MMDetection first.
 
 ```bash
-# Install mmcv
-pushd ../../../../toolbox/MMDetection/patch/mmcv/v2.0.0rc4/
-bash clean_mmcv.sh
-bash build_mmcv.sh
-bash install_mmcv.sh
-popd
-
-# Install mmdetection
-pushd ../../../../toolbox/MMDetection/
-git clone --depth 1 -b v2.22.0 https://github.com/open-mmlab/mmdetection.git
-cp -r -T patch/mmdetection/ mmdetection/
-
-cd mmdetection/
-bash clean_mmdetection.sh
-bash build_mmdetection.sh
-
-pip3 install build_pip/mmdet-2.22.0+corex*-py3-none-any.whl
-popd
-
 # Install libGL
+## CentOS
 yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
-# Install urllib3
-pip3 install urllib3==1.26.6
-
-cd ../../../../toolbox/MMDetection/mmdetection
-pip3 install -v -e .
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 
 ## Step 2: Preparing datasets
@@ -74,8 +57,14 @@ cd mmdetection/
 mkdir -p data/
 ln -s /path/to/coco2017 data/coco
 
+# Prepare cspnext-tiny_imagenet_600e.pth, skip this if fast network
+mkdir -p /root/.cache/torch/hub/checkpoints/
+wget -O /root/.cache/torch/hub/checkpoints/cspnext-tiny_imagenet_600e.pth https://download.openmmlab.com/mmdetection/v3.0/rtmdet/cspnext_rsb_pretrain/cspnext-tiny_imagenet_600e.pth
+
 # On single GPU
 python3 tools/train.py configs/rtmdet/rtmdet_tiny_8xb32-300e_coco.py
+
+sed -i 's/python /python3 /g' tools/dist_train.sh
 
 # Multiple GPUs on one machine
 bash tools/dist_train.sh configs/rtmdet/rtmdet_tiny_8xb32-300e_coco.py 8
