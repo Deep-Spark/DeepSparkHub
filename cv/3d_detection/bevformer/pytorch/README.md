@@ -96,4 +96,4 @@ and we provide another script to train BEVFormer with FP16.
 | 1x8  | bevformer_base | 0.3516 | 0.3701 |
 
 ## Reference:
-[Paper in arXiv](http://arxiv.org/abs/2203.17270) 
+[BEVFormer](https://github.com/fundamentalvision/BEVFormer/tree/master) 
