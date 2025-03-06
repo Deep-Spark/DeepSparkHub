@@ -8,16 +8,27 @@ Determining positive/negative samples for object detection is known as label ass
 ## Step 1: Installing packages
 
 ```bash
-$ pip3 install -r requirements.txt
-$ MMCV_WITH_OPS=1 python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 
 ## Step 2: Preparing datasets
 
 ```bash
-$ apt install dos2unix
-$ mkdir -p data 
-$ ln -s /path/to/coco/ ./data
+mkdir -p data 
+ln -s /path/to/coco/ ./data
+
+# Prepare resnet50_msra-5891d200.pth, skip this if fast network
+mkdir -p /root/.cache/torch/hub/checkpoints/
+wget https://download.openmmlab.com/pretrain/third_party/resnet50_msra-5891d200.pth -O /root/.cache/torch/hub/checkpoints/resnet50_msra-5891d200.pth
 ```
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
@@ -48,14 +59,14 @@ coco2017
 ### One single GPU
 
 ```bash
-$ python3 train.py <config file> [training args]   # config file can be found in the configs directory
+python3 tools/train.py configs/autoassign/autoassign_r50-caffe_fpn_1x_coco.py
 ```
 
 ### Multiple GPUs on one machine
 ```bash
-$ bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/autoassign/autoassign_r50-caffe_fpn_1x_coco.py 8
 ```
 
 ## Reference
-
-https://github.com/Megvii-BaseDetection/AutoAssign
+[mmdetection](https://github.com/open-mmlab/mmdetection)

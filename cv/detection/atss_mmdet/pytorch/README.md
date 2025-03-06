@@ -74,4 +74,4 @@ bash tools/dist_train.sh configs/atss/atss_r50_fpn_1x_coco.py 8
 | BI-V100 x8  | MAP=39.5                             |
 
 ## Reference
-- [Bridging the Gap Between Anchor-based and Anchor-free Detection via Adaptive Training Sample Selection](https://arxiv.org/abs/1912.02424)
+[mmdetection](https://github.com/open-mmlab/mmdetection)
