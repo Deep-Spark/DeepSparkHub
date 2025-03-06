@@ -8,7 +8,18 @@ We study on image super-resolution (SR), which aims to recover realistic texture
 ## Step 1: Installing packages
 
 ```bash
-pip3 install -r requirements.txt
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/open-mmlab/mmagic.git -b v1.2.0 --depth=1
+cd mmagic/
+pip3 install -e . -v
+
+sed -i 's/diffusers.models.unet_2d_condition/diffusers.models.unets.unet_2d_condition/g' mmagic/models/editors/vico/vico_utils.py
+pip install albumentations
 ```
 
 ## Step 2: Preparing datasets
@@ -19,24 +30,27 @@ cd data
 # Download CUFED Dataset from [homepage](https://zzutk.github.io/SRNTT-Project-Page)
 # the folder would be like:
 data/CUFED/
-└── train
-├  ├── input
-├  └── ref
-└── test
-   └── CUFED5
+└── input
+├── ref
+└── CUFED5
+
+# Prepare vgg19-dcbb9e9d.pth, skip this if fast network
+mkdir -p /root/.cache/torch/hub/checkpoints/
+wget https://download.pytorch.org/models/vgg19-dcbb9e9d.pth -O /root/.cache/torch/hub/checkpoints/vgg19-dcbb9e9d.pth
 ```
 
 ## Step 3: Training
 
-### Multiple GPUs on one machine
-
-```bash
-CUDA_VISIBLE_DEVICES=${gpu_id_1,gpu_id_2,...} bash train.sh ${num_gpus}
+### Training on single card
+```shell
+python3 tools/train.py configs/ttsr/ttsr-gan_x4c64b16_1xb9-500k_CUFED.py
 ```
 
-```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 bash train.sh 8
+### Mutiple GPUs on one machine
+```shell
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/ttsr/ttsr-gan_x4c64b16_1xb9-500k_CUFED.py 8
 ```
 
 ## Reference
-https://github.com/open-mmlab/mmediting
+[mmagic](https://github.com/open-mmlab/mmagic)

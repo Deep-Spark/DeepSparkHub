@@ -43,7 +43,7 @@ python3 tools/train.py configs/real_basicvsr/realbasicvsr_wogan-c64b20-2x30x8_8x
 ### Mutiple GPUs on one machine
 ```shell
 sed -i 's/python /python3 /g' tools/dist_train.sh
-bash tools/dist_train.sh configs/real_basicvsr/realbasicvsr_wogan-c64b20-2x30x8_8xb2-lr1e-4-300k_reds.py
+bash tools/dist_train.sh configs/real_basicvsr/realbasicvsr_wogan-c64b20-2x30x8_8xb2-lr1e-4-300k_reds.py 8
 ```
 
 ## Reference
