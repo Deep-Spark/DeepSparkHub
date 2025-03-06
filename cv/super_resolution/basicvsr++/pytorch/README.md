@@ -23,7 +23,7 @@ pip install albumentations
 
 ## Step 2: Preparing datasets
 
-Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html)
+Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html) or you can follow tools/dataset_converters/reds/README.md
 ```shell
 mkdir -p data/
 ln -s ${REDS_DATASET_PATH} data/REDS
