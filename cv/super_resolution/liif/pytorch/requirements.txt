@@ -1,4 +1,0 @@
-addict
-yapf
-opencv-python
-tensorboard
