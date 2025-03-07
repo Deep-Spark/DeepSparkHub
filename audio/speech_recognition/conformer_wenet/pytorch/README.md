@@ -1,20 +1,22 @@
-# Conformer
+# Conformer (WeNet)
 
-## Model description
+## Model Description
 
 The Conformer neural network is a hybrid model designed for tasks like speech recognition, merging the strengths of
 convolutional neural networks (CNNs) and transformers. It employs CNNs for local feature extraction and transformers to
 capture long-range dependencies in data. This combination allows the Conformer to efficiently handle both local patterns
 and global relationships, making it particularly effective for audio and speech tasks.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```sh
 cd ../../../../toolbox/WeNet/
 bash install_toolbox_wenet.sh
 ```
 
-## Step 2: Training
+## Model Training
 
 Dataset is data_aishell.tgz and resource_aishell.tgz from wenet.
 You could just run the whole script, which will download the dataset automatically.
@@ -54,17 +56,17 @@ bash run.sh --stage 5 --stop-stage 5
 bash run.sh --stage 6 --stop-stage 6
 ```
 
-## Results on BI-V100
+## Model Results
 
-| GPUs | FP16  | QPS |
-|------|-------|-----|
-| 1x8  | False | 67  |
-| 1x8  | True  | 288 |
+| GPU       | FP16  | QPS |
+|-----------|-------|-----|
+| BI-v100x8 | False | 67  |
+| BI-v100x8 | True  | 288 |
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 |----------------------|------------------------------------------|-------------|----------|------------|-------------|-------------------------|-----------|
 | 3.72                 | SDK V2.2,bs:32,8x,fp32                   | 380         | 4.79@cer | 113\*8     | 0.82        | 21.5\*8                 | 1         |
 
-## Reference
+## References
 
-<https://github.com/wenet-e2e/wenet>
+- [wenet](https://github.com/wenet-e2e/wenet)

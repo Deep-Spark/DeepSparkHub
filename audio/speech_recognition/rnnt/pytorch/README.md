@@ -1,46 +1,39 @@
 # RNN-T
 
-## Model description
+## Model Description
 
-Many machine learning tasks can be expressed as the transformation---or \emph{transduction}---of input sequences into
-output sequences: speech recognition, machine translation, protein secondary structure prediction and text-to-speech to
-name but a few. One of the key challenges in sequence transduction is learning to represent both the input and output
-sequences in a way that is invariant to sequential distortions such as shrinking, stretching and translating. Recurrent
-neural networks (RNNs) are a powerful sequence learning architecture that has proven capable of learning such
-representations. However RNNs traditionally require a pre-defined alignment between the input and output sequences to
-perform transduction. This is a severe limitation since \emph{finding} the alignment is the most difficult aspect of
-many sequence transduction problems. Indeed, even determining the length of the output sequence is often challenging.
-This paper introduces an end-to-end, probabilistic sequence transduction system, based entirely on RNNs, that is in
-principle able to transform any input sequence into any finite, discrete output sequence. Experimental results for
-phoneme recognition are provided on the TIMIT speech corpus.
+RNN-T (Recurrent Neural Network Transducer) is an end-to-end deep learning model designed for sequence-to-sequence
+tasks, particularly in speech recognition. It combines RNNs with a transducer architecture to directly map input
+sequences (like audio) to output sequences (like text) without requiring explicit alignment. The model consists of an
+encoder network that processes the input, a prediction network that models the output sequence, and a joint network that
+combines these representations. RNN-T handles variable-length input/output sequences and learns alignments automatically
+during training. It's particularly effective for speech recognition as it can process continuous audio streams and
+output text in real-time, achieving state-of-the-art performance on various benchmarks.
 
-## Step 1: Installing packages
+## Model Preparation
 
-Install required libraries:
+### Prepare Resources
 
 ```sh
-bash install.sh
-```
-
-## Step 2: Preparing datasets
-
-download LibriSpeech [http://www.openslr.org/12](http://www.openslr.org/12)
-
-```sh
+# Download LibriSpeech [http://www.openslr.org/12](http://www.openslr.org/12)
 bash scripts/download_librispeech.sh ${DATA_ROOT_DIR}
-```
 
-preprocess LibriSpeech
+# Preprocess LibriSpeech
 
 ```sh
 bash scripts/preprocess_librispeech.sh ${DATA_ROOT_DIR}
 ```
 
-## Step 3: Training
-
-### Setup config yaml
+### Install Dependencies
 
 ```sh
+bash install.sh
+```
+
+## Model Training
+
+```sh
+# Setup config yaml
 sed -i "s#MODIFY_DATASET_DIR#${DATA_ROOT_DIR}/LibriSpeech#g" configs/baseline_v3-1023sp.yaml
 ```
 
@@ -59,12 +52,12 @@ Following conditions were tested, you can run any of them below:
 | 4 cards     | `train_rnnt_1x4.sh` |
 | 8 cards     | `train_rnnt_1x8.sh` |
 
-## Results on BI-V100
+## Model Results
 
-| GPUs | FP16  | FPS | WER   |
-|------|-------|-----|-------|
-| 1x8  | False | 20  | 0.058 |
+| Model | GPUs       | FP16  | FPS | WER   |
+|-------|------------|-------|-----|-------|
+| RNN-T | BI-V100 x8 | False | 20  | 0.058 |
 
-## Reference
+## References
 
-<https://github.com/mlcommons/training/tree/master/rnn_speech_recognition/pytorch>
+- [mlcommons](https://github.com/mlcommons/training/tree/master/rnn_speech_recognition/pytorch)

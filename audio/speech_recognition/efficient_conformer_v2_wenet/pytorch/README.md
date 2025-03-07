@@ -1,13 +1,15 @@
-# Efficient Conformer V2
+# Efficient Conformer V2 (WeNet)
 
-## Model description
+## Model Description
 
 EfficientFormerV2 mimics MobileNet with its convolutional structure,
 offering transformers a series of designs and optimizations for mobile acceleration.
 The number of parameters and latency of the model are critical for resource-constrained hardware,
 so EfficientFormerV2 combines a fine-grained joint search strategy to propose an efficient network with low latency and size.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```sh
 cd ../../../../toolbox/WeNet/
@@ -18,7 +20,7 @@ pip3 install -r requirements.txt
 
 ```
 
-## Step 2: Training
+## Model Training
 
 Dataset is data_aishell.tgz and resource_aishell.tgz from wenet.
 You could just run the whole script, which will download the dataset automatically.
@@ -66,12 +68,12 @@ bash run.sh --stage 5 --stop-stage 5
 bash run.sh --stage 6 --stop-stage 6
 ```
 
-## Results
+## Model Results
 
 | GPUs       | QPS | WER(ctc_greedy_search) | WER(ctc_prefix_beam_search) | WER(attention) | WER(attention_rescoring) |
 |------------|-----|------------------------|-----------------------------|----------------|--------------------------|
 | BI-V100 x8 | 234 | 5.00%                  | 4.99%                       | 4.89%          | 4.58%                    |
 
-## Reference
+## References
 
 - [WeNet](https://github.com/wenet-e2e/wenet)

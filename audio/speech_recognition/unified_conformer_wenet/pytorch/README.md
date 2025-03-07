@@ -1,20 +1,22 @@
-# Unified Conformer
+# Unified Conformer (WeNet)
 
-## Model description
+## Model Description
 
 Unified Conformer is an architecture that has become state-of-the-art in the field of Automatic Speech Recognition
 (ASR). It is a variant of the Transformer architecture which has achieved extraordinary performance in Natural Language
 Processing and Computer Vision tasks thanks to its powerful self-attention mechanism¹. The Conformer architecture has
 been modified from ASR to Automatic Speaker Verification (ASV) with very minor changes.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```sh
 cd ../../../../toolbox/WeNet/
 bash install_toolbox_wenet.sh
 ```
 
-## Step 2: Training
+## Model Training
 
 Dataset is data_aishell.tgz and resource_aishell.tgz from wenet.
 You could just run the whole script, which will download the dataset automatically.
@@ -54,12 +56,12 @@ bash run.sh --stage 5 --stop-stage 5
 bash run.sh --stage 6 --stop-stage 6
 ```
 
-## Results
+## Model Results
 
 | GPUs       | FP16  | QPS | WER(ctc_greedy_search) | WER(ctc_prefix_beam_search) | WER(attention) | WER(attention_rescoring) |
 |------------|-------|-----|------------------------|-----------------------------|----------------|--------------------------|
 | BI-V100 x8 | False | 257 | 5.60%                  | 5.60%                       | 5.46%          | 4.98%                    |
 
-## Reference
+## References
 
 - [WeNet](https://github.com/wenet-e2e/wenet)

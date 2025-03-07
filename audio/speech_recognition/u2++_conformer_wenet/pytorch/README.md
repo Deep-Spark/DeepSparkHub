@@ -1,19 +1,21 @@
-# U2++ Conformer
+# U2++ Conformer (WeNet)
 
-## Model description
+## Model Description
 
 U2++, an enhanced version of U2 to further improve the accuracy. The core idea of U2++ is to use the forward and the
 backward information of the labeling sequences at the same time at training to learn richer information, and combine the
 forward and backward prediction at decoding to give more accurate recognition results.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```sh
 cd ../../../../toolbox/WeNet/
 bash install_toolbox_wenet.sh
 ```
 
-## Step 2: Training
+## Model Training
 
 Dataset is data_aishell.tgz and resource_aishell.tgz from wenet.
 You could just run the whole script, which will download the dataset automatically.
@@ -53,12 +55,12 @@ bash run.sh --stage 5 --stop-stage 5
 bash run.sh --stage 6 --stop-stage 6
 ```
 
-## Results
+## Model Results
 
 | GPUs       | FP16  | QPS | WER(ctc_greedy_search) | WER(ctc_prefix_beam_search) | WER(attention) | WER(attention_rescoring) |
 |------------|-------|-----|------------------------|-----------------------------|----------------|--------------------------|
 | BI-V100 x8 | False | 272 | 5.21%                  | 5.21%                       | 5.13%          | 4.82%                    |
 
-## Reference
+## References
 
 - [WeNet](https://github.com/wenet-e2e/wenet)
