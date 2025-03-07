@@ -7,47 +7,39 @@ The Super-Resolution Generative Adversarial Network (SRGAN) is a seminal work th
 ## Step 1: Installing packages
 
 ```shell
-$ pip3 install -r requirements.txt
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/open-mmlab/mmagic.git -b v1.2.0 --depth=1
+cd mmagic/
+pip3 install -e . -v
+
+sed -i 's/diffusers.models.unet_2d_condition/diffusers.models.unets.unet_2d_condition/g' mmagic/models/editors/vico/vico_utils.py
+pip install albumentations
 ```
 
 ## Step 2: Preparing datasets
 
 ```shell
-$ cd /path/to/modelzoo/cv/super_resolution/esrgan/pytorch
-
-# Download DIV2K 
+# Download DIV2K: https://data.vision.ee.ethz.ch/cvl/DIV2K/ or you can follow this tools/dataset_converters/div2k/README.md
 $ mkdir -p data/DIV2K
-$ cd data/DIV2K
-# Homepage of DIV2K: https://data.vision.ee.ethz.ch/cvl/DIV2K/
-
-# Download validation samples
-$ cd ../..
-$ mkdir -p data/test
-$ cd data/test
-# Home page of Set5: http://people.rennes.inria.fr/Aline.Roumy/results/SR_BMVC12.html
-# Home page of Set14: https://github.com/jbhuang0604/SelfExSR
-
-$ python3 get_div2k_anno.py 
 ```
 
 ## Step 3: Training
 
 ### One single GPU
-
 ```shell
-$ python3 train.py <config file> [training args]   # config file can be found in the configs directory
+python3 tools/train.py configs/esrgan/esrgan_psnr-x4c64b23g32_1xb16-1000k_div2k.py
 ```
 
 ### Mutiple GPUs on one machine
-
 ```shell
-$ bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
-```
-### Example
-
-```shell
-bash dist_train.sh configs/esrgan_psnr_x4c64b23g32_g1_1000k_div2k.py 8
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/esrgan/esrgan_psnr-x4c64b23g32_1xb16-1000k_div2k.py 8
 ```
 
 ## Reference
-https://github.com/open-mmlab/mmediting
+[mmagic](https://github.com/open-mmlab/mmagic)

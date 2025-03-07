@@ -75,5 +75,4 @@ bash tools/dist_train.sh configs/solov2/solov2_r50_fpn_1x_coco.py 8
 | BI-V100 x8 | 21.26 images/s |
 
 ## Reference
-
-- [mmdetection](https://github.com/open-mmlab/mmdetection/tree/v3.2.0/configs/solov2)
+[mmdetection](https://github.com/open-mmlab/mmdetection)

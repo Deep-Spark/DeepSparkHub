@@ -8,47 +8,43 @@ The diversity and complexity of degradations in real-world video super-resolutio
 ## Step 1: Installing packages
 
 ```shell
-bash build_env.sh
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/open-mmlab/mmagic.git -b v1.2.0 --depth=1
+cd mmagic/
+pip3 install -e . -v
+
+sed -i 's/diffusers.models.unet_2d_condition/diffusers.models.unets.unet_2d_condition/g' mmagic/models/editors/vico/vico_utils.py
+pip install albumentations av==12.0.0
 ```
 
 ## Step 2: Preparing datasets
 
+Download UDM10  https://www.terabox.com/web/share/link?surl=LMuQCVntRegfZSxn7s3hXw&path=%2Fproject%2Fpfnl to data/UDM10
+
+Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html) or you can follow tools/dataset_converters/reds/README.md
 ```shell
-
-# Download REDS
-mkdir -p data/REDS
-# Homepage of REDS: https://seungjunnah.github.io/Datasets/reds.html
-python3 crop_sub_images.py # cut REDS images into patches for fas
-
-# Download UDM10
-cd ..
-# Homepage of UDM10: https://www.terabox.com/web/share/link?surl=LMuQCVntRegfZSxn7s3hXw&path=%2Fproject%2Fpfnl
-```
-## Step 3: Download pretrained weights
-
-```shell
-mkdir pretrained && cd pretrained
-wget https://download.openmmlab.com/mmediting/restorers/basicvsr/spynet_20210409-c6c1bd09.pth
-wget https://download.openmmlab.com/mmediting/restorers/real_basicvsr/realbasicvsr_wogan_c64b20_2x30x8_lr1e-4_300k_reds_20211027-0e2ff207.pth
-wget https://download.pytorch.org/models/vgg19-dcbb9e9d.pth
-cd ..
+mkdir -p data/
+ln -s ${REDS_DATASET_PATH} data/REDS
+python tools/dataset_converters/reds/crop_sub_images.py --data-root ./data/REDS # cut REDS images into patches for fas
 ```
 
 ## Step 3: Training
 
 ### Training on single card
 ```shell
-python3 train.py <config file> [training args]   # config file can be found in the configs directory
+python3 tools/train.py configs/real_basicvsr/realbasicvsr_wogan-c64b20-2x30x8_8xb2-lr1e-4-300k_reds.py
 ```
 
 ### Mutiple GPUs on one machine
 ```shell
-bash dist_train.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/real_basicvsr/realbasicvsr_wogan-c64b20-2x30x8_8xb2-lr1e-4-300k_reds.py 8
 ```
-### Example
 
-```shell
-python3 train.py configs/real_basicvsr/realbasicvsr_wogan_c64b20_2x30x8_lr1e-4_300k_reds.py
-```
 ## Reference
-https://github.com/open-mmlab/mmediting
+[mmagic](https://github.com/open-mmlab/mmagic)

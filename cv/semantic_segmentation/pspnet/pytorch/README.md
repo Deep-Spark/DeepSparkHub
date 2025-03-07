@@ -10,115 +10,62 @@ PSPNet provides a superior framework for pixellevel prediction. The proposed app
 ### Install packages
 
 ```shell
-$ pip3 install -r requirements.txt
-```
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
-### Build Extension
+# install mmsegmentation
+git clone -b v1.2.2 https://github.com/open-mmlab/mmsegmentation.git --depth=1
+cd mmsegmentation/
+pip install -v -e .
 
-```shell
-$ python3 setup.py build && cp build/lib.linux*/mmcv/_ext.cpython* mmcv
+pip install ftfy
 ```
 
 ### Prepare datasets
-**You need to arrange datasets as follow:**
-[Datasets](configs/_base_/datasets/datasets.md)
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
-```shell
-mkdir -p data
-ln -s /path/to/datasets/ data/
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+
+```bash
+cityscapes/
+├── gtFine
+│   ├── test
+│   ├── train
+│   │   ├── aachen
+│   │   └── bochum
+│   └── val
+│       ├── frankfurt
+│       ├── lindau
+│       └── munster
+└── leftImg8bit
+    ├── train
+    │   ├── aachen
+    │   └── bochum
+    └── val
+        ├── frankfurt
+        ├── lindau
+        └── munster
 ```
 
+```bash
+mkdir data/
+ln -s /path/to/cityscapes data/cityscapes
+```
 
 ## Step 2: Training
-
-**There are available configs in ./configs/pspnet/**
-
 ### Training on single card
 ```shell
-$ bash train.sh <config file> [training args]    # config file can be found in the configs directory 
+python3 tools/train.py configs/pspnet/pspnet_r50-d8_4xb2-40k_cityscapes-512x1024.py
 ```
 
 ### Training on mutil-cards
 ```shell
-$ bash train_dist.sh <config file> <num_gpus> [training args]    # config file can be found in the configs directory 
+sed -i 's/python /python3 /g' tools/dist_train.sh
+bash tools/dist_train.sh configs/pspnet/pspnet_r50-d8_4xb2-40k_cityscapes-512x1024.py 8
 ```
-
-### Example
-
-```shell
-bash train_dist.sh pspnet_r50-d8_512x1024_40k_cityscapes 8
-```
-
-### Training arguments
-
-```python
-# the dir to save logs and models
-work-dir: str = None
-
-# the checkpoint file to load weights from
-load-from: str = None
-
-# the checkpoint file to resume from
-resume-from: str = None
-
-# whether not to evaluate the checkpoint during training
-no-validate: bool = False
-
-# (Deprecated, please use --gpu-id) number of gpus to 
-# use (only applicable to non-distributed training)
-gpus: int = None
-
-# (Deprecated, please use --gpu-id) ids of gpus to use 
-# (only applicable to non-distributed training)
-gpu-ids: int = None
-
-# id of gpu to use (only applicable to non-distributed training)
-gpu-id: int = 0
-
-# random seed
-seed: int = None
-
-# Whether or not set different seeds for different ranks
-diff_seed: bool = False
-
-# whether to set deterministic options for CUDNN backend.
-deterministic: bool = False
-
-# --options is deprecated in favor of --cfg_options' and it 
-# will not be supported in version v0.22.0. Override some 
-# settings in the used config, the key-value pair in xxx=yyy 
-# format will be merged into config file. If the value to be 
-# overwritten is a list, it should be like key="[a,b]" or key=a,b 
-# It also allows nested list/tuple values, e.g. key="[(a,b),(c,d)]" 
-# Note that the quotation marks are necessary and that no white space 
-# is allowed.
-options: str = None
-
-# override some settings in the used config, the key-value pair 
-# in xxx=yyy format will be merged into config file. If the value 
-# to be overwritten is a list, it should be like key="[a,b]" or key=a,b 
-# It also allows nested list/tuple values, e.g. key="[(a,b),(c,d)]" 
-# Note that the quotation marks are necessary and that no white 
-# space is allowed.
-cfg-options: str = None
-
-# job launcher
-launcher: str = "none"
-
-# local rank
-local_rank: int = 0
-
-# distributed backend
-dist_backend: str = None
-
-# resume from the latest checkpoint automatically.
-auto-resume: bool = False
-```
-
-## Results
-
 
 ## Reference
--Ref: https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes
--Ref: [Author Results](configs/pspnet/README.md)
--Ref: https://github.com/open-mmlab/mmsegmentation
+[mmsegmentation](https://github.com/open-mmlab/mmsegmentation)
