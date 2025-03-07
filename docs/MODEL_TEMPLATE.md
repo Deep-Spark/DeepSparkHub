@@ -1,22 +1,40 @@
-# MODEL_NAME
+# MODEL_NAME (Related Toolbox for LLM)
 
-## Model description
-The paper proposes a method to convert a deep learning object detector into an equivalent spiking neural network. The aim is to provide a conversion framework that is not constrained to shallow network structures and classification problems as in state-of-the-art conversion libraries. The results show that models of higher complexity, such as the RetinaNet object detector, can be converted with limited loss in performance.
+## Model Description
 
-## Step 1: Installation
+A brief introduction about this model.
+A brief introduction about this model.
+A brief introduction about this model.
+
+## Supported Environments
+
+| Iluvatar GPU | IXUCA Version |
+|--------------|---------------|
+| BI-V100      | 3.0.0         |
+| BI-V150      | 4.2.0         |
+
+## Model Preparation
+
+### Prepare Resources
+
+### Prepare Datasets
+
+```bash
+python3 dataset/coco/download_coco.py
+```
+
+#### Prepare Pre-trained Weights (for LLM)
+
+Go to huggingface.
+
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 python3 setup.py install
 ```
 
-## Step 2: Preparing datasets
-
-```bash
-python3 dataset/coco/download_coco.py
-```
-
-## Step 3: Training
+## Model Training
 
 ```bash
 # 8 GPUs
@@ -28,12 +46,14 @@ export CUDA_VISIBLE_DEVICES=0
 python3 tools/train.py -c configs/retinanet/retinanet_r50_fpn_1x_coco.yml --eval
 ```
 
-## Results
+## Model Results
 
-| GPUs        | FPS       | ACC          |
-|-------------|-----------|--------------|
-| BI-V100 x 8 | 251       | 71.2         |
+| Model      | Iluvatar GPU | FPS | ACC  |
+|------------|--------------|-----|------|
+| MODEL_NAME | BI-V100 x1   | 32  | 71.2 |
+| MODEL_NAME | BI-V100 x8   | 251 | 71.2 |
 
-## Reference
+## References
 
 - [Reference_link](https://github.com/reference_repo/reference_repo)
+- [Paper](Paper_link)
