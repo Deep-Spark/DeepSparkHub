@@ -1,27 +1,20 @@
 # DenseASPP
 
-## Model description
+## Model Description
 
-Densely connected Atrous Spatial Pyramid Pooling (DenseASPP), which connects a set of atrous convolutional layers in a dense way.
-Such that it generates multi-scale features that not only cover a larger scale range, but also cover that scale range densely, without significantly increasing the model size. 
+Densely connected Atrous Spatial Pyramid Pooling (DenseASPP), which connects a set of atrous convolutional layers in a
+dense way. Such that it generates multi-scale features that not only cover a larger scale range, but also cover that
+scale range densely, without significantly increasing the model size.
 
-## Step 1: Installing 
+## Model Preparation
 
-### Install packages
+### Prepare Resources
 
-```shell
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
-
-```
-
-## Step 2: Training
-
-### Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -42,13 +35,19 @@ coco2017
 └── ...
 ```
 
-### Training on COCO dataset
+### Install Dependencies
+
+```shell
+pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+```
+
+### Model Training
 
 ```shell
 bash train_denseaspp_r50_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
-Ref: https://github.com/LikeLy-Journey/SegmenTron
-Ref: [torchvision](../../torchvision/pytorch/README.md)
+- [SegmenTron](https://github.com/LikeLy-Journey/SegmenTron)
+- [torchvision](../../torchvision/pytorch/README.md)

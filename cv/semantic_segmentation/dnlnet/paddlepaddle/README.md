@@ -1,20 +1,17 @@
 # DNLNet
 
-## Model description
-[Disentangled Non-Local Neural Networks](https://arxiv.org/abs/2006.06668) Minghao Yin, Zhuliang Yao, Yue Cao, Xiu Li, Zheng Zhang, Stephen Lin, Han Hu
+## Model Description
 
+DNLNet (Disentangled Non-Local Neural Networks) is an advanced deep learning model for semantic segmentation that
+enhances feature representation through disentangled non-local operations. It separates spatial and channel-wise
+relationships in feature maps, enabling more effective long-range dependency modeling. This approach improves the
+network's ability to capture contextual information while maintaining computational efficiency. DNLNet demonstrates
+superior performance in tasks requiring precise spatial understanding, such as urban scene segmentation, by effectively
+aggregating both local and global features.
 
-## Step 1: Installing
-```
-git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
-cd PaddleSeg
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3 
-pip3 install urllib3==1.26.6
-yum install mesa-libGL
-```
+## Model Preparation
 
-## Step 2: Prepare Datasets
+### Prepare Resources
 
 Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
@@ -41,35 +38,31 @@ cityscapes/
         └── munster
 ```
 
-Datasets preprocessing:
+### Install Dependencies
+
+```bash
+git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
+cd PaddleSeg
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 
+pip3 install urllib3==1.26.6
+yum install mesa-libGL
+```
+
+### Preprocess Data
+
 ```bash
 pip3 install cityscapesscripts
 
 python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
-
 python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 ```
 
-then the cityscapes path as follows:
-```
-root@5574247e63f8:~# ls -al /path/to/cityscapes
-total 11567948
-drwxr-xr-x 4 root root         227 Jul 18 03:32 .
-drwxr-xr-x 6 root root         179 Jul 18 06:48 ..
--rw-r--r-- 1 root root         298 Feb 20  2016 README
-drwxr-xr-x 5 root root          58 Jul 18 03:30 gtFine
--rw-r--r-- 1 root root   252567705 Jul 18 03:22 gtFine_trainvaltest.zip
-drwxr-xr-x 5 root root          58 Jul 18 03:30 leftImg8bit
--rw-r--r-- 1 root root 11592327197 Jul 18 03:27 leftImg8bit_trainvaltest.zip
--rw-r--r-- 1 root root        1646 Feb 17  2016 license.txt
--rw-r--r-- 1 root root      193690 Jul 18 03:32 test.txt
--rw-r--r-- 1 root root      398780 Jul 18 03:32 train.txt
--rw-r--r-- 1 root root       65900 Jul 18 03:32 val.txt
-```
+## Model Training
 
-## Step 3: Training
 Notice: modify configs/dnlnet/dnlnet_resnet50_os8_cityscapes_1024x512_80k.yml file, modify the datasets path as yours.
-```
+
+```bash
 cd PaddleSeg
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
@@ -81,5 +74,7 @@ python3 -u -m paddle.distributed.launch train.py \
        --amp_level O1
 ```
 
-## Reference
+## References
+
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)
+- [Paper](https://arxiv.org/abs/2006.06668)

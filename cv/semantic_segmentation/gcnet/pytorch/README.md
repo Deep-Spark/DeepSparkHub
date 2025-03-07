@@ -1,6 +1,6 @@
 # GCNet
 
-## Model description
+## Model Description
 
 A Global Context Network, or GCNet, utilises global context blocks to model long-range dependencies in images.
 It is based on the Non-Local Network, but it modifies the architecture so less computation is required.
@@ -88,5 +88,5 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/gcnet/gcnet_r50-d8_4xb2-40k_cityscapes-769x769.py 8
 ```
 
-## Reference
+## References
 [mmsegmentation](https://github.com/open-mmlab/mmsegmentation)

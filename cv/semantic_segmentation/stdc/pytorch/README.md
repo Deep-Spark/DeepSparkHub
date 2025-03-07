@@ -1,6 +1,6 @@
 # STDC
 
-## Model description
+## Model Description
 
 We propose a novel and efficient structure named Short-Term Dense Concatenate network (STDC network) by removing structure redundancy. Specifically, we gradually reduce the dimension
 of feature maps and use the aggregation of them for image representation, which forms the basic module of STDC
@@ -58,7 +58,7 @@ mkdir -p data/
 ln -s /path/to/cityscapes data/
 ```
 
-## Step 3: Training
+## Model Training
 
 ### Training on single card
 ```shell
@@ -71,11 +71,11 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/stdc/stdc1_4xb12-80k_cityscapes-512x1024.py 8
 ```
 
-## Results
+## Model Results
 
 | GPUs | Crop Size | Lr schd | FPS  | mIoU |
 | ------ | --------- | ------: | --------  |--------------:|
 |  BI-V100 x8 | 512x1024  |   20000 | 39.38     | 70.74 |
 
-## Reference
+## References
 [mmsegmentation](https://github.com/open-mmlab/mmsegmentation)

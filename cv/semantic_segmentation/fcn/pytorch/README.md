@@ -1,6 +1,6 @@
 # FCN
 
-## Model description
+## Model Description
 
 Fully Convolutional Networks, or FCNs, are an architecture used mainly for semantic segmentation.
 They employ solely locally connected layers, such as convolution, pooling and upsampling. 
@@ -9,9 +9,9 @@ It also means an FCN can work for variable image sizes given all connections are
 The network consists of a downsampling path, used to extract and interpret the context, and an upsampling path, which allows for localization.
 FCNs also employ skip connections to recover the fine-grained spatial information lost in the downsampling path.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
+### Install Dependencies
 
 ```shell
 
@@ -52,6 +52,6 @@ coco2017
 bash train_fcn_r50_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
 Ref: [torchvision](../../torchvision/pytorch/README.md)

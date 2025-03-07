@@ -1,29 +1,22 @@
 # DFANet
 
-## Model description
+## Model Description
 
-An extremely efficient CNN architecture named DFANet for semantic segmentation under resource constraints.
-It starts from a single lightweight backbone and aggregates discriminative features through sub-network and sub-stage cascade respectively.
-Based on the multi-scale feature propagation, DFANet substantially reduces the number of parameters.
-But it still obtains sufficient receptive field and enhances the model learning ability, which strikes a balance between the speed and segmentation performance.
+An extremely efficient CNN architecture named DFANet for semantic segmentation under resource constraints. It starts
+from a single lightweight backbone and aggregates discriminative features through sub-network and sub-stage cascade
+respectively. Based on the multi-scale feature propagation, DFANet substantially reduces the number of parameters. But
+it still obtains sufficient receptive field and enhances the model learning ability, which strikes a balance between the
+speed and segmentation performance.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
+### Prepare Resources
 
-```shell
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
-
-```
-
-## Step 2: Training
-
-### Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -44,13 +37,19 @@ coco2017
 └── ...
 ```
 
-### Training on COCO dataset
+### Install Dependencies
+
+```shell
+pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+```
+
+### Model Training
 
 ```shell
 bash train_dfanet_xceptiona_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
-Ref: https://github.com/LikeLy-Journey/SegmenTron
-Ref: [torchvision](../../torchvision/pytorch/README.md)
+- [SegmenTron](https://github.com/LikeLy-Journey/SegmenTron)
+- [torchvision](../../torchvision/pytorch/README.md)

@@ -1,6 +1,6 @@
 # MobileSeg
 
-## Model description
+## Model Description
 
 MobileSeg models adopt encoder-decoder architecture and use lightweight models as encoder. 
 These semantic segmentation models are designed for mobile and edge devices.
@@ -67,7 +67,7 @@ drwxr-xr-x 5 root root          58 Jul 18 03:30 leftImg8bit
 -rw-r--r-- 1 root root       65900 Jul 18 03:32 val.txt
 ```
 
-## Step 3: Training
+## Model Training
 
 ```bash
 # Change '/path/to/cityscapes' as your local Cityscapes dataset path
@@ -86,7 +86,7 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 train.py \
        --use_vdl
 ```
 
-## Results
+## Model Results
 
 ### Cityscapes
 
@@ -96,5 +96,5 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 train.py \
 | ------ | --------- | ------: | --------  |--------------:|
 |  MobileSeg | 512x1024  |   80000 | 28.68      | 0.726 |
 
-## Reference
+## References
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

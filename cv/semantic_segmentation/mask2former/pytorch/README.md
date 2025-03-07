@@ -1,6 +1,6 @@
 # Mask2Former
 
-## Model description
+## Model Description
 
 Mask2Former adopts the same meta architecture as MaskFormer, with our proposed Transformer decoder replacing the standard one. The key components of our Transformer decoder include a masked attention operator, which extracts localized features by constraining cross-attention to within the foreground region of the predicted mask for each query, instead of attending to the full feature map. To handle small objects, we propose an efficient multi-scale strategy to utilize high-resolution features. It feeds successive feature maps from the pixel decoder’s feature pyramid into successive Transformer decoder layers in a round-robin fashion. Finally, we incorporate optimization improvements that boost model performance without introducing additional computation.
 
@@ -49,18 +49,18 @@ cityscapes/
         └── munster
 ```
 
-## Step 3: Training
+## Model Training
 
 ```bash
 DETECTRON2_DATASETS=/path/to/cityscapes/ python3 train_net.py --num-gpus 8 --config-file configs/cityscapes/semantic-segmentation/maskformer2_R50_bs16_90k.yaml 1> train_mask2former.log 2> train_mask2former_error.log & tail -f train_mask2former.log
 ```
 
-## Results
+## Model Results
 
 |GPUs|    fps       |       IoU Score Average   | nIoU Score Average    |
 | ---           | ---                       | ---                   | ---               |
 |    BI-V100×8 |  11.52                | 0.795            |  0.624       |
 
-## Reference
+## References
 
 - [Mask2Former](https://github.com/facebookresearch/Mask2Former)

@@ -1,6 +1,6 @@
 # PP-HumanSegV1
 
-## Model description
+## Model Description
 
 Human segmentation is a high-frequency application in the field of image segmentation.
 Generally, human segmentation can be classified as portrait segmentation and general human segmentation.
@@ -47,7 +47,7 @@ PP-HumanSeg14K/
 
 ```
 
-## Step 3: Training
+## Model Training
 
 ```bash
 # Change ./contrib/PP-HumanSeg/configs/portrait_pp_humansegv1_lite.yml dataset path as your dataset path 
@@ -63,11 +63,11 @@ python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py  \
        --save_interval 500
 ```
 
-## Results
+## Model Results
 
 | GPUS       | mIoU   | Acc    | Kappa  |Dice    | FPS   | 
 | ---------- | ------ | ------ | ------ | ------ | ----- |
 | BI-V100 x8 | 0.9591 | 0.9836 | 0.9581 | 0.9790 | 24.54 |
 
-## Reference
+## References
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

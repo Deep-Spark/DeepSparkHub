@@ -1,14 +1,14 @@
 # FastSCNN
 
-## Model description
+## Model Description
 
 The fast segmentation convolutional neural network (Fast-SCNN), an above real-time semantic segmentation model on high resolution image data (1024x2048px) suited to efficient computation on embedded devices with low memory.
 The 'learning to downsample' module which computes low-level features for multiple resolution branches simultaneously. 
 The network combines spatial detail at high resolution with deep features extracted at lower resolution.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
+### Install Dependencies
 
 ```shell
 
@@ -49,7 +49,7 @@ coco2017
 bash train_fastscnn_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
 Ref: https://github.com/LikeLy-Journey/SegmenTron
 Ref: [torchvision](../../torchvision/pytorch/README.md)

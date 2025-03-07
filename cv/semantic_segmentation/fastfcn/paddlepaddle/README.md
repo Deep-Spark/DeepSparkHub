@@ -1,8 +1,11 @@
 # FastFCN
 
-## Model description
+## Model Description
 
-FastFCN is a fast, lightweight semantic segmentation model that achieves real-time speeds with competitive accuracy. It uses an efficient encoder-decoder architecture and depthwise separable convolutions to reduce computations. The simplified design allows FastFCN to run much faster than prior FCNs while maintaining good segmentation quality. FastFCN demonstrates real-time segmentation is possible with a carefully designed lightweight CNN architecture.
+FastFCN is a fast, lightweight semantic segmentation model that achieves real-time speeds with competitive accuracy. It
+uses an efficient encoder-decoder architecture and depthwise separable convolutions to reduce computations. The
+simplified design allows FastFCN to run much faster than prior FCNs while maintaining good segmentation quality. FastFCN
+demonstrates real-time segmentation is possible with a carefully designed lightweight CNN architecture.
 
 ## Step 1: Installation
 
@@ -34,7 +37,7 @@ ADEChallengeData2016
 └── sceneCategories.txt
 ```
 
-## Step 3: Training
+## Model Training
 
 ```bash
 # Make sure your dataset path is the same as above
@@ -52,12 +55,12 @@ python3 -m paddle.distributed.launch --gpus=0,1,2,3,4,5,6,7 tools/train.py --con
 python3 tools/val.py  --config configs/fastfcn/fastfcn_resnet50_os8_ade20k_480x480_120k.yml --model_path output/path/to/model.pdparams
 ```
 
-## Results
+## Model Results
 
 | GPUs        | mIoU        | Acc         |Kappa         | Dice         | ips         |
 |:-----------:|:-----------:|:-----------:|:------------:|:------------:|:-----------:|
 | BI-V100 x 8 |0.4312       | 0.8083      | 0.7935       | 0.570        | 33.68       |
 
-## Reference
+## References
 
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

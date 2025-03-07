@@ -1,6 +1,6 @@
 # SegNet
 
-## Model description
+## Model Description
 
 SegNet is a semantic segmentation model.
 This core trainable segmentation architecture consists of an encoder network, a corresponding decoder network followed by a pixel-wise classification layer.
@@ -9,9 +9,9 @@ The role of the decoder network is to map the low resolution encoder feature map
 The novelty of SegNet lies is in the manner in which the decoder upsamples its lower resolution input feature maps.
 Specifically, the decoder uses pooling indices computed in the max-pooling step of the corresponding encoder to perform non-linear upsampling.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
+### Install Dependencies
 
 ```shell
 
@@ -52,6 +52,6 @@ coco2017
 bash train_segnet_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
 Ref: [torchvision](../../torchvision/pytorch/README.md)

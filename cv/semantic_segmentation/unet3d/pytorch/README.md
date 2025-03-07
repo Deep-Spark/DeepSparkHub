@@ -1,6 +1,6 @@
 # 3D-UNet
 
-## Model description
+## Model Description
 
 A network for volumetric segmentation that learns from sparsely annotated volumetric images.
 Two attractive use cases of this method:
@@ -9,9 +9,9 @@ Two attractive use cases of this method:
 The proposed network extends the previous u-net architecture from Ronneberger et al. by replacing all 2D operations with their 3D counterparts.
 The implementation performs on-the-fly elastic deformations for efficient data augmentation during training.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
+### Install Dependencies
 
 ```shell
 pip3 install 'scipy' 'tqdm'
@@ -56,6 +56,6 @@ bash train_dist.sh
 | ---------------------- | ------------------------------------------ | ------------- | ---------- | ------------ | ------------- | ------------------------- | ----------- |
 | 0.908                | SDK V2.2, bs:4, 8x, fp32                    | 12          | 0.908    | 152\*8     | 0.85        | 19.6\*8                 | 1         |
 
-## Reference
+## References
 
 Reference: https://github.com/mlcommons/training/tree/master/image_segmentation/pytorch

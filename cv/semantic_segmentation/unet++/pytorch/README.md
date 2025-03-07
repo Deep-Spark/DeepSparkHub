@@ -1,6 +1,6 @@
 # UNet++: A Nested U-Net Architecture for Medical Image Segmentation
 
-## Model description
+## Model Description
 
 We present UNet++, a new, more powerful architecture for medical image segmentation. Our architecture is essentially
 a deeply supervised encoder-decoder network where the encoder and decoder sub-networks are connected through a series of nested, dense skip
@@ -45,7 +45,7 @@ If there is no `DRIVE` dataset locally, you can download `DRIVE` from a file ser
 python3 tools/convert_datasets/drive.py /path/to/training.zip /path/to/test.zip
 ```
 
-## Step 3: Training
+## Model Training
 ### Training on single card
 ```shell
 python3 tools/train.py configs/unet/unet-s5-d16_pspnet_4xb4-40k_drive-64x64.py
@@ -57,11 +57,11 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/unet/unet-s5-d16_pspnet_4xb4-40k_drive-64x64.py 8
 ```
 
-## Results
+## Model Results
 
 | GPUs| Crop Size | Lr schd | FPS | mDice |
 | ------ | --------- | ------: | --------  |--------------:|
 |  BI-V100 x8 | 64x64  |   40000 | 238.9      | 87.52 |
 
-## Reference
+## References
 [mmsegmentation](https://github.com/open-mmlab/mmsegmentation)

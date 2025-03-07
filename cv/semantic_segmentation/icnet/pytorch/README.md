@@ -1,6 +1,6 @@
 # ICNet
 
-## Model description
+## Model Description
 
 An image cascade network (ICNet) that incorporates multi-resolution branches under proper label guidance
 ICNet provide in-depth analysis of the framework and introduce the cascade feature fusion unit to quickly achieve high-quality segmentation. 
@@ -47,7 +47,7 @@ coco2017
 bash train_icnet_r50_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
 Ref: https://github.com/LikeLy-Journey/SegmenTron
 Ref: [torchvision](../../torchvision/pytorch/README.md)

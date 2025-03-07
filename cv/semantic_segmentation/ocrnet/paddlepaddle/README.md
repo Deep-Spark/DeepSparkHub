@@ -1,6 +1,6 @@
 # OCRNet
 
-## Model description
+## Model Description
 
  We present a simple yet effective approach, object-contextual representations, characterizing a pixel by exploiting the representation of the corresponding object class. First, we learn object regions under the supervision of ground-truth segmentation. Second, we compute the object region representation by aggregating the representations of the pixels lying in the object region. Last, % the representation similarity we compute the relation between each pixel and each object region and augment the representation of each pixel with the object-contextual representation which is a weighted aggregation of all the object region representations according to their relations with the pixel.
 
@@ -68,7 +68,7 @@ tree -L 2 /path/to/cityscapes
 └── val.txt
 ```
 
-## Step 3: Training
+## Model Training
 
 ```bash
 # Change '/path/to/cityscapes' as your local Cityscapes dataset path
@@ -92,10 +92,10 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 tools/train.py \
        --use_vdl
 ```
 
-## Results
+## Model Results
 | GPU         | IPS              | ACC         |
 |:-----------:|:----------------:|:-----------:|
 | BI-V100 x 4 | 2.12 samples/sec | mIoU=0.8120 |
 
-## Reference
+## References
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

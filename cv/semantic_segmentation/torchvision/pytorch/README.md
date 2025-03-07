@@ -13,40 +13,46 @@ You must modify the following flags:
 ## One Card
 
 ### deeplabv3_resnet50
-```
+
+```bash
 python3 train.py --lr 0.02 --dataset coco -b 4 --model deeplabv3_resnet50 --aux-loss
 ```
 
 ### deeplabv3_resnet101
-```
+
+```bash
 python3 train.py --lr 0.02 --dataset coco -b 4 --model deeplabv3_resnet101 --aux-loss
 ```
 
 ### deeplabv3_mobilenet_v3_large
-```
+
+```bash
 python3 train.py --dataset coco -b 4 --model deeplabv3_mobilenet_v3_large --aux-loss --wd 0.000001
 ```
 
 ## DDP
 
 ### deeplabv3_resnet50
-```
+
+```bash
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --lr 0.02 --dataset coco -b 4 --model deeplabv3_resnet50 --aux-loss
 ```
 
 ### deeplabv3_resnet101
-```
+
+```bash
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --lr 0.02 --dataset coco -b 4 --model deeplabv3_resnet101 --aux-loss
 ```
 
 ### deeplabv3_mobilenet_v3_large
-```
+
+```bash
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --dataset coco -b 4 --model deeplabv3_mobilenet_v3_large --aux-loss --wd 0.000001
 ```
 
 ## Arguments
 
-```
+```bash
   --data-path DATA_PATH
                         dataset path
   --dataset DATASET     dataset name, [coco | camvid]

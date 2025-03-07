@@ -1,6 +1,6 @@
 # STDC
 
-## Model description
+## Model Description
 
 A novel and efficient structure named Short-Term Dense Concatenate network (STDC network) by removing structure redundancy. Specifically, we gradually reduce the dimension
 of feature maps and use the aggregation of them for image representation, which forms the basic module of STDC
@@ -54,7 +54,7 @@ python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes -
 python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 ```
 
-## Step 3: Training
+## Model Training
 
 ```bash
 # Change '/path/to/cityscapes' as your local Cityscapes dataset path
@@ -75,12 +75,12 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 train.py \
        --use_vdl
 ```
 
-## Results
+## Model Results
 
 | GPUs | Crop Size | Lr schd | FPS  | mIoU |
 | ------ | --------- | ------: | --------  |--------------:|
 |  BI-V100 x8 | 512x1024  |   80000 | 14.36     | 0.7466 |
 
-## Reference
+## References
 - [cityscapes](https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes)
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

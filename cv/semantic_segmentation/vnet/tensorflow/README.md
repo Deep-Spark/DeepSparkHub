@@ -1,6 +1,6 @@
 # VNet
 
-## Model description
+## Model Description
 [V-Net: Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation](https://arxiv.org/abs/1606.04797) Fausto Milletari, Nassir Navab, Seyed-Ahmad Ahmadi
 
 ## Prepare

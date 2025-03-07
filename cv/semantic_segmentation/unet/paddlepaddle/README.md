@@ -1,5 +1,5 @@
 # UNet
-## Model description
+## Model Description
 A network and training strategy that relies on the strong use of data augmentation to use the available annotated samples more efficiently.
 The architecture consists of a contracting path to capture context and a symmetric expanding path that enables precise localization. 
 
@@ -13,7 +13,7 @@ pip3 install urllib3==1.26.6
 yum install mesa-libGL
 ```
 
-## Step 2: Prepare Datasets
+### Prepare Resources
 
 Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
@@ -68,7 +68,7 @@ drwxr-xr-x 5 root root          58 Jul 18 03:30 leftImg8bit
 -rw-r--r-- 1 root root       65900 Jul 18 03:32 val.txt
 ```
 
-## Step 3: Training
+## Model Training
 Notice: modify configs/ssd/ssd_mobilenet_v1_300_120e_voc.yml file, modify the datasets path as yours.
 The training is use AMP model.
 ```
@@ -85,5 +85,5 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 train.py \
        --amp_level O1
 ```
 
-## Reference
+## References
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

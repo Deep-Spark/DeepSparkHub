@@ -1,6 +1,6 @@
 # OCRNet
 
-## Model description 
+## Model Description 
 
 Segmentation Transformer: Object-Contextual Representations for Semantic Segmentation 
 It presents a simple yet effective approach, object-contextual representations, characterizing a pixel by exploiting the representation of the corresponding object class.
@@ -63,6 +63,6 @@ when using 8 x GPU
 bash train_distx8.sh
 ```
 
-## Reference
+## References
 
 Ref: https://github.com/HRNet/HRNet-Semantic-Segmentation

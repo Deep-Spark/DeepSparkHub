@@ -1,6 +1,6 @@
 # PP-LiteSeg
 
-## Model description
+## Model Description
 
 PP-LiteSeg is a novel lightweight model for the real-time semantic segmentation task. Specifically, the model presents a Flexible and Lightweight Decoder (FLD) to reduce computation overhead of previous decoder. To strengthen feature representations, this model proposes a Unified Attention Fusion Module (UAFM), which takes advantage of spatial and channel attention to produce a weight and then fuses the input features with the weight. Moreover, a Simple Pyramid Pooling Module (SPPM) is proposed to aggregate global context with low computation cost.
 
@@ -53,7 +53,7 @@ PaddleSeg/data
 │   └── val.txt
 ```
 
-## Step 3: Training
+## Model Training
 
 ```
 cd ..
@@ -81,11 +81,11 @@ python3 tools/train.py \
     --use_vdl
 ```
 
-## Results
+## Model Results
 
 | Method | Backbone | Training Iters | FPS (BI x 8)  | mIOU |
 | ------ | --------- | ------ | --------  |--------------:|
 |  PP-LiteSeg-T | STDC1  |  160000  |   28.8    | 73.19% |
 
-## Reference
+## References
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

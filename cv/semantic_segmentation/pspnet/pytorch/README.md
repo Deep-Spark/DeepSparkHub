@@ -1,13 +1,13 @@
 # PSPNet
 
-## Model descripstion
+## Model Description
 
 An effective pyramid scene parsing network for complex scene understanding. The global pyramid pooling feature provides additional contextual information.
 PSPNet provides a superior framework for pixellevel prediction. The proposed approach achieves state-ofthe-art performance on various datasets. It came first in ImageNet scene parsing challenge 2016, PASCAL VOC 2012 benchmark and Cityscapes benchmark. A single PSPNet yields the new record of mIoU accuracy 85.4% on PASCAL VOC 2012 and accuracy 80.2% on Cityscapes.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
+### Install Dependencies
 
 ```shell
 # Install libGL
@@ -67,5 +67,5 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/pspnet/pspnet_r50-d8_4xb2-40k_cityscapes-512x1024.py 8
 ```
 
-## Reference
+## References
 [mmsegmentation](https://github.com/open-mmlab/mmsegmentation)
