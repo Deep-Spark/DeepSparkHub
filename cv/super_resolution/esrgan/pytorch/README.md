@@ -1,10 +1,24 @@
 # ESRGAN
 
-## Model description
+## Model Description
 
-The Super-Resolution Generative Adversarial Network (SRGAN) is a seminal work that is capable of generating realistic textures during single image super-resolution. However, the hallucinated details are often accompanied with unpleasant artifacts. To further enhance the visual quality, we thoroughly study three key components of SRGAN - network architecture, adversarial loss and perceptual loss, and improve each of them to derive an Enhanced SRGAN (ESRGAN). In particular, we introduce the Residual-in-Residual Dense Block (RRDB) without batch normalization as the basic network building unit. Moreover, we borrow the idea from relativistic GAN to let the discriminator predict relative realness instead of the absolute value. Finally, we improve the perceptual loss by using the features before activation, which could provide stronger supervision for brightness consistency and texture recovery. Benefiting from these improvements, the proposed ESRGAN achieves consistently better visual quality with more realistic and natural textures than SRGAN and won the first place in the PIRM2018-SR Challenge. The code is available at https://github.com/xinntao/ESRGAN .
+ESRGAN (Enhanced Super-Resolution Generative Adversarial Network) is an advanced deep learning model for single image
+super-resolution. It improves upon SRGAN by introducing Residual-in-Residual Dense Blocks (RRDB) without batch
+normalization, relativistic GAN for the discriminator, and enhanced perceptual loss using pre-activation features. These
+innovations enable ESRGAN to generate more realistic textures with fewer artifacts, producing higher-quality upscaled
+images. It achieved first place in the PIRM2018-SR Challenge, demonstrating superior visual quality and more natural
+textures compared to its predecessor.
 
-## Step 1: Installing packages
+## Model Preparation
+
+### Prepare Resources
+
+```shell
+# Download DIV2K: https://data.vision.ee.ethz.ch/cvl/DIV2K/ or you can follow this tools/dataset_converters/div2k/README.md
+$ mkdir -p data/DIV2K
+```
+
+### Install Dependencies
 
 ```shell
 # Install libGL
@@ -21,25 +35,17 @@ sed -i 's/diffusers.models.unet_2d_condition/diffusers.models.unets.unet_2d_cond
 pip install albumentations
 ```
 
-## Step 2: Preparing datasets
+## Model Training
 
 ```shell
-# Download DIV2K: https://data.vision.ee.ethz.ch/cvl/DIV2K/ or you can follow this tools/dataset_converters/div2k/README.md
-$ mkdir -p data/DIV2K
-```
-
-## Step 3: Training
-
-### One single GPU
-```shell
+# One single GPU
 python3 tools/train.py configs/esrgan/esrgan_psnr-x4c64b23g32_1xb16-1000k_div2k.py
-```
 
-### Mutiple GPUs on one machine
-```shell
+# Mutiple GPUs on one machine
 sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/esrgan/esrgan_psnr-x4c64b23g32_1xb16-1000k_div2k.py 8
 ```
 
-## Reference
-[mmagic](https://github.com/open-mmlab/mmagic)
+## References
+
+- [mmagic](https://github.com/open-mmlab/mmagic)

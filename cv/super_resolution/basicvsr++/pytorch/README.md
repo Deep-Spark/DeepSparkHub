@@ -1,10 +1,27 @@
-# basicVSR++ (CVPR2022, Oral)
+# BasicVSR++
 
-## Model description
+## Model Description
 
-A recurrent structure is a popular framework choice for the task of video super-resolution. The state-of-the-art method BasicVSR adopts bidirectional propagation with feature alignment to effectively exploit information from the entire input video. In this study, we redesign BasicVSR by proposing second-order grid propagation and flow-guided deformable alignment. We show that by empowering the recurrent framework with the enhanced propagation and alignment, one can exploit spatiotemporal information across misaligned video frames more effectively. The new components lead to an improved performance under a similar computational constraint. In particular, our model BasicVSR++ surpasses BasicVSR by 0.82 dB in PSNR with similar number of parameters. In addition to video super-resolution, BasicVSR++ generalizes well to other video restoration tasks such as compressed video enhancement. In NTIRE 2021, BasicVSR++ obtains three champions and one runner-up in the Video Super-Resolution and Compressed Video Enhancement Challenges. Codes and models will be released to MMEditing.
+BasicVSR++ is an advanced video super-resolution model that enhances BasicVSR with second-order grid propagation and
+flow-guided deformable alignment. These innovations improve spatiotemporal information utilization across misaligned
+frames, boosting performance by 0.82 dB PSNR while maintaining efficiency. It excels in video restoration tasks,
+including compressed video enhancement, and achieved top results in NTIRE 2021 challenges. The model's recurrent
+structure effectively processes entire video sequences, making it a state-of-the-art solution for high-quality video
+upscaling and restoration.
 
-## Step 1: Installing packages
+## Model Preparation
+
+### Prepare Resources
+
+Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html) or you can follow
+tools/dataset_converters/reds/README.md
+
+```shell
+mkdir -p data/
+ln -s ${REDS_DATASET_PATH} data/REDS
+```
+
+### Install Dependencies
 
 ```shell
 # Install libGL
@@ -21,26 +38,17 @@ sed -i 's/diffusers.models.unet_2d_condition/diffusers.models.unets.unet_2d_cond
 pip install albumentations
 ```
 
-## Step 2: Preparing datasets
+## Model Training
 
-Download REDS dataset from [homepage](https://seungjunnah.github.io/Datasets/reds.html) or you can follow tools/dataset_converters/reds/README.md
 ```shell
-mkdir -p data/
-ln -s ${REDS_DATASET_PATH} data/REDS
-```
-
-## Step 3: Training
-
-### One single GPU
-```shell
+# One single GPU
 python3 tools/train.py configs/basicvsr_pp/basicvsr-pp_c64n7_8xb1-600k_reds4.py
-```
 
-### Mutiple GPUs on one machine
-```shell
+# Mutiple GPUs on one machine
 sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/basicvsr_pp/basicvsr-pp_c64n7_8xb1-600k_reds4.py 8
 ```
 
-## Reference
-[mmagic](https://github.com/open-mmlab/mmagic)
+## References
+
+- [mmagic](https://github.com/open-mmlab/mmagic)

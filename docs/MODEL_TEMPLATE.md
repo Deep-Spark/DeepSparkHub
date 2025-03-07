@@ -17,17 +17,13 @@ A brief introduction about this model.
 
 ### Prepare Resources
 
-### Prepare Datasets
-
 ```bash
 python3 dataset/coco/download_coco.py
 ```
 
-#### Prepare Pre-trained Weights (for LLM)
-
 Go to huggingface.
 
-### Install Dependencies
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
