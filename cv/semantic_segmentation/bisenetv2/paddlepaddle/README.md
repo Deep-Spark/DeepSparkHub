@@ -1,25 +1,18 @@
 # BiSeNetV2
 
-## Model description
+## Model Description
 
-A novel Bilateral Segmentation Network (BiSeNet).
-First design a Spatial Path with a small stride to preserve the spatial information and generate high-resolution features.
-Meanwhile, a Context Path with a fast downsampling strategy is employed to obtain sufficient receptive field.
-On top of the two paths, we introduce a new Feature Fusion Module to combine features efficiently.
+BiSeNet V2 is a two-pathway architecture for real-time semantic segmentation. One pathway is designed to capture the
+spatial details with wide channels and shallow layers, called Detail Branch. In contrast, the other pathway is
+introduced to extract the categorical semantics with narrow channels and deep layers, called Semantic Branch. The
+Semantic Branch simply requires a large receptive field to capture semantic context, while the detail information can be
+supplied by the Detail Branch. Therefore, the Semantic Branch can be made very lightweight with fewer channels and a
+fast-downsampling strategy. Both types of feature representation are merged to construct a stronger and more
+comprehensive feature representation.
 
-## Step 1: Installing
+## Model Preparation
 
-```bash
-git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
-cd PaddleSeg
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3 
-pip3 install urllib3==1.26.6
-yum install mesa-libGL
-python3 setup.py install
-```
-
-## Step 2: Download data
+### Prepare Resources
 
 Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
@@ -46,30 +39,29 @@ cityscapes/
         └── munster
 ```
 
+### Install Dependencies
+
+```bash
+git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
+cd PaddleSeg
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 
+pip3 install urllib3==1.26.6
+yum install mesa-libGL
+python3 setup.py install
+```
+
+### Preprocess Data
+
 ```bash
 # Datasets preprocessing
 pip3 install cityscapesscripts
 
 python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
 python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
-
-# CityScapes PATH as follow:
-ls -al /path/to/cityscapes
-total 11567948
-drwxr-xr-x 4 root root         227 Jul 18 03:32 .
-drwxr-xr-x 6 root root         179 Jul 18 06:48 ..
--rw-r--r-- 1 root root         298 Feb 20  2016 README
-drwxr-xr-x 5 root root          58 Jul 18 03:30 gtFine
--rw-r--r-- 1 root root   252567705 Jul 18 03:22 gtFine_trainvaltest.zip
-drwxr-xr-x 5 root root          58 Jul 18 03:30 leftImg8bit
--rw-r--r-- 1 root root 11592327197 Jul 18 03:27 leftImg8bit_trainvaltest.zip
--rw-r--r-- 1 root root        1646 Feb 17  2016 license.txt
--rw-r--r-- 1 root root      193690 Jul 18 03:32 test.txt
--rw-r--r-- 1 root root      398780 Jul 18 03:32 train.txt
--rw-r--r-- 1 root root       65900 Jul 18 03:32 val.txt
 ```
 
-## Step 3: Run BiSeNetV2
+## Model Training
 
 ```bash
 # Change '/path/to/cityscapes' as your local Cityscapes dataset path
@@ -90,7 +82,6 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 tools/train.py \
        --use_vdl
 ```
 
-
-| GPU     | FP32        |
-| --------- | ------------- |
-| 8 cards | mIoU=73.45% |
+| Model     | GPU        | FP32        |
+|-----------|------------|-------------|
+| BiSeNetV2 | BI-V100 x8 | mIoU=73.45% |

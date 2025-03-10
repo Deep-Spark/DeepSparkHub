@@ -1,24 +1,17 @@
 # STDC
 
-## Model description
+## Model Description
 
-A novel and efficient structure named Short-Term Dense Concatenate network (STDC network) by removing structure redundancy. Specifically, we gradually reduce the dimension
-of feature maps and use the aggregation of them for image representation, which forms the basic module of STDC
-network. In the decoder, we propose a Detail Aggregation module by integrating the learning of spatial information into low-level layers in single-stream manner. Finally,
-the low-level features and deep features are fused to predict the final segmentation results. 
+STDC (Short-Term Dense Concatenate network) is an efficient deep learning model for semantic segmentation that reduces
+structural redundancy while maintaining high performance. It gradually decreases feature map dimensions and aggregates
+them for image representation. The model incorporates a Detail Aggregation module in the decoder to enhance spatial
+information learning in low-level layers. By fusing both low-level and deep features, STDC achieves accurate
+segmentation results with optimized computational efficiency, making it particularly suitable for real-time
+applications.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
-cd PaddleSeg
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3
-pip3 install urllib3==1.26.6
-yum install mesa-libGL -y
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
 
@@ -45,19 +38,32 @@ cityscapes/
         └── munster
 ```
 
+### Install Dependencies
+
+```bash
+git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleSeg.git
+cd PaddleSeg
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3
+pip3 install urllib3==1.26.6
+yum install mesa-libGL -y
+```
+
+### Preprocess Data
+
 ```bash
 # Datasets preprocessing
 pip3 install cityscapesscripts
 
 python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
-
 python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 ```
 
-## Step 3: Training
+## Model Training
+
+Change '/path/to/cityscapes' as your local Cityscapes dataset path.
 
 ```bash
-# Change '/path/to/cityscapes' as your local Cityscapes dataset path
 data_dir=/path/to/cityscapes
 sed -i "s#: data/cityscapes#: ${data_dir}#g" configs/_base_/cityscapes.yml
 export FLAGS_cudnn_exhaustive_search=True
@@ -75,12 +81,13 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 train.py \
        --use_vdl
 ```
 
-## Results
+## Model Results
 
-| GPUs | Crop Size | Lr schd | FPS  | mIoU |
-| ------ | --------- | ------: | --------  |--------------:|
-|  BI-V100 x8 | 512x1024  |   80000 | 14.36     | 0.7466 |
+| GPUs       | Crop Size | Lr schd | FPS   | mIoU   |
+|------------|-----------|--------:|-------|--------|
+| BI-V100 x8 | 512x1024  |   80000 | 14.36 | 0.7466 |
 
-## Reference
+## References
+
 - [cityscapes](https://mmsegmentation.readthedocs.io/en/latest/dataset_prepare.html#cityscapes)
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

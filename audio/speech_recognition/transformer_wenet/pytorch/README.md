@@ -1,6 +1,6 @@
-# Transformer
+# Transformer (WeNet)
 
-## Model description
+## Model Description
 
 The Transformer architecture, introduced in the paper "Attention Is All You Need" by Vaswani et al. in 2017,
 revolutionized the field of deep learning. It relies on a mechanism called self-attention to process input data in
@@ -8,14 +8,16 @@ parallel (as opposed to sequentially) and capture complex dependencies in data, 
 sequence. Transformers have since become the foundation for state-of-the-art models in various tasks, especially in
 natural language processing, such as the BERT and GPT series.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```sh
 cd ../../../../toolbox/WeNet/
 bash install_toolbox_wenet.sh
 ```
 
-## Step 2: Training
+## Model Training
 
 Dataset is data_aishell.tgz and resource_aishell.tgz from wenet.
 You could just run the whole script, which will download the dataset automatically.
@@ -55,12 +57,12 @@ bash run.sh --stage 5 --stop-stage 5
 bash run.sh --stage 6 --stop-stage 6
 ```
 
-## Results
+## Model Results
 
 | GPUs       | FP16  | QPS | WER (ctc_greedy_search) | WER (ctc_prefix_beam_search) | WER (attention) | WER (attention_rescoring) |
 |------------|-------|-----|-------------------------|------------------------------|-----------------|---------------------------|
 | BI-V100 x8 | False | 394 | 5.78%                   | 5.78%                        | 5.59%           | 5.17%                     |
 
-## Reference
+## References
 
 - [WeNet](https://github.com/wenet-e2e/wenet)

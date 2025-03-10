@@ -1,20 +1,17 @@
 # VQMIVC
 
-## Model description
+## Model Description
 
-One-shot voice conversion (VC), which performs conversion across arbitrary speakers with only a single target-speaker
-utterance for reference, can be effectively achieved by speech representation disentanglement. Existing work generally
-ignores the correlation between different speech representations during training, which causes leakage of content
-information into the speaker representation and thus degrades VC performance. To alleviate this issue, we employ vector
-quantization (VQ) for content encoding and introduce mutual information (MI) as the correlation metric during training,
-to achieve proper disentanglement of content, speaker and pitch representations, by reducing their inter-dependencies in
-an unsupervised manner. Experimental results reflect the superiority of the proposed method in learning effective
-disentangled speech representations for retaining source linguistic content and intonation variations, while capturing
-target speaker characteristics. In doing so, the proposed approach achieves higher speech naturalness and speaker
-similarity than current state-of-the-art one-shot VC systems. Our code, pre-trained models and demo are available at
-<https://github.com/Wendison/VQMIVC>.
+VQMIVC is an advanced deep learning model for one-shot voice conversion that employs vector quantization and mutual
+information minimization to disentangle speech representations. It effectively separates content, speaker, and pitch
+information, enabling high-quality voice conversion with just a single target-speaker utterance. By reducing
+inter-dependencies between speech components, VQMIVC achieves superior naturalness and speaker similarity compared to
+traditional methods. This unsupervised approach is particularly effective for retaining source linguistic content while
+accurately capturing target speaker characteristics.
 
-## Step 1: Preparing datasets
+## Model Preparation
+
+### Prepare Resources
 
 ```sh
 mkdir -p /home/data/vqmivc/
@@ -23,38 +20,37 @@ wget https://datashare.ed.ac.uk/bitstream/handle/10283/3443/VCTK-Corpus-0.92.zip
 unzip VCTK-Corpus-0.92.zip
 ```
 
-## Step 2: Preprocess
+### Install Dependencies
 
 ```sh
-cd ${DEEPSPARKHUB_ROOT}/speech/speech_synthesis/vqmivc/pytorch/
 pip3 install -r requirements_bi.txt
 ln -s /home/data/vqmivc .
 python3 preprocess.py
 ln -s vqmivc/data .
 ```
 
-## Step 3: Training
+## Model Training
 
-* Training with mutual information minimization (MIM):
+- Training with mutual information minimization (MIM):
 
 ```sh
 export HYDRA_FULL_ERROR=1
 python3 train.py use_CSMI=True use_CPMI=True use_PSMI=True
 ```
 
-* Training without MIM:
+- Training without MIM:
 
 ```sh
 python3 train.py use_CSMI=False use_CPMI=False use_PSMI=False 
 ```
 
-## Results on BI-V100
+## Model Results
 
 | Card Type | recon loss | cps loss | vq loss | perpexlity | lld cs loss | mi cs loss | lld ps loss | mi ps loss | lld cp loss | mi cp loss | used time(s) |
 |-----------|------------|----------|---------|------------|-------------|------------|-------------|------------|-------------|------------|--------------|
-| BI        |      0.635 |  1.062   |  0.453  |  401.693   |   110.958   |  2.653E-4  |    0.052    |   0.001    |   219.895   |   0.021    |    4.315     |
+| BI-V100   | 0.635      | 1.062    | 0.453   | 401.693    | 110.958     | 2.653E-4   | 0.052       | 0.001      | 219.895     | 0.021      | 4.315        |
 |           |
 
-## Reference
+## References
 
 - [VQMIVC](https://github.com/Wendison/VQMIVC)

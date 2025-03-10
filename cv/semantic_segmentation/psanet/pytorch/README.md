@@ -1,29 +1,22 @@
 # PSANet
 
-## Model description
+## Model Description
 
-The point-wise spatial attention network (PSANet) to relax the local neighborhood constraint. 
-Each position on the feature map is connected to all the other ones through a self-adaptively learned attention mask.
-Moreover, information propagation in bi-direction for scene parsing is enabled.
-Information at other positions can be collected to help the prediction of the current position and vice versa, information at the current position can be distributed to assist the prediction of other ones.
+The point-wise spatial attention network (PSANet) to relax the local neighborhood constraint. Each position on the
+feature map is connected to all the other ones through a self-adaptively learned attention mask. Moreover, information
+propagation in bi-direction for scene parsing is enabled. Information at other positions can be collected to help the
+prediction of the current position and vice versa, information at the current position can be distributed to assist the
+prediction of other ones.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
+### Prepare Resources
 
-```shell
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
-
-```
-
-## Step 2: Training
-
-### Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -44,13 +37,19 @@ coco2017
 └── ...
 ```
 
-### Training on COCO dataset
+### Install Dependencies
+
+```shell
+pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+```
+
+## Model Training
 
 ```shell
 bash train_psanet_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
-Ref: https://github.com/ycszen/TorchSeg
-Ref: [torchvision](../../torchvision/pytorch/README.md)
+- [TorchSeg](https://github.com/ycszen/TorchSeg)
+- [torchvision](../../torchvision/pytorch/README.md)

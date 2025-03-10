@@ -171,7 +171,7 @@ def plot_predictions(images_list, size):
 plot_predictions(train_images[:4], (512, 512))
 ```
 
-## Results
+## Model Results
 
 ### Multi-Person Human Parsing
 

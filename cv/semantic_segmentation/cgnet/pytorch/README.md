@@ -1,24 +1,14 @@
 # CGNet
 
-## Model description
+## Model Description
 
 A novel Context Guided Network (CGNet), which is a light-weight and efficient network for semantic segmentation. 
 Under an equivalent number of parameters, the proposed CGNet significantly outperforms existing segmentation networks. 
 Specifically, without any post-processing and multi-scale testing, the proposed CGNet achieves 64.8% mean IoU on Cityscapes with less than 0.5 M parameters.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
-
-```shell
-
-pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
-
-```
-
-## Step 2: Training
-
-### Preparing datasets
+### Prepare Resources
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
@@ -43,13 +33,19 @@ coco2017
 └── ...
 ```
 
-### Training on COCO dataset
+### Install Dependencies
+
+```shell
+pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+```
+
+## Model Training
 
 ```shell
 bash train_cgnet_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
-Ref: https://github.com/LikeLy-Journey/SegmenTron
-Ref: [torchvision](../../torchvision/pytorch/README.md)
+- [SegmenTron](https://github.com/LikeLy-Journey/SegmenTron)
+- [torchvision](../../torchvision/pytorch/README.md)

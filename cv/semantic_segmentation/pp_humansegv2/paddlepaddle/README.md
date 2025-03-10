@@ -1,34 +1,24 @@
 # PP-HumanSegV2
 
-## Model description
+## Model Description
 
-Human segmentation is a high-frequency application in the field of image segmentation.
-Generally, human segentation can be classified as portrait segmentation and general human segmentation.
+PP-HumanSegV2 is an advanced deep learning model for human segmentation, specializing in both portrait and general human
+segmentation tasks. Developed by PaddleSeg, it offers improved accuracy, faster inference speed, and enhanced robustness
+compared to its predecessor. The model supports zero-cost deployment for immediate use in products and allows
+fine-tuning for better performance. PP-HumanSegV2 is particularly effective for applications like video background
+replacement and portrait segmentation, delivering high-quality results with optimized computational efficiency.
 
-For portrait segmentation and general human segmentation, PaddleSeg releases the PP-HumanSeg models, which has **good performance in accuracy, inference speed and robustness**. Besides, we can deploy PP-HumanSeg models to products without training
-Besides, PP-HumanSeg models can be deployed to products at zero cost, and it also support fine-tuning to achieve better performance.
+## Model Preparation
 
-The following is demonstration videos (due to the video is large, the loading will be slightly slow) .We provide full-process application guides from training to deployment, as well as video streaming segmentation and background replacement tutorials. Based on Paddle.js, you can experience the effects of [Portrait Snapshot](https://paddlejs.baidu.com/humanseg), [Video Background Replacement and Barrage Penetration](https://www.paddlepaddle.org.cn/paddlejs).
+### Prepare Resources
 
-## Step 1: Installation
-
-```bash
-git clone -b develop https://github.com/PaddlePaddle/PaddleSeg.git
-cd PaddleSeg
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3 
-pip3 install urllib3==1.26.6
-yum install mesa-libGL
-python3 setup.py develop
-```
-
-## Step 2: Preparing datasets
-
-Go to visit [PP-HumanSeg14K official website](https://paperswithcode.com/dataset/pp-humanseg14k), then download the PP-HumanSeg14K dataset, or you can download via [Baidu Netdisk](https://pan.baidu.com/s/1Buy74e5ymu2vXYlYfGvBHg) password: vui7 , [Google Cloud Disk](https://drive.google.com/file/d/1eEIV9lM2Kl1Ejcj3Cuht8EHN5eNF8Zjn/view?usp=sharing)
+Go to visit [PP-HumanSeg14K official website](https://paperswithcode.com/dataset/pp-humanseg14k), then download the
+PP-HumanSeg14K dataset, or you can download via [Baidu Netdisk](https://pan.baidu.com/s/1Buy74e5ymu2vXYlYfGvBHg)
+password: vui7 , [Google Cloud Disk](https://drive.google.com/file/d/1eEIV9lM2Kl1Ejcj3Cuht8EHN5eNF8Zjn/view?usp=sharing)
 
 The dataset path structure sholud look like:
 
-```
+```bash
 PP-HumanSeg14K/
 ├── annotations
 │   ├── train
@@ -45,12 +35,23 @@ PP-HumanSeg14K/
 
 ```
 
-
-## Step 3: Training
+### Install Dependencies
 
 ```bash
-# Change ./contrib/PP-HumanSeg/configs/portrait_pp_humansegv2_lite.yml dataset path as your dateset path 
+git clone -b develop https://github.com/PaddlePaddle/PaddleSeg.git
+cd PaddleSeg
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 
+pip3 install urllib3==1.26.6
+yum install mesa-libGL
+python3 setup.py develop
+```
 
+## Model Training
+
+Change ./contrib/PP-HumanSeg/configs/portrait_pp_humansegv2_lite.yml dataset path as your dateset path
+
+```bash
 # One GPU
 CUDA_VISIBLE_DEVICES=0 python3 tools/train.py --config contrib/PP-HumanSeg/configs/portrait_pp_humansegv2_lite.yml --save_dir output/human_pp_humansegv2_lite --save_interval 500 --do_eval --use_vdl
 
@@ -62,15 +63,12 @@ python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py \
        --save_interval 500
 ```
 
-## Results
+## Model Results
 
-| MODEL         | mIoU    |Acc     | Kappa  |Dice   |
-| ----------    | ------  |------  |--------|-----  |
-| pp_humansegv2 | 0.798   |0.9860  |0.9642  |0.9821 |
+| MODEL         | GPU        | mIoU  | Acc    | Kappa  | Dice   | FPS     |
+|---------------|------------|-------|--------|--------|--------|---------|
+| PP-HumanSegV2 | BI-V100 x8 | 0.798 | 0.9860 | 0.9642 | 0.9821 | 34.0294 |
 
-| GPUS       | FPS     | 
-| ---------- | ------  |
-| BI-V100x 8 | 34.0294 |
+## References
 
-## Reference
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

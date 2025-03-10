@@ -1,27 +1,19 @@
 # EncNet
 
-## Model description
+## Model Description
 
 The Context Encoding Module, which captures the semantic context of scenes and selectively highlights class-dependent featuremaps. 
 The Context Encoding Module significantly improves semantic segmentation results with only marginal extra computation cost over FCN.
 
-## Step 1: Installing
+## Model Preparation
 
-### Install packages
+### Prepare Resources
 
-```shell
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
-
-```
-
-## Step 2: Training
-
-### Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -42,13 +34,19 @@ coco2017
 └── ...
 ```
 
-### Training on COCO dataset
+### Install Dependencies
+
+```shell
+pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+```
+
+## Model Training
 
 ```shell
 bash train_encnet_r50_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-## Reference
+## References
 
-Ref: https://github.com/LikeLy-Journey/SegmenTron
-Ref: [torchvision](../../torchvision/pytorch/README.md)
+- [SegmenTron](https://github.com/LikeLy-Journey/SegmenTron)
+- [torchvision](../../torchvision/pytorch/README.md)
