@@ -2,26 +2,22 @@
 
 ## Model Description
 
- We present a simple yet effective approach, object-contextual representations, characterizing a pixel by exploiting the representation of the corresponding object class. First, we learn object regions under the supervision of ground-truth segmentation. Second, we compute the object region representation by aggregating the representations of the pixels lying in the object region. Last, % the representation similarity we compute the relation between each pixel and each object region and augment the representation of each pixel with the object-contextual representation which is a weighted aggregation of all the object region representations according to their relations with the pixel.
+OCRNet (Object Contextual Representation Network) is a deep learning model for semantic segmentation that enhances
+pixel-level understanding by incorporating object context information. It learns object regions from ground-truth
+segmentation and aggregates pixel representations within these regions. By computing relationships between pixels and
+object regions, OCRNet augments each pixel's representation with contextual information from relevant objects. This
+approach improves segmentation accuracy, particularly in complex scenes, by better capturing object boundaries and
+contextual relationships between different image elements.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-git clone -b release/2.8 https://github.com/PaddlePaddle/PaddleSeg.git
-cd PaddleSeg
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3
-pip3 install urllib3==1.26.13
-python3 setup.py install
+### Prepare Resources
 
-yum install -y mesa-libGL
-```
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the
+Cityscapes dataset.
 
-## Step 2: Preparing datasets
-
-Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
-
-Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure
+sholud look like:
 
 ```bash
 cityscapes/
@@ -44,12 +40,26 @@ cityscapes/
         └── munster
 ```
 
+### Install Dependencies
+
+```bash
+git clone -b release/2.8 https://github.com/PaddlePaddle/PaddleSeg.git
+cd PaddleSeg
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3
+pip3 install urllib3==1.26.13
+python3 setup.py install
+
+yum install -y mesa-libGL
+```
+
+### Preprocess Data
+
 ```bash
 # Datasets preprocessing
 pip3 install cityscapesscripts
 
 python3 tools/data/convert_cityscapes.py --cityscapes_path /path/to/cityscapes --num_workers 8
-
 python3 tools/data/create_dataset_list.py /path/to/cityscapes --type cityscapes --separator ","
 
 # CityScapes PATH as follow:
@@ -93,9 +103,11 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3 tools/train.py \
 ```
 
 ## Model Results
-| GPU         | IPS              | ACC         |
-|:-----------:|:----------------:|:-----------:|
-| BI-V100 x 4 | 2.12 samples/sec | mIoU=0.8120 |
+
+| GPU        | IPS              | ACC         |
+|------------|------------------|-------------|
+| BI-V100 x4 | 2.12 samples/sec | mIoU=0.8120 |
 
 ## References
+
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

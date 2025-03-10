@@ -23,7 +23,7 @@ python3 dataset/coco/download_coco.py
 
 Go to huggingface.
 
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt

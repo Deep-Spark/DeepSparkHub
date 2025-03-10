@@ -2,27 +2,19 @@
 
 ## Model Description
 
-The Harmonic Densely Connected Network to achieve high efficiency in terms of both low MACs and memory traffic. 
-The new network achieves 35%, 36%, 30%, 32%, and 45% inference time reduction compared with FC-DenseNet-103, DenseNet-264, ResNet-50, ResNet-152, and SSD-VGG, respectively. 
-
+The Harmonic Densely Connected Network to achieve high efficiency in terms of both low MACs and memory traffic. The new
+network achieves 35%, 36%, 30%, 32%, and 45% inference time reduction compared with FC-DenseNet-103, DenseNet-264,
+ResNet-50, ResNet-152, and SSD-VGG, respectively.
 
 ## Model Preparation
 
-### Install Dependencies
+### Prepare Resources
 
-```shell
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
-
-```
-
-## Step 2: Training
-
-### Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -43,7 +35,15 @@ coco2017
 └── ...
 ```
 
-### Training on COCO dataset
+### Install Dependencies
+
+```shell
+
+pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+
+```
+
+## Model Training
 
 ```shell
 bash train_hardnet_dist.sh --data-path /path/to/coco2017/ --dataset coco
@@ -51,5 +51,5 @@ bash train_hardnet_dist.sh --data-path /path/to/coco2017/ --dataset coco
 
 ## References
 
-Ref: https://github.com/LikeLy-Journey/SegmenTron
-Ref: [torchvision](../../torchvision/pytorch/README.md)
+- [SegmenTron](https://github.com/LikeLy-Journey/SegmenTron)
+- [torchvision](../../torchvision/pytorch/README.md)

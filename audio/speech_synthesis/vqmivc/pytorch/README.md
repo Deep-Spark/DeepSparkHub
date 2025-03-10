@@ -2,17 +2,12 @@
 
 ## Model Description
 
-One-shot voice conversion (VC), which performs conversion across arbitrary speakers with only a single target-speaker
-utterance for reference, can be effectively achieved by speech representation disentanglement. Existing work generally
-ignores the correlation between different speech representations during training, which causes leakage of content
-information into the speaker representation and thus degrades VC performance. To alleviate this issue, we employ vector
-quantization (VQ) for content encoding and introduce mutual information (MI) as the correlation metric during training,
-to achieve proper disentanglement of content, speaker and pitch representations, by reducing their inter-dependencies in
-an unsupervised manner. Experimental results reflect the superiority of the proposed method in learning effective
-disentangled speech representations for retaining source linguistic content and intonation variations, while capturing
-target speaker characteristics. In doing so, the proposed approach achieves higher speech naturalness and speaker
-similarity than current state-of-the-art one-shot VC systems. Our code, pre-trained models and demo are available at
-<https://github.com/Wendison/VQMIVC>.
+VQMIVC is an advanced deep learning model for one-shot voice conversion that employs vector quantization and mutual
+information minimization to disentangle speech representations. It effectively separates content, speaker, and pitch
+information, enabling high-quality voice conversion with just a single target-speaker utterance. By reducing
+inter-dependencies between speech components, VQMIVC achieves superior naturalness and speaker similarity compared to
+traditional methods. This unsupervised approach is particularly effective for retaining source linguistic content while
+accurately capturing target speaker characteristics.
 
 ## Model Preparation
 
@@ -25,10 +20,9 @@ wget https://datashare.ed.ac.uk/bitstream/handle/10283/3443/VCTK-Corpus-0.92.zip
 unzip VCTK-Corpus-0.92.zip
 ```
 
-## Preprocess Data
+### Install Dependencies
 
 ```sh
-cd ${DEEPSPARKHUB_ROOT}/speech/speech_synthesis/vqmivc/pytorch/
 pip3 install -r requirements_bi.txt
 ln -s /home/data/vqmivc .
 python3 preprocess.py

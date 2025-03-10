@@ -2,29 +2,20 @@
 
 ## Model Description
 
-Mask2Former adopts the same meta architecture as MaskFormer, with our proposed Transformer decoder replacing the standard one. The key components of our Transformer decoder include a masked attention operator, which extracts localized features by constraining cross-attention to within the foreground region of the predicted mask for each query, instead of attending to the full feature map. To handle small objects, we propose an efficient multi-scale strategy to utilize high-resolution features. It feeds successive feature maps from the pixel decoder’s feature pyramid into successive Transformer decoder layers in a round-robin fashion. Finally, we incorporate optimization improvements that boost model performance without introducing additional computation.
+Mask2Former adopts the same meta architecture as MaskFormer, with our proposed Transformer decoder replacing the
+standard one. The key components of our Transformer decoder include a masked attention operator, which extracts
+localized features by constraining cross-attention to within the foreground region of the predicted mask for each query,
+instead of attending to the full feature map. To handle small objects, we propose an efficient multi-scale strategy to
+utilize high-resolution features. It feeds successive feature maps from the pixel decoder’s feature pyramid into
+successive Transformer decoder layers in a round-robin fashion. Finally, we incorporate optimization improvements that
+boost model performance without introducing additional computation.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-# Install mesa-libGL
-yum install mesa-libGL -y
+### Prepare Resources
 
-# Install requirements
-pip3 install urllib3==1.26.6
-pip3 install 'git+https://github.com/facebookresearch/detectron2.git@d779ea63faa54fe42b9b4c280365eaafccb280d6'
-pip3 install cityscapesscripts
-
-pip3 install -r requirements.txt
-
-cd mask2former/modeling/pixel_decoder/ops
-sh make.sh
-cd -
-```
-
-## Step 2: Preparing datasets
-
-Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the
+Cityscapes dataset.
 
 Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure should look like:
 
@@ -49,6 +40,24 @@ cityscapes/
         └── munster
 ```
 
+### Install Dependencies
+
+```bash
+# Install mesa-libGL
+yum install mesa-libGL -y
+
+# Install requirements
+pip3 install urllib3==1.26.6
+pip3 install 'git+https://github.com/facebookresearch/detectron2.git@d779ea63faa54fe42b9b4c280365eaafccb280d6'
+pip3 install cityscapesscripts
+
+pip3 install -r requirements.txt
+
+cd mask2former/modeling/pixel_decoder/ops
+sh make.sh
+cd -
+```
+
 ## Model Training
 
 ```bash
@@ -57,9 +66,9 @@ DETECTRON2_DATASETS=/path/to/cityscapes/ python3 train_net.py --num-gpus 8 --con
 
 ## Model Results
 
-|GPUs|    fps       |       IoU Score Average   | nIoU Score Average    |
-| ---           | ---                       | ---                   | ---               |
-|    BI-V100×8 |  11.52                | 0.795            |  0.624       |
+| GPU        | fps   | IoU Score Average | nIoU Score Average |
+|------------|-------|-------------------|--------------------|
+| BI-V100 ×8 | 11.52 | 0.795             | 0.624              |
 
 ## References
 

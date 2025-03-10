@@ -2,27 +2,20 @@
 
 ## Model Description
 
-A lightweight feature pyramid encoding network (FPENet) to make a good trade-off between accuracy and speed. 
-Specifically, use a feature pyramid encoding block to encode multi-scale contextual features with depthwise dilated convolutions in all stages of the encoder.
-A mutual embedding upsample module is introduced in the decoder to aggregate the high-level semantic features and low-level spatial details efficiently. 
+A lightweight feature pyramid encoding network (FPENet) to make a good trade-off between accuracy and speed.
+Specifically, use a feature pyramid encoding block to encode multi-scale contextual features with depthwise dilated
+convolutions in all stages of the encoder. A mutual embedding upsample module is introduced in the decoder to aggregate
+the high-level semantic features and low-level spatial details efficiently.
 
 ## Model Preparation
 
-### Install Dependencies
+### Prepare Resources
 
-```shell
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
-
-```
-
-## Step 2: Training
-
-### Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -43,7 +36,15 @@ coco2017
 └── ...
 ```
 
-### Training on COCO dataset
+### Install Dependencies
+
+```shell
+
+pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+
+```
+
+## Model Training
 
 ```shell
 bash train_fpenet_dist.sh --data-path /path/to/coco2017/ --dataset coco
@@ -51,5 +52,5 @@ bash train_fpenet_dist.sh --data-path /path/to/coco2017/ --dataset coco
 
 ## References
 
-Ref: https://github.com/LikeLy-Journey/SegmenTron
-Ref: [torchvision](../../torchvision/pytorch/README.md)
+- [SegmenTron]https://github.com/LikeLy-Journey/SegmenTron
+- [torchvision](../../torchvision/pytorch/README.md)

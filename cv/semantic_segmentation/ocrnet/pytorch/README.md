@@ -1,19 +1,23 @@
 # OCRNet
 
-## Model Description 
+## Model Description
 
-Segmentation Transformer: Object-Contextual Representations for Semantic Segmentation 
-It presents a simple yet effective approach, object-contextual representations, characterizing a pixel by exploiting the representation of the corresponding object class.
-First, we learn object regions under the supervision of ground-truth segmentation.
-Second, we compute the object region representation by aggregating the representations of the pixels lying in the object region. 
-Last, the representation similarity we compute the relation between each pixel and each object region and augment the representation of each pixel with the object-contextual representation which is a weighted aggregation of all the object region representations according to their relations with the pixel. 
+OCRNet (Object Contextual Representation Network) is a deep learning model for semantic segmentation that enhances
+pixel-level understanding by incorporating object context information. It learns object regions from ground-truth
+segmentation and aggregates pixel representations within these regions. By computing relationships between pixels and
+object regions, OCRNet augments each pixel's representation with contextual information from relevant objects. This
+approach improves segmentation accuracy, particularly in complex scenes, by better capturing object boundaries and
+contextual relationships between different image elements.
 
-## Step 1: Installing
-### Datasets
+## Model Preparation
 
-Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the Cityscapes dataset.
+### Prepare Resources
 
-Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure sholud look like:
+Go to visit [Cityscapes official website](https://www.cityscapes-dataset.com/), then choose 'Download' to download the
+Cityscapes dataset.
+
+Specify `/path/to/cityscapes` to your Cityscapes path in later training process, the unzipped dataset path structure
+sholud look like:
 
 ```bash
 cityscapes/
@@ -41,28 +45,25 @@ mkdir data/
 ln -s /path/to/cityscapes data/cityscapes
 ```
 
-### Environment
+### Install Dependencies
+
 ```bash
 bash init.sh
 ```
 
-## Step 2: Training
-### Train using 1x GPU card
+## Model Training
+
 ```bash
+# Train using 1x GPU card
 bash train.sh
-```
 
-### Train using Nx GPU cards
-when using 4 x GPU  
-```bash
+# Train using 4x GPU cards
 bash train_distx4.sh
-```
 
-when using 8 x GPU  
-```bash
+# Training using 8 x GPU  
 bash train_distx8.sh
 ```
 
 ## References
 
-Ref: https://github.com/HRNet/HRNet-Semantic-Segmentation
+- [HRNet-Semantic-Segmentation](https://github.com/HRNet/HRNet-Semantic-Segmentation)

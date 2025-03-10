@@ -7,19 +7,13 @@ uses an efficient encoder-decoder architecture and depthwise separable convoluti
 simplified design allows FastFCN to run much faster than prior FCNs while maintaining good segmentation quality. FastFCN
 demonstrates real-time segmentation is possible with a carefully designed lightweight CNN architecture.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-git clone -b release/2.9 --recursive  https://github.com/PaddlePaddle/PaddleSeg.git
-cd PaddleSeg
-yum install -y mesa-libGL
-pip3 install scikit-learn easydict visualdl==2.2.0 urllib3==1.26.6
-pip3 install -v -e .
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets
-
-Download the ADEChallengeData2016 from [Scene Parsing Challenge 2016](http://sceneparsing.csail.mit.edu/index_challenge.html). Alternatively, you can skip this step because the PaddleSeg framework will automatically download it for you.
+Download the ADEChallengeData2016 from [Scene Parsing Challenge
+2016](http://sceneparsing.csail.mit.edu/index_challenge.html). Alternatively, you can skip this step because the
+PaddleSeg framework will automatically download it for you.
 
 The ADEChallengeData2016 dataset path structure should look like:
 
@@ -37,6 +31,16 @@ ADEChallengeData2016
 └── sceneCategories.txt
 ```
 
+### Install Dependencies
+
+```bash
+git clone -b release/2.9 --recursive  https://github.com/PaddlePaddle/PaddleSeg.git
+cd PaddleSeg
+yum install -y mesa-libGL
+pip3 install scikit-learn easydict visualdl==2.2.0 urllib3==1.26.6
+pip3 install -v -e .
+```
+
 ## Model Training
 
 ```bash
@@ -47,7 +51,6 @@ cd PaddleClas/
 ln -s /path/to/ADEChallengeData2016 ./data/ADEChallengeData2016
 
 # 8 GPUs
-
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 python3 -m paddle.distributed.launch --gpus=0,1,2,3,4,5,6,7 tools/train.py --config configs/fastfcn/fastfcn_resnet50_os8_ade20k_480x480_120k.yml
 
@@ -57,9 +60,9 @@ python3 tools/val.py  --config configs/fastfcn/fastfcn_resnet50_os8_ade20k_480x4
 
 ## Model Results
 
-| GPUs        | mIoU        | Acc         |Kappa         | Dice         | ips         |
-|:-----------:|:-----------:|:-----------:|:------------:|:------------:|:-----------:|
-| BI-V100 x 8 |0.4312       | 0.8083      | 0.7935       | 0.570        | 33.68       |
+| GPUs        | mIoU   | Acc    | Kappa  | Dice  | ips   |
+|-------------|--------|--------|--------|-------|-------|
+| BI-V100 x 8 | 0.4312 | 0.8083 | 0.7935 | 0.570 | 33.68 |
 
 ## References
 

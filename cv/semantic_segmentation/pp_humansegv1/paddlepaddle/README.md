@@ -2,35 +2,24 @@
 
 ## Model Description
 
-Human segmentation is a high-frequency application in the field of image segmentation.
-Generally, human segmentation can be classified as portrait segmentation and general human segmentation.
+PP-HumanSegV1 is an efficient deep learning model for human segmentation, specializing in both portrait and general
+human segmentation tasks. Developed by PaddleSeg, it offers excellent accuracy, fast inference speed, and robust
+performance across various scenarios. The model supports zero-cost deployment for immediate use in products and allows
+fine-tuning for enhanced performance. PP-HumanSegV1 is particularly valuable for applications like video background
+replacement, portrait snapshot, and barrage penetration, providing high-quality segmentation results with minimal
+computational requirements.
 
-For portrait segmentation and general human segmentation, PaddleSeg releases the PP-HumanSeg models, which have **good performance in accuracy, inference speed, and robustness**. Besides, we can deploy PP-HumanSeg models to products without training
-Besides, PP-HumanSeg models can be deployed to products at zero cost, and it also supports fine-tuning to achieve better performance.
+## Model Preparation
 
-The following are demonstration videos (due to the video being large, the loading will be slightly slow). We provide full-process application guides from training to deployment, as well as video streaming segmentation and background replacement tutorials. Based on Paddle.js, you can experience the effects of [Portrait Snapshot](https://paddlejs.baidu.com/humanseg), [Video Background Replacement and Barrage Penetration](https://www.paddlepaddle.org.cn/paddlejs).
+### Prepare Resources
 
-PP-HumanSegV1-Lite portrait segmentation model: It has good performance in accuracy and model size and the model architecture in [url](https://github.com/PaddlePaddle/PaddleSeg/tree/develop/configs/pp_humanseg_lite).
-
-## Step 1: Installation
-
-```bash
-git clone -b develop https://github.com/PaddlePaddle/PaddleSeg.git
-cd PaddleSeg
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3 
-pip3 install urllib3==1.26.6
-yum install mesa-libGL
-python3 setup.py develop
-```
-
-## Step 2: Preparing datasets
-
-Go to visit [PP-HumanSeg14K official website](https://paperswithcode.com/dataset/pp-humanseg14k), then download the PP-HumanSeg14K dataset, or you can download via [Baidu Netdisk](https://pan.baidu.com/s/1Buy74e5ymu2vXYlYfGvBHg) password: vui7 , [Google Cloud Disk](https://drive.google.com/file/d/1eEIV9lM2Kl1Ejcj3Cuht8EHN5eNF8Zjn/view?usp=sharing)
+Go to visit [PP-HumanSeg14K official website](https://paperswithcode.com/dataset/pp-humanseg14k), then download the
+PP-HumanSeg14K dataset, or you can download via [Baidu Netdisk](https://pan.baidu.com/s/1Buy74e5ymu2vXYlYfGvBHg)
+password: vui7 , [Google Cloud Disk](https://drive.google.com/file/d/1eEIV9lM2Kl1Ejcj3Cuht8EHN5eNF8Zjn/view?usp=sharing)
 
 The dataset path structure should look like:
 
-```
+```bash
 PP-HumanSeg14K/
 ├── annotations
 │   ├── train
@@ -44,7 +33,18 @@ PP-HumanSeg14K/
 └──test.txt
 └──LICENSE
 └──README.txt
+```
 
+### Install Dependencies
+
+```bash
+git clone -b develop https://github.com/PaddlePaddle/PaddleSeg.git
+cd PaddleSeg
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 
+pip3 install urllib3==1.26.6
+yum install mesa-libGL
+python3 setup.py develop
 ```
 
 ## Model Training
@@ -65,9 +65,10 @@ python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py  \
 
 ## Model Results
 
-| GPUS       | mIoU   | Acc    | Kappa  |Dice    | FPS   | 
-| ---------- | ------ | ------ | ------ | ------ | ----- |
+| GPUS       | mIoU   | Acc    | Kappa  | Dice   | FPS   |
+|------------|--------|--------|--------|--------|-------|
 | BI-V100 x8 | 0.9591 | 0.9836 | 0.9581 | 0.9790 | 24.54 |
 
 ## References
+
 - [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)

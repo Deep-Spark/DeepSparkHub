@@ -12,9 +12,11 @@ the receptive fields according to vessels' scales and shapes.
 
 ### Prepare Resources
 
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
