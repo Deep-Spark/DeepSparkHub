@@ -12,7 +12,7 @@ Recently, segmentation-based methods are quite popular in scene text detection, 
 <img src="https://user-images.githubusercontent.com/22607038/142791306-0da6db2a-20a6-4a68-b228-64ff275f67b3.png"/>
 </div>
 
-## Results and models
+## Model Results
 
 ### ICDAR2015
 

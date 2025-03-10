@@ -1,20 +1,21 @@
 # SAST
 
-## Description
+## Model Description
 
-SAST is a cutting-edge segmentation-based text detector designed for recognizing scene text of arbitrary shapes. Leveraging a context attended multi-task learning framework anchored on a Fully Convolutional Network (FCN), it adeptly learns geometric properties to reconstruct text regions into polygonal shapes. Incorporating a Context Attention Block, SAST captures long-range pixel dependencies for improved segmentation accuracy, while its Point-to-Quad assignment method efficiently clusters pixels into text instances by merging high-level and low-level information. Demonstrated to be highly effective across several benchmarks like ICDAR2015 and SCUT-CTW1500, SAST not only shows superior accuracy but also operates efficiently, achieving significant performance metrics such as running at 27.63 FPS on a NVIDIA Titan Xp with a high detection accuracy, making it a notable solution for arbitrary-shaped text detection challenges.
+SAST is a cutting-edge segmentation-based text detector designed for recognizing scene text of arbitrary shapes.
+Leveraging a context attended multi-task learning framework anchored on a Fully Convolutional Network (FCN), it adeptly
+learns geometric properties to reconstruct text regions into polygonal shapes. Incorporating a Context Attention Block,
+SAST captures long-range pixel dependencies for improved segmentation accuracy, while its Point-to-Quad assignment
+method efficiently clusters pixels into text instances by merging high-level and low-level information. Demonstrated to
+be highly effective across several benchmarks like ICDAR2015 and SCUT-CTW1500, SAST not only shows superior accuracy but
+also operates efficiently, achieving significant performance metrics such as running at 27.63 FPS on a NVIDIA Titan Xp
+with a high detection accuracy, making it a notable solution for arbitrary-shaped text detection challenges.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleOCR.git
-cd PaddleOCR/
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets
-
-Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015) 
+Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015)
 
 ```bash
 # ICDAR2015 PATH as follow:
@@ -28,10 +29,17 @@ drwxr-xr-x 2 root root    12288 Jul 21 15:53 ch4_test_images
 drwxr-xr-x 2 root root    24576 Jul 21 15:53 icdar_c4_train_imgs
 -rw-r--r-- 1 root root   468453 Jul 21 15:54 test_icdar2015_label.txt
 -rw-r--r-- 1 root root  1063118 Jul 21 15:54 train_icdar2015_label.txt
-
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleOCR.git
+cd PaddleOCR/
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 # Notice: modify "configs/det/det_r50_vd_sast_icdar15.yml" file, set the datasets path as yours.
@@ -43,12 +51,12 @@ python3 -u -m paddle.distributed.launch --gpus '0,1,2,3,4,5,6,7' tools/train.py 
 >train.log 2>&1 &
 ```
 
-## Results
+## Model Results
 
-GPUs|FPS|ACC
-----|---|---
-BI-V100 x8| ips: 11.24631 samples/s | hmean: 0.817155756207675
+| Model | GPU        | FPS                     | ACC                      |
+|-------|------------|-------------------------|--------------------------|
+| SAST  | BI-V100 x8 | ips: 11.24631 samples/s | hmean: 0.817155756207675 |
 
-## Reference
+## References
+
 - [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR.git)
-

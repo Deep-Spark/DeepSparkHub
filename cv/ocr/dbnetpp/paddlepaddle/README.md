@@ -1,33 +1,22 @@
 # DBNet++
 
-## Model description
+## Model Description
 
-Recently, segmentation-based scene text detection methods have drawn extensive attention in the scene text detection field, because of their superiority in detecting the text instances of arbitrary shapes and extreme aspect ratios, profiting from the pixel-level descriptions. However, the vast majority of the existing segmentation-based approaches are limited to their complex post-processing algorithms and the scale robustness of their segmentation models, where the post-processing algorithms are not only isolated to the model optimization but also time-consuming and the scale robustness is usually strengthened by fusing multi-scale feature maps directly. In this paper, we propose a Differentiable Binarization (DB) module that integrates the binarization process, one of the most important steps in the post-processing procedure, into a segmentation network. Optimized along with the proposed DB module, the segmentation network can produce more accurate results, which enhances the accuracy of text detection with a simple pipeline. Furthermore, an efficient Adaptive Scale Fusion (ASF) module is proposed to improve the scale robustness by fusing features of different scales adaptively. By incorporating the proposed DB and ASF with the segmentation network, our proposed scene text detector consistently achieves state-of-the-art results, in terms of both detection accuracy and speed, on five standard benchmarks.
+DBNet++ is an advanced scene text detection model that combines a Differentiable Binarization (DB) module with an
+Adaptive Scale Fusion (ASF) mechanism. The DB module integrates binarization directly into the segmentation network,
+simplifying post-processing and improving accuracy. The ASF module enhances scale robustness by adaptively fusing
+multi-scale features. This architecture enables DBNet++ to detect text of arbitrary shapes and extreme aspect ratios
+efficiently, achieving state-of-the-art performance in both accuracy and speed across various text detection benchmarks.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-# Clone PaddleOCR, branch: release/2.5
-git clone -b release/2.5  https://github.com/PaddlePaddle/PaddleOCR.git
+### Prepare Resources
 
-# Copy PaddleOCR 2.5 patch from toolbox
-yes | cp -rf ../../../../toolbox/PaddleOCR/* PaddleOCR/
-cd PaddleOCR
-
-# install requirements.
-bash ../init.sh
-
-# build PaddleOCR
-python3 setup.py develop
-```
-
-## Step 2: Preparing datasets
-
-Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015)
+Download [ICDAR 2015](https://deepai.org/dataset/icdar-2015) Dataset.
 
 ```bash
 # ICDAR2015 PATH as follow:
-ls -al /home/datasets/ICDAR2015/text_localization
+$ ls -al /home/datasets/ICDAR2015/text_localization
 total 133420
 drwxr-xr-x 4 root root      179 Jul 21 15:54 .
 drwxr-xr-x 3 root root       39 Jul 21 15:50 ..
@@ -46,7 +35,24 @@ ln -s /path/to/icdar2015/ train_data/icdar2015
 wget -P ./pretrain_models/ https://paddleocr.bj.bcebos.com/pretrained/MobileNetV3_large_x0_5_pretrained.pdparams
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+# Clone PaddleOCR, branch: release/2.5
+git clone -b release/2.5  https://github.com/PaddlePaddle/PaddleOCR.git
+
+# Copy PaddleOCR 2.5 patch from toolbox
+yes | cp -rf ../../../../toolbox/PaddleOCR/* PaddleOCR/
+cd PaddleOCR
+
+# install requirements.
+bash ../init.sh
+
+# build PaddleOCR
+python3 setup.py develop
+```
+
+## Model Training
 
 ```bash
 # run training
@@ -59,13 +65,12 @@ python3 -m paddle.distributed.launch --gpus $CUDA_VISIBLE_DEVICES \
     -o Global.pretrained_model=./pretrain_models/MobileNetV3_large_x0_5_pretrained
 ```
 
-## Results
+## Model Results
 
+| Model   | GPUs       | IPS            | ACC               |
+|---------|------------|----------------|-------------------|
+| DBNet++ | BI-V100 x8 | 5.46 samples/s | precision: 0.9062 |
 
-| GPUs       | IPS            | ACC               |
-| ------------ | ---------------- | ------------------- |
-| BI-V100 x8 | 5.46 samples/s | precision: 0.9062 |
-
-## Reference
+## References
 
 - [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR.git)

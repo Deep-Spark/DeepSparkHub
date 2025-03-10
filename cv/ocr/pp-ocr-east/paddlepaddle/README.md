@@ -1,23 +1,22 @@
 # PP-OCR-EAST
-## Model description
 
-EAST (Efficient and Accurate Scene Text Detector) is a deep learning model designed for detecting and recognizing text in natural scene images. 
-It was developed by researchers at the School of Electronic Information and Electrical Engineering, Shanghai Jiao Tong University, and was presented in a research paper in 2017.
+## Model Description
 
-## Step 1: Installation
-```bash
-git clone --recursive https://github.com/PaddlePaddle/PaddleOCR.git
-cd PaddleOCR
-pip3 install -r requirements.txt
-```
+PP-OCR-EAST is an efficient scene text detection model based on the EAST architecture, optimized within the PaddleOCR
+framework. It combines a MobileNetV3 backbone with the EAST detection mechanism to accurately locate text in natural
+scene images. The model is designed for real-time performance and can handle text of various orientations and sizes.
+PP-OCR-EAST is particularly effective in complex scenarios, offering a balance between detection accuracy and
+computational efficiency for practical OCR applications.
 
-## Step 2: Preparing datasets
+## Model Preparation
 
-Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015) 
+### Prepare Resources
+
+Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015)
 
 ```bash
 # ICDAR2015 PATH as follow:
-ls -al /home/datasets/ICDAR2015/text_localization
+$ ls -al /home/datasets/ICDAR2015/text_localization
 total 133420
 drwxr-xr-x 4 root root      179 Jul 21 15:54 .
 drwxr-xr-x 3 root root       39 Jul 21 15:50 ..
@@ -30,7 +29,15 @@ drwxr-xr-x 2 root root    24576 Jul 21 15:53 icdar_c4_train_imgs
 
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+git clone --recursive https://github.com/PaddlePaddle/PaddleOCR.git
+cd PaddleOCR
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 # Notice: modify "configs/det/det_mv3_east.yml" file, set the datasets path as yours.
@@ -41,11 +48,12 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus '0,1,2,3' tools/train.py -c configs/det/det_mv3_east.yml -o Global.use_visualdl=True 
 ```
 
-## Results
+## Model Results
 
-GPUs|FPS|ACC
-----|---|---
-BI-V100 x8|50.08|hmean:0.7711, precision: 0.7752
+| Model       | GPU        | FPS   | ACC                             |
+|-------------|------------|-------|---------------------------------|
+| PP-OCR-EAST | BI-V100 x8 | 50.08 | hmean:0.7711, precision: 0.7752 |
 
-## Reference
+## References
+
 - [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR.git)

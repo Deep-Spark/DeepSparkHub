@@ -1,35 +1,25 @@
-# SATRN(Self-Attention Text Recognition Network)
+# SATRN
 
-## Model description
+## Model Description
 
-Scene text recognition (STR) is the task of recognizing character sequences in natural scenes. While there have been great advances in STR methods, current methods still fail to recognize texts in arbitrary shapes, such as heavily curved or rotated texts, which are abundant in daily life (e.g. restaurant signs, product labels, company logos, etc). This paper introduces a novel architecture to recognizing texts of arbitrary shapes, named Self-Attention Text Recognition Network (SATRN), which is inspired by the Transformer. SATRN utilizes the self-attention mechanism to describe two-dimensional (2D) spatial dependencies of characters in a scene text image. Exploiting the full-graph propagation of self-attention, SATRN can recognize texts with arbitrary arrangements and large inter-character spacing. As a result, SATRN outperforms existing STR models by a large margin of 5.7 pp on average in "irregular text" benchmarks. We provide empirical analyses that illustrate the inner mechanisms and the extent to which the model is applicable (e.g. rotated and multi-line text). We will open-source the code.
+SATRN (Self-Attention Text Recognition Network) is an advanced deep learning model for scene text recognition,
+particularly effective for texts with arbitrary shapes like curved or rotated characters. Inspired by Transformer
+architecture, SATRN utilizes self-attention mechanisms to capture 2D spatial dependencies between characters. This
+enables it to handle complex text arrangements and large inter-character spacing with high accuracy. SATRN significantly
+outperforms traditional methods in recognizing irregular texts, making it valuable for real-world applications like sign
+and logo recognition.
 
+## Model Preparation
 
-## Step 1: Installation
-
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-dev
-
-cd /satrn/pytorch/base/csrc
-bash clean.sh
-bash build.sh
-bash install.sh
-cd ..
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 ```bash
 mkdir data
 cd data
 ```
 
-Reffering to [MMOCR Docs](https://mmocr.readthedocs.io/zh_CN/dev-1.x/user_guides/data_prepare/datasetzoo.html) to prepare datasets. Datasets path would look like below:
+Reffering to [MMOCR Docs](https://mmocr.readthedocs.io/zh_CN/dev-1.x/user_guides/data_prepare/datasetzoo.html) to
+prepare datasets. Datasets path would look like below:
 
 ```bash
 ├── mixture
@@ -102,37 +92,43 @@ Reffering to [MMOCR Docs](https://mmocr.readthedocs.io/zh_CN/dev-1.x/user_guides
 │   │   ├── val_label.txt
 ```
 
-## Step 3: Training
+### Install Dependencies
 
-### Training on single card
 ```bash
-python3 train.py configs/models/satrn_academic.py
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-dev
+
+cd /satrn/pytorch/base/csrc
+bash clean.sh
+bash build.sh
+bash install.sh
+cd ..
+pip3 install -r requirements.txt
 ```
 
-### Training on mutil-cards
+## Model Training
+
 ```bash
+# Training on single card
+python3 train.py configs/models/satrn_academic.py
+
+# Training on mutil-cards
 bash dist_train.sh configs/models/satrn_academic.py 8
 ```
 
-## Results on BI-V100
+## Model Results
 
-| approach|  GPUs   | train mem | train FPS |
-| :-----: |:-------:| :-------: |:--------: |
-|  satrn  | BI100x8 |   14.159G |  549.94   |
-
-| dataset |   acc   |
-| :-----: |:-------:|
-|  IIIT5K |   94.5  |
-|  IC15   |   83.3  |
-|  SVTP   |   88.4  |
+| Model | GPU        | train mem | train FPS | ACC                                  |
+|-------|------------|-----------|-----------|--------------------------------------|
+| SATRN | BI-V100 x8 | 14.159G   | 549.94    | IIIT5K: 94.5, IC15: 83.3, SVTP: 88.4 |
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 |----------------------|------------------------------------------|-------------|----------|------------|-------------|-------------------------|-----------|
 | 0.841                | SDK V2.2,bs:128,8x,fp32                  | 630         | 88.4     | 166\*8     | 0.98        | 28.5\*8                 | 1         |
 
+## References
 
-## Reference
-https://github.com/open-mmlab/mmocr
-
-
-
+- [mmocr](https://github.com/open-mmlab/mmocr)

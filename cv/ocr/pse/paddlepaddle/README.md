@@ -1,21 +1,20 @@
 # PSE
 
-## Model description
-[Shape robust text detection with progressive scale expansion network](https://arxiv.org/abs/1903.12473) Wang, Wenhai and Xie, Enze and Li, Xiang and Hou, Wenbo and Lu, Tong and Yu, Gang and Shao, Shuai CVPR, 2019
+## Model Description
 
-## Step 1: Installing
+PSE (Progressive Scale Expansion Network) is a deep learning model for robust text detection in natural scenes. It
+addresses the challenge of detecting text with arbitrary shapes by progressively expanding text regions through a scale
+expansion algorithm. PSE effectively handles complex scenarios like curved text and overlapping instances. The model's
+architecture combines feature pyramid networks with a novel post-processing method, making it particularly suitable for
+detecting text in diverse orientations and layouts with high accuracy.
+
+## Model Preparation
+
+### Prepare Resources
+
+Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015)
+
 ```bash
-git clone --recursive https://github.com/PaddlePaddle/PaddleOCR.git
-cd PaddleOCR
-pip3 install -r requirements.txt
-```
-
-## Step 2: Download data
-
-Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015) 
-
-```bash
-
 # ICDAR2015 PATH as follow:
 ls -al /home/datasets/ICDAR2015/text_localization
 total 133420
@@ -27,10 +26,17 @@ drwxr-xr-x 2 root root    12288 Jul 21 15:53 ch4_test_images
 drwxr-xr-x 2 root root    24576 Jul 21 15:53 icdar_c4_train_imgs
 -rw-r--r-- 1 root root   468453 Jul 21 15:54 test_icdar2015_label.txt
 -rw-r--r-- 1 root root  1063118 Jul 21 15:54 train_icdar2015_label.txt
-
 ```
 
-## Step 3: Run PSE
+### Install Dependencies
+
+```bash
+git clone --recursive https://github.com/PaddlePaddle/PaddleOCR.git
+cd PaddleOCR
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 # Notice: modify "configs/det/det_r50_vd_pse.yml" file, set the datasets path as yours.
