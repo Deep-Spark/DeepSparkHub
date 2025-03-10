@@ -1,18 +1,16 @@
 # DeepSORT
 
-## Model description
+## Model Description
 
-This is an implement of MOT tracking algorithm deep sort. Deep sort is basicly the same with sort
-but added a CNN model to extract features in image of human part bounded by a detector. This CNN
-model is indeed a RE-ID model and the detector used in [PAPER](https://arxiv.org/abs/1703.07402) is
-FasterRCNN , and the original source code is [HERE](https://github.com/nwojke/deep_sort). However in
-original code, the CNN model is implemented with tensorflow, which I'm not familier with. SO I
-re-implemented the CNN feature extraction model with PyTorch, and changed the CNN model a little
-bit. Also, I use **YOLOv3** to generate bboxes instead of FasterRCNN.
+DeepSORT is an advanced multi-object tracking algorithm that extends SORT by incorporating deep learning-based
+appearance features. It combines motion information with a CNN-based RE-ID model to track objects more accurately,
+especially in complex scenarios with occlusions. DeepSORT uses a Kalman filter for motion prediction and associates
+detections using both motion and appearance cues. This approach improves tracking consistency and reduces identity
+switches, making it particularly effective for person tracking in crowded scenes and video surveillance applications.
 
-We just need to train the RE-ID model!
+## Model Preparation
 
-## Preparing datasets
+### Prepare Resources
 
 Download the [Market-1501](https://zheng-lab.cecs.anu.edu.au/Project/project_reid.html)
 
@@ -50,25 +48,26 @@ data
 ├── gallery
 ```
 
-## Training
+## Model Training
 
-The original model used in paper is in original_model.py, and its parameter here [original_ckpt.t7](https://drive.google.com/drive/folders/1xhG0kRH1EX5B9_Iz8gQJb7UNnn_riXi6).  
+The original model used in paper is in original_model.py, and its parameter here
+[original_ckpt.t7](https://drive.google.com/drive/folders/1xhG0kRH1EX5B9_Iz8gQJb7UNnn_riXi6).  
 
 ```sh
+# Train
 python3 train.py --data-dir your path
-```
 
-## Evaluate your model
-
-```sh
+# Evaluate your model.
 python3 test.py --data-dir your path
 python3 evaluate.py
 ```
 
-## Results
+## Model Results
 
-Acc top1:0.980
+| Model    | GPU        | Top1 ACC |
+|----------|------------|----------|
+| DeepSORT | BI-V100 x8 | 0.980    |
 
-## Reference
+## References
 
-Please refer to <https://github.com/ZQPei/deep_sort_pytorch>
+- [deep_sort_pytorch](https://github.com/ZQPei/deep_sort_pytorch)

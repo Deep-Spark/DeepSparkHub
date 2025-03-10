@@ -1,30 +1,25 @@
 # ByteTrack
 
-## Model description
+## Model Description
 
-ByteTrack is a simple, fast and strong multi-object tracker.
+ByteTrack is an efficient multi-object tracking (MOT) model that improves tracking accuracy by associating every
+detection box, including low-score ones, rather than discarding them. It addresses challenges like occluded objects and
+fragmented trajectories by leveraging similarities between detections and tracklets. ByteTrack achieves state-of-the-art
+performance on benchmarks like MOT17, with high MOTA, IDF1, and HOTA scores while maintaining real-time processing
+speeds. Its simple yet effective design makes it a robust solution for various object tracking applications in video
+analysis.
 
-Multi-object tracking (MOT) aims at estimating bounding boxes and identities of objects in videos. Most methods obtain identities by associating detection boxes whose scores are higher than a threshold. The objects with low detection scores, e.g. occluded objects, are simply thrown away, which brings non-negligible true object missing and fragmented trajectories. To solve this problem, we present a simple, effective and generic association method, tracking by associating every detection box instead of only the high score ones. For the low score detection boxes, we utilize their similarities with tracklets to recover true objects and filter out the background detections. When applied to 9 different state-of-the-art trackers, our method achieves consistent improvement on IDF1 scores ranging from 1 to 10 points. To put forwards the state-of-the-art performance of MOT, we design a simple and strong tracker, named ByteTrack. For the first time, we achieve 80.3 MOTA, 77.3 IDF1 and 63.1 HOTA on the test set of MOT17 with 30 FPS running speed on a single V100 GPU.
+## Model Preparation
 
-## Step 1: Installation
+### Prepare Resources
 
-```bash
-git clone -b release/2.6 https://github.com/PaddlePaddle/PaddleDetection.git
-cd PaddleDetection
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3 
-pip3 install urllib3==1.26.6
-yum install mesa-libGL
-python3 setup.py develop
-```
-
-## Step 2: Preparing datasets
-
-Go to visit [MOT17 official website](https://motchallenge.net/), then download the MOT17 dataset, or you can download via [paddledet data](https://bj.bcebos.com/v1/paddledet/data/mot/MOT17.zip),then extract and place it in the dataset/mot/folder.
+Go to visit [MOT17 official website](https://motchallenge.net/), then download the MOT17 dataset, or you can download
+via [paddledet data](https://bj.bcebos.com/v1/paddledet/data/mot/MOT17.zip),then extract and place it in the
+dataset/mot/folder.
 
 The dataset path structure sholud look like:
 
-```
+```bash
 datasets/mot/MOT17/
 ├── annotations
 │   ├── train_half.json
@@ -39,10 +34,21 @@ datasets/mot/MOT17/
 
 ```
 
-## Step 3: Training
+### Install Dependencies
 
 ```bash
+git clone -b release/2.6 https://github.com/PaddlePaddle/PaddleDetection.git
+cd PaddleDetection
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 
+pip3 install urllib3==1.26.6
+yum install mesa-libGL
+python3 setup.py develop
+```
 
+## Model Training
+
+```bash
 # One GPU
 CUDA_VISIBLE_DEVICES=0 python3 tools/train.py -c configs/mot/bytetrack/detector/ppyoloe_crn_l_36e_640x640_mot17half.yml --eval --amp
 
@@ -50,15 +56,12 @@ CUDA_VISIBLE_DEVICES=0 python3 tools/train.py -c configs/mot/bytetrack/detector/
 python3 -m paddle.distributed.launch --log_dir=ppyoloe --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/mot/bytetrack/detector/ppyoloe_crn_l_36e_640x640_mot17half.yml --eval --amp
 ```
 
-## Results
+## Model Results
 
-| MODEL         | mAP(0.5:0.95)|
-| ----------    | ------------ |
-| ByteTrack     |     0.538    |
+| Model     | GPU        | FPS    | mAP(0.5:0.95) |
+|-----------|------------|--------|---------------|
+| ByteTrack | BI-V100 x8 | 4.6504 | 0.538         |
 
-| GPUS       | FPS     | 
-| ---------- | ------  |
-| BI-V100x 8 | 4.6504  |
+## References
 
-## Reference
 - [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)
