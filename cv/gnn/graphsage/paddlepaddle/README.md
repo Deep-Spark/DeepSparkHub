@@ -1,21 +1,16 @@
-# GraphSAGE (Inductive Representation Learning on Large Graphs)
+# GraphSAGE
 
-[GraphSAGE](https://cs.stanford.edu/people/jure/pubs/graphsage-nips17.pdf) is a general inductive framework that
-leverages node feature information (e.g., text attributes) to efficiently generate node embeddings for previously unseen
-data. Instead of training individual embeddings for each node, GraphSAGE learns a function that generates embeddings by
-sampling and aggregating features from a node’s local neighborhood. Based on PGL, we reproduce GraphSAGE algorithm and
-reach the same level of indicators as the paper in Reddit Dataset. Besides, this is an example of subgraph sampling and
-training in PGL.
+## Model Description
 
-## Step 1: Installation
+GraphSAGE (Graph Sample and Aggregated) is an inductive graph neural network model designed for large-scale graph data.
+Unlike traditional methods that learn fixed node embeddings, GraphSAGE learns a function to generate embeddings by
+sampling and aggregating features from a node's local neighborhood. This approach enables the model to generalize to
+unseen nodes and graphs, making it particularly effective for dynamic graphs and large-scale applications like social
+network analysis and recommendation systems.
 
-```sh
-git clone -b 2.2.5 https://github.com/PaddlePaddle/PGL
-pip3 install scikit-learn
-pip3 install pgl==2.2.5
-```
+## Model Preparation
 
-## Step 2: Preparing datasets
+### Prepare Resources
 
 The reddit dataset should be downloaded from the following links and placed in the directory ```pgl.data```. The details
 for Reddit Dataset can be found [here](https://cs.stanford.edu/people/jure/pubs/graphsage-nips17.pdf).
@@ -28,7 +23,15 @@ for Reddit Dataset can be found [here](https://cs.stanford.edu/people/jure/pubs/
 ln -s /path/to/reddit/ /usr/local/lib/python3.7/site-packages/pgl/data/
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+git clone -b 2.2.5 https://github.com/PaddlePaddle/PGL
+pip3 install scikit-learn
+pip3 install pgl==2.2.5
+```
+
+## Model Training
 
 To  train a GraphSAGE model on Reddit Dataset, you can just run:
 
@@ -38,12 +41,12 @@ cd PGL/examples/graphsage/cpu_sample_version
 CUDA_VISIBLE_DEVICES=0 python3 train.py  --epoch 10  --normalize --symmetry
 ```
 
-## Results
+## Model Results
 
 | GPUs       | Accuracy | FPS        |
 |------------|----------|------------|
 | BI-V100 x1 | 0.9072   | 47.54 s/it |
 
-## Reference
+## References
 
 - [PGL](https://github.com/PaddlePaddle/pgl)
