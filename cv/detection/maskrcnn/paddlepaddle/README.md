@@ -1,40 +1,44 @@
 # Mask R-CNN
 
-## Model description
+## Model Description
 
-Nuclei segmentation is both an important and in some ways ideal task for modern computer vision methods, e.g. convolutional neural networks. While recent developments in theory and open-source software have made these tools easier to implement, expert knowledge is still required to choose the right model architecture and training setup. We compare two popular segmentation frameworks, U-Net and Mask-RCNN in the nuclei segmentation task and find that they have different strengths and failures. To get the best of both worlds, we develop an ensemble model to combine their predictions that can outperform both models by a significant margin and should be considered when aiming for best nuclei segmentation performance.
+Mask R-CNN is an advanced instance segmentation model that extends Faster R-CNN by adding a parallel branch for
+predicting object masks. It efficiently detects objects in an image while simultaneously generating high-quality
+segmentation masks for each instance. Mask R-CNN maintains the two-stage architecture of Faster R-CNN but introduces a
+fully convolutional network for mask prediction. This model achieves state-of-the-art performance on tasks like object
+detection, instance segmentation, and human pose estimation.
 
-## Step 1: Installing
+## Model Preparation
+
+### Prepare Resources
 
 ```bash
-git clone --recursive https://github.com/PaddlePaddle/PaddleDetection.git
-cd PaddleDetection
-pip3 install -r requirements.txt
-python3 setup.py install --user
-```
+git clone https://github.com/PaddlePaddle/PaddleDetection.git
 
-## Step 2: Download data
-
-```
+cd PaddleDetection/
+# Get COCO Dataset
 python3 dataset/coco/download_coco.py
 ```
 
-## Step 3: Run Mask R-CNN
+### Install Dependencies
 
 ```bash
+pip install -r requirements.txt
+python3 setup.py install
+```
 
+## Model Training
+
+```bash
 export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+
 python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/mask_rcnn/mask_rcnn_r50_fpn_1x_coco.yml --use_vdl=true --eval
 ```
 
-## Results on BI-V100
+## Model Results
 
-<div align="center">
-
-| GPU         | FP32                                 |
-| ----------- | ------------------------------------ |
-| 8 cards     | bbox=38.8,FPS=7.5,BatchSize=1        |
-
-</div>
+| Model      | GPU        | FP32                          |
+|------------|------------|-------------------------------|
+| Mask R-CNN | BI-V100 x8 | bbox=38.8,FPS=7.5,BatchSize=1 |

@@ -1,21 +1,22 @@
 # FCOS
 
-## Model description
-FCOS (Fully Convolutional One-Stage Object Detection) is a fast anchor-free object detection framework with strong performance.
-The full paper is available at: [https://arxiv.org/abs/1904.01355](https://arxiv.org/abs/1904.01355). 
+## Model Description
 
-## Step 1: Installation
+FCOS (Fully Convolutional One-Stage Object Detection) is an anchor-free object detection model that predicts bounding
+boxes directly without anchor boxes. It uses a fully convolutional network to detect objects by predicting per-pixel
+bounding boxes and class labels. FCOS simplifies the detection pipeline, reduces hyperparameters, and achieves
+competitive performance on benchmarks like COCO. Its center-ness branch helps suppress low-quality predictions, making
+it efficient and effective for various detection tasks.
 
-```
-pip3 install -r requirements.txt
-python3 setup.py develop
-```
+## Model Preparation
 
-## Step 2: Preparing datasets
+### Prepare Resources
 
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -44,9 +45,17 @@ wget https://dl.fbaipublicfiles.com/detectron/ImageNetPretrained/MSRA/R-50.pkl
 mv R-50.pkl /root/.torch/models/
 ```
 
-## Step 3: Training
+### Install Dependencies
 
-The following command line will train FCOS_imprv_R_50_FPN_1x on 8 GPUs with Synchronous Stochastic Gradient Descent (SGD):
+```bash
+pip3 install -r requirements.txt
+python3 setup.py develop
+```
+
+## Model Training
+
+The following command line will train FCOS_imprv_R_50_FPN_1x on 8 GPUs with Synchronous Stochastic Gradient Descent
+(SGD):
 
 ```bash
 python3 -m torch.distributed.launch \
@@ -56,20 +65,25 @@ python3 -m torch.distributed.launch \
     DATALOADER.NUM_WORKERS 2 \
     OUTPUT_DIR training_dir/fcos_imprv_R_50_FPN_1x
 ```
-        
+
 Note that:
-1) If you want to use fewer GPUs, please change `--nproc_per_node` to the number of GPUs. No other settings need to be changed. The total batch size does not depends on `nproc_per_node`. If you want to change the total batch size, please change `SOLVER.IMS_PER_BATCH` in [configs/fcos/fcos_R_50_FPN_1x.yaml](configs/fcos/fcos_R_50_FPN_1x.yaml).
+
+1) If you want to use fewer GPUs, please change `--nproc_per_node` to the number of GPUs. No other settings need to be
+   changed. The total batch size does not depends on `nproc_per_node`. If you want to change the total batch size,
+   please change `SOLVER.IMS_PER_BATCH` in [configs/fcos/fcos_R_50_FPN_1x.yaml](configs/fcos/fcos_R_50_FPN_1x.yaml).
 2) The models will be saved into `OUTPUT_DIR`.
 3) If you want to train FCOS with other backbones, please change `--config-file`.
-4) If you want to train FCOS on your own dataset, please follow this instruction [#54](https://github.com/tianzhi0549/FCOS/issues/54#issuecomment-497558687).
-5) Now, training with 8 GPUs and 4 GPUs can have the same performance. Previous performance gap was because we did not synchronize `num_pos` between GPUs when computing loss. 
+4) If you want to train FCOS on your own dataset, please follow this instruction
+   [#54](https://github.com/tianzhi0549/FCOS/issues/54#issuecomment-497558687).
+5) Now, training with 8 GPUs and 4 GPUs can have the same performance. Previous performance gap was because we did not
+   synchronize `num_pos` between GPUs when computing loss.
 
-## Results
+## Model Results
 
-| GPUs | FPS | Train Epochs | Box AP|
-|------|-----|--------------|-------|
-| BI-V100 x8  | 8.24 | 12          |  38.7 |
+ | Model | GPU        | FPS  | Train Epochs | Box AP |
+ |-------|------------|------|--------------|--------|
+ | FCOS  | BI-V100 x8 | 8.24 | 12           | 38.7   |
 
-## Reference
+## References
 
 - [FCOS](https://github.com/tianzhi0549/FCOS)

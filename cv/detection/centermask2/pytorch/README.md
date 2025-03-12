@@ -1,20 +1,17 @@
 # CenterMask2
 
-CenterMask2 is an upgraded implementation on top of detectron2 beyond original CenterMask based on maskrcnn-benchmark.
+## Model Description
 
-## Step 1: Installation
+CenterMask2 is an advanced instance segmentation model built on Detectron2, extending the original CenterMask
+architecture. It improves mask prediction accuracy by incorporating spatial attention mechanisms and VoVNet backbones.
+CenterMask2 enhances object localization and segmentation through its dual-branch design, combining mask and box
+predictions effectively. The model achieves state-of-the-art performance on COCO dataset benchmarks, offering efficient
+training and inference capabilities. It's particularly effective for complex scenes with overlapping objects and varying
+scales.
 
-All you need to use centermask2 is [detectron2](https://github.com/facebookresearch/detectron2). It's easy!
+## Model Preparation
 
-you just install [detectron2](https://github.com/facebookresearch/detectron2) following [INSTALL.md](https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md).
-
-```bash
-# Install detectron2
-git clone https://github.com/facebookresearch/detectron2.git
-python3 -m pip install -e detectron2
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
@@ -44,7 +41,19 @@ mkdir -p <project_path>/datasets/
 ln -s /path/to/coco2017 <project_path>/datasets/
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+All you need to use centermask2 is [detectron2](https://github.com/facebookresearch/detectron2). It's easy!
+
+you just install [detectron2](https://github.com/facebookresearch/detectron2) following [INSTALL.md](https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md).
+
+```bash
+# Install detectron2
+git clone https://github.com/facebookresearch/detectron2.git
+python3 -m pip install -e detectron2
+```
+
+## Model Training
 
 For example, to launch CenterMask training with VoVNetV2-39 backbone on 8 GPUs,
 one should execute:
@@ -55,6 +64,6 @@ cd centermask2
 python3 train_net.py --config-file "configs/centermask/centermask_V_39_eSE_FPN_ms_3x.yaml" --num-gpus 8
 ```
 
-## Reference
+## References
 
 - [CenterMask2](https://github.com/youngwanLEE/centermask2)

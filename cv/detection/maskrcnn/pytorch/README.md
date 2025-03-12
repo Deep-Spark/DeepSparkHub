@@ -1,27 +1,22 @@
 # Mask R-CNN
 
-## Model description
+## Model Description
 
-Nuclei segmentation is both an important and in some ways ideal task for modern computer vision methods, e.g. convolutional neural networks. While recent developments in theory and open-source software have made these tools easier to implement, expert knowledge is still required to choose the right model architecture and training setup. We compare two popular segmentation frameworks, U-Net and Mask-RCNN in the nuclei segmentation task and find that they have different strengths and failures. To get the best of both worlds, we develop an ensemble model to combine their predictions that can outperform both models by a significant margin and should be considered when aiming for best nuclei segmentation performance.
+Mask R-CNN is an advanced instance segmentation model that extends Faster R-CNN by adding a parallel branch for
+predicting object masks. It efficiently detects objects in an image while simultaneously generating high-quality
+segmentation masks for each instance. Mask R-CNN maintains the two-stage architecture of Faster R-CNN but introduces a
+fully convolutional network for mask prediction. This model achieves state-of-the-art performance on tasks like object
+detection, instance segmentation, and human pose estimation.
 
-## Step 1: Installing packages
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-dev
+## Model Preparation
 
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets and model
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-Download from https://download.pytorch.org/models/resnet50-0676ba61.pth and mv to /root/.cache/torch/hub/checkpoints/
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -47,16 +42,36 @@ mkdir -p ./datasets/
 ln -s /path/to/coco2017 ./datasets/coco
 ```
 
-## Step 3: Training
+Download from <https://download.pytorch.org/models/resnet50-0676ba61.pth> and mv to /root/.cache/torch/hub/checkpoints/.
 
-### Single Card
+```bash
+wget https://download.pytorch.org/models/resnet50-0676ba61.pth
+mkdir -p /root/.cache/torch/hub/checkpoints/
+mv resnet50-0676ba61.pth /root/.cache/torch/hub/checkpoints/
+```
+
+### Install Dependencies
+
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-dev
+
+pip3 install -r requirements.txt
+```
+
+## Model Training
+
+```bash
+# Single Card
 python3 train.py --data-path ./datasets/coco --dataset coco --model maskrcnn_resnet50_fpn --lr 0.001 --batch-size 4
 
-### AMP 
+# AMP
 python3 train.py --data-path ./datasets/coco --dataset coco --model maskrcnn_resnet50_fpn --lr 0.001 --batch-size 1 --amp
 
-### DDP
-```
+# DDP
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py\
     --data-path ./datasets/coco --dataset coco --model maskrcnn_resnet50_fpn --wd 0.000001 --lr 0.001 --batch-size 4
 ```

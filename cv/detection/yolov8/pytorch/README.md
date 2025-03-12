@@ -1,30 +1,22 @@
 # YOLOv8
 
-## Model description
+## Model Description
 
-[Ultralytics](https://ultralytics.com) [YOLOv8](https://github.com/ultralytics/ultralytics) is a cutting-edge, state-of-the-art (SOTA) model that builds upon the success of previous YOLO versions and introduces new features and improvements to further boost performance and flexibility. YOLOv8 is designed to be fast, accurate, and easy to use, making it an excellent choice for a wide range of object detection and tracking, instance segmentation, image classification and pose estimation tasks.
+YOLOv8 is the latest iteration in the YOLO series, offering state-of-the-art performance in object detection and
+tracking. It introduces enhanced architecture and training techniques for improved accuracy and speed. YOLOv8 supports
+multiple tasks including instance segmentation, pose estimation, and image classification. The model is designed for
+efficiency and ease of use, making it suitable for real-time applications. It maintains the YOLO tradition of fast
+inference while delivering superior detection performance across various scenarios.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-# Install zlib 1.2.9
-wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
-tar xvf zlib-1.2.9.tar.gz
-cd zlib-1.2.9/
-./configure && make install
+### Prepare Resources
 
-# Install libGL
-yum install mesa-libGL
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-# Install ultralytics
-pip3 install ultralytics
-```
-
-## Step 2: Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -50,17 +42,34 @@ mkdir -p <project_path>/datasets/
 ln -s /path/to/coco2017 <project_path>/datasets/
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+# Install zlib 1.2.9
+wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
+tar xvf zlib-1.2.9.tar.gz
+cd zlib-1.2.9/
+./configure && make install
+
+# Install libGL
+yum install mesa-libGL
+
+# Install ultralytics
+pip3 install ultralytics
+```
+
+## Model Training
 
 ```bash
 python3 test.py
 ```
 
-## Results
+## Model Results
 
-|    GPUs    | FP32     | 
-| ---------- | ---------|
-| BI-V100 x8 | MAP=36.3 |
+| Model  | GPU        | FP32     |
+|--------|------------|----------|
+| YOLOv8 | BI-V100 x8 | MAP=36.3 |
 
-## Reference
+## References
+
 - [ultralytics](https://github.com/ultralytics/ultralytics)

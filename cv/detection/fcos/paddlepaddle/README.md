@@ -1,47 +1,49 @@
 # FCOS
 
-## Model description
-FCOS (Fully Convolutional One-Stage Object Detection) is a fast anchor-free object detection framework with strong performance.
+## Model Description
 
-## Get PaddleDetection source code
+FCOS (Fully Convolutional One-Stage Object Detection) is an anchor-free object detection model that predicts bounding
+boxes directly without anchor boxes. It uses a fully convolutional network to detect objects by predicting per-pixel
+bounding boxes and class labels. FCOS simplifies the detection pipeline, reduces hyperparameters, and achieves
+competitive performance on benchmarks like COCO. Its center-ness branch helps suppress low-quality predictions, making
+it efficient and effective for various detection tasks.
 
-```
+## Model Preparation
+
+### Prepare Resources
+
+```bash
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
+
+cd PaddleDetection/
+# Get COCO Dataset
+python3 dataset/coco/download_coco.py
 ```
 
-## Install PaddleDetection
+### Install Dependencies
 
-```
-cd PaddleDetection
+```bash
 pip install -r requirements.txt
 python3 setup.py install
 ```
 
-## Prepare datasets
+## Model Training
 
-```
-python3 dataset/coco/download_coco.py
-```
-
-## Train
-
-```
-# GPU多卡训练
+```bash
+# Multi-GPU
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-
 python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/fcos/fcos_r50_fpn_1x_coco.yml --eval
 
-# GPU单卡训练
+# Single-GPU
 export CUDA_VISIBLE_DEVICES=0
-
 python3 tools/train.py -c configs/fcos/fcos_r50_fpn_1x_coco.yml --eval
 
-# 注：默认学习率是适配多GPU训练(8x GPU)，若使用单GPU训练，须对应调整config中的学习率（例如，除以8）
-
+# Note: The default learning rate is optimized for multi-GPU training (8x GPU). If using single GPU training,
+# you need to adjust the learning rate in the config accordingly (e.g., divide by 8).
 ```
 
-## Results on BI-V100
+## Model Results
 
-| GPUs | FPS | Train Epochs | Box AP	  |
-|------|-----|--------------|------|
-| 1x8  | 8.24 | 12           | 39.7 |
+ | Model | GPU        | FPS  | Train Epochs | Box AP |
+ |-------|------------|------|--------------|--------|
+ | FCOS  | BI-V100 x8 | 8.24 | 12           | 39.7   |

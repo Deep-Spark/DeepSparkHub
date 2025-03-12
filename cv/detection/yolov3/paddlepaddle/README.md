@@ -1,26 +1,33 @@
 # YOLOv3
 
-## Model description
+## Model Description
 
-We present some updates to YOLO! We made a bunch of little design changes to make it better. We also trained this new network that’s pretty swell. It’s a little bigger than last time but more accurate. It’s still fast though, don’t worry. At 320 × 320 YOLOv3 runs in 22 ms at 28.2 mAP, as accurate as SSD but three times faster. When we look at the old .5 IOU mAP detection metric YOLOv3 is quite good. It achieves 57.9 AP50 in 51 ms on a Titan X, compared to 57.5 AP50 in 198 ms by RetinaNet, similar performance but 3.8× faster. As always, all the code is online at https://pjreddie.com/yolo/.
+YOLOv3 is a real-time object detection model that builds upon its predecessors with improved accuracy while maintaining
+speed. It uses a deeper backbone network and multi-scale predictions to detect objects of various sizes. YOLOv3 achieves
+competitive performance with faster inference times compared to other detectors. It processes images in a single forward
+pass, making it efficient for real-time applications. The model balances speed and accuracy, making it popular for
+practical detection tasks.
 
-## Step 1: Installing
+## Model Preparation
 
-```bash
-git clone --recursive https://github.com/PaddlePaddle/PaddleDetection.git
-cd PaddleDetection
-pip3 install -r requirements.txt
-```
-
-## Step 2: Download data
+### Prepare Resources
 
 ```bash
+git clone https://github.com/PaddlePaddle/PaddleDetection.git
+
+cd PaddleDetection/
+# Get COCO Dataset
 python3 dataset/coco/download_coco.py
-
-ls dataset/coco/
 ```
 
-## Step 3: Run YOLOv3
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+python3 setup.py install
+```
+
+## Model Training
 
 ```bash
 # Make sure your dataset path is the same as above.

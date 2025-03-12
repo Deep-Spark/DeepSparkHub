@@ -1,31 +1,22 @@
 # ATSS
 
-## Model description
+## Model Description
 
-Object detection has been dominated by anchor-based detectors for several years. Recently, anchor-free detectors have become popular due to the proposal of FPN and Focal Loss. In this paper, we first point out that the essential difference between anchor-based and anchor-free detection is actually how to define positive and negative training samples, which leads to the performance gap between them. If they adopt the same definition of positive and negative samples during training, there is no obvious difference in the final performance, no matter regressing from a box or a point. This shows that how to select positive and negative training samples is important for current object detectors. Then, we propose an Adaptive Training Sample Selection (ATSS) to automatically select positive and negative samples according to statistical characteristics of object. It significantly improves the performance of anchor-based and anchor-free detectors and bridges the gap between them. Finally, we discuss the necessity of tiling multiple anchors per location on the image to detect objects. Extensive experiments conducted on MS COCO support our aforementioned analysis and conclusions. With the newly introduced ATSS, we improve state-of-the-art detectors by a large margin to 50.7% AP without introducing any overhead.
+ATSS (Adaptive Training Sample Selection) is an innovative object detection framework that bridges the gap between
+anchor-based and anchor-free methods. It introduces an adaptive mechanism to select positive and negative training
+samples based on statistical characteristics of objects, improving detection accuracy. ATSS automatically determines
+optimal sample selection thresholds, eliminating the need for manual tuning. This approach enhances both anchor-based
+and anchor-free detectors, achieving state-of-the-art performance on benchmarks like COCO without additional
+computational overhead.
 
-## Step 1: Installation
+## Model Preparation
 
-ATSS model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
-
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
-
-# install MMDetection
-git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
-cd mmdetection
-pip install -v -e .
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -46,7 +37,24 @@ coco2017
 └── ...
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+ATSS model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
+
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
+```
+
+## Model Training
 
 ```bash
 # Make soft link to dataset
@@ -67,11 +75,12 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/atss/atss_r50_fpn_1x_coco.py 8
 ```
 
-## Results
+## Model Results
 
-|     GPUs    | FP32                                 | 
-| ----------- | ------------------------------------ |
-| BI-V100 x8  | MAP=39.5                             |
+| GPU        | FP32     |
+|------------|----------|
+| BI-V100 x8 | MAP=39.5 |
 
-## Reference
-[mmdetection](https://github.com/open-mmlab/mmdetection)
+## References
+
+- [mmdetection](https://github.com/open-mmlab/mmdetection)

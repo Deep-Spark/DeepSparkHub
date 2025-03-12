@@ -1,22 +1,22 @@
 # RetinaNet
 
-## Model description
+## Model Description
 
-The paper proposes a method to convert a deep learning object detector into an equivalent spiking neural network. The aim is to provide a conversion framework that is not constrained to shallow network structures and classification problems as in state-of-the-art conversion libraries. The results show that models of higher complexity, such as the RetinaNet object detector, can be converted with limited loss in performance.
+RetinaNet is a state-of-the-art object detection model that addresses the class imbalance problem in dense detection
+through its novel Focal Loss. It uses a Feature Pyramid Network (FPN) backbone to detect objects at multiple scales
+efficiently. RetinaNet achieves high accuracy while maintaining competitive speed, making it suitable for various
+detection tasks. Its single-stage architecture combines the accuracy of two-stage detectors with the speed of
+single-stage approaches, offering an excellent balance between performance and efficiency.
 
-## Step 1: Installing packages
+## Model Preparation
 
-```shell
+### Prepare Resources
 
-pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-```
-
-## Step 2: Preparing COCO dataset
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -37,20 +37,19 @@ coco2017
 └── ...
 ```
 
-## Step 3: Training on COCO dataset
-
-Download the [COCO Dataset](https://cocodataset.org/#home) 
-
-### Multiple GPUs on one machine
+### Install Dependencies
 
 ```shell
+pip3 install 'scipy' 'matplotlib' 'pycocotools' 'opencv-python' 'easydict' 'tqdm'
+```
+
+## Model Training
+
+```shell
+# Multiple GPUs on one machine
 bash train_retinanet_r50_dist.sh --data-path /path/to/coco2017/ --dataset coco
 ```
 
-### Parameters
+## References
 
-Ref: [torchvision](../../torchvision/pytorch/README.md)
-
-## Reference
-
-https://github.com/pytorch/vision
+- [vision](https://github.com/pytorch/vision)

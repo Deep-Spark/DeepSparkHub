@@ -1,30 +1,22 @@
 # Cascade R-CNN
 
-## Model description
+## Model Description
 
-In object detection, the intersection over union (IoU) threshold is frequently used to define positives/negatives. The threshold used to train a detector defines its quality. While the commonly used threshold of 0.5 leads to noisy (low-quality) detections, detection performance frequently degrades for larger thresholds. This paradox of high-quality detection has two causes: 1) overfitting, due to vanishing positive samples for large thresholds, and 2) inference-time quality mismatch between detector and test hypotheses. A multi-stage object detection architecture, the Cascade R-CNN, composed of a sequence of detectors trained with increasing IoU thresholds, is proposed to address these problems. The detectors are trained sequentially, using the output of a detector as training set for the next. This resampling progressively improves hypotheses quality, guaranteeing a positive training set of equivalent size for all detectors and minimizing overfitting. The same cascade is applied at inference, to eliminate quality mismatches between hypotheses and detectors. An implementation of the Cascade R-CNN without bells or whistles achieves state-of-the-art performance on the COCO dataset, and significantly improves high-quality detection on generic and specific object detection datasets, including VOC, KITTI, CityPerson, and WiderFace. Finally, the Cascade R-CNN is generalized to instance segmentation, with nontrivial improvements over the Mask R-CNN.
+Cascade R-CNN is a multi-stage object detection framework that progressively improves detection quality through a
+sequence of detectors trained with increasing IoU thresholds. Each stage refines the bounding boxes from the previous
+stage, addressing the paradox of high-quality detection by minimizing overfitting and ensuring quality consistency
+between training and inference. This architecture achieves state-of-the-art performance on various datasets, including
+COCO, and can be extended to instance segmentation tasks, outperforming models like Mask R-CNN.
 
-## Step 1: Installation
-Cascade R-CNN model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
+## Model Preparation
 
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
+### Prepare Resources
 
-# install MMDetection
-git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
-cd mmdetection
-pip install -v -e .
-```
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-## Step 2: Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -45,7 +37,24 @@ coco2017
 └── ...
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+Cascade R-CNN model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
+
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
+```
+
+## Model Training
 
 ```bash
 # Make soft link to dataset
@@ -66,12 +75,12 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh  configs/cascade_rcnn/cascade_rcnn_r50_fpn_1x_coco.py  8
 ```
 
-## Results
+## Model Results
 
-|     GPUs    | FP32                                 | 
-| ----------- | ------------------------------------ |
-| BI-V100 x8  | MAP=40.4                             |
+| GPU        | FP32     |
+|------------|----------|
+| BI-V100 x8 | MAP=40.4 |
 
-## Reference
+## References
 
-- [Cascade R-CNN: High Quality Object Detection and Instance Segmentation](https://arxiv.org/abs/1906.09756)
+- [Paper](https://arxiv.org/abs/1906.09756)

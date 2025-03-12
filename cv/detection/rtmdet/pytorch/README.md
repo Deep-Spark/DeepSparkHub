@@ -1,31 +1,16 @@
 # RTMDet
 
-> [RTMDet: An Empirical Study of Designing Real-Time Object Detectors](https://arxiv.org/pdf/2212.07784v2.pdf)
+## Model Description
 
-<!-- [ALGORITHM] -->
+RTMDet is a highly efficient real-time object detection model designed to surpass YOLO series performance. It features a
+balanced architecture with large-kernel depth-wise convolutions and dynamic label assignment using soft labels. RTMDet
+achieves state-of-the-art accuracy with exceptional speed, reaching 300+ FPS on modern GPUs. The model offers various
+sizes for different applications and excels in tasks like instance segmentation and rotated object detection. Its design
+provides insights for versatile real-time detection systems.
 
-## Model description
+## Model Preparation
 
-In this paper, we aim to design an efficient real-time object detector that exceeds the YOLO series and is easily extensible for many object recognition tasks such as instance segmentation and rotated object detection. To obtain a more efficient model architecture, we explore an architecture that has compatible capacities in the backbone and neck, constructed by a basic building block that consists of large-kernel depth-wise convolutions. We further introduce soft labels when calculating matching costs in the dynamic label assignment to improve accuracy. Together with better training techniques, the resulting object detector, named RTMDet, achieves 52.8% AP on COCO with 300+ FPS on an NVIDIA 3090 GPU, outperforming the current mainstream industrial detectors. RTMDet achieves the best parameter-accuracy trade-off with tiny/small/medium/large/extra-large model sizes for various application scenarios and obtains new state-of-the-art performance on real-time instance segmentation and rotated object detection. We hope the experimental results can provide new insights into designing versatile real-time object detectors for many object recognition tasks.
-
-## Step 1: Installation
-
-RTMDet model uses the MMDetection toolbox. Before you run this model, you need to set up MMDetection first.
-
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
-
-# install MMDetection
-git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
-cd mmdetection
-pip install -v -e .
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
@@ -49,7 +34,25 @@ coco2017
 ├── val2017.txt
 └── ...
 ```
-## Step 3: Training
+
+### Install Dependencies
+
+RTMDet model uses the MMDetection toolbox. Before you run this model, you need to set up MMDetection first.
+
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
+```
+
+## Model Training
 
 ```bash
 # Make soft link to dataset
@@ -70,11 +73,13 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/rtmdet/rtmdet_tiny_8xb32-300e_coco.py 8
 ```
 
-## Results
+## Model Results
 
-|GPUs|FPS|box AP|
-|:---:|:---:|:---:|
-|BI-V100|172.5|0.4090|
+| Model  | GPU     | FPS   | box AP |
+|--------|---------|-------|--------|
+| RTMDet | BI-V100 | 172.5 | 0.4090 |
 
-## Reference
+## References
+
+- [Paper](https://arxiv.org/pdf/2212.07784v2.pdf)
 - [mmdetection](https://github.com/open-mmlab/mmdetection)

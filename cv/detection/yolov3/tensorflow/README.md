@@ -1,27 +1,28 @@
 # YOLOv3
 
-## Model description
+## Model Description
 
-We present some updates to YOLO! We made a bunch of little design changes to make it better. We also trained this new network that’s pretty swell. It’s a little bigger than last time but more accurate. It’s still fast though, don’t worry. At 320 × 320 YOLOv3 runs in 22 ms at 28.2 mAP, as accurate as SSD but three times faster. When we look at the old .5 IOU mAP detection metric YOLOv3 is quite good. It achieves 57.9 AP50 in 51 ms on a Titan X, compared to 57.5 AP50 in 198 ms by RetinaNet, similar performance but 3.8× faster. As always, all the code is online at https://pjreddie.com/yolo/.
+YOLOv3 is a real-time object detection model that builds upon its predecessors with improved accuracy while maintaining
+speed. It uses a deeper backbone network and multi-scale predictions to detect objects of various sizes. YOLOv3 achieves
+competitive performance with faster inference times compared to other detectors. It processes images in a single forward
+pass, making it efficient for real-time applications. The model balances speed and accuracy, making it popular for
+practical detection tasks.
 
-## Prepare
+## Model Preparation
 
-```
-bash init_tf.sh
-```
+### Prepare Resources
 
-## Download dataset and checkpoint
+Download VOC PASCAL trainval and test data.
 
-### Download VOC PASCAL trainval and test data
-
-```
+```bash
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
 wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar
 ```
+
 Extract all of these tars into one directory and rename them, which should have the following basic structure.
 
-```
+```bash
 VOC           # path:  /home/yang/dataset/VOC
 ├── test
 |    └──VOCdevkit
@@ -31,19 +32,25 @@ VOC           # path:  /home/yang/dataset/VOC
          └──VOC2007 (from VOCtrainval_06-Nov-2007.tar)
          └──VOC2012 (from VOCtrainval_11-May-2012.tar)
 ```
-###  Download checkpoint
+
+Download checkpoint.
+
 Exporting loaded COCO weights as TF checkpoint(yolov3_coco.ckpt)[BaiduCloud](https://pan.baidu.com/s/11mwiUy8KotjUVQXqkGGPFQ&shfl=sharepset#list/path=%2F)
 
+### Install Dependencies
 
-
-
-## Run training 
+```bash
+bash init_tf.sh
 ```
+
+## Model Training
+
+```bash
 bash ./run_training.sh
 ```
-## Result
 
-|               | mAP       |       fps |
-| ---           | ---       | ---       |
-|    multi_card |  33.67%   | 4.34it/s  |
+## Model Results
 
+| Model  | GPU     | mAP    | fps      |
+|--------|---------|--------|----------|
+| YOLOv3 | BI-V100 | 33.67% | 4.34it/s |

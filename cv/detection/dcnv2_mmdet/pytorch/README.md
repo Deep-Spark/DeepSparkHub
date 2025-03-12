@@ -1,31 +1,23 @@
 # DCNv2
 
-## Model description
+## Model Description
 
-The superior performance of Deformable Convolutional Networks arises from its ability to adapt to the geometric variations of objects. Through an examination of its adaptive behavior, we observe that while the spatial support for its neural features conforms more closely than regular ConvNets to object structure, this support may nevertheless extend well beyond the region of interest, causing features to be influenced by irrelevant image content. To address this problem, we present a reformulation of Deformable ConvNets that improves its ability to focus on pertinent image regions, through increased modeling power and stronger training. The modeling power is enhanced through a more comprehensive integration of deformable convolution within the network, and by introducing a modulation mechanism that expands the scope of deformation modeling. To effectively harness this enriched modeling capability, we guide network training via a proposed feature mimicking scheme that helps the network to learn features that reflect the object focus and classification power of RCNN features. With the proposed contributions, this new version of Deformable ConvNets yields significant performance gains over the original model and produces leading results on the COCO benchmark for object detection and instance segmentation.
+DCNv2 (Deformable Convolutional Networks v2) is an advanced convolutional neural network architecture that enhances
+spatial transformation capabilities. It improves upon DCN by introducing a modulation mechanism for more precise
+deformation modeling and better focus on relevant image regions. DCNv2 integrates deformable convolution more
+comprehensively throughout the network, enabling superior adaptation to object geometry. This results in
+state-of-the-art performance on object detection and instance segmentation tasks, particularly on benchmarks like COCO,
+while maintaining computational efficiency.
 
-## Step 1: Installation
+## Model Preparation
 
-DCNv2 model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
+### Prepare Resources
 
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-# install MMDetection
-git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
-cd mmdetection
-pip install -v -e .
-```
-
-## Step 2: Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -46,7 +38,24 @@ coco2017
 └── ...
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+DCNv2 model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
+
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
+```
+
+## Model Training
 
 ```bash
 # Make soft link to dataset
@@ -63,12 +72,12 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/dcnv2/faster-rcnn_r50-mdconv-c3-c5_fpn_1x_coco.py 8
 ```
 
-## Results
+## Model Results
 
-|    GPUs    | FP32     |
-| ---------- | -------- |
-| BI-V100 x8 | MAP=41.2 |
+ | GPU   | FP32       | mAP  |
+ |-------|------------|------|
+ | DCNv2 | BI-V100 x8 | 41.2 |
 
-## Reference
+## References
 
-- [Deformable ConvNets v2: More Deformable, Better Results](https://arxiv.org/abs/1811.11168)
+- [Paper](https://arxiv.org/abs/1811.11168)

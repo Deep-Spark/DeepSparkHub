@@ -1,52 +1,54 @@
 # DETR
 
-## Model description
-DETR is an object detection model based on transformer. We reproduced the model of the paper.
+## Model Description
 
-## 克隆代码
+DETR (DEtection TRansformer) is a novel object detection model that replaces traditional convolutional methods with a
+transformer-based architecture. It treats object detection as a direct set prediction problem, eliminating the need for
+anchor boxes and non-maximum suppression. DETR uses a transformer encoder-decoder structure to process image features
+and predict object bounding boxes and classes simultaneously. This end-to-end approach simplifies the detection pipeline
+while achieving competitive performance on benchmarks like COCO, offering a new paradigm for object detection tasks.
 
-```
+## Model Preparation
+
+### Prepare Resources
+
+```bash
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
+
+cd PaddleDetection/
+# Get COCO Dataset
+python3 dataset/coco/download_coco.py
 ```
 
-## 安装PaddleDetection
+### Install Dependencies
 
-```
-cd PaddleDetection
+```bash
 pip install -r requirements.txt
 python3 setup.py install
 ```
 
-## 下载COCO数据集
+## Model Training
 
-```
-python3 dataset/coco/download_coco.py
-```
-
-## 运行代码
-
-```
-# GPU多卡训练
+```bash
+# Multi-GPU
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-
 python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/detr/detr_r50_1x_coco.yml --eval
 
-# GPU单卡训练
+# Single-GPU
 export CUDA_VISIBLE_DEVICES=0
-
 python3 tools/train.py -c configs/detr/detr_r50_1x_coco.yml --eval
 
-# finetune
+# Finetune
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-
 python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/detr/detr_r50_1x_coco.yml -o pretrain_weights=https://paddledet.bj.bcebos.com/models/detr_r50_1x_coco.pdparams --eval
 
-# 注：默认学习率是适配多GPU训练(8x GPU)，若使用单GPU训练，须对应调整config中的学习率（例如，除以8）
+# Note: The default learning rate is optimized for multi-GPU training (8x GPU). If using single GPU training,
+# you need to adjust the learning rate in the config accordingly (e.g., divide by 8).
 
 ```
 
-## finetune Results on BI-V100
+## Model Results
 
-| GPUs | learning rate | FPS | Train Epochs | Box AP  |
-|------|------------|-----|--------------|------|
-| 1x8  | 0.00001        | 14.64 | 1           | 42.0 |
+| Model | GPU        | learning rate | FPS   | Train Epochs | Box AP |
+|-------|------------|---------------|-------|--------------|--------|
+| DETR  | BI-V100 x8 | 0.00001       | 14.64 | 1            | 42.0   |

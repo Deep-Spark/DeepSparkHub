@@ -1,29 +1,23 @@
 # CornerNet
 
-## Model description
+## Model Description
 
-CornerNet, a new approach to object detection where we detect an object bounding box as a pair of keypoints, the top-left corner and the bottom-right corner, using a single convolution neural network. By detecting objects as paired keypoints, we eliminate the need for designing a set of anchor boxes commonly used in prior single-stage detectors. In addition to our novel formulation, we introduce corner pooling, a new type of pooling layer that helps the network better localize corners. Experiments show that CornerNet achieves a 42.2% AP on MS COCO, outperforming all existing one-stage detectors.
+CornerNet, a new approach to object detection where we detect an object bounding box as a pair of keypoints, the
+top-left corner and the bottom-right corner, using a single convolution neural network. By detecting objects as paired
+keypoints, we eliminate the need for designing a set of anchor boxes commonly used in prior single-stage detectors. In
+addition to our novel formulation, we introduce corner pooling, a new type of pooling layer that helps the network
+better localize corners. Experiments show that CornerNet achieves a 42.2% AP on MS COCO, outperforming all existing
+one-stage detectors.
 
-## Step 1: Installation
-CornerNet model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
+## Model Preparation
 
-# install MMDetection
-git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
-cd mmdetection
-pip install -v -e .
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -44,7 +38,24 @@ coco2017
 └── ...
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+CornerNet model is using MMDetection toolbox. Before you run this model, you need to setup MMDetection first.
+
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
+```
+
+## Model Training
 
 ```bash
 # Make soft link to dataset
@@ -61,11 +72,12 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/cornernet/cornernet_hourglass104_8xb6-210e-mstest_coco.py 8
 ```
 
-## Results
+## Model Results
 
-|     GPUs   | FP32     | 
-| ---------- | -------- |
-| BI-V100 x8 | MAP=41.2 |
+| Model     | GPU        | FP32     |
+|-----------|------------|----------|
+| CornerNet | BI-V100 x8 | MAP=41.2 |
 
-## Reference
-- [Cornernet: Detecting objects as paired keypoints](https://arxiv.org/abs/1808.01244)
+## References
+
+- [Paper](https://arxiv.org/abs/1808.01244)

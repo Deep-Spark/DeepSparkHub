@@ -1,24 +1,17 @@
-# OC_SORT
+# OC-SORT
 
-## Model description
-Observation-Centric SORT (OC-SORT) is a pure motion-model-based multi-object tracker. It aims to improve tracking robustness in crowded scenes and when objects are in non-linear motion. It is designed by recognizing and fixing limitations in Kalman filter and SORT. It is flexible to integrate with different detectors and matching modules, such as appearance similarity. It remains, Simple, Online and Real-time.
+## Model Description
 
-## Step 1: Installation
-```bash
-git clone https://github.com/PaddlePaddle/PaddleDetection.git
-```
+OC-SORT (Observation-Centric SORT) is an advanced multi-object tracking algorithm that enhances traditional SORT by
+addressing limitations in Kalman filters and non-linear motion scenarios. It improves tracking robustness in crowded
+scenes and complex motion patterns while maintaining simplicity and real-time performance. OC_SORT focuses on
+observation-centric updates, making it more reliable for object tracking in challenging environments. It remains
+flexible for integration with various detectors and matching modules, offering improved accuracy without compromising
+speed.
 
-```bash
-cd PaddleDetection
-yum install mesa-libGL -y
+## Model Preparation
 
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.1
-pip3 install urllib3==1.26.6
-pip3 install scikit-learn
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 - **MOT17_ch datasets**
 
@@ -27,7 +20,11 @@ cd dataset/mot
 git clone https://github.com/ifzhang/ByteTrack.git
 ```
 
-Download [MOT17](https://motchallenge.net/), [MOT20](https://motchallenge.net/), [CrowdHuman](https://www.crowdhuman.org/), [Cityperson](https://github.com/Zhongdao/Towards-Realtime-MOT/blob/master/DATASET_ZOO.md), [ETHZ](https://github.com/Zhongdao/Towards-Realtime-MOT/blob/master/DATASET_ZOO.md) and put them under <ByteTrack_HOME>/datasets in the following structure:
+Download [MOT17](https://motchallenge.net/), [MOT20](https://motchallenge.net/),
+[CrowdHuman](https://www.crowdhuman.org/),
+[Cityperson](https://github.com/Zhongdao/Towards-Realtime-MOT/blob/master/DATASET_ZOO.md),
+[ETHZ](https://github.com/Zhongdao/Towards-Realtime-MOT/blob/master/DATASET_ZOO.md) and put them under
+<ByteTrack_HOME>/datasets in the following structure:
 
 ```bash
 datasets/
@@ -115,7 +112,6 @@ ln -s ByteTrack/datasets/mix_mot_ch mix_mot_ch
 
 Download [MOT17](https://bj.bcebos.com/v1/paddledet/data/mot/MOT17.zip) and put them under <PaddleDetection_HOME>/datasets/mot/ in the following structure:
 
-
 ```bash
 MOT17/
 └──images
@@ -153,11 +149,23 @@ cd <PaddleDetection_HOME>/datasets/mot/MOT17
 ln -s ../ByteTrack/datasets/mot/annotations ./
 ```
 
-## Step 3: Training
+### Install Dependencies
 
 ```bash
-cd PaddleDetection
+yum install mesa-libGL -y
 
+git clone https://github.com/PaddlePaddle/PaddleDetection.git
+cd PaddleDetection/
+
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.1
+pip3 install urllib3==1.26.6
+pip3 install scikit-learn
+```
+
+## Model Training
+
+```bash
 # mix_mot_ch datasets
 python3 -m paddle.distributed.launch --log_dir=ppyoloe --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/mot/bytetrack/detector/yolox_x_24e_800x1440_mix_mot_ch.yml --eval --amp
 
@@ -168,11 +176,12 @@ python3 -m paddle.distributed.launch --log_dir=ppyoloe --gpus 0,1,2,3,4,5,6,7 to
 CUDA_VISIBLE_DEVICES=0 python3 tools/eval_mot.py -c configs/mot/ocsort/ocsort_ppyoloe.yml --scaled=True
 ```
 
-## Results
+## Model Results
 
-| GPUs        | DATASET   | IPS       | MOTA     |
-|-------------|-----------|-----------|----------|
-| BI-V100 x8  | MOT-17 half train| 6.5907 | 57.5 | 
+| Model   | GPU        | DATASET           | IPS    | MOTA |
+|---------|------------|-------------------|--------|------|
+| OC-SORT | BI-V100 x8 | MOT-17 half train | 6.5907 | 57.5 |
 
-## Reference
+## References
+
 - [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)
