@@ -1,6 +1,6 @@
-# RetinaFace: Single-stage Dense Face Localisation in the Wild
+# RetinaFace
 
-## Model description
+## Model Description
 
 Though tremendous strides have been made in uncontrolled face detection, accurate and efficient face localisation in the
 wild remains an open challenge. This paper presents a robust single-stage face detector, named RetinaFace, which
@@ -14,11 +14,9 @@ On the IJB-C test set, RetinaFace enables state of the art methods (ArcFace) to 
 verification (TAR=89.59% for FAR=1e-6). (5) By employing light-weight backbone networks, RetinaFace can run real-time on
 a single CPU core for a VGA-resolution image.
 
-## Prepare
+## Model Preparation
 
-### Install packages
-
-### Download dataset
+### Prepare Resources
 
 1. Download the [WIDER FACE](http://shuoyang1213.me/WIDERFACE/WiderFace_Results.html) dataset.
 
@@ -53,48 +51,29 @@ a single CPU core for a VGA-resolution image.
 
 ```
 
-## Training
-
-### Single GPU with mobilenet backbone
+## Model Training
 
 ```shell
-
+# Single GPU with mobilenet backbone
 python3 train.py --network mobile0.25
 
-```
-
-### Multi GPU with resnet50 backbone
-
-```shell
-
+# Multi GPU with resnet50 backbone
 python3 train.py --network resnet50
 
-```
-
-## Evaluate
-
-1. Generate txt file
-
-```Shell
-
+# Evaluate
+## 1. Generate txt file
 python3 test_widerface.py --trained_model ${weight_file} --network mobile0.25 or resnet50
 
-```
-
-2. Evaluate txt results. Demo come from [Here](https://github.com/wondervictor/WiderFace-Evaluation)
-
-```Shell
-
+## 2. Evaluate txt results. Demo come from [Here](https://github.com/wondervictor/WiderFace-Evaluation)
 cd ./widerface_evaluate
 python3 setup.py build_ext --inplace
 python3 evaluation.py
-
 ```
 
-3. You can also use widerface official Matlab evaluate demo in
+You can also use widerface official Matlab evaluate demo in
    [Here](http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/WiderFace_Results.html)
 
-## Results
+## Model Results
 
 | Model      | GPU     | Type       | AP                 |
 |------------|---------|------------|--------------------|

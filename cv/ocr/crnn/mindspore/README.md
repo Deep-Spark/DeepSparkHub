@@ -1,12 +1,51 @@
 # CRNN
 
-## Model description
+## Model Description
 
-CRNN was a neural network for image based sequence recognition and its Application to scene text recognition.In this paper, we investigate the problem of scene text recognition, which is among the most important and challenging tasks in image-based sequence recognition. A novel neural network architecture, which integrates feature extraction, sequence modeling and transcription into a unified framework, is proposed. Compared with previous systems for scene text recognition, the proposed architecture possesses four distinctive properties: (1) It is end-to-end trainable, in contrast to most of the existing algorithms whose components are separately trained and tuned. (2) It naturally handles sequences in arbitrary lengths, involving no character segmentation or horizontal scale normalization. (3) It is not confined to any predefined lexicon and achieves remarkable performances in both lexicon-free and lexicon-based scene text recognition tasks. (4) It generates an effective yet much smaller model, which is more practical for real-world application scenarios.
+CRNN (Convolutional Recurrent Neural Network) is an end-to-end trainable model for image-based sequence recognition,
+particularly effective for scene text recognition. It combines convolutional layers for feature extraction with
+recurrent layers for sequence modeling, followed by a transcription layer. CRNN handles sequences of arbitrary lengths
+without character segmentation or horizontal scaling, making it versatile for both lexicon-free and lexicon-based text
+recognition tasks. Its compact architecture and unified framework make it practical for real-world applications like
+document analysis and OCR.
 
-[Paper](https://arxiv.org/abs/1507.05717): Baoguang Shi, Xiang Bai, Cong Yao, "An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition", ArXiv, vol. abs/1507.05717, 2015.
+## Model Preparation
 
-## Step 1:Installation
+### Prepare Resources
+
+- Go to visit [Syn90K official website](https://www.robots.ox.ac.uk/~vgg/data/text/), then download the dataset for
+  training. The dataset path structure sholud look like:
+
+```bash
+  ├── Syn90k
+  │   ├── shuffle_labels.txt
+  │   ├── label.txt
+  │   ├── label.lmdb
+  │   ├── mnt
+```
+
+- Go to visit [IIIT5K official
+  website](https://cvit.iiit.ac.in/research/projects/cvit-projects/the-iiit-5k-word-dataset), then download the dataset
+  for test. The dataset path structure sholud look like:
+
+```bash
+  ├── IIIT5K
+  │   ├── traindata.mat
+  │   ├── testdata.mat
+  │   ├── trainCharBound.mat
+  │   ├── testCharBound.mat
+  │   ├── lexicon.txt
+  │   ├── train
+  │   ├── test
+```
+
+- The annotation need to be extracted from the matlib data file.
+
+```bash
+python3 convert_iiit5k.py -m ./IIIT5K/testdata.mat -o ./IIIT5K -a ./IIIT5K/annotation.txt
+```
+
+### Install Dependencies
 
 ```shell
 # Install requirements
@@ -21,34 +60,7 @@ make -j4 && make install
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 ```
 
-## Step 2:Preparing datasets
-
-* Go to visit [Syn90K official website](https://www.robots.ox.ac.uk/~vgg/data/text/), then download the dataset for training. The dataset path structure sholud look like:
-
-  ```
-  ├── Syn90k
-  │   ├── shuffle_labels.txt
-  │   ├── label.txt
-  │   ├── label.lmdb
-  │   ├── mnt
-  ```
-* Go to visit [IIIT5K official website](https://cvit.iiit.ac.in/research/projects/cvit-projects/the-iiit-5k-word-dataset), then download the dataset for test. The dataset path structure sholud look like:
-
-```
-├── IIIT5K
-│   ├── traindata.mat
-│   ├── testdata.mat
-│   ├── trainCharBound.mat
-│   ├── testCharBound.mat
-│   ├── lexicon.txt
-│   ├── train
-│   ├── test
-```
-* The annotation need to be extracted from the matlib data file.
-```
-python3 convert_iiit5k.py -m ./IIIT5K/testdata.mat -o ./IIIT5K -a ./IIIT5K/annotation.txt
-```
-## Step 3:Training
+## Model Training
 
 ```bash
 # Run on 1 GPU
@@ -60,17 +72,17 @@ python3 train.py --train_dataset=synth --train_dataset_path=./Syn90k/mnt/ramdisk
 
 # Run eval
 python3 eval.py --eval_dataset=iiit5k \
---eval_dataset_path=./IIIT5K/ \
+--eval_dataset_path=./IIIT5K/ \ 
 --checkpoint_path=./ckpt_0/crnn-10_14110.ckpt \
 --device_target=GPU 2>&1 | tee eval.log
 ```
 
-## Results
+## Model Results
 
-| GPUS       | DATASETS   | ACC     |  FPS    | 
-| ---------- | ---------- | ------  | ------  |
-| BI-V100 x8 | IIIT5K     | 0.798   | 7976.44 |
+| GPUS       | DATASETS | ACC   | FPS     |
+|------------|----------|-------|---------|
+| BI-V100 x8 | IIIT5K   | 0.798 | 7976.44 |
 
-## Reference
+## References
 
-[CRNN](https://gitee.com/mindspore/models/tree/master/official/cv/CRNN)
+- [CRNN](https://gitee.com/mindspore/models/tree/master/official/cv/CRNN)

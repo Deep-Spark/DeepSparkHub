@@ -1,16 +1,16 @@
 # RT-DETR
 
-## Model description
+## Model Description
 
-RT-DETR is specifically optimized for real-time applications, making it suitable for scenarios where low latency is crucial. It achieves this by incorporating design modifications that improve efficiency without sacrificing accuracy.
+RT-DETR is a real-time variant of the DETR (DEtection TRansformer) model, optimized for efficient object detection. It
+maintains the transformer-based architecture of DETR while introducing modifications to reduce latency and improve
+speed. RT-DETR achieves competitive accuracy with significantly faster inference times, making it suitable for
+applications requiring real-time performance. The model preserves the end-to-end detection capabilities of DETR while
+addressing its computational challenges, offering a practical solution for time-sensitive detection tasks.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
@@ -27,34 +27,28 @@ Modify config "img_folder" and "ann_file" locaton in the configuration file(./co
 vim ./configs/dataset/coco_detection.yml
 ```
 
-## Step 3: Training
-
-### Training on a Single GPU
+### Install Dependencies
 
 ```bash
-# training on single-gpu
+pip3 install -r requirements.txt
+```
+
+## Model Training
+
+```bash
+# Training on single-gpu
 export CUDA_VISIBLE_DEVICES=0
 python3 tools/train.py -c configs/rtdetr/rtdetr_r50vd_6x_coco.yml
-```
 
-### Training on Multiple GPUs
-
-```bash
-# train on multi-gpu
+# Train on multi-gpu
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 torchrun --nproc_per_node=4 tools/train.py -c configs/rtdetr/rtdetr_r50vd_6x_coco.yml
-```
 
-### Evaluation on Multiple GPUs
-
-```bash
-# val on multi-gpu
+# Evaluation on multi-gpu
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 torchrun --nproc_per_node=4 tools/train.py -c configs/rtdetr/rtdetr_r50vd_6x_coco.yml -r path/to/checkpoint --test-only
 ```
 
-## Results
-
-## Reference
+## References
 
 [RT-DERT](https://github.com/lyuwenyu/RT-DETR/tree/main/rtdetr_pytorch)

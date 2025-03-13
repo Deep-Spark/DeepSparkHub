@@ -1,29 +1,22 @@
-# YOLOF(You Only Look One-level Feature)
+# YOLOF
 
-## Model description
+## Model Description
 
-This paper revisits feature pyramids networks (FPN) for one-stage detectors and points out that the success of FPN is due to its divide-and-conquer solution to the optimization problem in object detection rather than multi-scale feature fusion. From the perspective of optimization, we introduce an alternative way to address the problem instead of adopting the complex feature pyramids - {\em utilizing only one-level feature for detection}. Based on the simple and efficient solution, we present You Only Look One-level Feature (YOLOF). In our method, two key components, Dilated Encoder and Uniform Matching, are proposed and bring considerable improvements. Extensive experiments on the COCO benchmark prove the effectiveness of the proposed model. Our YOLOF achieves comparable results with its feature pyramids counterpart RetinaNet while being 2.5x faster. Without transformer layers, YOLOF can match the performance of DETR in a single-level feature manner with 7x less training epochs. With an image size of 608x608, YOLOF achieves 44.3 mAP running at 60 fps on 2080Ti, which is 13% faster than YOLOv4. Code is available at \url{https://github.com/megvii-model/YOLOF}.
+YOLOF (You Only Look One-level Feature) is an efficient object detection model that challenges the necessity of feature
+pyramids. It demonstrates that using a single-level feature with proper optimization can achieve comparable results to
+multi-level approaches. YOLOF introduces two key components: Dilated Encoder for capturing multi-scale context and
+Uniform Matching for balanced positive samples. The model achieves competitive accuracy with RetinaNet while being 2.5x
+faster, making it suitable for real-time detection tasks.
 
-## Step 1: Installing packages
+## Model Preparation
 
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
+### Prepare Resources
 
-# install MMDetection
-git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
-cd mmdetection
-pip install -v -e .
-```
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-## Step 2: Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -47,29 +40,41 @@ coco2017
 ```bash
 mkdir -p data
 ln -s /path/to/coco2017 data/coco
+```
 
-# Prepare resnet50_caffe-788b5fa3.pth, skip this if fast network
+Prepare resnet50_caffe-788b5fa3.pth, skip this if fast network
+
+```bash
 mkdir -p /root/.cache/torch/hub/checkpoints/
 wget -O /root/.cache/torch/hub/checkpoints/resnet50_caffe-788b5fa3.pth https://download.openmmlab.com/pretrain/third_party/resnet50_caffe-788b5fa3.pth
 ```
 
-## Step 3: Training
-
-#### Training on a single GPU
+### Install Dependencies
 
 ```bash
-python3 tools/train.py configs/yolof/yolof_r50-c5_8xb8-1x_coco.py
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 
-#### Training on multiple GPUs
+## Model Training
 
 ```bash
-sed -i 's/python /python3 /g' tools/dist_train.sh
+# Training on a single GPU
+python3 tools/train.py configs/yolof/yolof_r50-c5_8xb8-1x_coco.py
 
-# Multiple GPUs on one machine
+# Training on multiple GPUs
+sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/yolof/yolof_r50-c5_8xb8-1x_coco.py 8
 ```
 
-## Reference
+## References
 
 - [mmdetection](https://github.com/open-mmlab/mmdetection)

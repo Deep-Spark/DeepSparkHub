@@ -1,21 +1,21 @@
 # YOLOv5
 
-YOLOv5 🚀 is a family of object detection architectures and models pretrained on the COCO dataset, and represents Ultralytics open-source research into future vision AI methods, incorporating lessons learned and best practices evolved over thousands of hours of research and development.
+## Model Description
 
-## Step 1: Installing packages
+YOLOv5 is a state-of-the-art object detection model that builds upon the YOLO architecture, offering improved speed and
+accuracy. It features a streamlined design with enhanced data augmentation and anchor box strategies. YOLOv5 supports
+multiple model sizes (n/s/m/l/x) for different performance needs. The model is known for its ease of use, fast training,
+and efficient inference, making it popular for real-time detection tasks across various applications.
 
-```bash
-## clone yolov5 and install
-git clone https://gitee.com/deep-spark/deepsparkhub-GPL.git
-cd deepsparkhub-GPL/cv/detection/yolov5/pytorch/
-bash init.sh
-```
+## Model Preparation
 
-## Step 2: Preparing datasets
+### Prepare Resources
 
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -36,6 +36,15 @@ coco2017
 └── ...
 ```
 
+### Install Dependencies
+
+```bash
+## clone yolov5 and install
+git clone https://gitee.com/deep-spark/deepsparkhub-GPL.git
+cd deepsparkhub-GPL/cv/detection/yolov5/pytorch/
+bash init.sh
+```
+
 Modify the configuration file(data/coco.yaml)
 
 ```bash
@@ -45,27 +54,19 @@ vim data/coco.yaml
 # val: the relative path of valid images
 ```
 
-## Training the detector
+## Model Training
 
 Train the yolov5 model as follows, the train log is saved in ./runs/train/exp
 
-### On single GPU
-
 ```bash
+# On single GPU
 python3 train.py --data ./data/coco.yaml --batch-size 32 --cfg ./models/yolov5s.yaml --weights ''
-```
 
-### On single GPU (AMP)
-
-```bash
+# On single GPU (AMP)
 python3 train.py --data ./data/coco.yaml --batch-size 32 --cfg ./models/yolov5s.yaml --weights '' --amp
-```
 
-### Multiple GPUs on one machine
-
-```bash
-# eight cards
-# YOLOv5s
+# Multiple GPUs on one machine
+## YOLOv5s
 python3 -m torch.distributed.launch --nproc_per_node 8 \
     train.py \
     --data ./data/coco.yaml \
@@ -73,14 +74,11 @@ python3 -m torch.distributed.launch --nproc_per_node 8 \
     --cfg ./models/yolov5s.yaml --weights '' \
     --device 0,1,2,3,4,5,6,7
 
-# YOLOv5m
+## YOLOv5m
 bash run.sh
-```
 
-### Multiple GPUs on one machine (AMP)
-
-```bash
-# eight cards 
+# Multiple GPUs on one machine (AMP)
+## eight cards 
 python3 -m torch.distributed.launch --nproc_per_node 8 \
     train.py \
     --data ./data/coco.yaml \
@@ -89,9 +87,7 @@ python3 -m torch.distributed.launch --nproc_per_node 8 \
     --device 0,1,2,3,4,5,6,7 --amp
 ```
 
-## Test the detector
-
-Test the yolov5 model as follows, the result is saved in ./runs/detect:
+Test the YOLOv5 model as follows, the results are saved in ./runs/detect.
 
 ```bash
 python3 detect.py --source ./data/images/bus.jpg --weights yolov5s.pt --img 640
@@ -99,18 +95,17 @@ python3 detect.py --source ./data/images/bus.jpg --weights yolov5s.pt --img 640
 python3 detect.py --source ./data/images/zidane.jpg --weights yolov5s.pt --img 640
 ```
 
-## Results on BI-V100
+## Model Results
 
 
-| GPUs | FP16 | Batch size | FPS | E2E | mAP@.5 |
-| ---- | ---- | ---------- | --- | --- | ------ |
-| 1x1  | True | 64         | 81  | N/A | N/A    |
-| 1x8  | True | 64         | 598 | 24h | 0.632  |
+| GPU        | FP16 | Batch size | FPS | E2E | mAP@.5 |
+|------------|------|------------|-----|-----|--------|
+| BI-V100 x8 | True | 64         | 598 | 24h | 0.632  |
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 | -------------------- | ---------------------------------------- | ----------- | -------- | ---------- | ----------- | ----------------------- | --------- |
 | mAP:0.5              | SDK V2.2, bs:128, 8x, AMP                | 1228        | 0.56     | 140\*8     | 0.92        | 27.3\*8                 | 1         |
 
-## Reference
+## References
 
 - [YOLOv5](https://github.com/ultralytics/yolov5)

@@ -1,29 +1,34 @@
 # PP-YOLOE+
 
-## Model description
+## Model Description
 
-PP-YOLOE is an excellent single-stage anchor-free model based on PP-YOLOv2, surpassing a variety of popular YOLO models. PP-YOLOE has a series of models, named s/m/l/x, which are configured through width multiplier and depth multiplier. PP-YOLOE avoids using special operators, such as Deformable Convolution or Matrix NMS, to be deployed friendly on various hardware.
+PP-YOLOE+ is an enhanced version of PP-YOLOE, a high-performance anchor-free object detection model. It builds upon
+PP-YOLOv2's architecture, offering improved accuracy and efficiency. The model comes in multiple sizes (s/m/l/x)
+configurable through width and depth multipliers. PP-YOLOE+ maintains hardware compatibility by avoiding special
+operators while achieving state-of-the-art speed-accuracy trade-offs. Its optimized architecture makes it ideal for
+real-time applications, offering superior detection performance across various scenarios and hardware platforms.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
 
 ```bash
 git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleYOLO.git
 cd PaddleYOLO/
-pip3 install -r requirements.txt
-```
 
-## Step 2: Preparing datasets
-
-```bash
 python3 dataset/coco/download_coco.py
 ```
 
-## Step 3: Training
+### Install Dependencies
 
-> **HINT:**
-> 
+```bash
+pip3 install -r requirements.txt
+```
+
+## Model Training
+
+> HINT:
 > --eval : training with evaluation
->
 > --amp  : Mixed-precision training
 
 ```bash
@@ -49,14 +54,13 @@ CUDA_VISIBLE_DEVICES=0 python3 tools/infer.py -c ${config} -o weights=${weights}
 # CUDA_VISIBLE_DEVICES=0 python3 tools/infer.py -c ${config} -o weights=${weights} --infer_dir=demo/ --draw_threshold=0.5
 ```
 
-## Results
+## Model Results
 
+| Model     | GPU        | FPS        | ACC                      |
+|-----------|------------|------------|--------------------------|
+| PP-YOLOE+ | BI-V100 x8 | ips:6.3293 | Best test bbox ap: 0.528 |
 
-| GPUs       | FPS        | ACC                      |
-| ------------ | ------------ | -------------------------- |
-| BI-V100 x8 | ips:6.3293 | Best test bbox ap: 0.528 |
+## References
 
-## Reference
-
+- [Paper](https://arxiv.org/pdf/2203.16250v3.pdf)
 - [PaddleYOLO](https://github.com/PaddlePaddle/PaddleYOLO)
-- [PP-YOLOE](https://arxiv.org/pdf/2203.16250v3.pdf)

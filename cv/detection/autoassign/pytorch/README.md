@@ -1,26 +1,17 @@
 # AutoAssign
 
-## Model description
+## Model Description
 
-Determining positive/negative samples for object detection is known as label assignment. Here we present an anchor-free detector named AutoAssign. It requires little human knowledge and achieves appearance-aware through a fully differentiable weighting mechanism. During training, to both satisfy the prior distribution of data and adapt to category characteristics, we present Center Weighting to adjust the category-specific prior distributions. To adapt to object appearances, Confidence Weighting is proposed to adjust the specific assign strategy of each instance. The two weighting modules are then combined to generate positive and negative weights to adjust each location's confidence. 
+AutoAssign is an anchor-free object detection model that introduces a fully differentiable label assignment mechanism.
+It combines Center Weighting and Confidence Weighting to adaptively determine positive and negative samples during
+training. Center Weighting adjusts category-specific prior distributions, while Confidence Weighting customizes
+assignment strategies for each instance. This approach eliminates the need for manual anchor design and achieves
+appearance-aware detection through automatic sample selection, resulting in improved performance and reduced human
+intervention in the detection process.
 
+## Model Preparation
 
-## Step 1: Installing packages
-
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
-
-# install MMDetection
-git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
-cd mmdetection
-pip install -v -e .
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 ```bash
 mkdir -p data 
@@ -31,9 +22,11 @@ mkdir -p /root/.cache/torch/hub/checkpoints/
 wget https://download.openmmlab.com/pretrain/third_party/resnet50_msra-5891d200.pth -O /root/.cache/torch/hub/checkpoints/resnet50_msra-5891d200.pth
 ```
 
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```bash
 coco2017
@@ -54,19 +47,32 @@ coco2017
 └── ...
 ```
 
-## Step 3: Training
-
-### One single GPU
+### Install Dependencies
 
 ```bash
-python3 tools/train.py configs/autoassign/autoassign_r50-caffe_fpn_1x_coco.py
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# install MMDetection
+git clone https://github.com/open-mmlab/mmdetection.git -b v3.3.0 --depth=1
+cd mmdetection
+pip install -v -e .
 ```
 
-### Multiple GPUs on one machine
+## Model Training
+
 ```bash
+# One single GPU
+python3 tools/train.py configs/autoassign/autoassign_r50-caffe_fpn_1x_coco.py
+
+# Multiple GPUs on one machine
 sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/autoassign/autoassign_r50-caffe_fpn_1x_coco.py 8
 ```
 
-## Reference
+## References
+
 [mmdetection](https://github.com/open-mmlab/mmdetection)

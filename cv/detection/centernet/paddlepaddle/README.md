@@ -1,52 +1,54 @@
 # CenterNet
 
-## Model description
-Detection identifies objects as axis-aligned boxes in an image. Most successful object detectors enumerate a nearly exhaustive list of potential object locations and classify each. This is wasteful, inefficient, and requires additional post-processing. In this paper, we take a different approach. We model an object as a single point --- the center point of its bounding box. Our detector uses keypoint estimation to find center points and regresses to all other object properties, such as size, 3D location, orientation, and even pose. Our center point based approach, CenterNet, is end-to-end differentiable, simpler, faster, and more accurate than corresponding bounding box based detectors. CenterNet achieves the best speed-accuracy trade-off on the MS COCO dataset, with 28.1% AP at 142 FPS, 37.4% AP at 52 FPS, and 45.1% AP with multi-scale testing at 1.4 FPS. We use the same approach to estimate 3D bounding box in the KITTI benchmark and human pose on the COCO keypoint dataset. Our method performs competitively with sophisticated multi-stage methods and runs in real-time.
+## Model Description
 
-## 克隆代码
+CenterNet is an efficient object detection model that represents objects as single points (their bounding box centers)
+rather than traditional bounding boxes. It uses keypoint estimation to locate centers and regresses other object
+properties like size and orientation. This approach eliminates the need for anchor boxes and non-maximum suppression,
+making it simpler and faster. CenterNet achieves state-of-the-art speed-accuracy trade-offs on benchmarks like COCO and
+can be extended to 3D detection and pose estimation tasks.
 
-```
+## Model Preparation
+
+### Prepare Resources
+
+```bash
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
+
+cd PaddleDetection/
+# Get COCO Dataset
+python3 dataset/coco/download_coco.py
 ```
 
-## 安装PaddleDetection
+### Install Dependencies
 
-```
-cd PaddleDetection
+```bash
 pip install -r requirements.txt
 python3 setup.py install
 ```
 
-## 下载COCO数据集
+## Model Training
 
-```
-python3 dataset/coco/download_coco.py
-```
-
-## 运行代码
-
-```
-# GPU多卡训练
+```bash
+# Multi-GPU
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-
 python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/centernet/centernet_r50_140e_coco.yml --eval
 
-# GPU单卡训练
+# Single-GPU
 export CUDA_VISIBLE_DEVICES=0
-
 python3 tools/train.py -c configs/centernet/centernet_r50_140e_coco.yml --eval
 
-# finetune
+# Finetune
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-
 python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/centernet/centernet_r50_140e_coco.yml -o pretrain_weights=https://bj.bcebos.com/v1/paddledet/models/centernet_r50_140e_coco.pdparams --eval
 
-# 注：默认学习率是适配多GPU训练(8x GPU)，若使用单GPU训练，须对应调整config中的学习率（例如，除以8）
+# Note: The default learning rate is optimized for multi-GPU training (8x GPU). If using single GPU training,
+# you need to adjust the learning rate in the config accordingly (e.g., divide by 8).
 
 ```
 
-## finetune Results on BI-V100
+## Model Results
 
-| GPUs | learning rate | FPS | Train Epochs | mAP  |
-|------|------------|-----|--------------|------|
-| 1x8  | 0.00005        | 10.85 | 3           | 38.5 |
+| GPU        | learning rate | FPS   | Train Epochs | mAP  |
+|------------|---------------|-------|--------------|------|
+| BI-V100 x8 | 0.00005       | 10.85 | 3            | 38.5 |

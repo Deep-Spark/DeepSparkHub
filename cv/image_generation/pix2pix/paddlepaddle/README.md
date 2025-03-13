@@ -1,20 +1,16 @@
 # Pix2Pix
-## Model description
-Pix2Pix uses paired images for image translation, which has two different styles of the same image as input, can be used for style transfer. Pix2pix is encouraged by cGAN, cGAN inputs a noisy image and a condition as the supervision information to the generation network, Pix2pix uses another style of image as the supervision information input into the generation network, so the fake image is related to another style of image which is input as supervision information, thus realizing the process of image translation.
 
-## Step 1: Installation
-```bash
-git clone https://github.com/PaddlePaddle/PaddleGAN.git
-```
+## Model Description
 
-```bash
-cd PaddleGAN
-pip3 install -r requirements.txt
-pip3 install urllib3==1.26.6
-yum install mesa-libGL -y
-```
+Pix2Pix uses paired images for image translation, which has two different styles of the same image as input, can be used
+for style transfer. Pix2pix is encouraged by cGAN, cGAN inputs a noisy image and a condition as the supervision
+information to the generation network, Pix2pix uses another style of image as the supervision information input into the
+generation network, so the fake image is related to another style of image which is input as supervision information,
+thus realizing the process of image translation.
 
-## Step 2: Preparing datasets
+## Model Preparation
+
+### Prepare Resources
 
 Datasets used by Pix2Pix can be downloaded from [here](http://efrosgans.eecs.berkeley.edu/pix2pix/datasets/).
 
@@ -31,7 +27,20 @@ facades
     └── val
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+git clone https://github.com/PaddlePaddle/PaddleGAN.git
+```
+
+```bash
+cd PaddleGAN
+pip3 install -r requirements.txt
+pip3 install urllib3==1.26.6
+yum install mesa-libGL -y
+```
+
+## Model Training
 
 ```bash
 # move facades dataset to data/ 
@@ -41,21 +50,21 @@ mv facades/ data/
 python3 -u tools/main.py --config-file configs/pix2pix_facades.yaml
 ```
 
-## Step 4: Evaluation
-
 ```bash
+# Evaluation
 python3 tools/main.py --config-file configs/pix2pix_facades.yaml --evaluate-only --load ${PATH_OF_WEIGHT}
 ```
 
-## Results
-|GPUs|Metric FID|FPS|
-|:---:|:---:|:---:|
-|BI-V100|120.5818|16.12240|
+## Model Results
+
+| Model   | GPU     | Metric FID | FPS      |
+|---------|---------|------------|----------|
+| Pix2Pix | BI-V100 | 120.5818   | 16.12240 |
 
 The generated images at epoch 200 is shown below:
 
-<img src = 'results.png'>
+![results](results.png)
 
+## References
 
-## Reference
-- [PaddleGAN](https://github.com/PaddlePaddle/PaddleGAN) 
+- [PaddleGAN](https://github.com/PaddlePaddle/PaddleGAN)

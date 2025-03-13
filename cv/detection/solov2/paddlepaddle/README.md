@@ -1,47 +1,49 @@
 # SOLOv2
 
-## Model description
-SOLOv2 (Segmenting Objects by Locations) is a fast instance segmentation framework with strong performance. 
+## Model Description
 
-## 克隆代码
+SOLOv2 is an efficient instance segmentation framework that directly segments objects by predicting instance masks based
+on their spatial locations. It eliminates the need for bounding box detection and mask refinement, offering a simpler
+and faster approach compared to traditional methods. SOLOv2 introduces dynamic convolutions and matrix non-maximum
+suppression to improve mask quality and processing speed. The model achieves strong performance on instance segmentation
+tasks while maintaining real-time capabilities, making it suitable for various computer vision applications.
 
-```
+## Model Preparation
+
+### Prepare Resources
+
+```bash
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
+
+cd PaddleDetection/
+# Get COCO Dataset
+python3 dataset/coco/download_coco.py
 ```
 
-## 安装PaddleDetection
+### Install Dependencies
 
-```
-cd PaddleDetection
+```bash
 pip install -r requirements.txt
 python3 setup.py install
 ```
 
-## 下载COCO数据集
+## Model Training
 
-```
-python3 dataset/coco/download_coco.py
-```
-
-## 运行代码
-
-```
-# GPU多卡训练
+```bash
+# Multi GPU
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-
 python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/solov2/solov2_r50_fpn_1x_coco.yml --eval
 
-# GPU单卡训练
+# Single GPU
 export CUDA_VISIBLE_DEVICES=0
-
 python3 tools/train.py -c configs/solov2/solov2_r50_fpn_1x_coco.yml --eval
 
-# 注：默认学习率是适配多GPU训练(8x GPU)，若使用单GPU训练，须对应调整config中的学习率（例如，除以8）
-
+# Note: The default learning rate is optimized for multi-GPU training (8x GPU). If using single GPU training,
+# you need to adjust the learning rate in the config accordingly (e.g., divide by 8).
 ```
 
-## Results on BI-V100
+## Model Results
 
-| GPUs | FPS | Train Epochs | mAP  |
-|------|-----|--------------|------|
-| 1x8  | 6.39 | 12           | 35.4 |
+| Model  | GPU        | FPS  | Train Epochs | mAP  |
+|--------|------------|------|--------------|------|
+| SOLOv2 | BI-V100 x8 | 6.39 | 12           | 35.4 |

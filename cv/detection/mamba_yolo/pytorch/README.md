@@ -1,26 +1,20 @@
 # Mamba-YOLO
 
-## Model description
+## Model Description
 
-Mamba-YOLO is an innovative object detection model that integrates State Space Models (SSMs) into the YOLO (You Only Look Once) architecture to enhance performance in complex visual tasks. This integration aims to improve the model's ability to capture global dependencies and process long-range information efficiently.
+Mamba-YOLO is an innovative object detection model that integrates State Space Models (SSMs) into the YOLO (You Only
+Look Once) architecture to enhance performance in complex visual tasks. This integration aims to improve the model's
+ability to capture global dependencies and process long-range information efficiently.
 
-## Step 1: Installation
+## Model Preparation
 
-```sh
-pip3 install seaborn thop timm einops
+### Prepare Resources
 
-git clone --depth 1 https://gitee.com/deep-spark/deepsparkhub-GPL.git
-cd cv/detection/mamba-yolo/pytorch
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
 
-cd selective_scan && pip install . && cd ..
-pip install -v -e .
-```
-
-## Step 2: Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
 
 ```sh
 coco2017
@@ -44,13 +38,26 @@ coco2017
 Modify the configuration file(data/coco.yaml)
 
 ```sh
-vim ultralytics/cfg/datasets/coco.yaml
 # path: the root of coco data
 # train: the relative path of train images
 # val: the relative path of valid images
+vim ultralytics/cfg/datasets/coco.yaml
+
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+pip3 install seaborn thop timm einops
+
+git clone --depth 1 https://gitee.com/deep-spark/deepsparkhub-GPL.git
+cd cv/detection/mamba-yolo/pytorch
+
+cd selective_scan && pip install . && cd ..
+pip install -v -e .
+```
+
+## Model Training
 
 ```sh
 python3 mbyolo_train.py --task train --data ultralytics/cfg/datasets/coco.yaml \
@@ -58,6 +65,6 @@ python3 mbyolo_train.py --task train --data ultralytics/cfg/datasets/coco.yaml \
 --amp  --project ./output_dir/mscoco --name mambayolo_n
 ```
 
-## Reference
+## References
 
 - [Mamba-YOLO](https://github.com/HZAI-ZJNU/Mamba-YOLO/tree/main)

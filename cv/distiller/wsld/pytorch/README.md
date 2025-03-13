@@ -1,28 +1,19 @@
-# WSLD: Weighted Soft Label Distillation
+# WSLD
 
-## Model description
-Knowledge distillation is an effective approach to leverage a well-trained network or an ensemble of them, named as the teacher, to guide the training of a student network. The outputs from the teacher network are used as soft labels for supervising the training of a new network.we investigate the bias-variance tradeoff brought by distillation with soft labels. Specifically, we observe that during training the bias-variance tradeoff varies sample-wisely. Further, under the same distillation temperature setting, we observe that the distillation performance is negatively associated with the number of some specific samples, which are named as regularization samples since these samples lead to bias increasing and variance decreasing. Nevertheless, we empirically find that completely filtering out regularization samples also deteriorates distillation performance. 
+## Model Description
 
-## Step 1: Installation
-```bash
-# Install libGL
-yum install mesa-libGL
+WSLD (Weighted Soft Label Distillation) is a knowledge distillation technique that focuses on transferring soft label
+information from a teacher model to a student model. Unlike traditional distillation methods that use uniform weighting,
+WSLD assigns different weights to each class based on their importance or difficulty, allowing the student to focus more
+on challenging or critical classes. This approach improves the student model's performance, particularly in imbalanced
+datasets or tasks where certain classes require more attention.
 
-# Install zlib
-wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
-tar xvf zlib-1.2.9.tar.gz
-cd zlib-1.2.9/
-./configure && make install
-cd ..
-rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
+## Model Preparation
 
-# Install requirements
-pip3 install opencv-python lmdb msgpack
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets
-
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -40,9 +31,28 @@ imagenet
 └── val_list.txt
 ```
 
-**ImageNet to lmdb file**
+### Install Dependencies
 
-The code is used for training Imagenet. Our pre-trained teacher models are Pytorch official models. By default, we pack the ImageNet data as the lmdb file for faster IO. The lmdb files can be made as follows.
+```bash
+# Install libGL
+yum install mesa-libGL
+
+# Install zlib
+wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
+tar xvf zlib-1.2.9.tar.gz
+cd zlib-1.2.9/
+./configure && make install
+cd ..
+rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
+
+# Install requirements
+pip3 install opencv-python lmdb msgpack
+```
+
+### Preprocess Data
+
+The code is used for training Imagenet. Our pre-trained teacher models are Pytorch official models. By default, we pack
+the ImageNet data as the lmdb file for faster IO. The lmdb files can be made as follows.
 
 ```bash
 # 1. Generate the list of the image data.
@@ -53,7 +63,7 @@ python3 dataset/img2lmdb.py --image_path /path/to/imagenet --list_path /path/to/
 python3 dataset/img2lmdb.py --image_path /path/to/imagenet --list_path /path/to/imagenet --output_path '/path/to/imagenet' --split 'val'
 ```
 
-## Step 3: Training
+## Model Training
 
 - train_with_distillation.py: train the model with our distillation method.
 - imagenet_train_cfg.py: all dataset and hyperparameter settings.
@@ -66,16 +76,15 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 python3 train_with_distillation.py
 ```
 
+## Model Results
 
-## Results
+| GPU        | Network   | Method   | acc   |
+|------------|-----------|----------|-------|
+| BI-V100 x8 | ResNet 34 | Teacher  | 73.19 |
+| BI-V100 x8 | ResNet 18 | Original | 69.75 |
+| BI-V100 x8 | ResNet 18 | Proposed | 71.6  |
 
-|GPUs|   Network  |  Method  | acc |
-|:----:|:----------:|:--------:|:----------:|
-| | ResNet 34 |  Teacher | 73.19 |
-| | ResNet 18 | Original | 69.75 |
-| BI-V100 x 8 | ResNet 18 | Proposed | __71.6__ |
+## References
 
-## Reference
-
-- [Rethinking soft labels for knowledge distillation: A Bias-Variance Tradeoff Perspective](https://arxiv.org/abs/2102.00650)
+- [Paper](https://arxiv.org/abs/2102.00650)
 - [Weighted Soft Label Distillation](https://github.com/bellymonster/Weighted-Soft-Label-Distillation)

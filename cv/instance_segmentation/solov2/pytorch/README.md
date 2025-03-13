@@ -1,10 +1,43 @@
 # SOLOV2
 
-## Model description
+## Model Description
 
-In this work, we aim at building a simple, direct, and fast instance segmentation framework with strong performance. We follow the principle of the SOLO method of Wang et al. "SOLO: segmenting objects by locations". Importantly, we take one step further by dynamically learning the mask head of the object segmenter such that the mask head is conditioned on the location. Specifically, the mask branch is decoupled into a mask kernel branch and mask feature branch, which are responsible for learning the convolution kernel and the convolved features respectively. Moreover, we propose Matrix NMS (non maximum suppression) to significantly reduce the inference time overhead due to NMS of masks. Our Matrix NMS performs NMS with parallel matrix operations in one shot, and yields better results. We demonstrate a simple direct instance segmentation system, outperforming a few state-of-the-art methods in both speed and accuracy. A light-weight version of SOLOv2 executes at 31.3 FPS and yields 37.1% AP. Moreover, our state-of-the-art results in object detection (from our mask byproduct) and panoptic segmentation show the potential to serve as a new strong baseline for many instance-level recognition tasks besides instance segmentation.
+SOLOv2 is an enhanced instance segmentation model that builds upon SOLO's approach by dynamically learning mask heads
+conditioned on object locations. It decouples mask prediction into kernel and feature branches for improved efficiency.
+SOLOv2 introduces Matrix NMS, a faster non-maximum suppression technique that processes masks in parallel. This
+architecture achieves state-of-the-art performance in both speed and accuracy, with a lightweight version running at
+31.3 FPS. It serves as a strong baseline for various instance-level recognition tasks beyond segmentation.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
+
+Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to
+download.
+
+Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the
+unzipped dataset path structure sholud look like:
+
+```bash
+coco2017
+├── annotations
+│   ├── instances_train2017.json
+│   ├── instances_val2017.json
+│   └── ...
+├── train2017
+│   ├── 000000000009.jpg
+│   ├── 000000000025.jpg
+│   └── ...
+├── val2017
+│   ├── 000000000139.jpg
+│   ├── 000000000285.jpg
+│   └── ...
+├── train2017.txt
+├── val2017.txt
+└── ...
+```
+
+### Install Dependencies
 
 ```bash
 # Install libGL
@@ -26,32 +59,7 @@ wget https://download.pytorch.org/models/resnet50-0676ba61.pth -O /root/.cache/t
 pip3 install yapf==0.31.0 urllib3==1.26.18
 ```
 
-## Step 2: Preparing datasets
-
-Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
-
-Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO path in later training process, the unzipped dataset path structure sholud look like:
-
-```bash
-coco2017
-├── annotations
-│   ├── instances_train2017.json
-│   ├── instances_val2017.json
-│   └── ...
-├── train2017
-│   ├── 000000000009.jpg
-│   ├── 000000000025.jpg
-│   └── ...
-├── val2017
-│   ├── 000000000139.jpg
-│   ├── 000000000285.jpg
-│   └── ...
-├── train2017.txt
-├── val2017.txt
-└── ...
-```
-
-## Step 3: Training
+## Model Training
 
 ```bash
 # Make soft link to dataset
@@ -68,11 +76,12 @@ python3 tools/train.py configs/solov2/solov2_r50_fpn_1x_coco.py
 bash tools/dist_train.sh configs/solov2/solov2_r50_fpn_1x_coco.py 8
 ```
 
-## Results
+## Model Results
 
-|    GPUs    | FPS |
-| ---------- | --------- |
-| BI-V100 x8 | 21.26 images/s |
+| Model  | GPUs       | FPS            |
+|--------|------------|----------------|
+| SOLOV2 | BI-V100 x8 | 21.26 images/s |
 
-## Reference
-[mmdetection](https://github.com/open-mmlab/mmdetection)
+## References
+
+- [mmdetection](https://github.com/open-mmlab/mmdetection)

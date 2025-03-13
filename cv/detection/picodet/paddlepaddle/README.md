@@ -1,65 +1,58 @@
 # PP-PicoDet
 
-## Model description
-    PicoDet is an ultra lightweight real-time object detection model that includes four different sizes of XS/S/M/L. 
-    By using structures such as TAL, ETA Head, and PAN, the accuracy of the model is improved. When deploying model inference, 
-    the model supports including post-processing in the network, thereby supporting direct output of prediction results.
+## Model Description
 
-## Step 1:Installation
+PP-PicoDet is an ultra-lightweight real-time object detection model designed for efficient deployment. It comes in four
+sizes (XS/S/M/L) and incorporates advanced structures like TAL, ETA Head, and PAN to boost accuracy. The model supports
+end-to-end inference by including post-processing in the network, enabling direct prediction outputs. PP-PicoDet
+achieves an excellent balance between speed and accuracy, making it ideal for applications requiring real-time detection
+on resource-constrained devices.
+
+## Model Preparation
+
+### Prepare Resources
+
 ```bash
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
-cd PaddleDetection
-pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+cd PaddleDetection/
+# Get COCO Dataset
+python3 dataset/coco/download_coco.py
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
 python3 setup.py install
+
 pip3 install protobuf==3.20.3
 pip3 install numba==0.56.4
+
 yum install mesa-libGl -y
 ```
 
-## Step 2:Preparing datasets
-    Download the Coco datasets, Specify coco2017 to your Coco path in later training process. 
-    The Coco datesets path structure should look like(assuming coco2017 is used):
+## Model Training
+
+Assuming we are going to train picodet-l, the model config file is 'configs/picodet/picodet_l_640_coco_lcnet.yml' vim
+configs/datasets/coco_detection.yml, set 'dataset_dir' in the configuration file to coco2017, then start trainging.
+
 ```bash
-coco2017
-├── annotations
-│   ├── instances_train2017.json
-│   ├── instances_val2017.json
-│   └── ...
-├── train2017
-│   ├── 000000000009.jpg
-│   ├── 000000000025.jpg
-│   └── ...
-├── val2017
-│   ├── 000000000139.jpg
-│   ├── 000000000285.jpg
-│   └── ...
-├── train2017.txt
-├── val2017.txt
-└── ...
-```
-
-## Step 3:Training
-
-assuming we are going to train picodet-l, the model config file is 'configs/picodet/picodet_l_640_coco_lcnet.yml'
-vim configs/datasets/coco_detection.yml, set 'dataset_dir' in the configuration file to coco2017, then start trainging.
-
-single gpu:
-```bash
+# Single GPU
 export CUDA_VISIBLE_DEVICES=0
 python3 tools/train.py -c configs/picodet/picodet_l_640_coco_lcnet.yml --eval
-```
-multi-gpu:
-```bash
+
+# Multi GPU
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c configs/picodet/picodet_l_640_coco_lcnet.yml --eval
 ```
 
-## Results
+## Model Results
 
-| GPUs        | IPS       | mAP0.5:0.95  | mAP0.5       |
-|-------------|-----------|--------------|--------------|
-| BI-V100 x 8 | 19.84     | 41.2         | 58.2         |
+| Model      | GPU        | IPS   | mAP0.5:0.95 | mAP0.5 |
+|------------|------------|-------|-------------|--------|
+| PP-PicoDet | BI-V100 x8 | 19.84 | 41.2        | 58.2   |
 
-## Reference:
+## References
 
-https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.6/configs/picodet/README_en.md
+- [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.6/configs/picodet/README_en.md)

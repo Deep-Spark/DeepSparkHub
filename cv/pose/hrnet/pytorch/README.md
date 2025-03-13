@@ -1,16 +1,17 @@
 # HRNet
 
-## Model description
+## Model Description
 
-HRNet, or High-Resolution Net, is a general purpose convolutional neural network for tasks like semantic segmentation, object detection and image classification. It is able to maintain high resolution representations through the whole process. We start from a high-resolution convolution stream, gradually add high-to-low resolution convolution streams one by one, and connect the multi-resolution streams in parallel. The resulting network consists of several stages and the nth stage contains n streams corresponding to n resolutions. The authors conduct repeated multi-resolution fusions by exchanging the information across the parallel streams over and over.
+HRNet, or High-Resolution Net, is a general purpose convolutional neural network for tasks like semantic segmentation,
+object detection and image classification. It is able to maintain high resolution representations through the whole
+process. We start from a high-resolution convolution stream, gradually add high-to-low resolution convolution streams
+one by one, and connect the multi-resolution streams in parallel. The resulting network consists of several stages and
+the nth stage contains n streams corresponding to n resolutions. The authors conduct repeated multi-resolution fusions
+by exchanging the information across the parallel streams over and over.
 
-## Step 1: Installing packages
+## Model Preparation
 
-```shell
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Go to visit [COCO official website](https://cocodataset.org/#download), then select the COCO dataset you want to download.
 
@@ -35,35 +36,31 @@ coco2017
 └── ...
 ```
 
-## Step 3: Training
+### Install Dependencies
 
-### On single GPU
+```shell
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```shell
 export COCO_DATASET_PATH=/path/to/coco2017
-```
 
-```shell
+# On single GPU
 python3 ./tools/train.py --cfg ./configs/coco/w32_512_adam_lr1e-3.yaml --datadir=${COCO_DATASET_PATH} --max_epochs=2
-```
 
-### On single GPU (AMP)
-
-```shell
+# On single GPU (AMP)
 python3 ./tools/train.py --cfg ./configs/coco/w32_512_adam_lr1e-3.yaml --datadir=${COCO_DATASET_PATH} --max_epochs=2 --amp
-```
 
-### Multiple GPUs on one machine
+# Multiple GPUs on one machine
 
-```shell
 python3 ./tools/train.py --cfg ./configs/coco/w32_512_adam_lr1e-3.yaml --datadir=${COCO_DATASET_PATH} --max_epochs=2 --dist
-```
 
-### Multiple GPUs on one machine (AMP)
-
-```shell
+# Multiple GPUs on one machine (AMP)
 python3 ./tools/train.py --cfg ./configs/coco/w32_512_adam_lr1e-3.yaml --datadir=${COCO_DATASET_PATH} --max_epochs=2 --amp --dist
 ```
 
-## Reference
-https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation
+## References
+
+- [HigherHRNet-Human-Pose-Estimation](https://github.com/HRNet/HigherHRNet-Human-Pose-Estimation)

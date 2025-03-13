@@ -1,11 +1,16 @@
-# RKD (Relational Knowledge Distillation)
+# RKD
 
-## Model description
+## Model Description
 
-Official implementation of [Relational Knowledge Distillation](https://arxiv.org/abs/1904.05068), CVPR 2019\
-This repository contains the source code of experiments for metric learning.
+RKD (Relational Knowledge Distillation) is a knowledge distillation technique that transfers relational information
+between data points from a teacher model to a student model. Instead of mimicking individual outputs, RKD focuses on
+preserving the relationships (distance and angle) between embeddings. This approach is particularly effective for metric
+learning tasks, where maintaining the relative structure of the embedding space is crucial. RKD enhances student model
+performance by capturing higher-order relational knowledge from the teacher.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 # If 'ZLIB_1.2.9' is not found, you need to install it as below.
@@ -17,7 +22,9 @@ cd ..
 rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
 ```
 
-## Step 2: Distillation
+## Model Training
+
+### Model Distillation
 
 ```bash
 # Train a teacher embedding network of resnet50 (d=512) sing triplet loss (margin=0.2) with distance-weighted sampling.
@@ -57,13 +64,12 @@ python3 run.py --mode eval \
                --load student/best.pth 
 ```
 
-## Results
-| model   | acc |
-|:----------:|:--------:|
-| RKD|  Best Train Recall: 0.7940, Best Eval Recall: 0.5763 |
+## Model Results
 
-## Reference
-- [paper](https://arxiv.org/abs/2302.05637)
+| Model | ACC                                                 |
+|-------|-----------------------------------------------------|
+| RKD   | Best Train Recall: 0.7940, Best Eval Recall: 0.5763 |
 
+## References
 
-
+- [Paper](https://arxiv.org/abs/2302.05637)

@@ -65,7 +65,7 @@ All the codes was tested under TensorFlow 1.6, Python 3.5, Ubuntu 16.04 with CUD
 
 ***This repo is just created recently, any contribution will be welcomed.***
 
-## Results (VOC07 Metric)
+## Model Results (VOC07 Metric)
 
 This implementation(SSD300-VGG16) yield **mAP 77.8%** on PASCAL VOC 2007 test dataset(the original performance described in the paper is 77.2%mAP), the details are as follows:
 

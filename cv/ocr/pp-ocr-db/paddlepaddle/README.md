@@ -1,15 +1,18 @@
 # PP-OCR-DB
 
-## Step 1: Installing
-```bash
-git clone --recursive https://github.com/PaddlePaddle/PaddleOCR.git
-cd PaddleOCR
-pip3 install -r requirements.txt
-```
+## Model Description
 
-## Step 2: Download data
+PP-OCR-DB is an efficient deep learning model for text detection, part of the PaddleOCR framework. It combines a
+MobileNetV3 backbone with a Differentiable Binarization (DB) module to accurately detect text in various scenarios. The
+model is optimized for real-time performance and can handle diverse text layouts and orientations. PP-OCR-DB is
+particularly effective in document analysis and scene text recognition tasks, offering a balance between accuracy and
+computational efficiency for practical OCR applications.
 
-Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015) 
+## Model Preparation
+
+### Prepare Resources
+
+Download the [ICDAR2015 Dataset](https://deepai.org/dataset/icdar-2015)
 
 ```bash
 # ICDAR2015 PATH as follow:
@@ -26,7 +29,15 @@ drwxr-xr-x 2 root root    24576 Jul 21 15:53 icdar_c4_train_imgs
 
 ```
 
-## Step 3: Run PP-OCR-DB
+### Install Dependencies
+
+```bash
+git clone --recursive https://github.com/PaddlePaddle/PaddleOCR.git
+cd PaddleOCR
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 # Notice: modify "configs/det/det_mv3_db.yml" file, set the datasets path as yours.
