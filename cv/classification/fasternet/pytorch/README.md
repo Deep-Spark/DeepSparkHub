@@ -14,6 +14,9 @@ We propose a simple yet fast and effective partial convolution (**PConv**), as w
 Clone this repo and install the required packages:
 ```bash
 pip install -r requirements.txt
+git clone https://github.com/JierunChen/FasterNet.git
+cd FasterNet
+git checkout e8fba4465ae912359c9f661a72b14e39347e4954
 ```
 
 ## Step 2: Preparing datasets

@@ -6,6 +6,9 @@
 
 ```bash
 pip3 install timm yacs
+git clone https://github.com/DingXiaoH/RepVGG.git
+cd RepVGG
+git checkout eae7c5204001eaf195bbe2ee72fb6a37855cce33
 ```
 
 ## Step 2: Download data
@@ -31,7 +34,14 @@ imagenet
 ## Step 3: Run RepVGG
 
 ```bash
-python -m torch.distributed.launch --nproc_per_node 8 --master_port 12349 main.py --arch [model name] --data-path [/path/to/imagenet] --batch-size 32 --tag train_from_scratch --output ./ --opts TRAIN.EPOCHS 300 TRAIN.BASE_LR 0.1 TRAIN.WEIGHT_DECAY 1e-4 TRAIN.WARMUP_EPOCHS 5 MODEL.LABEL_SMOOTHING 0.1 AUG.PRESET weak AUG.MIXUP 0.0 DATA.DATASET imagenet DATA.IMG_SIZE 224
+# fix --local-rank for torch 2.x
+sed -i 's/--local_rank/--local-rank/g' main.py
+
+# change dataset load
+# Tips: "import os" into data/build.py
+sed -i "s@dataset = torchvision.datasets.ImageNet(root=config.DATA.DATA_PATH, split='train' if is_train else 'val', transform=transform)@dataset = datasets.ImageFolder(os.path.join(config.DATA.DATA_PATH, prefix), transform=transform)@" data/build.py
+
+python3 -m torch.distributed.launch --nproc_per_node 4 --master_port 12349 main.py --arch RepVGG-A0 --data-path ./imagenet --batch-size 32 --tag train_from_scratch --output ./ --opts TRAIN.EPOCHS 300 TRAIN.BASE_LR 0.1 TRAIN.WEIGHT_DECAY 1e-4 TRAIN.WARMUP_EPOCHS 5 MODEL.LABEL_SMOOTHING 0.1 AUG.PRESET weak AUG.MIXUP 0.0 DATA.DATASET imagenet DATA.IMG_SIZE 224
 ```
 
 The original RepVGG models were trained in 120 epochs with cosine learning rate decay from 0.1 to 0. We used 8 GPUs, global batch size of 256, weight decay of 1e-4 (no weight decay on fc.bias, bn.bias, rbr_dense.bn.weight and rbr_1x1.bn.weight) (weight decay on rbr_identity.weight makes little difference, and it is better to use it in most of the cases), and the same simple data preprocssing as the PyTorch official example:
@@ -54,9 +64,6 @@ RepVGGplus-L2pse, RepVGG-A0, RepVGG-A1, RepVGG-A2, RepVGG-B0, RepVGG-B1, RepVGG-
 |----------| ----------- | ------------------------------------ |
 | RepVGG-A0| 8 cards     | Acc@1=0.7241                         |
 
+## Reference
 
-
-
-
-
-
+- [RepMLP](https://github.com/DingXiaoH/RepVGG/tree/eae7c5204001eaf195bbe2ee72fb6a37855cce33)

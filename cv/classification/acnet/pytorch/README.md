@@ -7,8 +7,8 @@ As designing appropriate Convolutional Neural Network (CNN) architecture in the 
 
 ```bash
 git clone https://github.com/DingXiaoH/ACNet.git
-pip3 install urllib3==1.26.6
 cd ACNet
+git checkout 748fb0c734b41c48eacaacf7fc5e851e33a63ce8
 ```
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
@@ -37,6 +37,8 @@ rm -rf acnet/acb.py
 rm -rf utils/misc.py
 mv ../acb.py acnet/
 mv ../misc.py utils/
+# fix --local-rank for torch 2.x
+sed -i 's/--local_rank/--local-rank/g' acnet/do_acnet.py
 export PYTHONPATH=$PYTHONPATH:.
 ```
 
