@@ -5,8 +5,10 @@ The Swin Transformer is a type of Vision Transformer. It builds hierarchical fea
 ## Step 1: Installing
 
 ```bash
-pip install timm==0.4.12
-pip install yacs
+git clone https://github.com/microsoft/Swin-Transformer.git
+git checkout f82860bfb5225915aca09c3227159ee9e1df874d
+cd Swin-Transformer
+pip install timm==0.4.12 yacs
 ```
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
@@ -30,9 +32,12 @@ imagenet
 ## Step 2: Training
 ### Multiple GPUs on one machine
 ```bash
+# fix --local-rank for torch 2.x
+sed -i 's/--local_rank/--local-rank/g' main.py
+
 python3 -m torch.distributed.launch --nproc_per_node 8 --master_port 12345  main.py \
     --cfg configs/swin/swin_tiny_patch4_window7_224.yaml --data-path /path/to/imagenet --batch-size 128
 ```
 
 ## Reference
-https://github.com/microsoft/Swin-Transformer
+[Swin-Transformer](https://github.com/microsoft/Swin-Transformer)
