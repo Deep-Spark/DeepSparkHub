@@ -1,9 +1,11 @@
 # ResNeXt50_32x4d
 
-## Model description
+## Model Description
 A ResNeXt repeats a building block that aggregates a set of transformations with the same topology. Compared to a ResNet, it exposes a new dimension, cardinality (the size of the set of transformations) , as an essential factor in addition to the dimensions of depth and width.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 Install OpenMPI and mesa-libGL
 ```bash
 wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.7.tar.gz
@@ -72,11 +74,11 @@ python3 eval.py \
     --checkpoint_file_path=/path/to/checkpoint/model_data_dir/ckpt_0/
 ```
 
-## Results
+## Model Results
 
 | GPUs        | FPS       | ACC(TOP1)    | ACC(TOP5)    |
 |-------------|-----------|--------------|--------------|
 | BI-V100 x 8 | 109.97    | 78.18%       | 94.03%       |
 
-## Reference
+## References
 https://gitee.com/mindspore/models/tree/master/research/cv/ResNeXt

@@ -1,10 +1,12 @@
 # EfficientNetB0
 
-## Model description
+## Model Description
 
 This model is the B0 version of the EfficientNet series, whitch can be used for image classification tasks, such as cat and dog classification, flower classification, and so on.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
@@ -67,11 +69,11 @@ export CUDA_VISIBLE_DEVICES=0
 python3 tools/train.py -c ppcls/configs/ImageNet/EfficientNet/EfficientNetB0.yaml
 ```
 
-## Results
+## Model Results
 
 | GPUs| ips | Top1 | Top5 |
 | ------ | ----------  |--------------|--------------|
 |  BI-V100 x8 |   1065.28      | 0.7683 | 0.9316 |
 
-## Reference
+## References
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas/tree/release/2.5)

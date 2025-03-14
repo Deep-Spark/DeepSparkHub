@@ -1,5 +1,5 @@
 # MobileNetV3
-## Model description
+## Model Description
 MobileNetV3 is a convolutional neural network that is tuned to mobile phone CPUs through a combination of hardware-aware network architecture search (NAS) complemented by the NetAdapt algorithm, and then subsequently improved through novel architecture advances. Advances include (1) complementary search techniques, (2) new efficient versions of nonlinearities practical for the mobile setting, (3) new efficient network design.
 
 ## Step 1: Installing
@@ -42,5 +42,5 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/MobileNetV3/MobileNetV3_small_x1_25.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Reference
+## References
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

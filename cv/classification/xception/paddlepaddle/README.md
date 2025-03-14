@@ -1,10 +1,12 @@
 # Xception
 
-## Model description
+## Model Description
 
 Xception is a convolutional neural network architecture that relies solely on depthwise separable convolution layers.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
@@ -57,10 +59,10 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 python3 -m paddle.distributed.launch --gpus=0,1,2,3,4,5,6,7 tools/train.py -c ./ppcls/configs/ImageNet/Xception/Xception41.yaml
 ```
 
-## Results
+## Model Results
 | GPUs        | TOP1        | TOP5        | ips         |
 |:-----------:|:-----------:|:-----------:|:-----------:|
 | BI-V100 x 8 |0.783        | 0.941       | 537.04      |
 
-## Reference
+## References
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

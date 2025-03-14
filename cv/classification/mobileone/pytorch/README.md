@@ -2,7 +2,7 @@
 
 > [An Improved One millisecond Mobile Backbone](https://arxiv.org/abs/2206.04040)
 
-## Model description
+## Model Description
 
 Mobileone is proposed by apple and based on reparameterization. On the apple chips, the accuracy of the model is close to 0.76 on the ImageNet dataset when the latency is less than 1ms. Its main improvements based on [RepVGG](../repvgg) are fllowing:
 
@@ -12,7 +12,9 @@ Mobileone is proposed by apple and based on reparameterization. On the apple chi
 
 Efficient neural network backbones for mobile devices are often optimized for metrics such as FLOPs or parameter count. However, these metrics may not correlate well with latency of the network when deployed on a mobile device. Therefore, we perform extensive analysis of different metrics by deploying several mobile-friendly networks on a mobile device. We identify and analyze architectural and optimization bottlenecks in recent efficient neural networks and provide ways to mitigate these bottlenecks. To this end, we design an efficient backbone MobileOne, with variants achieving an inference time under 1 ms on an iPhone12 with 75.9% top-1 accuracy on ImageNet. We show that MobileOne achieves state-of-the-art performance within the efficient architectures while being many times faster on mobile. Our best model obtains similar performance on ImageNet as MobileFormer while being 38x faster. Our model obtains 2.3% better top-1 accuracy on ImageNet than EfficientNet at similar latency. Furthermore, we show that our model generalizes to multiple tasks - image classification, object detection, and semantic segmentation with significant improvements in latency and accuracy as compared to existing efficient architectures when deployed on a mobile device.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 # Install libGL
@@ -67,11 +69,11 @@ imagenet
 bash tools/dist_train.sh configs/mobileone/mobileone-s0_8xb32_in1k.py 8
 ```
 
-## Results
+## Model Results
 |     GPUs     | FPS         | TOP1 Accuracy |
 | ------------ |  ---------  |-------------- |
 |  BI-V100 x8  |    1014     |    71.49      |
 
-## Reference
+## References
 - [mmpretrain](https://github.com/open-mmlab/mmpretrain/)
 

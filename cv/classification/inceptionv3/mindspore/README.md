@@ -1,9 +1,11 @@
 # InceptionV3
 
-## Model description
+## Model Description
 InceptionV3 is a convolutional neural network architecture from the Inception family that makes several improvements including using Label Smoothing, Factorized 7 x 7 convolutions, and the use of an auxiliary classifier to propagate label information lower down the network (along with the use of batch normalization for layers in the sidehead).
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 yum install -y mesa-libGL
@@ -61,11 +63,11 @@ DEVICE_ID=0
 bash run_eval_gpu.sh $DEVICE_ID /path/to/imagenet/val/ /path/to/checkpoint
 ```
 
-## Results
+## Model Results
 | GPUS      |    ACC (epoch 108) | FPS |
 | ----------| --------------------------| ----- | 
 | BI V100×4 | 'Loss': 3.9033, 'Top1-Acc': 0.4847, 'Top5-Acc': 0.7405 | 447.2 |
 
 
-## Reference
+## References
 - [MindSpore Models](https://gitee.com/mindspore/models/tree/master/official/)

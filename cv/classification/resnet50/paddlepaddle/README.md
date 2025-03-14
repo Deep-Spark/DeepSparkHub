@@ -1,5 +1,5 @@
 # ResNet50
-## Model description
+## Model Description
 Residual Networks, or ResNets, learn residual functions with reference to the layer inputs, instead of learning unreferenced functions. Instead of hoping each few stacked layers directly fit a desired underlying mapping, residual nets let these layers fit a residual mapping.
 
 ## Step 1: Installing
@@ -58,7 +58,7 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/ResNet/ResNet50.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Results on BI-V100
+## Model Results on BI-V100
 
 <div align="center">
 

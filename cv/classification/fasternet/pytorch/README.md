@@ -1,6 +1,6 @@
 # FasterNet
 
-## Model description
+## Model Description
 
 This is the official Pytorch/PytorchLightning implementation of the paper: <br/>
 > [**Run, Don't Walk: Chasing Higher FLOPS for Faster Neural Networks**](https://arxiv.org/abs/2303.03667)      
@@ -10,7 +10,9 @@ This is the official Pytorch/PytorchLightning implementation of the paper: <br/>
 
 We propose a simple yet fast and effective partial convolution (**PConv**), as well as a latency-efficient family of architectures called **FasterNet**.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 Clone this repo and install the required packages:
 ```bash
 pip install -r requirements.txt
@@ -66,12 +68,12 @@ python3 train_test.py -g 0 --num_nodes 1 -n 4 -b 512 -e 2000 \
 
 To train other FasterNet variants, `--cfg` need to be changed. You may also want to change the training batch size `-b`.       
 
-## Results
+## Model Results
 
 | GPUs        | FP32                                |
 | ----------- | ------------------------------------ |
 | BI-V100 x8  |  test_acc1 71.832 val_acc1 71.722    |
 
-## Reference
+## References
 
 [FasterNet](https://github.com/JierunChen/FasterNet/tree/e8fba4465ae912359c9f661a72b14e39347e4954)

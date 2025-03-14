@@ -1,6 +1,6 @@
 # CspDarknet53
 
-## Model description
+## Model Description
 
 This is an implementation of CSPDarknet53 in pytorch.
 
@@ -10,7 +10,7 @@ This is an implementation of CSPDarknet53 in pytorch.
 pip3 install torchsummary
 ```
 
-## Step 2: Training
+## Model Training
 
 ### One single GPU
 
@@ -32,6 +32,6 @@ python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --batc
 | 8 cards     |  Acc@1 76.644     fps 1049           |
 | 1 card      |                   fps 148            |
 
-## Reference
+## References
 
 https://github.com/WongKinYiu/CrossStagePartialNetworks

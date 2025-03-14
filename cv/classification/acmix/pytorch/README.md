@@ -1,18 +1,20 @@
 # ACmix
 
-## Model description
+## Model Description
 
-Convolution and self-attention are two powerful techniques for representation learning, and they are usually considered as two peer approaches that are distinct from each other. In this paper, we show that there exists a strong underlying relation between them, in the sense that the bulk of computations of these two paradigms are in fact done with the same operation. Specifically, we first show that a traditional convolution with kernel size k x k can be decomposed into k^2 individual 1x1 convolutions, followed by shift and summation operations. Then, we interpret the projections of queries, keys, and values in self-attention module as multiple 1x1 convolutions, followed by the computation of attention weights and aggregation of the values. Therefore, the first stage of both two modules comprises the similar operation. More importantly, the first stage contributes a dominant computation complexity (square of the channel size) comparing to the second stage. This observation naturally leads to an elegant integration of these two seemingly distinct paradigms, i.e., a mixed model that enjoys the benefit of both self-Attention and Convolution (ACmix), while having minimum computational overhead compared to the pure convolution or self-attention counterpart. Extensive experiments show that our model achieves consistently improved results over competitive baselines on image recognition and downstream tasks. Code and pre-trained models will be released at https://github.com/LeapLabTHU/ACmix and https://gitee.com/mindspore/models.
+ACmix is an innovative deep learning model that unifies convolution and self-attention mechanisms by revealing their
+shared computational foundation. It demonstrates that both operations can be decomposed into 1x1 convolutions followed
+by different aggregation strategies. This insight enables ACmix to efficiently combine the benefits of both paradigms -
+the local feature extraction of convolutions and the global context modeling of self-attention. The model achieves
+improved performance on image recognition tasks with minimal computational overhead compared to pure convolution or
+attention-based approaches.
 
-## Step 1: Installing packages
-```bash
-git clone https://github.com/LeapLabTHU/ACmix.git
-pip install termcolor==1.1.0 yacs==0.1.8 timm==0.4.5
-cd ACmix/Swin-Transformer
-git checkout 81dddb6dff98f5e238a7fb6ab174e256489c07fa
-```
+## Model Preparation
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -30,21 +32,32 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+### Install Dependencies
 
-### Swin-S + ACmix on ImageNet using 8 cards:
 ```bash
-# fix --local-rank for torch 2.x
+git clone https://github.com/LeapLabTHU/ACmix.git
+pip install termcolor==1.1.0 yacs==0.1.8 timm==0.4.5
+cd ACmix/Swin-Transformer
+git checkout 81dddb6dff98f5e238a7fb6ab174e256489c07fa
+```
+
+## Model Training
+
+```bash
+# Swin-S + ACmix on ImageNet using 8 cards
+
+## fix --local-rank for torch 2.x
 sed -i 's/--local_rank/--local-rank/g' main.py
+
 python3 -m torch.distributed.launch --nproc_per_node 8 --master_port 12345 main.py --cfg configs/acmix_swin_small_patch4_window7_224.yaml --data-path /path/to/imagenet --batch-size 128
 ```
 
-## Results on BI-V100
+## Model Results
 
-| card | batch_size | Single Card | 8 Cards |
-|:-----|------------|------------:|:-------:|
-| BI   |     128    |       63.59 | 502.22  |
+| Model | GPU     | batch_size | Single Card | 8 Cards |
+|-------|---------|------------|-------------|---------|
+| ACmix | BI-V100 | 128        | 63.59       | 502.22  |
 
+## References
 
-## Reference
-[acmix](https://github.com/leaplabthu/acmix)
+- [acmix](https://github.com/leaplabthu/acmix)

@@ -3,7 +3,7 @@
 > [Improved Baselines with Momentum Contrastive Learning](https://arxiv.org/abs/2003.04297)
 
 
-## Model description
+## Model Description
 
 Contrastive unsupervised learning has recently shown encouraging progress, e.g., in Momentum Contrast (MoCo) and SimCLR. In this note, we verify the effectiveness of two of SimCLR’s design improvements by implementing them in the MoCo framework. With simple modifications to MoCo—namely, using an MLP projection head and more data augmentation—we establish stronger baselines that outperform SimCLR and do not require large training batches. We hope this will make state-of-the-art unsupervised learning research more accessible.
 
@@ -73,10 +73,10 @@ model = dict(
 bash tools/dist_train.sh configs/mocov2/mocov2_resnet50_8xb32-coslr-200e_in1k.py 8
 ```
 
-## Results
+## Model Results
 |     Model    | FPS | TOP1 Accuracy |
 | ------------ |  ---------  |--------------|
 |  BI-V100 x8  |  4663       |    67.50     |
 
-## Reference
+## References
 - [mmpretrain](https://github.com/open-mmlab/mmpretrain/)

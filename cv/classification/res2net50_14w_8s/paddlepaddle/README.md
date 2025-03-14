@@ -1,8 +1,10 @@
 # Res2Net50_14w_8s
 
-## Model description
+## Model Description
 Res2Net is modified from the source code of ResNet. The main function of Res2Net is to add hierarchical connections within the block and indirectly increase the receptive field while reusing the feature map.
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
@@ -44,11 +46,11 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ./ppcls/configs/ImageNet/Res2Net/Res2Net50_14w_8s.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Results
+## Model Results
 
 | GPUs | ACC | FPS
 | ---------- | ------ | ---
 | BI-V100 x8 | top1: 0.7943 | 338.29 images/sec
 
-## Reference
+## References
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

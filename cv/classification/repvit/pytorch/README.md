@@ -3,11 +3,13 @@
 
 <!-- [ALGORITHM] -->
 
-## Model description
+## Model Description
 
 Recently, lightweight Vision Transformers (ViTs) demonstrate superior performance and lower latency compared with lightweight Convolutional Neural Networks (CNNs) on resource-constrained mobile devices. This improvement is usually attributed to the multi-head self-attention module, which enables the model to learn global representations. However, the architectural disparities between lightweight ViTs and lightweight CNNs have not been adequately examined. In this study, we revisit the efficient design of lightweight CNNs and emphasize their potential for mobile devices. We incrementally enhance the mobile-friendliness of a standard lightweight CNN, specifically MobileNetV3, by integrating the efficient architectural choices of lightweight ViTs. This ends up with a new family of pure lightweight CNNs, namely RepViT. Extensive experiments show that RepViT outperforms existing state-of-the-art lightweight ViTs and exhibits favorable latency in various vision tasks. On ImageNet, RepViT achieves over 80\% top-1 accuracy with 1ms latency on an iPhone 12, which is the first time for a lightweight model, to the best of our knowledge. Our largest model, RepViT-M2.3, obtains 83.7\% accuracy with only 2.3ms latency.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 git clone https://github.com/THU-MIG/RepViT.git
@@ -55,10 +57,10 @@ wandb: (2) Use an existing W&B account
 wandb: (3) Don't visualize my results
 ```
 
-## Results
+## Model Results
 |GPUs|FPS|ACC|
 |:---:|:---:|:---:|
 |BI-V100 x8|1.5984 s / it| Acc@1 78.53% |
 
-## Reference
+## References
 [RepViT](https://github.com/THU-MIG/RepViT/tree/298f42075eda5d2e6102559fad260c970769d34e)

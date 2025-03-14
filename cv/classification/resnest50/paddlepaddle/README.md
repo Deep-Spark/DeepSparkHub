@@ -1,5 +1,5 @@
 # ResNeSt50
-## Model description
+## Model Description
 A ResNest is a variant on a ResNet, which instead stacks Split-Attention blocks. The cardinal group representations are then concatenated along the channel dimension.As in standard residual blocks, the final output  of otheur Split-Attention block is produced using a shortcut connection.
 
 ## Step 1: Installing

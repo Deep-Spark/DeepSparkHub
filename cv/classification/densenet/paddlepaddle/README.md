@@ -1,10 +1,12 @@
 # DenseNet
 
-## Model description
+## Model Description
 
 A DenseNet is a type of convolutional neural network that utilises dense connections between layers, through Dense Blocks, where we connect all layers (with matching feature-map sizes) directly with each other. To preserve the feed-forward nature, each layer obtains additional inputs from all preceding layers and passes on its own feature-maps to all subsequent layers.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
@@ -55,12 +57,12 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/DenseNet/DenseNet121.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Results
+## Model Results
 
 | GPUs        | Top1        | Top5           |ips             |
 |-------------|-------------|----------------|----------------|
 | BI-V100 x 4 | 0.757       | 0.925          |   171          |
 
-## Reference
+## References
 
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

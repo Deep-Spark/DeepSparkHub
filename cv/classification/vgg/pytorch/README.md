@@ -1,9 +1,11 @@
 # VGG16
-## Model description
+## Model Description
 VGG is a classical convolutional neural network architecture. It was based on an analysis of how to increase the depth of such networks. The network utilises small 3 x 3 filters. Otherwise the network is characterized by its simplicity: the only other components being pooling layers and a fully connected layer.
 
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 pip3 install -r requirements.txt
@@ -39,5 +41,5 @@ export DATA_PATH=/path/to/imagenet
 bash train_vgg16_amp_dist.sh
 ```
 
-## Reference
+## References
 - [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)

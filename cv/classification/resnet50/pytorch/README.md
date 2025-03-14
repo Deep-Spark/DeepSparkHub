@@ -1,5 +1,5 @@
 # ResNet50
-## Model description
+## Model Description
 Residual Networks, or ResNets, learn residual functions with reference to the layer inputs, instead of learning unreferenced functions. Instead of hoping each few stacked layers directly fit a desired underlying mapping, residual nets let these layers fit a residual mapping.
 
 ## Step 1: Preparing
@@ -24,7 +24,7 @@ imagenet
 
 
 
-## Step 2: Training
+## Model Training
 
 ### One single GPU
 ```bash
@@ -49,7 +49,7 @@ bash scripts/amp_8cards.sh --data-path /path/to/imagenet
 bash scripts/fp32_16cards.sh --data-path /path/to/imagenet
 ```
 
-## Results on BI-V100
+## Model Results on BI-V100
 
 |             | FP32                                            | AMP+NHWC                                      |
 | ----------- | ----------------------------------------------- | --------------------------------------------- |
@@ -62,5 +62,5 @@ bash scripts/fp32_16cards.sh --data-path /path/to/imagenet
 | top1 75.9%           | SDK V2.2,bs:512,8x,AMP                   | 5221        | 76.43%   | 128\*8     | 0.97        | 29.1\*8                 | 1         |
 
 
-## Reference
+## References
 - [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)

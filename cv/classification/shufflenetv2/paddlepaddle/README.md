@@ -1,8 +1,10 @@
 # ShuffleNetv2
-## Model description
+## Model Description
 ShuffleNet v2 is a convolutional neural network optimized for a direct metric (speed) rather than indirect metrics like FLOPs. It builds upon ShuffleNet v1, which utilised pointwise group convolutions, bottleneck-like structures, and a channel shuffle operation. Differences are shown in the Figure to the right, including a new channel split operation and moving the channel shuffle operation further down the block.ShuffleNetv2 is an efficient convolutional neural network architecture for mobile devices. For more information check the paper: [ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design](https://arxiv.org/abs/1807.11164)
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 ```bash
 git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
 
@@ -51,11 +53,11 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/ShuffleNet/ShuffleNetV2_x1_0.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Results
+## Model Results
 
 | GPUs        | Top1        | Top5           |ips             |
 |-------------|-------------|----------------|----------------|
 | BI-V100 x 4 | 0.684       | 0.881          |    1236         |
 
-## Reference
+## References
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

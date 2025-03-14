@@ -1,6 +1,6 @@
 # LeNet
 
-## Model description
+## Model Description
 LeNet is a classic convolutional neural network employing the use of convolutions, pooling and fully connected layers. It was used for the handwritten digit recognition task with the MNIST dataset. The architectural design served as inspiration for future networks such as AlexNet and VGG.
 
 ## Step 1: Preparing
@@ -23,7 +23,7 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+## Model Training
 ### One single GPU
 ```bash
 python3 train.py --data-path /path/to/imagenet --model lenet 
@@ -33,5 +33,5 @@ python3 train.py --data-path /path/to/imagenet --model lenet
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --data-path /path/to/imagenet --model lenet 
 ```
 
-## Reference
+## References
 http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf

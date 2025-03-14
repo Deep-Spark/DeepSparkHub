@@ -1,6 +1,6 @@
 # ECA MobileNet V2
 
-## Model description
+## Model Description
 
 An ECA-Net is a type of convolutional neural network that utilises an Efficient Channel Attention module.
 
@@ -28,7 +28,7 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+## Model Training
 
 ### Multiple GPUs on one machine (AMP)
 
@@ -38,6 +38,6 @@ Set data path by `export DATA_PATH=/path/to/imagenet`. The following command use
 bash train_eca_mobilenet_v2_amp_dist.sh
 ```
 
-## Reference
+## References
 
 - [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)

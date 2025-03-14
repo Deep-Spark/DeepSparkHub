@@ -1,9 +1,11 @@
 # PP-LCNet: A Lightweight CPU Convolutional Neural Network
 
-## Model description
+## Model Description
 We propose a lightweight CPU network based on the MKLDNN acceleration strategy, named PP-LCNet, which improves the performance of lightweight models on multiple tasks. This paper lists technologies which can improve network accuracy while the latency is almost constant. With these improvements, the accuracy of PP-LCNet can greatly surpass the previous network structure with the same inference time for classification. It outperforms the most state-of-the-art models. And for downstream tasks of computer vision, it also performs very well, such as object detection, semantic segmentation, etc. All our experiments are implemented based on PaddlePaddle. Code and pretrained models are available at PaddleClas.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
@@ -45,7 +47,7 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/PPLCNet/PPLCNet_x1_0.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Results on BI-V100
+## Model Results on BI-V100
 
 <div align="center">
 
@@ -55,6 +57,6 @@ python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/c
 
 </div>
 
-## Reference
+## References
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)
 

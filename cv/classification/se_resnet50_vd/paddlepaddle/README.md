@@ -1,10 +1,12 @@
 # SE_ResNet50_vd
 
-## Model description
+## Model Description
 
 The SENet structure is a weighted average between graph channels that can be embedded into other network structures. SE_ResNet50_vd is a model that adds the senet structure to ResNet50, further learning the dependency relationships between graph channels to obtain better image features.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```
 pip3 install -r requirements.txt
@@ -55,12 +57,12 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -m paddle.distributed.launch --gpus="0,1,2,3" tools/train.py -c ./ppcls/configs/ImageNet/SENet/SE_ResNet50_vd.yaml
 ```
 
-## Results
+## Model Results
 
 | GPUS | ACC    | FPS |
 | ---- | ------ | --------- |
 | BI-V100 x8 | 79.20% | 139.63 samples/s |
 
-## Reference
+## References
 
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas/tree/release/2.5)

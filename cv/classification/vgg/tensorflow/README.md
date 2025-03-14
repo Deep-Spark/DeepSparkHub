@@ -1,10 +1,12 @@
 # VGG16
 
-## Model description
+## Model Description
 
 VGG is a classical convolutional neural network architecture. It was based on an analysis of how to increase the depth of such networks. The network utilises small 3 x 3 filters. Otherwise the network is characterized by its simplicity: the only other components being pooling layers and a fully connected layer.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 pip3 install absl-py git+https://github.com/NVIDIA/dllogger#egg=dllogger
@@ -38,11 +40,11 @@ bash run_train_vgg16_imagenet.sh
 bash run_train_vgg16_multigpu_imagenet.sh
 ```
 
-## Results
+## Model Results
 
 | GPUS      |    acc                    |   fps |
 | ----------| --------------------------| ----- | 
 | BI V100×8 | acc@1=0.7160,acc@5=0.9040 | 435.9 |
 
-## Reference
+## References
 - [TensorFlow/benchmarks](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks)

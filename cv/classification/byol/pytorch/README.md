@@ -1,13 +1,39 @@
 # BYOL
 
-> [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/abs/2006.07733)
+## Model Description
 
-## Model description
+BYOL (Bootstrap Your Own Latent) is a self-supervised learning method that learns visual representations without
+negative samples. It uses two neural networks - an online network and a target network - that learn from each other
+through contrasting augmented views of the same image. BYOL's unique approach eliminates the need for negative pairs,
+achieving state-of-the-art performance in unsupervised learning. It's particularly effective for pre-training models on
+large datasets before fine-tuning for specific tasks.
 
-**B**ootstrap **Y**our **O**wn **L**atent (BYOL) is a new approach to self-supervised image representation learning. BYOL relies on two neural networks, referred to as online and target networks, that interact and learn from each other. From an augmented view of an image, we train the online network to predict the target network representation of the same image under a different augmented view. At the same time, we update the target network with a slow-moving average of the online network.
+## Model Preparation
 
+### Prepare Resources
 
-## Step 1: Installation
+Prepare your dataset according to the
+[docs](https://mmpretrain.readthedocs.io/en/latest/user_guides/dataset_prepare.html#prepare-dataset). Sign up and login
+in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole
+ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+
+The ImageNet dataset path structure should look like:
+
+```bash
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
+```
+
+### Install Dependencies
 
 ```bash
 # Install libGL
@@ -34,29 +60,7 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 python3 setup.py install
 ```
 
-## Step 2: Preparing datasets
-
-Prepare your dataset according to the [docs](https://mmpretrain.readthedocs.io/en/latest/user_guides/dataset_prepare.html#prepare-dataset).
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. 
-Specify `/path/to/imagenet` to your ImageNet path in later training process.
-
-The ImageNet dataset path structure should look like:
-
-```bash
-imagenet
-├── train
-│   └── n01440764
-│       ├── n01440764_10026.JPEG
-│       └── ...
-├── train_list.txt
-├── val
-│   └── n01440764
-│       ├── ILSVRC2012_val_00000293.JPEG
-│       └── ...
-└── val_list.txt
-```
-
-## Step 3: Training
+## Model Training
 
 ```bash
 mkdir -p data
@@ -70,12 +74,13 @@ model = dict(
 bash tools/dist_train.sh configs/byol/benchmarks/resnet50_8xb512-linear-coslr-90e_in1k.py 8
 ```
 
-## Results
-|     GPUs     | FPS       | TOP1 Accuracy  |
-| ------------ | --------- | -------------- |
-|  BI-V100 x8  |  5408     | 71.80          |
+## Model Results
 
+| Model | GPU        | FPS  | TOP1 Accuracy |
+|-------|------------|------|---------------|
+| BYOL  | BI-V100 x8 | 5408 | 71.80         |
 
-## Reference
+## References
+
+- [Paper](https://arxiv.org/abs/2006.07733)
 - [mmpretrain](https://github.com/open-mmlab/mmpretrain/)
-

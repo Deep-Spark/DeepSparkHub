@@ -1,11 +1,13 @@
 # MobileNetV3
 
-## Model description
+## Model Description
 MobileNetV3 is tuned to mobile phone CPUs through a combination of hardware- aware network architecture search (NAS) complemented by the NetAdapt algorithm and then subsequently improved through novel architecture advances.Nov 20, 2019.
 
 [Paper](https://arxiv.org/pdf/1905.02244) Howard, Andrew, Mark Sandler, Grace Chu, Liang-Chieh Chen, Bo Chen, Mingxing Tan, Weijun Wang et al. "Searching for mobilenetv3." In Proceedings of the IEEE International Conference on Computer Vision, pp. 1314-1324. 2019.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 # Install requirements
@@ -58,7 +60,7 @@ bash run_train.sh GPU 8 0,1,2,3,4,5,6,7 /path/to/imagenet/train/
 bash run_infer.sh GPU /path/to/imagenet/val/ ../train/checkpointckpt_0/mobilenetv3-300_2135.ckpt
 ```
 
-## Results
+## Model Results
 <div align="center">
  
 | GPUS       | ACC (ckpt107) |  FPS   |
@@ -67,5 +69,5 @@ bash run_infer.sh GPU /path/to/imagenet/val/ ../train/checkpointckpt_0/mobilenet
 
 </div>
 
-## Reference
+## References
 - [mindspore/models](https://gitee.com/mindspore/models)

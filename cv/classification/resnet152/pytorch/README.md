@@ -1,5 +1,5 @@
 # ResNet152
-## Model description
+## Model Description
 Residual Networks, or ResNets, learn residual functions with reference to the layer inputs, instead of learning unreferenced functions. Instead of hoping each few stacked layers directly fit a desired underlying mapping, residual nets let these layers fit a residual mapping.
 
 ## Step 1: Installing
@@ -26,7 +26,7 @@ imagenet
 ```
 
 
-## Step 2: Training
+## Model Training
 ### Multiple GPUs on one machine
 Set data path by `export DATA_PATH=/path/to/imagenet`. The following command uses all cards to train:
 
@@ -36,5 +36,5 @@ bash train_resnet152_amp_dist.sh
 
 
 
-## Reference
+## References
 - [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)

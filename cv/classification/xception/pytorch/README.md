@@ -1,6 +1,6 @@
 # Xception
 
-## Model description
+## Model Description
 Xception is a convolutional neural network architecture that relies solely on depthwise separable convolution layers.
 
 ## Step 1: Installing
@@ -26,7 +26,7 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+## Model Training
 ### One single GPU
 ```bash
 python3 train.py --data-path /path/to/imagenet --model xception
@@ -36,5 +36,5 @@ python3 train.py --data-path /path/to/imagenet --model xception
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --data-path /path/to/imagenet --model xception
 ```
 
-## Reference
+## References
 https://github.com/tstandley/Xception-PyTorch

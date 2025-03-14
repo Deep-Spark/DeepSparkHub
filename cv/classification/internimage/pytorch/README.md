@@ -1,6 +1,6 @@
 # InternImage for Image Classification
 
-## Model description
+## Model Description
 
 "INTERN-2.5" is a powerful multimodal multitask general model jointly released by SenseTime and Shanghai AI Laboratory. It consists of large-scale vision foundation model "InternImage", pre-training method "M3I-Pretraining", generic decoder "Uni-Perceiver" series, and generic encoder for autonomous driving perception "BEVFormer" series.
 
@@ -64,7 +64,7 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+## Model Training
 
 ```bash
 # Training on 8 GPUs
@@ -86,6 +86,6 @@ python3 main.py --cfg configs/internimage_t_1k_224.yaml --data-path /path/to/ima
 | 8 cards     |  Acc@1 83.440     fps 252            |
 | 1 card      |                   fps 31             |
 
-## Reference
+## References
 
 https://github.com/OpenGVLab/InternImage

@@ -1,5 +1,5 @@
 # Swin Transformer
-## Model description
+## Model Description
 The Swin Transformer is a type of Vision Transformer. It builds hierarchical feature maps by merging image patches (shown in gray) in deeper layers and has linear computation complexity to input image size due to computation of self-attention only within each local window (shown in red). It can thus serve as a general-purpose backbone for both image classification and dense recognition tasks.
 
 ## Step 1: Installing
@@ -29,7 +29,7 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+## Model Training
 ### Multiple GPUs on one machine
 ```bash
 # fix --local-rank for torch 2.x
@@ -40,4 +40,5 @@ python3 -m torch.distributed.launch --nproc_per_node 8 --master_port 12345  main
 ```
 
 ## Reference
-[Swin-Transformer](https://github.com/microsoft/Swin-Transformer)
+
+- [Swin-Transformer](https://github.com/microsoft/Swin-Transformer)

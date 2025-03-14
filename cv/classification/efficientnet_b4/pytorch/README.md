@@ -1,6 +1,6 @@
 # EfficientNetB4
 
-## Model description
+## Model Description
 
 EfficientNet is a convolutional neural network architecture and scaling method that uniformly scales all dimensions of depth/width/resolution using a compound coefficient.
 
@@ -28,7 +28,7 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+## Model Training
 
 ### One single GPU
 
@@ -42,6 +42,6 @@ python3 train.py --data-path /path/to/imagenet --model efficientnet_b4 --batch-s
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --data-path /path/to/imagenet --model efficientnet_b4 --batch-size 128
 ```
 
-## Reference
+## References
 
 <https://github.com/pytorch/vision/blob/main/torchvision/models/efficientnet.py>

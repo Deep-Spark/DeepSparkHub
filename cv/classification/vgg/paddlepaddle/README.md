@@ -1,5 +1,5 @@
 # VGG16
-## Model description
+## Model Description
 VGG is a classical convolutional neural network architecture. It was based on an analysis of how to increase the depth of such networks. The network utilises small 3 x 3 filters. Otherwise the network is characterized by its simplicity: the only other components being pooling layers and a fully connected layer.
 
 ## Step 1: Installing
@@ -53,5 +53,5 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/VGG/VGG16.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Reference
+## References
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)
