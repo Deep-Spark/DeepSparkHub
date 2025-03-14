@@ -1,24 +1,23 @@
-# MoE-LLaVA-stablelm-2-1_6b
-## Model description
+# MoE-LLaVA-StableLM-1.6B
 
-MoE-LLaVA: Mixture of Experts for Large Vision-Language Models, the Language Models is stablelm-2-1_6b
+## Model Description
 
-## Prepare
+MoE-LLaVA is a cutting-edge vision-language model that combines the Mixture of Experts (MoE) architecture with the
+phi-2.7b language model. It excels in multimodal tasks by efficiently processing and integrating visual and textual
+information. The model leverages expert networks to specialize in different aspects of vision-language understanding,
+enabling more accurate and context-aware responses. MoE-LLaVA is particularly effective in applications requiring
+complex reasoning across visual and linguistic domains, such as image captioning and visual question answering.
 
-### Install requirements
+## Model Preparation
 
-```bash
+### Prepare Resources
 
-cd MoE-LLaVA
-pip install --upgrade pip  # enable PEP 660 support
-pip3 install -e .
-pip3 install --upgrade pydantic
+Dataset and weights need to link to current path in "MoE-LLaVA/"
 
-```
-### load data and weights
-数据集和权重需要链接到当前目录 MoE-LLaVA 里
-[数据集地址]（http://files.deepspark.org.cn:880/deepspark/）
-格式如下:
+Download from the [file server](http://files.deepspark.org.cn:880/deepspark)
+
+The dataset path is as follows:
+
 ```bash
 MoE-LLaVA/
 ├── gitattributes
@@ -28,8 +27,11 @@ MoE-LLaVA/
 ├── README.md
 └── train_json
 ```
-[权重-clip-vit-large-patch14-336](http://files.deepspark.org.cn:880/deepspark/openai/)
-格式如下:
+
+Get [clip-vit-large-patch14-336](http://files.deepspark.org.cn:880/deepspark/openai/).
+
+The weights path is as follows:
+
 ```bash
 openai/
 └── clip-vit-large-patch14-336
@@ -45,8 +47,42 @@ openai/
     ├── tokenizer.json
     └── vocab.json
 ```
-[权重-stablelm-2-1_6b](http://files.deepspark.org.cn:880/deepspark/stablelm-2-1_6b)
-格式如下:
+
+Get [Qwen-1_8B](http://files.deepspark.org.cn:880/deepspark/Qwen-1_8B)
+
+The weights path is as follows:
+
+```bash
+Qwen-1_8B/
+├── assets
+│   ├── logo.jpg
+│   ├── qwen_tokenizer.png
+│   ├── tokenizer.png
+│   └── wechat.png
+├── cache_autogptq_cuda_256.cpp
+├── cache_autogptq_cuda_kernel_256.cu
+├── config.json
+├── configuration_qwen.py
+├── cpp_kernels.py
+├── generation_config.json
+├── gitattributes
+├── LICENSE
+├── model-00001-of-00002.safetensors
+├── model-00002-of-00002.safetensors
+├── modeling_qwen.py
+├── model.safetensors.index.json
+├── NOTICE
+├── qwen_generation_utils.py
+├── qwen.tiktoken
+├── README.md
+├── tokenization_qwen.py
+└── tokenizer_config.json
+```
+
+Get [stablelm-2-1_6b](http://files.deepspark.org.cn:880/deepspark/stablelm-2-1_6b)
+
+The weights path is as follows:
+
 ```bash
 stablelm-2-1_6b/
 ├── config.json
@@ -64,8 +100,19 @@ stablelm-2-1_6b/
 └── vocab.json
 ```
 
+### Install Dependencies
 
-## Train
+```bash
+
+cd MoE-LLaVA
+pip install --upgrade pip  # enable PEP 660 support
+pip3 install -e .
+pip3 install --upgrade pydantic
+
+```
+
+## Model Training
+
 ```bash
 cd scripts/v1/stablelm-2-1_6b
 bash pretrain.sh
