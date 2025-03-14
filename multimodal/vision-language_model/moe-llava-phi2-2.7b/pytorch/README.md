@@ -1,5 +1,4 @@
-
-# MoE-LLaVA-Qwen-1.8B
+# MoE-LLaVA-Phi2-2.7B
 
 ## Model Description
 
@@ -12,6 +11,12 @@ complex reasoning across visual and linguistic domains, such as image captioning
 ## Model Preparation
 
 ### Prepare Resources
+
+Go to MoE-LLaVA toolbox.
+
+```bash
+cd <deepsparkhub_root>/toolbox/MoE-LLaVA
+```
 
 Dataset and weights need to link to current path in "MoE-LLaVA/"
 
@@ -49,35 +54,29 @@ openai/
     └── vocab.json
 ```
 
-Get [Qwen-1_8B](http://files.deepspark.org.cn:880/deepspark/Qwen-1_8B)
+Get [phi-2.7b](http://files.deepspark.org.cn:880/deepspark/phi-2)
 
 The weights path is as follows:
 
 ```bash
-Qwen-1_8B/
-├── assets
-│   ├── logo.jpg
-│   ├── qwen_tokenizer.png
-│   ├── tokenizer.png
-│   └── wechat.png
-├── cache_autogptq_cuda_256.cpp
-├── cache_autogptq_cuda_kernel_256.cu
+phi-2/
+├── added_tokens.json
+├── CODE_OF_CONDUCT.md
 ├── config.json
-├── configuration_qwen.py
-├── cpp_kernels.py
 ├── generation_config.json
 ├── gitattributes
 ├── LICENSE
+├── merges.txt
 ├── model-00001-of-00002.safetensors
 ├── model-00002-of-00002.safetensors
-├── modeling_qwen.py
 ├── model.safetensors.index.json
-├── NOTICE
-├── qwen_generation_utils.py
-├── qwen.tiktoken
+├── NOTICE.md
 ├── README.md
-├── tokenization_qwen.py
-└── tokenizer_config.json
+├── SECURITY.md
+├── special_tokens_map.json
+├── tokenizer_config.json
+├── tokenizer.json
+└── vocab.json
 ```
 
 ### Install Dependencies
@@ -92,6 +91,10 @@ pip3 install --upgrade pydantic
 ## Model Training
 
 ```bash
-cd scripts/v1/qwen
+cd scripts/v1/phi2
 bash pretrain.sh
 ```
+
+## References
+
+- [MoE-LLaVA](https://github.com/PKU-YuanGroup/MoE-LLaVA)

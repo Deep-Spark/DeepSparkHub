@@ -1,4 +1,5 @@
-# MoE-LLaVA-StableLM-1.6B
+
+# MoE-LLaVA-Qwen-1.8B
 
 ## Model Description
 
@@ -11,6 +12,12 @@ complex reasoning across visual and linguistic domains, such as image captioning
 ## Model Preparation
 
 ### Prepare Resources
+
+Go to MoE-LLaVA toolbox.
+
+```bash
+cd <deepsparkhub_root>/toolbox/MoE-LLaVA
+```
 
 Dataset and weights need to link to current path in "MoE-LLaVA/"
 
@@ -79,41 +86,22 @@ Qwen-1_8B/
 └── tokenizer_config.json
 ```
 
-Get [stablelm-2-1_6b](http://files.deepspark.org.cn:880/deepspark/stablelm-2-1_6b)
-
-The weights path is as follows:
-
-```bash
-stablelm-2-1_6b/
-├── config.json
-├── configuration_stablelm.py
-├── generation_config.json
-├── gitattributes
-├── LICENSE.md
-├── merges.txt
-├── modeling_stablelm.py
-├── model.safetensors
-├── README.md
-├── special_tokens_map.json
-├── tokenizer_config.json
-├── tokenizer.json
-└── vocab.json
-```
-
 ### Install Dependencies
 
 ```bash
-
 cd MoE-LLaVA
 pip install --upgrade pip  # enable PEP 660 support
 pip3 install -e .
 pip3 install --upgrade pydantic
-
 ```
 
 ## Model Training
 
 ```bash
-cd scripts/v1/stablelm-2-1_6b
+cd scripts/v1/qwen
 bash pretrain.sh
 ```
+
+## References
+
+- [MoE-LLaVA](https://github.com/PKU-YuanGroup/MoE-LLaVA)
