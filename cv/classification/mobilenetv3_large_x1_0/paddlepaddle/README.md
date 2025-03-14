@@ -1,27 +1,20 @@
 # MobileNetV3_large_x1_0
 
 ## Model Description
-MobileNetV3 is a convolutional neural network that is tuned to mobile phone CPUs through a combination of hardware-aware network architecture search (NAS) complemented by the NetAdapt algorithm, and then subsequently improved through novel architecture advances. Advances include (1) complementary search techniques, (2) new efficient versions of nonlinearities practical for the mobile setting, (3) new efficient network design.
+
+MobileNetV3_large_x1_0 is an efficient convolutional neural network optimized for mobile devices. It combines
+hardware-aware neural architecture search with novel design techniques, including improved nonlinearities and efficient
+network structures. This variant offers a balance between accuracy and computational efficiency, achieving 74.9% top-1
+accuracy on ImageNet. Its design focuses on reducing latency while maintaining performance, making it suitable for
+mobile applications. MobileNetV3_large_x1_0 serves as a general-purpose backbone for various computer vision tasks on
+resource-constrained devices.
 
 ## Model Preparation
 
-### Install Dependencies
-```
-git clone https://github.com/PaddlePaddle/PaddleClas.git
-```
+### Prepare Resources
 
-```bash
-cd PaddleClas
-yum install mesa-libGL -y
-
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3
-pip3 install urllib3==1.26.13
-python3 setup.py install
-```
-
-## Step 2: Preparing Datasets
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -39,11 +32,25 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+yum install mesa-libGL -y
+
+git clone https://github.com/PaddlePaddle/PaddleClas.git
+cd PaddleClas/
+pip3 install -r requirements.txt
+python3 setup.py install
+
+pip3 install protobuf==3.20.3
+pip3 install urllib3==1.26.13
+```
+
+## Model Training
 
 ```bash
 # Make sure your dataset path is the same as above
-cd PaddleClas
+cd PaddleClas/
 # Link your dataset to default location
 ln -s /path/to/imagenet ./dataset/ILSVRC2012
 
@@ -54,10 +61,11 @@ python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/c
 ```
 
 ## Model Results
-| GPUs        | Top1        | Top5           | ips |
-|-------------|-------------|----------------|----------|
-| BI-V100 x 4 | 0.749       | 0.922          | 512 samples/s |
 
+| Model                  | GPU        | Top1  | Top5  | ips           |
+|------------------------|------------|-------|-------|---------------|
+| MobileNetV3_large_x1_0 | BI-V100 x4 | 0.749 | 0.922 | 512 samples/s |
 
 ## References
+
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

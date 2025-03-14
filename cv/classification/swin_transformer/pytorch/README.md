@@ -1,17 +1,20 @@
 # Swin Transformer
+
 ## Model Description
-The Swin Transformer is a type of Vision Transformer. It builds hierarchical feature maps by merging image patches (shown in gray) in deeper layers and has linear computation complexity to input image size due to computation of self-attention only within each local window (shown in red). It can thus serve as a general-purpose backbone for both image classification and dense recognition tasks.
 
-## Step 1: Installing
+The Swin Transformer is a hierarchical vision transformer that introduces shifted windows for efficient self-attention
+computation. It processes images in local windows, reducing computational complexity while maintaining global modeling
+capabilities. The architecture builds hierarchical feature maps by merging image patches in deeper layers, making it
+suitable for both image classification and dense prediction tasks. Swin Transformer achieves state-of-the-art
+performance in various vision tasks, offering a powerful alternative to traditional convolutional networks with its
+transformer-based approach.
 
-```bash
-git clone https://github.com/microsoft/Swin-Transformer.git
-git checkout f82860bfb5225915aca09c3227159ee9e1df874d
-cd Swin-Transformer
-pip install timm==0.4.12 yacs
-```
+## Model Preparation
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -29,16 +32,27 @@ imagenet
 └── val_list.txt
 ```
 
-## Model Training
-### Multiple GPUs on one machine
+### Install Dependencies
+
 ```bash
-# fix --local-rank for torch 2.x
+git clone https://github.com/microsoft/Swin-Transformer.git
+git checkout f82860bfb5225915aca09c3227159ee9e1df874d
+cd Swin-Transformer
+pip install timm==0.4.12 yacs
+```
+
+## Model Training
+
+```bash
+# Multiple GPUs on one machine
+
+## fix --local-rank for torch 2.x
 sed -i 's/--local_rank/--local-rank/g' main.py
 
 python3 -m torch.distributed.launch --nproc_per_node 8 --master_port 12345  main.py \
     --cfg configs/swin/swin_tiny_patch4_window7_224.yaml --data-path /path/to/imagenet --batch-size 128
 ```
 
-## Reference
+## References
 
 - [Swin-Transformer](https://github.com/microsoft/Swin-Transformer)

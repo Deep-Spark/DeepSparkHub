@@ -1,13 +1,39 @@
 # MoCoV2
 
-> [Improved Baselines with Momentum Contrastive Learning](https://arxiv.org/abs/2003.04297)
-
-
 ## Model Description
 
-Contrastive unsupervised learning has recently shown encouraging progress, e.g., in Momentum Contrast (MoCo) and SimCLR. In this note, we verify the effectiveness of two of SimCLR’s design improvements by implementing them in the MoCo framework. With simple modifications to MoCo—namely, using an MLP projection head and more data augmentation—we establish stronger baselines that outperform SimCLR and do not require large training batches. We hope this will make state-of-the-art unsupervised learning research more accessible.
+MoCoV2 is an improved version of Momentum Contrast (MoCo) for unsupervised learning, combining the strengths of
+contrastive learning with momentum-based updates. It introduces an MLP projection head and enhanced data augmentation
+techniques to boost performance without requiring large batch sizes. This approach enables effective feature learning
+from unlabeled data, establishing strong baselines for self-supervised learning. MoCoV2 outperforms previous methods
+like SimCLR while maintaining computational efficiency, making it accessible for various computer vision tasks.
 
-## Installation
+## Model Preparation
+
+### Prepare Resources
+
+Prepare your dataset according to the [docs](https://mmpretrain.readthedocs.io/en/latest/user_guides/dataset_prepare.html#prepare-dataset).
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+
+The ImageNet dataset path structure should look like:
+
+```bash
+imagenet
+├── train
+│   └── n01440764
+│       ├── n01440764_10026.JPEG
+│       └── ...
+├── train_list.txt
+├── val
+│   └── n01440764
+│       ├── ILSVRC2012_val_00000293.JPEG
+│       └── ...
+└── val_list.txt
+```
+
+### Install Dependencies
 
 ```bash
 # Install libGL
@@ -34,29 +60,7 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 python3 setup.py install
 ```
 
-## Preparing datasets
-
-Prepare your dataset according to the [docs](https://mmpretrain.readthedocs.io/en/latest/user_guides/dataset_prepare.html#prepare-dataset).
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. 
-Specify `/path/to/imagenet` to your ImageNet path in later training process.
-
-The ImageNet dataset path structure should look like:
-
-```bash
-imagenet
-├── train
-│   └── n01440764
-│       ├── n01440764_10026.JPEG
-│       └── ...
-├── train_list.txt
-├── val
-│   └── n01440764
-│       ├── ILSVRC2012_val_00000293.JPEG
-│       └── ...
-└── val_list.txt
-```
-
-## Training
+## Model Training
 
 ```bash
 # get mocov2_resnet50_8xb32-coslr-200e_in1k_20220825-b6d23c86.pth
@@ -74,9 +78,11 @@ bash tools/dist_train.sh configs/mocov2/mocov2_resnet50_8xb32-coslr-200e_in1k.py
 ```
 
 ## Model Results
-|     Model    | FPS | TOP1 Accuracy |
-| ------------ |  ---------  |--------------|
-|  BI-V100 x8  |  4663       |    67.50     |
+
+ | Model  | GPU        | FPS  | TOP1 Accuracy |
+ |--------|------------|------|---------------|
+ | MoCoV2 | BI-V100 x8 | 4663 | 67.50         |
 
 ## References
+
 - [mmpretrain](https://github.com/open-mmlab/mmpretrain/)

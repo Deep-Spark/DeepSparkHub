@@ -1,11 +1,19 @@
 # GoogLeNet
 
 ## Model Description
-GoogLeNet is a type of convolutional neural network based on the Inception architecture. It utilises Inception modules, which allow the network to choose between multiple convolutional filter sizes in each block. An Inception network stacks these modules on top of each other, with occasional max-pooling layers with stride 2 to halve the resolution of the grid.
 
-## Step 1: Preparing
+GoogLeNet is a pioneering deep convolutional neural network that introduced the Inception architecture. It features
+multiple parallel convolutional filters of different sizes within Inception modules, allowing efficient feature
+extraction at various scales. The network uses 1x1 convolutions for dimensionality reduction, making it computationally
+efficient. GoogLeNet achieved state-of-the-art performance in image classification tasks while maintaining relatively
+low computational complexity. Its innovative design has influenced many subsequent CNN architectures in computer vision.
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+## Model Preparation
+
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -24,14 +32,15 @@ imagenet
 ```
 
 ## Model Training
-### One single GPU
+
 ```bash
+# One single GPU
 python3 train.py --data-path /path/to/imagenet --model googlenet --batch-size 512
-```
-### 8 GPUs on one machine
-```bash
+
+# 8 GPUs on one machine
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --data-path /path/to/imagenet --model googlenet --batch-size 512 --wd 0.000001
 ```
 
 ## References
-https://github.com/pytorch/vision/blob/main/torchvision/models/googlenet.py
+
+- [vision](https://github.com/pytorch/vision/blob/main/torchvision/models/googlenet.py)

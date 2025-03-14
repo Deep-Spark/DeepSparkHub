@@ -1,5 +1,7 @@
 # AlexNet
 
+## Model Description
+
 AlexNet is a groundbreaking deep convolutional neural network that revolutionized computer vision. It introduced key
 innovations like ReLU activations, dropout regularization, and GPU acceleration. With its 8-layer architecture featuring
 5 convolutional and 3 fully-connected layers, AlexNet achieved record-breaking performance on ImageNet in 2012. Its

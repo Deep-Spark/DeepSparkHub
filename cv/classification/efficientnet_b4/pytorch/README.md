@@ -2,15 +2,18 @@
 
 ## Model Description
 
-EfficientNet is a convolutional neural network architecture and scaling method that uniformly scales all dimensions of depth/width/resolution using a compound coefficient.
+EfficientNetB4 is a scaled-up version of the EfficientNet architecture, using compound scaling to balance network width,
+depth, and resolution. It builds upon the efficient MBConv blocks with squeeze-and-excitation optimization, achieving
+superior accuracy compared to smaller EfficientNet variants. The model maintains computational efficiency while handling
+more complex visual recognition tasks. EfficientNetB4 is particularly effective for high-accuracy image classification
+scenarios where computational resources are available, offering a good trade-off between performance and efficiency.
 
-## Step 1: Installing
+## Model Preparation
 
-```bash
-pip3 install torch torchvision
-```
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -28,20 +31,22 @@ imagenet
 └── val_list.txt
 ```
 
-## Model Training
-
-### One single GPU
+### Install Dependencies
 
 ```bash
-python3 train.py --data-path /path/to/imagenet --model efficientnet_b4 --batch-size 128
+pip3 install torch torchvision
 ```
 
-### Multiple GPUs on one machine
+## Model Training
 
 ```bash
+# One single GPU
+python3 train.py --data-path /path/to/imagenet --model efficientnet_b4 --batch-size 128
+
+# Multiple GPUs on one machine
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --data-path /path/to/imagenet --model efficientnet_b4 --batch-size 128
 ```
 
 ## References
 
-<https://github.com/pytorch/vision/blob/main/torchvision/models/efficientnet.py>
+- [vision](https://github.com/pytorch/vision/blob/main/torchvision/models/efficientnet.py)

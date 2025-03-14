@@ -1,21 +1,19 @@
 # VGG16
+
 ## Model Description
-VGG is a classical convolutional neural network architecture. It was based on an analysis of how to increase the depth of such networks. The network utilises small 3 x 3 filters. Otherwise the network is characterized by its simplicity: the only other components being pooling layers and a fully connected layer.
 
-## Step 1: Installing
+VGG is a classic convolutional neural network architecture known for its simplicity and depth. It uses small 3x3
+convolutional filters stacked in multiple layers, allowing for effective feature extraction. The architecture typically
+includes 16 or 19 weight layers, with VGG16 being the most popular variant. VGG achieved state-of-the-art performance in
+image classification tasks and became a benchmark for subsequent CNN architectures. Its uniform structure and deep
+design have influenced many modern deep learning models in computer vision.
 
-```bash
-git clone https://github.com/PaddlePaddle/PaddleClas.git
-```
+## Model Preparation
 
-```bash
-cd PaddleClas
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
-## Step 2: Prepare Datasets
-
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -33,8 +31,21 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
-Notice：if use AMP, modify PaddleClas/ppcls/configs/ImageNet/VGG/VGG16.yaml, 
+### Install Dependencies
+
+```bash
+git clone https://github.com/PaddlePaddle/PaddleClas.git
+```
+
+```bash
+cd PaddleClas
+pip3 install -r requirements.txt
+```
+
+## Model Training
+
+Notice：if use AMP, modify PaddleClas/ppcls/configs/ImageNet/VGG/VGG16.yaml,
+
 ```yaml
 AMP:
   scale_loss: 128.0
@@ -54,4 +65,5 @@ python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/c
 ```
 
 ## References
+
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

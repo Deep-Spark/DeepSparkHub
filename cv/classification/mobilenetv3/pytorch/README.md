@@ -1,18 +1,20 @@
 # MobileNetV3
 
 ## Model Description
-MobileNetV3 is a convolutional neural network that is tuned to mobile phone CPUs through a combination of hardware-aware network architecture search (NAS) complemented by the NetAdapt algorithm, and then subsequently improved through novel architecture advances. Advances include (1) complementary search techniques, (2) new efficient versions of nonlinearities practical for the mobile setting, (3) new efficient network design.
+
+MobileNetV3 is an efficient convolutional neural network optimized for mobile devices, combining hardware-aware neural
+architecture search with novel design techniques. It introduces improved nonlinearities and efficient network structures
+to reduce computational complexity while maintaining accuracy. MobileNetV3 achieves state-of-the-art performance in
+mobile vision tasks, offering variants for different computational budgets. Its design focuses on minimizing latency and
+power consumption, making it ideal for real-time applications on resource-constrained devices like smartphones and
+embedded systems.
 
 ## Model Preparation
 
-### Install Dependencies
-```bash
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets
-
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -30,7 +32,13 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 # Set data path
@@ -41,4 +49,5 @@ bash train_mobilenet_v3_large_amp_dist.sh
 ```
 
 ## References
-- [torchvision](https://github.com/pytorch/vision/tree/main/references/classification#mobilenetv3-large--small)
+
+- [vision](https://github.com/pytorch/vision/tree/main/references/classification#mobilenetv3-large--small)

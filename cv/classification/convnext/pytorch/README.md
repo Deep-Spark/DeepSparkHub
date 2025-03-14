@@ -2,15 +2,19 @@
 
 ## Model Description
 
-The ConvNeXT model was proposed in [A ConvNet for the 2020s](https://arxiv.org/abs/2201.03545) by Zhuang Liu, Hanzi Mao, Chao-Yuan Wu, Christoph Feichtenhofer, Trevor Darrell, Saining Xie. ConvNeXT is a pure convolutional model (ConvNet), inspired by the design of Vision Transformers, that claims to outperform them.
+ConvNext is a modern convolutional neural network architecture that bridges the gap between traditional ConvNets and
+Vision Transformers. Inspired by Transformer designs, it incorporates techniques like large kernel sizes, layer
+normalization, and inverted bottlenecks to achieve state-of-the-art performance. ConvNext demonstrates that properly
+modernized ConvNets can match or exceed Transformer-based models in accuracy and efficiency across various vision tasks.
+Its simplicity and strong performance make it a compelling choice for image classification and other computer vision
+applications.
 
-## Step 1: Installing
+## Model Preparation
 
-```bash
-pip install timm==0.4.12 tensorboardX six torch torchvision
-```
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -28,14 +32,20 @@ imagenet
 └── val_list.txt
 ```
 
-## Model Training
-
-### Multiple GPUs on one machine
+### Install Dependencies
 
 ```bash
+pip install timm==0.4.12 tensorboardX six torch torchvision
+
 git clone https://github.com/facebookresearch/ConvNeXt.git
-cd /path/to/ConvNeXt
+cd ConvNeXt/
 git checkout 048efcea897d999aed302f2639b6270aedf8d4c8
+```
+
+## Model Training
+
+```bash
+# Multiple GPUs on one machine
 python3 -m torch.distributed.launch --nproc_per_node=8 main.py \
                                     --model convnext_tiny \
                                     --drop_path 0.1 \

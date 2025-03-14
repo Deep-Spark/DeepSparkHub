@@ -2,33 +2,24 @@
 
 ## Model Description
 
-This model is the B0 version of the EfficientNet series, whitch can be used for image classification tasks, such as cat and dog classification, flower classification, and so on.
+EfficientNetB0 is the baseline model in the EfficientNet series, known for its exceptional balance between accuracy and
+efficiency. It uses compound scaling to uniformly scale up network width, depth, and resolution, achieving
+state-of-the-art performance with minimal computational resources. The model employs mobile inverted bottleneck
+convolution (MBConv) blocks with squeeze-and-excitation optimization. EfficientNetB0 is particularly effective for
+mobile and edge devices, offering high accuracy in image classification tasks while maintaining low computational
+requirements.
 
 ## Model Preparation
 
-### Install Dependencies
+### Prepare Resources
 
-```bash
-git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
-
-cd PaddleClas
-pip3 install -r requirements.txt
-pip3 install paddleclas
-pip3 install protobuf==3.20.3
-yum install mesa-libGL 
-pip3 install urllib3==1.26.15
-
-```
-
-
-## Step 2: Preparing datasets
-
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. 
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `./PaddleClas/dataset/` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
 ```bash
-PaddleClas/dataset/ILSVRC2012/
+ILSVRC2012
 ├── train
 │   └── n01440764
 │       ├── n01440764_10026.JPEG
@@ -41,9 +32,9 @@ PaddleClas/dataset/ILSVRC2012/
 └── val_list.txt
 ```
 
-**Tips**
+Tips: for `PaddleClas` training, the image path in train_list.txt and val_list.txt must contain `train/` and `val/`
+directories:
 
-For `PaddleClas` training, the image path in train_list.txt and val_list.txt must contain `train/` and `val/` directories:
 - train_list.txt: train/n01440764/n01440764_10026.JPEG 0
 - val_list.txt: val/n01667114/ILSVRC2012_val_00000229.JPEG 35
 
@@ -53,7 +44,21 @@ sed -i 's#^#train/#g' train_list.txt
 sed -i 's#^#val/#g' val_list.txt
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+yum install -y mesa-libGL
+
+git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
+cd PaddleClas/
+pip3 install -r requirements.txt
+pip3 install paddleclas
+pip3 install protobuf==3.20.3
+pip3 install urllib3==1.26.15
+
+```
+
+## Model Training
 
 ```bash
 # Link your dataset to default location
@@ -71,9 +76,10 @@ python3 tools/train.py -c ppcls/configs/ImageNet/EfficientNet/EfficientNetB0.yam
 
 ## Model Results
 
-| GPUs| ips | Top1 | Top5 |
-| ------ | ----------  |--------------|--------------|
-|  BI-V100 x8 |   1065.28      | 0.7683 | 0.9316 |
+| Model          | GPU        | ips     | Top1   | Top5   |
+|----------------|------------|---------|--------|--------|
+| EfficientNetB0 | BI-V100 x8 | 1065.28 | 0.7683 | 0.9316 |
 
 ## References
+
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas/tree/release/2.5)

@@ -1,21 +1,19 @@
 # ResNet50
+
 ## Model Description
-Residual Networks, or ResNets, learn residual functions with reference to the layer inputs, instead of learning unreferenced functions. Instead of hoping each few stacked layers directly fit a desired underlying mapping, residual nets let these layers fit a residual mapping.
 
-## Step 1: Installing
+ResNet50 is a deep convolutional neural network with 50 layers, known for its innovative residual learning framework. It
+introduces skip connections that bypass layers, enabling the training of very deep networks by addressing vanishing
+gradient problems. This architecture achieved breakthrough performance in image classification tasks, winning the 2015
+ImageNet competition. ResNet50's efficient design and strong feature extraction capabilities make it widely used in
+computer vision applications, serving as a backbone for various tasks like object detection and segmentation.
 
-```bash
-git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas
-pip3 install -r requirements.txt
-yum install mesa-libGL -y
-pip3 install urllib3==1.26.6
-pip3 install protobuf==3.20.3
-```
+## Model Preparation
 
-## Step 2: Download data
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -33,9 +31,19 @@ imagenet
 └── val_list.txt
 ```
 
-**Tips**
+### Install Dependencies
 
-For `PaddleClas` training, the images path in train_list.txt and val_list.txt must contain `train/` and `val/` directories:
+```bash
+git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+cd PaddleClas
+pip3 install -r requirements.txt
+yum install mesa-libGL -y
+pip3 install urllib3==1.26.6
+pip3 install protobuf==3.20.3
+```
+
+Tips: for `PaddleClas` training, the images path in train_list.txt and val_list.txt must contain `train/` and `val/` directories:
+
 - train_list.txt: train/n01440764/n01440764_10026.JPEG 0
 - val_list.txt: val/n01667114/ILSVRC2012_val_00000229.JPEG 35
 
@@ -58,12 +66,8 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/ResNet/ResNet50.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Model Results on BI-V100
+## Model Results
 
-<div align="center">
-
-| GPU         | FP32                                 |
-| ----------- | ------------------------------------ |
-| 4 cards     | Acc@1=76.27,FPS=80.37,BatchSize=64   |
-
-</div>
+| Model    | GPU        | FP32                               |
+|----------|------------|------------------------------------|
+| ResNet50 | BI-V100 x4 | Acc@1=76.27,FPS=80.37,BatchSize=64 |

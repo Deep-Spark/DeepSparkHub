@@ -46,9 +46,10 @@ ResNet50 based examples are included. Example scripts are included under ```./sc
 
 ```bash
 # To train with CBAM (ResNet50 backbone)
-# For 8 GPUs
+## For 8 GPUs
 python3 train_imagenet.py --ngpu 8 --workers 20 --arch resnet --depth 50 --epochs 100 --batch-size 256 --lr 0.1 --att-type CBAM --prefix RESNET50_IMAGENET_CBAM ./data/ImageNet
-# For 1 GPUs
+
+## For 1 GPUs
 python3 train_imagenet.py --ngpu 1 --workers 20 --arch resnet --depth 50 --epochs 100 --batch-size 64 --lr 0.1 --att-type CBAM --prefix RESNET50_IMAGENET_CBAM ./data/ImageNet
 ```
 

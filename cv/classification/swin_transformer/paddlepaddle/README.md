@@ -1,18 +1,20 @@
 # Swin Transformer
+
 ## Model Description
-The Swin Transformer is a type of Vision Transformer. It builds hierarchical feature maps by merging image patches (shown in gray) in deeper layers and has linear computation complexity to input image size due to computation of self-attention only within each local window (shown in red). It can thus serve as a general-purpose backbone for both image classification and dense recognition tasks.
 
-## Step 1: Installing
+The Swin Transformer is a hierarchical vision transformer that introduces shifted windows for efficient self-attention
+computation. It processes images in local windows, reducing computational complexity while maintaining global modeling
+capabilities. The architecture builds hierarchical feature maps by merging image patches in deeper layers, making it
+suitable for both image classification and dense prediction tasks. Swin Transformer achieves state-of-the-art
+performance in various vision tasks, offering a powerful alternative to traditional convolutional networks with its
+transformer-based approach.
 
-```bash
-git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas
-pip3 install -r requirements.txt
-```
+## Model Preparation
 
-## Step 2: Download data
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -30,7 +32,15 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Run Swin-Transformer
+### Install Dependencies
+
+```bash
+git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+cd PaddleClas
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 cd PaddleClas
@@ -42,6 +52,8 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3,4,5,6,7 tools/train.py -c ppcls/configs/ImageNet/SwinTransformer/SwinTransformer_tiny_patch4_window7_224.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-| GPU         | FP32                                 |
-| ----------- | ------------------------------------ |
-| 8 cards     | Acc@1=0.8024                         |
+## Model Results
+
+| Model            | GPU        | FP32         |
+|------------------|------------|--------------|
+| Swin Transformer | BI-V100 x8 | Acc@1=0.8024 |

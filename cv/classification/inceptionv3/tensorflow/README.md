@@ -12,7 +12,7 @@ InceptionV3 is a convolutional neural network architecture from the Inception fa
 pip3 install absl-py git+https://github.com/NVIDIA/dllogger#egg=dllogger
 ```
 
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
@@ -39,7 +39,7 @@ Refer below links to convert ImageNet data to TFrecord data.
 
 Put the TFrecord data in "./imagenet_tfrecord" directory.
 
-## Step 3: Training
+## Model Training
 
 ```bash
 # 1 GPU

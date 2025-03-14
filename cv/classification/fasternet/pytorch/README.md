@@ -2,28 +2,19 @@
 
 ## Model Description
 
-This is the official Pytorch/PytorchLightning implementation of the paper: <br/>
-> [**Run, Don't Walk: Chasing Higher FLOPS for Faster Neural Networks**](https://arxiv.org/abs/2303.03667)      
-> Jierun Chen, Shiu-hong Kao, Hao He, Weipeng Zhuo, Song Wen, Chul-Ho Lee, S.-H. Gary Chan        
-> *IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023*
-> 
-
-We propose a simple yet fast and effective partial convolution (**PConv**), as well as a latency-efficient family of architectures called **FasterNet**.
+FasterNet is a high-speed neural network architecture that introduces Partial Convolution (PConv) to optimize
+computational efficiency. It achieves superior performance by reducing redundant computations while maintaining feature
+learning capabilities. FasterNet is designed for real-time applications, offering an excellent balance between accuracy
+and speed. Its innovative architecture makes it particularly effective for mobile and edge devices, where computational
+resources are limited. The model demonstrates state-of-the-art results in various computer vision tasks while
+maintaining low latency.
 
 ## Model Preparation
 
-### Install Dependencies
-Clone this repo and install the required packages:
-```bash
-pip install -r requirements.txt
-git clone https://github.com/JierunChen/FasterNet.git
-cd FasterNet
-git checkout e8fba4465ae912359c9f661a72b14e39347e4954
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets
-
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -41,8 +32,21 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
-**Remark**: Training will prompt wondb visualization options, you'll need a W&B account to visualize, choose "3" if you don't need to.
+### Install Dependencies
+
+Clone this repo and install the required packages:
+
+```bash
+pip install -r requirements.txt
+git clone https://github.com/JierunChen/FasterNet.git
+cd FasterNet
+git checkout e8fba4465ae912359c9f661a72b14e39347e4954
+```
+
+## Model Training
+
+**Remark**: Training will prompt wondb visualization options, you'll need a W&B account to visualize, choose "3" if you
+don't need to.
 
 FasterNet-T0 training on ImageNet with a 8-GPU node:
 
@@ -66,14 +70,14 @@ python3 train_test.py -g 0 --num_nodes 1 -n 4 -b 512 -e 2000 \
                       --cfg cfg/fasternet_t0.yaml
 ```
 
-To train other FasterNet variants, `--cfg` need to be changed. You may also want to change the training batch size `-b`.       
+To train other FasterNet variants, `--cfg` need to be changed. You may also want to change the training batch size `-b`.
 
 ## Model Results
 
-| GPUs        | FP32                                |
-| ----------- | ------------------------------------ |
-| BI-V100 x8  |  test_acc1 71.832 val_acc1 71.722    |
+| Model     | GPU        | FP32                             |
+|-----------|------------|----------------------------------|
+| FasterNet | BI-V100 x8 | test_acc1 71.832 val_acc1 71.722 |
 
 ## References
 
-[FasterNet](https://github.com/JierunChen/FasterNet/tree/e8fba4465ae912359c9f661a72b14e39347e4954)
+- [FasterNet](https://github.com/JierunChen/FasterNet/tree/e8fba4465ae912359c9f661a72b14e39347e4954)

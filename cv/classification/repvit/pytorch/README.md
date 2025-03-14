@@ -1,26 +1,19 @@
-# RepViT 
-> [RepViT: Revisiting  Mobile CNN From ViT Perspective](https://arxiv.org/abs/2307.09283)
-
-<!-- [ALGORITHM] -->
+# RepViT
 
 ## Model Description
 
-Recently, lightweight Vision Transformers (ViTs) demonstrate superior performance and lower latency compared with lightweight Convolutional Neural Networks (CNNs) on resource-constrained mobile devices. This improvement is usually attributed to the multi-head self-attention module, which enables the model to learn global representations. However, the architectural disparities between lightweight ViTs and lightweight CNNs have not been adequately examined. In this study, we revisit the efficient design of lightweight CNNs and emphasize their potential for mobile devices. We incrementally enhance the mobile-friendliness of a standard lightweight CNN, specifically MobileNetV3, by integrating the efficient architectural choices of lightweight ViTs. This ends up with a new family of pure lightweight CNNs, namely RepViT. Extensive experiments show that RepViT outperforms existing state-of-the-art lightweight ViTs and exhibits favorable latency in various vision tasks. On ImageNet, RepViT achieves over 80\% top-1 accuracy with 1ms latency on an iPhone 12, which is the first time for a lightweight model, to the best of our knowledge. Our largest model, RepViT-M2.3, obtains 83.7\% accuracy with only 2.3ms latency.
+RepViT is an efficient lightweight vision model that combines the strengths of CNNs and Transformers for mobile devices.
+It enhances MobileNetV3 architecture with Transformer-inspired design choices, achieving superior performance and lower
+latency than lightweight ViTs. RepViT demonstrates state-of-the-art accuracy on ImageNet while maintaining fast
+inference speeds, making it ideal for resource-constrained applications. Its pure CNN architecture ensures
+mobile-friendliness, with the largest variant achieving 83.7% accuracy at just 2.3ms latency on an iPhone 12.
 
 ## Model Preparation
 
-### Install Dependencies
+### Prepare Resources
 
-```bash
-git clone https://github.com/THU-MIG/RepViT.git
-cd RepViT
-git checkout 298f42075eda5d2e6102559fad260c970769d34e
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets
-
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in the later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in the later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -38,7 +31,16 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+git clone https://github.com/THU-MIG/RepViT.git
+cd RepViT
+git checkout 298f42075eda5d2e6102559fad260c970769d34e
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 # On single GPU
@@ -47,8 +49,10 @@ python3 main.py --model repvit_m0_9 --data-path /path/to/imagenet --dist-eval
 # Multiple GPUs on one machine
 python3 -m torch.distributed.launch --nproc_per_node=8 --master_port 12346 --use_env main.py --model repvit_m0_9 --data-path /path/to/imagenet --dist-eval
 ```
-Tips: 
-- Specify your data path and model name! 
+
+Tips:
+
+- Specify your data path and model name!
 - Choose "3" when getting the output log below during training.
 
 ```bash
@@ -58,9 +62,11 @@ wandb: (3) Don't visualize my results
 ```
 
 ## Model Results
-|GPUs|FPS|ACC|
-|:---:|:---:|:---:|
-|BI-V100 x8|1.5984 s / it| Acc@1 78.53% |
+
+| Model  | GPU        | FPS           | ACC          |
+|--------|------------|---------------|--------------|
+| RepViT | BI-V100 x8 | 1.5984 s / it | Acc@1 78.53% |
 
 ## References
-[RepViT](https://github.com/THU-MIG/RepViT/tree/298f42075eda5d2e6102559fad260c970769d34e)
+
+- [RepViT](https://github.com/THU-MIG/RepViT/tree/298f42075eda5d2e6102559fad260c970769d34e)

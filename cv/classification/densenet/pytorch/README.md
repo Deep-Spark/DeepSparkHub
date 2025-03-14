@@ -2,15 +2,18 @@
 
 ## Model Description
 
-A DenseNet is a type of convolutional neural network that utilises dense connections between layers, through Dense Blocks, where we connect all layers (with matching feature-map sizes) directly with each other. To preserve the feed-forward nature, each layer obtains additional inputs from all preceding layers and passes on its own feature-maps to all subsequent layers.
+DenseNet is an innovative convolutional neural network architecture that introduces dense connections between layers. In
+each dense block, every layer receives feature maps from all preceding layers and passes its own features to all
+subsequent layers. This dense connectivity pattern improves gradient flow, encourages feature reuse, and reduces
+vanishing gradient problems. DenseNet achieves state-of-the-art performance with fewer parameters compared to
+traditional CNNs, making it efficient for various computer vision tasks like image classification and object detection.
 
-## Step 1: Installing
+## Model Preparation
 
-```bash
-pip install torch torchvision
-```
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -28,20 +31,22 @@ imagenet
 └── val_list.txt
 ```
 
-## Model Training
-
-### One single GPU
+### Install Dependencies
 
 ```bash
-python3 train.py --data-path /path/to/imagenet --model densenet201 --batch-size 128
+pip install torch torchvision
 ```
 
-### Multiple GPUs on one machine
+## Model Training
 
 ```bash
+# One single GPU
+python3 train.py --data-path /path/to/imagenet --model densenet201 --batch-size 128
+
+# Multiple GPUs on one machine
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --data-path /path/to/imagenet --model densenet201 --batch-size 128
 ```
 
 ## References
 
-[densenet](https://github.com/pytorch/vision/blob/main/torchvision/models/densenet.py)
+- [vision](https://github.com/pytorch/vision/blob/main/torchvision/models/densenet.py)

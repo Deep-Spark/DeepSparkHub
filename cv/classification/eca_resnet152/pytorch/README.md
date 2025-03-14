@@ -2,15 +2,19 @@
 
 ## Model Description
 
-An ECA-Net is a type of convolutional neural network that utilises an Efficient Channel Attention module.
+ECA ResNet152 is an enhanced version of ResNet152 that incorporates the Efficient Channel Attention (ECA) module. This
+module improves feature representation by adaptively recalibrating channel-wise feature responses without dimensionality
+reduction. The ECA mechanism boosts model performance while maintaining computational efficiency. ECA ResNet152 achieves
+superior accuracy in image classification tasks compared to standard ResNet152, making it particularly effective for
+complex visual recognition problems. Its architecture balances performance and efficiency, making it suitable for
+various computer vision applications.
 
-## Step 1: Installing
+## Model Preparation
 
-```bash
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -28,16 +32,21 @@ imagenet
 └── val_list.txt
 ```
 
-## Model Training
+### Install Dependencies
 
-### Multiple GPUs on one machine (AMP)
+```bash
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 Set data path by `export DATA_PATH=/path/to/imagenet`. The following command uses all cards to train:
 
 ```bash
+# Multiple GPUs on one machine (AMP)
 bash train_eca_resnet152_amp_dist.sh
 ```
 
 ## References
 
-- [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)
+- [vision](https://github.com/pytorch/vision/tree/main/references/classification)

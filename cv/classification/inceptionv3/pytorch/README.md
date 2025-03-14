@@ -11,7 +11,7 @@ Inception-v3 is a convolutional neural network architecture from the Inception f
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
@@ -31,7 +31,7 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
+## Model Training
 
 
 ```bash
@@ -43,4 +43,4 @@ bash train_inception_v3_amp_dist.sh
 ```
 
 ## References
-- [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)
+- [vision](https://github.com/pytorch/vision/tree/main/references/classification)

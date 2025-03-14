@@ -1,52 +1,20 @@
-# InternImage for Image Classification
+# InternImage
 
 ## Model Description
 
-"INTERN-2.5" is a powerful multimodal multitask general model jointly released by SenseTime and Shanghai AI Laboratory. It consists of large-scale vision foundation model "InternImage", pre-training method "M3I-Pretraining", generic decoder "Uni-Perceiver" series, and generic encoder for autonomous driving perception "BEVFormer" series.
+InternImage is a large-scale vision foundation model developed by SenseTime and Shanghai AI Laboratory. It's part of the
+INTERN-2.5 multimodal multitask general model, designed for comprehensive visual understanding tasks. The architecture
+leverages advanced techniques to achieve state-of-the-art performance in image classification and other vision tasks.
+InternImage demonstrates exceptional scalability and efficiency, making it suitable for various applications from
+general image recognition to complex autonomous driving perception systems. Its design focuses on balancing model
+capacity with computational efficiency.
 
-## Step 1: Installing
+## Model Preparation
 
-### Environment Preparation
+### Prepare Resources
 
--  `CUDA>=10.2` with `cudnn>=7` 
--  `PyTorch>=1.10.0` and `torchvision>=0.9.0` with `CUDA>=10.2`
-
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
-
-## Install mmcv
-cd mmcv/
-bash clean_mmcv.sh
-bash build_mmcv.sh
-bash install_mmcv.sh
-cd ../
-
-## Install timm and mmdet
-pip3 install timm==0.6.11 mmdet==2.28.1
-```
-
-- Install other requirements:
-
-```bash
-pip3 install addict yapf opencv-python termcolor yacs pyyaml scipy
-```
-
-- Compiling CUDA operators
-```bash
-cd ./ops_dcnv3
-sh ./make.sh
-# unit test (should see all checking is True)
-python3 test.py
-cd ../
-```
-
-### Data Preparation
-
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -64,6 +32,43 @@ imagenet
 └── val_list.txt
 ```
 
+### Install Dependencies
+
+Environment Preparation.
+
+- `CUDA>=10.2` with `cudnn>=7`
+- `PyTorch>=1.10.0` and `torchvision>=0.9.0` with `CUDA>=10.2`
+
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+# Install mmcv
+cd mmcv/
+bash clean_mmcv.sh
+bash build_mmcv.sh
+bash install_mmcv.sh
+cd ../
+
+# Install timm and mmdet
+pip3 install timm==0.6.11 mmdet==2.28.1
+
+# Install other requirements:
+pip3 install addict yapf opencv-python termcolor yacs pyyaml scipy
+
+# Compiling CUDA operators
+cd ./ops_dcnv3
+sh ./make.sh
+
+# unit test (should see all checking is True)
+python3 test.py
+
+cd ../
+```
+
 ## Model Training
 
 ```bash
@@ -79,13 +84,13 @@ python3 main.py --cfg configs/internimage_t_1k_224.yaml --data-path /path/to/ima
 
 ```
 
-## Result
+## Model Results
 
-| GPU         | FP32                                 |
-| ----------- | ------------------------------------ |
-| 8 cards     |  Acc@1 83.440     fps 252            |
-| 1 card      |                   fps 31             |
+| Model       | GPU        | FP32                     |
+|-------------|------------|--------------------------|
+| InternImage | BI-V100 x8 | Acc@1 83.440     fps 252 |
+| InternImage | BI-V100 x1 | fps 31                   |
 
 ## References
 
-https://github.com/OpenGVLab/InternImage
+- [InternImage](https://github.com/OpenGVLab/InternImage)

@@ -1,13 +1,20 @@
 # ResNet152
+
 ## Model Description
-Residual Networks, or ResNets, learn residual functions with reference to the layer inputs, instead of learning unreferenced functions. Instead of hoping each few stacked layers directly fit a desired underlying mapping, residual nets let these layers fit a residual mapping.
 
-## Step 1: Installing
-```bash
-pip3 install -r requirements.txt
-```
+ResNet152 is a deep convolutional neural network with 152 layers, representing one of the largest variants in the ResNet
+family. It builds upon the residual learning framework, using skip connections to enable effective training of very deep
+networks. The model achieves state-of-the-art performance in image classification tasks by extracting complex
+hierarchical features. ResNet152's architecture is particularly effective for large-scale visual recognition tasks,
+offering improved accuracy over smaller ResNet variants while maintaining computational efficiency through its residual
+connections.
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+## Model Preparation
+
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -25,16 +32,21 @@ imagenet
 └── val_list.txt
 ```
 
+### Install Dependencies
+
+```bash
+pip3 install -r requirements.txt
+```
 
 ## Model Training
-### Multiple GPUs on one machine
+
 Set data path by `export DATA_PATH=/path/to/imagenet`. The following command uses all cards to train:
 
 ```bash
+# Multiple GPUs on one machine
 bash train_resnet152_amp_dist.sh
 ```
 
-
-
 ## References
-- [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)
+
+- [vision](https://github.com/pytorch/vision/tree/main/references/classification)

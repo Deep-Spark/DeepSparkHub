@@ -1,14 +1,19 @@
 # ResNeXt50_32x4d
 
 ## Model Description
-A ResNeXt repeats a building block that aggregates a set of transformations with the same topology. Compared to a ResNet, it exposes a new dimension, cardinality (the size of the set of transformations) , as an essential factor in addition to the dimensions of depth and width.
 
-## Step 1: Installing
-```bash
-pip3 install -r requirements.txt
-```
+ResNeXt50 is an enhanced version of ResNet50 that introduces cardinality as a new dimension alongside depth and width.
+It uses grouped convolutions to create multiple parallel transformation paths within each block, improving feature
+representation. The 32x4d variant has 32 groups with 4-dimensional transformations. This architecture achieves better
+accuracy than ResNet50 with similar computational complexity, making it efficient for image classification tasks.
+ResNeXt50's design has influenced many subsequent CNN architectures in computer vision.
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+## Model Preparation
+
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -26,16 +31,21 @@ imagenet
 └── val_list.txt
 ```
 
+### Install Dependencies
+
+```bash
+pip3 install -r requirements.txt
+```
 
 ## Model Training
-### Multiple GPUs on one machine
+
 Set data path by `export DATA_PATH=/path/to/imagenet`. The following command uses all cards to train:
 
 ```bash
+# Multiple GPUs on one machine
 bash train_resnext50_32x4d_amp_dist.sh
 ```
 
-
-
 ## References
-https://github.com/osmr/imgclsmob/blob/f2993d3ce73a2f7ddba05da3891defb08547d504/pytorch/pytorchcv/models/seresnext.py#L200
+
+- [imgclsmob](https://github.com/osmr/imgclsmob/blob/f2993d3ce73a2f7ddba05da3891defb08547d504/pytorch/pytorchcv/models/seresnext.py#L200)
