@@ -1,30 +1,16 @@
 # Part-A2-Free
 
-## Model description
+## Model Description
 
-In this work, we propose the part-aware and aggregation neural network (PartA2-Net). The whole framework consists of the part-aware stage and the part-aggregation stage. Firstly, the part-aware stage for the first time fully utilizes free-of-charge part supervisions derived from 3D ground-truth boxes to simultaneously predict high quality 3D proposals and accurate intra-object part locations. The predicted intra-object part locations within the same proposal are grouped by our new-designed RoI-aware point cloud pooling module, which results in an effective representation to encode the geometry-specific features of each 3D proposal. Then the part-aggregation stage learns to re-score the box and refine the box location by exploring the spatial relationship of the pooled intra-object part locations. At the time of submission (July-9 2019), our PartA2-Net outperforms all existing 3D detection methods and achieves new state-of-the-art on KITTI 3D object detection learderbaord by utilizing only the LiDAR point cloud data.
+Part-A2-Free is an advanced 3D object detection framework for LiDAR point clouds, leveraging part-aware and aggregation
+techniques. It operates in two stages: first predicting 3D proposals and intra-object part locations using free part
+supervisions, then aggregating these parts to refine box scores and locations. This approach effectively captures object
+geometry through a novel RoI-aware point cloud pooling module, achieving state-of-the-art performance on the KITTI
+dataset while maintaining computational efficiency for practical applications.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-## install libGL and libboost
-yum install mesa-libGL
-yum install boost-devel
-
-# Install spconv
-cd toolbox/spconv
-bash clean_spconv.sh
-bash build_spconv.sh
-bash install_spconv.sh
-
-# Install openpcdet
-cd toolbox/openpcdet
-pip3 install -r requirements.txt
-bash build_openpcdet.sh
-bash install_openpcdet.sh
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Download the kitti dataset from <http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>
 
@@ -49,17 +35,33 @@ cd toolbox/openpcdet
 python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml
 ```
 
-## Step 3: Training
-
-### Single GPU training
+### Install Dependencies
 
 ```bash
-cd tools
-python3 train.py --cfg_file cfgs/kitti_models/PartA2_free.yaml
+## install libGL and libboost
+yum install mesa-libGL
+yum install boost-devel
+
+# Install spconv
+cd toolbox/spconv
+bash clean_spconv.sh
+bash build_spconv.sh
+bash install_spconv.sh
+
+# Install openpcdet
+cd toolbox/openpcdet
+pip3 install -r requirements.txt
+bash build_openpcdet.sh
+bash install_openpcdet.sh
 ```
 
-### Multiple GPU training
+## Model Training
 
 ```bash
+# Single GPU training
+cd tools/
+python3 train.py --cfg_file cfgs/kitti_models/PartA2_free.yaml
+
+# Multiple GPU training
 bash scripts/dist_train.sh 16 --cfg_file cfgs/kitti_models/PartA2_free.yaml
 ```

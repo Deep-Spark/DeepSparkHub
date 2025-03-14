@@ -1,10 +1,41 @@
 # PointRCNN-IoU
 
-## Model description
+## Model Description
 
-PointRCNN-IoU is an extension of the PointRCNN object detection framework that incorporates Intersection over Union (IoU) as a metric for evaluation. IoU is a common metric used in object detection tasks to measure the overlap between predicted bounding boxes and ground truth bounding boxes.
+PointRCNN-IoU is an enhanced version of the PointRCNN framework that incorporates Intersection over Union (IoU)
+optimization for 3D object detection. It processes raw point cloud data in two stages: first generating 3D proposals,
+then refining them with IoU-aware regression. This approach improves bounding box accuracy by directly optimizing the
+overlap between predicted and ground truth boxes. PointRCNN-IoU maintains the efficiency of its predecessor while
+achieving higher precision in 3D object detection tasks.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
+
+Download the kitti dataset from <http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>
+
+Download the "planes" subdataset from <https://drive.google.com/file/d/1d5mq0RXRnvHPVeKx6Q612z0YRO1t2wAp/view?usp=sharing>
+
+```bash
+OpenPCDet
+├── data
+│   ├── kitti
+│   │   │── ImageSets
+│   │   │── training
+│   │   │   ├──calib & velodyne & label_2 & image_2 & (optional: planes) & (optional: depth_2)
+│   │   │── testing
+│   │   │   ├──calib & velodyne & image_2
+├── pcdet
+├── tools
+```
+
+```bash
+# Modify the `DATA_PATH` in the kitti_dataset.yaml to your own
+cd <deepsparkhub_root>/toolbox/openpcdet
+python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml
+```
+
+### Install Dependencies
 
 ```bash
 ## install libGL and libboost
@@ -32,42 +63,13 @@ bash install_openpcdet.sh
 popd
 ```
 
-## Step 2: Preparing datasets
-
-Download the kitti dataset from <http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>
-
-Download the "planes" subdataset from <https://drive.google.com/file/d/1d5mq0RXRnvHPVeKx6Q612z0YRO1t2wAp/view?usp=sharing>
+## Model Training
 
 ```bash
-OpenPCDet
-├── data
-│   ├── kitti
-│   │   │── ImageSets
-│   │   │── training
-│   │   │   ├──calib & velodyne & label_2 & image_2 & (optional: planes) & (optional: depth_2)
-│   │   │── testing
-│   │   │   ├──calib & velodyne & image_2
-├── pcdet
-├── tools
-```
-
-```bash
-# Modify the `DATA_PATH` in the kitti_dataset.yaml to your own
-cd <deepsparkhub_root>/toolbox/openpcdet
-python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml
-```
-
-## Step 3: Training
-
-### Single GPU training
-
-```bash
-cd tools
+# Single GPU training
+cd tools/
 python3 train.py --cfg_file cfgs/kitti_models/pointrcnn_iou.yaml
-```
 
-### Multiple GPU training
-
-```bash
+# Multiple GPU training
 bash scripts/dist_train.sh 16 --cfg_file cfgs/kitti_models/pointrcnn_iou.yaml
 ```

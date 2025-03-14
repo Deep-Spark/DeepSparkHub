@@ -1,10 +1,42 @@
 # SECOND-IoU
 
-## Model description
+## Model Description
 
-we present a novel approach called SECOND (Sparsely Embedded CONvolutional Detection), which addresses these challenges in 3D convolution-based detection by maximizing the use of the rich 3D information present in point cloud data. This method incorporates several improvements to the existing convolutional network architecture. Spatially sparse convolutional networks are introduced for LiDAR-based detection and are used to extract information from the z-axis before the 3D data are downsampled to something akin to 2D image data.
+SECOND-IoU is an enhanced version of the SECOND framework that incorporates Intersection over Union (IoU) optimization
+for 3D object detection from LiDAR point clouds. It leverages sparse convolutional networks to efficiently process 3D
+data while maintaining spatial information. The model introduces IoU-aware regression to improve bounding box accuracy
+and orientation estimation. SECOND-IoU achieves state-of-the-art performance on 3D detection benchmarks, offering faster
+inference speeds and better precision than traditional methods, making it suitable for real-time applications like
+autonomous driving.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
+
+Download the kitti dataset from <http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>
+
+Download the "planes" subdataset from <https://drive.google.com/file/d/1d5mq0RXRnvHPVeKx6Q612z0YRO1t2wAp/view?usp=sharing>
+
+```bash
+OpenPCDet
+├── data
+│   ├── kitti
+│   │   │── ImageSets
+│   │   │── training
+│   │   │   ├──calib & velodyne & label_2 & image_2 & (optional: planes) & (optional: depth_2)
+│   │   │── testing
+│   │   │   ├──calib & velodyne & image_2
+├── pcdet
+├── tools
+```
+
+```bash
+# Modify the `DATA_PATH` in the kitti_dataset.yaml to your own
+cd <deepsparkhub_root>/toolbox/openpcdet
+python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml
+```
+
+### Install Dependencies
 
 ```bash
 ## install libGL and libboost
@@ -32,42 +64,13 @@ bash install_openpcdet.sh
 popd
 ```
 
-## Step 2: Preparing datasets
-
-Download the kitti dataset from <http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>
-
-Download the "planes" subdataset from <https://drive.google.com/file/d/1d5mq0RXRnvHPVeKx6Q612z0YRO1t2wAp/view?usp=sharing>
+## Model Training
 
 ```bash
-OpenPCDet
-├── data
-│   ├── kitti
-│   │   │── ImageSets
-│   │   │── training
-│   │   │   ├──calib & velodyne & label_2 & image_2 & (optional: planes) & (optional: depth_2)
-│   │   │── testing
-│   │   │   ├──calib & velodyne & image_2
-├── pcdet
-├── tools
-```
-
-```bash
-# Modify the `DATA_PATH` in the kitti_dataset.yaml to your own
-cd <deepsparkhub_root>/toolbox/openpcdet
-python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml
-```
-
-## Step 3: Training
-
-### Single GPU training
-
-```bash
-cd tools
+# Single GPU training
+cd tools/
 python3 train.py --cfg_file cfgs/kitti_models/second_iou.yaml
-```
 
-### Multiple GPU training
-
-```bash
+# Multiple GPU training
 bash scripts/dist_train.sh 16 --cfg_file cfgs/kitti_models/second_iou.yaml
 ```
