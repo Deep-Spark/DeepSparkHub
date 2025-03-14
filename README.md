@@ -338,19 +338,22 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### Multimodal
 
-| Model                                                                           | Framework | Dataset        | IXUCA SDK |
-|---------------------------------------------------------------------------------|-----------|----------------|-------|
-|  [BLIP](multimodal/vision-language_model/blip/pytorch)                            |  PyTorch    |  COCO            | 3.1.1 |
-|  [CLIP](multimodal/contrastive_learning/clip/pytorch)                             |  PyTorch    |  CIFAR100        | 2.2.0 |
-|  [ControlNet](multimodal/diffusion_model/controlnet)                              |  PyTorch    |  Fill50K         | 3.1.0 |
-|  [DDPM](multimodal/diffusion_model/ddpm)                                          |  PyTorch    |  CIFAR-10        | 3.1.0 |
-|  [LLaVA 1.5](multimodal/vision-language_model/llava-1.5/pytorch)                      |  PyTorch    |  LLaVA-Pretrain  | 4.1.1 |
-|  [L-Verse](multimodal/vision-language_model/l-verse/pytorch)                      |  PyTorch    |  ImageNet        | 2.2.0 |
-|  [Stable Diffusion 1.4](multimodal/diffusion_model/stable-diffusion-1.4/pytorch)  |  PyTorch    |  pokemon-images  | 4.1.1 |
-|  [Stable Diffusion 1.5](multimodal/diffusion_model/stable-diffusion-1.5/pytorch)  |  PyTorch    |  pokemon-images  | 4.1.1 |
-|  [Stable Diffusion 2.1](multimodal/diffusion_model/stable-diffusion-2.1/pytorch)  |  PyTorch    |  pokemon-images  | 4.1.1 |
-|  [Stable Diffusion 3](multimodal/diffusion_model/stable-diffusion-3/pytorch)      |  PyTorch    |  dog-example     | 4.1.1 |
-|  [Stable Diffusion XL](multimodal/diffusion_model/stable-diffusion-xl/pytorch)    |  PyTorch    |  pokemon-images  | 4.1.1 |
+| Model                                                                                       | Framework | Dataset        | IXUCA SDK |
+|---------------------------------------------------------------------------------------------|-----------|----------------|-----------|
+| [BLIP](multimodal/vision-language_model/blip/pytorch)                                       | PyTorch   | COCO           | 3.1.1     |
+| [CLIP](multimodal/contrastive_learning/clip/pytorch)                                        | PyTorch   | CIFAR100       | 2.2.0     |
+| [ControlNet](multimodal/diffusion_model/controlnet)                                         | PyTorch   | Fill50K        | 3.1.0     |
+| [DDPM](multimodal/diffusion_model/ddpm)                                                     | PyTorch   | CIFAR-10       | 3.1.0     |
+| [LLaVA 1.5](multimodal/vision-language_model/llava-1.5/pytorch)                             | PyTorch   | LLaVA-Pretrain | 4.1.1     |
+| [L-Verse](multimodal/vision-language_model/l-verse/pytorch)                                 | PyTorch   | ImageNet       | 2.2.0     |
+| [MoE-LLaVA-Phi2-2.7B](multimodal/vision-language_model/moe-llava-phi2-2.7b/pytorch/)        | PyTorch   | MoE-LLaVA      | 4.2.0     |
+| [MoE-LLaVA-Qwen-1.8B](multimodal/vision-language_model/moe-llava-qwen-1.8b/pytorch)         | PyTorch   | MoE-LLaVA      | 4.2.0     |
+| [MoE-LLaVA-StableLM-1.6B](multimodal/vision-language_model/moe-llava-stablelm-1.6b/pytorch) | PyTorch   | MoE-LLaVA      | 4.2.0     |
+| [Stable Diffusion 1.4](multimodal/diffusion_model/stable-diffusion-1.4/pytorch)             | PyTorch   | pokemon-images | 4.1.1     |
+| [Stable Diffusion 1.5](multimodal/diffusion_model/stable-diffusion-1.5/pytorch)             | PyTorch   | pokemon-images | 4.1.1     |
+| [Stable Diffusion 2.1](multimodal/diffusion_model/stable-diffusion-2.1/pytorch)             | PyTorch   | pokemon-images | 4.1.1     |
+| [Stable Diffusion 3](multimodal/diffusion_model/stable-diffusion-3/pytorch)                 | PyTorch   | dog-example    | 4.1.1     |
+| [Stable Diffusion XL](multimodal/diffusion_model/stable-diffusion-xl/pytorch)               | PyTorch   | pokemon-images | 4.1.1     |
 
 ### NLP (Natural Language Processing)
 

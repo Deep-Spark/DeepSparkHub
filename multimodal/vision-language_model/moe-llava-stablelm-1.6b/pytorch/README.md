@@ -123,3 +123,7 @@ pip3 install --upgrade pydantic
 cd scripts/v1/stablelm-2-1_6b
 bash pretrain.sh
 ```
+
+## References
+
+- [MoE-LLaVA](https://github.com/PKU-YuanGroup/MoE-LLaVA)
