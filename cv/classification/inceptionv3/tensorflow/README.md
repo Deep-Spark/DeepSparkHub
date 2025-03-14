@@ -1,16 +1,18 @@
 # InceptionV3
 
-## Model description
+## Model Description
 
 InceptionV3 is a convolutional neural network architecture from the Inception family that makes several improvements including using Label Smoothing, Factorized 7 x 7 convolutions, and the use of an auxiliary classifer to propagate label information lower down the network (along with the use of batch normalization for layers in the sidehead).
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 pip3 install absl-py git+https://github.com/NVIDIA/dllogger#egg=dllogger
 ```
 
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
@@ -37,7 +39,7 @@ Refer below links to convert ImageNet data to TFrecord data.
 
 Put the TFrecord data in "./imagenet_tfrecord" directory.
 
-## Step 3: Training
+## Model Training
 
 ```bash
 # 1 GPU
@@ -47,12 +49,12 @@ bash run_train_inceptionV3_imagenet.sh
 bash run_train_inceptionV3_multigpu_imagenet.sh --epoch 200
 ```
 
-## Results
+## Model Results
 
 | GPUS       | ACC   | FPS          |
 | ---------- | ----- | ------------ |
 | BI-V100 ×8 | 76.4% | 312 images/s |
 
-## Reference
+## References
 
 - [TensorFlow/benchmarks](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks)

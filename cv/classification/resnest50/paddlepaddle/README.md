@@ -1,18 +1,20 @@
 # ResNeSt50
-## Model description
-A ResNest is a variant on a ResNet, which instead stacks Split-Attention blocks. The cardinal group representations are then concatenated along the channel dimension.As in standard residual blocks, the final output  of otheur Split-Attention block is produced using a shortcut connection.
 
-## Step 1: Installing
+## Model Description
 
-```bash
-git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas
-pip3 install -r requirements.txt
-```
+ResNeSt50 is a convolutional neural network that enhances ResNet architecture with Split-Attention blocks. It introduces
+channel-wise attention mechanisms to improve feature representation, combining multiple feature-map groups with adaptive
+feature aggregation. The architecture achieves state-of-the-art performance in image classification tasks by effectively
+balancing computational efficiency and model capacity. ResNeSt50's design is particularly suitable for large-scale
+visual recognition tasks, offering improved accuracy over standard ResNet variants while maintaining efficient training
+and inference capabilities.
 
-## Step 2: Download data
+## Model Preparation
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -30,7 +32,15 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Run ResNeSt50
+### Install Dependencies
+
+```bash
+git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+cd PaddleClas
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 cd PaddleClas
@@ -42,6 +52,6 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/ResNeSt/ResNeSt50.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-| GPU         | FP32                                 |
-| ----------- | ------------------------------------ |
-| 4 cards     | Acc@1=0.7677                         |
+| Model     | GPU        | FP32         |
+|-----------|------------|--------------|
+| ResNeSt50 | BI-V100 x4 | Acc@1=0.7677 |

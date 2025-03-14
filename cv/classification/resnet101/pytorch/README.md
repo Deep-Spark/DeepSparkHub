@@ -1,13 +1,20 @@
 # ResNet101
-## Model description
-Residual Networks, or ResNets, learn residual functions with reference to the layer inputs, instead of learning unreferenced functions. Instead of hoping each few stacked layers directly fit a desired underlying mapping, residual nets let these layers fit a residual mapping.
 
-## Step 1: Installing
-```bash
-pip3 install -r requirements.txt
-```
+## Model Description
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+ResNet101 is a deep convolutional neural network with 101 layers, building upon the ResNet architecture's residual
+learning framework. It extends ResNet50's capabilities with additional layers for more complex feature extraction. The
+model uses skip connections to address vanishing gradient problems, enabling effective training of very deep networks.
+ResNet101 achieves state-of-the-art performance in image classification tasks while maintaining computational
+efficiency. Its architecture is widely used as a backbone for various computer vision applications, including object
+detection and segmentation.
+
+## Model Preparation
+
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -25,15 +32,21 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
-### Multiple GPUs on one machine
+### Install Dependencies
+
+```bash
+pip3 install -r requirements.txt
+```
+
+## Model Training
+
 Set data path by `export DATA_PATH=/path/to/imagenet`. The following command uses all cards to train:
 
 ```bash
+# Multiple GPUs on one machine
 bash train_resnet101_amp_dist.sh
 ```
 
+## References
 
-
-## Reference
-- [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)
+- [vision](https://github.com/pytorch/vision/tree/main/references/classification)

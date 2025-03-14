@@ -1,14 +1,19 @@
 # MobileNetV2
 
-## Model description
-MobileNetV2 is a convolutional neural network architecture that seeks to perform well on mobile devices. It is based on an inverted residual structure where the residual connections are between the bottleneck layers. The intermediate expansion layer uses lightweight depthwise convolutions to filter features as a source of non-linearity. As a whole, the architecture of MobileNetV2 contains the initial fully convolution layer with 32 filters, followed by 19 residual bottleneck layers.
+## Model Description
 
-## Step 1: Installing
-```bash
-pip3 install -r requirements.txt
-```
+MobileNetV2 is an efficient convolutional neural network designed for mobile and embedded vision applications. It
+introduces inverted residual blocks with linear bottlenecks, using depthwise separable convolutions to reduce
+computational complexity. This architecture maintains high accuracy while significantly decreasing model size and
+latency compared to traditional CNNs. MobileNetV2's design focuses on balancing performance and efficiency, making it
+ideal for real-time applications on resource-constrained devices like smartphones and IoT devices.
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+## Model Preparation
+
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -26,15 +31,21 @@ imagenet
 └── val_list.txt
 ```
 
+### Install Dependencies
 
-## Step 2: Training
-### Multiple GPUs on one machine (AMP)
+```bash
+pip3 install -r requirements.txt
+```
+
+## Model Training
+
 Set data path by `export DATA_PATH=/path/to/imagenet`. The following command uses all cards to train:
 
 ```bash
+# Multiple GPUs on one machine (AMP)
 bash train_mobilenet_v2_amp_dist.sh
 ```
 
+## References
 
-## Reference
-- [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)
+- [vision](https://github.com/pytorch/vision/tree/main/references/classification)

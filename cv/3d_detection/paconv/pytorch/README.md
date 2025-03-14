@@ -1,9 +1,24 @@
-# PAConv: Position Adaptive Convolution with Dynamic Kernel Assembling on Point Clouds
+# PAConv
 
-## Model description
-We introduce Position Adaptive Convolution (PAConv), a generic convolution operation for 3D point cloud processing. The key of PAConv is to construct the convolution kernel by dynamically assembling basic weight matrices stored in Weight Bank, where the coefficients of these weight matrices are self-adaptively learned from point positions through ScoreNet. In this way, the kernel is built in a data-driven manner, endowing PAConv with more flexibility than 2D convolutions to better handle the irregular and unordered point cloud data. Besides, the complexity of the learning process is reduced by combining weight matrices instead of brutally predicting kernels from point positions. Furthermore, different from the existing point convolution operators whose network architectures are often heavily engineered, we integrate our PAConv into classical MLP-based point cloud pipelines without changing network configurations. Even built on simple networks, our method still approaches or even surpasses the state-of-the-art models, and significantly improves baseline performance on both classification and segmentation tasks, yet with decent efficiency. Thorough ablation studies and visualizations are provided to understand PAConv.
+## Model Description
 
-## Step 1: Installation
+PAConv (Position Adaptive Convolution) is an innovative convolution operation for 3D point cloud processing that
+dynamically assembles convolution kernels. It constructs kernels by adaptively combining weight matrices from a Weight
+Bank, with coefficients learned from point positions through ScoreNet. This data-driven approach provides flexibility to
+handle irregular point cloud data efficiently. PAConv integrates seamlessly with existing MLP-based pipelines, achieving
+state-of-the-art performance in classification and segmentation tasks while maintaining computational efficiency.
+
+## Model Preparation
+
+### Prepare Resources
+
+```bash
+cd data/s3dis/
+```
+
+Enter the data/s3dis/ folder, then prepare the dataset according to readme instructions in data/s3dis/ folder.
+
+### Install Dependencies
 
 ```bash
 # Install libGL
@@ -18,14 +33,7 @@ cd mmdetection3d
 pip install -v -e .
 ```
 
-## Step 2: Preparing datasets
-
-```bash
-cd data/s3dis/
-```
-Enter the data/s3dis/ folder, then prepare the dataset according to readme instructions in data/s3dis/ folder.
-
-## Step 3: Training
+## Model Training
 
 ```bash
 # Single GPU training
@@ -36,13 +44,12 @@ sed -i 's/python /python3 /g' tools/dist_train.sh
 bash tools/dist_train.sh configs/paconv/paconv_cuda_ssg_8x8_cosine_200e_s3dis_seg-3d-13class.py 8
 ```
 
-## Results
+## Model Results
 
-classes | ceiling | floor  | wall   | beam   | column | window | door   | table  | chair  | sofa   | bookcase | board  | clutter | miou   | acc    | acc_cls
----------|---------|--------|--------|--------|--------|--------|--------|--------|--------|--------|----------|--------|---------|--------|--------|---------
-results | 0.9488  | 0.9838 | 0.8184 | 0.0000 | 0.1682 | 0.5836 | 0.7387 | 0.7782 | 0.8832 | 0.6101 | 0.7081   | 0.6876 | 0.5810  | 0.6530 | 0.8910 | 0.7131
+| Model  | ceiling | floor  | wall   | beam   | column | window | door   | table  | chair  | sofa   | bookcase | board  | clutter | miou   | acc    | acc_cls | fps              |
+|--------|---------|--------|--------|--------|--------|--------|--------|--------|--------|--------|----------|--------|---------|--------|--------|---------|------------------|
+| PAConv | 0.9488  | 0.9838 | 0.8184 | 0.0000 | 0.1682 | 0.5836 | 0.7387 | 0.7782 | 0.8832 | 0.6101 | 0.7081   | 0.6876 | 0.5810  | 0.6530 | 0.8910 | 0.7131  | 65.3 samples/sec |
 
-fps = batchsize*8/1batchtime = 65.3 samples/sec
+## References
 
-## Reference
-[mmdetection3d](https://github.com/open-mmlab/mmdetection3d/tree/v1.4.0)
+- [mmdetection3d](https://github.com/open-mmlab/mmdetection3d/tree/v1.4.0)

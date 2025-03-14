@@ -1,20 +1,23 @@
 # VGG16
 
-## Model description
+## Model Description
 
-VGG is a classical convolutional neural network architecture. It was based on an analysis of how to increase the depth of such networks. The network utilises small 3 x 3 filters. Otherwise the network is characterized by its simplicity: the only other components being pooling layers and a fully connected layer.
+VGG is a classic convolutional neural network architecture known for its simplicity and depth. It uses small 3x3
+convolutional filters stacked in multiple layers, allowing for effective feature extraction. The architecture typically
+includes 16 or 19 weight layers, with VGG16 being the most popular variant. VGG achieved state-of-the-art performance in
+image classification tasks and became a benchmark for subsequent CNN architectures. Its uniform structure and deep
+design have influenced many modern deep learning models in computer vision.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-pip3 install absl-py git+https://github.com/NVIDIA/dllogger#egg=dllogger
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 You can get ImageNet 1K TFrecords ILSVRC2012 dataset directly from below links:
-- [ImageNet 1K TFrecords ILSVRC2012 - part 0](https://www.kaggle.com/datasets/hmendonca/imagenet-1k-tfrecords-ilsvrc2012-part-0)
-- [ImageNet 1K TFrecords ILSVRC2012 - part 1](https://www.kaggle.com/datasets/hmendonca/imagenet-1k-tfrecords-ilsvrc2012-part-1)
+
+- [ImageNet 1K TFrecords ILSVRC2012 - part
+  0](https://www.kaggle.com/datasets/hmendonca/imagenet-1k-tfrecords-ilsvrc2012-part-0)
+- [ImageNet 1K TFrecords ILSVRC2012 - part
+  1](https://www.kaggle.com/datasets/hmendonca/imagenet-1k-tfrecords-ilsvrc2012-part-1)
 
 The ImageNet TFrecords dataset path structure should look like:
 
@@ -28,8 +31,16 @@ imagenet_tfrecord
 └── validation-00127-of-00128
 ```
 
-## Step 3: Training
-**Put the TFrecords data in "./imagenet_tfrecord" directory or create a soft link.**
+### Install Dependencies
+
+```bash
+pip3 install absl-py git+https://github.com/NVIDIA/dllogger#egg=dllogger
+```
+
+## Model Training
+
+Put the TFrecords data in "./imagenet_tfrecord" directory or create a soft link.
+
 ```bash
 # 1 GPU
 bash run_train_vgg16_imagenet.sh
@@ -38,11 +49,12 @@ bash run_train_vgg16_imagenet.sh
 bash run_train_vgg16_multigpu_imagenet.sh
 ```
 
-## Results
+## Model Results
 
-| GPUS      |    acc                    |   fps |
-| ----------| --------------------------| ----- | 
-| BI V100×8 | acc@1=0.7160,acc@5=0.9040 | 435.9 |
+| Model | GPU        | acc                       | fps   |
+|-------|------------|---------------------------|-------|
+| VGG16 | BI-V100 ×8 | acc@1=0.7160,acc@5=0.9040 | 435.9 |
 
-## Reference
-- [TensorFlow/benchmarks](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks)
+## References
+
+- [tensorflow/benchmarks](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks)

@@ -1,20 +1,20 @@
-# PP-LCNet: A Lightweight CPU Convolutional Neural Network
+# PP-LCNet
 
-## Model description
-We propose a lightweight CPU network based on the MKLDNN acceleration strategy, named PP-LCNet, which improves the performance of lightweight models on multiple tasks. This paper lists technologies which can improve network accuracy while the latency is almost constant. With these improvements, the accuracy of PP-LCNet can greatly surpass the previous network structure with the same inference time for classification. It outperforms the most state-of-the-art models. And for downstream tasks of computer vision, it also performs very well, such as object detection, semantic segmentation, etc. All our experiments are implemented based on PaddlePaddle. Code and pretrained models are available at PaddleClas.
+## Model Description
 
-## Step 1: Installation
+PP-LCNet is a lightweight CPU-optimized neural network designed for efficient inference on edge devices. It leverages
+MKLDNN acceleration strategies to enhance performance while maintaining low latency. The architecture achieves
+state-of-the-art accuracy for lightweight models in image classification tasks and performs well in downstream computer
+vision applications like object detection and semantic segmentation. PP-LCNet's design focuses on maximizing accuracy
+with minimal computational overhead, making it ideal for resource-constrained environments requiring fast and efficient
+inference.
 
-```bash
-git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas
-pip3 install -r requirements.txt
-python3 setup.py install
-```
+## Model Preparation
 
-## Step 2: Preparing datasets
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -32,7 +32,16 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+cd PaddleClas
+pip3 install -r requirements.txt
+python3 setup.py install
+```
+
+## Model Training
 
 ```bash
 # Make sure your dataset path is the same as above
@@ -45,16 +54,12 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/PPLCNet/PPLCNet_x1_0.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Results on BI-V100
+## Model Results
 
-<div align="center">
+| Model        | GPU        | Crop Size | FPS  | TOP1 Accuracy |
+|--------------|------------|-----------|------|---------------|
+| PPLCNet_x1_0 | BI-V100 x4 | 224x224   | 2537 | 0.7062        |
 
-| Method | Crop Size | FPS (BI x 4)  | TOP1 Accuracy |
-| ------ | --------- |  --------  |--------------:|
-| PPLCNet_x1_0 | 224x224  | 2537     | 0.7062 |
+## References
 
-</div>
-
-## Reference
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)
-

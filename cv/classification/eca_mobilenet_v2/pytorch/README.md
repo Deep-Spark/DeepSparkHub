@@ -1,16 +1,20 @@
 # ECA MobileNet V2
 
-## Model description
+## Model Description
 
-An ECA-Net is a type of convolutional neural network that utilises an Efficient Channel Attention module.
+ECA MobileNet V2 is an efficient convolutional neural network that combines MobileNet V2's lightweight architecture with
+an Efficient Channel Attention (ECA) module. The ECA module enhances feature representation by adaptively recalibrating
+channel-wise feature responses without dimensionality reduction. This integration improves model performance while
+maintaining computational efficiency, making it suitable for mobile and edge devices. ECA MobileNet V2 achieves better
+accuracy than standard MobileNet V2 with minimal additional parameters, making it ideal for resource-constrained image
+classification tasks.
 
-## Step 1: Installing
+## Model Preparation
 
-```bash
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -28,16 +32,21 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+### Install Dependencies
 
-### Multiple GPUs on one machine (AMP)
+```bash
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 Set data path by `export DATA_PATH=/path/to/imagenet`. The following command uses all cards to train:
 
 ```bash
+# Multiple GPUs on one machine (AMP)
 bash train_eca_mobilenet_v2_amp_dist.sh
 ```
 
-## Reference
+## References
 
-- [torchvision](https://github.com/pytorch/vision/tree/main/references/classification)
+- [vision](https://github.com/pytorch/vision/tree/main/references/classification)

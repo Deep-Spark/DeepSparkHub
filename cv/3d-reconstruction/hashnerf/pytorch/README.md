@@ -2,16 +2,15 @@
 
 ## Model description
 
-A PyTorch implementation (Hash) of the NeRF part (grid encoder, density grid ray sampler) in instant-ngp, as described
-in Instant Neural Graphics Primitives with a Multiresolution Hash Encoding.
+HashNeRF is an efficient implementation of Neural Radiance Fields (NeRF) using a multiresolution hash encoding
+technique. It accelerates 3D scene reconstruction and novel view synthesis by optimizing memory usage and computational
+efficiency. Based on instant-ngp's approach, HashNeRF employs a grid encoder and density grid ray sampler to achieve
+high-quality rendering results. The model supports various datasets and custom scenes, making it suitable for
+applications in computer graphics, virtual reality, and 3D reconstruction tasks.
 
-## Step 1: Installation
+## Model Preparation
 
-```sh
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 We use the same data format as instant-ngp, [fox](https://github.com/NVlabs/instant-ngp/tree/master/data/nerf/fox) and
 blender dataset [nerf_synthetic](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1).Please
@@ -23,19 +22,23 @@ For custom dataset, you should:
 2. put the video under a path like ./data/custom/video.mp4 or the images under ./data/custom/images/*.jpg.
 3. call the preprocess code: (should install ffmpeg and colmap first! refer to the file for more options)
 
-```sh
+```bash
 python3 scripts/colmap2nerf.py --video ./data/custom/video.mp4 --run_colmap # if use video
 python3 scripts/colmap2nerf.py --images ./data/custom/images/ --run_colmap # if use images
 ```
 
-## Step 3: Training and test
+### Install Dependencies
 
-### One single GPU
+```bash
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 First time running will take some time to compile the CUDA extensions.
 
-```sh
-# train with fox dataset
+```bash
+# train with fox dataset on One single GPU
 python3 main_nerf.py data/fox --workspace trial_nerf -O
 
 # data/fox is dataset path; --workspace means output path;
@@ -43,22 +46,18 @@ python3 main_nerf.py data/fox --workspace trial_nerf -O
 
 # test mode
 python3 main_nerf.py data/fox --workspace trial_nerf -O --test
-```
 
-```sh
 # train with the blender dataset, you should add `--bound 1.0 --scale 0.8 --dt_gamma 0`
 # --bound means the scene is assumed to be inside box[-bound, bound]
 # --scale adjusts the camera locaction to make sure it falls inside the above bounding box. 
 # --dt_gamma controls the adaptive ray marching speed, set to 0 turns it off.
 python3 main_nerf.py data/nerf_synthetic/lego --workspace trial_nerf -O --bound 1.0 --scale 0.8 --dt_gamma 0
-```
 
-```sh
 # train with custom dataset(you'll need to tune the scale & bound if necessary):
 python3 main_nerf.py data/custom_data --workspace trial_nerf -O
 ```
 
-## Results
+## Model Results
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 |----------------------|------------------------------------------|-------------|----------|------------|-------------|-------------------------|-----------|

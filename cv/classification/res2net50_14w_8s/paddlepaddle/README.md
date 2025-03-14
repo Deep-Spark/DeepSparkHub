@@ -1,20 +1,19 @@
 # Res2Net50_14w_8s
 
-## Model description
-Res2Net is modified from the source code of ResNet. The main function of Res2Net is to add hierarchical connections within the block and indirectly increase the receptive field while reusing the feature map.
-## Step 1: Installation
+## Model Description
 
-```bash
-git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3 urllib3==1.26.6
-yum install -y mesa-libGL
-```
+Res2Net50_14w_8s is a convolutional neural network that enhances ResNet architecture by introducing hierarchical
+residual-like connections within individual blocks. It increases the receptive field while reusing feature maps,
+improving feature representation. The 14w_8s variant uses 14 width and 8 scales, achieving state-of-the-art performance
+in image classification tasks. This architecture effectively balances model complexity and computational efficiency,
+making it suitable for various computer vision applications requiring both high accuracy and efficient processing.
 
-## Step 2: Preparing datasets
+## Model Preparation
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -32,7 +31,17 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
+cd PaddleClas
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3 urllib3==1.26.6
+yum install -y mesa-libGL
+```
+
+## Model Training
 
 ```bash
 cd PaddleClas
@@ -44,11 +53,12 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ./ppcls/configs/ImageNet/Res2Net/Res2Net50_14w_8s.yaml -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Results
+## Model Results
 
-| GPUs | ACC | FPS
-| ---------- | ------ | ---
-| BI-V100 x8 | top1: 0.7943 | 338.29 images/sec
+| Model            | GPU        | ACC          | FPS               |
+|------------------|------------|--------------|-------------------|
+| Res2Net50_14w_8s | BI-V100 x8 | top1: 0.7943 | 338.29 images/sec |
 
-## Reference
+## References
+
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

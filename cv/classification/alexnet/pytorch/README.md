@@ -1,14 +1,21 @@
 # AlexNet
 
-## Model description
-AlexNet is a classic convolutional neural network architecture. It consists of convolutions, max pooling and dense layers as the basic building blocks.
-## Step 1: Installing
+## Model Description
 
-```bash
-pip3 install torch
-pip3 install torchvision
-```
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+AlexNet is a groundbreaking deep convolutional neural network that revolutionized computer vision. It introduced key
+innovations like ReLU activations, dropout regularization, and GPU acceleration. With its 8-layer architecture featuring
+5 convolutional and 3 fully-connected layers, AlexNet achieved record-breaking performance on ImageNet in 2012. Its
+success popularized deep learning and established CNNs as the dominant approach for image recognition. AlexNet's design
+principles continue to influence modern neural network architectures in computer vision applications.AlexNet is a
+classic convolutional neural network architecture. It consists of convolutions, max pooling and dense layers as the
+basic building blocks.
+
+## Model Preparation
+
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -26,28 +33,33 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
+### Install Dependencies
+
+```bash
+pip3 install torch
+pip3 install torchvision
+```
+
+## Model Training
 
 ```bash
 cd start_scripts
 ```
 
-### One single GPU
 ```bash
+# One single GPU
 bash train_alexnet_torch.sh --data-path /path/to/imagenet
-```
-### One single GPU (AMP)
-```bash
+
+# One single GPU (AMP)
 bash train_alexnet_amp_torch.sh --data-path /path/to/imagenet
-```
-### 8 GPUs on one machine
-```bash
+
+# 8 GPUs on one machine
 bash train_alexnet_dist_torch.sh --data-path /path/to/imagenet
-```
-### 8 GPUs on one machine (AMP)
-```bash
+
+# 8 GPUs on one machine (AMP)
 bash train_alexnet_dist_amp_torch.sh --data-path /path/to/imagenet
 ```
 
-## Reference
-https://github.com/pytorch/vision/blob/main/torchvision
+## References
+
+- [vision](https://github.com/pytorch/vision/blob/main/torchvision)

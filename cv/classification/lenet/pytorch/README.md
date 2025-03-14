@@ -1,11 +1,19 @@
 # LeNet
 
-## Model description
-LeNet is a classic convolutional neural network employing the use of convolutions, pooling and fully connected layers. It was used for the handwritten digit recognition task with the MNIST dataset. The architectural design served as inspiration for future networks such as AlexNet and VGG.
+## Model Description
 
-## Step 1: Preparing
+LeNet is a pioneering convolutional neural network architecture developed for handwritten digit recognition. It
+introduced fundamental concepts like convolutional layers, pooling, and fully connected layers, laying the groundwork
+for modern deep learning. Designed for the MNIST dataset, LeNet demonstrated the effectiveness of CNNs for image
+recognition tasks. Its simple yet effective architecture inspired subsequent networks like AlexNet and VGG, making it a
+cornerstone in the evolution of deep learning for computer vision applications.
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+## Model Preparation
+
+### Prepare Resources
+
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -23,15 +31,16 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 2: Training
-### One single GPU
+## Model Training
+
 ```bash
+# One single GPU
 python3 train.py --data-path /path/to/imagenet --model lenet 
-```
-### 8 GPUs on one machine
-```bash
+
+# 8 GPUs on one machine
 python3 -m torch.distributed.launch --nproc_per_node=8 --use_env train.py --data-path /path/to/imagenet --model lenet 
 ```
 
-## Reference
-http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf
+## References
+
+- [Paper](http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf)

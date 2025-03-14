@@ -1,28 +1,19 @@
 # DenseNet
 
-## Model description
+## Model Description
 
-A DenseNet is a type of convolutional neural network that utilises dense connections between layers, through Dense Blocks, where we connect all layers (with matching feature-map sizes) directly with each other. To preserve the feed-forward nature, each layer obtains additional inputs from all preceding layers and passes on its own feature-maps to all subsequent layers.
+DenseNet is an innovative convolutional neural network architecture that introduces dense connections between layers. In
+each dense block, every layer receives feature maps from all preceding layers and passes its own features to all
+subsequent layers. This dense connectivity pattern improves gradient flow, encourages feature reuse, and reduces
+vanishing gradient problems. DenseNet achieves state-of-the-art performance with fewer parameters compared to
+traditional CNNs, making it efficient for various computer vision tasks like image classification and object detection.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+### Prepare Resources
 
-cd PaddleClas
-
-yum install mesa-libGL -y
-
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3
-pip3 install urllib3==1.26.13
-
-python3 setup.py install
-```
-
-## Step 2: Preparing Datasets
-
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -40,11 +31,25 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Training
+### Install Dependencies
 
 ```bash
-# Make sure your dataset path is the same as above
-cd PaddleClas
+git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+
+cd PaddleClas/
+
+yum install mesa-libGL -y
+
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3
+pip3 install urllib3==1.26.13
+
+python3 setup.py install
+```
+
+## Model Training
+
+```bash
 # Link your dataset to default location
 ln -s /path/to/imagenet ./dataset/ILSVRC2012
 
@@ -52,15 +57,17 @@ export FLAGS_cudnn_exhaustive_search=True
 export FLAGS_cudnn_batchnorm_spatial_persistent=True
 
 export CUDA_VISIBLE_DEVICES=0,1,2,3
-python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/DenseNet/DenseNet121.yaml -o Arch.pretrained=False -o Global.device=gpu
+python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py \
+                                        -c ppcls/configs/ImageNet/DenseNet/DenseNet121.yaml \
+                                        -o Arch.pretrained=False -o Global.device=gpu
 ```
 
-## Results
+## Model Results
 
-| GPUs        | Top1        | Top5           |ips             |
-|-------------|-------------|----------------|----------------|
-| BI-V100 x 4 | 0.757       | 0.925          |   171          |
+| Model     | GPU         | Top1  | Top5  | ips |
+|-----------|-------------|-------|-------|-----|
+| DeneseNet | BI-V100 x 4 | 0.757 | 0.925 | 171 |
 
-## Reference
+## References
 
 - [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

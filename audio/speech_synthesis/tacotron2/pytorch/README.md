@@ -2,14 +2,12 @@
 
 ## Model Description
 
-This paper describes Tacotron 2, a neural network architecture for speech synthesis directly from text. The system is
-composed of a recurrent sequence-to-sequence feature prediction network that maps character embeddings to mel-scale
-spectrograms, followed by a modified WaveNet model acting as a vocoder to synthesize timedomain waveforms from those
-spectrograms. Our model achieves a mean opinion score (MOS) of 4.53 comparable to a MOS of 4.58 for professionally
-recorded speech. To validate our design choices, we present ablation studies of key components of our system and
-evaluate the impact of using mel spectrograms as the input to WaveNet instead of linguistic, duration, and F_0 features.
-We further demonstrate that using a compact acoustic intermediate representation enables significant simplification of
-the WaveNet architecture.
+Tacotron2 is an end-to-end neural text-to-speech synthesis system that directly converts text into natural-sounding
+speech. It combines a sequence-to-sequence network that generates mel-spectrograms from text with a WaveNet-based
+vocoder to produce high-quality audio. The model achieves near-human speech quality with a Mean Opinion Score (MOS) of
+4.53, rivaling professional recordings. Its architecture simplifies traditional speech synthesis pipelines by using
+learned acoustic representations, enabling more natural prosody and articulation while maintaining computational
+efficiency.
 
 ## Model Preparation
 

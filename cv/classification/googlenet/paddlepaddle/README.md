@@ -1,19 +1,19 @@
 # GoogLeNet
 
-## Model description
-GoogLeNet is a type of convolutional neural network based on the Inception architecture. It utilises Inception modules, which allow the network to choose between multiple convolutional filter sizes in each block. An Inception network stacks these modules on top of each other, with occasional max-pooling layers with stride 2 to halve the resolution of the grid.
+## Model Description
 
-## Step 1: Installing
+GoogLeNet is a pioneering deep convolutional neural network that introduced the Inception architecture. It features
+multiple parallel convolutional filters of different sizes within Inception modules, allowing efficient feature
+extraction at various scales. The network uses 1x1 convolutions for dimensionality reduction, making it computationally
+efficient. GoogLeNet achieved state-of-the-art performance in image classification tasks while maintaining relatively
+low computational complexity. Its innovative design has influenced many subsequent CNN architectures in computer vision.
 
-```bash
-git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas
-pip3 install -r requirements.txt
-```
+## Model Preparation
 
-## Step 2: Download data
+### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
+Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
+download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
 
 The ImageNet dataset path structure should look like:
 
@@ -31,7 +31,15 @@ imagenet
 └── val_list.txt
 ```
 
-## Step 3: Run GoogLeNet AMP
+### Install Dependencies
+
+```bash
+git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+cd PaddleClas
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```bash
 # Modify the file: PaddleClas/ppcls/configs/ImageNet/Inception/GoogLeNet.yaml to add the option of AMP

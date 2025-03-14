@@ -1,33 +1,16 @@
 # Part-A2-Anchor
 
-## Model description
+## Model Description
 
-3D object detection from LiDAR point cloud is a challenging problem in 3D scene understanding and has many practical applications. In this paper, we extend our preliminary work PointRCNN to a novel and strong point-cloud-based 3D object detection framework, the part-aware and aggregation neural network (Part-A2 net). The whole framework consists of the part-aware stage and the part-aggregation stage. Firstly, the part-aware stage for the first time fully utilizes free-of-charge part supervisions derived from 3D ground-truth boxes to simultaneously predict high quality 3D proposals and accurate intra-object part locations. The predicted intra-object part locations within the same proposal are grouped by our new-designed RoI-aware point cloud pooling module, which results in an effective representation to encode the geometry-specific features of each 3D proposal. Then the part-aggregation stage learns to re-score the box and refine the box location by exploring the spatial relationship of the pooled intra-object part locations. Extensive experiments are conducted to demonstrate the performance improvements from each component of our proposed framework. Our Part-A2 net outperforms all existing 3D detection methods and achieves new state-of-the-art on KITTI 3D object detection dataset by utilizing only the LiDAR point cloud data.
+Part-A2-Anchor is an advanced 3D object detection framework for LiDAR point clouds, extending PointRCNN with enhanced
+part-aware and aggregation capabilities. It operates in two stages: first, it predicts 3D proposals and intra-object
+part locations using free part supervisions; second, it aggregates these parts to refine box scores and locations. This
+approach effectively captures object geometry, achieving state-of-the-art performance on the KITTI dataset while
+maintaining computational efficiency for practical applications.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-## install libGL and libboost
-yum install mesa-libGL
-yum install boost-devel
-
-## switch to devtoolset-7 env
-source /opt/rh/devtoolset-7/enable
-
-# Install spconv
-cd toolbox/spconv
-bash clean_spconv.sh
-bash build_spconv.sh
-bash install_spconv.sh
-
-# Install openpcdet
-cd toolbox/openpcdet
-pip3 install -r requirements.txt
-bash build_openpcdet.sh
-bash install_openpcdet.sh
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 Download the kitti dataset from <http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d>
 
@@ -52,17 +35,36 @@ cd toolbox/openpcdet
 python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml
 ```
 
-## Step 3: Training
-
-### Single GPU training
+### Install Dependencies
 
 ```bash
-cd tools
-python3 train.py --cfg_file cfgs/kitti_models/PartA2.yaml
+## install libGL and libboost
+yum install mesa-libGL
+yum install boost-devel
+
+## switch to devtoolset-7 env
+source /opt/rh/devtoolset-7/enable
+
+# Install spconv
+cd toolbox/spconv
+bash clean_spconv.sh
+bash build_spconv.sh
+bash install_spconv.sh
+
+# Install openpcdet
+cd toolbox/openpcdet
+pip3 install -r requirements.txt
+bash build_openpcdet.sh
+bash install_openpcdet.sh
 ```
 
-### Multiple GPU training
+## Model Training
 
 ```bash
+# Single GPU training
+cd tools
+python3 train.py --cfg_file cfgs/kitti_models/PartA2.yaml
+
+# Multiple GPU training
 bash scripts/dist_train.sh 16 --cfg_file cfgs/kitti_models/PartA2.yaml
 ```
