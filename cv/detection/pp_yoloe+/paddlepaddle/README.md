@@ -13,10 +13,18 @@ real-time applications, offering superior detection performance across various s
 ### Prepare Resources
 
 ```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
 git clone -b release/2.7 https://github.com/PaddlePaddle/PaddleYOLO.git
 cd PaddleYOLO/
 
 python3 dataset/coco/download_coco.py
+or
+ln -s /path/to/coco2017 dataset/coco
 ```
 
 ### Install Dependencies

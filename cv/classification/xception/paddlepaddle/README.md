@@ -47,10 +47,16 @@ sed -i 's#^#val/#g' val_list.txt
 ### Install Dependencies
 
 ```bash
-git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas
-pip3 install scikit-learn easydict visualdl==2.2.0 urllib3==1.26.6
+# Install libGL
+## CentOS
 yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleClas.git -b release/2.6 --depth=1
+cd PaddleClas
+pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 ## Model Training

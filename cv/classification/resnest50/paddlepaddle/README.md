@@ -35,9 +35,16 @@ imagenet
 ### Install Dependencies
 
 ```bash
-git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleClas.git -b release/2.6 --depth=1
 cd PaddleClas
 pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 ## Model Training
@@ -55,3 +62,6 @@ python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/c
 | Model     | GPU        | FP32         |
 |-----------|------------|--------------|
 | ResNeSt50 | BI-V100 x4 | Acc@1=0.7677 |
+
+## Reference
+- [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

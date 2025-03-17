@@ -34,9 +34,16 @@ imagenet
 ### Install Dependencies
 
 ```bash
-git clone --recursive  https://github.com/PaddlePaddle/PaddleClas.git
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleClas.git -b release/2.6 --depth=1
 cd PaddleClas
 pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 ## Model Training
@@ -61,3 +68,6 @@ export FLAGS_cudnn_batchnorm_spatial_persistent=True
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/Inception/GoogLeNet.yaml
 ```
+
+## Reference
+- [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

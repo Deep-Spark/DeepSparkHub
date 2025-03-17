@@ -13,7 +13,13 @@ can be extended to 3D detection and pose estimation tasks.
 ### Prepare Resources
 
 ```bash
-git clone https://github.com/PaddlePaddle/PaddleDetection.git
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleDetection.git -b release2.6 --depth=1
 
 cd PaddleDetection/
 # Get COCO Dataset
@@ -52,3 +58,6 @@ python3 -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c co
 | GPU        | learning rate | FPS   | Train Epochs | mAP  |
 |------------|---------------|-------|--------------|------|
 | BI-V100 x8 | 0.00005       | 10.85 | 3            | 38.5 |
+
+## Reference
+[PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)

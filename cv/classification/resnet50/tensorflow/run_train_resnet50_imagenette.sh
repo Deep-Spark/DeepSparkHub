@@ -40,7 +40,7 @@ do
 done
 
 python3 -u tf_cnn_benchmarks.py\
- --data_name=imagenette --data_dir=${DATA_DIR}\
+ --data_name=imagenet --data_dir=${DATA_DIR}\
  --data_format=NCHW --batch_size=${BATCH_SIZE}\
  --model=resnet50 --optimizer=${OPTIMIZER} --num_gpus=1\
  --weight_decay=1e-4 --train_dir=${TRAIN_DIR}\

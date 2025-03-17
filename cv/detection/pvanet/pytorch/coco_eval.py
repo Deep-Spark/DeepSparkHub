@@ -5,7 +5,7 @@ import numpy as np
 import copy
 import time
 import torch
-import torch._six
+# import torch._six # pytorch 2.0后无此api
 
 from pycocotools.cocoeval import COCOeval
 from pycocotools.coco import COCO

@@ -72,7 +72,7 @@ python3 setup.py build develop
 ## Model Training
 
 ```bash
-cd ./cv/detection/centernet/pytorch/src
+cd ./src
 touch lib/datasets/__init__.py
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 

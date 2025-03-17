@@ -57,4 +57,4 @@ bash run_train_alexnet_multigpu_imagenet.sh
 
 ## References
 
-- [TensorFlow Models](https://github.com/tensorflow/models)
+- [TensorFlow/benchmarks](https://github.com/tensorflow/benchmarks/tree/master/scripts/tf_cnn_benchmarks)

@@ -35,15 +35,17 @@ imagenet
 ### Install Dependencies
 
 ```bash
-yum install mesa-libGL -y
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
-git clone https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas/
+git clone https://github.com/PaddlePaddle/PaddleClas.git -b release/2.6 --depth=1
+cd PaddleClas
 pip3 install -r requirements.txt
 python3 setup.py install
-
-pip3 install protobuf==3.20.3
-pip3 install urllib3==1.26.13
 ```
 
 ## Model Training

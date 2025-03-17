@@ -35,9 +35,18 @@ imagenet
 ### Install Dependencies
 
 ```bash
-git clone https://github.com/PaddlePaddle/PaddleClas.git
-cd PaddleClas/
+## Step 1: Installing
+```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleClas.git -b release/2.6 --depth=1
+cd PaddleClas
 pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 ## Model Training

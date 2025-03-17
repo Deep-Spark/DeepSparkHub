@@ -13,7 +13,13 @@ it efficient and effective for various detection tasks.
 ### Prepare Resources
 
 ```bash
-git clone https://github.com/PaddlePaddle/PaddleDetection.git
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone https://github.com/PaddlePaddle/PaddleDetection.git -b release2.6 --depth=1
 
 cd PaddleDetection/
 # Get COCO Dataset
@@ -47,3 +53,7 @@ python3 tools/train.py -c configs/fcos/fcos_r50_fpn_1x_coco.yml --eval
  | Model | GPU        | FPS  | Train Epochs | Box AP |
  |-------|------------|------|--------------|--------|
  | FCOS  | BI-V100 x8 | 8.24 | 12           | 39.7   |
+
+## Reference
+
+- [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)

@@ -78,6 +78,5 @@ bash tools/dist_train.sh configs/cornernet/cornernet_hourglass104_8xb6-210e-mste
 |-----------|------------|----------|
 | CornerNet | BI-V100 x8 | MAP=41.2 |
 
-## References
-
-- [Paper](https://arxiv.org/abs/1808.01244)
+## Reference
+[mmdetection](https://github.com/open-mmlab/mmdetection)

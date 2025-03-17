@@ -13,11 +13,20 @@ detection, instance segmentation, and human pose estimation.
 ### Prepare Resources
 
 ```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone --recursive https://github.com/PaddlePaddle/PaddleDetection.git -b release2.6 --depth=1
 git clone https://github.com/PaddlePaddle/PaddleDetection.git
 
 cd PaddleDetection/
 # Get COCO Dataset
 python3 dataset/coco/download_coco.py
+or
+ln -s /path/to/coco2017 dataset/coco
 ```
 
 ### Install Dependencies
@@ -42,3 +51,7 @@ python3 -u -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools/train.py -c
 | Model      | GPU        | FP32                          |
 |------------|------------|-------------------------------|
 | Mask R-CNN | BI-V100 x8 | bbox=38.8,FPS=7.5,BatchSize=1 |
+
+## Reference
+
+- [PaddleDetection](https://github.com/PaddlePaddle/PaddleDetection)

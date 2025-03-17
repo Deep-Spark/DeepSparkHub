@@ -12,11 +12,18 @@ and efficient inference, making it popular for real-time detection tasks across 
 ### Prepare Resources
 
 ```bash
-cd deepsparkhub/cv/detection/yolov5/paddlepaddle/
-git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleYOLO.git
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
+git clone -b release/2.7 --depth=1 https://github.com/PaddlePaddle/PaddleYOLO.git
 cd PaddleYOLO/
 
 python3 dataset/coco/download_coco.py
+or
+ln -s /path/to/coco2017 dataset/coco
 ```
 
 ### Install Dependencies

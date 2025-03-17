@@ -46,17 +46,24 @@ sed -i 's#^#val/#g' val_list.txt
 ### Install Dependencies
 
 ```bash
-pip3 install -r requirements.txt
-python3 -m pip install urllib3==1.26.6
+# Install libGL
+## CentOS
 yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
-git clone -b release/2.5 https://github.com/PaddlePaddle/PaddleClas.git
+git clone https://github.com/PaddlePaddle/PaddleClas.git -b release/2.6 --depth=1
+cd PaddleClas
+pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 ## Model Training
 
 ```bash
 cd PaddleClas/
+# Link your dataset to the default location
+ln -s /path/to/imagenet ./dataset/ILSVRC2012
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 python3 -m paddle.distributed.launch --gpus="0,1,2,3" tools/train.py -c ./ppcls/configs/ImageNet/SENet/SE_ResNet50_vd.yaml
 ```
@@ -69,4 +76,4 @@ python3 -m paddle.distributed.launch --gpus="0,1,2,3" tools/train.py -c ./ppcls/
 
 ## References
 
-- [PaddleClas](https://github.com/PaddlePaddle/PaddleClas/tree/release/2.5)
+- [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)
