@@ -12,18 +12,20 @@ assistant, which is trained with alignment techniques.
 ```sh
 # install firefly
 pushd <deepsparkhub_root>/toolbox/firefly
-pip3 install -r requirements.txt
 python3 setup.py develop
+pip install transformers-stream-generator
 popd
 ```
 
 ## Step 2: Preparing datasets and checkpoints
 
 ```sh
-pip install modelscope
-python3 ./get_Qwen-7B.py
-mkdir -p /home/model_zoo/nlp
-mv /root/.cache/modelscope/hub/qwen/Qwen-7B /home/model_zoo/nlp
+mkdir -p checkpoint
+mv /path/to/Qwen-7B checkpoint/
+
+# download school_math_0.25M.jsonl
+mkdir -p data
+mv /path/to/school_math_0.25M.jsonl data/
 ```
 
 ## Step 3: Training
@@ -31,14 +33,14 @@ mv /root/.cache/modelscope/hub/qwen/Qwen-7B /home/model_zoo/nlp
 ```sh
 # how to train
 
-# train with sft full
-bash train.sh 16 configs/qwen-7b-sft-full.json full
-
 # train with Lora
 bash train.sh 1 configs/qwen-7b-sft-lora.json lora
 
 # train with Ptuning-V2
 bash train.sh 1 configs/qwen-7b-sft-ptuning_v2.json ptuning_v2
+
+# train with sft full
+bash train.sh 16 configs/qwen-7b-sft-full.json full
 ```
 
 ## Results

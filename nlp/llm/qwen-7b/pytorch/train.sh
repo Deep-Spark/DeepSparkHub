@@ -9,13 +9,13 @@ CHECKPOINT_DIR="$PWD/checkpoint"
 
 # 把模型结构拷贝到对应预训练文件路径，方便加载时使用
 for source_dir in "$MODELS_DIR"/*; do
-    if [ -d "$source_dir" ]; then 
+    if [ -d "$source_dir" ]; then
         source_dir_name=$(basename "$source_dir")
-        
+
         for dest_dir in "$CHECKPOINT_DIR"/*; do
             if [ -d "$dest_dir" ]; then
                 dest_dir_name=$(basename "$dest_dir")
-                
+
                 if [[ "$dest_dir_name" == *"$source_dir_name"* ]]; then
                     echo "Copying files from $source_dir to $dest_dir"
                     cp -r "$source_dir"/* "$dest_dir"

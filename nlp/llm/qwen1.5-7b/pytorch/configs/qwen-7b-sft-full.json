@@ -1,8 +1,8 @@
 {
     "output_dir": "output/firefly-qwen-7b-full",
-    "model_name_or_path": "/home/model_zoo/nlp/Qwen1___5-7B",
+    "model_name_or_path": "checkpoint/Qwen1.5-7B",
     "deepspeed": "configs/ds_config/ds_z3_config_bf16.json",
-    "train_file": "/home/datasets/nlp/school_math_0.25M.jsonl",
+    "train_file": "./data/school_math_0.25M.jsonl",
     "num_train_epochs": 1,
     "max_steps": 50,
     "per_device_train_batch_size": 4,
@@ -31,6 +31,3 @@
     "max_grad_norm": 1.0,
     "remove_unused_columns": false
 }
-
-
-

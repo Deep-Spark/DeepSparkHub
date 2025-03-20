@@ -1,6 +1,7 @@
 import sys
+
+from firefly.train import init_components, setup_everything
 from loguru import logger
-from firefly.train import setup_everything, init_components  
 
 
 def train():
