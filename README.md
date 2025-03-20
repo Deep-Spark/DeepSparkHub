@@ -31,6 +31,12 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 |  [QWen1.5-7B](nlp/llm/qwen1.5-7b/pytorch)               |  PyTorch    |  Firefly             |  school_math            | 4.1.1 |
 |  [QWen1.5-14B](nlp/llm/qwen1.5-14b/pytorch)             |  PyTorch    |  Firefly             |  school_math            | 4.1.1 |
 |  [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/pytorch)           |  PyTorch    |  LLaMA-Factory       |  qwen2.5-7b             | 4.1.1 |
+|  [Yi_6B](nlp/llm/Yi_6B/pytorch)           |  PyTorch    | DeepSpeed       |  Yi-6B             | 4.2.0 |
+|  [Yi-1.5_6B](nlp/llm/Yi-1.5_6B/pytorch)           |  PyTorch    |  DeepSpeed       |  Yi-1.5-6B             | 4.2.0 |
+|  [Yi-VL-6B](nlp/llm/Yi-VL-6B/pytorch)           |  PyTorch    |  LLaMA-Factory       |  Yi-VL-6B-hf             | 4.2.0 |
+|  [GLM-4](nlp/llm/glm-4/pytorch)           |  PyTorch    |  Torchrun       |  glm-4-9b-chat             | 4.2.0 |
+|  [MiniCPM](nlp/llm/minicpm/pytorch)           |  PyTorch    |  DeepSpeed       |  MiniCPM-2B-sft-bf16             | 4.2.0 |
+|  [Phi-3](nlp/llm/phi-3/pytorch)           |  PyTorch    |  Torchrun       |  Phi-3-mini-4k-instruct             | 4.2.0 |
 
 ### Computer Vision
 
