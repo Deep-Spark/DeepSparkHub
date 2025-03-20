@@ -66,6 +66,13 @@ def main():
         logging.debug(f"The result of {model['model_name']} is\n{json.dumps(result, indent=4)}")
         logging.info(f"End running {model['model_name']} test case.")
 
+    if model["category"] == "nlp/llm" and model["framework"] == "pytorch":
+        logging.info(f"Start running {model['model_name']} test case:\n{json.dumps(model, indent=4)}")
+        result = run_llm_testcase(model)
+        check_model_result(result)
+        logging.debug(f"The result of {model['model_name']} is\n{json.dumps(result, indent=4)}")
+        logging.info(f"End running {model['model_name']} test case.")
+
     logging.info(f"Full text result: {result}")
 
 def get_model_config(model_name, framework, category):
@@ -268,6 +275,64 @@ def run_clf_testcase(model):
 
     result["result"][prec]["Cost time (s)"] = t
     logging.debug(f"matchs:\n{matches}")
+    return result
+
+def run_llm_testcase(model):
+    model_name = model["model_name"]
+    result = {
+        "name": model_name,
+        "framework": model["framework"],
+        "toolbox": model["toolbox"],
+        "category": "cv/classification",
+        "result": {},
+    }
+    is_firefly = True if model["toolbox"].lower() == "firefly" else False
+    deepsparkhub_path = model["deepsparkhub_path"].replace("deepsparkhub/", "")
+
+    logging.info(f"Start running {model_name} test case")
+    if is_firefly:
+        # 选择使用qwen-7b作为个例
+        # ***** train metrics *****
+        # epoch                    =     0.0016
+        # total_flos               =  3676485GF
+        # train_loss               =     1.1016
+        # train_runtime            = 0:02:04.04
+        # train_samples_per_second =      3.225
+        # train_steps_per_second   =      0.403
+        prepare_script = f"""
+            cd ../toolbox/firefly
+            python3 setup.py develop
+            cd ../../{deepsparkhub_path}
+            mkdir -p data
+            ln -s /mnt/deepspark/data/datasets/school_math_0.25M.jsonl data/
+            mkdir -p checkpoint
+            ln -s /mnt/deepspark/data/checkpoints/qwen-7B checkpoint/
+            timeout 1800 bash train.sh 1 configs/qwen-7b-sft-lora.json lora
+        """
+    else:
+        prepare_script = f"""
+            cd ../{deepsparkhub_path}
+            bash ci/prepare.sh
+        """
+    r, t = run_script(prepare_script)
+    sout = r.stdout
+    prec = "fp16"
+    pattern = re.compile(r'^\s*(\S+)\s*=\s*(.+)$', re.MULTILINE)
+    metrics = {}
+    for match in pattern.finditer(sout):
+        key = match.group(1).strip()
+        value = match.group(2).strip()
+        metrics[key] = value
+    if metrics:
+        result["result"].setdefault(prec, {"status": "PASS"})
+        for key, value in metrics.items():
+            result["result"][prec][key] = value
+    else:
+        result["result"].setdefault(prec, {"status": "FAIL"})
+        print("No match found.")
+
+    result["result"][prec]["Cost time (s)"] = t
+    logging.debug(f"matchs:\n{metrics}")
     return result
 
 def get_metric_result(str):

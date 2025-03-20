@@ -12,6 +12,7 @@ perform text tasks it hasn't been explicitly trained for, by casting them as tex
 ```sh
 # install firefly
 pushd <deepsparkhub_root>/toolbox/firefly
+pip install transformers==4.37.2
 python3 setup.py develop
 popd
 ```
