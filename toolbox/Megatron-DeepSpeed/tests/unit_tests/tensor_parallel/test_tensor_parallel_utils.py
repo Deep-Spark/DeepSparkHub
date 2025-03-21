@@ -1,6 +1,7 @@
 import torch
-import megatron_ds.core.tensor_parallel.utils as util
-import megatron_ds.core.parallel_state as ps
+import megatronspeed.megatron_adaptor
+import megatron.core.tensor_parallel.utils as util
+import megatron.core.parallel_state as ps
 from unit_tests.test_utilities import Utils
 
 rank = Utils.rank

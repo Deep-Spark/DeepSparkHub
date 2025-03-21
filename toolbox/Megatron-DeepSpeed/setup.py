@@ -1,6 +1,3 @@
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
-
 from setuptools import setup, find_packages
 
 """Setup for pip package."""
@@ -9,7 +6,7 @@ import importlib.util
 import os
 import setuptools
 
-spec = importlib.util.spec_from_file_location('package_info', 'megatron_ds/core/package_info.py')
+spec = importlib.util.spec_from_file_location('package_info', 'megatronspeed/core/package_info.py')
 package_info = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(package_info)
 
@@ -26,8 +23,8 @@ __repository_url__ = package_info.__repository_url__
 __version__ = package_info.__version__
 
 
-if os.path.exists('megatron_ds/core/README.md'):
-    with open("megatron_ds/core/README.md", "r", encoding='utf-8') as fh:
+if os.path.exists('megatronspeed/core/README.md'):
+    with open("megatronspeed/core/README.md", "r", encoding='utf-8') as fh:
         long_description = fh.read()
     long_description_content_type = "text/markdown"
 
@@ -40,7 +37,7 @@ else:
 #                             Dependency Loading                              #
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-def req_file(filename, folder="megatron_ds/core"):
+def req_file(filename, folder="megatronspeed/core"):
     with open(os.path.join(folder, filename), encoding='utf-8') as f:
         content = f.readlines()
     # you may also want to remove whitespace characters
@@ -51,8 +48,8 @@ install_requires = req_file("requirements.txt")
 
 ###############################################################################
 
-if "MEGATRON_DS_VERSION_IDENTIFIER" in os.environ:
-        __version__ += "+" + str(os.environ['MEGATRON_DS_VERSION_IDENTIFIER'])
+if "MEGATRONSPEED_VERSION_IDENTIFIER" in os.environ:
+        __version__ += "+" + str(os.environ['MEGATRONSPEED_VERSION_IDENTIFIER'])
 
 setuptools.setup(
     name=__package_name__,
@@ -107,7 +104,7 @@ setuptools.setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
     ],
-    packages=setuptools.find_packages(include=["megatron_ds", "megatron_ds.*"]),
+    packages=setuptools.find_packages(include=["megatronspeed", "megatronspeed.*"]),
     install_requires=install_requires,
 
     # Add in any packaged data.

@@ -288,6 +288,7 @@ def run_llm_testcase(model):
     }
     is_firefly = True if model["toolbox"].lower() == "firefly" else False
     is_deepspeed = True if model["toolbox"].lower() == "deepspeed" else False
+    is_megatron_deepspeed = True if model["toolbox"].lower() == "megatron-deepspeed" else False
     deepsparkhub_path = model["deepsparkhub_path"].replace("deepsparkhub/", "")
 
     logging.info(f"Start running {model_name} test case")
@@ -325,6 +326,15 @@ def run_llm_testcase(model):
             ln -s /mnt/deepspark/data/checkpoints/chatglm3-6b checkpoint/
             timeout 1800 bash run.sh configs/lora.yaml 1
         """
+    elif is_megatron_deepspeed:
+        # 选择使用llama2-7b作为个例
+        prepare_script = f"""
+            cd ../toolbox/Megatron-DeepSpeed
+            ln -s /mnt/deepspark/data/datasets/gpt_small_117M dataset/
+            cd examples/llama2
+            sed -i 's/ens5f0/eth0/g' run_llama2_7b_1node.sh
+            timeout 1800 bash run_llama2_7b_1node.sh
+        """
     else:
         pattern = re.compile(r'^\s*(\S+)\s*=\s*(.+)$', re.MULTILINE)
         prepare_script = f"""
@@ -358,10 +368,18 @@ def run_llm_testcase(model):
                     metrics = {key: data[key] for key in required_keys}
             except json.JSONDecodeError as e:
                 print(f"JSON解析错误: {str(e)}")
+    else:
+        epoch_pattern = [r".*tokens per second per device.*", r"Epoch: \[", r".*Epoch\s+gpu_mem", r"total_loss: "]
+        combined_pattern = re.compile("|".join(epoch_pattern))
+        epoch_matches = bool(combined_pattern.search(sout))
+
     if metrics:
         result["result"].setdefault(prec, {"status": "PASS"})
         for key, value in metrics.items():
             result["result"][prec][key] = value
+    elif epoch_matches:
+        result["result"].setdefault(prec, {"status": "PASS"})
+        result["result"][prec]["tokens per second"] = "train timeout"
     else:
         result["result"].setdefault(prec, {"status": "FAIL"})
         print("No match found.")

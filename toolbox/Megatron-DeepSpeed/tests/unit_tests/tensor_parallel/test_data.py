@@ -1,4 +1,5 @@
-from megatron_ds.core.tensor_parallel.data import broadcast_data
+import megatronspeed.megatron_adaptor
+from megatron.core.tensor_parallel.data import broadcast_data
 import torch
 from unit_tests.test_utilities import Utils
 

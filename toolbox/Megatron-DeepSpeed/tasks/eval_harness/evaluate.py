@@ -1,6 +1,3 @@
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
-
 # This code is originally from https://github.com/bigscience-workshop/Megatron-DeepSpeed
 # under the license https://huggingface.co/spaces/bigscience/license
 

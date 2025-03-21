@@ -1,6 +1,4 @@
 # Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 from mpu import layers
 from commons import set_random_seed

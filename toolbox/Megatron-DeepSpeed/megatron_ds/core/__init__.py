@@ -1,6 +1,3 @@
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
-
 import megatron_ds.core.tensor_parallel
 import megatron_ds.core.utils
 from megatron_ds.core import parallel_state

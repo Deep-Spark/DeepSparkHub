@@ -5,19 +5,20 @@
 import torch
 import math
 from functools import partial
-from megatron import get_args
-from megatron import print_rank_0
-from megatron import get_timers
-from megatron import get_tokenizer
+import megatronspeed.megatron_adaptor
+from megatron.training import get_args
+from megatron.training import print_rank_0
+from megatron.training import get_timers
+from megatron.training import get_tokenizer
 from megatron.core import mpu, tensor_parallel
 from megatron.core.enums import ModelType
-from megatron.data.gpt_dataset import build_train_valid_test_datasets
-from megatron.data.prompt_dataset import SupervisedDataset
-from megatron.model import GPTModel, GPTModelPipe
-from megatron.training import pretrain
-from megatron.utils import get_ltor_masks_and_position_ids
-from megatron.utils import average_losses_across_data_parallel_group, update_rotary_pos_emb
-from megatron.arguments import core_transformer_config_from_args
+from megatron.legacy.data.gpt_dataset import build_train_valid_test_datasets
+from megatron.legacy.data.prompt_dataset import SupervisedDataset
+from megatron.legacy.model import GPTModel, GPTModelPipe
+from megatron.training.training import pretrain
+from megatron.training.utils import get_ltor_masks_and_position_ids
+from megatron.training.utils import average_losses_across_data_parallel_group, update_rotary_pos_emb
+from megatron.training.arguments import core_transformer_config_from_args
 
 import deepspeed
 from deepspeed.runtime.utils import see_memory_usage

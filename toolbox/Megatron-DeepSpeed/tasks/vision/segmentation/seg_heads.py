@@ -1,7 +1,4 @@
 # Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
-
 import math
 import einops
 import torch

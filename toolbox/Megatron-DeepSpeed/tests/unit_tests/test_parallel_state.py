@@ -1,5 +1,6 @@
 import torch
-import megatron_ds.core.parallel_state as ps
+import megatronspeed.megatron_adaptor
+import megatron.core.parallel_state as ps
 import pytest
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../'))

@@ -2,8 +2,6 @@
 #
 # Copyright (c) Soumith Chintala 2016, 
 # All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:

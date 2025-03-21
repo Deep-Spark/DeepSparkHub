@@ -9,23 +9,26 @@ understanding and generating longer texts.
 ## Step 1: Installation
 
 ```sh
+# install
+cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
 bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
-pip3 install urllib3==1.23
 ```
 
 ## Step 2: Preparing datasets
 
 ```sh
 cd dataset
-mkdir BookCorpusDataset && cd BookCorpusDataset
-wget https://files.deepspark.org.cn:880/deepspark/data/datasets/BookCorpusDataset_text_document.bin
-wget https://files.deepspark.org.cn:880/deepspark/data/datasets/BookCorpusDataset_text_document.idx
+# get gpt_small_117M.tar
+wget http://files.deepspark.org.cn:880/deepspark/data/datasets/gpt_small_117M.tar
+tar -xf gpt_small_117M.tar
+rm -f gpt_small_117M.tar
 ```
 
 ## Step 3: Training
 
 ```sh
-export NCCL_SOCKET_IFNAME="eth0"
+cd examples/llama2
+# Modify run_llama2_7b_1node.sh according to your machine: for example, HOST_NAME, ADDR_ARRAY, CONTAINER_NAME, NCCL_SOCKET_IFNAME
 bash run_llama2_7b_1node.sh
 ```
 

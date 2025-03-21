@@ -1,6 +1,4 @@
 # Copyright (c) 2022, NVIDIA CORPORATION.  All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 """Pretrain BERT for Inverse Cloze Task"""
 
@@ -11,16 +9,16 @@ import torch
 import torch.distributed as dist
 import torch.nn.functional as F
 
-from megatron_ds import get_args
-from megatron_ds import print_rank_0
-from megatron_ds import get_timers
-from megatron_ds.core import mpu
-from megatron_ds.core.enums import ModelType
-from megatron_ds.data.biencoder_dataset_utils import get_ict_batch
-from megatron_ds.data.dataset_utils import build_train_valid_test_datasets
-from megatron_ds.model.biencoder_model import biencoder_model_provider
-from megatron_ds.training import pretrain
-from megatron_ds.utils import average_losses_across_data_parallel_group
+from megatron.training import get_args
+from megatron.training import print_rank_0
+from megatron.training import get_timers
+from megatron.core import mpu
+from megatron.core.enums import ModelType
+from megatron.legacy.data.biencoder_dataset_utils import get_ict_batch
+from megatron.legacy.data.dataset_utils import build_train_valid_test_datasets
+from megatron.legacy.model.biencoder_model import biencoder_model_provider
+from megatron.training import pretrain
+from megatron.training.utils import average_losses_across_data_parallel_group
 
 
 def pretrain_ict_model_provider(pre_process=True, post_process=True):
@@ -160,6 +158,7 @@ def train_valid_test_datasets_provider(train_val_test_num_samples):
 
 
 if __name__ == "__main__":
+    print_rank_0("WARNING : This script is DEPRECATED. Will be removed in mcore release 0.9")
     pretrain(train_valid_test_datasets_provider,
              pretrain_ict_model_provider,
              ModelType.encoder_or_decoder,

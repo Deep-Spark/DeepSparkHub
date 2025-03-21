@@ -1,6 +1,4 @@
 # Copyright (c) 2022, NVIDIA CORPORATION.  All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 import torch
 import torch.nn.functional as F
@@ -8,14 +6,14 @@ import torch.nn as nn
 import numpy as np
 import torch.distributed as dist
 from functools import partial
-from megatron_ds import get_args, get_timers, print_rank_0
-from megatron_ds.core.enums import ModelType
-from megatron_ds.data.vit_dataset import build_train_valid_datasets
-from megatron_ds.model.vision.dino import DINOPretrainModel
-from megatron_ds.model.vision.knn_monitor import knn_predict, get_feature_bank
-from megatron_ds.training import pretrain
-from megatron_ds.utils import average_losses_across_data_parallel_group, unwrap_model
-from megatron_ds.arguments import core_transformer_config_from_args
+from megatron.training import get_args, get_timers, print_rank_0
+from megatron.core.enums import ModelType
+from megatron.legacy.data.vit_dataset import build_train_valid_datasets
+from megatron.legacy.model.vision.dino import DINOPretrainModel
+from megatron.legacy.model.vision.knn_monitor import knn_predict, get_feature_bank
+from megatron.training import pretrain
+from megatron.training.utils import average_losses_across_data_parallel_group, unwrap_model
+from megatron.training.arguments import core_transformer_config_from_args
 
 def model_provider(pre_process=True, post_process=True):
     """Build the model."""

@@ -22,12 +22,9 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub ${host_name}  ## {host_name} can be a specified
 ## Step 2: Installation on all nodes
 
 ```sh
-# Clone
+# install
 cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
-
-# Install
 bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
-pip3 install urllib3==1.23
 ```
 
 ## Step 3: Preparing datasets on all nodes

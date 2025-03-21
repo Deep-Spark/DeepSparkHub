@@ -1,6 +1,4 @@
 # Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 import logging
 import math
@@ -247,9 +245,14 @@ class BlendedMegatronDatasetBuilder(object):
             dataset = None
 
             # First, build on rank 0
+            # WA: each node's first rank build the dataset cache (some node could not need to do this, but this can work on no shared storage, only given a litte overhead)
             if torch.distributed.get_rank() % get_accelerator().device_count() == 0:
             #if rank == 0and getattr(self.config, "is_built_on_rank")():
                 try:
+                    # @todo: if data_parallel_group has been created, we can use this group to avoid overhead
+                    #vote = get_accelerator().LongTensor([1]).fill_(mpu.get_data_parallel_rank(with_context_parallel=True))
+                    #torch.distributed.all_reduce(vote, group=mpu.get_data_parallel_group(), op=torch.distributed.ReduceOp.MIN)
+                    #if vote.item() == mpu.get_data_parallel_rank(with_context_parallel=True):
                     dataset = cls(*args)
                 except OSError as err:
                     log = (

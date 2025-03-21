@@ -1,6 +1,4 @@
 # Copyright (c) 2023, NVIDIA CORPORATION.  All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 from megatron_ds.core.fusions.fused_layer_norm import FusedLayerNorm
 from megatron_ds.core.models.gpt.gpt_layer_specs import (

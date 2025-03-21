@@ -10,12 +10,9 @@ learning with human feedback (RLHF) to align with human preferences for helpfuln
 ## Step 1: Installation
 
 ```sh
-# Clone
+# install
 cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
-
-# Install
 bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
-pip3 install urllib3==1.23
 ```
 
 ## Step 2: Preparing datasets

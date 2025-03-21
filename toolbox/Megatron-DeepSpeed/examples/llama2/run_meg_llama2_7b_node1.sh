@@ -58,7 +58,9 @@ TRAINING_ARGS="
     --use-distributed-optimizer \
     --recompute-granularity full \
     --recompute-method block \
-    --custom-recompute-layers-per-stage 2 0 0 0 \
+    --recompute-num-layers 1 \
+    --recompute-method-per-stage 4 1 \
+    --recompute-num-layers-per-stage 1 2 3 0 \
 "
 ## 自定义recompute layers pp stage
     # --recompute-granularity full \

@@ -125,13 +125,14 @@ def save_checkpoint(queue, args):
         sys.path.insert(0, args.megatron_path)
 
     try:
-        from megatron_ds.arguments import (parse_args, validate_args)
-        from megatron_ds.checkpointing import save_checkpoint
-        from megatron_ds.global_vars import set_global_variables, get_args
-        from megatron_ds.core.enums import ModelType
-        from megatron_ds.tokenizer.tokenizer import _vocab_size_with_padding
-        from megatron_ds import fused_kernels
-        from megatron_ds.core import mpu
+        import megatronspeed.megatron_adaptor
+        from megatron.training.arguments import (parse_args, validate_args)
+        from megatron.training.checkpointing import save_checkpoint
+        from megatron.training.global_vars import set_global_variables, get_args
+        from megatron.core.enums import ModelType
+        from megatron.training.tokenizer.tokenizer import _vocab_size_with_padding
+        from megatron.legacy import fused_kernels
+        from megatron.core import mpu
     except ModuleNotFoundError:
         print("Unable to import Megatron, please specify the path to Megatron using --megatron-path. Exiting.")
         exit(1)

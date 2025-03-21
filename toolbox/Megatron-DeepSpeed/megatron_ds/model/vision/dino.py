@@ -1,6 +1,4 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 #
 # This source code is licensed under the Apache license found in the
 # LICENSE file in the root directory of this source tree.

@@ -1,24 +1,23 @@
 # Copyright (c) 2023, NVIDIA CORPORATION.  All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 """Pretrain GPT"""
 
 import torch
 import math
 from functools import partial
-from megatron_ds import get_args
-from megatron_ds import print_rank_0
-from megatron_ds import get_timers
-from megatron_ds import get_tokenizer
-from megatron_ds.core import mpu, tensor_parallel
-from megatron_ds.core.enums import ModelType
-from megatron_ds.data.gpt_dataset import build_train_valid_test_datasets
-from megatron_ds.model import GPTModel, GPTModelPipe
-from megatron_ds.training import pretrain
-from megatron_ds.utils import get_ltor_masks_and_position_ids
-from megatron_ds.utils import average_losses_across_data_parallel_group, update_rotary_pos_emb
-from megatron_ds.arguments import core_transformer_config_from_args
+import megatronspeed.megatron_adaptor
+from megatron.training import get_args
+from megatron.training import print_rank_0
+from megatron.training import get_timers
+from megatron.training import get_tokenizer
+from megatron.core import mpu, tensor_parallel
+from megatron.core.enums import ModelType
+from megatron.legacy.data.gpt_dataset import build_train_valid_test_datasets
+from megatron.legacy.model import GPTModel, GPTModelPipe
+from megatron.training.training import pretrain
+from megatron.training.utils import get_ltor_masks_and_position_ids
+from megatron.training.utils import average_losses_across_data_parallel_group, update_rotary_pos_emb
+from megatron.training.arguments import core_transformer_config_from_args
 
 import deepspeed
 from deepspeed.runtime.utils import see_memory_usage
@@ -219,7 +218,7 @@ def loss_func(loss_mask, moe_loss, mos_loss, output_tensor):
     # Reduce loss for logging.
     averaged_loss = average_losses_across_data_parallel_group([loss])
     if args.mos or args.kd:
-        # assert max(args.num_experts) >= 1
+        # assert max(args.ds_num_experts) >= 1
         loss = loss + moe_loss + mos_loss
         if args.mos:
             return loss, {'total loss': loss, 'lm loss': averaged_loss[0], 'moe loss': moe_loss, 'mos loss': mos_loss}
@@ -227,7 +226,7 @@ def loss_func(loss_mask, moe_loss, mos_loss, output_tensor):
             return loss, {'total loss': loss, 'lm loss': averaged_loss[0], 'moe loss': moe_loss, 'kd loss': mos_loss}
         print_rank_0('>>> total loss: {}, lm loss {}, kd loss {}'.format(loss, averaged_loss[0], mos_loss))
     else:
-        if max(args.num_experts) <= 1:
+        if max(args.ds_num_experts) <= 1:
             return loss, {'lm loss': averaged_loss[0]}
         else:
             loss = loss + moe_loss
@@ -259,7 +258,7 @@ def calculate_mos_loss(args, stu_output, teacher_model, tokens, position_ids, at
         mos_loss = mos_loss.div(args.seq_length) * beta
     return mos_loss
 
-def forward_step(data_iterator, model):
+def forward_step(data_iterator, model, config=None):
     """Forward step."""
     args = get_args()
     timers = get_timers()
