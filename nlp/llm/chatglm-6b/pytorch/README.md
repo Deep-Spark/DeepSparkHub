@@ -16,55 +16,15 @@ line with human preference.
 ```sh
 # Install requirements
 pip3 install -r requirements.txt
-
-# Install sqlite
-yum install -y sqlite-devel
-wget https://www.sqlite.org/2018/sqlite-autoconf-3240000.tar.gz
-tar -xvzf sqlite-autoconf-3240000.tar.gz
-cd sqlite-autoconf-3240000/
-./configure --prefix=/usr/local/sqlite
-make -j4 && make install
-cd ../ && rm -rf sqlite-autoconf-3240000*
-
-# Install Python 3.7.9
-cd ../
-wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz
-tar -xf Python-3.7.9.tgz
-cd Python-3.7.9/
-./configure --enable-loadable-sqlite-extensions
-make -j4 && make install
-cd ../ && rm -rf Python-3.7.9*
-```
-
-### Install DeepSpeed
-
-ChatGLM-6B model is using DeepSpeed toolbox. Before you run this model, you need to install DeepSpeed first.
-
-```sh
-pushd ../../../../toolbox/DeepSpeed/v0.9.2/
-bash install_toolbox_deepspeed.sh
-popd
 ```
 
 ## Step 2: Preparing datasets
 
-ADGEN is a large-scale dataset for advertisement text generation proposed by researchers from Hong Kong University of
-Science and Technology in 2018. Go to [Google
-Drive](https://drive.google.com/file/d/13_vf0xRTQsyneRKdD1bZIr93vBGOczrk/view?usp=sharing) or [Tsinghua
-Cloud](https://cloud.tsinghua.edu.cn/f/b3f119a008264b1cabd1/?dl=1), download the processed ADGEN dataset, and decompress
-AdvertiseGen directory.
-
-If you want to load the model locally, you can download the model implementation ( `13GB` ) from [Hugging Face
-Hub](https://huggingface.co/THUDM/chatglm-6b)
-
 ```sh
-# Install lfs
-yum install -y rh-git218-git-lfs.x86_64
-source /opt/rh/rh-git218/enable
-# Get huggingface dataset
-git lfs install
-git config --global http.sslVerify false
-git clone https://huggingface.co/THUDM/chatglm-6b
+# Get AdvertiseGen.tar.gz
+wget -O AdvertiseGen.tar.gz https://cloud.tsinghua.edu.cn/f/b3f119a008264b1cabd1/?dl=1
+tar xf AdvertiseGen.tar.gz
+# Get chatglm-6b from https://huggingface.co/THUDM/chatglm-6b.
 ```
 
 ## Step 3: Training

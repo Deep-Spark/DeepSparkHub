@@ -287,6 +287,7 @@ def run_llm_testcase(model):
         "result": {},
     }
     is_firefly = True if model["toolbox"].lower() == "firefly" else False
+    is_deepspeed = True if model["toolbox"].lower() == "deepspeed" else False
     deepsparkhub_path = model["deepsparkhub_path"].replace("deepsparkhub/", "")
 
     logging.info(f"Start running {model_name} test case")
@@ -299,6 +300,7 @@ def run_llm_testcase(model):
         # train_runtime            = 0:02:04.04
         # train_samples_per_second =      3.225
         # train_steps_per_second   =      0.403
+        pattern = re.compile(r'^\s*(\S+)\s*=\s*(.+)$', re.MULTILINE)
         prepare_script = f"""
             cd ../toolbox/firefly
             python3 setup.py develop
@@ -309,7 +311,22 @@ def run_llm_testcase(model):
             ln -s /mnt/deepspark/data/checkpoints/qwen-7B checkpoint/
             timeout 1800 bash train.sh 1 configs/qwen-7b-sft-lora.json lora
         """
+    elif is_deepspeed:
+        # 选择使用chatglm3-6b作为个例
+        # {'train_runtime': 84.0969, 'train_samples_per_second': 2.378, 'train_steps_per_second': 1.189, 'train_loss': 0.24943359375, 'epoch': 0.0}
+        pattern = r"({.*?})"
+        prepare_script = f"""
+            cd ../../{deepsparkhub_path}
+            pip3 install -r requirements.txt
+            mkdir -p data
+            ln -s /mnt/deepspark/data/datasets/AdvertiseGen data/
+            python3 process_data.py
+            mkdir -p checkpoint
+            ln -s /mnt/deepspark/data/checkpoints/chatglm3-6b checkpoint/
+            timeout 1800 bash run.sh configs/lora.yaml 1
+        """
     else:
+        pattern = re.compile(r'^\s*(\S+)\s*=\s*(.+)$', re.MULTILINE)
         prepare_script = f"""
             cd ../{deepsparkhub_path}
             bash ci/prepare.sh
@@ -317,12 +334,30 @@ def run_llm_testcase(model):
     r, t = run_script(prepare_script)
     sout = r.stdout
     prec = "fp16"
-    pattern = re.compile(r'^\s*(\S+)\s*=\s*(.+)$', re.MULTILINE)
     metrics = {}
-    for match in pattern.finditer(sout):
-        key = match.group(1).strip()
-        value = match.group(2).strip()
-        metrics[key] = value
+    if is_firefly:
+        for match in pattern.finditer(sout):
+            key = match.group(1).strip()
+            value = match.group(2).strip()
+            metrics[key] = value
+    elif is_deepspeed:
+        required_keys = {
+            'train_runtime',
+            'train_samples_per_second',
+            'train_steps_per_second',
+            'train_loss',
+            'epoch'
+        }
+        match = re.search(pattern, sout)
+        if match:
+            dict_str = match.group(1)
+            dict_str = dict_str.replace("'", '"')
+            try:
+                data = json.loads(dict_str)
+                if required_keys.issubset(data.keys()):
+                    metrics = {key: data[key] for key in required_keys}
+            except json.JSONDecodeError as e:
+                print(f"JSON解析错误: {str(e)}")
     if metrics:
         result["result"].setdefault(prec, {"status": "PASS"})
         for key, value in metrics.items():
