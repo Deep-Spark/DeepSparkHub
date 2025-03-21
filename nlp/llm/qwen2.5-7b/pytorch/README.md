@@ -16,12 +16,12 @@ Russian, Japanese, Korean, Vietnamese, Thai, Arabic, and more.
 ## Step 1: Installation
 
 ```sh
-git clone -b 6b62550af1acda93246e05b37061f2ad7db58e55 --depth 1 https://github.com/hiyouga/LLaMA-Factory.git
-cp qwen2_5-7b_full_sft.yaml LLaMA-Factory/examples/train_full/
-cp qwen2_5-7b_lora_sft.yaml LLaMA-Factory/examples/train_lora/
+git clone https://github.com/hiyouga/LLaMA-Factory.git
 cd LLaMA-Factory/
+git checkout d8a5571be7fcdc6f9e2442a832252d507f58c862
+cp ../qwen2_5-7b_full_sft.yaml examples/train_full/
+cp ../qwen2_5-7b_lora_sft.yaml examples/train_lora/
 pip3 install -r requirements.txt
-pip3 install --no-deps -e .
 ```
 
 ## Step 2: Preparing datasets

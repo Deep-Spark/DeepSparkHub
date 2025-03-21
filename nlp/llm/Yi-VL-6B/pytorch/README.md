@@ -13,16 +13,12 @@
 ## Step 1: Installation
 
 ```sh
-git clone -b main https://github.com/hiyouga/LLaMA-Factory.git
-git -C LLaMA-Factory/ checkout 1481af5dc9bc99807ae0ee5a438bf0a279cafb66
-
-cp yi_vl_6b_full_sft.yaml LLaMA-Factory/examples/train_full/
-cp yi_vl_6b_lora_sft.yaml LLaMA-Factory/examples/train_lora/
-
+git clone https://github.com/hiyouga/LLaMA-Factory.git
 cd LLaMA-Factory/
+git checkout d8a5571be7fcdc6f9e2442a832252d507f58c862
+cp ../yi_vl_6b_full_sft.yaml examples/train_full/
+cp ../yi_vl_6b_lora_sft.yaml examples/train_lora/
 pip3 install -r requirements.txt
-pip3 install --no-deps -e .
-
 ```
 
 ## Step 2: Preparing model
