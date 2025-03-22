@@ -1,4 +1,4 @@
-# Yi-6B
+# Yi-6B (deepspeed)
 
 ## Model description
 

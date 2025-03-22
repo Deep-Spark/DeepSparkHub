@@ -2,7 +2,7 @@
 CUR_DIR=$(cd "$(dirname "$0")";pwd)
 
 if [[ ! -e ${CUR_DIR}/dahoas_train.jsonl ]]; then
-    wget http://files.deepspark.org.cn:880/deepspark/data/datasets/dahoas_train.jsonl
+    wget http://sw.iluvatar.ai/download/apps/datasets/nlp/RLHF/dahoas_train.jsonl
 fi
 
 PROJ_HOME=$(dirname "$PWD")

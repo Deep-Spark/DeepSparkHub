@@ -458,6 +458,7 @@ def init_components(args, training_args):
             model=model,
             args=training_args,
             train_dataset=train_dataset,
+            eval_dataset=train_dataset, # fix Trainer: evaluation requires an eval_dataset.
             tokenizer=tokenizer,
             data_collator=data_collator,
         )

@@ -9,6 +9,8 @@ can get them in huggingface through links provided.
 ## Step 1: Install
 
 ```sh
+# install
+cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
 bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
 ```
 
@@ -17,22 +19,18 @@ bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
 Download dataset and convert it.
 
 ```sh
-cd dataset && bash download_and_convert_dataset.sh
+cd dataset
+# get gpt_small_117M.tar
+wget http://files.deepspark.org.cn:880/deepspark/data/datasets/gpt_small_117M.tar
+tar -xf gpt_small_117M.tar
+rm -f gpt_small_117M.tar
 ```
 
-## Step 3: Checkpoint
-
-Download checkpoints as above and put them to proper path (llama2_7b -> checkpoints/llama2-7b,  tinyllama_1.1b ->
-checkpoints/TinyLlama-1.1B), then convert checkpoints.
-
-```sh
-cd checkpoints && bash convert_hf_2_meg.sh
-```
-
-## Step 4: Train
+## Step 3: Train
 
 ```sh
 cd examples/llama2
+# Modify run_llama2_7b_1node.sh according to your machine: for example, HOST_NAME, ADDR_ARRAY, CONTAINER_NAME, NCCL_SOCKET_IFNAME
 bash run_llama2_7b_rlhf_node1.sh
 ```
 

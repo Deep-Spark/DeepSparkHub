@@ -3,9 +3,9 @@
 """Computes theoretical memory footprint for model training without instantiating
 a model and running training iterations on GPU(s)."""
 
-from megatron_ds import get_args
-from megatron_ds.initialize import initialize_megatron
-from megatron_ds.theoretical_memory_usage import report_theoretical_memory
+from megatron.training import get_args
+from megatron.training.initialize import initialize_megatron
+from megatronspeed.theoretical_memory_usage import report_theoretical_memory
 
 if __name__ == "__main__":
     initialize_megatron(allow_no_cuda=True, skip_mpu_initialization=True)

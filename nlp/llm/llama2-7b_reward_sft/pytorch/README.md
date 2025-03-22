@@ -11,6 +11,8 @@ understanding and generating longer texts.
 ```sh
 cd deepsparkhub/nlp/llm/llama2-7b_reward_sft/deepspeed
 pip install -r requirements.txt
+pip uninstall numpy
+pip install numpy==1.23.5
 pip install -e .
 ```
 

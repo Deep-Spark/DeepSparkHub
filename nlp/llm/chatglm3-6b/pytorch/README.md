@@ -9,7 +9,6 @@ smooth dialogue and low deployment threshold.
 ## Step 1: Installation
 
 ```sh
-cd finetune_demo
 pip3 install -r requirements.txt
 ```
 

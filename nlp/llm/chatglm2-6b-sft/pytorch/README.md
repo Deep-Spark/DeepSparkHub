@@ -9,7 +9,6 @@ through model quantization, Gradient Checkpoint and other methods
 ## Step 1: Installation
 
 ```bash
-cd ptuning/
 pip3 install -r requirements.txt
 ```
 
@@ -18,6 +17,7 @@ LFS](https://docs.github.com/zh/repositories/working-with-files/managing-large-f
 and then running
 
 ```bash
+cd ptuning/
 mkdir -p data
 cd data 
 git clone https://huggingface.co/THUDM/chatglm2-6b

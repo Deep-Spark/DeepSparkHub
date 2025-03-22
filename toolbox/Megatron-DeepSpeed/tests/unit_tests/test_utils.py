@@ -1,6 +1,7 @@
 import pytest
 import torch
-import megatron_ds.core.utils as util
+import megatronspeed.megatron_adaptor
+import megatron.core.utils as util
 import numpy as np
 
 def test_divide_properly():

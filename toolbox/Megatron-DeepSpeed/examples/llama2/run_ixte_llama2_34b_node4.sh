@@ -58,7 +58,9 @@ TRAINING_ARGS="
     --recompute-granularity full \
     --recompute-method block \
     --make-vocab-size-divisible-by 1 \
-    --custom-recompute-layers-per-stage 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 \
+    --recompute-num-layers 1 \
+    --recompute-method-per-stage 16 1 \
+    --recompute-num-layers-per-stage 2 1 14 0 \
 "
     # --custom-recompute-layers-per-stage 2 2 1 0 0 0 0 0 \
     # --no-gradient-accumulation-fusion \

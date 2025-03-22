@@ -20,12 +20,9 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub ${host_name}  ## {host_name} can be a specified
 ## Step 2: Installation on all nodes
 
 ```sh
-# Clone
+# install
 cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
-
-# Install
 bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
-pip3 install urllib3==1.23
 ```
 
 ## Step 3: Preparing datasets on all nodes
@@ -43,13 +40,13 @@ wget https://the-eye.eu/public/AI/pile_neox/data/BookCorpusDataset_text_document
 cd examples/aquila/
 ```
 
-1. Modify run_meg_aquila2_34b_node4.sh according to your machine: for example, HOST_NAME, ADDR_ARRAY, CONTAINER_NAME,
+1. Modify run_aquila_34b_node4.sh according to your machine: for example, HOST_NAME, ADDR_ARRAY, CONTAINER_NAME,
    NCCL_SOCKET_IFNAME
 
-2. executing run_meg_aquila2_34b_node4.sh
+2. executing run_aquila_34b_node4.sh
 
 ```sh
-bash run_meg_aquila2_34b_node4.sh
+bash run_aquila_34b_node4.sh
 ```
 
 a. If there is an error: Got permission denied while trying to connect to the Docker daemon socket at

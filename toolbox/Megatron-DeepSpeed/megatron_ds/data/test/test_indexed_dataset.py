@@ -1,6 +1,3 @@
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
-
 # This file isn't really a formal automated test, it's just a place to
 # put some code used during development and manual testing of
 # indexed_dataset.

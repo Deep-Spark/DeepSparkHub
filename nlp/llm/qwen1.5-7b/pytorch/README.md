@@ -13,29 +13,32 @@ sizes;No need of trust_remote_code.
 ```sh
 # install firefly
 pushd <deepsparkhub_root>/toolbox/firefly
-pip3 install -r requirements.txt
 python3 setup.py develop
+pip install transformers-stream-generator
 popd
 ```
 
 ## Step 2: Preparing datasets and checkpoints
 
 ```sh
-mkdir -p /home/datasets/nlp
-git clone -b school_math_0.25M git@gitee.com:sanghui-ilu/datasets.git
-mv datasets/school_math_0.25M.jsonl /home/datasets/nlp
-rm -rf datasets
+mkdir -p checkpoint
+mv /path/to/Qwen1.5-7B checkpoint/
 
-mkdir -p /home/model_zoo/nlp
-pip install modelscope
-python3 ./get_Qwen1.5.py --model=Qwen1.5-7B
-mv /root/.cache/modelscope/hub/qwen/Qwen1___5-7B /home/model_zoo/nlp
+# download school_math_0.25M.jsonl
+mkdir -p data
+mv /path/to/school_math_0.25M.jsonl data/
 ```
 
 ## Step 3: Training
 
 ```sh
-bash train.sh 16 configs/qwen-7b-sft-full.json full  
+# how to train
+
+# train with Lora
+bash train.sh 1 configs/qwen-7b-sft-lora.json lora
+
+# train with sft full
+bash train.sh 16 configs/qwen-7b-sft-full.json full
 ```
 
 ## Results

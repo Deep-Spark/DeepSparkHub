@@ -1,14 +1,14 @@
 import torch
 import deepspeed
-import megatron_ds
-from megatron_ds import get_args
-from megatron_ds.core import mpu
-from megatron_ds.checkpointing import load_checkpoint
-from megatron_ds.initialize import initialize_megatron
-from megatron_ds.model import GPTModel
-from megatron_ds.training import get_model
-from megatron_ds.arguments import core_transformer_config_from_args
-from megatron_ds.text_generation_utils import generate_samples_eval
+import megatronspeed.megatron_adaptor
+from megatron import get_args
+from megatron.core import mpu
+from megatron.training.checkpointing import load_checkpoint
+from megatron.training.initialize import initialize_megatron
+from megatron.legacy.model import GPTModel
+from megatron.training.training import get_model
+from megatron.training.arguments import core_transformer_config_from_args
+from megatronspeed.text_generation_utils import generate_samples_eval
 
 
 def model_provider(pre_process=True, post_process=True):

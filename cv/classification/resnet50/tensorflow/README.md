@@ -27,6 +27,8 @@ pip3 install absl-py git+https://github.com/NVIDIA/dllogger#egg=dllogger
 ## Model Training
 
 ```shell
+ln -s /path/to/imagenette_tfrecord ./imagenette
+
 # Training on single card
 bash run_train_resnet50_imagenette.sh
 

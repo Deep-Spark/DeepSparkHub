@@ -35,7 +35,7 @@ VOC           # path:  /home/yang/dataset/VOC
 
 Download checkpoint.
 
-Exporting loaded COCO weights as TF checkpoint(yolov3_coco.ckpt)[BaiduCloud](https://pan.baidu.com/s/11mwiUy8KotjUVQXqkGGPFQ&shfl=sharepset#list/path=%2F)
+Exporting loaded COCO weights as TF checkpoint(yolov3_coco.ckpt)[BaiduCloud](https://pan.baidu.com/s/11mwiUy8KotjUVQXqkGGPFQ&shfl=sharepset#list/path=%2F) and save as checkpoint/yolov3_coco_demo.ckpt
 
 ### Install Dependencies
 

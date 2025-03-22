@@ -1,6 +1,6 @@
 import os
 import torch
-import megatron_ds.core.parallel_state as ps
+import megatron.core.parallel_state as ps
 
 class Utils:
     rank = int(os.environ['RANK'])

@@ -1,4 +1,5 @@
-from megatron_ds.core.tensor_parallel import mappings
+import megatronspeed.megatron_adaptor
+from megatron.core.tensor_parallel import mappings
 from unit_tests.test_utilities import Utils
 import torch
 

@@ -1,6 +1,4 @@
 # Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 """Processing large data for pretraining."""
 import argparse
@@ -22,8 +20,9 @@ try:
 except ImportError:
     nltk_available = False
 
-from megatron_ds.tokenizer import build_tokenizer
-from megatron_ds.core.datasets import indexed_dataset
+import megatronspeed.megatron_adaptor
+from megatron.training.tokenizer import build_tokenizer
+from megatron.core.datasets import indexed_dataset
 
 
 # https://stackoverflow.com/questions/33139531/preserve-empty-lines-with-nltks-punkt-tokenizer
@@ -183,7 +182,7 @@ class Partition(object):
                                                           key, level)
             output_idx_files[key] = "{}_{}_{}.idx".format(output_prefix,
                                                           key, level)
-            builders[key] = indexed_dataset.MMapIndexedDatasetBuilder(
+            builders[key] = indexed_dataset.IndexedDatasetBuilder(
                 output_bin_files[key],
                 dtype=indexed_dataset.DType.optimal_dtype(tokenizer.vocab_size),
             )

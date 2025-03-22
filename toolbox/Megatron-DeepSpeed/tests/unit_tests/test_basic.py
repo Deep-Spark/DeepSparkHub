@@ -1,3 +1,4 @@
 def test_import():
-    import megatron_ds
+    import megatronspeed
+    import megatronspeed.megatron_adaptor
 

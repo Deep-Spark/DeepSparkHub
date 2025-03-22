@@ -12,7 +12,7 @@ perform text tasks it hasn't been explicitly trained for, by casting them as tex
 ```sh
 # install firefly
 pushd <deepsparkhub_root>/toolbox/firefly
-pip3 install -r requirements.txt
+pip install transformers==4.37.2
 python3 setup.py develop
 popd
 ```
@@ -32,14 +32,11 @@ mkdir -p checkpoint && cd checkpoint
 ## Step 3: Training
 
 ```sh
-# how to train
-bash train.sh {num_gpus} {config_file} {train_type}
+# train with lora
+bash train.sh 1 configs/bloom-sft-lora.json lora
 
 # train with sft full 
 bash train.sh 16 configs/bloom-sft-full.json full
-
-# train with qlora
-bash train.sh 1 configs/bloom-sft-qlora.json qlora
 ```
 
 ## Results

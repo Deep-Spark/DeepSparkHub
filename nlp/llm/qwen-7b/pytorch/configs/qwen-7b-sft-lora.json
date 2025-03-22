@@ -1,6 +1,6 @@
 {
     "output_dir": "output/firefly-qwen-7b",
-    "model_name_or_path": "/home/model_zoo/nlp/Qwen-7B",
+    "model_name_or_path": "checkpoint/qwen-7B",
     "train_file": "./data/school_math_0.25M.jsonl",
     "num_train_epochs": 1,
     "max_steps": 50,

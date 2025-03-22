@@ -10,9 +10,10 @@ language generation model obtained by pre-training on a large-scale unlabeled te
 
 ```shell
 git clone https://github.com/PaddlePaddle/PaddleNLP.git
+git checkout v2.6.0
 cd PaddleNLP/model_zoo/gpt
 pip3 install -r requirements.txt
-pip3 install paddlenlp
+pip3 install paddlenlp==2.6.0
 ```
 
 ## Step 2: Preparing dataset

@@ -1,6 +1,4 @@
 # Copyright (c) 2023, NVIDIA CORPORATION.  All rights reserved.
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
 
 from megatron_ds.core.models.retro.config import RetroConfig
 from megatron_ds.core.transformer.attention import CrossAttention, CrossAttentionSubmodules

@@ -1,6 +1,3 @@
-# Copyright (c) 2024, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
-# All Rights Reserved.
-
 from .cross_entropy import vocab_parallel_cross_entropy
 from .data import broadcast_data
 from .layers import (

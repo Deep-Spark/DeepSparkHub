@@ -28,7 +28,7 @@ def test_forward_backward_func_without_pipeline_parallel(mocker):
 
     Utils.initialize_model_parallel(tensor_model_parallel_size=2, pipeline_model_parallel_size=1)
 
-    def forward_step_func(data_iterator, model):
+    def forward_step_func(data_iterator, model, config=None):
         import os
         rank = int(os.environ['LOCAL_RANK'])
         dummy_data = torch.ones(1,4)
@@ -71,7 +71,7 @@ def test_forward_backward_func_with_pipeline_parallel(mocker):
 
     Utils.initialize_model_parallel(tensor_model_parallel_size=1, pipeline_model_parallel_size=4)
 
-    def forward_step_func(data_iterator, model):
+    def forward_step_func(data_iterator, model, config=None):
         import os
         rank = int(os.environ['LOCAL_RANK'])
         def loss_func(output_tensor):
@@ -120,7 +120,7 @@ def test_forward_backward_func_with_interleaving(mocker):
 
     Utils.initialize_model_parallel(tensor_model_parallel_size=1, pipeline_model_parallel_size=4, virtual_pipeline_model_parallel_size=2)
 
-    def forward_step_func(data_iterator, model):
+    def forward_step_func(data_iterator, model, config=None):
         import os
         rank = int(os.environ['LOCAL_RANK'])
         def loss_func(output_tensor):

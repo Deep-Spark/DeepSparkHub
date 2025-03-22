@@ -146,10 +146,10 @@ def run_py_case(args, py_file, test_args: List[str] = None, log_dir: str = None,
         test_args = []
 
     if "test_utils.py" in py_file:
-        command = f"torchrun --nproc_per_node=1 -m pytest -s {py_file} {' '.join(test_args)} --junitxml={args.log_dir}/_{py_file.split('/')[-1][:-3]}.xml"
+        command = f"torchrun --nproc_per_node=1 -m pytest -s {py_file} {' '.join(test_args)} --junitxml={args.log_dir}/___{py_file.split('/')[-1][:-3]}.xml -o junit_suite_name={py_file.split('/')[-1][:-3]}"
     else:
         command = f"torchrun --nproc_per_node=8 --nnodes {args.nnodes} --node_rank {args.node_rank} \
-        --master_addr {args.master_addr} --master_port {args.master_port} -m pytest -s {py_file} {' '.join(test_args)} --junitxml={args.log_dir}/_{py_file.split('/')[-1][:-3]}.xml"
+        --master_addr {args.master_addr} --master_port {args.master_port} -m pytest -s {py_file} {' '.join(test_args)} --junitxml={args.log_dir}/___{py_file.split('/')[-1][:-3]}.xml -o junit_suite_name={py_file.split('/')[-1][:-3]}"
 
     if log_dir is None:
         log_dir = DEFAULT_LOG_DIR
@@ -210,7 +210,7 @@ def run_py_cases(args, files, log_dir = None, timeout_per_case = None, excludes:
     test_results = []
     for i, file in enumerate(test_files):
         print(f"Progress: {i+1} / {len(test_files)}, Case: {file}")
-
+        sys.stdout.flush()
         if not is_valid_test_case(file):
             print(f"Skip {file}")
             continue
