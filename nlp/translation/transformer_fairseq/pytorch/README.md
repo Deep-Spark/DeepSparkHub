@@ -1,22 +1,22 @@
 # Transformer
 
-## Model description
+## Model Description
 
-The following instructions can be used to train a Transformer model on the IWSLT'14 German to English dataset.
+The Transformer model revolutionized natural language processing with its attention-based architecture, eliminating the
+need for recurrent connections. It employs self-attention mechanisms to process input sequences in parallel, capturing
+long-range dependencies more effectively than previous models. Transformers excel in tasks like translation, text
+generation, and summarization by dynamically weighting the importance of different words in a sequence. Their parallel
+processing capability enables faster training and better scalability, making them the foundation for state-of-the-art
+language models like BERT and GPT.
 
-## Step 1: Installation
+## Model Preparation
 
-Transformer model is using Fairseq toolbox. Before you run this model, you need to setup Fairseq first.
+### Prepare Resources
 
 ```bash
 # Go to "toolbox/Fairseq" directory in root path
 cd ../../../../toolbox/Fairseq/
-bash install_toolbox_fairseq.sh
-```
 
-## Step 2: Preparing datasets
-
-```bash
 cd fairseq/examples/translation/
 bash prepare-iwslt14.sh
 cd ../..
@@ -28,13 +28,20 @@ fairseq-preprocess --source-lang de --target-lang en \
     --workers 20
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+Transformer model is using Fairseq toolbox. Before you run this model, you need to setup Fairseq first.
+
+```bash
+bash install_toolbox_fairseq.sh
+```
+
+## Model Training
 
 ```bash
 # Train
 mkdir -p checkpoints/transformer
-fairseq-train \
-    data-bin/iwslt14.tokenized.de-en \
+fairseq-train data-bin/iwslt14.tokenized.de-en \
     --arch transformer_iwslt_de_en --share-decoder-input-output-embed \
     --optimizer adam --adam-betas '(0.9, 0.98)' --clip-norm 0.0 \
     --lr 5e-4 --lr-scheduler inverse_sqrt --warmup-updates 4000 \
@@ -57,12 +64,12 @@ fairseq-generate data-bin/iwslt14.tokenized.de-en \
     --batch-size 128 --beam 5 --remove-bpe
 ```
 
-## Results
+## Model Results
 
-| GPUs       | QPS     | Train Epochs | Bleu  |
-|------------|---------|--------------|-------|
-| BI-v100 x8 | 3204.78 | 100          | 35.07 |
+| Model       | GPUs       | QPS     | Train Epochs | Bleu  |
+|-------------|------------|---------|--------------|-------|--|
+| Transformer | BI-V100 x8 | 3204.78 | 100          | 35.07 |
 
-## Reference
+## References
 
 - [Fairseq](https://github.com/facebookresearch/fairseq/tree/v0.10.2)

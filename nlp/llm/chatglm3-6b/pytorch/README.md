@@ -1,18 +1,17 @@
 # ChatGLM3-6B (DeepSpeed)
 
-## Model description
+## Model Description
 
-ChatGLM3 is a generation of pre-trained dialogue models jointly released by Zhipu AI and Tsinghua KEG. ChatGLM3-6B is
-the open-source model in the ChatGLM3 series, maintaining many excellent features of the first two generations such as
-smooth dialogue and low deployment threshold.
+ChatGLM3-6B is the latest iteration in the ChatGLM series, developed through collaboration between Zhipu AI and Tsinghua
+KEG. This open-source dialogue model builds upon its predecessors' strengths, offering enhanced conversational
+capabilities and improved performance. With 6 billion parameters, it maintains a balance between computational
+efficiency and language understanding. ChatGLM3-6B excels in generating coherent and contextually relevant responses,
+particularly in Chinese dialogue scenarios. Its architecture supports various fine-tuning techniques, making it
+adaptable for diverse applications while maintaining a low deployment threshold for practical implementation.
 
-## Step 1: Installation
+## Model Preparation
 
-```sh
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets and checkpoints
+### Prepare Resources
 
 ```sh
 # Get AdvertiseGen.tar.gz
@@ -35,7 +34,13 @@ tar -zxvf chatglm3-6b.tar.gz
 popd
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```sh
 bash run.sh {config_file} {num_gpus} 
@@ -50,16 +55,16 @@ bash run.sh configs/ptuning_v2.yaml 16
 bash run.sh configs/sft.yaml 16
 ```
 
-## Results
+## Model Results
 
-| GPUs    | model      | peft       | num_gpus | train_samples_per_second |
-|---------|------------|------------|----------|--------------------------|
-| BI-V150 | ChatGLM-6B | Lora       | 1        | 2.11                     |
-| BI-V150 | ChatGLM-6B | ptuning_v2 | 1        | 8.889                    |
-| BI-V150 | ChatGLM-6B | Lora       | 16       | 32.639                   |
-| BI-V150 | ChatGLM-6B | ptuning_v2 | 16       | 115.763                  |
-| BI-V150 | ChatGLM-6B | sft        | 16       | 5.99                     |
+| Model      | GPU     | peft       | num_gpus | train_samples_per_second |
+|------------|---------|------------|----------|--------------------------|
+| ChatGLM-6B | BI-V150 | Lora       | 1        | 2.11                     |
+| ChatGLM-6B | BI-V150 | ptuning_v2 | 1        | 8.889                    |
+| ChatGLM-6B | BI-V150 | Lora       | 16       | 32.639                   |
+| ChatGLM-6B | BI-V150 | ptuning_v2 | 16       | 115.763                  |
+| ChatGLM-6B | BI-V150 | sft        | 16       | 5.99                     |
 
-## Reference
+## References
 
 - [ChatGLM3](https://github.com/THUDM/ChatGLM3)

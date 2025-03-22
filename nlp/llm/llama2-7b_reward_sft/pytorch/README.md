@@ -1,22 +1,17 @@
-# DeepSpeed Llama-2-7B RMF (DeepSpeed)
+# Llama-2-7B RMF (DeepSpeed)
 
-## Model description
+## Model Description
 
-LLaMA2 is a large language model released by Meta in 2023, with parameters ranging from 7B to 70B. Compared to LLaMA,
-the training corpus of LLaMA2 is 40% longer, and the context length has been upgraded from 2048 to 4096, allowing for
-understanding and generating longer texts.
+Llama-2-7B RMF is a fine-tuned version of Meta's Llama-2-7B model, optimized using DeepSpeed's advanced training
+techniques. This model incorporates reward modeling for improved alignment with human preferences, enhancing its
+performance in dialogue and instruction-following tasks. With 7 billion parameters and a 4096-token context window, it
+excels in understanding and generating coherent, contextually relevant responses. The DeepSpeed optimization enables
+efficient training and inference, making it a powerful tool for developing high-quality conversational AI systems while
+maintaining computational efficiency.
 
-## Step 1: Installation
+## Model Preparation
 
-```sh
-cd deepsparkhub/nlp/llm/llama2-7b_reward_sft/deepspeed
-pip install -r requirements.txt
-pip uninstall numpy
-pip install numpy==1.23.5
-pip install -e .
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 ```sh
 # Install lfs
@@ -36,19 +31,29 @@ git clone https://huggingface.co/datasets/Dahoas/rm-static
 mv Llama-2-7b-hf/ datasets/
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+cd deepsparkhub/nlp/llm/llama2-7b_reward_sft/pytorch
+pip install -r requirements.txt
+pip uninstall numpy
+pip install numpy==1.23.5
+pip install -e .
+```
+
+## Model Training
 
 ```sh
 cd training/step2_reward_model_finetuning/training_scripts/llama2/
 bash ./run_llama2_7b.sh
 ```
 
-## Results
+## Model Results
 
-| GPUs       | Epochs | FPS                     | ACC    |
-|------------|--------|-------------------------|--------|
-| BI-V100 x8 | 1      | AvgSamplesPerSec: 1.948 | 0.6821 |
+| Model          | GPUs       | Epochs | FPS                     | ACC    |
+|----------------|------------|--------|-------------------------|--------|
+| Llama-2-7B RMF | BI-V100 x8 | 1      | AvgSamplesPerSec: 1.948 | 0.6821 |
 
-## Reference
+## References
 
 - [DeepSpeedExamples](https://github.com/microsoft/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat)

@@ -1,17 +1,23 @@
 # BERT Text Classification
 
-## Model description
+## Model Description
 
-BERT-base WNLI task Fine-tuning
+BERT for WNLI (Winograd NLI) is a fine-tuned version of BERT specifically designed for natural language inference tasks.
+It excels at determining the relationship between pairs of sentences, particularly in resolving pronoun references and
+understanding context. By leveraging BERT's bidirectional attention mechanism, it can effectively capture subtle
+linguistic nuances and relationships between text segments. This makes BERT WNLI particularly valuable for tasks
+requiring deep comprehension of sentence structure and meaning, such as coreference resolution and textual entailment.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ``` shell
 cd  <your_project_path>/nlp/text_classification/bert/pytorch
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Preparing datasets
+### Prepare Resources
 
 ```bash
 # Get "bert-base-uncased" from [Huggingface](https://huggingface.co/bert-base-uncased)
@@ -24,29 +30,25 @@ git lfs install
 git clone https://huggingface.co/bert-base-uncased
 ```
 
-## Step 3: Training
+## Model Training
 
 > Make sure you've got "bert-base-uncased" ready in ./bert-base-uncased
 
-### On single GPU
-
 ```bash
+# On single GPU
 bash train.sh
-```
 
-### Multiple GPUs on one machine
-
-```bash
+# Multiple GPUs on one machine
 bash train_dist.sh
 ```
 
-## Results
+## Model Results
 
-| GPUs | Samples/s | Loss |
-|------|-----------|------|
-| 1x1  | 144.5     | 0.74 |
-| 1x8  | 322.74    | 0.71 |
+| Model        | GPUs       | Samples/s | Loss |
+|--------------|------------|-----------|------|
+| BERT WNLI FT | BI-V100 x1 | 144.5     | 0.74 |
+| BERT WNLI FT | BI-V100 x8 | 322.74    | 0.71 |
 
-## Reference
+## References
 
 - [bert-base-uncased](https://huggingface.co/bert-base-uncased)

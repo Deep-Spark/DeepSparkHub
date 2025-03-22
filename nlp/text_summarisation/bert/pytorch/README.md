@@ -1,33 +1,36 @@
 # BERT Text Summarization
 
-## Model description
+## Model Description
 
-BERT-base summarization task Fine-tuning
+BERT for Text Summarization is a fine-tuned version of the BERT model specifically adapted for generating concise
+summaries from longer text documents. By leveraging BERT's bidirectional attention mechanism, it effectively captures
+key information and contextual relationships within the text. This approach enables the model to produce coherent and
+informative summaries while preserving the original meaning. BERT summarization is particularly valuable for
+applications requiring efficient information extraction and condensation, such as news aggregation, document analysis,
+and content curation.
 
-## Step 1: Installing packages
+## Model Preparation
+
+### Install Dependencies
 
 ``` shell
 cd  <your_project_path>/nlp/text_summarisation/bert/pytorch
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Training
-
-### On single GPU
+## Model Training
 
 ``` shell
+# On single GPU
 bash train.sh
-```
 
-### Multiple GPUs on one machine
-
-```shell
+# Multiple GPUs on one machine
 bash train_dist.sh
 ```
 
-## Results
+## Model Results
 
-| GPUs | Samples/s | Loss   |
-|------|-----------|--------|
-| 1x1  | 16.71     | 1.8038 |
-| 1x8  | 117.576   | 1.8288 |
+| Model | GPUs       | Samples/s | Loss   |
+|-------|------------|-----------|--------|
+| BERT  | BI-V100 x1 | 16.71     | 1.8038 |
+| BERT  | BI-V100 x8 | 117.576   | 1.8288 |

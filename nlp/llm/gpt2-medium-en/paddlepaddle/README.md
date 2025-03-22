@@ -1,22 +1,17 @@
 # GPT2-Medium-EN
 
-## Model introduction
+## Model Description
 
-GPT-[2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)/[3] is a
-language generation model obtained by pre-training on a large-scale unlabeled text corpus using the
-[Transformer](https://arxiv.org/abs/1706.03762)  decoder as the basic component of the network.
+GPT2-Medium-EN is a medium-sized variant of the GPT-2 language model, developed by OpenAI. With 345 million parameters,
+it balances computational efficiency and language generation capabilities. Built on the Transformer decoder
+architecture, GPT2-Medium-EN excels in various NLP tasks including text completion, summarization, and dialogue
+generation. Pretrained on a vast corpus of English text, it demonstrates strong performance in understanding and
+generating coherent, contextually relevant text. The model's architecture enables it to capture long-range dependencies
+in text, making it versatile for diverse language processing applications.
 
-## Step 1: Installation
+## Model Preparation
 
-```shell
-git clone https://github.com/PaddlePaddle/PaddleNLP.git
-git checkout v2.6.0
-cd PaddleNLP/model_zoo/gpt
-pip3 install -r requirements.txt
-pip3 install paddlenlp==2.6.0
-```
-
-## Step 2: Preparing dataset
+### Prepare Resources
 
 Take the SST-2 task in GLUE as an example, SST-2 (The Stanford Sentiment Treebank, Stanford Sentiment Treebank), a
 single sentence classification task, contains human annotations of sentences in movie reviews and their emotions. This
@@ -27,6 +22,10 @@ and negative emotions for the sentence level.Number of samples: 67,350 training 
 test sets. Task: Sentiment Classification, Binary Classification of Positive and Negative Sentiments.
 
 ```sh
+git clone https://github.com/PaddlePaddle/PaddleNLP.git
+cd PaddleNLP/
+git checkout v2.6.0
+
 wget https://dl.fbaipublicfiles.com/glue/data/SST-2.zip
 makdir -p dataset
 unzip SST-2.zip -d dataset
@@ -52,7 +51,15 @@ dataset/SST-2
 
 ```
 
-## Step 3:Training
+### Install Dependencies
+
+```shell
+cd PaddleNLP/model_zoo/gpt
+pip3 install -r requirements.txt
+pip3 install paddlenlp==2.6.0
+```
+
+## Model Training
 
 ```bash
 # 1 GPU
@@ -107,7 +114,7 @@ The parameters in the configuration file are explained as follows：
   'cpu' means to use CPU, 'npu' means to use Huawei Ascend card.
 - `use_amp` Indicates whether automatic mixed-precision training is enabled.
 
-## Step 4: Model Evaluation
+### Evaluation
 
 1. Add the `run_eval_sst2.py` file and put it in the `PaddleNLP/model_zoo/gpt` folder, `run_eval_sst2.py` is modified
    based on the `PaddleNLP/model_zoo/gpt/run_eval.py`
@@ -122,12 +129,12 @@ python3 run_eval_sst2.py --model_name gpt2-medium-en \
     --device gpu
 ```
 
-## Results
+## Model Results
 
-| GPUs    | FPS | Accuracy |
-|---------|-----|----------|
-| BI-V100 | 221 | 0.92087  |
+| Model          | GPUs    | FPS | Accuracy |
+|----------------|---------|-----|----------|
+| GPT2-Medium-EN | BI-V100 | 221 | 0.92087  |
 
-## Reference
+## References
 
 - [PaddleNlp](https://github.com/PaddlePaddle/PaddleNLP)

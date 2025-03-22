@@ -1,16 +1,19 @@
 # Baichuan2-7B (DeepSpeed)
 
-## Model description
+## Model Description
 
-Baichuan 2 is the new generation of open-source large language models launched by Baichuan Intelligent Technology. It
-was trained on a high-quality corpus with 2.6 trillion tokens.  Baichuan 2 achieved the best performance of its size on
-multiple authoritative Chinese, English, and multi-language general and domain-specific benchmarks. All versions are
-fully open to academic research. Developers only need to apply via email and obtain official commercial permission to
-use it for free commercially.
+Baichuan2-7B is an advanced open-source large language model developed by Baichuan Intelligent Technology. Trained on a
+high-quality corpus of 2.6 trillion tokens, it excels in both Chinese and English language tasks. The model demonstrates
+superior performance across various benchmarks, offering capabilities in text generation, comprehension, and
+domain-specific applications. Baichuan2-7B's architecture is optimized for efficiency and scalability, making it
+suitable for both academic research and commercial use. Its open-source nature encourages innovation and development in
+the field of natural language processing.
 
-## Step 1: Preparing datasets
+## Model Preparation
 
-Load model weight, and fix configuration_baichuan.py
+### Prepare Resources
+
+Load model weight, and fix configuration_baichuan.py.
   
 ```sh
 pip install modelscope
@@ -25,7 +28,7 @@ mkdir -p data/
 wget -c --no-check-certificate https://raw.githubusercontent.com/baichuan-inc/Baichuan2/main/fine-tune/data/belle_chat_ramdon_10k.json -P data/
 ```
 
-## Step 2: Installation
+### Install Dependencies
 
 ```sh
 cd ../
@@ -35,20 +38,20 @@ cd fine-tune/
 pip install -r requirements.txt
 ```
 
-## Step 3: Training
+## Model Training
 
-Fine-tuning
+Fine-tuning.
 
 ```sh
 bash ./run_sft.sh
 ```
 
-## Results
+## Model Results
 
-| GPUs       | Epochs | train_samples_per_second |
-|------------|--------|--------------------------|
-| BI-V150 x8 | 1      | 10.674                   |
+| Model        | GPUs       | Epochs | train_samples_per_second |
+|--------------|------------|--------|--------------------------|
+| Baichuan2-7B | BI-V150 x8 | 1      | 10.674                   |
 
-## Reference
+## References
 
 - [Baichuan2](https://github.com/baichuan-inc/Baichuan2)

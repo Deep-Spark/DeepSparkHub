@@ -1,24 +1,32 @@
 # Phi-3
 
-## Model description
+## Model Description
 
-Phi, is a family of open AI models developed by Microsoft. Phi models are the most capable and cost-effective small language models (SLMs) available, outperforming models of the same size and next size up across a variety of language, reasoning, coding, and math benchmarks. 
+Phi-3 is a family of efficient small language models (SLMs) developed by Microsoft, designed to deliver high performance
+while maintaining cost-effectiveness. These models excel in various tasks including language understanding, reasoning,
+coding, and mathematical problem-solving. Despite their compact size, Phi-3 models outperform larger models in their
+class, offering a balance between computational efficiency and capability. Their open-source nature and optimized
+architecture make them ideal for applications requiring lightweight yet powerful language processing solutions across
+diverse domains.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
+
 ```bash
 pip3 install -r requirements.txt
 ```
 
-## Step 2 : Training
-### LoRA
+## Model Training
+
 ```bash
+# LoRA
 bash run_lora.sh
-```
-### QLoRA
-```
+
+# QLoRA
 bash run_qlora.sh
 ```
-## Reference
+
+## References
 
 - [Phi-3](https://github.com/microsoft/Phi-3CookBook/commit/b899f6f26bcf0a140eb0e814373458740ead02c3)
-

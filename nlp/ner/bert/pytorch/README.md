@@ -1,17 +1,17 @@
 # BERT NER
 
-## Model description
+## Model Description
 
-BERT-base NER task Fine-tuning
+BERT NER (Named Entity Recognition) is a powerful application of the BERT model for identifying and classifying named
+entities in text. By fine-tuning the pre-trained BERT model on NER tasks, it leverages bidirectional context to
+accurately detect entities like names, locations, and organizations. This approach significantly improves entity
+recognition accuracy compared to traditional methods. BERT NER's ability to understand deep contextual relationships
+makes it particularly effective for complex text analysis tasks in various domains, including information extraction and
+text mining.
 
-## Step 1: Installing packages
+## Model Preparation
 
-``` shell
-cd  <your_project_path>/nlp/ner/bert/pytorch
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 ```bash
 # Get "bert-base-uncased" from [Huggingface](https://huggingface.co/bert-base-uncased)
@@ -25,33 +25,36 @@ git lfs install
 git clone https://huggingface.co/bert-base-uncased
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+``` shell
+cd  <your_project_path>/nlp/ner/bert/pytorch
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 > Make sure you've got "bert-base-uncased" ready in ./bert-base-uncased.
 
-### On single GPU
-
 ``` shell
+# On single GPU
 ## config "dataset_name" to be local path of conll2003 if you want to run off-line
 ## e.g. --dataset_name /path/to/conll2003
 bash run.sh
-```
 
-### Multiple GPUs on one machine
-
-```shell
+# Multiple GPUs on one machine
 ## config "dataset_name" to be local path of conll2003 if you want to run off-line
 ## e.g. --dataset_name /path/to/conll2003
 bash run_dist.sh
 ```
 
-## Results on BI-V100
+## Model Results
 
-| GPUs | Samples/s | Loss   |
-|------|-----------|--------|
-| 1x1  | 100       | 0.0696 |
-| 1x8  | 252       | 0.0688 |
+| Model | GPUs       | Samples/s | Loss   |
+|-------|------------|-----------|--------|
+| BERT  | BI-V100 x1 | 100       | 0.0696 |
+| BERT  | BI-V100 x8 | 252       | 0.0688 |
 
-## Reference
+## References
 
 - [bert-base-uncased](https://huggingface.co/bert-base-uncased)

@@ -1,17 +1,16 @@
 # BERT Question Answering
 
-## Model description
+## Model Description
 
-BERT-base SQuAD task Fine-tuning
+BERT for SQuAD (Stanford Question Answering Dataset) is a fine-tuned version of BERT specifically designed for question
+answering tasks. It excels at extracting precise answers from given contexts by leveraging BERT's bidirectional
+attention mechanism. The model is trained to predict the start and end positions of answers within text passages,
+demonstrating exceptional performance in comprehension tasks. BERT SQuAD's ability to understand context and
+relationships between words makes it particularly effective for complex question answering scenarios in various domains.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-cd  <your_project_path>/nlp/querstion_answering/bert/pytorch
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 ```bash
 # Get "bert-base-uncased" from [Huggingface](https://huggingface.co/bert-base-uncased)
@@ -25,33 +24,36 @@ git lfs install
 git clone https://huggingface.co/bert-base-uncased
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```bash
+cd  <your_project_path>/nlp/querstion_answering/bert/pytorch
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 > Make sure you've got "bert-base-uncased" ready in ./bert-base-uncased
 
-### On single GPU
-
 ```bash
+# On single GPU
 ## config "dataset_name" to be local path of squad if you want to run off-line
 ## e.g. --dataset_name /path/to/squad
 bash run.sh
-```
 
-### Multiple GPUs on one machine
-
-```bash
+# Multiple GPUs on one machine
 ## config "dataset_name" to be local path of squad if you want to run off-line
 ## e.g. --dataset_name /path/to/squad
 bash run_dist.sh
 ```
 
-## Results
+## Model Results
 
-| GPUs | Samples/s | F1    |
-|------|-----------|-------|
-| 1x1  | 128.86    | 87    |
-| 1x8  | 208.6     | 78.69 |
+| Model | GPUs       | Samples/s | F1    |
+|-------|------------|-----------|-------|
+| BERT  | BI-V100 x1 | 128.86    | 87    |
+| BERT  | BI-V100 x8 | 208.6     | 78.69 |
 
-## Reference
+## References
 
 - [bert-base-uncased](https://huggingface.co/bert-base-uncased)
