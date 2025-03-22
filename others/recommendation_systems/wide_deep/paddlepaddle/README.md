@@ -1,30 +1,35 @@
 # Wide&Deep
 
-## Model description
+## Model Description
 
-"Wide&Deep Learning" is a machine learning model architecture that combines the strengths of both memorization and
-generalization. It was introduced by Google in the context of recommender systems, particularly for improving the
-performance of large-scale recommendation tasks.
+Wide&Deep is a hybrid recommendation model developed by Google that combines the strengths of memorization and
+generalization. It integrates a wide linear model for capturing specific feature interactions with a deep neural network
+for learning complex patterns. This architecture effectively balances precise memorization of historical data with the
+ability to generalize to unseen combinations. Wide&Deep has proven particularly effective in large-scale recommendation
+systems, offering improved performance in tasks like app recommendation while maintaining computational efficiency.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
 
 ```sh
+# Prepare PaddleRec
 git clone -b release/2.3.0 https://github.com/PaddlePaddle/PaddleRec.git
 
-cd PaddleRec
-pip3 install -r requirements.txt
-```
-
-## Step 2: Preparing datasets
-
-```sh
 # Download dataset
-pushd datasets/criteo/
+pushd PaddleRec/datasets/criteo/
 sh run.sh
 popd
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+cd PaddleRec/
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```sh
 cd models/rank/wide_deep
@@ -39,6 +44,6 @@ python3 -u ../../../tools/trainer.py -m config_bigdata.yaml
 python3 -u ../../../tools/infer.py -m config_bigdata.yaml
 ```
 
-## Reference
+## References
 
 - [PaddleRec](https://github.com/PaddlePaddle/PaddleRec)

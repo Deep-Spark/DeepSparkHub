@@ -1,23 +1,19 @@
 # NCF
 
-## Model description
+## Model Description
 
-By replacing the inner product with a neural architecture that can learn an arbitrary function from data, we present a
-general framework named NCF, short for Neural network-based Collaborative Filtering. NCF is generic and can express and
-generalize matrix factorization under its framework. To supercharge NCF modelling with non-linearities, we propose to
-leverage a multi-layer perceptron to learn the user-item interaction function. Extensive experiments on two real-world
-datasets show significant improvements of our proposed NCF framework over the state-of-the-art methods. Empirical
-evidence shows that using deeper layers of neural networks offers better recommendation performance.
+NCF (Neural Collaborative Filtering) is an advanced recommendation system model that replaces traditional matrix
+factorization with neural networks. It learns user-item interactions through a multi-layer perceptron, enabling it to
+capture complex, non-linear relationships. NCF generalizes matrix factorization while offering enhanced flexibility and
+performance. It significantly improves recommendation accuracy by leveraging deep learning capabilities. The model is
+particularly effective for collaborative filtering tasks, demonstrating superior results on real-world datasets compared
+to traditional methods. NCF's architecture makes it a powerful tool for personalized recommendation systems.
 
-## Step 1: Installing packages
+## Model Preparation
 
-```sh
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets
-
-Dataset is movielens  
+Dataset is movielens.
 
 ```sh
 # Download dataset
@@ -31,23 +27,25 @@ unzip data/ml-20m.zip -d data/
 python3 convert.py --path ./data/ml-20m/ratings.csv --output ./data/ml-20m
 ```
 
-## Step 3: Training
-
-### Multiple GPUs on one machine
+### Install Dependencies
 
 ```sh
-export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 
-bash run_train_fp32.sh
+pip3 install -r requirements.txt
 ```
 
-### Multiple GPUs on one machine (AMP)
+## Model Training
 
 ```sh
+# Multiple GPUs on one machine
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 
-# fp16 train
+bash run_train_fp32.sh
+
+# Multiple GPUs on one machine (AMP)
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 
+## fp16 train
 bash run_train_fp16.sh
 ```
 
-## Reference
+## References
 
 - [mlcommons](https://github.com/mlcommons/training_results_v0.5/tree/master/v0.5.0/nvidia/submission/code/recommendation/pytorch)

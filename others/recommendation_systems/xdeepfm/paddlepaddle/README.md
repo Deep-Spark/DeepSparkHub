@@ -1,28 +1,36 @@
 # xDeepFM
 
-## Model description
+## Model Description
 
-xDeepFM proposes a novel network named Compressed Interaction Network (CIN), which aims to learn high-order feature
-interactions explicitly. xDeepFM can automatically learn high-order feature interactions in both explicit and implicit
-fashions, which is of great significance to reducing manual feature engineering work.
+xDeepFM is an advanced deep learning model for recommendation systems that combines explicit and implicit feature
+interactions. It introduces the Compressed Interaction Network (CIN) to explicitly learn high-order feature
+combinations, addressing limitations of traditional factorization machines. xDeepFM integrates CIN with deep neural
+networks, enabling both explicit and implicit feature learning. This architecture significantly reduces manual feature
+engineering while improving recommendation accuracy. Particularly effective for sparse data, xDeepFM excels in tasks
+like click-through rate prediction, offering enhanced performance in large-scale recommendation scenarios.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
 
 ```sh
+# Prepare PaddleRec
 git clone -b release/2.3.0 https://github.com/PaddlePaddle/PaddleRec.git
-cd PaddleRec
-pip3 install -r requirements.txt
-```
 
-## Step 2: Preparing datasets
-
-```sh
+# Download dataset
 pushd datasets/criteo/
 sh run.sh
 popd
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+cd PaddleRec/
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```sh
 cd models/rank/xdeepfm
@@ -34,12 +42,12 @@ python3 -u ../../../tools/trainer.py -m config_bigdata.yaml
 python3 -u ../../../tools/infer.py -m config_bigdata.yaml
 ```
 
-## Results
+## Model Results
 
-| GPUs       | IPS  | AUC    |
-|------------|------|--------|
-| BI-V100 x1 | 6000 | 0.7955 |
+| Model   | GPUs       | IPS  | AUC    |
+|---------|------------|------|--------|
+| xDeepFM | BI-V100 x1 | 6000 | 0.7955 |
 
-## Reference
+## References
 
 - [PaddleRec](https://github.com/PaddlePaddle/PaddleRec/tree/master/models/rank/xdeepfm)

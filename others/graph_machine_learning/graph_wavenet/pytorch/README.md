@@ -1,28 +1,23 @@
 # Graph WaveNet
 
-## Model description
+## Model Description
 
-Graph WaveNet is a graph neural network designed for spatial-temporal graph
-modeling. It captures both spatial dependencies and long-range temporal patterns
-using two key innovations: an adaptive dependency matrix for spatial
-relationships and stacked dilated 1D convolutions for long-term temporal
-dependencies. These components are integrated into a unified, end-to-end
-framework. Graph WaveNet effectively handles complex, large-scale datasets,
-excelling in tasks like traffic prediction and energy forecasting. Experimental
-results on datasets like METR-LA and PEMS-BAY show its superior performance
-compared to existing models in terms of accuracy and efficiency.
+Graph WaveNet is an advanced neural network architecture designed for spatial-temporal graph modeling, excelling in
+tasks like traffic prediction and energy forecasting. It combines adaptive dependency matrices for capturing spatial
+relationships with stacked dilated 1D convolutions for long-term temporal dependencies. This unified framework
+effectively handles complex, large-scale datasets, demonstrating superior performance in accuracy and efficiency. Graph
+WaveNet's innovative approach to modeling both spatial and temporal dependencies makes it a powerful tool for analyzing
+and predicting patterns in dynamic, interconnected systems.
 
-## Step 1: Installing packages
+## Model Preparation
 
-```shell
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
-## Step 2: Preparing datasets
+Download METR-LA and PEMS-BAY data from [Google
+Drive](https://drive.google.com/open?id=10FOTa6HXPqX8Pf5WRoRwcFnW9BrNZEIX) or [Baidu
+Yun](https://pan.baidu.com/s/14Yy9isAIZYdU__OYEQGa_g) links provided by [DCRNN](https://github.com/liyaguang/DCRNN)
 
-### Step 2.1: Download METR-LA and PEMS-BAY data from [Google Drive](https://drive.google.com/open?id=10FOTa6HXPqX8Pf5WRoRwcFnW9BrNZEIX) or [Baidu Yun](https://pan.baidu.com/s/14Yy9isAIZYdU__OYEQGa_g) links provided by [DCRNN](https://github.com/liyaguang/DCRNN)
-
-### Step 2.2: Process raw data
+Process raw data.
 
 ```shell
 # Create data and garage directories
@@ -50,7 +45,13 @@ python3 generate_training_data.py --output_dir=data/PEMS-BAY --traffic_df_filena
 
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```shell
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```shell
 python3 train.py --gcn_bool --adjtype doubletransition --addaptadj  --randomadj
