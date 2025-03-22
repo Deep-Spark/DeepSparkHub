@@ -1,42 +1,37 @@
 # Stable Diffusion 1.4
 
-## Model description
+## Model Description
 
-Stable Diffusion is a text-to-image latent diffusion model created by the researchers and engineers from CompVis,
-Stability AI, LAION and RunwayML. It's trained on 512x512 images from a subset of the LAION-5B database. This model uses
-a frozen CLIP ViT-L/14 text encoder to condition the model on text prompts. With its 860M UNet and 123M text encoder,
-the model is relatively lightweight and runs on a GPU with at least 4GB VRAM. See the model card for more information.
+Stable Diffusion 1.4 is a cutting-edge text-to-image generative model that transforms textual descriptions into
+high-quality visual representations. Built on latent diffusion architecture, it efficiently generates 512x512 pixel
+images by operating in a compressed latent space. The model leverages a frozen CLIP ViT-L/14 text encoder to interpret
+and process input prompts. With its 860M UNet and 123M text encoder, Stable Diffusion achieves remarkable results while
+maintaining computational efficiency, making it accessible for users with GPUs having at least 4GB VRAM.
 
-## Prepare
+## Model Preparation
 
-### Install zlib-1.2.9
+### Install Dependencies
 
 ```bash
+# Install zlib-1.2.9
 wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
 tar xvf zlib-1.2.9.tar.gz
 cd zlib-1.2.9/
 ./configure && make install
 cd ..
 rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
-```
 
-### Install openmpi
-
-```bash
+# Install openmpi
 yum install -y openmpi3-devel
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openmpi3/lib/
-```
 
-### Install requirements
-
-```bash
-
+# Install requirements
 pip3 install -r requirements.txt
 ```
 
-## Train
+## Model Training
 
-### Step 1 使用accelerate初始化训练环境
+Use accelerate to initial the traing environment.
 
 ```bash
 # 这里可以选择单卡或者多卡训练
@@ -44,17 +39,17 @@ pip3 install -r requirements.txt
 accelerate config 
 ```
 
-#### Single GPU example
+Single GPU example.
 
 ![image](IMG/single.png)
 
-#### Multi GPU example
+Multi GPU example.
 
 ![image](IMG/multi.png)
 
 if you want to train with "fp32"(mixed precision),you can choose "no"
 
-### Step 2 开始训练
+Start Training.
 
 ```bash
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
@@ -75,17 +70,14 @@ accelerate launch train_text_to_image.py \
   --output_dir="sd-pokemon-model"
 ```
 
-## Test
+Start Testing.
 
 ```bash
-## 可以在test.py中修改prompt
+# 可以在test.py中修改prompt
+## example prompt: A pokemon with green eyes and red legs
 python3 test.py
 ```
 
-## Example
-
-prompt: A pokemon with green eyes and red legs
-
-## Results
+## Model Results
 
 ![image](IMG/result.png)

@@ -1,6 +1,6 @@
 # ControlNet
 
-## Description
+## Model Description
 
 ControlNet is a neural network structure to control diffusion models by adding extra conditions, a game changer for AI
 Image generation. It brings unprecedented levels of control to Stable Diffusion. The revolutionary thing about
@@ -12,7 +12,28 @@ Stable diffusion is trained on billions of images, and it already knows what is 
 
 But it does not know the meaning of that "Control Image (Source Image)". Our target is to let it know.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
+
+Just download the Fill50K dataset from [our huggingface page](https://huggingface.co/lllyasviel/ControlNet)
+(training/fill50k.zip, the file is only 200M!). Make sure that the data is decompressed as:
+
+```sh
+training/
+└── fill50k
+    ├── source
+    └── target
+```
+
+In the folder "fill50k/source", you will have 50k images of circle lines.
+
+In the folder "fill50k/target", you will have 50k images of filled circles.
+
+In the "fill50k/prompt.json", you will have their filenames and prompts. Each prompt is like "a balabala color circle in
+some other color background."
+
+### Install Dependencies
 
 - Install
 
@@ -44,26 +65,7 @@ python3 tool_add_control.py ./models/v1-5-pruned.ckpt ./models/control_sd15_ini.
 python3 tool_add_control_sd21.py ./models/v2-1_512-ema-pruned.ckpt ./models/control_sd21_ini.ckpt
 ```
 
-## Step 2: Preparing datasets
-
-Just download the Fill50K dataset from [our huggingface page](https://huggingface.co/lllyasviel/ControlNet)
-(training/fill50k.zip, the file is only 200M!). Make sure that the data is decompressed as:
-
-```sh
-training/
-└── fill50k
-    ├── source
-    └── target
-```
-
-In the folder "fill50k/source", you will have 50k images of circle lines.
-
-In the folder "fill50k/target", you will have 50k images of filled circles.
-
-In the "fill50k/prompt.json", you will have their filenames and prompts. Each prompt is like "a balabala color circle in
-some other color background."
-
-## Step 3: Training
+## Model Training
 
 ```sh
 # One GPU
@@ -71,17 +73,16 @@ python3 tutorial_train.py
 
 # 8 GPUs
 python3 tutorial_train_dist.py
-
 ```
 
-## Results
+## Model Results
 
-| GPUs       | FPS       |
-|------------|-----------|
-| BI-V100 x8 | 5.02 s/it |
+| Model      | GPUs       | FPS       |
+|------------|------------|-----------|
+| ControlNet | BI-V100 x8 | 5.02 s/it |
 
 Go to `./image_log/train/` to check results of images.
 
-## Reference
+## References
 
 - [ControlNet](https://github.com/lllyasviel/ControlNet)

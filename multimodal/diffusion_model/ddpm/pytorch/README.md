@@ -1,20 +1,16 @@
-# DDPM (Denoising Diffusion Probabilistic Models)
+# DDPM
 
-## Model description
+## Model Description
 
-Unofficial PyTorch implementation of Denoising Diffusion Probabilistic Models. This implementation follows the most of details in official TensorFlow implementation.
+DDPM (Denoising Diffusion Probabilistic Models) are a class of generative models that learn to generate data by
+gradually denoising it through a Markov chain. Inspired by non-equilibrium thermodynamics, DDPMs work by progressively
+adding Gaussian noise to data during training and then learning to reverse this process. This approach allows the model
+to generate high-quality samples by starting from random noise and iteratively refining it. DDPMs have shown impressive
+results in image generation, offering stable training and producing diverse, realistic outputs.
 
-## Step 1: Installation
+## Model Preparation
 
-```sh
-pip3 install -U pip setuptools
-pip3 install -r requirements.txt
-pip3 install protobuf==3.20.3
-yum install -y mesa-libGL 
-pip3 install urllib3==1.26.6
-```
-
-## Step 2: Preparing datasets
+### Prepare Resources
 
 ```sh
 mkdir -p stats && cd stats
@@ -31,23 +27,30 @@ stats
 └── cifar10.train.npz
 ```
 
-## Step 3: Training
+### Install Dependencies
 
 ```sh
-cd ..
+pip3 install -U pip setuptools
+pip3 install -r requirements.txt
+pip3 install protobuf==3.20.3
+yum install -y mesa-libGL 
+pip3 install urllib3==1.26.6
+```
+
+## Model Training
+
+```sh
+cd ../
 
 # 8 GPUs
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
-python3 main.py --train \
-    --flagfile ./config/CIFAR10.txt \
-    --parallel
+python3 main.py --train --flagfile ./config/CIFAR10.txt --parallel
 
 # 1 GPU
 export CUDA_VISIBLE_DEVICES=0
 
-python3 main.py --train \
-    --flagfile ./config/CIFAR10.txt
+python3 main.py --train --flagfile ./config/CIFAR10.txt
 ```
 
 ## Step 4: Evaluate
@@ -56,29 +59,22 @@ python3 main.py --train \
 # 8 GPUs
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
-python3 main.py \
-    --flagfile ./logs/DDPM_CIFAR10_EPS/flagfile.txt \
-    --notrain \
-    --eval \
-    --parallel
+python3 main.py --flagfile ./logs/DDPM_CIFAR10_EPS/flagfile.txt --notrain --eval --parallel
 
 # 1 GPU
 export CUDA_VISIBLE_DEVICES=0
 
-python3 main.py \
-    --flagfile ./logs/DDPM_CIFAR10_EPS/flagfile.txt \
-    --notrain \
-    --eval
+python3 main.py --flagfile ./logs/DDPM_CIFAR10_EPS/flagfile.txt --notrain --eval
 ```
 
-## Results
+## Model Results
 
-| GPUs       | FPS       |
-|------------|-----------|
-| BI-V100 x8 | 1.65 it/s |
+| Model | GPUs       | FPS       |
+|-------|------------|-----------|
+| DDPM  | BI-V100 x8 | 1.65 it/s |
 
 ![image](images/cifar10_samples.png)
 
-## Reference
+## References
 
 - [pytorch-ddpm](https://github.com/w86763777/pytorch-ddpm/tree/master)
