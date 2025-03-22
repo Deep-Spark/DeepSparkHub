@@ -1,16 +1,20 @@
 # BERT Pretraining
 
-## Model description
+## Model Description
 
-BERT, or Bidirectional Encoder Representations from Transformers, improves upon standard Transformers by removing the
-unidirectionality constraint by using a masked language model (MLM) pre-training objective. The masked language model
-randomly masks some of the tokens from the input, and the objective is to predict the original vocabulary id of the
-masked word based only on its context. Unlike left-to-right language model pre-training, the MLM objective enables the
-representation to fuse the left and the right context, which allows us to pre-train a deep bidirectional Transformer. In
-addition to the masked language model, BERT uses a next sentence prediction task that jointly pre-trains text-pair
-representations.
+BERT (Bidirectional Encoder Representations from Transformers) is a groundbreaking language model that revolutionized
+natural language processing. It employs a transformer architecture with bidirectional attention, enabling it to capture
+context from both directions in text. Pretrained using Masked Language Modeling (MLM) and Next Sentence Prediction (NSP)
+tasks, BERT achieves state-of-the-art results across various NLP tasks through fine-tuning. Its ability to understand
+deep contextual relationships in text has made it a fundamental model in modern NLP research and applications.
 
-## Step 1: Installing
+## Model Preparation
+
+### Prepare Resources
+
+Download the [MNLI Dataset](http://www.nyu.edu/projects/bowman/multinli/)
+
+### Install Dependencies
 
 ```bash
 git clone --recursive https://github.com/PaddlePaddle/PaddleNLP.git
@@ -18,19 +22,15 @@ cd PaddleNLP
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Download data
-
-Download the [MNLI Dataset](http://www.nyu.edu/projects/bowman/multinli/)
-
-## Step 3: Training
+## Model Training
 
 ```bash
 # Make sure your dataset path is the same as above
 bash train_bert.sh
 ```
 
-## Results on BI-V100
+## Model Results
 
-| GPU    | FP32                            |
-|--------|---------------------------------|
-| 1 card | Acc@1=84.5,FPS=5.1,BatchSize=32 |
+| Model            | GPU        | FP32                            |
+|------------------|------------|---------------------------------|
+| BERT Pretraining | BI-V100 x1 | Acc@1=84.5,FPS=5.1,BatchSize=32 |
