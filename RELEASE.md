@@ -2,50 +2,49 @@
 
 ## DeepSparkHub 25.03 Release Notes
 
-### 特性和增强
+### 模型与算法
 
-#### 模型与算法
-● 新增了9个大模型训练示例，涉及MoE-LLaVA，DeepSpeed和LLaMA-Factory工具箱
+* 新增了9个大模型训练示例，涉及DeepSpeed，MoE-LLaVA和LLaMA-Factory工具箱
 
 <table>
     </tr>
         <tr align="left"><th colspan=5>大模型</th></tr>
     <tr>
-        <td>MoE-LLaVA-Phi2-2.7B(MoE-LLaVA)</td>
-        <td>MoE-LLaVA-Qwen-1.8B(MoE-LLaVA)</td>
-        <td>MoE-LLaVA-StableLM-1.6B(MoE-LLaVA)</td>
-    </tr>
-    <tr>
-        <td>Yi_6B(DeepSpeed)</td>
-        <td>Yi-1.5_6B(DeepSpeed)</td>
-        <td>Yi-VL-6B(LLaMA-Factory)</td>
-    </tr>
-    <tr>
         <td>GLM-4</td>
         <td>MiniCPM(DeepSpeed)</td>
         <td>Phi-3</td>
     </tr>
+    <tr>
+        <td>MoE-LLaVA-Phi2-2.7B</td>
+        <td>MoE-LLaVA-Qwen-1.8B</td>
+        <td>MoE-LLaVA-StableLM-1.6B</td>
+    </tr>
+    <tr>
+        <td>Yi-6B (DeepSpeed)</td>
+        <td>Yi-1.5-6B (DeepSpeed)</td>
+        <td>Yi-VL-6B (LLaMA-Factory)</td>
+    </tr>
 </table>
 
-● 更新了cv/multi_object_tracking、cv/gnn、cv/face_recognition等分类名称。
-● 调整了kan、graph wavenet、hashnerf等模型的分类路径。
-● 删除了convnext、co-detr、centernet等模型的冗余代码与社区版本对齐。
-● 更新了相关模型README说明，增加了模型所支持的IXUCA SDK版本。
-● 更新了ATSS、Cascade R-CNN、CornerNet等模型代码，适配了MMDetection社区v3.3.0版本。
-● 增加了cv/classification、cv/detection自动化ci脚本。
-● 同步了tacotron2模型的代码。
+### 问题修复
 
-#### 版本关联
+* 同步了Tacotron2 PyTorch模型的最新代码。
+* 删除了ConvNeXt，Co-DETR和CenterNet等模型的冗余代码，并对齐社区版本。
+* 更新了MMDetection工具箱版本至v3.3.0，并同步ATSS、Cascade R-CNN、CornerNet等模型代码。
+* 增加了cv/classification和cv/detection的自动化CI脚本。
+* 更新了所有模型README文档格式，补充了模型所支持的IXUCA SDK版本。
+
+### 版本关联
+
 DeepSparkHub 25.03对应天数软件栈4.2.0版本。
 
-#### 贡献者
+### 贡献者
 
 感谢以下社区贡献者
 
 李一力，sanghui-ilu，majorli6，honglyua，吴永乐。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
-
 
 ## DeepSparkHub 24.12 Release Notes
 
