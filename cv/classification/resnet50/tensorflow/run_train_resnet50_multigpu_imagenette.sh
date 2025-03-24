@@ -42,7 +42,7 @@ done
 source ./get_num_devices.sh
 
 UMD_WAITAFTERLAUNCH=1 python3 -u tf_cnn_benchmarks.py\
- --data_name=imagenet --data_dir=${DATA_DIR}\
+ --data_name=imagenette --data_dir=${DATA_DIR}\
  --data_format=NCHW --batch_size=${BATCH_SIZE}\
  --model=resnet50 --optimizer=${OPTIMIZER} --num_gpus=${IX_NUM_CUDA_VISIBLE_DEVICES}\
  --weight_decay=1e-4 --train_dir=${TRAIN_DIR}\
