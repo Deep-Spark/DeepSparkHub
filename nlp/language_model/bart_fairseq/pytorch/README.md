@@ -1,25 +1,22 @@
 # BART
 
-## Model description
+## Model Description
 
-BART is sequence-to-sequence model trained with denoising as pretraining objective. We show that this pretraining
-objective is more generic and show that we can match RoBERTa results on SQuAD and GLUE and gain state-of-the-art results
-on summarization (XSum, CNN dataset), long form generative question answering (ELI5) and dialog response genration
-(ConvAI2).
+BART (Bidirectional and Auto-Regressive Transformer) is a powerful sequence-to-sequence model that combines
+bidirectional and autoregressive approaches for natural language processing. Pretrained using a denoising objective,
+BART excels in various tasks including text summarization, question answering, and dialogue generation. Its architecture
+allows it to effectively handle both understanding and generation tasks, making it versatile for different NLP
+applications. BART has demonstrated state-of-the-art performance on benchmarks like XSum, CNN/Daily Mail, and GLUE,
+showcasing its robust capabilities in text transformation and comprehension.
 
-## Step 1: Installation
+## Model Preparation
 
-Bart model is using Fairseq toolbox. Before you run this model, you need to setup Fairseq first.
+### Prepare Resources
 
 ```bash
 # Go to "toolbox/Fairseq" directory in root path
 cd ../../../../toolbox/Fairseq/
-bash install_toolbox_fairseq.sh
-```
 
-## Step 2: Preparing datasets
-
-```bash
 # Download dataset
 cd fairseq/
 mkdir -p glue_data
@@ -37,7 +34,15 @@ wget https://dl.fbaipublicfiles.com/fairseq/models/bart.large.tar.gz
 tar -xzvf bart.large.tar.gz
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+Bart model is using Fairseq toolbox. Before you run this model, you need to setup Fairseq first.
+
+```bash
+bash install_toolbox_fairseq.sh
+```
+
+## Model Training
 
 ```bash
 # Finetune on CLUE RTE task
@@ -47,12 +52,12 @@ bash bart.sh
 python3 bart.py
 ```
 
-## Results
+## Model Results
 
-| GPUs       | QPS    | Train Epochs | Accuracy |
-|------------|--------|--------------|----------|
-| BI-v100 x8 | 113.18 | 10           | 83.8     |
+| Model | GPUs       | QPS    | Train Epochs | Accuracy |
+|-------|------------|--------|--------------|----------|
+| BART  | BI-v100 x8 | 113.18 | 10           | 83.8     |
 
-## Reference
+## References
 
 - [Fairseq](https://github.com/facebookresearch/fairseq/tree/v0.10.2)

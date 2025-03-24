@@ -1,30 +1,37 @@
 # Llama-2-7B SFT (Megatron-DeepSpeed)
 
-## Model description
+## Model Description
 
-Llama 2 is a large language model released by Meta in 2023, with parameters ranging from 7B to 70B. Compared to LLaMA,
-the training corpus of Llama 2 is 40% longer, and the context length has been upgraded from 2048 to 4096, allowing for
-understanding and generating longer texts.
+Llama-2-7B SFT is a fine-tuned version of Meta's Llama-2-7B model, optimized using supervised fine-tuning techniques.
+With 7 billion parameters and an extended 4096-token context window, it excels in understanding and generating coherent,
+contextually relevant text. The SFT process enhances its performance on specific tasks by leveraging labeled datasets,
+making it particularly effective for applications requiring precise language understanding and generation. This model
+combines the foundational capabilities of Llama-2 with task-specific optimizations, offering improved performance while
+maintaining computational efficiency.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
 
 ```sh
-# install
 cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
-bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
-```
 
-## Step 2: Preparing datasets
-
-```sh
-cd dataset
+pushd dataset
 # get gpt_small_117M.tar
 wget http://files.deepspark.org.cn:880/deepspark/data/datasets/gpt_small_117M.tar
 tar -xf gpt_small_117M.tar
 rm -f gpt_small_117M.tar
+popd
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+# install
+bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
+```
+
+## Model Training
 
 ```sh
 cd examples/llama2
@@ -38,13 +45,12 @@ If the torchrun command cannot be found，you can execute:
 ln -s /usr/local/corex-3.1.0/lib64/python3/dist-packages/bin/torchrun /usr/local/bin/
 ```
 
-## Results
+## Model Results
 
-| GPUs       | Toolbox            | Model         | Training speed    |
-|------------|--------------------|---------------|-------------------|
-| BI-V100 x8 | Megatron-DeepSpeed | LLaMA2-7B SFT | 1.146 samples/sec |
+| Model         | GPUs       | Toolbox            | Training speed    |
+|---------------|------------|--------------------|-------------------|
+| LLaMA2-7B SFT | BI-V100 x8 | Megatron-DeepSpeed | 1.146 samples/sec |
 
-## Reference
+## References
 
 - [Megatron-DeepSpeed](https://github.com/microsoft/Megatron-DeepSpeed)
-- [Megatron-LM](https://github.com/NVIDIA/Megatron-LM)

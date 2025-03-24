@@ -1,16 +1,22 @@
 # XLNet
 
-## Model description
+## Model Description
 
-[XLNet: Generalized Autoregressive Pretraining for Language Understanding](https://arxiv.org/abs/1906.08237) is an
-unsupervised auto-regressive pre-trained language model. Different from traditional one-way auto-regressive models,
-XLNet performs language modeling by maximizing the expectation of all permutations of the input sequence, which allows
-it to pay attention to contextual information at the same time. In addition, XLNet integrates the
-[Transformer-XL](https://arxiv.org/abs/1901.02860) model in the pre-training stage, the Segment Recurrent Mechanism and
-Relative Positional Encoding mechanism in Transformer-XL can support XLNet to accept longer input sequences, which makes
-XLNet have excellent performance in language tasks with long text sequences.
+XLNet is an advanced language model that combines the strengths of autoregressive and autoencoding approaches. It
+introduces permutation language modeling, allowing the model to consider all possible word orders while maintaining the
+autoregressive property. This enables XLNet to capture bidirectional context more effectively than traditional models.
+Additionally, it incorporates Transformer-XL architecture, which handles long-range dependencies through segment
+recurrence and relative positional encoding. XLNet achieves state-of-the-art performance across various NLP tasks by
+leveraging these innovative techniques.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
+
+The dataset included in the GLUE evaluation task has been provided in the form of API in PaddleNLP, no preparation is
+required in advance. It will be automatically downloaded when executing using `run_glue.py`.
+
+### Install Dependencies
 
 ```bash
 pip3 install sentencepiece
@@ -18,27 +24,22 @@ pip3 install urllib3==1.26.6
 pip3 install paddlenlp==2.4.1
 ```
 
-### Step 2: Preparing datasets
-
-The dataset included in the GLUE evaluation task has been provided in the form of API in PaddleNLP, no preparation is
-required in advance. It will be automatically downloaded when executing using `run_glue.py`.
-
-### Step 3: Training
+## Model Training
 
 Taking the SST-2 task in GLUE as an example, the method of starting Fine-tuning is as follows:
 
 ```bash
 # Set --gpus to be "0" if run on 1 GPU
 python3 -m paddle.distributed.launch --gpus "0,1,2,3,4,5,6,7" ./run_glue.py \
-    --model_name_or_path xlnet-base-cased \
-    --task_name SST-2 \
-    --max_seq_length 128 \
-    --batch_size 32 \
-    --learning_rate 2e-5 \
-    --num_train_epochs 3 \
-    --logging_steps 100 \
-    --save_steps 500 \
-    --output_dir ./tmp/
+                                     --model_name_or_path xlnet-base-cased \
+                                     --task_name SST-2 \
+                                     --max_seq_length 128 \
+                                     --batch_size 32 \
+                                     --learning_rate 2e-5 \
+                                     --num_train_epochs 3 \
+                                     --logging_steps 100 \
+                                     --save_steps 500 \
+                                     --output_dir ./tmp/xlnet_model/
 ```
 
 The parameters are explained as follows:
@@ -56,13 +57,13 @@ The parameters are explained as follows:
 - `save_steps` indicates the model saving and evaluation interval.
 - `output_dir` indicates the model saving path.
 
-## Results
+## Model Results
 
-| GPUs       | FPS   | ACC    |
-|------------|-------|--------|
-| BI-V100 x8 | 743.7 | 0.9450 |
+| Model | GPUs       | FPS   | ACC    |
+|-------|------------|-------|--------|
+| XLNet | BI-V100 x8 | 743.7 | 0.9450 |
 
-## Reference
+## References
 
 - [XLNet](https://arxiv.org/abs/1906.08237)
 - [PaddleNLP](<https://github.com/PaddlePaddle/PaddleNLP/tree/develop/examples/language_model/xlnet>

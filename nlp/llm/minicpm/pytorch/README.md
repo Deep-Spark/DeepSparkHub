@@ -1,6 +1,6 @@
 # MiniCPM (DeepSpeed)
 
-## Model description
+## Model Description
 
 MiniCPM is a series of on-device large language models, with the core language model, MiniCPM-2B, possessing 2.4 billion
 non-embedding parameters. On comprehensive benchmarks, it performs similarly to Mistral-7B (with superior capabilities
@@ -9,7 +9,9 @@ Falcon-40B. Furthermore, on the MT-Bench, currently the closest benchmark to use
 many representative open-source large language models, including Llama2-70B-Chat, Vicuna-33B, Mistral-7B-Instruct-v0.1,
 and Zephyr-7B-alpha.
 
-## Step 1: Installation
+## Model Preparation
+
+### Install Dependencies
 
 ```bash
 cd /model/to/minicpm/pytorch
@@ -18,20 +20,16 @@ cd finetune
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Training
-
-### SFT
+## Model Training
 
 ```bash
+# SFT
 bash sft_finetune.sh
-```
 
-### LoRA
-
-```bash
+# LoRA
 bash lora_finetune.sh
 ```
 
-## Reference
+## References
 
 - [MiniCPM](https://github.com/OpenBMB/MiniCPM/tree/main)

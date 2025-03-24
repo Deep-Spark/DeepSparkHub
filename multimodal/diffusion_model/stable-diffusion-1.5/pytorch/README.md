@@ -1,26 +1,32 @@
 # Stable Diffusion 1.5
 
-## Model description
+## Model Description
 
-Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text
-input.
+Stable Diffusion 1.5 is an advanced text-to-image generative model that creates high-quality, photorealistic images from
+textual descriptions. Building upon its predecessor, this version enhances image generation capabilities through
+improved latent diffusion techniques. The model operates in a compressed latent space, enabling efficient processing
+while maintaining exceptional visual quality. With its ability to interpret diverse text prompts and generate
+corresponding images, Stable Diffusion 1.5 has become a powerful tool for creative applications, AI-assisted design, and
+visual content generation.
 
-## Step 1: Preparation
+## Model Preparation
+
+### Prepare Resources
 
 You just need to run the script, and it will automatically download the required data and weights. Or you can manually
 download the weights and data locally.
 
-### Weights
+#### Weights
 
 Download the runwayml/stable-diffusion-v1-5 from [huggingface
 page](https://huggingface.co/runwayml/stable-diffusion-v1-5).
 
-### Datasets
+#### Datasets
 
 dataset: download the lambdalabs/pokemon-blip-captions  from [huggingface
 page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
 
-## Step 2: Installation
+### Install Dependencies
 
 ```bash
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/diffusers-0.29.0-py3-none-any.whl
@@ -29,7 +35,7 @@ pip3 install -r requirements.txt
 pip3 install pillow --upgrade
 ```
 
-## Step 3: Training
+## Model Training
 
 If you have downloaded the weights and dataset, please export the environment variables like below.
 
@@ -49,12 +55,12 @@ bash run_sd_1.5_single.sh
 bash run_sd_1.5_multi.sh
 ```
 
-## Results
+## Model Results
 
 | Model  | GPUs    | ips_per_device | ips_per_gpu |
 | ------ | ------- | -------------- | ----------- |
 | SD 1.5 | BI-V150 | 6.76           | 13.5        |
 
-## Reference
+## References
 
 - [diffusers](https://github.com/huggingface/diffusers)

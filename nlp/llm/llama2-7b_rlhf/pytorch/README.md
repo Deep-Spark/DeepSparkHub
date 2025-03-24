@@ -1,32 +1,42 @@
 # Llama2-7B RLHF (Megatron-DeepSpeed)
 
-In this example, we use [Llama2-7b](https://huggingface.co/meta-llama/Llama-2-7b) and
-[Tiny-llama-1.1B](https://huggingface.co/TinyLlama/TinyLlama-1.1B-intermediate-step-240k-503b) to do RLHF training. You
-can get them in huggingface through links provided.
+## Model Description
+
+Llama2-7B RLHF is an advanced language model developed by Meta, enhanced through Reinforcement Learning with Human
+Feedback (RLHF). With 7 billion parameters, it combines the foundational capabilities of Llama2 with improved alignment
+to human preferences. The RLHF process refines the model's responses, making them more coherent, contextually relevant,
+and aligned with ethical guidelines. This model excels in various natural language tasks, offering enhanced performance
+in dialogue systems, content generation, and instruction following while maintaining computational efficiency compared
+to larger models.
 
 **Notion: You would better to fine-tune this two models, then do RLHF training as below. So that can get good training result.**
 
-## Step 1: Install
+## Model Preparation
 
-```sh
-# install
-cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
-bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
-```
-
-## Step 2: Dataset
+### Prepare Resources
 
 Download dataset and convert it.
 
 ```sh
-cd dataset
+cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed/
+
+pushd dataset/
+
 # get gpt_small_117M.tar
 wget http://files.deepspark.org.cn:880/deepspark/data/datasets/gpt_small_117M.tar
 tar -xf gpt_small_117M.tar
 rm -f gpt_small_117M.tar
+popd
 ```
 
-## Step 3: Train
+### Install Dependencies
+
+```sh
+# install
+bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
+```
+
+## Model Training
 
 ```sh
 cd examples/llama2
@@ -34,7 +44,7 @@ cd examples/llama2
 bash run_llama2_7b_rlhf_node1.sh
 ```
 
-## Reference
+## References
 
 - [Llama2-7b](https://huggingface.co/meta-llama/Llama-2-7b)
 - [Tiny-llama-1.1B](https://huggingface.co/TinyLlama/TinyLlama-1.1B-intermediate-step-240k-503b)

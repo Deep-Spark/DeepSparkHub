@@ -1,16 +1,16 @@
 # ChatGLM2-6B SFT (DeepSpeed)
 
-## Model description
+## Model Description
 
-This warehouse realizes the fine-tuning of ChatGLM2-6B model based on P-Tuning v2. P-Tuning v2 can reduce the number of
-parameters that need to be fine-tuned to 0.1% of the original, and then run with a minimum of 7GB of video memory
-through model quantization, Gradient Checkpoint and other methods
+ChatGLM2-6B SFT is an enhanced version of the ChatGLM2-6B model, fine-tuned using P-Tuning v2 for efficient adaptation
+to specific tasks. This approach reduces the number of trainable parameters to just 0.1% of the original model, enabling
+fine-tuning with minimal computational resources. Through techniques like model quantization and gradient checkpointing,
+it can operate on GPUs with as little as 7GB of memory. ChatGLM2-6B SFT maintains the original model's bilingual
+capabilities while offering improved task-specific performance and resource efficiency.
 
-## Step 1: Installation
+## Model Preparation
 
-```bash
-pip3 install -r requirements.txt
-```
+### Prepare Resources
 
 Downloading a model from Hugging Face Hub requires first [installing Git
 LFS](https://docs.github.com/zh/repositories/working-with-files/managing-large-files/installing-git-large-file-storage)
@@ -24,20 +24,22 @@ git clone https://huggingface.co/THUDM/chatglm2-6b
 cd ..
 ```
 
-## Step 3: Training
-
-### Train
+### Install Dependencies
 
 ```bash
-bash train_ptuning_v2.sh
+pip3 install -r requirements.txt
 ```
 
-### Test
+## Model Training
 
 ```bash
+# Train
+bash train_ptuning_v2.sh
+
+# Test
 bash evaluate_ptuning_v2.sh
 ```
 
-## Reference
+## References
 
 - [ChatGLM2-6B](https://github.com/THUDM/ChatGLM2-6B/tree/main/ptuning)

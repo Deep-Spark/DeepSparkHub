@@ -1,52 +1,45 @@
 # T5
 
-## Model description
+## Model Description
 
-T5, or Text-to-Text Transfer Transformer, is a Transformer based architecture that uses a text-to-text approach. Every
-task – including translation, question answering, and classification – is cast as feeding the model text as input and
-training it to generate some target text. This allows for the use of the same model, loss function, hyperparameters,
-etc. across our diverse set of tasks.
+T5 (Text-to-Text Transfer Transformer) is a versatile transformer-based model that approaches all NLP tasks through a
+unified text-to-text framework. It treats every task, including translation, summarization, and question answering, as a
+text generation problem. This allows T5 to use the same architecture and training procedure across diverse applications.
+By converting inputs and outputs into text sequences, T5 demonstrates strong performance across multiple benchmarks
+while maintaining a consistent and scalable approach to natural language processing tasks.
 
-## Step 1: Installing packages
+## Model Preparation
+
+### Install Dependencies
 
 ``` shell
 cd  <your_project_path>/t5/pytorch
 bash examples_ix/init_torch.sh
 ```
 
-## Step 2: Training
-
-### On single GPU
+## Model Training
 
 ``` shell
+# On single GPU
 bash examples_ix/train_t5_small_torch.sh
-```
 
-### On single GPU (AMP)
-
-```shell
+# On single GPU (AMP)
 bash examples_ix/train_t5_small_amp_torch.sh
-```
 
-### Multiple GPUs on one machine
-
-```shell
+# Multiple GPUs on one machine
 bash examples_ix/train_t5_small_dist_torch.sh
-```
 
-### Multiple GPUs on one machine (AMP)
-
-```shell
+# Multiple GPUs on one machine (AMP)
 bash examples_ix/train_t5_small_amp_dist_torch.sh
 ```
 
-## Results on BI-V100
+## Model Results
 
-| GUSs | Samples/s | Loss |
-|------|-----------|------|
-| 1x1  | 339       | 1.18 |
-| 1x8  | 2488      | 1.18 |
+| Model | GUSs       | Samples/s | Loss |
+|-------|------------|-----------|------|
+| T5    | BI-V100 x1 | 339       | 1.18 |
+| T5    | BI-V100 x8 | 2488      | 1.18 |
 
-## Reference
+## References
 
 - [t5-small](https://huggingface.co/google-t5/t5-small)

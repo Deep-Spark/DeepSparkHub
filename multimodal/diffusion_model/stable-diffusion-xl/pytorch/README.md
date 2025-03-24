@@ -1,16 +1,23 @@
 # Stable Diffusion XL
 
-## Model description
+## Model Description
 
-Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text
-input.
+Stable Diffusion XL is a powerful text-to-image generation model that represents a significant leap in AI-driven visual
+creativity. This advanced version builds upon its predecessors with enhanced capabilities for generating
+high-resolution, detailed images from textual descriptions. With its larger architecture and improved training
+techniques, Stable Diffusion XL excels at producing photorealistic and artistic visuals with greater accuracy and
+diversity. The model's ability to interpret complex prompts and generate corresponding images makes it a valuable tool
+for creative professionals, designers, and AI enthusiasts.
 
-## Step 1: Preparation
+## Model Preparation
+
+### Prepare Resources
+
 
 You just need to run the script, and it will automatically download the required data and weights. Or you can manually
 download the weights and data locally.
 
-### Weights
+#### Weights
 
 Download the stabilityai/stable-diffusion-xl-base-1.0 from [huggingface
 page](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0).
@@ -18,12 +25,12 @@ page](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0).
 Download the madebyollin/sdxl-vae-fp16-fix from [huggingface
 page](https://huggingface.co/madebyollin/sdxl-vae-fp16-fix).
 
-### Datasets
+#### Datasets
 
 dataset: download the lambdalabs/pokemon-blip-captions  from [huggingface
 page](https://huggingface.co/datasets/lambdalabs/pokemon-blip-captions).
 
-## Step 2: Installation
+### Install Dependencies
 
 ```sh
 pip3 install http://files.deepspark.org.cn:880/deepspark/add-ons/diffusers-0.27.0-py3-none-any.whl
@@ -33,7 +40,7 @@ pip3 install -r requirements.txt
 pip3 install pillow --upgrade
 ```
 
-## Step 3: Training
+## Model Training
 
 If you have downloaded the weights and dataset, please export the environment variables like below.
 
@@ -50,6 +57,6 @@ cd ${PROJ_ROOT}/toolbox/diffusers
 bash run_sd_xl.sh
 ```
 
-## Reference
+## References
 
 - [diffusers](https://github.com/huggingface/diffusers)

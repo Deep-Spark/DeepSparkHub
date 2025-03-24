@@ -1,21 +1,27 @@
 # LLaMA-7B (ColossalAI)
 
-## Model description
+## Model Description
 
-LLaMA-7B is part of a collection of foundation language models called **LLaMA**, which range from 7B to 65B parameters.
-LLaMA models are trained on trillions of tokens from publicly available datasets, and achieve state-of-the-art
-performance on various natural language understanding tasks. LLaMA-7B is the smallest model in the LLaMA family, but it
-still has impressive capabilities. It can generate fluent and coherent text, answer questions, complete sentences, and
-more.
+LLaMA-7B is a foundational language model developed by Meta AI, part of the LLaMA family ranging from 7B to 65B
+parameters. Trained on trillions of tokens from publicly available datasets, it demonstrates state-of-the-art
+performance in natural language understanding tasks. Despite being the smallest in its family, LLaMA-7B excels in text
+generation, question answering, and sentence completion. Its efficient architecture enables impressive capabilities
+while maintaining computational feasibility, making it a versatile tool for various NLP applications and research in
+language model development.
 
-ColossalChat is the project to implement LLM with RLHF, powered by the Colossal-AI project.
+## Model Preparation
 
-Coati stands for ColossalAI Talking Intelligence. It is the name for the module implemented in this project and is also
-the name of the large language model developed by the ColossalChat project.
+### Prepare Resources
 
-## Step 1: Installation
+You can download dataset and pretrained mode from below link.
 
-### Install ColossalAI
+- instinwild_en.json: [BaiduPan](https://pan.baidu.com/s/1f22_1dcWr-ZwErOo8OwbzQ?pwd=x3s9),
+  [GoogleDrive](https://drive.google.com/file/d/1qOfrl0RIWgH2_b1rYCEVxjHF3u3Dwqay/view)
+- [llama-7b-hf](https://huggingface.co/decapoda-research/llama-7b-hf)
+
+### Install Dependencies
+
+#### Install ColossalAI
 
 LLaMA-7B model is using ColossalAI toolbox. Before you run this model, you need to setup ColossalAI first.
 
@@ -24,22 +30,14 @@ cd ../../../../toolbox/ColossalAI/v0.3.0/
 bash install_toolbox_colossalai.sh
 ```
 
-### Install coati
+#### Install coati
 
 ```sh
 cd ColossalAI/applications/Chat
 pip3 install .
 ```
 
-## Step 2: Preparing datasets
-
-You can download dataset and pretrained mode from below link.
-
-- instinwild_en.json: [BaiduPan](https://pan.baidu.com/s/1f22_1dcWr-ZwErOo8OwbzQ?pwd=x3s9),
-  [GoogleDrive](https://drive.google.com/file/d/1qOfrl0RIWgH2_b1rYCEVxjHF3u3Dwqay/view)
-- [llama-7b-hf](https://huggingface.co/decapoda-research/llama-7b-hf)
-
-## Step 3: Training
+## Model Training
 
 ```sh
 # multi node
@@ -63,12 +61,12 @@ torchrun --nnodes=$NODE_NUMS --node_rank=$NODE_RANK --master_addr=$MASTER_ADDR -
 ln -s /usr/local/corex-3.1.0/lib64/python3/dist-packages/bin/torchrun /usr/local/bin/
 ```
 
-## Results
+## Model Results
 
-| Model    | Training speed  |
-|----------|-----------------|
-| LLaMA-7B | 0.9 samples/sec |
+| Model    | GPU     | Training speed  |
+|----------|---------|-----------------|
+| LLaMA-7B | BI-V100 | 0.9 samples/sec |
 
-## Reference
+## References
 
 - [ColossalAI](https://github.com/hpcaitech/ColossalAI)

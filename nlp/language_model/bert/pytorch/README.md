@@ -1,43 +1,43 @@
 # BERT Pretraining
 
-## Model description
+## Model Description
 
-BERT, or Bidirectional Encoder Representations from Transformers, improves upon standard Transformers by removing the unidirectionality constraint by using a masked language model (MLM) pre-training objective. The masked language model randomly masks some of the tokens from the input, and the objective is to predict the original vocabulary id of the masked word based only on its context. Unlike left-to-right language model pre-training, the MLM objective enables the representation to fuse the left and the right context, which allows us to pre-train a deep bidirectional Transformer. In addition to the masked language model, BERT uses a next sentence prediction task that jointly pre-trains text-pair representations.
+BERT (Bidirectional Encoder Representations from Transformers) is a groundbreaking language model that revolutionized
+natural language processing. It employs a transformer architecture with bidirectional attention, enabling it to capture
+context from both directions in text. Pretrained using Masked Language Modeling (MLM) and Next Sentence Prediction (NSP)
+tasks, BERT achieves state-of-the-art results across various NLP tasks through fine-tuning. Its ability to understand
+deep contextual relationships in text has made it a fundamental model in modern NLP research and applications.
 
+## Model Preparation
 
-## Step 1: Installing
-
-```shell
-bash init.sh
-```
-
-## Step 2: Preparing dataset
+### Prepare Resources
 
 Reference: [training_results_v1.0](https://github.com/mlcommons/training_results_v1.0/tree/master/NVIDIA/benchmarks/bert/implementations/pytorch)
 
-**Structure**
-```
+```bash
 └── bert/dataset
     ├── 2048_shards_uncompressed
     ├── bert_config.json
     ├── eval_set_uncompressed
     └── model.ckpt-28252.apex.pt
 ```
-## Step 3: Training
+
+### Install Dependencies
+
+```shell
+bash init.sh
+```
+
+## Model Training
 
 > Warning: The number of cards are computed by `torch.cuda.device_count()`, 
 > so you can set `CUDA_VISIBLE_DEVICES` to set the number of cards.
 
-
-### Multiple GPUs on one machine (AMP)
-
 ```shell
+# Multiple GPUs on one machine (AMP)
 DATA=/path/to/bert/dataset bash train_bert_pretraining_amp_dist.sh
-```
 
-
-### Parameters
-```shell
+# Parameters
 --gradient_accumulation_steps
 --max_steps
 --train_batch_size
@@ -47,20 +47,16 @@ DATA=/path/to/bert/dataset bash train_bert_pretraining_amp_dist.sh
 --dist_backend
 ```
 
+## Model Results
 
-## Results on BI-V100
-
-| GPUs | FP16 | FPS |  E2E   | MLM Accuracy |
-| ---- | ---- | --- | ------ | ------------ |
-| 1x8  | True | 227 | 13568s | 0.72         |
-
+| Model            | GPUs       | FP16 | FPS | E2E    | MLM Accuracy |
+|------------------|------------|------|-----|--------|--------------|
+| BERT Pretraining | BI-V100 x8 | True | 227 | 13568s | 0.72         |
 
 | Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
 | -------------------- | ---------------------------------------- | ----------- | -------- | ---------- | ----------- | ----------------------- | --------- |
 | 0.72                 | SDK V2.2,bs:32,8x,AMP                    | 214         | 0.72     | 152\*8     | 0.96        | 20.3\*8                 | 1         |
 
+## References
 
-
-# Reference
-
-https://github.com/mlcommons/training_results_v1.0/tree/master/NVIDIA/benchmarks/bert/implementations/pytorch
+- [training_results_v1.0](https://github.com/mlcommons/training_results_v1.0/tree/master/NVIDIA/benchmarks/bert/implementations/pytorch)

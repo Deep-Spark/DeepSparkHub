@@ -1,10 +1,17 @@
 # Aquila2-34B (Megatron-DeepSpeed)
 
-## Model description
+## Model Description
 
-Aquila 2 is a large language model released by Beijing Zhiyuan Artificial Intelligence Research Institute in 2023, with parameters ranging from 7B to 70B.
+Aquila2-34B is a state-of-the-art large language model developed by Beijing Zhiyuan Artificial Intelligence Research
+Institute. With 34 billion parameters, it demonstrates exceptional capabilities in natural language understanding and
+generation. Built on the Megatron-DeepSpeed framework, Aquila2-34B efficiently handles complex language tasks while
+optimizing computational resources. Its architecture enables advanced performance in various NLP applications, including
+text generation, summarization, and question answering. The model represents a significant advancement in Chinese
+language processing, offering improved context understanding and response generation for diverse linguistic tasks.
 
-## Step1: Configure 4-node environment
+## Model Preparation
+
+### Configure 4-node environment
 
 1. Configure the same runing environment on each node and make sure the docker container names are the same
 2. Set ssh non-encryption connection on docker container:
@@ -17,7 +24,7 @@ ssh-keygen
 ssh-copy-id -i ~/.ssh/id_rsa.pub ${host_name}  ## {host_name} can be a specified Ip address or domain name
 ```
 
-## Step 2: Installation on all nodes
+### Installation on all nodes
 
 ```sh
 # install
@@ -25,7 +32,7 @@ cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
 bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
 ```
 
-## Step 3: Preparing datasets on all nodes
+### Preparing datasets on all nodes
 
 ```sh
 cd dataset
@@ -34,7 +41,9 @@ wget https://the-eye.eu/public/AI/pile_neox/data/BookCorpusDataset_text_document
 wget https://the-eye.eu/public/AI/pile_neox/data/BookCorpusDataset_text_document.idx
 ```
 
-## Step 4: Training by executing the following command on master node
+## Model Training
+
+Execute the following command on master node.
 
 ```sh
 cd examples/aquila/
@@ -66,6 +75,6 @@ following command:
 scp -r ../../dataset/gpt_small_117M/gpt_small_117M_text_document ${user_name}@${host_name}:path/to/megatron-deepspeed/dataset/gpt_small_117M/gpt_small_117M_text_document
 ```
 
-## Reference
+## References
 
 - [Megatron-DeepSpeed](https://github.com/microsoft/Megatron-DeepSpeed)

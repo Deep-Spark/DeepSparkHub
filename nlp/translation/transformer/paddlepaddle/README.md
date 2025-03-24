@@ -1,6 +1,6 @@
 # Transformer
 
-## Introduction
+## Model Description
 
 The Transformer model, introduced in 2017 by Vaswani et al., revolutionized natural language processing (NLP). Unlike
 traditional models like RNNs or LSTMs, the Transformer relies entirely on self-attention mechanisms to process input
@@ -10,18 +10,17 @@ multi-head attention and position-wise feed-forward networks. Transformers have 
 state-of-the-art models like BERT, GPT, and T5, driving advancements in machine translation, text generation, and other
 NLP tasks.
 
-## Step 1: Installing
+## Model Preparation
+
+### Install Dependencies
 
 ```sh
 git clone https://github.com/PaddlePaddle/PaddleNLP.git
-```
-
-```sh
-cd PaddleNLP
+cd PaddleNLP/
 pip3 install -r requirements.txt
 ```
 
-## Step 2: Training
+## Model Training
 
 The training is use AMP model.
 
@@ -34,6 +33,6 @@ python3 -u -m paddle.distributed.launch --gpus=0,1,2,3,4,5,6,7 train.py --config
 --use_amp True --amp_level O1
 ```
 
-## Reference
+## References
 
 - [PaddleNLP](https://github.com/PaddlePaddle/PaddleNLP)

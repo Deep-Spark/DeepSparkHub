@@ -1,6 +1,6 @@
 # DeepFM
 
-## Description
+## Model Description
 
 DeepFM (Deep Factorization Machine) combines Factorization Machines (FM) and Deep Neural Networks (DNN) for
 recommendation systems. FM captures low-order feature interactions, while DNN models high-order non-linear interactions.
@@ -8,23 +8,28 @@ The model is end-to-end trainable and excels in tasks like click-through rate (C
 recommendations. By integrating both FM and DNN, DeepFM efficiently handles sparse data, offering better performance
 compared to traditional methods, especially in large-scale applications such as advertising and product recommendations.
 
-## Step 1: Installation
+## Model Preparation
+
+### Prepare Resources
 
 ```sh
+# Prepare PaddleRec
 git clone -b release/2.3.0  https://github.com/PaddlePaddle/PaddleRec.git
-cd PaddleRec
-pip3 install -r requirements.txt
-```
+cd PaddleRec/
 
-## Step 2: Preparing datasets
-
-```sh
+# Prepare Criteo dataset
 pushd datasets/criteo/
 sh run.sh
 popd
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```sh
 cd models/rank/deepfm
@@ -37,6 +42,6 @@ python3 -u ../../../tools/trainer.py -m config_bigdata.yaml
 python3 -u ../../../tools/infer.py -m config_bigdata.yaml
 ```
 
-## Reference
+## References
 
 - [PaddleRec](https://github.com/PaddlePaddle/PaddleRec.git)

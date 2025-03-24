@@ -1,55 +1,63 @@
 # Llama3-8B SFT (ColossalAI)
 
-## Model description
+## Model Description
 
-The Llama 3 Herd of models natively supports multilinguality, coding, reasoning, and tool usage. Our largest model is
-dense Transformer with 405B parameters, processing information in a context window of up to 128K tokens, Llama 3 8B is
-the smallest model of Llama 3 Herd of models.
+Llama3-8B SFT is a fine-tuned version of Meta's Llama3-8B model, optimized using supervised fine-tuning techniques. With
+8 billion parameters, it leverages an advanced transformer architecture and Grouped-Query Attention (GQA) for efficient
+inference. The SFT process enhances its performance on specific tasks by leveraging labeled datasets, making it
+particularly effective for applications requiring precise language understanding and generation. This model combines the
+foundational capabilities of Llama3 with task-specific optimizations, offering improved performance while maintaining
+computational efficiency.
 
-## Step 1: Preparing checkpoints
+## Model Preparation
+
+### Prepare Resources
 
 Get "Meta-Llama-3-8B" models and config file from modelscope or other place, and mv it to "/home/model_zoos/".
 One recommended link: "<https://modelscope.cn/models/LLM-Research/Meta-Llama-3-8B>".
 
 ```sh
+# Prepare ColossalAI
+git clone -b v0.4.4 https://github.com/hpcaitech/ColossalAI.git --depth=1
+cd ColossalAI/
+cp -rf <DeepSparkHub_Root>/toolbox/ColossalAI/v0.4.4/patches/* ./
+
+# Get Meta-Llama-3-8B
 mkdir -p /home/model_zoos/
 mv <Path>/Meta-Llama-3-8B /home/model_zoos/
 
 wget http://files.deepspark.org.cn:880/deepspark/data/tokenizer/tokenizer.model
 cp tokenizer.model /home/model_zoos/Meta-Llama-3-8B
-```
 
-## Step 2: Installation and preparing datasets
-
-You should ensure that the corresponding version of ColossalAI has been installed in the iluvatar environment. Then
-install applications as follows:
-
-```sh
-git clone -b v0.4.4 https://github.com/hpcaitech/ColossalAI.git --depth=1
-cd ColossalAI
-cp -rf <DeepSparkHub_Root>/toolbox/ColossalAI/v0.4.4/patches/* ./
-cd applications/Colossal-LLaMA
-pip3 install -e . 
-
-# preparing datasets
+# Get school_math_0.25M.jsonl
 wget http://files.deepspark.org.cn:880/deepspark/data/datasets/school_math_0.25M.jsonl
 mkdir -p dataset/school_math/convert/
 mv school_math_0.25M.jsonl dataset/school_math
 bash ./prepare_sft_dataset.sh llama3
 ```
 
-## Step 3: Training
+### Install Dependencies
+
+You should ensure that the corresponding version of ColossalAI has been installed in the iluvatar environment. Then
+install applications as follows:
+
+```sh
+cd applications/Colossal-LLaMA/
+pip3 install -e . 
+```
+
+## Model Training
 
 ```sh
 bash run_llama3_8b_sft_3d.sh
 ```
 
-## Results
+## Model Results
 
-| model     | peft     | num_gpus | train_samples_per_second |
+| Model     | peft     | num_gpus | train_samples_per_second |
 |-----------|----------|----------|--------------------------|
 | Llama3-8B | Full sft | 16       | 1.53                     |
 
-## Reference
+## References
 
 - [ColossalAI](https://github.com/hpcaitech/ColossalAI/tree/v0.4.4/applications/Colossal-LLaMA)

@@ -1,33 +1,19 @@
 ﻿# BERT
 
-## Model description
+## Model Description
 
-The BERT network was proposed by Google in 2018. The network has made a breakthrough in the field of NLP. The network
-uses pre-training to achieve a large network structure without modifying, and only by adding an output layer to achieve
-multiple text-based tasks in fine-tuning. The backbone code of BERT adopts the Encoder structure of Transformer. The
-attention mechanism is introduced to enable the output layer to capture high-latitude global semantic information. The
-pre-training uses denoising and self-encoding tasks, namely MLM(Masked Language Model) and NSP(Next Sentence
-Prediction). No need to label data, pre-training can be performed on massive text data, and only a small amount of data
-to fine-tuning downstream tasks to obtain good results. The pre-training plus fune-tuning mode created by BERT is widely
-adopted by subsequent NLP networks.
+BERT (Bidirectional Encoder Representations from Transformers) is a groundbreaking language model that revolutionized
+natural language processing. It employs a transformer architecture with bidirectional attention, enabling it to capture
+context from both directions in text. Pretrained using Masked Language Modeling (MLM) and Next Sentence Prediction (NSP)
+tasks, BERT achieves state-of-the-art results across various NLP tasks through fine-tuning. Its ability to understand
+deep contextual relationships in text has made it a fundamental model in modern NLP research and applications.
 
-[Paper](https://arxiv.org/abs/1810.04805):  Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova. [BERT:
-Pre-training of Deep Bidirectional Transformers for Language Understanding]((https://arxiv.org/abs/1810.04805)). arXiv
-preprint arXiv:1810.04805.
+## Model Preparation
 
-[Paper](https://arxiv.org/abs/1909.00204):  Junqiu Wei, Xiaozhe Ren, Xiaoguang Li, Wenyong Huang, Yi Liao, Yasheng Wang,
-Jiashu Lin, Xin Jiang, Xiao Chen, Qun Liu. [NEZHA: Neural Contextualized Representation for Chinese Language
-Understanding](https://arxiv.org/abs/1909.00204). arXiv preprint arXiv:1909.00204.
+### Prepare Resources
 
-## Step 1: Installing
-
-```sh
-pip3 install -r requirements.txt
-```
-
-## Step 2: Prepare Datasets
-
-1. Download training dataset(.tf_record), eval dataset(.json), vocab.txt and checkpoint：bert_large_ascend_v130_enwiki_official_nlp_bs768_loss1.1.ckpt
+Download training dataset(.tf_record), eval dataset(.json), vocab.txt and checkpoint:
+bert_large_ascend_v130_enwiki_official_nlp_bs768_loss1.1.ckpt
 
 ```sh
 cd scripts
@@ -61,16 +47,20 @@ We have provided several kinds of pretrained checkpoint.
 - [Bert-large-en](https://download.mindspore.cn/model_zoo/r1.3/bert_large_ascend_v130_enwiki_official_nlp_bs768_loss1.1/),
   tarined on en-wiki datasets with 512 length.
 
-## Step 3: Training
+### Install Dependencies
+
+```sh
+pip3 install -r requirements.txt
+```
+
+## Model Training
 
 ```sh
 bash scripts/run_squad_gpu_distribute.sh 8
 ```
 
-### [Evaluation result]
+## Model Results
 
-## Results
-
-| GPUs | per step time | exact_match | F1     |
-|------|---------------|-------------|--------|
-| 1x8  | 1.898s        | 71.9678     | 81.422 |
+| Model | GPUs       | per step time | exact_match | F1     |
+|-------|------------|---------------|-------------|--------|
+| BERT  | BI-V100 x8 | 1.898s        | 71.9678     | 81.422 |
