@@ -26,7 +26,6 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub ${host_name}  ## {host_name} can be a specified
 ```sh
 # install
 cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed
-bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
 ```
 
 ### Preparing datasets on all nodes

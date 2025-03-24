@@ -21,26 +21,24 @@ Download dataset and convert it.
 cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed/
 
 pushd dataset/
-
 # get gpt_small_117M.tar
 wget http://files.deepspark.org.cn:880/deepspark/data/datasets/gpt_small_117M.tar
 tar -xf gpt_small_117M.tar
 rm -f gpt_small_117M.tar
 popd
-```
 
-### Install Dependencies
-
-```sh
-# install
-bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
+# Download checkpoints as above and put them to proper path, then convert checkpoints.
+pushd checkpoints
+bash download_rlhf_checkpoints.sh
+bash convert_hf_2_meg.sh
+popd
 ```
 
 ## Model Training
 
 ```sh
 cd examples/llama2
-# Modify run_llama2_7b_1node.sh according to your machine: for example, HOST_NAME, ADDR_ARRAY, CONTAINER_NAME, NCCL_SOCKET_IFNAME
+# Modify run_llama2_7b_rlhf_node1.sh according to your machine: for example, HOST_NAME, ADDR_ARRAY, CONTAINER_NAME, NCCL_SOCKET_IFNAME, DATA_PATH
 bash run_llama2_7b_rlhf_node1.sh
 ```
 

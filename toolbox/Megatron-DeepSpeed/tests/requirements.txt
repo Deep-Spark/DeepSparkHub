@@ -1,3 +1,0 @@
-pytest_mock
-pybind11
-regex
