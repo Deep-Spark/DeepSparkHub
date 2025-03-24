@@ -22,13 +22,6 @@ tar -xf gpt_small_117M.tar
 rm -f gpt_small_117M.tar
 ```
 
-### Install Dependencies
-
-```sh
-# install
-bash build_megatron-deepspeed.sh && bash install_megatron-deepspeed.sh
-```
-
 ## Model Training
 
 ```sh

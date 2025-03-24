@@ -1,5 +1,0 @@
-include megatron_ds/data/Makefile
-include megatron_ds/data/helpers.cpp
-include megatron_ds/core/datasets/Makefile
-include megatron_ds/core/datasets/helpers.cpp
-recursive-include megatron_ds/fused_kernels *.cpp *.h *.cu *.tr *.cuh *.cc
