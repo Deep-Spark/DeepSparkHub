@@ -25,7 +25,11 @@ Reference: [training_results_v1.0](https://github.com/mlcommons/training_results
 ### Install Dependencies
 
 ```shell
-bash init.sh
+apt install -y git numactl
+pip install h5py
+pip install psutil
+pip install mlperf-logging
+pip install boto3
 ```
 
 ## Model Training

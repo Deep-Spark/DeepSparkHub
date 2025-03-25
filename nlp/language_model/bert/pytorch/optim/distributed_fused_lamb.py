@@ -43,7 +43,7 @@ def _pipeline_block_reductions_patched(self, block_id):
         rs_stream.wait_stream(torch.cuda.current_stream())
         rs_stream.wait_stream(self._l2_grad_norm_st)
         with torch.cuda.stream(rs_stream):
-            works[chunk_id] = torch.distributed.reduce_scatter(self._fp16_g_chunks[block_id][chunk_id],self._flat_grads_shards[block_id][chunk_id],group=self._rs_pg[glob_chunk_id%self._num_rs_pg],async_op=True,no_copy=True)
+            works[chunk_id] = torch.distributed.reduce_scatter(self._fp16_g_chunks[block_id][chunk_id],self._flat_grads_shards[block_id][chunk_id],group=self._rs_pg[glob_chunk_id%self._num_rs_pg],async_op=True)
 
     # Reduction across nodes for each rank
     if self._num_groups > 1:
@@ -118,6 +118,6 @@ def _pipeline_step_patched(self):
                 self._contrib_weight_decay,
                 global_grad_norm,
                 self._use_nvlamb)
-        torch.distributed.all_gather(self._new_params_mega_shards, self._fp16_p, group=self._ag_pg[0], no_copy=True)
+        torch.distributed.all_gather(self._new_params_mega_shards, self._fp16_p, group=self._ag_pg[0])
 
 
