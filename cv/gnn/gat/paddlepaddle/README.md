@@ -8,6 +8,12 @@ to neighboring nodes through attention coefficients, allowing for more flexible 
 approach enables the model to handle varying neighborhood sizes and capture complex relationships in graph data, making
 it particularly effective for tasks like node classification and graph-based prediction problems.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.1.0     |  23.12  |
+
 ## Model Preparation
 
 ### Prepare Resources

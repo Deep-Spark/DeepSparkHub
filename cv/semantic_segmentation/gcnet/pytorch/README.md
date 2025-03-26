@@ -6,6 +6,12 @@ A Global Context Network, or GCNet, utilises global context blocks to model long
 based on the Non-Local Network, but it modifies the architecture so less computation is required. Global context blocks
 are applied to multiple layers in a backbone network to construct the GCNet.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

@@ -9,6 +9,12 @@ understanding compared to earlier versions. The model operates efficiently in a 
 accessible for various applications while maintaining exceptional visual fidelity. Stable Diffusion 2.1 has become a
 powerful tool for creative professionals and AI enthusiasts alike.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.1.1     |  24.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

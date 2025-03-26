@@ -8,6 +8,12 @@ efficiency. Based on instant-ngp's approach, HashNeRF employs a grid encoder and
 high-quality rendering results. The model supports various datasets and custom scenes, making it suitable for
 applications in computer graphics, virtual reality, and 3D reconstruction tasks.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

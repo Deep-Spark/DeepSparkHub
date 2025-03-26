@@ -8,6 +8,12 @@ The model is end-to-end trainable and excels in tasks like click-through rate (C
 recommendations. By integrating both FM and DNN, DeepFM efficiently handles sparse data, offering better performance
 compared to traditional methods, especially in large-scale applications such as advertising and product recommendations.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.3.0     |  22.12  |
+
 ## Model Preparation
 
 ### Prepare Resources

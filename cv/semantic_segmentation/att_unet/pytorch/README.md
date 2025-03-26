@@ -9,6 +9,12 @@ modules, improving model sensitivity and accuracy. Attention U-Net efficiently p
 computational overhead, making it particularly effective for tasks requiring precise segmentation of complex anatomical
 structures.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.0.0     |  23.06  |
+
 ## Model Preparation
 
 ### Prepare Resources

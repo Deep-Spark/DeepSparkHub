@@ -8,6 +8,12 @@ sources, such as structured knowledge graphs, and by integrating multiple lingui
 semantics, and common sense. The model achieves this by using a knowledge-enhanced pre-training approach, which helps
 ERNIE better understand and generate more accurate and contextually aware language representations.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.3.0     |  22.12  |
+
 ## Model Preparation
 
 ### Prepare Resources

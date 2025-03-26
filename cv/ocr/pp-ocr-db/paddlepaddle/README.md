@@ -8,6 +8,12 @@ model is optimized for real-time performance and can handle diverse text layouts
 particularly effective in document analysis and scene text recognition tasks, offering a balance between accuracy and
 computational efficiency for practical OCR applications.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.3.0     |  22.12  |
+
 ## Model Preparation
 
 ### Prepare Resources

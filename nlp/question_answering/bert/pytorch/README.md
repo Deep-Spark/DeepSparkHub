@@ -8,6 +8,12 @@ attention mechanism. The model is trained to predict the start and end positions
 demonstrating exceptional performance in comprehension tasks. BERT SQuAD's ability to understand context and
 relationships between words makes it particularly effective for complex question answering scenarios in various domains.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.0.0     |  23.03  |
+
 ## Model Preparation
 
 ### Prepare Resources

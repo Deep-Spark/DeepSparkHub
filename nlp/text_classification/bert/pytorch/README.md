@@ -8,6 +8,12 @@ understanding context. By leveraging BERT's bidirectional attention mechanism, i
 linguistic nuances and relationships between text segments. This makes BERT WNLI particularly valuable for tasks
 requiring deep comprehension of sentence structure and meaning, such as coreference resolution and textual entailment.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.0.0     |  23.03  |
+
 ## Model Preparation
 
 ### Install Dependencies

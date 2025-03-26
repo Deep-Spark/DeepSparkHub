@@ -7,6 +7,12 @@ uses an efficient encoder-decoder architecture and depthwise separable convoluti
 simplified design allows FastFCN to run much faster than prior FCNs while maintaining good segmentation quality. FastFCN
 demonstrates real-time segmentation is possible with a carefully designed lightweight CNN architecture.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.1.0     |  23.12  |
+
 ## Model Preparation
 
 ### Prepare Resources

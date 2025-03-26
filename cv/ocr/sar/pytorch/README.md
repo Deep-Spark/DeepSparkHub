@@ -10,6 +10,12 @@ off-the-shelf neural network components and only word-level annotations. It is c
 LSTM-based encoder-decoder framework and a 2-dimensional attention module. Despite its simplicity, the proposed method
 is robust and achieves state-of-the-art performance on both regular and irregular scene text recognition benchmarks.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

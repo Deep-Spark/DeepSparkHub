@@ -8,6 +8,12 @@ mAP) on COCO dataset and 80+ mAP (82.1 mAP) on MPII dataset. To match poses that
 frames, we also provide an efficient online pose tracker called Pose Flow. It is the first open-source online pose
 tracker that achieves both 60+ mAP (66.5 mAP) and 50+ MOTA (58.3 MOTA) on PoseTrack Challenge dataset.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.0.0     |  23.06  |
+
 ## Model Preparation
 
 ### Prepare Resources

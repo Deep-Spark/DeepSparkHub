@@ -9,6 +9,12 @@ allows it to effectively handle both understanding and generation tasks, making 
 applications. BART has demonstrated state-of-the-art performance on benchmarks like XSum, CNN/Daily Mail, and GLUE,
 showcasing its robust capabilities in text transformation and comprehension.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.0.0     |  23.06  |
+
 ## Model Preparation
 
 ### Prepare Resources
