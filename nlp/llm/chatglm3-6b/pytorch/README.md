@@ -9,6 +9,13 @@ efficiency and language understanding. ChatGLM3-6B excels in generating coherent
 particularly in Chinese dialogue scenarios. Its architecture supports various fine-tuning techniques, making it
 adaptable for diverse applications while maintaining a low deployment threshold for practical implementation.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+| BI-V150 | 4.1.1     |  24.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

@@ -6,6 +6,12 @@ Mamba-YOLO is an innovative object detection model that integrates State Space M
 Look Once) architecture to enhance performance in complex visual tasks. This integration aims to improve the model's
 ability to capture global dependencies and process long-range information efficiently.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.1.1     |  24.12  |
+
 ## Model Preparation
 
 ### Prepare Resources

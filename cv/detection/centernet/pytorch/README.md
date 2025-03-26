@@ -8,6 +8,13 @@ properties like size and orientation. This approach eliminates the need for anch
 making it simpler and faster. CenterNet achieves state-of-the-art speed-accuracy trade-offs on benchmarks like COCO and
 can be extended to 3D detection and pose estimation tasks.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

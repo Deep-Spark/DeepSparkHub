@@ -9,6 +9,13 @@ mobile vision tasks, offering variants for different computational budgets. Its 
 power consumption, making it ideal for real-time applications on resource-constrained devices like smartphones and
 embedded systems.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+| BI-V100 | 2.3.0     |  22.12  |
+
 ## Model Preparation
 
 ### Prepare Resources

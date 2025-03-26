@@ -8,6 +8,13 @@ for modern deep learning. Designed for the MNIST dataset, LeNet demonstrated the
 recognition tasks. Its simple yet effective architecture inspired subsequent networks like AlexNet and VGG, making it a
 cornerstone in the evolution of deep learning for computer vision applications.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

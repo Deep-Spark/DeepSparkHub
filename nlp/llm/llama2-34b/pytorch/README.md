@@ -8,6 +8,13 @@ better understanding of longer texts. This model excels in various natural langu
 comprehension, and dialogue. Its enhanced architecture and training methodology make it a versatile tool for AI
 applications, offering state-of-the-art performance in language understanding and generation.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+| BI-V150 | 3.4.0     |  24.06  |
+
 ## Model Preparation
 
 ### Configure 4-node environment

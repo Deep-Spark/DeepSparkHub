@@ -6,6 +6,13 @@ The Mixtral model is a Mixture of Experts (MoE)-based large language model devel
 company focusing on open-source AI models. Mixtral is designed to achieve high performance while maintaining
 computational efficiency, making it an excellent choice for real-world applications.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+| BI-V150 | 4.1.1     |  24.12  |
+
 ## Model Preparation
 
 ### Prepare Resources
