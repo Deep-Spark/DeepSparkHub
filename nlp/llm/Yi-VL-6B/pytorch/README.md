@@ -8,6 +8,12 @@ conversations involving both text and images. Supporting English and Chinese, Yi
 performance in benchmarks like MMMU and CMMMU. Its ability to process high-resolution images (448×448) and engage in
 detailed visual question answering makes it a powerful tool for AI-driven image-text analysis and dialogue systems.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Prepare Resources

@@ -6,6 +6,12 @@ Llama 2 is a large language model released by Meta in 2023, with parameters rang
 the training corpus of Llama 2 is 40% longer, and the context length has been upgraded from 2048 to 4096, allowing for
 understanding and generating longer texts.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Configure 2-node environment

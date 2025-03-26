@@ -8,6 +8,12 @@ fine-tuning with minimal computational resources. Through techniques like model 
 it can operate on GPUs with as little as 7GB of memory. ChatGLM2-6B SFT maintains the original model's bilingual
 capabilities while offering improved task-specific performance and resource efficiency.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Prepare Resources

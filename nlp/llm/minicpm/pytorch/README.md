@@ -9,6 +9,12 @@ Falcon-40B. Furthermore, on the MT-Bench, currently the closest benchmark to use
 many representative open-source large language models, including Llama2-70B-Chat, Vicuna-33B, Mistral-7B-Instruct-v0.1,
 and Zephyr-7B-alpha.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Install Dependencies
