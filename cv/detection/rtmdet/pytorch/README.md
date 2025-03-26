@@ -8,6 +8,12 @@ achieves state-of-the-art accuracy with exceptional speed, reaching 300+ FPS on 
 sizes for different applications and excels in tasks like instance segmentation and rotated object detection. Its design
 provides insights for versatile real-time detection systems.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Prepare Resources

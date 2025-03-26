@@ -8,6 +8,12 @@ introduces innovative features that optimize performance across various hardware
 tradition of real-time detection while delivering superior results in complex scenarios. Its efficient design makes it
 suitable for applications requiring fast and accurate object recognition in diverse environments.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Prepare Resources

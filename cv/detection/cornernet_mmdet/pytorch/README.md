@@ -9,6 +9,12 @@ addition to our novel formulation, we introduce corner pooling, a new type of po
 better localize corners. Experiments show that CornerNet achieves a 42.2% AP on MS COCO, outperforming all existing
 one-stage detectors.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Prepare Resources
