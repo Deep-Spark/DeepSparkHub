@@ -8,6 +8,12 @@ extraction at various scales. The network uses 1x1 convolutions for dimensionali
 efficient. GoogLeNet achieved state-of-the-art performance in image classification tasks while maintaining relatively
 low computational complexity. Its innovative design has influenced many subsequent CNN architectures in computer vision.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Prepare Resources

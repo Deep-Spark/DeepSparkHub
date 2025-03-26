@@ -9,6 +9,12 @@ each block while maintaining computational efficiency. SEResNeXt achieves state-
 classification tasks by effectively combining multi-branch transformations with channel-wise attention, making it
 particularly suitable for complex visual recognition problems.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
+
 ## Model Preparation
 
 ### Prepare Resources
