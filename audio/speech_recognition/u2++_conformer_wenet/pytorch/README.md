@@ -6,6 +6,12 @@ U2++, an enhanced version of U2 to further improve the accuracy. The core idea o
 backward information of the labeling sequences at the same time at training to learn richer information, and combine the
 forward and backward prediction at decoding to give more accurate recognition results.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.0.0     |  23.06  |
+
 ## Model Preparation
 
 ### Install Dependencies

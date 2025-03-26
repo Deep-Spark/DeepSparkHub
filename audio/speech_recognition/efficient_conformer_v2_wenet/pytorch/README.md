@@ -7,6 +7,12 @@ offering transformers a series of designs and optimizations for mobile accelerat
 The number of parameters and latency of the model are critical for resource-constrained hardware,
 so EfficientFormerV2 combines a fine-grained joint search strategy to propose an efficient network with low latency and size.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.1.0     |  23.12  |
+
 ## Model Preparation
 
 ### Install Dependencies

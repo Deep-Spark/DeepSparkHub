@@ -8,6 +8,12 @@ especially in complex scenarios with occlusions. DeepSORT uses a Kalman filter f
 detections using both motion and appearance cues. This approach improves tracking consistency and reduces identity
 switches, making it particularly effective for person tracking in crowded scenes and video surveillance applications.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.0.0     |  23.03  |
+
 ## Model Preparation
 
 ### Prepare Resources

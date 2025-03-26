@@ -13,6 +13,12 @@ five benchmark datasets, which consistently achieves state-of-the-art results, i
 speed. In particular, with a light-weight backbone, the performance improvements by DB are significant so that we can
 look for an ideal tradeoff between detection accuracy and efficiency.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.0.0     |  23.03  |
+
 ## Model Preparation
 
 ### Prepare Resources

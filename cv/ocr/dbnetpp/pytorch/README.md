@@ -8,6 +8,12 @@ simplifying post-processing and improving accuracy. The ASF module enhances scal
 multi-scale features. This architecture enables DBNet++ to detect text of arbitrary shapes and extreme aspect ratios
 efficiently, achieving state-of-the-art performance in both accuracy and speed across various text detection benchmarks.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.1.0     |  23.12  |
+
 ## Model Preparation
 
 ### Prepare Resources

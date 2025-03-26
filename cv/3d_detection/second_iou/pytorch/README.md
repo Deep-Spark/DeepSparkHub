@@ -9,6 +9,12 @@ and orientation estimation. SECOND-IoU achieves state-of-the-art performance on 
 inference speeds and better precision than traditional methods, making it suitable for real-time applications like
 autonomous driving.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V150 | 4.1.1     |  24.06  |
+
 ## Model Preparation
 
 ### Prepare Resources

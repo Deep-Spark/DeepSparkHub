@@ -9,6 +9,12 @@ one by one, and connect the multi-resolution streams in parallel. The resulting 
 the nth stage contains n streams corresponding to n resolutions. The authors conduct repeated multi-resolution fusions
 by exchanging the information across the parallel streams over and over.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

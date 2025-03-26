@@ -8,6 +8,12 @@ encoder and a text encoder to predict the correct pairings of a batch of (image,
 the learned text encoder synthesizes a zero-shot linear classifier by embedding the names or descriptions of the target
 dataset’s classes.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

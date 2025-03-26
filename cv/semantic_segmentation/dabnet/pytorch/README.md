@@ -6,6 +6,12 @@ A novel Depthwise Asymmetric Bottleneck (DAB) module, which efficiently adopts d
 Based on the DAB module, design a Depth-wise Asymmetric Bottleneck Network (DABNet) especially for real-time semantic segmentation.
 It creates sufficient receptive field and densely utilizes the contextual information.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

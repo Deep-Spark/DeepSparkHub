@@ -8,6 +8,12 @@ arbitrary resolution representation. LIIF combines 2D deep features with coordin
 images, even at resolutions 30x higher than training data. This approach bridges discrete and continuous image
 representations, outperforming traditional resizing methods and supporting tasks with varying image sizes.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

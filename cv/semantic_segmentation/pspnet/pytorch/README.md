@@ -8,6 +8,12 @@ achieves state-ofthe-art performance on various datasets. It came first in Image
 VOC 2012 benchmark and Cityscapes benchmark. A single PSPNet yields the new record of mIoU accuracy 85.4% on PASCAL VOC
 2012 and accuracy 80.2% on Cityscapes.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

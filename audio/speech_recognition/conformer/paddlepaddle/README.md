@@ -12,6 +12,12 @@ CNN based models achieving state-of-the-art accuracies. On the widely used Libri
 of 2.1%/4.3% without using a language model and 1.9%/3.9% with an external language model on test/testother. We also
 observe competitive performance of 2.7%/6.3% with a small model of only 10M parameters.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 3.1.0     |  23.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

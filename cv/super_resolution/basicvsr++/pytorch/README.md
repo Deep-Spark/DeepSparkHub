@@ -9,6 +9,12 @@ including compressed video enhancement, and achieved top results in NTIRE 2021 c
 structure effectively processes entire video sequences, making it a state-of-the-art solution for high-quality video
 upscaling and restoration.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources

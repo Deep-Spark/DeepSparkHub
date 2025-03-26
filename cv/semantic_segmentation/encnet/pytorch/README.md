@@ -5,6 +5,12 @@
 The Context Encoding Module, which captures the semantic context of scenes and selectively highlights class-dependent featuremaps. 
 The Context Encoding Module significantly improves semantic segmentation results with only marginal extra computation cost over FCN.
 
+## Supported Environments
+
+| GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
+|--------|-----------|---------|
+| BI-V100 | 2.2.0     |  22.09  |
+
 ## Model Preparation
 
 ### Prepare Resources
