@@ -12,6 +12,7 @@ tracker that achieves both 60+ mAP (66.5 mAP) and 50+ MOTA (58.3 MOTA) on PoseTr
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 |--------|-----------|---------|
+| BI-V150 | 4.2.0     |  25.03  |
 | BI-V100 | 3.0.0     |  23.06  |
 
 ## Model Preparation
@@ -25,6 +26,10 @@ Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO pa
 unzipped dataset path structure sholud look like:
 
 ```bash
+# create soft link to coco
+mkdir -p /home/datasets/cv/
+ln -s /path/to/coco2017 /home/datasets/cv/coco
+
 coco2017
 ├── annotations
 │   ├── instances_train2017.json
@@ -46,31 +51,20 @@ coco2017
 ### Install Dependencies
 
 ```bash
-# install libGL
-yum install mesa-libGL
-
-# install zlib
-wget http://www.zlib.net/fossils/zlib-1.2.9.tar.gz
-tar xvf zlib-1.2.9.tar.gz
-cd zlib-1.2.9/
-./configure && make install
-cd ..
-rm -rf zlib-1.2.9.tar.gz zlib-1.2.9/
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
 
 # install requirements
-pip3 install seaborn pandas pycocotools matplotlib
-pip3 install easydict tensorboardX opencv-python
+pip3 install seaborn pandas pycocotools matplotlib easydict tensorboardX opencv-python
 ```
 
 ## Model Training
 
 ```bash
-# create soft link to coco
-mkdir -p /home/datasets/cv/
-ln -s /path/to/coco2017 /home/datasets/cv/coco
-
-# 
-bash ./scripts/trainval/train.sh ./configs/coco/resnet/256x192_res50_lr1e-3_1x.yaml 1
+bash ./scripts/train.sh ./configs/coco/resnet/256x192_res50_lr1e-3_1x.yaml 1
 ```
 
 ## Model Results
