@@ -9,28 +9,28 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                                 | Framework | ToolBox            | Dataset/Weight         | IXUCA SDK |
 |-------------------------------------------------------|-----------|--------------------|------------------------|-----------|
-| [Aquila2-34B](nlp/llm/aquila2-34b/pytorch)            | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
-| [Baichuan2-7B](nlp/llm/baichuan2-7b/pytorch)          | PyTorch   | DeepSpeed          | baichuan2-7b-base      | 4.1.1     |
-| [Bloom-7B1](nlp/llm/bloom-7b1/pytorch)                | PyTorch   | Firefly            | school_math_0.25M      | 4.1.1     |
+| [Aquila2-34B](nlp/llm/aquila2-34b/pytorch)            | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
+| [Baichuan2-7B](nlp/llm/baichuan2-7b/pytorch)          | PyTorch   | DeepSpeed          | baichuan2-7b-base      | 3.4.0     |
+| [Bloom-7B1](nlp/llm/bloom-7b1/pytorch)                | PyTorch   | Firefly            | school_math_0.25M      | 3.4.0     |
 | [ChatGLM-6B](nlp/llm/chatglm-6b/pytorch)              | PyTorch   | DeepSpeed          | ADGEN & chatglm-6b     | 3.1.0     |
-| [ChatGLM2-6B SFT](nlp/llm/chatglm2-6b-sft/pytorch)    | PyTorch   | DeepSpeed          | ADGEN & chatglm2-6b    | 4.1.1     |
+| [ChatGLM2-6B SFT](nlp/llm/chatglm2-6b-sft/pytorch)    | PyTorch   | DeepSpeed          | ADGEN & chatglm2-6b    | 3.4.0     |
 | [ChatGLM3-6B](nlp/llm/chatglm3-6b/pytorch)            | PyTorch   | DeepSpeed          | ADGEN & chatglm3-6b    | 4.1.1     |
 | [DeepSeekMoE 7B](nlp/llm/deepseek_moe_7b/pytorch)     | PyTorch   | ColossalAI         | deepseek-moe-16b-base  | 4.1.1     |
 | [GLM-4](nlp/llm/glm-4/pytorch)                        | PyTorch   | Torchrun           | glm-4-9b-chat          | 4.2.0     |
 | [Llama-7B](nlp/llm/llama-7b/pytorch)                  | PyTorch   | ColossalAI         | llama-7b-hf            | 3.1.0     |
 | [Llama2-7B](nlp/llm/llama2-7b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.1.0     |
 | [Llama2-7B RMF](nlp/llm/llama2-7b_reward_sft/pytorch) | PyTorch   | DeepSpeed          | Dahoas/rm-static       | 3.1.1     |
-| [Llama2-7B RLHF](nlp/llm/llama2-7b_rlhf/pytorch)      | PyTorch   | Megatron-DeepSpeed | llama2-7b&tiny-llama   | 4.1.1     |
+| [Llama2-7B RLHF](nlp/llm/llama2-7b_rlhf/pytorch)      | PyTorch   | Megatron-DeepSpeed | llama2-7b&tiny-llama   | 3.4.0     |
 | [Llama2-7B SFT](nlp/llm/llama2-7b_sft/pytorch)        | PyTorch   | Megatron-DeepSpeed | GPT Small-117M         | 3.1.1     |
-| [Llama2-13B](nlp/llm/llama2-13b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
-| [Llama2-34B](nlp/llm/llama2-34b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
+| [Llama2-13B](nlp/llm/llama2-13b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
+| [Llama2-34B](nlp/llm/llama2-34b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
 | [Llama3-8B](nlp/llm/llama3_8b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
 | [Llama3-8B SFT](nlp/llm/llama3_8b_sft/pytorch)        | PyTorch   | ColossalAI         | school_math_0.25M      | 4.1.1     |
 | [Mamba-2](nlp/llm/mamba-2/pytorch)                    | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.1.1     |
 | [MiniCPM](nlp/llm/minicpm/pytorch)                    | PyTorch   | DeepSpeed          | MiniCPM-2B-sft-bf16    | 4.2.0     |
 | [Mixtral 8x7B](nlp/llm/mixtral/pytorch)               | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.1.1     |
 | [Phi-3](nlp/llm/phi-3/pytorch)                        | PyTorch   | Torchrun           | Phi-3-mini-4k-instruct | 4.2.0     |
-| [QWen-7B](nlp/llm/qwen-7b/pytorch)                    | PyTorch   | Firefly            | qwen-7b                | 4.1.1     |
+| [QWen-7B](nlp/llm/qwen-7b/pytorch)                    | PyTorch   | Firefly            | qwen-7b                | 3.4.0     |
 | [QWen1.5-7B](nlp/llm/qwen1.5-7b/pytorch)              | PyTorch   | Firefly            | school_math            | 4.1.1     |
 | [QWen1.5-14B](nlp/llm/qwen1.5-14b/pytorch)            | PyTorch   | Firefly            | school_math            | 4.1.1     |
 | [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/pytorch)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b             | 4.1.1     |
@@ -207,7 +207,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 |  [PAConv](cv/3d_detection/paconv/pytorch)                       |  PyTorch    |  S3DIS             | 3.1.1 |
 |  [Part-A2-Anchor](cv/3d_detection/part_a2_anchor/pytorch)       |  PyTorch    |  KITTI             | 4.1.1 |
 |  [Part-A2-Free](cv/3d_detection/part_a2_free/pytorch)           |  PyTorch    |  KITTI             | 4.1.1 |
-|  [PointNet++](cv/3d_detection/pointnet2/pytorch/mmdetection3d)  |  PyTorch    |  S3DIS             | 3.0.0 |
+|  [PointNet++](cv/3d_detection/pointnet2/pytorch)                |  PyTorch    |  S3DIS             | 3.0.0 |
 |  [PointPillars](cv/3d_detection/pointpillars/pytorch)           |  PyTorch    |  KITTI             | 3.0.0 |
 |  [PointRCNN](cv/3d_detection/pointrcnn/pytorch)                 |  PyTorch    |  KITTI             | 3.1.1 |
 |  [PointRCNN-IoU](cv/3d_detection/pointrcnn_iou/pytorch)         |  PyTorch    |  KITTI             | 4.1.1 |
@@ -348,14 +348,14 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 |---------------------------------------------------------------------------------------------|-----------|----------------|-----------|
 | [BLIP](multimodal/vision-language_model/blip/pytorch)                                       | PyTorch   | COCO           | 3.1.1     |
 | [CLIP](multimodal/contrastive_learning/clip/pytorch)                                        | PyTorch   | CIFAR100       | 2.2.0     |
-| [ControlNet](multimodal/diffusion_model/controlnet)                                         | PyTorch   | Fill50K        | 3.1.0     |
-| [DDPM](multimodal/diffusion_model/ddpm)                                                     | PyTorch   | CIFAR-10       | 3.1.0     |
+| [ControlNet](multimodal/diffusion_model/controlnet/pytorch)                                 | PyTorch   | Fill50K        | 3.1.0     |
+| [DDPM](multimodal/diffusion_model/ddpm/pytorch)                                             | PyTorch   | CIFAR-10       | 3.1.0     |
 | [LLaVA 1.5](multimodal/vision-language_model/llava-1.5/pytorch)                             | PyTorch   | LLaVA-Pretrain | 4.1.1     |
 | [L-Verse](multimodal/vision-language_model/l-verse/pytorch)                                 | PyTorch   | ImageNet       | 2.2.0     |
-| [MoE-LLaVA-Phi2-2.7B](multimodal/vision-language_model/moe-llava-phi2-2.7b/pytorch/)        | PyTorch   | MoE-LLaVA      | 4.2.0     |
+| [MoE-LLaVA-Phi2-2.7B](multimodal/vision-language_model/moe-llava-phi2-2.7b/pytorch)         | PyTorch   | MoE-LLaVA      | 4.2.0     |
 | [MoE-LLaVA-Qwen-1.8B](multimodal/vision-language_model/moe-llava-qwen-1.8b/pytorch)         | PyTorch   | MoE-LLaVA      | 4.2.0     |
 | [MoE-LLaVA-StableLM-1.6B](multimodal/vision-language_model/moe-llava-stablelm-1.6b/pytorch) | PyTorch   | MoE-LLaVA      | 4.2.0     |
-| [Stable Diffusion 1.4](multimodal/diffusion_model/stable-diffusion-1.4/pytorch)             | PyTorch   | pokemon-images | 4.1.1     |
+| [Stable Diffusion 1.4](multimodal/diffusion_model/stable-diffusion-1.4/pytorch)             | PyTorch   | pokemon-images | 3.0.0     |
 | [Stable Diffusion 1.5](multimodal/diffusion_model/stable-diffusion-1.5/pytorch)             | PyTorch   | pokemon-images | 4.1.1     |
 | [Stable Diffusion 2.1](multimodal/diffusion_model/stable-diffusion-2.1/pytorch)             | PyTorch   | pokemon-images | 4.1.1     |
 | [Stable Diffusion 3](multimodal/diffusion_model/stable-diffusion-3/pytorch)                 | PyTorch   | dog-example    | 4.1.1     |
@@ -367,7 +367,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                                   | Framework | Dataset               | IXUCA SDK |
 |---------------------------------------------------------|-----------|-----------------------|-------|
-|  [GLM](nlp/cloze_test/glm/pytorch/GLMForMultiTokenCloze)  |  PyTorch    |  GLMForMultiTokenCloze  | 2.2.0 |
+|  [GLM](nlp/cloze_test/glm/pytorch)  |  PyTorch    |  GLMForMultiTokenCloze  | 2.2.0 |
 
 #### Dialogue Generation
 
@@ -383,7 +383,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 |  [BERT NER](nlp/ner/bert/pytorch)                                  |  PyTorch            |  CoNLL-2003          | 3.0.0 |
 |  [BERT Pretraining](nlp/language_model/bert/pytorch)               |  PyTorch            |  MLCommon Wikipedia  | 2.2.0 |
 |  [BERT Pretraining](nlp/language_model/bert/paddlepaddle)          |  PaddlePaddle       |  MNLI                | 2.3.0 |
-|  [BERT Pretraining](nlp/language_model/bert/tensorflow/base)       |  TensorFlow         |  MNLI                | 3.0.0 |
+|  [BERT Pretraining](nlp/language_model/bert/tensorflow)            |  TensorFlow         |  MNLI                | 3.0.0 |
 |  [BERT Pretraining](nlp/language_model/bert/mindspore)             |  MindSpore          |  SQuAD               | 3.0.0 |
 |  [BERT Text Classification](nlp/text_classification/bert/pytorch)  |  PyTorch            |  GLUE                | 3.0.0 |
 |  [BERT Text Summerization](nlp/text_summarisation/bert/pytorch)    |  PyTorch            |  cnn_dailymail       | 3.0.0 |
