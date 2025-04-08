@@ -494,7 +494,7 @@ You can build a container image that can run models from the DeepSparkHub reposi
 
 Please refer to DeepSpark Code of Conduct on
 [Gitee](https://gitee.com/deep-spark/deepspark/blob/master/CODE_OF_CONDUCT.md) or on
-[GitHub](https://github.com/Deep-Spark/deepspark/blob/main/CODE_OF_CONDUCT.md)。
+[GitHub](https://github.com/Deep-Spark/deepspark/blob/main/CODE_OF_CONDUCT.md).
 
 ### Contact
 
@@ -519,4 +519,4 @@ sincerely appreciate your support and contributions to our community.
 
 ## License
 
-This project is released under [Apache-2.0](LICENSE) License。
+This project is released under [Apache-2.0](LICENSE) License.
