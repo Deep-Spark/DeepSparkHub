@@ -326,7 +326,7 @@ def _process_image_files(name, directory, all_records, num_shards):
     num_shards: integer number of shards for this data set.
   """
   # Break all images into batches with a [ranges[i][0], ranges[i][1]].
-  spacing = np.linspace(0, len(all_records), FLAGS.num_threads + 1).astype(np.int)
+  spacing = np.linspace(0, len(all_records), FLAGS.num_threads + 1).astype(np.int32)
   ranges = []
   threads = []
   for i in range(len(spacing) - 1):
