@@ -77,7 +77,7 @@ def main():
 
 def get_model_config(model_name, framework, category):
     print(f"model_name: {model_name}, framework: {framework}, category: {category}")
-    with open('all_deepsparkhub_model_info.json', mode='r', encoding='utf-8') as config_file:
+    with open('model_info.json', mode='r', encoding='utf-8') as config_file:
         config_data = json.load(config_file)
 
     for model in config_data["models"]:
@@ -107,7 +107,7 @@ def run_detec_testcase(model):
     is_mmdetection = True if model["toolbox"] == "mmdetection" else False
     is_yolov = True if model["toolbox"] == "yolov" else False
     is_paddledetection = True if model["toolbox"] == "PaddleDetection" else False
-    deepsparkhub_path = model["deepsparkhub_path"].replace("deepsparkhub/", "")
+    model_path = model["model_path"].replace("deepsparkhub/", "")
     if is_mmdetection:
         # 选择使用atss作为个例
         prepare_script = f"""
@@ -144,7 +144,7 @@ def run_detec_testcase(model):
             """
     else:
         prepare_script = f"""
-            cd ../{deepsparkhub_path}
+            cd ../{model_path}
             bash ci/prepare.sh
             """
 
@@ -193,7 +193,7 @@ def run_clf_testcase(model):
     is_mmpretrain = True if model["toolbox"].lower() == "mmpretrain" else False
     is_paddleclas = True if model["toolbox"].lower() == "paddleclas" else False
     is_tf_benchmarks = True if model["toolbox"].lower() == "tensorflow/benchmarks" else False
-    deepsparkhub_path = model["deepsparkhub_path"].replace("deepsparkhub/", "")
+    model_path = model["model_path"].replace("deepsparkhub/", "")
     dataset_path = "/mnt/deepspark/data/datasets/imagenet"
 
     # # add pip list info when in debug mode
@@ -205,7 +205,7 @@ def run_clf_testcase(model):
     if is_torchvision:
         # 选择使用googlenet作为个例
         prepare_script = f"""
-            cd ../{deepsparkhub_path}
+            cd ../{model_path}
             timeout 1800 python3 -m torch.distributed.launch --nproc_per_node=4 --use_env train.py --data-path {dataset_path} --model googlenet --batch-size 512
         """
     elif is_mmpretrain:
@@ -245,7 +245,7 @@ def run_clf_testcase(model):
         """
     else:
         prepare_script = f"""
-            cd ../{deepsparkhub_path}
+            cd ../{model_path}
             ln -s /mnt/deepspark/data/datasets/imagenet ./
             bash ci/prepare.sh
         """
@@ -289,7 +289,7 @@ def run_llm_testcase(model):
     is_firefly = True if model["toolbox"].lower() == "firefly" else False
     is_deepspeed = True if model["toolbox"].lower() == "deepspeed" else False
     is_megatron_deepspeed = True if model["toolbox"].lower() == "megatron-deepspeed" else False
-    deepsparkhub_path = model["deepsparkhub_path"].replace("deepsparkhub/", "")
+    model_path = model["model_path"].replace("deepsparkhub/", "")
 
     logging.info(f"Start running {model_name} test case")
     if is_firefly:
@@ -305,7 +305,7 @@ def run_llm_testcase(model):
         prepare_script = f"""
             cd ../toolbox/firefly
             python3 setup.py develop
-            cd ../../{deepsparkhub_path}
+            cd ../../{model_path}
             mkdir -p data
             ln -s /mnt/deepspark/data/datasets/school_math_0.25M.jsonl data/
             mkdir -p checkpoint
@@ -317,7 +317,7 @@ def run_llm_testcase(model):
         # {'train_runtime': 84.0969, 'train_samples_per_second': 2.378, 'train_steps_per_second': 1.189, 'train_loss': 0.24943359375, 'epoch': 0.0}
         pattern = r"({.*?})"
         prepare_script = f"""
-            cd ../../{deepsparkhub_path}
+            cd ../../{model_path}
             pip3 install -r requirements.txt
             mkdir -p data
             ln -s /mnt/deepspark/data/datasets/AdvertiseGen data/
@@ -338,7 +338,7 @@ def run_llm_testcase(model):
     else:
         pattern = re.compile(r'^\s*(\S+)\s*=\s*(.+)$', re.MULTILINE)
         prepare_script = f"""
-            cd ../{deepsparkhub_path}
+            cd ../{model_path}
             bash ci/prepare.sh
         """
     r, t = run_script(prepare_script)
