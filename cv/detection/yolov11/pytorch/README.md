@@ -8,8 +8,7 @@ Ultralytics YOLO11 is not just another object detection model; it's a versatile 
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 |--------|-----------|---------|
-| BI-V150 | 4.2.0     |  25.03  |
-| BI-V100 | 3.0.0     |  23.06  |
+| BI-V150 | 4.2.0    |  25.06  |
 
 ## Model Preparation
 
@@ -42,14 +41,25 @@ coco2017
 
 ```bash
 mkdir -p <project_path>/datasets/
-ln -s /path/to/coco2017 <project_path>/datasets/
+ln -s /path/to/coco2017 <project_path>/datasets/coco
+
+mkdir -p /root/.config/Ultralytics/
+# Download https://ultralytics.com/assets/Arial.ttf to '/root/.config/Ultralytics/'...
+
+# Download https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt to 'yolo11n.pt'...
 ```
 
 ### Install Dependencies
 
 ```bash
+# Install libGL
+## CentOS
+yum install -y mesa-libGL
+## Ubuntu
+apt install -y libgl1-mesa-glx
+
 # Install ultralytics
-pip3 install ultralytics
+pip3 install ultralytics==8.3.127
 ```
 
 ## Model Training
