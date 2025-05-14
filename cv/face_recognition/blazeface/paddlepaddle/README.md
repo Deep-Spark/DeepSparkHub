@@ -8,7 +8,7 @@ mobile GPU inference. It runs at a speed of 200-1000+ FPS on flagship devices.
 ## Supported Environments
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
-|--------|-----------|---------|
+| :----: | :----: | :----: |
 | BI-V100 | 3.1.0     |  23.12  |
 
 ## Model Preparation
