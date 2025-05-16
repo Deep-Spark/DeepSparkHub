@@ -1,4 +1,4 @@
-matplotlib==3.7.0
+matplotlib==3.8.0
 numpy
 inflect==0.2.5
 scipy
