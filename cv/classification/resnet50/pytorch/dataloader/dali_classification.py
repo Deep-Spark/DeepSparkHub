@@ -14,7 +14,7 @@ import nvidia.dali.ops as ops
 import nvidia.dali.types as types
 from nvidia.dali.pipeline import Pipeline
 from nvidia.dali.plugin.pytorch import DALIClassificationIterator, DALIGenericIterator
-
+from nvidia.dali.plugin.base_iterator import LastBatchPolicy
 class HybridTrainPipe(Pipeline):
     def __init__(self, batch_size, num_threads, device_id, data_dir, size):
         super(HybridTrainPipe, self).__init__(batch_size, num_threads, device_id)
@@ -66,14 +66,14 @@ def get_imagenet_iter_dali(type, image_dir, batch_size, num_threads, device_id, 
                                     data_dir = os.path.join(image_dir, "train"),
                                     size=size)
         pip_train.build()
-        dali_iter_train = DALIClassificationIterator(pip_train, size=pip_train.epoch_size("Reader"))
+        dali_iter_train = DALIClassificationIterator(pip_train, size=pip_train.epoch_size("Reader"), last_batch_policy = LastBatchPolicy.DROP)
         return dali_iter_train
     elif type == 'val':
         pip_val = HybridValPipe(batch_size=batch_size, num_threads=num_threads, device_id=device_id,
                                     data_dir = os.path.join(image_dir, "val"),
                                     size=size)
         pip_val.build()
-        dali_iter_val = DALIClassificationIterator(pip_val, size=pip_val.epoch_size("Reader"))
+        dali_iter_val = DALIClassificationIterator(pip_val, size=pip_val.epoch_size("Reader"), last_batch_policy = LastBatchPolicy.DROP)
         return dali_iter_val
 
 

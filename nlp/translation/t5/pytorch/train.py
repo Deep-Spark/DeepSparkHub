@@ -18,8 +18,8 @@ from transformers import (HfArgumentParser,
                           default_data_collator,
                           DataCollatorForSeq2Seq,
                           )
-from trainer_seq2seq import Seq2SeqTrainer
-from training_args_seq2seq import Seq2SeqTrainingArguments
+from transformers.trainer_seq2seq import Seq2SeqTrainer
+from transformers.training_args_seq2seq import Seq2SeqTrainingArguments
 
 logger = logging.getLogger(__name__)
 
