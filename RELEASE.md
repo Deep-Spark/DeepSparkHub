@@ -1,5 +1,54 @@
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 25.06 Release Notes
+
+### 模型与算法
+
+* 新增了1个PyTorch训练模型
+* 新增了5个大模型训练示例，涉及verl和OpenRLHF框架
+
+<table>
+    <tr align="left"><th colspan=5>PyTorch</th></tr>
+    <tr>
+        <td>YOLOv11</td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tr>
+        <tr align="left"><th colspan=5>大模型</th></tr>
+    <tr>
+        <td>Llama3-8B PPO(OpenRLHF)</td>
+        <td>Llama3-8B DPO(OpenRLHF)</td>
+        <td>Llama3-8B KTO(OpenRLHF)</td>
+    </tr>
+    <tr>
+        <td>Qwen2.5-1.5B(verl)</td>
+        <td>Qwen2.5-7B(verl)</td>
+        <td></td>
+    </tr>
+</table>
+
+### 问题修复
+
+* 优化了AlphaPose模型的冗余代码。
+* 更新了Yi-1.5-6B和Yi-6B模型的文本链接。
+* 增加了中英文README说明。
+* 同步了bloom-7b1、ssd、bert等模型的最新代码
+* 增加了全局模型配置文件。
+* 优化了各模型的README部分表格居中对齐
+
+### 版本关联
+
+DeepSparkHub 25.06对应天数软件栈4.2.0版本。
+
+### 贡献者
+
+感谢以下社区贡献者
+
+李一力，张文风，majorli6，honglyua，吴永乐。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
 ## DeepSparkHub 25.03 Release Notes
 
 ### 模型与算法

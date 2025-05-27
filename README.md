@@ -35,6 +35,9 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [Llama2-34B](nlp/llm/llama2-34b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
 | [Llama3-8B](nlp/llm/llama3_8b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
 | [Llama3-8B SFT](nlp/llm/llama3_8b_sft/pytorch)        | PyTorch   | ColossalAI         | school_math_0.25M      | 4.1.1     |
+| [Llama3-8B PPO](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
+| [Llama3-8B DPO](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
+| [Llama3-8B KTO](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
 | [Mamba-2](nlp/llm/mamba-2/pytorch)                    | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.1.1     |
 | [MiniCPM](nlp/llm/minicpm/pytorch)                    | PyTorch   | DeepSpeed          | MiniCPM-2B-sft-bf16    | 4.2.0     |
 | [Mixtral 8x7B](nlp/llm/mixtral/pytorch)               | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.1.1     |
@@ -43,6 +46,8 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [QWen1.5-7B](nlp/llm/qwen1.5-7b/pytorch)              | PyTorch   | Firefly            | school_math            | 4.1.1     |
 | [QWen1.5-14B](nlp/llm/qwen1.5-14b/pytorch)            | PyTorch   | Firefly            | school_math            | 4.1.1     |
 | [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/pytorch)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b             | 4.1.1     |
+| [Qwen2.5-1.5B verl](nlp/llm/qwen2.5-1.5b/verl)        | PyTorch   | verl               | qwen2.5-1.5b           | 4.2.0     |
+| [Qwen2.5-7B verl](nlp/llm/qwen2.5-7b/verl)            | PyTorch   | verl               | qwen2.5-7b             | 4.2.0     |
 | [Yi-6B](nlp/llm/yi-6b/pytorch)                        | PyTorch   | DeepSpeed          | Yi-6B                  | 4.2.0     |
 | [Yi-1.5-6B](nlp/llm/yi-1.5-6b/pytorch)                | PyTorch   | DeepSpeed          | Yi-1.5-6B              | 4.2.0     |
 | [Yi-VL-6B](nlp/llm/yi-vl-6b/pytorch)                  | PyTorch   | LLaMA-Factory      | Yi-VL-6B-hf            | 4.2.0     |
@@ -206,6 +211,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 |  [YOLOv8](cv/detection/yolov8/pytorch)                          |  PyTorch                |  COCO     | 3.0.0 |
 |  [YOLOv9](cv/detection/yolov9/pytorch)                          |  PyTorch                |  COCO     | 4.1.1 |
 |  [YOLOv10](cv/detection/yolov10/pytorch)                        |  PyTorch                |  COCO     | 4.1.1 |
+|  [YOLOv11](cv/detection/yolov11/pytorch)                        |  PyTorch                |  COCO     | 4.2.0 |
 
 #### 三维目标检测
 
