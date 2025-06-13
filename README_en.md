@@ -488,12 +488,6 @@ individuals, healthcare, education, communication, energy, and more.
 
 --------
 
-## How to build container image
-
-You can build a container image that can run models from the DeepSparkHub repository referring to the [How-To-Doc](docker/Iluvatar/README.md).
-
---------
-
 ## Community
 
 ### Code of Conduct
