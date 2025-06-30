@@ -11,6 +11,8 @@ InceptionV3 is a convolutional neural network architecture from the Inception fa
 | BI-V150 | 4.2.0     |  25.03  |
 | BI-V100 | 3.1.0     |  23.09  |
 
+**This model is compatible with IXUCA SDK up to version 4.2.0.**
+
 ## Model Preparation
 
 ### Install Dependencies

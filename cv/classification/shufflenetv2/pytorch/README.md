@@ -15,6 +15,8 @@ while maintaining low computational complexity, making it ideal for resource-con
 | BI-V150 | 4.2.0     |  25.03  |
 | BI-V100 | 2.2.0     |  22.09  |
 
+**This model is compatible with IXUCA SDK up to version 4.2.0.**
+
 ## Model Preparation
 
 ### Prepare Resources
