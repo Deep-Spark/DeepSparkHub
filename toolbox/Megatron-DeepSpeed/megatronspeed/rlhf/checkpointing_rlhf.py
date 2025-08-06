@@ -206,7 +206,7 @@ def save_checkpoint(iteration, model, optimizer, opt_param_scheduler, model_pref
 
     # Collect args, model, RNG.
     if not torch.distributed.is_initialized() \
-            or mpu.get_data_modulo_expert_parallel_rank() == 0:
+            or mpu.get_expert_data_parallel_rank() == 0:
 
         # Arguments, iteration, and model.
         state_dict = {}
@@ -248,6 +248,7 @@ def save_checkpoint(iteration, model, optimizer, opt_param_scheduler, model_pref
     if not torch.distributed.is_initialized() \
        or torch.distributed.get_rank() == 0:
         tracker_filename = get_checkpoint_tracker_filename(save_path)
+        print(f"save path: {save_path}, {tracker_filename}, {checkpoint_name}")
         with open(tracker_filename, 'w') as f:
             f.write(str(iteration))
 

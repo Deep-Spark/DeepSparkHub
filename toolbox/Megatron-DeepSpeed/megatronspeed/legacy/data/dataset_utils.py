@@ -21,6 +21,7 @@
 import math
 import os
 import time
+import logging
 import collections
 
 import numpy as np
@@ -31,7 +32,10 @@ from megatron.training import (
     print_rank_0
 )
 from megatron.core import mpu
+from megatron.core.utils import log_single_rank
 from megatronspeed.legacy.data.indexed_dataset import MMapIndexedDataset
+
+logger = logging.getLogger(__name__)
 
 
 DSET_TYPE_BERT = 'standard_bert'
@@ -81,15 +85,21 @@ def get_datasets_weights_and_num_samples(data_prefix,
 
 
 def compile_helper():
-    """Compile helper function ar runtime. Make sure this
-    is invoked on a single process."""
+    """Compile C++ helper functions at runtime. Make sure this is invoked on a single process."""
     import os
     import subprocess
-    path = os.path.abspath(os.path.dirname(__file__))
-    ret = subprocess.run(['make', '-C', path])
-    if ret.returncode != 0:
-        print("Making C++ dataset helpers module failed, exiting.")
+    from pathlib import Path
+    import fnmatch
+    root_path = Path(__file__).resolve().parent
+    for name in os.listdir(root_path):
+        if fnmatch.fnmatch(name, "helpers.*.so"):
+            return
+
+    command = ["make", "-C", os.path.abspath(os.path.dirname(__file__))]
+    if subprocess.run(command).returncode != 0:
         import sys
+
+        log_single_rank(logger, logging.ERROR, "Failed to compile the C++ dataset helper functions")
         sys.exit(1)
 
 

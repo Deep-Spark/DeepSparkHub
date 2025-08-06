@@ -167,7 +167,9 @@ megatron_args=" \
            --make-vocab-size-divisible-by 1 \
            --exit-interval 5000 \
            --no-gradient-accumulation-fusion \
-           --no-masked-softmax-fusion"
+           --no-masked-softmax-fusion \
+           --use-legacy-models \
+           --ckpt-format torch"
 
 if [ "${activation_checkpoint}" = "true" ]; then
     megatron_args="${megatron_args} --checkpoint-activations"

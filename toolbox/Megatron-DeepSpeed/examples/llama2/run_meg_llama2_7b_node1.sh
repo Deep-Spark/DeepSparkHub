@@ -61,6 +61,8 @@ TRAINING_ARGS="
     --recompute-num-layers 1 \
     --recompute-method-per-stage 4 1 \
     --recompute-num-layers-per-stage 1 2 3 0 \
+    --use-legacy-models \
+    --ckpt-format torch \
 "
 ## 自定义recompute layers pp stage
     # --recompute-granularity full \

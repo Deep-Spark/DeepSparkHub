@@ -13,12 +13,16 @@ from megatron.training import get_adlr_autoresume
 from megatron.training import get_args
 from megatron.training import get_tensorboard_writer
 from megatron.core import mpu, tensor_parallel
+from megatron.core.rerun_state_machine import initialize_rerun_state_machine, RerunErrorInjector, RerunDiagnostic, RerunMode
 from megatron.training.arguments import parse_args, validate_args
 from megatron.training.yaml_arguments import validate_yaml
 from megatron.training.checkpointing import load_args_from_checkpoint
 from megatron.training.global_vars import set_global_variables
-from megatron.legacy.model.transformer import bias_dropout_add_fused_train
-from megatron.legacy.model.fused_bias_gelu import bias_gelu
+from megatron.core.fusions.fused_bias_dropout import bias_dropout_add_fused_train
+from megatron.core.fusions.fused_bias_gelu import bias_gelu
+from megatron.core.fusions.fused_bias_swiglu import bias_swiglu
+from megatron.core.parallel_state import create_group
+from megatron.core.utils import get_te_version, is_te_min_version, is_torch_min_version
 from megatron.core import ixte_extensions
 from megatron.training.initialize import (
     setup_logging,
@@ -43,7 +47,9 @@ def initialize_megatron(
     ignore_unknown_args=False,
     allow_no_cuda=False,
     skip_mpu_initialization=False,
-    external_args={}
+    external_args={},
+    get_embedding_ranks=None,
+    get_position_embedding_ranks=None
 ):
     """Set global variables, initialize distributed, and
     set autoresume and random seeds.
@@ -64,8 +70,21 @@ def initialize_megatron(
         if key in args:
             setattr(args, key, external_args[key])
 
+    # Prep for checkpoint conversion.
+    if args.ckpt_convert_format is not None:
+        assert args.ckpt_convert_save is not None
+        assert args.load is not None
+        args.exit_on_missing_checkpoint = True
+
     if args.use_checkpoint_args or args_defaults.get("use_checkpoint_args", False):
         assert args.load is not None, "--use-checkpoints-args requires --load argument"
+        assert (
+            args.non_persistent_ckpt_type != "local"
+        ), (
+            "--use-checkpoint-args is not supported with --non_persistent_ckpt_type=local. "
+            "Two-stage checkpoint loading is not implemented, and all arguments must be defined "
+            "before initializing LocalCheckpointManager."
+        )
         load_args_from_checkpoint(args)
 
     if args.yaml_cfg is not None:
@@ -81,16 +100,37 @@ def initialize_megatron(
     # set logging level
     setup_logging()
 
+    # init rerun state
+    def state_save_func():
+        return {
+            'rng_tracker_states': tensor_parallel.get_cuda_rng_tracker().get_states()
+        }
+
+    def state_restore_func(state_dict):
+        if state_dict['rng_tracker_states']:
+            tensor_parallel.get_cuda_rng_tracker().set_states(state_dict['rng_tracker_states'])
+
+    args = get_args()
+    initialize_rerun_state_machine(
+        state_save_func=state_save_func,
+        state_restore_func=state_restore_func,
+        mode=RerunMode(args.rerun_mode),
+        error_injector=RerunErrorInjector(
+            error_injection_rate=args.error_injection_rate,
+            error_injection_type=RerunDiagnostic(args.error_injection_type),
+        ),
+    )
+
     # torch.distributed initialization
     def finish_mpu_init():
         args = get_args()
         # Pytorch distributed.
-        _initialize_distributed()
+        _initialize_distributed(get_embedding_ranks, get_position_embedding_ranks)
 
         # Random seeds for reproducibility.
         if args.rank == 0:
             print("> setting random seeds to {} ...".format(args.seed))
-        _set_random_seed(args.seed, args.data_parallel_random_init)
+        _set_random_seed(args.seed, args.data_parallel_random_init, args.te_rng_tracker, args.inference_rng_tracker)
 
     if skip_mpu_initialization:
         return None
@@ -120,6 +160,7 @@ def initialize_megatron(
         _compile_dependencies()
 
         if args.tp_comm_overlap and not ixte_extensions._USE_IXTE:
+            #TODO: Should this be activated with just decoder-tp-comm-overlap too?
             _initialize_tp_communicators()
 
         if not args.deepspeed or (args.deepspeed and args.no_pipeline_parallel):
@@ -238,7 +279,7 @@ def setup_deepspeed_random_and_activation_checkpointing(args):
         synchronize=args.synchronize_each_layer,
         profile=args.profile_backward)
 
-def _initialize_distributed():
+def _initialize_distributed(get_embedding_ranks, get_position_embedding_ranks):
     """Initialize torch.distributed and core model parallel."""
     args = get_args()
 
@@ -281,12 +322,13 @@ def _initialize_distributed():
     if args.deepspeed or args.ds_inference:
         deepspeed.init_distributed()
     else:
-        torch.distributed.init_process_group(
-            backend=args.distributed_backend,
-            world_size=args.world_size,
-            rank=args.rank,
-            timeout=timedelta(minutes=args.distributed_timeout_minutes),
-        )
+        if not torch.distributed.is_initialized():
+            torch.distributed.init_process_group(
+                backend=args.distributed_backend,
+                world_size=args.world_size,
+                rank=args.rank,
+                timeout=timedelta(minutes=args.distributed_timeout_minutes),
+            )
 
     # Set the tensor model-parallel, pipeline model-parallel, and
     # data-parallel communicators.
@@ -308,10 +350,17 @@ def _initialize_distributed():
                 args.pipeline_model_parallel_split_rank,
                 args.ds_sequence_parallel_size,
                 context_parallel_size=args.context_parallel_size,
+                hierarchical_context_parallel_sizes=args.hierarchical_context_parallel_sizes,
                 expert_model_parallel_size=args.expert_model_parallel_size,
+                num_distributed_optimizer_instances=args.num_distributed_optimizer_instances,
+                expert_tensor_parallel_size=args.expert_tensor_parallel_size,
                 distributed_timeout_minutes=args.distributed_timeout_minutes,
                 nccl_communicator_config_path=args.nccl_communicator_config_path,
-                order='tp-cp-ep-dp-pp' if not args.use_tp_pp_dp_mapping else 'tp-pp-dp',
+                order='tp-cp-ep-dp-pp' if not args.use_tp_pp_dp_mapping else 'tp-cp-ep-pp-dp',
+                encoder_tensor_model_parallel_size=args.encoder_tensor_model_parallel_size,
+                encoder_pipeline_model_parallel_size=args.encoder_pipeline_model_parallel_size,
+                get_embedding_ranks=get_embedding_ranks,
+                get_position_embedding_ranks=get_position_embedding_ranks,
             )
             if args.rank == 0:
                 print(
@@ -322,6 +371,8 @@ def _initialize_distributed():
                     f"> initialized pipeline model parallel with size "
                     f"{mpu.get_pipeline_model_parallel_world_size()}"
                 )
+
+    print(f"RANK: {torch.distributed.get_rank()}, {args.local_rank}")
 
     if args.deepspeed and args.deepspeed_activation_checkpointing:
         setup_deepspeed_random_and_activation_checkpointing(args)
@@ -351,7 +402,8 @@ def _warmup_jit_function():
     )
     input = torch.rand(
         (
-            args.seq_length // args.ds_sequence_parallel_size,
+            (args.seq_length // args.ds_sequence_parallel_size) if args.deepspeed else \
+                (args.seq_length // args.context_parallel_size),
             args.micro_batch_size,
             args.ffn_hidden_size // args.tensor_model_parallel_size,
         ),
@@ -372,12 +424,14 @@ def _warmup_jit_function():
     else:
         seq_length = args.seq_length
     input = torch.rand(
-        (seq_length // args.ds_sequence_parallel_size, args.micro_batch_size, args.hidden_size),
+        ((args.seq_length // args.ds_sequence_parallel_size) if args.deepspeed else \
+            (args.seq_length // args.context_parallel_size), args.micro_batch_size, args.hidden_size),
         dtype=dtype,
         device="cuda",
     )
     residual = torch.rand(
-        (seq_length // args.ds_sequence_parallel_size, args.micro_batch_size, args.hidden_size),
+        ((args.seq_length // args.ds_sequence_parallel_size) if args.deepspeed else \
+            (args.seq_length // args.context_parallel_size), args.micro_batch_size, args.hidden_size),
         dtype=dtype,
         device="cuda",
     )
@@ -394,6 +448,6 @@ def _warmup_jit_function():
         bias.requires_grad = bias_grad
         residual.requires_grad = residual_grad
         for _ in range(5):
-            output = bias_dropout_add_fused_train(input, bias, residual, dropout_rate)
+            output = bias_dropout_add_fused_train([input, bias], residual, dropout_rate)
     del bias, input, residual, output
     torch.cuda.empty_cache()

@@ -1,7 +1,7 @@
 #!/bin/bash
 # This example script is contributed by external user https://github.com/nrailgun
 set -ex
-export NCCL_SOCKET_IFNAME="ens5f0"
+# export NCCL_SOCKET_IFNAME="ens5f0"
 
 PROJECT_PATH=$(dirname $(dirname "$PWD"))
 mkdir -p ./config
@@ -124,4 +124,6 @@ torchrun $DISTRIBUTED_ARGS \
        --use-flash-attn \
        --no-masked-softmax-fusion \
        --make-vocab-size-divisible-by 1 \
+       --use-legacy-models \
+       --ckpt-format torch \
        $ds_args | tee ${OUTPUT_DIR}/output.log 2>&1

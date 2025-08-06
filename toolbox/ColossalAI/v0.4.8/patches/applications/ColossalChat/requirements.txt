@@ -1,0 +1,23 @@
+# transformers==4.39.3
+# colossalai>=0.4.7
+# torch>=2.1.0
+# flash-attn
+tqdm
+loralib
+tokenizers
+fastapi
+sse_starlette
+wandb
+sentencepiece
+gpustat
+packaging
+autoflake==2.2.1
+black==23.9.1
+tensorboard
+six==1.16.0
+datasets
+ninja==1.11.1
+sentencepiece==0.1.99
+tiktoken
+jsonlines
+protobuf==4.25.0
