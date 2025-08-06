@@ -68,6 +68,9 @@ def _load_checkpoint(queue, args):
     # so trick it into thinking we are plenty of processes
     margs.world_size = margs.tensor_model_parallel_size * margs.pipeline_model_parallel_size
     margs.custom_partition = args.custom_partition
+    margs.use_legacy_models = True
+    margs.ckpt_format = "torch"
+    margs.use_dist_ckpt = False
 
     margs = validate_args(margs)
 

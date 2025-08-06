@@ -1,6 +1,6 @@
 import logging
 from functools import wraps
-from typing import Callable, Dict, List, Optional
+from typing import Callable, Dict, List, Optional, Tuple
 
 import torch
 
@@ -14,16 +14,17 @@ except ImportError:
         f'Transformer Engine and Apex are not installed. Falling back to Torch optimizers.'
     )
 
-    ## apex's FusedAdam is a drop-in replacement for torch's AdamW
-    ## see https://github.com/NVIDIA/apex/blob/7b73b12361068a10b0f44844534613f252a5ea75/apex/optimizers/fused_adam.py#L16
+    # Apex's FusedAdam is a drop-in replacement for torch's AdamW.
+    # pylint: disable-next=line-too-long.
+    # See https://github.com/NVIDIA/apex/blob/7b73b12361068a10b0f44844534613f252a5ea75/apex/optimizers/fused_adam.py#L16.
     from torch.optim import AdamW as Adam, SGD
 
 from megatron.core import mpu
 
 from megatron.training.global_vars import get_args
-from megatron.core.distributed import ParamAndGradBuffer
+from megatron.core.distributed.param_and_grad_buffer import _ParamAndGradBuffer
 from megatron.core.transformer.module import MegatronModule
-from megatron.core.utils import log_single_rank
+from megatron.core.utils import is_te_min_version, log_single_rank
 from megatron.core.optimizer.distrib_optimizer import DistributedOptimizer
 from megatron.core.optimizer.grad_scaler import ConstantGradScaler, DynamicGradScaler
 from megatron.core.optimizer.optimizer import (
@@ -93,10 +94,13 @@ def get_param_groups(modules,
 
 def _get_param_groups_mod(
     model_chunks: List[MegatronModule],
-    no_weight_decay_cond: Callable,
-    scale_lr_cond: Callable,
+    no_weight_decay_cond: Optional[Callable],
+    scale_lr_cond: Optional[Callable],
     lr_mult: float,
-    use_decoupled_learning_rate: bool,
+    lr: float,
+    min_lr: float,
+    decoupled_lr: Optional[float],
+    decoupled_min_lr: Optional[float],
 ) -> List[Dict]:
     """Create parameter groups for optimizer.
 
@@ -108,17 +112,22 @@ def _get_param_groups_mod(
     Args:
         model_chunks (List[MegatronModule]): model chunks to create parameter
             groups for.
-        no_weight_decay_cond (func): function to determine whether a parameter
-            should not perform weight decay.
-        scale_lr_cond (func): function to determine whether a parameter
+        no_weight_decay_cond (func, optional): function to determine whether a
+            parameter should not perform weight decay.
+        scale_lr_cond (func, optional): function to determine whether a parameter
             should have a scaled learning rate.
         lr_mult (float): learning rate multiplier for parameters that
             satisfy scale_lr_cond.
-        use_decoupled_learning_rate (bool): true if using decoupled learning rate.
+        lr (float): learning rate.
+        min_lr (float): minimum learning rate.
+        decoupled_lr (Optional[float]): optional decoupled learning rate.
+        decoupled_min_lr (Optional[float]): optional decoupled minimum learning rate.
 
     Returns:
         List of parameter groups.
     """
+
+    use_decoupled_learning_rate = decoupled_lr is not None
 
     # Map (wd_mult, lr_mult, is_expert_parallel, is_decoupled_lr) to params.
     params_map = {}
@@ -150,7 +159,8 @@ def _get_param_groups_mod(
                 wd_mult, _lr_mult = 0.0, lr_mult
 
             is_decoupled_lr = False
-            # For input/embedding and output layer: embedding.word_embeddings.weight / output_layer.weight.
+            # For input/embedding and output layer: embedding.word_embeddings.weight /
+            # output_layer.weight.
             if use_decoupled_learning_rate and getattr(
                 param, 'is_embedding_or_output_parameter', False
             ):
@@ -172,16 +182,23 @@ def _get_param_groups_mod(
             name = 'no_wd_no_scale_lr'
         else:
             name = 'no_wd_scale_lr'
-        param_groups.append(
-            {
-                'name': name,
-                'params': params,
-                'wd_mult': wd_mult,
-                'lr_mult': _lr_mult,
-                'is_expert_parallel': is_expert_parallel,
-                'is_decoupled_lr': is_decoupled_lr,
-            }
-        )
+        param_group = {
+            'name': name,
+            'params': params,
+            'wd_mult': wd_mult,
+            'lr_mult': _lr_mult,
+            'is_expert_parallel': is_expert_parallel,
+            'is_decoupled_lr': is_decoupled_lr,
+        }
+        param_groups.append(param_group)
+
+    param_groups = _update_min_and_max_lr_in_param_groups(
+        param_groups,
+        lr=lr,
+        min_lr=min_lr,
+        decoupled_lr=decoupled_lr,
+        decoupled_min_lr=decoupled_min_lr,
+    )
 
     return param_groups
 
@@ -214,7 +231,10 @@ def get_megatron_optimizer_wrapper(get_megatron_optimizer):
             no_weight_decay_cond,
             scale_lr_cond,
             lr_mult,
-            use_decoupled_learning_rate=config.decoupled_lr is not None,
+            lr=config.lr,
+            min_lr=config.min_lr,
+            decoupled_lr=config.decoupled_lr,
+            decoupled_min_lr=config.decoupled_min_lr,
         )
         param_groups = _update_min_and_max_lr_in_param_groups(
             param_groups,

@@ -1,0 +1,8 @@
+hjson
+ninja
+numpy
+packaging>=20.0
+psutil
+py-cpuinfo
+pydantic
+tqdm

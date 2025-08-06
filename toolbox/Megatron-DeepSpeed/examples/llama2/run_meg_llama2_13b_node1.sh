@@ -46,7 +46,9 @@ TRAINING_ARGS="
     --recompute-granularity full \
     --recompute-method block \
     --recompute-num-layers 20 \
-    --make-vocab-size-divisible-by 1
+    --make-vocab-size-divisible-by 1 \
+    --use-legacy-models \
+    --ckpt-format torch \
 
 "
 

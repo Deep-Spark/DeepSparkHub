@@ -229,6 +229,9 @@ def save_checkpoint(queue, args):
 
     margs = parse_args()
     margs.custom_partition = args.custom_partition
+    margs.use_legacy_models = True
+    margs.ckpt_format = "torch"
+    margs.use_dist_ckpt = False
 
     if hasattr (md, 'checkpoint_args'):
         # These are arguments that we are either changing, or cause problems for validation if they are set
@@ -245,7 +248,7 @@ def save_checkpoint(queue, args):
                         'distribute_saved_activations',
                         'train_iters', 'lr_decay_iters', 'lr_warmup_iters', 'lr_warmup_fraction',
                         'start_weight_decay', 'end_weight_decay', 
-                        'custom_partition']
+                        'custom_partition', 'use_legacy_models', 'ckpt_format', 'use_dist_ckpt']
 
 
         for arg, value in vars(md.checkpoint_args).items():

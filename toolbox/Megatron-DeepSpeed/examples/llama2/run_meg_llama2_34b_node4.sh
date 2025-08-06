@@ -63,6 +63,8 @@ TRAINING_ARGS="
     --recompute-num-layers 1 \
     --recompute-method-per-stage 8 1 \
     --recompute-num-layers-per-stage 1 4 1 3 2 2 4 0 \
+    --use-legacy-models \
+    --ckpt-format torch \
 "
     # --custom-recompute-layers-per-stage 2 2 1 0 0 0 0 0 \
     # --no-gradient-accumulation-fusion \

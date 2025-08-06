@@ -7,6 +7,7 @@ from torch.autograd.variable import Variable
 from megatron.core import parallel_state
 from megatron.core.enums import ModelType
 from megatron.core.pipeline_parallel import p2p_communication
+from megatron.core.transformer.cuda_graphs import create_cudagraphs
 from megatron.core.transformer.moe.router import MoEAuxLossAutoScaler
 from megatron.core.transformer.transformer_config import TransformerConfig
 from megatron.core.utils import (
@@ -14,6 +15,7 @@ from megatron.core.utils import (
     get_attr_wrapped_model,
     get_model_config,
     get_model_type,
+    get_model_xattn,
 )
 from megatron.training.global_vars import get_args
 from megatron.core.pipeline_parallel.schedules import (
@@ -96,10 +98,11 @@ def backward_step(input_tensor, output_tensor, output_tensor_grad, model_type, c
     # model with encoder and decoder).
     if (
         parallel_state.get_pipeline_model_parallel_world_size() > 1
-        and parallel_state.is_pipeline_stage_after_split()
         and model_type == ModelType.encoder_and_decoder
+        and len(output_tensor_grad) > 1  # excludes models that lack a skip connection.
     ):
         if output_tensor_grad[1] is not None:
+            assert input_tensor_grad[-1] is not None
             input_tensor_grad[-1].add_(output_tensor_grad[1])
     if unwrap_input_tensor_grad:
         input_tensor_grad = input_tensor_grad[0]
@@ -121,7 +124,6 @@ def forward_backward_no_pipelining(
     forward_only: bool = False,
     collect_non_loss_data: bool = False,
     first_val_step: bool = None,
-    config: TransformerConfig = None,
 ):
     """Run forward and backward passes with no pipeline parallelism
     (no inter-stage communication).
@@ -141,9 +143,7 @@ def forward_backward_no_pipelining(
         ), "non-pipeline-parallel schedule does not support model chunking"
         data_iterator = data_iterator[0]
 
-    if config is None:
-        config = get_model_config(model)
-
+    config = get_model_config(model)
     if config.timers is not None:
         config.timers('forward-backward', log_level=1).start(barrier=config.barrier_with_L1_time)
 
@@ -211,6 +211,9 @@ def forward_backward_no_pipelining(
     if config.timers is not None:
         config.timers('forward-backward').stop()
 
+    if not args.deepspeed and hasattr(config, 'enable_cuda_graph') and config.enable_cuda_graph:
+        create_cudagraphs()
+
     return forward_data_store
 
 def forward_backward_pipelining_without_interleaving(
@@ -225,26 +228,22 @@ def forward_backward_pipelining_without_interleaving(
     forward_only: bool = False,
     collect_non_loss_data: bool = False,
     first_val_step: bool = None,
-    config: TransformerConfig = None,
 ):
     """Run non-interleaved 1F1B schedule, with communication between pipeline
-    stages.
-
-    Returns dictionary with losses if the last stage, empty dict otherwise."""
+    stages. Returns dictionary with losses if the last stage, empty dict otherwise."""
 
     if isinstance(model, list):
         assert (
             len(model) == 1
-        ), "non-interleaved pipeline parallelism does not support model chunking"
+        ), "non-interleaved pipeline-parallel schedule does not support model chunking"
         model = model[0]
     if isinstance(data_iterator, list):
         assert (
             len(data_iterator) == 1
-        ), "non-pipeline-parallel schedule does not support model chunking"
+        ), "non-interleaved pipeline-parallel schedule does not support model chunking"
         data_iterator = data_iterator[0]
 
-    if config is None:
-        config = get_model_config(model)
+    config = get_model_config(model)
     if config.overlap_p2p_comm:
         raise ValueError(
             "Non-interleaved pipeline parallelism does not support overlapping p2p communication"
@@ -262,6 +261,8 @@ def forward_backward_pipelining_without_interleaving(
     if no_sync_func is None:
         no_sync_func = contextlib.nullcontext
     no_sync_context = None
+
+    args = get_args()
 
     def disable_grad_sync():
         """Disable asynchronous grad reductions"""
@@ -301,6 +302,7 @@ def forward_backward_pipelining_without_interleaving(
         max_outstanding_backprops = num_warmup_microbatches + 1
 
     model_type = get_model_type(model)
+    encoder_decoder_xattn = get_model_xattn(model)
 
     rank = parallel_state.get_pipeline_model_parallel_rank()
     recv_tensor_shapes = get_tensor_shapes(
@@ -310,6 +312,7 @@ def forward_backward_pipelining_without_interleaving(
         micro_batch_size=micro_batch_size,
         decoder_seq_length=decoder_seq_length,
         config=config,
+        encoder_decoder_xattn=encoder_decoder_xattn,
     )
     send_tensor_shapes = get_tensor_shapes(
         rank=rank,
@@ -318,6 +321,7 @@ def forward_backward_pipelining_without_interleaving(
         micro_batch_size=micro_batch_size,
         decoder_seq_length=decoder_seq_length,
         config=config,
+        encoder_decoder_xattn=encoder_decoder_xattn,
     )
 
     # Input, output tensors only need to be saved when doing backward passes
@@ -354,6 +358,7 @@ def forward_backward_pipelining_without_interleaving(
             checkpoint_activations_microbatch,
             check_first_val_step(first_val_step, forward_only, i == 0),
             current_microbatch=i,
+            encoder_decoder_xattn=encoder_decoder_xattn,
         )
         send_forward(output_tensor, send_tensor_shapes, config)
         total_num_tokens += num_tokens.item()
@@ -395,6 +400,7 @@ def forward_backward_pipelining_without_interleaving(
                 first_val_step, forward_only, (i == 0) and (num_warmup_microbatches == 0)
             ),
             current_microbatch=i + num_warmup_microbatches,
+            encoder_decoder_xattn=encoder_decoder_xattn,
         )
         total_num_tokens += num_tokens.item()
 
@@ -482,5 +488,8 @@ def forward_backward_pipelining_without_interleaving(
 
     if config.timers is not None:
         config.timers('forward-backward').stop()
+
+    if not args.deepspeed and hasattr(config, 'enable_cuda_graph') and config.enable_cuda_graph:
+        create_cudagraphs()
 
     return forward_data_store

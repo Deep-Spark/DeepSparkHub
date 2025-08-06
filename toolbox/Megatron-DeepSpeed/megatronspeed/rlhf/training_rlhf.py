@@ -26,7 +26,7 @@ from megatron.core.distributed import DistributedDataParallel as DDP
 from megatron.core.distributed import finalize_model_grads
 from megatron.core.enums import ModelType
 from megatron.core.optimizer import get_megatron_optimizer, OptimizerConfig
-from megatron.training.optimizer_param_scheduler import OptimizerParamScheduler
+from megatron.core.optimizer_param_scheduler import OptimizerParamScheduler
 from megatron.legacy.data.data_samplers import build_pretraining_data_loader
 from megatron.core.num_microbatches_calculator import (
     get_current_global_batch_size,

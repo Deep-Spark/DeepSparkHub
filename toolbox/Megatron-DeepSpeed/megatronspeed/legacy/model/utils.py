@@ -5,7 +5,7 @@ import math
 import torch
 
 from megatron.training import get_args
-from megatron.legacy.model import LayerNorm, RMSNorm, RMSNormResidual
+from megatron.legacy.model import LayerNorm, RMSNorm
 from megatron.core.jit import jit_fuser
 
 from deepspeed.runtime.zero import GatheredParameters

@@ -37,7 +37,7 @@ NODES=2
 TRAINING_ARGS="
     --train-iters 250000 \
     --eval-iters 10 \
-    --tensor-model-parallel-size 16 \
+    --tensor-model-parallel-size 8 \
     --pipeline-model-parallel-size 2\
     --micro-batch-size 1 \
     --global-batch-size 16 \
@@ -49,7 +49,9 @@ TRAINING_ARGS="
     --recompute-granularity full \
     --recompute-method block \
     --recompute-num-layers 24 \
-    --make-vocab-size-divisible-by 1
+    --make-vocab-size-divisible-by 1 \
+    --use-legacy-models \
+    --ckpt-format torch \
 
 "
 

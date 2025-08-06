@@ -9,20 +9,19 @@ from typing import Any, Callable, List, Optional, Tuple
 
 import torch
 import torch.nn.functional as F
-import torch.nn.init as init
-from torch.cuda.amp import custom_bwd, custom_fwd
 from torch.nn.parameter import Parameter
 
 from megatron.training.global_vars import get_args
 from megatron.core.model_parallel_config import ModelParallelConfig
 from megatron.core.parallel_state import (
+    get_expert_tensor_parallel_rank,
+    get_expert_tensor_parallel_world_size,
     get_global_memory_buffer,
-    get_tensor_and_expert_parallel_rank,
-    get_tensor_and_expert_parallel_world_size,
     get_tensor_model_parallel_group,
     get_tensor_model_parallel_rank,
     get_tensor_model_parallel_world_size,
 )
+from megatron.core.utils import is_torch_min_version
 
 from megatron.core import ixte_extensions
 
@@ -38,8 +37,10 @@ from megatron.core.tensor_parallel.mappings import (
     scatter_to_tensor_model_parallel_region,
 )
 from megatron.core.tensor_parallel.random import get_cuda_rng_tracker, get_expert_parallel_rng_tracker_name
-from megatron.core.tensor_parallel.utils import VocabUtility, divide, split_tensor_along_last_dim
+from megatron.core.tensor_parallel.utils import VocabUtility, divide
 from megatron.core.tensor_parallel.layers import (
+    dist_all_gather_func,
+    dist_reduce_scatter_func,
     ColumnParallelLinear,
     RowParallelLinear,
     _grad_accum_fusion_available,
@@ -94,6 +95,7 @@ def linear_with_grad_accumulation_and_async_allreduce_forward(
     wgrad_deferral_limit,
     inference_params=None,
 ):
+    """Forward."""
     ctx.save_for_backward(input, weight)
     ctx.use_bias = bias is not None
     ctx.gradient_accumulation_fusion = gradient_accumulation_fusion
@@ -108,9 +110,7 @@ def linear_with_grad_accumulation_and_async_allreduce_forward(
         dim_size[0] = dim_size[0] * world_size
 
         all_gather_buffer = get_global_memory_buffer().get_tensor(dim_size, input.dtype, "mpu")
-        torch.distributed._all_gather_base(
-            all_gather_buffer, input, group=get_tensor_model_parallel_group()
-        )
+        dist_all_gather_func(all_gather_buffer, input, group=get_tensor_model_parallel_group())
         total_input = all_gather_buffer
     else:
         total_input = input
@@ -121,6 +121,7 @@ def linear_with_grad_accumulation_and_async_allreduce_forward(
     return output
 
 def linear_with_grad_accumulation_and_async_allreduce_backward(ctx, grad_output):
+    """Backward."""
     input, weight = ctx.saved_tensors
     use_bias = ctx.use_bias
     grad_output_buffer = ctx.grad_output_buffer
@@ -141,7 +142,7 @@ def linear_with_grad_accumulation_and_async_allreduce_backward(ctx, grad_output)
             all_gather_buffer = get_global_memory_buffer().get_tensor(
                 dim_size, input.dtype, "mpu"
             )
-            handle = torch.distributed._all_gather_base(
+            handle = dist_all_gather_func(
                 all_gather_buffer, input, group=get_tensor_model_parallel_group(), async_op=True
             )
 
@@ -191,7 +192,7 @@ def linear_with_grad_accumulation_and_async_allreduce_backward(ctx, grad_output)
             dim_size, dtype=input.dtype, device=torch.cuda.current_device(), requires_grad=False
         )
         # reduce_scatter
-        handle = torch.distributed._reduce_scatter_base(
+        handle = dist_reduce_scatter_func(
             sub_grad_input, grad_input, group=get_tensor_model_parallel_group(), async_op=True
         )
         # Here we rely on CUDA_DEVICE_MAX_CONNECTIONS=1 to ensure that the
@@ -428,11 +429,11 @@ def linear_with_grad_accumulation_and_async_allreduce(
     weight: torch.Tensor,
     bias: Optional[torch.Tensor],
     gradient_accumulation_fusion: bool,
-    async_grad_allreduce: bool,
+    allreduce_dgrad: bool,
     sequence_parallel: bool,
     grad_output_buffer: Optional[List[torch.Tensor]] = None,
     wgrad_deferral_limit: Optional[int] = 0,
-    allreduce_dgrad: bool = None,
+    async_grad_allreduce: Optional[bool] = None,
     inference_params = None,
 ) -> torch.Tensor:
     """Linear layer execution with asynchronous communication and
@@ -477,8 +478,8 @@ def linear_with_grad_accumulation_and_async_allreduce(
             must turn off gradient accumulation fusion."
 
 
-        async_grad_allreduce (bool required): Do the allreduce of input
-            gradients asyncronously with the computation of weight
+        allreduce_dgrad (bool required): Do the allreduce of input gradients.
+            The allreduce is done asynchronously with the computation of weight
             gradients. If sequence_parallel is True, this must be
             False, as no all reduce is performed.
 
@@ -494,18 +495,16 @@ def linear_with_grad_accumulation_and_async_allreduce(
 
         wgrad_deferral_limit (int optional): Limit on the number of
             micro-batches for which embedding weight gradient GEMM should be
-            deferred. Defaults to 0.
+            deferred. Disable by setting this to 0. Defaults to 0.
 
-        allreduce_dgrad (bool): Do the allreduce of input gradients.
-            The allreduce is done asynchronously with the computation of weight
-            gradients. If sequence_parallel is True, this must be
-            False, as no all reduce is performed.
+        async_grad_allreduce (bool optional): Will be removed with 0.11.0.
+                                            Please use allreduce_dgrad instead.
     """
-    if allreduce_dgrad is None:
+    if async_grad_allreduce is not None:
         warnings.warn(
-            "async_grad_allreduce is deprecated and will be removed in a future release. use allreduce_dgrad instead."
+            "async_grad_allreduce is deprecated, not in use anymore and will"
+            " be fully removed with 0.11.0. Please use allreduce_dgrad instead."
         )
-        allreduce_dgrad = async_grad_allreduce
 
     args = [
         input,
@@ -581,15 +580,13 @@ def column_parallel_linear_init(self,
     self.explicit_expert_comm = False
     rank = get_tensor_model_parallel_rank()
     if not args.deepspeed:
-        self.explicit_expert_comm = self.is_expert and (
-            config.tensor_model_parallel_size > 1 or self.expert_parallel
-        )
-        if self.explicit_expert_comm and config.moe_extended_tp:
-            world_size = get_tensor_and_expert_parallel_world_size()
-            rank = get_tensor_and_expert_parallel_rank()
+        if is_expert:
+            world_size = get_expert_tensor_parallel_world_size()
+            rank = get_expert_tensor_parallel_rank()
         else:
             world_size = get_tensor_model_parallel_world_size()
             rank = get_tensor_model_parallel_rank()
+        self.explicit_expert_comm = self.is_expert and (world_size > 1 or self.expert_parallel)
     else:
         if moe and (not enable_expert_tensor_parallelism):
             world_size = 1
@@ -639,7 +636,7 @@ def column_parallel_linear_init(self,
                     init_method,
                     partition_dim=0,
                     stride=stride,
-                    expert_parallel=(self.is_expert and self.expert_parallel),
+                    is_expert=self.is_expert,
                 )
 
         setattr(self.weight, 'allreduce', not (self.is_expert and self.expert_parallel))
@@ -671,8 +668,8 @@ def column_parallel_linear_init(self,
     self.sequence_parallel = config.sequence_parallel
     if self.sequence_parallel and world_size <= 1:
         warnings.warn(
-            f"`sequence_parallel` is set to `True`, but tensor model parallel size is {world_size}. "
-            f"Disabling sequence parallel."
+            "`sequence_parallel` is set to `True`, but tensor model parallel size "
+            f"is {world_size}. Disabling sequence parallel."
         )
         self.sequence_parallel = False
 
@@ -712,14 +709,22 @@ def column_parallel_linear_init(self,
     if is_logits_gemm and config.sequence_parallel and ixte_extensions._USE_IXTE and config.transformer_impl == "transformer_engine":
         self.use_ixte = True
 
-def column_parallel_linear_forward(self, input_: torch.Tensor, weight: Optional[torch.Tensor] = None, inference_params=None):
+def column_parallel_linear_forward(
+    self,
+    input_: torch.Tensor,
+    weight: Optional[torch.Tensor] = None,
+    runtime_gather_output: Optional[bool] = None,
+    inference_params=None
+):
     """Forward of ColumnParallelLinear
 
     Args:
-        input_: 3D tensor whose order of dimension is [sequence, batch, hidden]
-
-        weight (optional): weight tensor to use, compulsory when
-            skip_weight_param_allocation is True.
+        input_:
+            3D tensor whose order of dimension is [sequence, batch, hidden]
+        weight (optional):
+            weight tensor to use, compulsory when skip_weight_param_allocation is True.
+        runtime_gather_output (bool): Gather output at runtime. Default None means
+            `gather_output` arg in the constructor will be used.
 
     Returns:
         - output
@@ -743,9 +748,9 @@ def column_parallel_linear_forward(self, input_: torch.Tensor, weight: Optional[
             )
 
     if self.config._cpu_offloading_context is not None:
-        if self.config._cpu_offloading_context.inside_context == True:
+        if self.config._cpu_offloading_context.inside_context is True:
             assert (
-                self.config.cpu_offloading == False
+                self.config.cpu_offloading is False
             ), "CPU Offloading cannot be enabled while using non-TE modules"
 
     bias = self.bias if not self.skip_bias_add else None
@@ -791,7 +796,7 @@ def column_parallel_linear_forward(self, input_: torch.Tensor, weight: Optional[
         weight=weight,
         bias=bias,
         gradient_accumulation_fusion=self.gradient_accumulation_fusion,
-        async_grad_allreduce=allreduce_dgrad,
+        allreduce_dgrad=allreduce_dgrad,
         sequence_parallel=False if self.explicit_expert_comm else self.sequence_parallel,
         grad_output_buffer=(
             self.grad_output_buffer if self.config.defer_embedding_wgrad_compute else None
@@ -801,11 +806,16 @@ def column_parallel_linear_forward(self, input_: torch.Tensor, weight: Optional[
             if self.config.defer_embedding_wgrad_compute
             else None
         ),
-        allreduce_dgrad=allreduce_dgrad,
         inference_params=inference_params,
     )
-    if (self.gather_output and not self.deepspeed) or \
-        (self.deepspeed and self.gather_output and not self.is_expert_without_slicing):
+
+    gather_output = self.gather_output
+    # Use the runtime gather output if it's set explicitly.
+    if runtime_gather_output is not None:
+        gather_output = runtime_gather_output
+
+    if (gather_output and not self.deepspeed) or \
+        (self.deepspeed and gather_output and not self.is_expert_without_slicing):
         # All-gather across the partitions.
         assert not self.sequence_parallel
         output = gather_from_tensor_model_parallel_region(output_parallel)
@@ -1161,17 +1171,14 @@ def row_parallel_linear_init(
     self.explicit_expert_comm = False
     rank = get_tensor_model_parallel_rank()
     if not args.deepspeed:
-        self.explicit_expert_comm = self.is_expert and (
-            config.tensor_model_parallel_size > 1 or self.expert_parallel
-        )
-
         # Divide the weight matrix along the last dimension.
-        if self.explicit_expert_comm and config.moe_extended_tp:
-            world_size = get_tensor_and_expert_parallel_world_size()
-            rank = get_tensor_and_expert_parallel_rank()
+        if self.is_expert:
+            world_size = get_expert_tensor_parallel_world_size()
+            rank = get_expert_tensor_parallel_rank()
         else:
             world_size = get_tensor_model_parallel_world_size()
             rank = get_tensor_model_parallel_rank()
+        self.explicit_expert_comm = self.is_expert and (world_size > 1 or self.expert_parallel)
     else:
         if moe and (not enable_expert_tensor_parallelism):
             world_size = 1
@@ -1220,7 +1227,7 @@ def row_parallel_linear_init(
                 init_method,
                 partition_dim=1,
                 stride=stride,
-                expert_parallel=(self.is_expert and self.expert_parallel),
+                is_expert=self.is_expert,
             )
     setattr(self.weight, 'allreduce', not (self.is_expert and self.expert_parallel))
 
@@ -1254,7 +1261,7 @@ def row_parallel_linear_init(
         )
     )
 
-def row_parallel_linear_forward(self, input_, inference_params=None):
+def row_parallel_linear_forward(self, input_, ignore_forward=False, recompute_fwd=False, inference_params=None):
     """Forward of RowParallelLinear
 
     Args:
@@ -1266,9 +1273,9 @@ def row_parallel_linear_forward(self, input_, inference_params=None):
     """
 
     if self.config._cpu_offloading_context is not None:
-        if self.config._cpu_offloading_context.inside_context == True:
+        if self.config._cpu_offloading_context.inside_context is True:
             assert (
-                self.config.cpu_offloading == False
+                self.config.cpu_offloading is False
             ), "CPU Offloading cannot be enabled while using non-TE modules"
 
     # Set up backprop all-reduce.
@@ -1290,10 +1297,9 @@ def row_parallel_linear_forward(self, input_, inference_params=None):
         weight=self.weight,
         bias=None,
         gradient_accumulation_fusion=self.gradient_accumulation_fusion,
-        async_grad_allreduce=allreduce_dgrad,
+        allreduce_dgrad=allreduce_dgrad,
         sequence_parallel=False,
         grad_output_buffer=None,
-        allreduce_dgrad=allreduce_dgrad,
         inference_params=inference_params,
     )
 

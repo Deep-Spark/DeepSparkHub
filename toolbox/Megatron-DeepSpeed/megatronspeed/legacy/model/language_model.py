@@ -49,7 +49,6 @@ def parallel_lm_logits(input_, word_embeddings_weight, parallel_output,
         weight=word_embeddings_weight,
         bias=bias,
         gradient_accumulation_fusion=args.gradient_accumulation_fusion,
-        async_grad_allreduce=allreduce_dgrad,
         sequence_parallel=args.sequence_parallel,
         grad_output_buffer=None,
         allreduce_dgrad=allreduce_dgrad,
@@ -65,12 +64,15 @@ def parallel_lm_logits(input_, word_embeddings_weight, parallel_output,
     else:
         return logits_parallel
 
-def get_language_model(config, num_tokentypes, add_pooler,
+def get_language_model(config,
+                       num_tokentypes,
+                       add_pooler,
                        encoder_attn_mask_type,
                        add_encoder=True,
                        add_decoder=False,
                        decoder_attn_mask_type=AttnMaskType.causal,
-                       pre_process=True, post_process=True,
+                       pre_process=True,
+                       post_process=True,
                        rlhf_training=False):
     """Build language model and return along with the key to save."""
     args = get_args()
@@ -78,8 +80,9 @@ def get_language_model(config, num_tokentypes, add_pooler,
         config.init_method = init_method_normal(config.init_method_std)
 
     if config.output_layer_init_method is None:
-        config.output_layer_init_method = scaled_init_method_normal(config.init_method_std,
-                                                                    config.num_layers)
+        config.output_layer_init_method = scaled_init_method_normal(
+            config.init_method_std, config.num_layers
+        )
 
     # Language model.
     language_model = TransformerLanguageModel(
@@ -164,7 +167,8 @@ def embedding_init(self,
     self.embedding_weights_in_fp32 = embedding_weights_in_fp32
     self.params_dtype = args.params_dtype
     self.word_embeddings = tensor_parallel.VocabParallelEmbedding(
-        vocab_size, self.hidden_size, config=config, init_method=config.init_method)
+        vocab_size, self.hidden_size, config=config, init_method=config.init_method
+    )
     self._word_embeddings_key = 'word_embeddings'
 
     # Position embedding (serial).
@@ -177,8 +181,7 @@ def embedding_init(self,
             # Initialize the position embeddings.
             self.init_method(self.position_embeddings.local_embeddings.weight)
         else:
-            self.position_embeddings = torch.nn.Embedding(
-                max_sequence_length, self.hidden_size)
+            self.position_embeddings = torch.nn.Embedding(max_sequence_length, self.hidden_size)
             # Initialize the position embeddings.
             if args.perform_initialization:
                 if args.zero_stage == 3:
@@ -512,8 +515,11 @@ def transformer_language_model_init(self,
     else:
         args = get_args()
     # TODO: passing share_embeddings_and_output_weights=False will not work correctly for T5 and embeddings will not be synced. Fix later for T5.
-    if args.untie_embeddings_and_output_weights: assert not add_decoder
-    super(TransformerLanguageModel, self).__init__(share_embeddings_and_output_weights=not args.untie_embeddings_and_output_weights)
+    if args.untie_embeddings_and_output_weights:
+        assert not add_decoder
+    super(TransformerLanguageModel, self).__init__(
+        share_embeddings_and_output_weights=not args.untie_embeddings_and_output_weights
+    )
 
     self.pre_process = pre_process
     self.post_process = post_process
@@ -542,12 +548,14 @@ def transformer_language_model_init(self,
         self._embedding_key = 'embedding'
 
     # Rotary positional embeddings
-    self.use_rotary_position_embeddings = \
-        args.position_embedding_type == 'rope'
+    self.use_rotary_position_embeddings = args.position_embedding_type == 'rope'
     if self.use_rotary_position_embeddings:
         self.seq_length = args.seq_length
-        rotary_dim = args.hidden_size // args.num_attention_heads \
-            if args.kv_channels is None else args.kv_channels
+        rotary_dim = (
+            args.hidden_size // args.num_attention_heads
+            if args.kv_channels is None
+            else args.kv_channels
+        )
 
         # partial rotary embeddings, which is better than full rotary
         # Wang and Komatsuzaki et al
@@ -559,6 +567,7 @@ def transformer_language_model_init(self,
             rotary_base=args.rope_theta
         )
         self.use_const_rope = (config.context_parallel_size == 1 and not args.variable_seq_lengths)
+        self.variable_seq_lengths = args.variable_seq_lengths
         if self.use_const_rope:
             rotary_pos_emb_out = self.rotary_pos_emb(self.seq_length)
             self.rotary_pos_emb_v = rotary_pos_emb_out
@@ -568,8 +577,9 @@ def transformer_language_model_init(self,
     if self.add_encoder:
         self.encoder = ParallelTransformer(
             config,
-            model_type=args.model_type if not args.retro_add_retriever \
-                else ModelType.retro_decoder,
+            model_type=(
+                args.model_type if not args.retro_add_retriever else ModelType.retro_decoder
+            ),
             self_attn_mask_type=self.encoder_attn_mask_type,
             pre_process=self.pre_process,
             post_process=self.post_process,
@@ -589,7 +599,8 @@ def transformer_language_model_init(self,
             self_attn_mask_type=self.decoder_attn_mask_type,
             pre_process=self.pre_process,
             post_process=self.post_process,
-            rlhf_training=rlhf_training)
+            rlhf_training=rlhf_training,
+        )
         self._decoder_key = 'decoder'
     else:
         self.decoder = None
@@ -609,13 +620,19 @@ def transformer_language_model_init(self,
                     args.padded_vocab_size,
                     config=config,
                     init_method=self.init_method,
-                    bias=False) # Setting bias to False always to keep it consistent with embedding tying that also does not have a bias.
+                    bias=False,
+                ) # Setting bias to False always to keep it consistent with embedding tying that also does not have a bias.
             self._output_layer_key = 'output_layer'
 
 def transformer_language_model_forward_wrapper(fn):
     @wraps(fn)
-    def wrapper(self, enc_input_ids, enc_position_ids, enc_attn_mask,
-                dec_input_ids=None, dec_position_ids=None, dec_attn_mask=None,
+    def wrapper(self,
+                enc_input_ids,
+                enc_position_ids,
+                enc_attn_mask,
+                dec_input_ids=None,
+                dec_position_ids=None,
+                dec_attn_mask=None,
                 retriever_input_ids=None,
                 retriever_position_ids=None,
                 retriever_attn_mask=None,
@@ -643,38 +660,42 @@ def transformer_language_model_forward_wrapper(fn):
 
         # Encoder embedding.
         if self.pre_process:
-            encoder_input = self.embedding(enc_input_ids, enc_position_ids,
-                                            tokentype_ids=tokentype_ids,
-                                            inference_params=inference_params)
+            encoder_input = self.embedding(
+                enc_input_ids, enc_position_ids, tokentype_ids=tokentype_ids,
+                inference_params=inference_params,
+            )
         else:
             encoder_input = None
 
         # Retriever embedding.
         if self.add_retriever and self.pre_process:
-            retriever_input = self.embedding(retriever_input_ids,
-                                                retriever_position_ids,
-                                                tokentype_ids=tokentype_ids,
-                                                inference_params=inference_params)
+            retriever_input = self.embedding(
+                retriever_input_ids, retriever_position_ids, tokentype_ids=tokentype_ids,
+                inference_params=inference_params,
+            )
         else:
             retriever_input = None
 
         # Rotary positional embeddings
         rotary_pos_emb = None
         if self.use_rotary_position_embeddings:
-            if self.use_const_rope and inference_params is None and self.training:
-                rotary_pos_emb = self.rotary_pos_emb_v
+            if inference_params is not None:
+                rotary_pos_emb = self.rotary_pos_emb(inference_params.max_sequence_length)
             else:
-                if inference_params is not None:
-                    rotary_pos_emb = \
-                        self.rotary_pos_emb(inference_params.max_sequence_length)
+                if self.use_const_rope and self.training:
+                    rotary_pos_emb = self.rotary_pos_emb_v
                 else:
-                    if args.curriculum_learning_legacy or args.data_efficiency_curriculum_learning:
-                        rotary_pos_emb = self.rotary_pos_emb(args.curriculum_seqlen)
+                    if self.variable_seq_lengths:
+                        # for finetune_gpt.py:114, every pp stage will have dataloader, so enc_input_ids will always have value.
+                        rotary_pos_emb = self.rotary_pos_emb(enc_input_ids.size(0))
                     else:
-                        if config is not None:
-                            rotary_pos_emb = self.rotary_pos_emb(config.seq_length)
+                        if args.curriculum_learning_legacy or args.data_efficiency_curriculum_learning:
+                            rotary_pos_emb = self.rotary_pos_emb(args.curriculum_seqlen)
                         else:
-                            rotary_pos_emb = self.rotary_pos_emb(self.seq_length)
+                            if config is None:
+                                rotary_pos_emb = self.rotary_pos_emb(self.seq_length)
+                            else:
+                                rotary_pos_emb = self.rotary_pos_emb(config.seq_length)
 
         # Run encoder.
         if enc_hidden_states is None:
@@ -686,7 +707,8 @@ def transformer_language_model_forward_wrapper(fn):
                     retriever_attn_mask=retriever_attn_mask,
                     inference_params=inference_params,
                     rotary_pos_emb=rotary_pos_emb,
-                    position_ids=enc_position_ids)
+                    position_ids=enc_position_ids,
+                )
 
                 if args.deepspeed:
                     encoder_output, *encoder_moe_losses = output
@@ -699,8 +721,7 @@ def transformer_language_model_forward_wrapper(fn):
 
         if self.post_process:
             if self.add_pooler:
-                pooled_output = self.pooler(encoder_output,
-                                            pooling_sequence_index)
+                pooled_output = self.pooler(encoder_output, pooling_sequence_index)
 
         # output_enc_hidden refers to when we just need the encoder's
         # output. For example, it is helpful to compute
@@ -719,8 +740,7 @@ def transformer_language_model_forward_wrapper(fn):
 
         # Decoder embedding.
         if self.pre_process:
-            decoder_input = self.embedding(dec_input_ids,
-                                            dec_position_ids)
+            decoder_input = self.embedding(dec_input_ids, dec_position_ids)
         else:
             decoder_input = None
 
@@ -731,7 +751,8 @@ def transformer_language_model_forward_wrapper(fn):
             encoder_output=encoder_output,
             enc_dec_attn_mask=enc_dec_attn_mask,
             inference_params=inference_params,
-            rotary_pos_emb=rotary_pos_emb)
+            rotary_pos_emb=rotary_pos_emb,
+        )
 
         if args.deepspeed:
             decoder_output, *decoder_moe_losses = output

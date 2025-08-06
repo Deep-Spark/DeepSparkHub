@@ -25,17 +25,28 @@ from megatron.core.enums import ModelType
 from megatron.legacy.model.enums import AttnMaskType, LayerType, AttnType
 from megatron.legacy.model.fused_softmax import FusedScaleMaskSoftmax
 from megatron.legacy.model.fused_bias_gelu import bias_gelu_impl
-from megatron.core.models.common.embeddings.rotary_pos_embedding import RotaryEmbedding, apply_rotary_pos_emb
+from megatron.core.models.common.embeddings import apply_rotary_pos_emb
+from megatron.core.jit import jit_fuser
 from megatron.core.num_microbatches_calculator import get_num_microbatches
-from megatron.legacy.model.utils import attention_mask_func, openai_gelu, erf_gelu, get_norm, get_rmsnorm_residual
+from megatron.core.parallel_state import (
+    get_expert_tensor_and_model_parallel_group,
+    get_tensor_model_parallel_group,
+)
 from megatron.core.tensor_parallel import (
-    gather_from_sequence_parallel_region_to_moe,
-    reduce_scatter_to_sequence_parallel_region_from_moe,
+    gather_from_sequence_parallel_region,
+    reduce_scatter_to_sequence_parallel_region,
     get_cuda_rng_tracker,
     get_data_parallel_rng_tracker_name
 )
-from megatron.core.parallel_state import get_tensor_model_parallel_group, get_tensor_and_expert_parallel_group
-from megatron.core.jit import jit_fuser
+from megatron.legacy.model.enums import AttnMaskType, AttnType, LayerType
+from megatron.legacy.model.utils import (
+    attention_mask_func,
+    erf_gelu,
+    get_norm,
+    openai_gelu,
+)
+from megatron.training import get_args, get_timers
+
 from megatron.core import ixte_extensions
 import megatron.legacy.model.transformer
 from megatron.legacy.model.transformer import (
@@ -70,7 +81,9 @@ try:
     from flash_attn.flash_attn_interface import flash_attn_unpadded_func
 except ImportError:
     try:
-        from flash_attn.flash_attn_interface import flash_attn_varlen_func as flash_attn_unpadded_func
+        from flash_attn.flash_attn_interface import (
+            flash_attn_varlen_func as flash_attn_unpadded_func,
+        )
     except ImportError:
         flash_attn_unpadded_func = None
 
@@ -1254,10 +1267,7 @@ def parallel_transformer_layer_init(self, config,
     self.drop_path = DropPath(drop_path_rate) if drop_path_rate > 0.0 else None
 
     # Normalize the attention output
-    if self.args.normalization != "RMSNorm":
-        self.post_attention_norm = get_norm(config)
-    else:
-        self.post_attention_norm = get_rmsnorm_residual(config)
+    self.post_attention_norm = get_norm(config)
 
     # Cross attention.
     if self.layer_type in (LayerType.decoder,
@@ -1391,36 +1401,36 @@ def parallel_transformer_layer_forward_wrapper(fn):
             if attention_bias is not None:
                 attention_bias = attention_bias.expand_as(residual)
             with self.bias_dropout_add_exec_handler():
-            #     norm_input = bias_dropout_add_func(
-            #         attention_output,
-            #         attention_bias,
-            #         residual,
-            #         self.hidden_dropout)
-                if self.args.normalization != "RMSNorm":
-                    norm_input = bias_dropout_add_func(
-                        attention_output,
-                        attention_bias,
-                        residual,
-                        self.hidden_dropout)
-                else:
-                    if attention_bias is not None:
-                        attention_output = attention_output + attention_bias
-                    out = torch.nn.functional.dropout(attention_output, p=self.hidden_dropout, training=self.training)
-                    norm_output, norm_input = self.post_attention_norm(out, residual)
+                norm_input = bias_dropout_add_func(
+                    attention_output,
+                    attention_bias,
+                    residual,
+                    self.hidden_dropout)
+                # if self.args.normalization != "RMSNorm":
+                #     norm_input = bias_dropout_add_func(
+                #         attention_output,
+                #         attention_bias,
+                #         residual,
+                #         self.hidden_dropout)
+                # else:
+                #     if attention_bias is not None:
+                #         attention_output = attention_output + attention_bias
+                #     out = torch.nn.functional.dropout(attention_output, p=self.hidden_dropout, training=self.training)
+                #     norm_output, norm_input = self.post_attention_norm(out, residual)
         else:
             out = torch.nn.functional.dropout(attention_output + attention_bias,
                                                 p=self.hidden_dropout,
                                                 training=self.training)
-            # norm_input = residual + self.drop_path(out)
-            if self.args.normalization != "RMSNorm":
-                norm_input = residual + self.drop_path(out)
-            else:
-                norm_output, norm_input = self.post_attention_norm(self.drop_path(out), residual)
+            norm_input = residual + self.drop_path(out)
+            # if self.args.normalization != "RMSNorm":
+            #     norm_input = residual + self.drop_path(out)
+            # else:
+            #     norm_output, norm_input = self.post_attention_norm(self.drop_path(out), residual)
 
         # Layer norm post the self attention.
-        # norm_output = self.post_attention_norm(norm_input)
-        if self.args.normalization != "RMSNorm":
-            norm_output = self.post_attention_norm(norm_input)
+        norm_output = self.post_attention_norm(norm_input)
+        # if self.args.normalization != "RMSNorm":
+        #     norm_output = self.post_attention_norm(norm_input)
 
         # Cross attention.
         if self.layer_type == LayerType.encoder:
@@ -2081,8 +2091,8 @@ def parallel_transformer_init(self, config,
     self.checkpoint_activations = args.checkpoint_activations
     self.checkpoint_num_layers = args.checkpoint_num_layers
     self.recompute_granularity = config.recompute_granularity
-    if args.recompute_method_per_stage != None:
-        if args.virtual_pipeline_model_parallel_size != None:
+    if args.recompute_method_per_stage is not None:
+        if args.virtual_pipeline_model_parallel_size is not None:
             if args.recompute_method_per_stage[mpu.get_virtual_pipeline_model_parallel_rank() * args.pipeline_model_parallel_size + mpu.get_pipeline_model_parallel_rank()] == 0:
                 self.recompute_method = 'uniform'
             elif args.recompute_method_per_stage[mpu.get_virtual_pipeline_model_parallel_rank() * args.pipeline_model_parallel_size + mpu.get_pipeline_model_parallel_rank()] == 1:
@@ -2094,8 +2104,8 @@ def parallel_transformer_init(self, config,
                 self.recompute_method = 'block'
     else:
         self.recompute_method = config.recompute_method
-    if args.recompute_num_layers_per_stage != None:
-        if args.virtual_pipeline_model_parallel_size != None:
+    if args.recompute_num_layers_per_stage is not None:
+        if args.virtual_pipeline_model_parallel_size is not None:
             self.recompute_num_layers = args.recompute_num_layers_per_stage[mpu.get_virtual_pipeline_model_parallel_rank() * args.pipeline_model_parallel_size + mpu.get_pipeline_model_parallel_rank()]
         else:
             self.recompute_num_layers = args.recompute_num_layers_per_stage[mpu.get_pipeline_model_parallel_rank()]
@@ -2107,7 +2117,6 @@ def parallel_transformer_init(self, config,
     self.sequence_parallel = config.sequence_parallel
 
     # Transformer Engine Init.
-    self.transformer_engine_rope_available = False
     self.transformer_engine_v_0_10 = False
     self.transformer_engine_v_0_11 = False
     self.transformer_engine_v_0_8 = False
@@ -2117,29 +2126,18 @@ def parallel_transformer_init(self, config,
         global transformer_engine
         import transformer_engine
         megatron.legacy.model.transformer.transformer_engine = transformer_engine
-        from importlib.metadata import version
-        from pkg_resources import packaging
+        self.ixte_v_0_2_3 = core.utils.is_ixte_min_version("0.2.3")
+        self.use_ixte = ixte_extensions._USE_IXTE
 
-        if ixte_extensions._USE_IXTE:
-            te_version = packaging.version.Version(ixte_extensions.te_version())
-            self.use_ixte = True
-            ixte_version = packaging.version.Version(ixte_extensions.ixte_version())
-            if ixte_version >= packaging.version.Version("0.2.3"):
-                self.ixte_v_0_2_3 = True
-        else:
-            te_version = packaging.version.Version(version("transformer-engine"))
-        if te_version >= packaging.version.Version("0.8.0"):
+        if core.utils.is_te_min_version("0.8.0"):
             self.transformer_engine_v_0_8 = True
-        if te_version >= packaging.version.Version("0.10.0"):
+        if core.utils.is_te_min_version("0.10.0"):
             self.transformer_engine_v_0_10 = True
-        if te_version >= packaging.version.Version("0.11.0"):
+        if core.utils.is_te_min_version("0.11.0"):
             self.transformer_engine_v_0_11 = True
-        if te_version >= packaging.version.Version("0.10.0"):
-            self.transformer_engine_rope_available = True
 
-        del version, packaging
-
-        assert not args.squared_relu, "TransformerEngine does not support squared relu activation."
+        assert not args.squared_relu, ("TransformerEngine does not support squared "
+                                       "relu activation.")
 
     self.use_fp8 = args.fp8 is not None
     self.fp8_recipe = None
@@ -2147,7 +2145,7 @@ def parallel_transformer_init(self, config,
     if self.use_fp8:
         assert args.transformer_impl == 'transformer_engine', \
             'transformer-engine required for fp8 training and inference'
-        self.fp8_group = mpu.get_amax_reduction_group()
+        self.fp8_group = mpu.get_amax_reduction_group(tp_only_amax_red=config.tp_only_amax_red)
         if args.fp8 == "e4m3":
             fp8_format = transformer_engine.common.recipe.Format.E4M3
         elif args.fp8 == "hybrid":
@@ -2259,6 +2257,11 @@ def parallel_transformer_init(self, config,
                 set_parallel_mode=True,
                 fuse_qkv_params=True,
                 **extra_transformer_engine_kwargs)
+            layer_tmp.set_context_parallel_group(
+                mpu.get_context_parallel_group(),
+                mpu.get_context_parallel_global_ranks(check_initialized=False),
+                None,
+            )
             return layer_tmp
 
     if config.virtual_pipeline_model_parallel_size is not None:
@@ -2309,7 +2312,7 @@ def parallel_transformer_init(self, config,
 
     if self.num_layers == 0:
         # When a standalone embedding stage is used (e.g.,
-        # args.standalone_embedding_stage == True), virtual pipeline ranks
+        # args.account_for_embedding_in_pipeline_split == True), virtual pipeline ranks
         # on pipeline rank 0 will have zero transformer layers assigned to
         # them. This results in the model's input and output tensors to be
         # the same, which will cause failure for certain output tensor

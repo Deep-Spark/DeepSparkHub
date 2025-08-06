@@ -13,12 +13,14 @@ from megatron.core.parallel_state import (
     get_data_parallel_rank,
     get_expert_model_parallel_rank,
     get_tensor_model_parallel_group,
+    get_expert_tensor_parallel_rank,
     get_tensor_model_parallel_rank,
     get_tensor_model_parallel_world_size,
 )
 from megatron.core.utils import safely_set_viewless_tensor_data
 import megatron.core.tensor_parallel.random as tp_random
 from megatron.core.tensor_parallel.random import (
+    _get_cuda_rng_state,
     _set_cuda_rng_state,
     initialize_rng_tracker,
     CheckpointFunction
@@ -61,30 +63,31 @@ def reset_checkpointed_activations_memory_buffer():
         _CHECKPOINTED_ACTIVATIONS_MEMORY_BUFFER.reset()
 
 
-def get_cuda_rng_tracker():
+def get_cuda_rng_tracker(use_te_rng_tracker=False, inference_rng_tracker=False):
     """Get cuda rng tracker."""
     if deepspeed.checkpointing.is_configured():
         return deepspeed.checkpointing.get_cuda_rng_tracker()
     
-    initialize_rng_tracker()
+    initialize_rng_tracker(use_te_rng_tracker, inference_rng_tracker)
     return tp_random._CUDA_RNG_STATE_TRACKER
 
-def model_parallel_cuda_manual_seed(seed):
+def model_parallel_cuda_manual_seed(seed, te_rng_tracker=False, inference_rng_tracker=False):
     """Initialize model parallel cuda seed.
 
     This function should be called after the model parallel is
     initialized. Also, no torch.cuda.manual_seed should be called
     after this function. Basically, this is replacement for that
     function.
-    Two set of RNG states are tracked:
-        default state: This is for data parallelism and is the same among a
-                       set of model parallel GPUs but different across
-                       different model paralle groups. This is used for
-                       example for dropout in the non-tensor-model-parallel regions.
-        tensor-model-parallel state: This state is different among a set of model
-                              parallel GPUs, but the same across data parallel
-                              groups. This is used for example for dropout in
-                              model parallel regions.
+    Three set of RNG states are tracked:
+    default state: This is for data parallelism and is the same among a set of model parallel GPUs
+    but different across different model parallel groups. This is used for example for dropout
+    in the non-tensor-model-parallel regions.
+    tensor-model-parallel state: This state is different among a set of model parallel GPUs,
+    but the same across data parallel groups. This is used for example for dropout
+    in model parallel regions.
+    expert-parallel-seed: This state is only used for the expert layer of MoE models.
+    It is different among expert-tensor and expert-model parallel GPUs, and the same
+    across expert-data parallel groups.
     """
     if deepspeed.checkpointing.is_configured():
         return deepspeed.checkpointing.model_parallel_cuda_manual_seed(seed)
@@ -102,7 +105,7 @@ def model_parallel_cuda_manual_seed(seed):
                   get_data_parallel_rank(), tensor_model_parallel_seed,
                   data_parallel_seed), flush=True)
 
-    initialize_rng_tracker()
+    initialize_rng_tracker(te_rng_tracker, inference_rng_tracker)
     tp_random._CUDA_RNG_STATE_TRACKER.reset()
     # Set the default state.
     torch.cuda.manual_seed(data_parallel_seed)
@@ -113,7 +116,7 @@ def model_parallel_cuda_manual_seed(seed):
                                           tensor_model_parallel_seed)
 
     expert_parallel_seed = (
-        seed + 1024 + 100 * get_expert_model_parallel_rank() + get_tensor_model_parallel_rank()
+        seed + 1024 + 100 * get_expert_model_parallel_rank() + get_expert_tensor_parallel_rank()
     )
     tp_random._CUDA_RNG_STATE_TRACKER.add(tp_random._EXPERT_PARALLEL_RNG_TRACKER_NAME, expert_parallel_seed)
 
@@ -127,13 +130,14 @@ def model_parallel_reconfigure_tp_seed(seed):
         get_accelerator().manual_seed(model_parallel_seed)
 
 def checkpoint_function_forward(ctx, run_function, distribute_saved_activations, *args):
+    """Forward pass."""
     ctx.run_function = run_function
     ctx.distribute_saved_activations \
         = distribute_saved_activations
 
     # Copy the rng states.
     ctx.fwd_cpu_rng_state = torch.get_rng_state()
-    ctx.fwd_cuda_rng_state = torch.cuda.get_rng_state()
+    ctx.fwd_cuda_rng_state = _get_cuda_rng_state()
     ctx.fwd_cuda_rng_state_tracker = get_cuda_rng_tracker().get_states()
 
     with torch.no_grad():
@@ -162,6 +166,7 @@ def checkpoint_function_forward(ctx, run_function, distribute_saved_activations,
     return outputs
 
 def checkpoint_function_backward(ctx, *args):
+    """Backward pass."""
     if not torch.autograd._is_checkpoint_valid():
         raise RuntimeError("Checkpointing is not compatible with .grad(), "
                             "please use .backward() if possible")
@@ -179,7 +184,7 @@ def checkpoint_function_backward(ctx, *args):
 
     # Store the current states.
     bwd_cpu_rng_state = torch.get_rng_state()
-    bwd_cuda_rng_state = torch.cuda.get_rng_state()
+    bwd_cuda_rng_state = _get_cuda_rng_state()
     bwd_cuda_rng_state_tracker = get_cuda_rng_tracker().get_states()
 
     # Set the states to what it used to be before the forward pass.

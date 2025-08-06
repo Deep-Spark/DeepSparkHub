@@ -7,6 +7,7 @@ import os
 from transformers import AutoTokenizer
 from megatron.core.datasets.megatron_tokenizer import MegatronTokenizer
 from megatron.training.tokenizer.gpt2_tokenization import GPT2Tokenizer
+from megatron.training.tokenizer.multimodal_tokenizer import MultimodalTokenizer
 from megatron.training.tokenizer.tokenizer import (
     _vocab_size_with_padding,
     _BertWordPieceTokenizer,
@@ -14,7 +15,6 @@ from megatron.training.tokenizer.tokenizer import (
     _SentencePieceTokenizer,
     _GPTSentencePieceTokenizer,
     _Llama2Tokenizer,
-    create_llama3_tokenizer
 )
 
 from typing import (
