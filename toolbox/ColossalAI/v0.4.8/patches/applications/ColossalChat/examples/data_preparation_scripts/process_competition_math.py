@@ -18,11 +18,11 @@ import os
 import json
 from datasets import load_dataset
 
-data_file = "/home/lin.wu/dataset/competition_math/data/train-00000-of-00001-7320a6f3aba8ebd2.parquet"
+data_file = "../dataset/competition_math/data/train-00000-of-00001-7320a6f3aba8ebd2.parquet"
 data = load_dataset('parquet', data_files=data_file)["train"]
 
 # 保存到 jsonl 文件中
-save_dir = "./dataset/competition_math/sft"
+save_dir = "../dataset/competition_math/sft"
 os.makedirs(save_dir, exist_ok=True)
 save_path = os.path.join(save_dir, 'data.jsonl')
 

@@ -4,9 +4,9 @@ rm -rf $SAVE_DIR/cache
 rm -rf $SAVE_DIR/jsonl
 rm -rf $SAVE_DIR/arrow
 
-input_data_dirs="dataset/competition_math/sft"
-conversation_template_config="conversation_template/Qwen_Qwen2.5-3B.json"
-tokenizer_dir="/home/lin.wu/dataset/Qwen2.5-3B"
+input_data_dirs="../dataset/competition_math/sft"
+conversation_template_config="../../conversation_template/Qwen_Qwen2.5-3B.json"
+tokenizer_dir="../checkpoints/Qwen2.5-3B"
 
 python3 prepare_dataset.py --type sft \
     --input_data_dirs ${input_data_dirs} \

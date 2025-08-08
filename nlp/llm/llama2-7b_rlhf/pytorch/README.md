@@ -15,6 +15,7 @@ to larger models.
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 | :----: | :----: | :----: |
+| BI-V150 | 4.3.0     |  25.09  |
 | BI-V150 | 4.2.0     |  25.03  |
 | BI-V150 | 3.4.0     |  24.06  |
 
@@ -28,10 +29,7 @@ Download dataset and convert it.
 cd <DeepSparkHub_Root>/toolbox/Megatron-DeepSpeed/
 
 pushd dataset/
-# get gpt_small_117M.tar
-wget http://files.deepspark.org.cn:880/deepspark/data/datasets/gpt_small_117M.tar
-tar -xf gpt_small_117M.tar
-rm -f gpt_small_117M.tar
+bash convert_dahoas.sh
 popd
 
 # Download checkpoints as above and put them to proper path, then convert checkpoints.
