@@ -1,8 +1,8 @@
-wget http://sw.iluvatar.ai/download/apps/pretrained/nlp/RLHF/output_tinyLlama-1.1B.zip
+wget http://files.deepspark.org.cn:880/deepspark/data/checkpoints/output_tinyLlama-1.1B.zip
 unzip output_tinyLlama-1.1B.zip
 rm -rf output_tinyLlama-1.1B.zip
 
-wget http://sw.iluvatar.ai/download/apps/pretrained/nlp/RLHF/output_step1_llama2_7b.zip
+wget http://files.deepspark.org.cn:880/deepspark/data/checkpoints/output_step1_llama2_7b.zip
 unzip output_step1_llama2_7b.zip
 rm -rf output_step1_llama2_7b.zip
 

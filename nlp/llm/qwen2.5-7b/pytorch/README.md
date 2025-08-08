@@ -20,7 +20,7 @@ architecture and specialized expert models make it a versatile tool for diverse 
 ### Prepare Resources
 
 ```sh
-# get qwen2.7-7b from https://huggingface.co/Qwen/Qwen2.5-7B and put it in checkpoints/Qwen2.5-7B
+# get qwen2.5-7b from https://huggingface.co/Qwen/Qwen2.5-7B and put it in checkpoints/Qwen2.5-7B
 mkdir -p checkpoints
 ```
 
