@@ -7,7 +7,7 @@ PROJECT_NAME="SFT"
 PARENT_SAVE_DIR="train_results/qwen2.5_3B/" # Path to a folder to save checkpoints
 PARENT_CONFIG_FILE=$PARENT_SAVE_DIR # Path to a folder to save training config logs
 PARENT_LOG_DIR=$PARENT_SAVE_DIR # Path to a folder to save training config logs
-PRETRAINED_MODEL_PATH="/home/lin.wu/model/Qwen2.5-3B" # huggingface or local model path
+PRETRAINED_MODEL_PATH="../checkpoints/Qwen2.5-3B" # huggingface or local model path
 PRETRAINED_TOKENIZER_PATH=$PRETRAINED_MODEL_PATH # huggingface or local tokenizer path
 declare -a dataset=(
     ../data_preparation_scripts/processed_data/sft/arrow/part-00000
