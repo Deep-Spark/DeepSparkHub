@@ -1,12 +1,15 @@
-[<img src="https://img.shields.io/badge/Language-English-blue.svg">](README_en.md) [<img src="https://img.shields.io/badge/语言-简体中文-red.svg">](README.md)
+<!-- markdownlint-disable first-line-h1 -->
+<!-- markdownlint-disable html -->
+<!-- markdownlint-disable line-length -->
+[<img alt="English" src="https://img.shields.io/badge/Language-English-blue.svg">](README_en.md) [<img alt="Chinese" src="https://img.shields.io/badge/语言-简体中文-red.svg">](README.md)
 
 # DeepSparkHub
 
 <div align="center" style="line-height: 1;">
   <a href="https://www.deepspark.org.cn"><img alt="Homepage"
     src="https://img.shields.io/badge/DeepSpark-Homepage-blue.svg"/></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-dfd.svg"></a>
-  <a href="https://gitee.com/deep-spark/deepsparkhub/releases/latest"><img src="https://img.shields.io/github/v/release/deep-spark/deepsparkhub?color=ffa"></a>
+  <a href="./LICENSE"><img alt="LICENSE" src="https://img.shields.io/badge/license-Apache%202.0-dfd.svg"></a>
+  <a href="https://gitee.com/deep-spark/deepsparkhub/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/deep-spark/deepsparkhub?color=ffa"></a>
 </div>
 <br>
 
