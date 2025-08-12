@@ -37,6 +37,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [Llama2-13B](nlp/llm/llama2-13b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
 | [Llama2-34B](nlp/llm/llama2-34b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
 | [Llama3-8B](nlp/llm/llama3_8b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
+| [Llama3-8B](nlp/llm/llama3_8b/megatron-lm)            | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.3.0     |
 | [Llama3-8B SFT](nlp/llm/llama3_8b_sft/pytorch)        | PyTorch   | ColossalAI         | school_math_0.25M      | 4.1.1     |
 | [Llama3-8B PPO](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
 | [Llama3-8B DPO](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
@@ -51,6 +52,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/pytorch)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b             | 4.1.1     |
 | [Qwen2.5-1.5B verl](nlp/llm/qwen2.5-1.5b/verl)        | PyTorch   | verl               | qwen2.5-1.5b           | 4.2.0     |
 | [Qwen2.5-7B verl](nlp/llm/qwen2.5-7b/verl)            | PyTorch   | verl               | qwen2.5-7b             | 4.2.0     |
+| [Qwen2.5-3B](nlp/llm/qwen2.5-3b/pytorch)              | PyTorch   | ColossalAI         | qwen2.5-3b             | 4.3.0     |
 | [Yi-6B](nlp/llm/yi-6b/pytorch)                        | PyTorch   | DeepSpeed          | Yi-6B                  | 4.2.0     |
 | [Yi-1.5-6B](nlp/llm/yi-1.5-6b/pytorch)                | PyTorch   | DeepSpeed          | Yi-1.5-6B              | 4.2.0     |
 | [Yi-VL-6B](nlp/llm/yi-vl-6b/pytorch)                  | PyTorch   | LLaMA-Factory      | Yi-VL-6B-hf            | 4.2.0     |
