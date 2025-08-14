@@ -456,6 +456,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 | Model                                                                 | Framework    | Dataset     | IXUCA SDK |
 |-----------------------------------------------------------------------|--------------|-------------|-------|
+|  [CosyVoice2-0.5B](audio/speech_synthesis/cosyvoice/pytorch)            |  DeepSpeed     |  openslr      | 4.3.0 |
 |  [PP-TTS-FastSpeech2](audio/speech_synthesis/fastspeech2/paddlepaddle)  |  PaddlePaddle  |  CSMSC        | 3.1.0 |
 |  [PP-TTS-HiFiGAN](audio/speech_synthesis/hifigan/paddlepaddle)          |  PaddlePaddle  |  CSMSC        | 3.1.0 |
 |  [Tacotron2](audio/speech_synthesis/tacotron2/pytorch)                  |  PyTorch       |  LJSpeech     | 2.2.0 |
