@@ -233,21 +233,6 @@ def modified_smooth_l1(bbox_pred, bbox_targets, bbox_inside_weights=1., bbox_out
         return outside_mul
 
 
-# from scipy.misc import imread, imsave, imshow, imresize
-# import numpy as np
-# from utility import draw_toolbox
-
-# def save_image_with_bbox(image, labels_, scores_, bboxes_):
-#     if not hasattr(save_image_with_bbox, "counter"):
-#         save_image_with_bbox.counter = 0  # it doesn't exist yet, so initialize it
-#     save_image_with_bbox.counter += 1
-
-#     img_to_draw = np.copy(image)
-
-#     img_to_draw = draw_toolbox.bboxes_draw_on_img(img_to_draw, labels_, scores_, bboxes_, thickness=2)
-#     imsave(os.path.join('./debug/{}.jpg').format(save_image_with_bbox.counter), img_to_draw)
-#     return save_image_with_bbox.counter
-
 def ssd_model_fn(features, labels, mode, params):
     """model_fn for SSD to be used with our Estimator."""
     shape = labels['shape']
@@ -259,17 +244,6 @@ def ssd_model_fn(features, labels, mode, params):
     decode_fn = global_anchor_info['decode_fn']
     num_anchors_per_layer = global_anchor_info['num_anchors_per_layer']
     all_num_anchors_depth = global_anchor_info['all_num_anchors_depth']
-
-    # bboxes_pred = decode_fn(loc_targets[0])
-    # bboxes_pred = [tf.reshape(preds, [-1, 4]) for preds in bboxes_pred]
-    # bboxes_pred = tf.concat(bboxes_pred, axis=0)
-    # save_image_op = tf.py_func(save_image_with_bbox,
-    #                         [ssd_preprocessing.unwhiten_image(features[0]),
-    #                         tf.clip_by_value(cls_targets[0], 0, tf.int64.max),
-    #                         match_scores[0],
-    #                         bboxes_pred],
-    #                         tf.int64, stateful=True)
-    # with tf.control_dependencies([save_image_op]):
 
     #print(all_num_anchors_depth)
     with tf.variable_scope(params['model_scope'], default_name=None, values=[features], reuse=tf.AUTO_REUSE):
@@ -356,9 +330,6 @@ def ssd_model_fn(features, labels, mode, params):
     if mode == tf.estimator.ModeKeys.PREDICT:
         return tf.estimator.EstimatorSpec(mode=mode, predictions=predictions)
 
-    # Calculate loss, which includes softmax cross entropy and L2 regularization.
-    #cross_entropy = tf.cond(n_positives > 0, lambda: tf.losses.sparse_softmax_cross_entropy(labels=flaten_cls_targets, logits=cls_pred), lambda: 0.)# * (params['negative_ratio'] + 1.)
-    #flaten_cls_targets=tf.Print(flaten_cls_targets, [flaten_loc_targets],summarize=50000)
     cross_entropy = tf.losses.sparse_softmax_cross_entropy(labels=flaten_cls_targets, logits=cls_pred) * (params['negative_ratio'] + 1.)
     # Create a tensor named cross_entropy for logging purposes.
     tf.identity(cross_entropy, name='cross_entropy_loss')
@@ -482,37 +453,3 @@ def main(_):
 if __name__ == '__main__':
   tf.logging.set_verbosity(tf.logging.INFO)
   tf.app.run()
-
-
-    # cls_targets = tf.reshape(cls_targets, [-1])
-    # match_scores = tf.reshape(match_scores, [-1])
-    # loc_targets = tf.reshape(loc_targets, [-1, 4])
-
-    # # each positive examples has one label
-    # positive_mask = cls_targets > 0
-    # n_positives = tf.count_nonzero(positive_mask)
-
-    # negtive_mask = tf.logical_and(tf.equal(cls_targets, 0), match_scores > 0.)
-    # n_negtives = tf.count_nonzero(negtive_mask)
-
-    # n_neg_to_select = tf.cast(params['negative_ratio'] * tf.cast(n_positives, tf.float32), tf.int32)
-    # n_neg_to_select = tf.minimum(n_neg_to_select, tf.cast(n_negtives, tf.int32))
-
-    # # hard negative mining for classification
-    # predictions_for_bg = tf.nn.softmax(cls_pred)[:, 0]
-
-    # prob_for_negtives = tf.where(negtive_mask,
-    #                        0. - predictions_for_bg,
-    #                        # ignore all the positives
-    #                        0. - tf.ones_like(predictions_for_bg))
-    # topk_prob_for_bg, _ = tf.nn.top_k(prob_for_negtives, k=n_neg_to_select)
-    # selected_neg_mask = prob_for_negtives > topk_prob_for_bg[-1]
-
-    # # include both selected negtive and all positive examples
-    # final_mask = tf.stop_gradient(tf.logical_or(tf.logical_and(negtive_mask, selected_neg_mask), positive_mask))
-    # total_examples = tf.count_nonzero(final_mask)
-
-    # glabels = tf.boolean_mask(tf.clip_by_value(cls_targets, 0, FLAGS.num_classes), final_mask)
-    # cls_pred = tf.boolean_mask(cls_pred, final_mask)
-    # location_pred = tf.boolean_mask(location_pred, tf.stop_gradient(positive_mask))
-    # loc_targets = tf.boolean_mask(loc_targets, tf.stop_gradient(positive_mask))
