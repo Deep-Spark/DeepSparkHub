@@ -7511,6 +7511,30 @@
             "github_branch": "",
             "github_path": "",
             "priority": "P4"
+        },
+        {
+            "model_name": "cosyvoice",
+            "framework": "pytorch",
+            "release_version": "25.09",
+            "release_sdk": "4.3.0",
+            "release_gpgpu": "BI-V150",
+            "latest_sdk": "",
+            "latest_gpgpu": "",
+            "category": "audio/speech_synthesis",
+            "toolbox": "",
+            "mdims": "",
+            "dataset": "",
+            "license": "",
+            "model_path": "deepsparkhub/audio/speech_synthesis/cosyvoice/pytorch",
+            "readme_file": "deepsparkhub/audio/speech_synthesis/cosyvoice/pytorch/README.md",
+            "bitbucket_repo": "",
+            "bitbucket_branch": "",
+            "bitbucket_path": "",
+            "develop_owner": "",
+            "github_repo": "",
+            "github_branch": "",
+            "github_path": "",
+            "priority": "P4"
         }
     ]
 }
