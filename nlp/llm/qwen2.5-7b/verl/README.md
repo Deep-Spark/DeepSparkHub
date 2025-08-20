@@ -29,7 +29,7 @@ python3 data_preprocess/kk.py --local_dir data/kk --data_path path_to_kk/train/p
 
 ### Install Dependencies
 ```bash
-cd deepsparkhub/toolbox/verl
+cd deepsparkhub/toolbox/verl/0dc8e8596
 pip3 install -r requirements.txt
 python3 setup.py install
 ```

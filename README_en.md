@@ -30,7 +30,9 @@ individuals, healthcare, education, communication, energy, and more.
 | [ChatGLM2-6B SFT](nlp/llm/chatglm2-6b-sft/pytorch)    | PyTorch   | DeepSpeed          | ADGEN & chatglm2-6b    | 3.4.0     |
 | [ChatGLM3-6B](nlp/llm/chatglm3-6b/pytorch)            | PyTorch   | DeepSpeed          | ADGEN & chatglm3-6b    | 4.1.1     |
 | [DeepSeekMoE 7B](nlp/llm/deepseek_moe_7b/pytorch)     | PyTorch   | ColossalAI         | deepseek-moe-16b-base  | 4.1.1     |
+| [DeepSeek-LLM-7B](nlp/llm/deepseek-llm-7b/pytorch)    | PyTorch   | verl               | deepseek-llm-7b-chat   | 4.4.0     |
 | [GLM-4](nlp/llm/glm-4/pytorch)                        | PyTorch   | Torchrun           | glm-4-9b-chat          | 4.2.0     |
+| [Gemma-2-2B-IT](nlp/llm/gemma-2-2b-it/pytorch)        | PyTorch   | verl               | gemma-2-2b-it          | 4.4.0     |
 | [Llama-7B](nlp/llm/llama-7b/pytorch)                  | PyTorch   | ColossalAI         | llama-7b-hf            | 3.1.0     |
 | [Llama2-7B](nlp/llm/llama2-7b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.1.0     |
 | [Llama2-7B RMF](nlp/llm/llama2-7b_reward_sft/pytorch) | PyTorch   | DeepSpeed          | Dahoas/rm-static       | 3.1.1     |
@@ -51,10 +53,13 @@ individuals, healthcare, education, communication, energy, and more.
 | [QWen-7B](nlp/llm/qwen-7b/pytorch)                    | PyTorch   | Firefly            | qwen-7b                | 3.4.0     |
 | [QWen1.5-7B](nlp/llm/qwen1.5-7b/pytorch)              | PyTorch   | Firefly            | school_math            | 4.1.1     |
 | [QWen1.5-14B](nlp/llm/qwen1.5-14b/pytorch)            | PyTorch   | Firefly            | school_math            | 4.1.1     |
+| [Qwen2-7B](nlp/llm/qwen2-7b/verl)                     | PyTorch   | verl               | qwen2-7b               | 4.4.0     |
 | [Qwen2.5-7B SFT](nlp/llm/qwen2.5-7b/pytorch)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b             | 4.1.1     |
 | [Qwen2.5-1.5B verl](nlp/llm/qwen2.5-1.5b/verl)        | PyTorch   | verl               | qwen2.5-1.5b           | 4.2.0     |
 | [Qwen2.5-7B verl](nlp/llm/qwen2.5-7b/verl)            | PyTorch   | verl               | qwen2.5-7b             | 4.2.0     |
 | [Qwen2.5-3B](nlp/llm/qwen2.5-3b/pytorch)              | PyTorch   | ColossalAI         | qwen2.5-3b             | 4.3.0     |
+| [Qwen2.5-VL-7B](nlp/llm/qwen2.5-vl-7b/verl)           | PyTorch   | verl               | qwen2.5-vl-7b          | 4.4.0     |
+| [Qwen3-8B](nlp/llm/qwen3-8b/verl)                     | PyTorch   | verl               | qwen3-8b               | 4.4.0     |
 | [Yi-6B](nlp/llm/yi-6b/pytorch)                        | PyTorch   | DeepSpeed          | Yi-6B                  | 4.2.0     |
 | [Yi-1.5-6B](nlp/llm/yi-1.5-6b/pytorch)                | PyTorch   | DeepSpeed          | Yi-1.5-6B              | 4.2.0     |
 | [Yi-VL-6B](nlp/llm/yi-vl-6b/pytorch)                  | PyTorch   | LLaMA-Factory      | Yi-VL-6B-hf            | 4.2.0     |
