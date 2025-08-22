@@ -13,6 +13,7 @@ language understanding and generation.
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 | :----: | :----: | :----: |
+| BI-V150 | 4.3.0     |  25.09  |
 | BI-V150 | 4.2.0     |  25.06  |
 
 ## Model Preparation
@@ -28,9 +29,11 @@ mkdir -p Dylan2048
 # for dpo: OpenRLHF/preference_dataset_mixture2_and_safe_pku
 # for kto: Dylan2048/ultrafeedback-unpaired-preferences
 # for ppo: OpenRLHF/prompt-collection-v0.1
+# for sft: Open-Orca/OpenOrca
 
 # get pretrain model from huggingface: https://huggingface.co/OpenRLHF/Llama-3-8b-sft-mixture
 # get reward_pretrain model from huggingface: https://huggingface.co/OpenRLHF/Llama-3-8b-rm-mixture
+# get model from https://huggingface.co/meta-llama/Meta-Llama-3-8B
 ```
 
 ### Install Dependencies
@@ -56,6 +59,9 @@ bash train_kto_llama.sh
 
 # train with ppo
 bash train_ppo_llama.sh
+
+# train with sft
+bash train_sft_llama.sh
 
 # Tips:
 # If you throw out: FileNotFoundError: Directory OpenRLHF/prompt-collection-v0.1 is neither a `Dataset` directory nor a `DatasetDict` directory.

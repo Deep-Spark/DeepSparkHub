@@ -6,8 +6,8 @@ openrlhf.cli.train_sft \
    --dataset Open-Orca/OpenOrca \
    --input_key question \
    --output_key response \
-   --train_batch_size 256 \
-   --micro_train_batch_size 2 \
+   --train_batch_size 128 \
+   --micro_train_batch_size 1 \
    --max_samples 500000 \
    --pretrain meta-llama/Meta-Llama-3-8B \
    --save_path ./checkpoint/llama3-8b-sft \
@@ -17,10 +17,9 @@ openrlhf.cli.train_sft \
    --zero_stage 2 \
    --max_epochs 1 \
    --bf16 \
-   --attn_implementation flash_attention_2 \
+   --flash_attn \
    --learning_rate 5e-6 \
    --load_checkpoint \
-   --packing_samples \
    --gradient_checkpointing
 EOF
     # --wandb [WANDB_TOKENS]
@@ -28,4 +27,4 @@ EOF
 
 if [[ ${1} != "slurm" ]]; then
     deepspeed --module $training_commands
-f
+fi
