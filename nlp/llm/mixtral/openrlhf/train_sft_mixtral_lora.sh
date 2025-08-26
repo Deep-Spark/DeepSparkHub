@@ -22,7 +22,8 @@ openrlhf.cli.train_sft \
     --learning_rate 5e-6 \
     --lora_rank 64 \
     --lora_alpha 64 \
-    --aux_loss_coef 0.001
+    --aux_loss_coef 0.001 \
+    --gradient_checkpointing_use_reentrant
 EOF
 
 if [[ ${1} != "slurm" ]]; then
