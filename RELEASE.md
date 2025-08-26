@@ -3,6 +3,56 @@
 <!-- markdownlint-disable no-duplicate-heading -->
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 25.09 Release Notes
+
+### 模型与算法
+
+* 新增了10个大模型强化学习微调示例，使用了[verl](https://github.com/volcengine/verl)、[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)、[Megatron-LM](https://github.com/NVIDIA/Megatron-LM)、[Colossal-AI](https://github.com/hpcaitech/ColossalAI)、[deepspeed](https://github.com/deepspeedai/DeepSpeed)工具箱
+
+<table>
+    </tr>
+        <tr align="left"><th colspan=5>大模型</th></tr>
+    <tr>
+        <td>Qwen2-7B GRPO (verl)</td>
+        <td>Qwen2.5-VL-7B GRPO (verl)</td>
+        <td>Qwen3-8B GRPO (verl)</td>
+    </tr>
+    <tr>
+        <td>DeepSeek-LLM-7B PPO (verl)</td>
+        <td>Gemma-2-2B-IT PPO (verl)</td>
+        <td>Llama-3-8B SFT (OpenRLHF)</td>
+    </tr>
+    <tr>
+        <td>Mixtral-8x7B-v0.1 SFT (OpenRLHF)</td>
+        <td>Llama-3-8B (Megatron-LM)</td>
+        <td>Qwen2.5-3B (Colossal-AI)</td>
+    </tr>
+    <tr>
+        <td>CosyVoice2-0.5B (deepspeed)</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+### 修复更新
+
+* 更新了AlexNet、GoogLeNet等模型所支持的最高SDK版本。
+* 同步了Colossal-AI、Megatron-Deepspeed、deepspeed框架的最新代码。
+* 同步了SSD模型的最新代码。
+* 修复了README文件中markdownlint的问题。
+
+### 版本关联
+
+DeepSparkHub 25.09对应天数软件栈4.3.0/4.4.0版本。
+
+### 贡献者
+
+感谢以下社区贡献者
+
+sanghui_ilu，李一力，郝燕龙，胡方健，lsy789，张汉涛，majorli6，honglyua。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
 ## DeepSparkHub 25.06 Release Notes
 
 ### 模型与算法
