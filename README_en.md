@@ -43,12 +43,14 @@ individuals, healthcare, education, communication, energy, and more.
 | [Llama3-8B](nlp/llm/llama3_8b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
 | [Llama3-8B](nlp/llm/llama3_8b/megatron-lm)            | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.3.0     |
 | [Llama3-8B SFT](nlp/llm/llama3_8b_sft/pytorch)        | PyTorch   | ColossalAI         | school_math_0.25M      | 4.1.1     |
+| [Llama3-8B SFT](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Meta-Llama-3-8B        | 4.3.0     |
 | [Llama3-8B PPO](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
 | [Llama3-8B DPO](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
 | [Llama3-8B KTO](nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
 | [Mamba-2](nlp/llm/mamba-2/pytorch)                    | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.1.1     |
 | [MiniCPM](nlp/llm/minicpm/pytorch)                    | PyTorch   | DeepSpeed          | MiniCPM-2B-sft-bf16    | 4.2.0     |
 | [Mixtral 8x7B](nlp/llm/mixtral/pytorch)               | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.1.1     |
+| [Mixtral 8x7B](nlp/llm/mixtral/openrlhf)              | PyTorch   | OpenRLHF           | Mixtral-8x7B-v0.1      | 4.3.0     |
 | [Phi-3](nlp/llm/phi-3/pytorch)                        | PyTorch   | Torchrun           | Phi-3-mini-4k-instruct | 4.2.0     |
 | [QWen-7B](nlp/llm/qwen-7b/pytorch)                    | PyTorch   | Firefly            | qwen-7b                | 3.4.0     |
 | [QWen1.5-7B](nlp/llm/qwen1.5-7b/pytorch)              | PyTorch   | Firefly            | school_math            | 4.1.1     |
