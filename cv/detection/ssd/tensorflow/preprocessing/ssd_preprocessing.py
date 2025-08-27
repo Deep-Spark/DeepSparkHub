@@ -34,7 +34,7 @@ from __future__ import print_function
 
 import tensorflow.compat.v1 as tf
 from tensorflow.python.ops import control_flow_ops
-import tf_slim as slim
+# import tf_slim as slim
 
 
 _R_MEAN = 123.68
