@@ -36,10 +36,13 @@
 
 ### 修复更新
 
-* 更新了AlexNet、GoogLeNet等模型所支持的最高SDK版本。
-* 同步了Colossal-AI、Megatron-Deepspeed、deepspeed框架的最新代码。
-* 同步了SSD模型的最新代码。
-* 修复了README文件中markdownlint的问题。
+* 修复了ResNet50 Pytorch使用DALI情况下steps数异常的问题 (#ICV31B) 
+* 修复了README文件中markdownlint语法报错的问题
+* 更新了AlexNet、GoogLeNet等模型所支持的最高SDK版本
+* 同步了SSD TensorFlow模型的最新代码
+* 同步了Colossal-AI、Deepspeed和Megatron-Deepspeed框架的最新代码
+
+
 
 ### 版本关联
 
@@ -49,7 +52,7 @@ DeepSparkHub 25.09对应天数软件栈4.3.0/4.4.0版本。
 
 感谢以下社区贡献者
 
-sanghui_ilu，李一力，郝燕龙，胡方健，lsy789，张汉涛，majorli6，honglyua。
+sanghui_ilu，李一力，郝燕龙，胡方健，lsy789，张汉涛，fanglaipeng，majorli6，honglyua。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
 
