@@ -56,7 +56,7 @@ _USE_FUSED_BN = True
 # vgg_16/conv3/conv3_3/biases
 # vgg_16/conv1/conv1_2/weights
 
-class ReLuLayer(tf.layers.Layer):
+class ReLuLayer(tf.keras.layers.Layer):
     def __init__(self, name, **kwargs):
         super(ReLuLayer, self).__init__(name=name, trainable=trainable, **kwargs)
         self._name = name
@@ -72,9 +72,9 @@ class ReLuLayer(tf.layers.Layer):
 
 
 def forward_module(m, inputs, training=False):
-    if isinstance(m, tf.layers.BatchNormalization) or isinstance(m, tf.layers.Dropout):
-        return m.apply(inputs, training=training)
-    return m.apply(inputs)
+    if isinstance(m, tf.keras.layers.BatchNormalization) or isinstance(m, tf.keras.layers.Dropout):
+        return m(inputs, training=training)
+    return m(inputs)
 
 
 def get_backbone(backbone, training, **kwargs):
@@ -124,18 +124,18 @@ def ssd_conv_block(
     with tf.variable_scope(name):
         conv_blocks = []
         conv_blocks.append(
-            tf.layers.Conv2D(filters=filters, kernel_size=1, strides=1, padding=padding,
+            tf.keras.layers.Conv2D(filters=filters, kernel_size=1, strides=1, padding=padding,
                 data_format=data_format, activation=tf.nn.relu, use_bias=True,
                 kernel_initializer=kernel_initializer,
                 bias_initializer=tf.zeros_initializer(),
-                name='{}_1'.format(name), _scope='{}_1'.format(name), _reuse=None)
+                name='{}_1'.format(name))
         )
         conv_blocks.append(
-            tf.layers.Conv2D(filters=filters * 2, kernel_size=3, strides=strides, padding=padding,
+            tf.keras.layers.Conv2D(filters=filters * 2, kernel_size=3, strides=strides, padding=padding,
                 data_format=data_format, activation=tf.nn.relu, use_bias=True,
                 kernel_initializer=kernel_initializer,
                 bias_initializer=tf.zeros_initializer(),
-                name='{}_2'.format(name), _scope='{}_2'.format(name), _reuse=None)
+                name='{}_2'.format(name))
         )
         return conv_blocks
 
@@ -203,28 +203,28 @@ class VGG16Backbone(object):
         # VGG layers
         self._conv1_block = self.conv_block(2, 64, 3, (1, 1), 'conv1')
         # down_1
-        self._pool1 = tf.layers.MaxPooling2D(2, 2, padding='same', data_format=self._data_format, name='pool1')
+        self._pool1 = tf.keras.layers.MaxPooling2D(2, 2, padding='same', data_format=self._data_format, name='pool1')
         self._conv2_block = self.conv_block(2, 128, 3, (1, 1), 'conv2')
         # down_2
-        self._pool2 = tf.layers.MaxPooling2D(2, 2, padding='same', data_format=self._data_format, name='pool2')
+        self._pool2 = tf.keras.layers.MaxPooling2D(2, 2, padding='same', data_format=self._data_format, name='pool2')
         self._conv3_block = self.conv_block(3, 256, 3, (1, 1), 'conv3')
         # down_3
-        self._pool3 = tf.layers.MaxPooling2D(2, 2, padding='same', data_format=self._data_format, name='pool3')
+        self._pool3 = tf.keras.layers.MaxPooling2D(2, 2, padding='same', data_format=self._data_format, name='pool3')
         self._conv4_block = self.conv_block(3, 512, 3, (1, 1), 'conv4')
         # down_4
-        self._pool4 = tf.layers.MaxPooling2D(2, 2, padding='same', data_format=self._data_format, name='pool4')
+        self._pool4 = tf.keras.layers.MaxPooling2D(2, 2, padding='same', data_format=self._data_format, name='pool4')
         self._conv5_block = self.conv_block(3, 512, 3, (1, 1), 'conv5')
-        self._pool5 = tf.layers.MaxPooling2D(3, 1, padding='same', data_format=self._data_format, name='pool5')
-        self._conv6 = tf.layers.Conv2D(filters=1024, kernel_size=3, strides=1, padding='same', dilation_rate=6,
+        self._pool5 = tf.keras.layers.MaxPooling2D(3, 1, padding='same', data_format=self._data_format, name='pool5')
+        self._conv6 = tf.keras.layers.Conv2D(filters=1024, kernel_size=3, strides=1, padding='same', dilation_rate=6,
                             data_format=self._data_format, activation=tf.nn.relu, use_bias=True,
                             kernel_initializer=self._conv_initializer(),
                             bias_initializer=tf.zeros_initializer(),
-                            name='fc6', _scope='fc6', _reuse=None)
-        self._conv7 = tf.layers.Conv2D(filters=1024, kernel_size=1, strides=1, padding='same',
+                            name='fc6')
+        self._conv7 = tf.keras.layers.Conv2D(filters=1024, kernel_size=1, strides=1, padding='same',
                             data_format=self._data_format, activation=tf.nn.relu, use_bias=True,
                             kernel_initializer=self._conv_initializer(),
                             bias_initializer=tf.zeros_initializer(),
-                            name='fc7', _scope='fc7', _reuse=None)
+                            name='fc7')
 
     def l2_normalize(self, x, name):
         with tf.name_scope(name, "l2_normalize", [x]) as name:
@@ -239,13 +239,13 @@ class VGG16Backbone(object):
         # forward vgg layers
         for conv in self._conv1_block:
             inputs = forward_module(conv, inputs, training=training)
-        inputs = self._pool1.apply(inputs)
+        inputs = self._pool1(inputs)
         for conv in self._conv2_block:
             inputs = forward_module(conv, inputs, training=training)
-        inputs = self._pool2.apply(inputs)
+        inputs = self._pool2(inputs)
         for conv in self._conv3_block:
             inputs = forward_module(conv, inputs, training=training)
-        inputs = self._pool3.apply(inputs)
+        inputs = self._pool3(inputs)
         for conv in self._conv4_block:
             inputs = forward_module(conv, inputs, training=training)
         # conv4_3
@@ -258,13 +258,13 @@ class VGG16Backbone(object):
 
             feature_layers.append(tf.multiply(weight_scale, self.l2_normalize(inputs, name='norm'), name='rescale')
                                 )
-        inputs = self._pool4.apply(inputs)
+        inputs = self._pool4(inputs)
         for conv in self._conv5_block:
             inputs = forward_module(conv, inputs, training=training)
-        inputs = self._pool5.apply(inputs)
+        inputs = self._pool5(inputs)
         # forward fc layers
-        inputs = self._conv6.apply(inputs)
-        inputs = self._conv7.apply(inputs)
+        inputs = self._conv6(inputs)
+        inputs = self._conv7(inputs)
         # fc7
         feature_layers.append(inputs)
 
@@ -275,11 +275,11 @@ class VGG16Backbone(object):
             conv_blocks = []
             for ind in range(1, num_blocks + 1):
                 conv_blocks.append(
-                        tf.layers.Conv2D(filters=filters, kernel_size=kernel_size, strides=strides, padding='same',
+                        tf.keras.layers.Conv2D(filters=filters, kernel_size=kernel_size, strides=strides, padding='same',
                             data_format=self._data_format, activation=tf.nn.relu, use_bias=True,
                             kernel_initializer=self._conv_initializer(),
                             bias_initializer=tf.zeros_initializer(),
-                            name='{}_{}'.format(name, ind), _scope='{}_{}'.format(name, ind), _reuse=None)
+                            name='{}_{}'.format(name, ind))
                     )
             return conv_blocks
 
@@ -287,32 +287,32 @@ class VGG16Backbone(object):
         with tf.variable_scope(name):
             conv_bn_blocks = []
             conv_bn_blocks.append(
-                    tf.layers.Conv2D(filters=filters, kernel_size=1, strides=1, padding='same',
+                    tf.keras.layers.Conv2D(filters=filters, kernel_size=1, strides=1, padding='same',
                         data_format=self._data_format, activation=None, use_bias=False,
                         kernel_initializer=self._conv_bn_initializer(),
                         bias_initializer=None,
-                        name='{}_1'.format(name), _scope='{}_1'.format(name), _reuse=None)
+                        name='{}_1'.format(name))
                 )
             conv_bn_blocks.append(
-                    tf.layers.BatchNormalization(axis=self._bn_axis, momentum=BN_MOMENTUM, epsilon=BN_EPSILON, fused=USE_FUSED_BN,
-                        name='{}_bn1'.format(name), _scope='{}_bn1'.format(name), _reuse=None)
+                    tf.keras.layers.BatchNormalization(axis=self._bn_axis, momentum=BN_MOMENTUM, epsilon=BN_EPSILON, fused=USE_FUSED_BN,
+                        name='{}_bn1'.format(name))
                 )
             conv_bn_blocks.append(
-                    ReLuLayer('{}_relu1'.format(name), _scope='{}_relu1'.format(name), _reuse=None)
+                    ReLuLayer('{}_relu1'.format(name))
                 )
             conv_bn_blocks.append(
-                    tf.layers.Conv2D(filters=filters * 2, kernel_size=3, strides=strides, padding='same',
+                    tf.keras.layers.Conv2D(filters=filters * 2, kernel_size=3, strides=strides, padding='same',
                         data_format=self._data_format, activation=None, use_bias=False,
                         kernel_initializer=self._conv_bn_initializer(),
                         bias_initializer=None,
-                        name='{}_2'.format(name), _scope='{}_2'.format(name), _reuse=None)
+                        name='{}_2'.format(name))
                 )
             conv_bn_blocks.append(
-                    tf.layers.BatchNormalization(axis=self._bn_axis, momentum=BN_MOMENTUM, epsilon=BN_EPSILON, fused=USE_FUSED_BN,
-                        name='{}_bn2'.format(name), _scope='{}_bn2'.format(name), _reuse=None)
+                    tf.keras.layers.BatchNormalization(axis=self._bn_axis, momentum=BN_MOMENTUM, epsilon=BN_EPSILON, fused=USE_FUSED_BN,
+                        name='{}_bn2'.format(name))
                 )
             conv_bn_blocks.append(
-                    ReLuLayer('{}_relu2'.format(name), _scope='{}_relu2'.format(name), _reuse=None)
+                    ReLuLayer('{}_relu2'.format(name))
                 )
             return conv_bn_blocks
 
@@ -322,15 +322,15 @@ def multibox_head(feature_layers, num_classes, num_anchors_depth_per_layer, data
         cls_preds = []
         loc_preds = []
         for ind, feat in enumerate(feature_layers):
-            loc_preds.append(tf.layers.conv2d(feat, num_anchors_depth_per_layer[ind] * 4, (3, 3), use_bias=True,
+            loc_preds.append(tf.keras.layers.Conv2D(num_anchors_depth_per_layer[ind] * 4, (3, 3), use_bias=True,
                         name='loc_{}'.format(ind), strides=(1, 1),
                         padding='same', data_format=data_format, activation=None,
                         kernel_initializer=tf.glorot_uniform_initializer(),
-                        bias_initializer=tf.zeros_initializer()))
-            cls_preds.append(tf.layers.conv2d(feat, num_anchors_depth_per_layer[ind] * num_classes, (3, 3), use_bias=True,
+                        bias_initializer=tf.zeros_initializer())(feat))
+            cls_preds.append(tf.keras.layers.Conv2D(num_anchors_depth_per_layer[ind] * num_classes, (3, 3), use_bias=True,
                         name='cls_{}'.format(ind), strides=(1, 1),
                         padding='same', data_format=data_format, activation=None,
                         kernel_initializer=tf.glorot_uniform_initializer(),
-                        bias_initializer=tf.zeros_initializer()))
+                        bias_initializer=tf.zeros_initializer())(feat))
 
         return loc_preds, cls_preds
