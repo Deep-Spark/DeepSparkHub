@@ -306,6 +306,23 @@ class CNNModel(Model):
       logits = tf.cast(logits, tf.float32)
       if aux_logits is not None:
         aux_logits = tf.cast(aux_logits, tf.float32)
+    
+    # 将 normalizization 相关的变量从 GLOBAL_VARIABLES 移动到 LOCAL_VARIABLES，这是因为normalization相关的层定义在tf2中已经不再支持，
+    # 只能使用tf2的接口BatchNormalizationLayer，而当前的代码自动移动上下文 OverrideToLocalVariableIfNotPsVar 捕获不了之，在这里手动移动。
+    global_collection = tf.get_default_graph().get_collection_ref(tf.GraphKeys.GLOBAL_VARIABLES)
+    local_collection = tf.get_default_graph().get_collection_ref(tf.GraphKeys.LOCAL_VARIABLES)
+    for v in tf.global_variables():
+        # print(f"global v.name: {v.name}")
+        if 'normalization' in v.name:
+            global_collection.remove(v)
+            local_collection.append(v)
+
+    # for v in tf.local_variables():
+    #   print(f"local v.name: {v.name}")
+
+    # for v in tf.trainable_variables():
+    #   print(f"trainable v.name: {v.name}")
+ 
     return BuildNetworkResult(
         logits=logits, extra_info=None if aux_logits is None else aux_logits)
 

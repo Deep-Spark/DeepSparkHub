@@ -2396,6 +2396,7 @@ class BenchmarkCNN(object):
       done_fn = lambda: local_step >= end_local_step
     else:
       done_fn = global_step_watcher.done
+    print(f"total_local_step: {end_local_step}")
     if self.params.debugger is not None:
       if self.params.debugger == 'cli':
         log_fn('The CLI TensorFlow debugger will be used.')

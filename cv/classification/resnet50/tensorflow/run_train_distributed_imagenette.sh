@@ -54,14 +54,14 @@ check_status()
 #################################################
 # Prepare devices
 #################################################
-devices=$CUDA_VISIBLE_DEVICES
-if [ -n "$devices"  ]; then
-    devices=(${devices//,/ })
-    num_devices=${#devices[@]}
-else
-    devices=(0 1)
-    num_devices=2
-fi
+# devices=$CUDA_VISIBLE_DEVICES
+# if [ -n "$devices"  ]; then
+#     devices=(${devices//,/ })
+#     num_devices=${#devices[@]}
+# else
+devices=(0 1)
+num_devices=2
+# fi
 echo "CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES}"
 echo "num_devices: ${num_devices}"
 
@@ -122,25 +122,27 @@ do
     fi
 
     if [ "${i}" == "${last_device}" ]; then
-        CUDA_VISIBLE_DEVICES=${device} UMD_WAITAFTERLAUNCH=1 python3 -u tf_cnn_benchmarks.py\
+        echo "device: ${device}"
+        UMD_WAITAFTERLAUNCH=1 python3 -u tf_cnn_benchmarks.py\
          --data_name=imagenette --data_dir=${DATA_DIR}\
          --data_format=NCHW \
          --optimizer=${OPTIMIZER} --datasets_use_prefetch=False\
          --local_parameter_device=gpu --num_gpus=${num_devices}\
          --batch_size=${BATCH_SIZE} --model=${model} \
          --variable_update=distributed_replicated \
-         --job_name=${job_name} --ps_hosts=127.0.0.1:50000 --worker_hosts="${worker_hosts}"\
+         --job_name=${job_name} --ps_hosts=127.0.0.1:40000 --worker_hosts="${worker_hosts}"\
          --train_dir=${TRAIN_DIR} --task_index=${task_index} --print_training_accuracy=True "${new_args[@]}" 2>&1 | tee ${LOG_DIR}/${DATE}_${TRAIN_EPOCHS}_${BATCH_SIZE}_${OPTIMIZER}.log; [[ ${PIPESTATUS[0]} == 0 ]] || exit
         echo "Distributed training PID ($!) on device ${device} where job name = ${job_name}"
     else
-        CUDA_VISIBLE_DEVICES=${device} UMD_WAITAFTERLAUNCH=1 python3 -u tf_cnn_benchmarks.py\
+        echo "device: ${device}"
+        UMD_WAITAFTERLAUNCH=1 python3 -u tf_cnn_benchmarks.py\
          --data_name=imagenette --data_dir=${DATA_DIR}\
          --data_format=NCHW \
          --optimizer=${OPTIMIZER} --datasets_use_prefetch=False\
          --local_parameter_device=gpu --num_gpus=${num_devices}\
          --batch_size=${BATCH_SIZE} --model=${model}\
          --variable_update=distributed_replicated\
-         --job_name=${job_name} --ps_hosts=127.0.0.1:50000 --worker_hosts="${worker_hosts}"\
+         --job_name=${job_name} --ps_hosts=127.0.0.1:40000 --worker_hosts="${worker_hosts}"\
          --train_dir=${TRAIN_DIR} --task_index=${task_index} --print_training_accuracy=True "${new_args[@]}" &
         echo "Distributed training PID ($!) on device ${device} where job name = ${job_name} and task_index = ${task_index}"
     fi

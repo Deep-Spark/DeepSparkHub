@@ -30,7 +30,7 @@ horovodrun -np ${IX_NUM_CUDA_VISIBLE_DEVICES} ${HOROVOD_RUN_ARGS} python3 ./run_
 	--max_eval_steps=100 \
 	--max_predictions_per_seq=76 \
 	--max_seq_length=512 \
-	--num_train_steps=2000 \
+	--num_train_steps=1000 \
 	--num_accumulation_steps=4 \
 	--num_warmup_steps=0 \
 	--save_checkpoints_steps=20000 \

@@ -314,8 +314,8 @@ class StagedModelVariable(object):
       return self._value()
 
 
-ops.register_tensor_conversion_function(
-    StagedModelVariable, StagedModelVariable._TensorConversionFunction)  # pylint: disable=protected-access
+# ops.register_tensor_conversion_function(
+#     StagedModelVariable, StagedModelVariable._TensorConversionFunction)  # pylint: disable=protected-access
 
 
 class StagedVariableGetter(object):

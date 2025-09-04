@@ -18,3 +18,4 @@ pip3 install "protobuf<4.0.0"
 pip3 install git+https://github.com/mlperf/logging.git
 pip3 install git+https://github.com/NVIDIA/dllogger.git
 pip3 install pandas==1.3.5
+pip3 install numpy==1.26.4

@@ -151,8 +151,8 @@ def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps, manual_fp
         return optimizer.apply_gradients(list(zip(accum_vars, tvars)), global_step=global_step)
     train_op = tf.cond(pred=update_step,
                        true_fn=lambda: update(accum_vars), false_fn=lambda: tf.no_op())
-    if hvd:
-      hvd.join()
+    # if hvd:
+    #   hvd.join()
   else:
     grads_and_vars = optimizer.compute_gradients(loss, tvars, gate_gradients=tf.compat.v1.train.Optimizer.GATE_NONE)
     grads_and_vars = [(g, v) for g, v in grads_and_vars if g is not None]
