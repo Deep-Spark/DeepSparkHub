@@ -32,7 +32,7 @@ from models import overfeat_model
 from models import resnet_model
 from models import trivial_model
 from models import vgg_model
-from models.experimental import deepspeech
+# from models.experimental import deepspeech
 from models.experimental import official_ncf_model
 
 
@@ -112,8 +112,8 @@ def _get_model_map(dataset_name):
     return _model_name_to_cifar_model
   elif dataset_name in ('imagenet', 'synthetic', 'imagenette'):
     return _model_name_to_imagenet_model
-  elif dataset_name == 'librispeech':
-    return {'deepspeech2': deepspeech.DeepSpeech2Model}
+#   elif dataset_name == 'librispeech':
+    # return {'deepspeech2': deepspeech.DeepSpeech2Model}
   elif dataset_name == 'coco':
     return _model_name_to_object_detection_model
   else:

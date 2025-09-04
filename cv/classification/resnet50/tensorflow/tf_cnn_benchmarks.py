@@ -57,6 +57,7 @@ def main(positional_arguments):
                      % positional_arguments[1:])
 
   params = benchmark_cnn.make_params_from_flags()
+  print(f"params: {params}")
   try:
       from dltest import show_training_arguments
       show_training_arguments(flags.FLAGS)

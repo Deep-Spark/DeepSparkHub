@@ -24,12 +24,12 @@ import contextlib
 import numpy as np
 
 import tensorflow.compat.v1 as tf
-
+tf.disable_v2_behavior()
 # pylint: disable=g-direct-tensorflow-import
 import mlperf
 from tensorflow.python.layers import convolutional as conv_layers
 from tensorflow.python.layers import core as core_layers
-from tensorflow.python.layers import normalization as normalization_layers
+from tensorflow.keras.layers import BatchNormalization as BatchNormalizationLayer
 from tensorflow.python.layers import pooling as pooling_layers
 from tensorflow.python.training import moving_averages
 
@@ -173,6 +173,7 @@ class ConvNetBuilder(object):
       kernel_initializer = tf.variance_scaling_initializer()
     name = 'conv' + str(self.counts['conv'])
     self.counts['conv'] += 1
+    # print(f"scope_name: {name}")
     with tf.variable_scope(name):
       strides = [1, d_height, d_width, 1]
       if self.data_format == 'NCHW':
@@ -466,19 +467,15 @@ class ConvNetBuilder(object):
     center = True
     with tf.variable_scope(name) as scope:
       if self.use_tf_layers:
-        layer_obj = normalization_layers.BatchNormalization(
+        bn_layer = BatchNormalizationLayer(
             momentum=decay,
             scale=scale,
-            epsilon=epsilon,
-            fused=True,
-            axis=_data_format_to_channel_axis[self.data_format],
-            # We pass this 'scope' argument for compatibility with checkpoints
-            # created with the contrib version of batch norm. tf_cnn_benchmarks
-            # used to use the contrib version.
-            _scope=scope,
             center=center,
-            name=scope.name)
-        bn = layer_obj.apply(input_layer, training=self.phase_train)
+            epsilon=epsilon,
+            axis=_data_format_to_channel_axis[self.data_format],
+            # name=scope.name.replace('/', '_') 
+        )
+        bn = bn_layer(input_layer, training=self.phase_train)
       else:
         bn = self._batch_norm_without_layers(input_layer, decay, scale, epsilon)
     self.top_layer = bn
