@@ -36,6 +36,8 @@
 
 ### 修复更新
 
+* 修复了Bert Tensorflow升级到2.16.2，不支持estimator的问题（#ICWA6Y）
+* 修复了ResNet50 Tensorflow升级到2.16，不兼容normalization_layers的问题（#ICWA59）
 * 修复了ResNet50 Pytorch使用DALI情况下steps数异常的问题 (#ICV31B) 
 * 修复了README文件中markdownlint语法报错的问题
 * 更新了AlexNet、GoogLeNet等模型所支持的最高SDK版本
