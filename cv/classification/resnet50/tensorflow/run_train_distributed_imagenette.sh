@@ -28,8 +28,8 @@ done
 echo "## Training model: ${model}"
 
 
-: ${BATCH_SIZE:=16}
-# TRAIN_EPOCHS=10
+: ${BATCH_SIZE:=160}
+TRAIN_EPOCHS=30
 # optional optimizer: momentum, rmsprop, momentum, sgd
 OPTIMIZER=momentum
 DATE=`date +%Y%m%d%H%M%S`
@@ -54,15 +54,27 @@ check_status()
 #################################################
 # Prepare devices
 #################################################
-# devices=$CUDA_VISIBLE_DEVICES
-# if [ -n "$devices"  ]; then
-#     devices=(${devices//,/ })
-#     num_devices=${#devices[@]}
-# else
-devices=(0 1)
-num_devices=2
-# fi
+devices=$CUDA_VISIBLE_DEVICES
 echo "CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES}"
+if [ -n "$devices"  ]; then
+    devices=(${devices//,/ })
+    num_devices=${#devices[@]}
+
+    if [ "${num_devices}" -gt "2" ]; then
+        devices=(${devices[@]:0:2})
+        num_devices=2
+
+        VALID_DEVICES="${devices[0]},${devices[1]}"
+        export CUDA_VISIBLE_DEVICES=${VALID_DEVICES}
+        echo "Distributed_replicated mode, use 2 gpus train: ${VALID_DEVICES}"
+    fi
+else
+    devices=(0 1)
+    VALID_DEVICES="0,1"
+    export CUDA_VISIBLE_DEVICES=${VALID_DEVICES}
+    num_devices=2
+fi
+echo "devices: ${devices}"
 echo "num_devices: ${num_devices}"
 
 if [ "${num_devices}" == "1" ]; then
@@ -82,7 +94,8 @@ do
         continue
     fi
     let i++
-    worker_hosts="${worker_hosts},127.0.0.1:5000${device}"
+    port=$((53400 + i))
+    worker_hosts="${worker_hosts},127.0.0.1:${port}"
 done
 worker_hosts=${worker_hosts#*,}
 echo "worker_hosts: ${worker_hosts}"
@@ -130,9 +143,10 @@ do
          --local_parameter_device=gpu --num_gpus=${num_devices}\
          --batch_size=${BATCH_SIZE} --model=${model} \
          --variable_update=distributed_replicated \
-         --job_name=${job_name} --ps_hosts=127.0.0.1:40000 --worker_hosts="${worker_hosts}"\
+         --num_epochs=${TRAIN_EPOCHS} \
+         --job_name=${job_name} --ps_hosts=127.0.0.1:53400 --worker_hosts="${worker_hosts}"\
          --train_dir=${TRAIN_DIR} --task_index=${task_index} --print_training_accuracy=True "${new_args[@]}" 2>&1 | tee ${LOG_DIR}/${DATE}_${TRAIN_EPOCHS}_${BATCH_SIZE}_${OPTIMIZER}.log; [[ ${PIPESTATUS[0]} == 0 ]] || exit
-        echo "Distributed training PID ($!) on device ${device} where job name = ${job_name}"
+        echo "Distributed training on device ${device} where job name = ${job_name}"
     else
         echo "device: ${device}"
         UMD_WAITAFTERLAUNCH=1 python3 -u tf_cnn_benchmarks.py\
@@ -142,14 +156,15 @@ do
          --local_parameter_device=gpu --num_gpus=${num_devices}\
          --batch_size=${BATCH_SIZE} --model=${model}\
          --variable_update=distributed_replicated\
-         --job_name=${job_name} --ps_hosts=127.0.0.1:40000 --worker_hosts="${worker_hosts}"\
+         --num_epochs=${TRAIN_EPOCHS} \
+         --job_name=${job_name} --ps_hosts=127.0.0.1:53400 --worker_hosts="${worker_hosts}"\
          --train_dir=${TRAIN_DIR} --task_index=${task_index} --print_training_accuracy=True "${new_args[@]}" &
         echo "Distributed training PID ($!) on device ${device} where job name = ${job_name} and task_index = ${task_index}"
+        pid_list+=($!)
     fi
     let i++
-    pid_list+=($!)
 done
 
-echo "All subprocess: ${pid_list[*]}"
+echo "All background subprocess: ${pid_list[*]}"
 ctrl_c
 exit ${EXIT_STATUS}
