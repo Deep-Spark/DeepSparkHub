@@ -45,7 +45,11 @@ git clone https://huggingface.co/bert-base-uncased
 bash train.sh
 
 # Multiple GPUs on one machine
+## torch 1.x
 bash train_dist.sh
+
+## torch 2.x
+bash train_dist_torch2.sh
 ```
 
 ## Model Results
