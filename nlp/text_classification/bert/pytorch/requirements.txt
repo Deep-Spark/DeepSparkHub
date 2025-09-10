@@ -8,3 +8,4 @@ protobuf
 numpy == 1.21.6
 evaluate == 0.4.1
 transformers == 4.30.2
+pyarrow < 13.0.0
