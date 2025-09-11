@@ -1,4 +1,4 @@
-# Copyright (c) 2023, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
+# Copyright (c) 2025, Shanghai Iluvatar CoreX Semiconductor Co., Ltd.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -13,9 +13,10 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-export TASK_NAME=WNLI
 
-python3 run_glue.py \
+export TASK_NAME=WNLI
+torchrun --nproc_per_node=8 --master_port 12333 \
+  run_glue.py \
   --model_name_or_path ./bert-base-uncased \
   --task_name $TASK_NAME \
   --do_train \

@@ -1,5 +1,5 @@
 accelerate >= 0.12.0
-datasets >= 1.8.0
+datasets == 2.14.6
 sentencepiece != 0.1.92
 scipy
 scikit-learn
@@ -8,3 +8,4 @@ protobuf
 numpy == 1.21.6
 evaluate == 0.4.1
 transformers == 4.30.2
+pyarrow < 13.0.0
