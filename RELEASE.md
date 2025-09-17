@@ -7,7 +7,7 @@
 
 ### 模型与算法
 
-* 新增了10个大模型强化学习微调示例，使用了[verl](https://github.com/volcengine/verl)、[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)、[Megatron-LM](https://github.com/NVIDIA/Megatron-LM)、[Colossal-AI](https://github.com/hpcaitech/ColossalAI)、[deepspeed](https://github.com/deepspeedai/DeepSpeed)工具箱
+* 新增了10个大模型强化学习微调示例，使用了[verl](https://github.com/volcengine/verl)、[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)、[Megatron-LM](https://github.com/NVIDIA/Megatron-LM)、[Colossal-AI](https://github.com/hpcaitech/ColossalAI)工具箱
 
 <table>
     </tr>
@@ -28,7 +28,7 @@
         <td>Qwen2.5-3B (Colossal-AI)</td>
     </tr>
     <tr>
-        <td>CosyVoice2-0.5B (deepspeed)</td>
+        <td>CosyVoice2-0.5B (DeepSpeed)</td>
         <td></td>
         <td></td>
     </tr>
@@ -36,17 +36,15 @@
 
 ### 修复更新
 
-* 修复了ResNet50 Pytorch使用DALI情况下steps数异常的问题 (#ICV31B) 
-* 修复了README文件中markdownlint语法报错的问题
+* 修复了BERT TensorFlow模型在TensorFlow升级后不支持estimator的问题（#ICWA6Y）
+* 修复了ResNet50 TensorFlow模型在TensorFlow升级后，不兼容normalization_layers的问题（#ICWA59） 
+* 修复了ResNet50 Pytorch模型使用DALI情况下的steps数异常问题 (#ICV31B) 
 * 更新了AlexNet、GoogLeNet等模型所支持的最高SDK版本
-* 同步了SSD TensorFlow模型的最新代码
 * 同步了Colossal-AI、Deepspeed和Megatron-Deepspeed框架的最新代码
-
-
 
 ### 版本关联
 
-DeepSparkHub 25.09对应天数软件栈4.3.0/4.4.0版本。
+DeepSparkHub 25.09版本中使用verl的模型对应IXUCA SDK 4.4.0版本，其余模型对应SDK 4.3.0。
 
 ### 贡献者
 
