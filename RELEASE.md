@@ -7,7 +7,7 @@
 
 ### 模型与算法
 
-* 新增了10个大模型强化学习微调示例，使用了[verl](https://github.com/volcengine/verl)、[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)、[Megatron-LM](https://github.com/NVIDIA/Megatron-LM)、[Colossal-AI](https://github.com/hpcaitech/ColossalAI)工具箱
+* 新增了10个大模型强化学习微调示例，其中7个强化学习示例使用了[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)和[verl](https://github.com/volcengine/verl)工具箱
 
 <table>
     </tr>
@@ -20,17 +20,17 @@
     <tr>
         <td>DeepSeek-LLM-7B PPO (verl)</td>
         <td>Gemma-2-2B-IT PPO (verl)</td>
-        <td>Llama-3-8B SFT (OpenRLHF)</td>
+        <td></td>
     </tr>
     <tr>
+        <td>Llama-3-8B SFT (OpenRLHF)</td>
         <td>Mixtral-8x7B-v0.1 SFT (OpenRLHF)</td>
-        <td>Llama-3-8B (Megatron-LM)</td>
-        <td>Qwen2.5-3B (Colossal-AI)</td>
+        <td></td>
     </tr>
     <tr>
         <td>CosyVoice2-0.5B (DeepSpeed)</td>
-        <td></td>
-        <td></td>
+        <td>Llama-3-8B (Megatron-LM)</td>
+        <td>Qwen2.5-3B (Colossal-AI)</td>
     </tr>
 </table>
 
