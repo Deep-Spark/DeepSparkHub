@@ -7,7 +7,7 @@
 
 ### 模型与算法
 
-* 新增了10个大模型强化学习微调示例，其中7个强化学习示例使用了[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)和[verl](https://github.com/volcengine/verl)工具箱
+* 新增了10个大模型训练微调示例，其中7个为强化学习相关示例，使用了[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)和[verl](https://github.com/volcengine/verl)工具箱
 
 <table>
     </tr>
