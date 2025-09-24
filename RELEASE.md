@@ -44,7 +44,7 @@
 
 ### 版本关联
 
-DeepSparkHub 25.09版本中使用verl的模型对应IXUCA SDK 4.4.0版本，其余模型对应SDK 4.3.0。
+DeepSparkHub 25.09版本中使用verl的模型对应IXUCA SDK dev-only版本，其余模型对应SDK 4.3.0。
 
 ### 贡献者
 

@@ -9,7 +9,7 @@ Directly plays as a visual agent that can reason and dynamically direct tools, w
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 | :----: | :----: | :----: |
-| BI-V150 | 4.4.0     |  25.09  |
+| BI-V150 | dev-only  |  25.09  |
 
 ## Environment Preparation
 
