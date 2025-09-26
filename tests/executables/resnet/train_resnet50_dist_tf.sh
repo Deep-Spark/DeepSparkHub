@@ -16,7 +16,7 @@ check_status()
     fi
 }
 
-cd ${ROOT_DIR}/official/cv/classification/resnet/tensorflow
+cd ${ROOT_DIR}/cv/classification/resnet50/tensorflow/
 ixdltest-check --nonstrict_mode_args="--epoch ${NONSTRICT_EPOCH}" -b 0.01 --run_script \
 bash run_train_resnet50_distributed_imagenette.sh "$@";  check_status
 
