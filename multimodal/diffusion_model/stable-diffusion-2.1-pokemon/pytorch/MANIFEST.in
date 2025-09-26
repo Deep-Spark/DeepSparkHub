@@ -1,0 +1,3 @@
+include LICENSE
+include src/diffusers/models/nhwc_groupnorm/*
+include src/diffusers/utils/model_card_template.md

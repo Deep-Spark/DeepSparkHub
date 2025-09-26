@@ -1,0 +1,6 @@
+accelerate>=0.16.0
+datasets
+ftfy
+tensorboard
+Jinja2
+peft==0.7.0
