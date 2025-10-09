@@ -26,7 +26,7 @@ MODEL:
   INIT_WEIGHTS: true
   NAME: pose_hrnet
   NUM_JOINTS: 17
-  PRETRAINED: '../../../../../data/model_zoo/hrnetv2_w32_imagenet_pretrained.pth'
+  PRETRAINED: '../../../../tests/data/model_zoo/hrnetv2_w32_imagenet_pretrained.pth'
   TARGET_TYPE: gaussian
   IMAGE_SIZE:
   - 192

@@ -15,9 +15,9 @@ set -euox pipefail
 
 : ${BATCH_SIZE:=27}
 
-cd ../../nlp/language_model/bert_sample/pytorch/base/
+cd ../../../nlp/language_model/bert_sample/pytorch/base/
 if [ "$?" != "0" ]; then
-    echo "ERROR: ../../nlp/language_model/bert_sample/pytorch/base/ not exist."
+    echo "ERROR: ../../../nlp/language_model/bert_sample/pytorch/base/ not exist."
     exit 1
 fi
 

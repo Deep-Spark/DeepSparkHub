@@ -12,7 +12,7 @@ fi
 
 
 ixdltest-check --nonstrict_mode_args="--epoch ${NONSTRICT_EPOCH}" -b 10 --run_script \
-python3 ${PROJECT_DIR}/cv/detection/maskrcnn/pytorch/train.py \
+python3 ${PROJECT_DIR}../cv/detection/maskrcnn/pytorch/train.py \
 --model maskrcnn_resnet50_fpn \
 --data-path ${PROJECT_DIR}/data/datasets/VOC2012_sample \
 --amp \

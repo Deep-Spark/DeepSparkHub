@@ -12,76 +12,54 @@ computer vision applications, serving as a backbone for various tasks like objec
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 | :----: | :----: | :----: |
-| BI-V150 | 4.2.0     |  25.03  |
-| BI-V100 | 2.3.0     |  22.12  |
+| BI-V150 | 4.3.0     |  25.12  |
 
 ## Model Preparation
 
 ### Prepare Resources
 
-Sign up and login in [ImageNet official website](https://www.image-net.org/index.php), then choose 'Download' to
-download the whole ImageNet dataset. Specify `/path/to/imagenet` to your ImageNet path in later training process.
-
-The ImageNet dataset path structure should look like:
-
 ```bash
-imagenet
-├── train
-│   └── n01440764
-│       ├── n01440764_10026.JPEG
-│       └── ...
-├── train_list.txt
-├── val
-│   └── n01440764
-│       ├── ILSVRC2012_val_00000293.JPEG
-│       └── ...
+mkdir -p data/datasets/flowers102
+cd data/datasets/flowers102
+wget http://files.deepspark.org.cn:880/deepspark/data/datasets/flowers102.tgz
+tar -xf flowers102.tgz
+
+data/datasets/flowers102
+├── jpg
+│   └── image_00000.jpg
+│   ├── image_00001.jpg
+│   └── ...
+├── flowers102_label_list.txt    
+├── train_extra_list.txt
 └── val_list.txt
 ```
 
 ### Install Dependencies
 
-```bash
-# Install libGL
-## CentOS
-yum install -y mesa-libGL
-## Ubuntu
-apt install -y libgl1-mesa-glx
+Contact the Iluvatar administrator to get the missing packages:
+  - paddlepaddle-3.0.0+corex.4.3.0-cp310-cp310-linux_x86_64.whl
 
-git clone https://github.com/PaddlePaddle/PaddleClas.git -b release/2.6 --depth=1
-cd PaddleClas
+```bash
+mkdir -p dataset
+ln -s ${DATASET_DIR}/flowers102 dataset/flowers102
+
+export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+pip3 install protobuf==3.20.3
+pip3 install pyyaml
 pip3 install -r requirements.txt
-python3 setup.py install
+rm -rf ppcls && ln -s ppcls_2.6 ppcls
 ```
 
-Tips: for `PaddleClas` training, the images path in train_list.txt and val_list.txt must contain `train/` and `val/` directories:
-
-- train_list.txt: train/n01440764/n01440764_10026.JPEG 0
-- val_list.txt: val/n01667114/ILSVRC2012_val_00000229.JPEG 35
+## Model Training
 
 ```bash
-# add "train/" and "val/" to head of lines
-sed -i 's#^#train/#g' train_list.txt
-sed -i 's#^#val/#g' val_list.txt
-```
-
-## Step 3: Run ResNet50
-
-```bash
-# Make sure your dataset path is the same as above
-cd PaddleClas
-# Link your dataset to default location
-ln -s /path/to/imagenet ./dataset/ILSVRC2012
-export FLAGS_cudnn_exhaustive_search=True
-export FLAGS_cudnn_batchnorm_spatial_persistent=True
-export CUDA_VISIBLE_DEVICES=0,1,2,3
-python3 -u -m paddle.distributed.launch --gpus=0,1,2,3 tools/train.py -c ppcls/configs/ImageNet/ResNet/ResNet50.yaml -o Arch.pretrained=False -o Global.device=gpu
+bash run_resnet50_dist.sh
 ```
 
 ## Model Results
 
-| Model    | GPU        | FP32                               |
-|----------|------------|------------------------------------|
-| ResNet50 | BI-V100 x4 | Acc@1=76.27,FPS=80.37,BatchSize=64 |
+| Model    | GPU        | CELoss   | loss   | top1   | top5   |
+|----------|------------|----------|--------|----------|----------|
+| ResNet50 | BI-V150 x8 | 4.80621  | 4.80621 | 0.05000 | 0.18529|
 
 ## Reference
-- [PaddleClas](https://github.com/PaddlePaddle/PaddleClas)

@@ -51,7 +51,7 @@ if [[ "$(uname -m)" == "aarch64" ]]; then
     source /opt/rh/gcc-toolset-11/enable
 fi
 
-cd ../../cv/detection/ssd/pytorch/ && bash ./clean_ssd.sh && bash ./build_ssd.sh && bash ./install_ssd.sh "$@";  check_status
+cd ../../../cv/detection/ssd/pytorch/ && bash ./clean_ssd.sh && bash ./build_ssd.sh && bash ./install_ssd.sh "$@";  check_status
 DATA_PATH_BBOX=../../../..
 
 python3 prepare-json.py --keep-keys ${DATA_PATH}/annotations/instances_val2017.json ${DATA_PATH_BBOX}/bbox_only_instances_val2017.json "$@";  check_status

@@ -12,7 +12,7 @@ install_pip_pkgs "${pkgs[@]}"
 
 pip3 install tqdm==4.62.1
 
-git clone https://gitee.com/deep-spark/deepsparkhub-gpl.git
+git clone https://gitee.com/deep-spark/deepsparkhub-gpl.git ../../deepsparkhub-gpl
 
 cd ${PROJ_DIR}/deepsparkhub-gpl/cv/detection/yolov5-sample/pytorch
 

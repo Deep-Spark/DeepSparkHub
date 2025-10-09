@@ -1,6 +1,6 @@
 #!/bin/bash
 ROOT_DIR="$(cd "$(dirname "$0")/../.."; pwd)"
-SRC_DIR=$ROOT_DIR/audio/speech_recognition/conformer/pytorch
+SRC_DIR=$ROOT_DIR/../audio/speech_recognition/conformer/pytorch
 DATA_DIR=$ROOT_DIR/data
 
 # determine whether the user is root mode to execute this script

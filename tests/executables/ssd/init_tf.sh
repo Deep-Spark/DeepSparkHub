@@ -4,7 +4,7 @@ PROJECT_ROOT="${CUR_DIR}/../.."
 DATASET_DIR="${PROJECT_ROOT}/data/datasets"
 MODEL_CPT_DIR="${PROJECT_ROOT}/data/model_zoo/ssd_tf"
 VOC_RECORD_DIR="${DATASET_DIR}/tf_ssd_voc_record"
-SSD_ROOT="${PROJECT_ROOT}/cv/detection/ssd/tensorflow"
+SSD_ROOT="${PROJECT_ROOT}/../cv/detection/ssd/tensorflow"
 
 # determine whether the user is root mode to execute this script
 prefix_sudo=""
