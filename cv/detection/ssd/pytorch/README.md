@@ -11,7 +11,7 @@ objects at different resolutions, offering a good balance between speed and accu
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 | :----: | :----: | :----: |
-| BI-V100 | 2.2.0     |  22.09  |
+| BI-V150 | 4.3.0     |  25.12  |
 
 ## Model Preparation
 
@@ -24,7 +24,9 @@ Take coco2017 dataset as an example, specify `/path/to/coco2017` to your COCO pa
 unzipped dataset path structure sholud look like:
 
 ```bash
-coco2017
+mkdir -p data/datasets/
+
+data/datasets/coco2017
 ├── annotations
 │   ├── instances_train2017.json
 │   ├── instances_val2017.json
@@ -42,35 +44,35 @@ coco2017
 └── ...
 ```
 
-```bash
-mkdir -p /home/data/perf/ssd
-cd /home/data/perf/ssd
-ln -s /path/to/coco/ /home/data/perf/ssd
-```
-
-Download backbone.
+### Install Dependencies
+Contact the Iluvatar administrator to get the missing packages:
+    - dali-1.21.0+corex.4.3.0-cp310-cp310-linux_x86_64.whl
+    - apex-0.1+corex.4.3.0-cp310-cp310-linux_x86_64.whl
 
 ```bash
-cd /home/data/perf/ssd
-wget https://download.pytorch.org/models/resnet34-333f7ec4.pth
+apt install -y git numactl
+pip3 install "git+https://github.com/mlperf/logging.git@1.0-branch" pybind11==2.9.2 ujson==1.35
+pip3 install wheel numpy>=1.26.4 cython pycocotools==2.0.8
+
+bash ./clean_ssd.sh && bash ./build_ssd.sh && bash ./install_ssd.sh "$@"
+export DATA_PATH_BBOX=../../../..
+export DATA_PATH=data/datasets/coco2017
+python3 prepare-json.py --keep-keys ${DATA_PATH}/annotations/instances_val2017.json ${DATA_PATH_BBOX}/bbox_only_instances_val2017.json "$@"
+python3 prepare-json.py ${DATA_PATH}/annotations/instances_train2017.json ${DATA_PATH_BBOX}/bbox_only_instances_train2017.json "$@"
 ```
 
 ## Model Training
 
 ```bash
-# Multiple GPUs on one machine
-cd {deepsparkhub_root_path}/cv/detection/ssd/pytorch/base
-source ../iluvatar/config/environment_variables.sh
-python3  prepare.py --name iluvatar --data_dir /home/data/perf/ssd
-bash run_training.sh --name iluvatar --config V100x1x8 --data_dir /home/data/perf/ssd --backbone_path /home/data/perf/ssd/resnet34-333f7ec4.pth
+python3 train.py --dali --dali-cache 0 --data=${DATA_PATH} \
+--batch-size=160 --warmup-factor=0 --warmup=650 --lr=2.92e-3 --threshold=0.08 --epochs 5 --eval-batch-size=160 \
+--wd=1.6e-4 --use-fp16 --jit --nhwc --pad-input --delay-allreduce --lr-decay-factor=0.2 --lr-decay-epochs 34 45 --opt-level O2 --seed 1769250163 "$@"
 ```
 
 ## Model Results
 
-| Model | GPU        | Batch Size | FPS  | Train Epochs | mAP  |
+| Model | GPU        | Batch Size | IoU=0.50:0.95  | IoU=0.50 | IoU=0.75  |
 |-------|------------|------------|------|--------------|------|
-| SSD   | BI-V100 x8 | 192        | 2858 | 65           | 0.23 |
+| SSD   | BI-V150 x8 | 160        | 0.094 | 0.197           | 0.078 |
 
 ## References
-
-- [mlcommons](https://github.com/mlcommons/training_results_v0.7/tree/master/NVIDIA/benchmarks/ssd/implementations/pytorch)

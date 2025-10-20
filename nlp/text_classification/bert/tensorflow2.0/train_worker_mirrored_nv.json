@@ -1,0 +1,8 @@
+{
+    "loss: ": 0.4382,
+    "accuracy: ": 0.801,
+    "val_loss: ": 0.3895,
+    "val_accuracy: ": 0.8365,
+    "threshold": 0.02,
+    "percentage": 0.002
+}

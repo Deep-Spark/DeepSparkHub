@@ -1,0 +1,1 @@
+bash ../_utils/init_segmentation_torch.sh ../_utils

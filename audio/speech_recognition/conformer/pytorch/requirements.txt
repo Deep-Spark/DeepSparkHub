@@ -1,0 +1,6 @@
+addict
+python-Levenshtein
+sentencepiece
+librosa
+tqdm
+#torchaudio==0.8.1

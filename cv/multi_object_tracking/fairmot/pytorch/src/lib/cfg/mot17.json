@@ -2,14 +2,14 @@
     "root":"./",
     "train":
     {
-        "mot17":"../../../../../data/datasets/MOT17/mot17.train"
+        "mot17":"../../../../tests/data/datasets/MOT17/mot17.train"
     },
     "test_emb":
     {
-        "mot17":"../../../../../data/datasets/MOT17/mot17.train"
+        "mot17":"../../../../tests/data/datasets/MOT17/mot17.train"
     },
     "test":
     {
-        "mot17":"../../../../../data/datasets/MOT17/mot17.train"
+        "mot17":"../../../../tests/data/datasets/MOT17/mot17.train"
     }
 }

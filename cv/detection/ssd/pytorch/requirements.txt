@@ -1,0 +1,2 @@
+ujson==1.35
+pycocotools==2.0.2

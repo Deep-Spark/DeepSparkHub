@@ -1,0 +1,98 @@
+{
+    "audio": {
+        "name": "fbank",
+        "sample_rate": 16000,
+        "frame_length": 20.0,
+        "frame_shift": 10.0,
+        "del_silence": false,
+        "num_mels": 80,
+        "apply_spec_augment": true,
+        "apply_noise_augment": false,
+        "apply_time_stretch_augment": false,
+        "apply_joining_augment": false
+    },
+    "augment": {
+        "apply_spec_augment": false,
+        "apply_noise_augment": false,
+        "apply_joining_augment": false,
+        "apply_time_stretch_augment": false,
+        "freq_mask_para": 27,
+        "freq_mask_num": 2,
+        "time_mask_num": 4,
+        "noise_dataset_dir": null,
+        "noise_level": 0.7,
+        "time_stretch_min_rate": 0.7,
+        "time_stretch_max_rate": 1.4
+    },
+    "dataset": {
+        "dataset": "librispeech",
+        "dataset_path": "datasets/LibriSpeech",
+        "train_parts": ["train-clean-100"],
+        "eval_parts": ["dev-clean"],
+        "dataset_download": false,
+        "train_manifest_file": "datasets/LibriSpeech/libri_subword_train_manifest.txt",
+        "eval_manifest_file": "datasets/LibriSpeech/libri_subword_dev_manifest.txt"
+    },
+    "criterion": {
+        "criterion_name": "cross_entropy",
+        "reduction": "mean"
+    },
+    "lr_scheduler": {
+        "lr": 0.0001,
+        "scheduler_name": "warmup_reduce_lr_on_plateau",
+        "lr_patience": 1,
+        "lr_factor": 0.3,
+        "peak_lr": 0.0001,
+        "init_lr": 1e-10,
+        "warmup_steps": 4000
+    },
+    "model": {
+        "model_name": "conformer_lstm",
+        "encoder_dim": 512,
+        "num_encoder_layers": 17,
+        "num_attention_heads": 8,
+        "feed_forward_expansion_factor": 4,
+        "conv_expansion_factor": 2,
+        "input_dropout_p": 0.1,
+        "feed_forward_dropout_p": 0.1,
+        "attention_dropout_p": 0.1,
+        "conv_dropout_p": 0.1,
+        "conv_kernel_size": 31,
+        "half_step_residual": true,
+        "num_decoder_layers": 2,
+        "decoder_dropout_p": 0.1,
+        "max_length": 128,
+        "teacher_forcing_ratio": 1.0,
+        "rnn_type": "lstm",
+        "decoder_attn_mechanism": "loc",
+        "optimizer": "adam"
+    },
+    "trainer": {
+        "seed": 1,
+        "accelerator": "ddp",
+        "accumulate_grad_batches": 1,
+        "num_workers": 4,
+        "batch_size": 8,
+        "check_val_every_n_epoch": 1,
+        "gradient_clip_val": 5.0,
+        "logger": "wandb",
+        "max_epochs": 50,
+        "save_checkpoint_n_steps": 10000,
+        "auto_scale_batch_size": "binsearch",
+        "sampler": "random",
+        "name": "gpu",
+        "device": "gpu",
+        "use_cuda": true,
+        "auto_select_gpus": true
+    },
+    "tokenizer": {
+        "sos_token": "<s>",
+        "eos_token": "</s>",
+        "pad_token": "<pad>",
+        "blank_token": "<blank>",
+        "encoding": "utf-8",
+        "unit": "libri_subword",
+        "vocab_size": 1023,
+        "vocab_path": "model_zoo/sentencepieces"
+    }
+}

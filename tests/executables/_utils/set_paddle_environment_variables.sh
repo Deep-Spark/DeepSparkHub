@@ -1,0 +1,2 @@
+export FLAGS_cudnn_exhaustive_search=True
+export FLAGS_cudnn_batchnorm_spatial_persistent=True

@@ -1,0 +1,189 @@
++ cd ../../benchmark/nlp/lm/bert/pytorch/base/
++ '[' 0 '!=' 0 ']'
++ bash run_training.sh --name iluvatar --config 02V100x1x8 --data_dir ../../../../../../datasets/bert_mini/
+Number of CPU sockets on a node: 2
+Number of CPU cores per socket: 40
+================================================================================
+= numactlargs_flag
+['/usr/bin/numactl', '--physcpubind=0-9', '/root/miniconda/bin/python3', '-u', './run_pretraining.py', '--local_rank=0', '--data_dir', '../../../../../../datasets/bert_mini/', '--do_train', '/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py']
+================================================================================
+================================================================================
+= numactlargs_flag
+['/usr/bin/numactl', '--physcpubind=10-19', '/root/miniconda/bin/python3', '-u', './run_pretraining.py', '--local_rank=1', '--data_dir', '../../../../../../datasets/bert_mini/', '--do_train', '/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py']
+================================================================================
+================================================================================
+= numactlargs_flag
+['/usr/bin/numactl', '--physcpubind=20-29', '/root/miniconda/bin/python3', '-u', './run_pretraining.py', '--local_rank=2', '--data_dir', '../../../../../../datasets/bert_mini/', '--do_train', '/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py']
+================================================================================
+================================================================================
+= numactlargs_flag
+['/usr/bin/numactl', '--physcpubind=30-39', '/root/miniconda/bin/python3', '-u', './run_pretraining.py', '--local_rank=3', '--data_dir', '../../../../../../datasets/bert_mini/', '--do_train', '/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py']
+================================================================================
+================================================================================
+= numactlargs_flag
+['/usr/bin/numactl', '--physcpubind=40-49', '/root/miniconda/bin/python3', '-u', './run_pretraining.py', '--local_rank=4', '--data_dir', '../../../../../../datasets/bert_mini/', '--do_train', '/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py']
+================================================================================
+================================================================================
+= numactlargs_flag
+['/usr/bin/numactl', '--physcpubind=50-59', '/root/miniconda/bin/python3', '-u', './run_pretraining.py', '--local_rank=5', '--data_dir', '../../../../../../datasets/bert_mini/', '--do_train', '/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py']
+================================================================================
+================================================================================
+= numactlargs_flag
+['/usr/bin/numactl', '--physcpubind=60-69', '/root/miniconda/bin/python3', '-u', './run_pretraining.py', '--local_rank=6', '--data_dir', '../../../../../../datasets/bert_mini/', '--do_train', '/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py']
+================================================================================
+================================================================================
+= numactlargs_flag
+['/usr/bin/numactl', '--physcpubind=70-79', '/root/miniconda/bin/python3', '-u', './run_pretraining.py', '--local_rank=7', '--data_dir', '../../../../../../datasets/bert_mini/', '--do_train', '/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py']
+================================================================================
+device: cuda:7 n_gpu: 8, distributed training: True, 16-bits training: True
+device: cuda:4 n_gpu: 8, distributed training: True, 16-bits training: True
+device: cuda:0 n_gpu: 8, distributed training: True, 16-bits training: True
+device: cuda:6 n_gpu: 8, distributed training: True, 16-bits training: True
+device: cuda:5 n_gpu: 8, distributed training: True, 16-bits training: Truedevice: cuda:2 n_gpu: 8, distributed training: True, 16-bits training: True
+
+device: cuda:3 n_gpu: 8, distributed training: True, 16-bits training: True
+device: cuda:1 n_gpu: 8, distributed training: True, 16-bits training: True
+[PerfLog] {"event": "LAUNCH_TRAINING", "value": {"other": "Launch training"}, "metadata": {"file": "./run_pretraining.py", "lineno": 136, "time_ms": 1646380150281, "rank": 7}}
+[PerfLog] {"event": "LAUNCH_TRAINING", "value": {"other": "Launch training"}, "metadata": {"file": "./run_pretraining.py", "lineno": 136, "time_ms": 1646380150281, "rank": 4}}
+[PerfLog] {"event": "LAUNCH_TRAINING", "value": {"other": "Launch training"}, "metadata": {"file": "./run_pretraining.py", "lineno": 136, "time_ms": 1646380150281, "rank": 0}}
+[PerfLog] {"event": "LAUNCH_TRAINING", "value": {"other": "Launch training"}, "metadata": {"file": "./run_pretraining.py", "lineno": 136, "time_ms": 1646380150281, "rank": 6}}
+[PerfLog] {"event": "LAUNCH_TRAINING", "value": {"other": "Launch training"}, "metadata": {"file": "./run_pretraining.py", "lineno": 136, "time_ms": 1646380150281, "rank": 2}}
+[PerfLog] {"event": "LAUNCH_TRAINING", "value": {"other": "Launch training"}, "metadata": {"file": "./run_pretraining.py", "lineno": 136, "time_ms": 1646380150281, "rank": 5}}
+[PerfLog] {"event": "LAUNCH_TRAINING", "value": {"other": "Launch training"}, "metadata": {"file": "./run_pretraining.py", "lineno": 136, "time_ms": 1646380150281, "rank": 3}}
+[PerfLog] {"event": "LAUNCH_TRAINING", "value": {"other": "Launch training"}, "metadata": {"file": "./run_pretraining.py", "lineno": 136, "time_ms": 1646380150281, "rank": 1}}
+[PerfLog] {"event": "SUBMITTED_INFO", "value": {"submmiter": "pytorch", "model": "iluvatar", "config_path": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py", "config": {"data_dir": "../../../../../../datasets/bert_mini/", "train_dir": "../../../../../../datasets/bert_mini/2048_shards_uncompressed", "bert_model": "bert-large-uncased", "output_dir": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/out", "eval_dir": "../../../../../../datasets/bert_mini/eval_set_uncompressed", "eval_iter_start_samples": 150000, "eval_iter_samples": 150000, "num_eval_examples": 10000, "cache_eval_data": true, "init_checkpoint": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/../../../../../../../model_zoo/lm_bert/model.ckpt-3000.pt", "init_tf_checkpoint": "None", "verify_checkpoint": true, "max_seq_length": 512, "max_predictions_per_seq": 76, "train_batch_size": 27, "eval_batch_size": 27, "learning_rate": 0.00035, "weight_decay_rate": 0.01, "opt_lamb_beta_1": 0.9, "opt_lamb_beta_2": 0.999, "max_steps": 14000, "max_samples_termination": 4500000, "warmup_proportion": 0, "warmup_steps": 0, "start_warmup_step": 0, "local_rank": 0, "dist_backend": "nccl", "seed": 9031, "gradient_accumulation_steps": 1, "fp16": true, "loss_scale": 0.0, "log_freq": 200, "checkpoint_activations": false, "resume_from_checkpoint": false, "resume_init_checkpoint": "None", "keep_n_most_recent_checkpoints": 20, "num_samples_per_checkpoint": 500000, "min_samples_to_start_checkpoints": 3000000, "save_checkpoint": false, "do_train": true, "exchange_padding": true, "enable_fuse_dropout": false, "disable_fuse_mask": false, "fused_gelu_bias": true, "fused_dropout_add": false, "dense_seq_output": true, "use_env": false, "bert_config_path": "../../../../../../datasets/bert_mini/bert_config.json", "target_mlm_accuracy": 0.706, "train_mlm_accuracy_window_size": 0, "num_epochs_to_generate_seeds_for": 2, "use_ddp": false, "use_gradient_as_bucket_view": false, "device": "cuda:0", "n_gpu": 8, "eval_interval_samples": 150000, "eval_steps": 200, "cuda_graph_mode": "segmented", "max_iterations_per_graph": 4, "allreduce_post_accumulation": false, "allreduce_post_accumulation_fp16": false, "unpad": false, "unpad_fmha": false, "pad": false, "disable_fuse_scale": false, "disable_fuse_qkv": false, "disable_apex_softmax": false, "enable_stream": false, "fused_mha": true, "use_cuda_graph": false, "ddp_type": "apex", "bypass_amp": false, "distributed_lamb": true, "dwu_group_size": 0, "dwu_num_blocks": 1, "dwu_num_chunks": 1, "dwu_num_rs_pg": 1, "dwu_num_ar_pg": 1, "dwu_num_ag_pg": 2, "dwu_overlap_reductions": false, "dwu_e5m2_allgather": false, "opt_level": "O2", "config": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/config_02V100x1x8.py", "training_event": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/iluvatar/config/training_event:ApexTrainingEvent"}}, "metadata": {"file": "./run_pretraining.py", "lineno": 49, "time_ms": 1646380150282, "rank": 0}}
+[PerfLog] {"event": "INIT_START", "value": null, "metadata": {"file": "./run_pretraining.py", "lineno": 55, "time_ms": 1646380150385, "rank": 0}}
+[PerfLog] {"event": "CONVERT_MODEL", "value": {"type": "BertForPreTraining", "module": "model.models.modeling"}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 44, "time_ms": 1646380156947, "rank": 0}}
+[PerfLog] {"event": "CREATE_OPTIMIZER", "value": {"type": "DistributedFusedLAMB", "module": "apex.contrib.optimizers.distributed_fused_lamb"}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 45, "time_ms": 1646380157580, "rank": 0}}
+[PerfLog] {"event": "MODEL_TO_FP16", "value": {"fp16": true}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 46, "time_ms": 1646380157642, "rank": 0}}
+[PerfLog] {"event": "MODEL_TO_DDP", "value": {"type": "BertForPreTraining", "module": "model.models.modeling"}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 47, "time_ms": 1646380157779, "rank": 0}}
+/tmp/filec9V7AC/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+1 warning generated when compiling for ivcore10.
+/tmp/filewkKRpO/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+1 warning generated when compiling for ivcore10.
+/tmp/fileKN2UMJ/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+1 warning generated when compiling for ivcore10.
+/tmp/filecoRXgP/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+1 warning generated when compiling for ivcore10.
+/tmp/fileimlLkT/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+/tmp/filewtPVkS/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+1 warning generated when compiling for ivcore10.
+1 warning generated when compiling for ivcore10.
+/tmp/file892lbW/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+/tmp/fileESygAW/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+1 warning generated when compiling for ivcore10.
+1 warning generated when compiling for ivcore10.
+[PerfLog] {"event": "INIT_EVALUATION", "value": {"eval_loss": 1.4461750984191895, "eval_mlm_accuracy": 0.696331262588501, "time": 26.021937608718872}, "metadata": {"file": "./run_pretraining.py", "lineno": 97, "time_ms": 1646380184816, "rank": 0}}
+[PerfLog] {"event": "INIT_END", "value": {"other": "Finish initialization"}, "metadata": {"file": "./run_pretraining.py", "lineno": 110, "time_ms": 1646380184817, "rank": 0}}
+[PerfLog] {"event": "TRAIN_BEGIN", "value": null, "metadata": {"file": "./run_pretraining.py", "lineno": 117, "time_ms": 1646380184822, "rank": 0}}
+[PerfLog] {"event": "EPOCH_BEGIN", "value": {"epoch": 0}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 110, "time_ms": 1646380184823, "rank": 0}}
+/tmp/fileaPWoW1/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+/tmp/filexYfiDT/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+/tmp/fileY5WSN5/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+/tmp/file3eQVN9/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^#define NAN __int_as_float(0x7fffffff)
+
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+/tmp/fileUkXx89/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+/tmp/filexatGDN/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+/tmp/fileMcmACE/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+/tmp/fileVpr85G/tmp.cu:53:9: warning: 'NAN' macro redefined [-Wmacro-redefined]
+#define NAN __int_as_float(0x7fffffff)
+        ^
+/usr/include/math.h:98:11: note: previous definition is here
+#  define NAN (__builtin_nanf (""))
+          ^
+111 warning warning warning generated generated when compiling for  when compiling for  generatedivcore10 when compiling for ivcore10.
+ivcore10.
+.
+1 warning generated when compiling for ivcore10.
+1 warning generated when compiling for ivcore10.
+1 warning generated when compiling for ivcore10.
+1 warning generated when compiling for ivcore10.
+1 warning generated when compiling for ivcore10.
+[PerfLog] {"event": "STEP_END", "value": {"loss": 1.650390625, "mlm_acc": 0.6736947894096375, "epoch": 0, "end_training": false, "global_steps": 3200, "num_trained_samples": 690984, "iter_dataloader_idx": 3, "learning_rate": 0.0002710714285714286, "seq/s": 181.11228738084873, "step": 3200}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 151, "time_ms": 1646380474335, "rank": 0}}
+[PerfLog] {"event": "EVALUATION", "value": {"global_steps": 3200, "eval_loss": 1.4227526187896729, "eval_mlm_accuracy": 0.7002610564231873, "time": 16.116336822509766}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 154, "time_ms": 1646380474336, "rank": 0}}
+[PerfLog] {"event": "STEP_END", "value": {"loss": 1.5634765625, "mlm_acc": 0.7014492750167847, "epoch": 0, "end_training": false, "global_steps": 3400, "num_trained_samples": 734184, "iter_dataloader_idx": 3, "learning_rate": 0.0002671428571428572, "seq/s": 179.7384824643963, "step": 3400}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 151, "time_ms": 1646380730093, "rank": 0}}
+[PerfLog] {"event": "EVALUATION", "value": {"global_steps": 3400, "eval_loss": 1.4111361503601074, "eval_mlm_accuracy": 0.7026439905166626, "time": 16.11122703552246}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 154, "time_ms": 1646380730094, "rank": 0}}
+[PerfLog] {"event": "STEP_END", "value": {"loss": 1.5400390625, "mlm_acc": 0.6908212304115295, "epoch": 0, "end_training": false, "global_steps": 3600, "num_trained_samples": 777384, "iter_dataloader_idx": 3, "learning_rate": 0.00026321428571428573, "seq/s": 180.10713035401778, "step": 3600}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 151, "time_ms": 1646380985841, "rank": 0}}
+[PerfLog] {"event": "EVALUATION", "value": {"global_steps": 3600, "eval_loss": 1.3965355157852173, "eval_mlm_accuracy": 0.7045647501945496, "time": 16.116958379745483}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 154, "time_ms": 1646380985842, "rank": 0}}
+[PerfLog] {"event": "STEP_END", "value": {"loss": 1.5625, "mlm_acc": 0.688141942024231, "epoch": 0, "end_training": true, "global_steps": 3800, "num_trained_samples": 820584, "iter_dataloader_idx": 3, "learning_rate": 0.0002592857142857143, "seq/s": 180.28647883741974, "step": 3800}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 151, "time_ms": 1646381241839, "rank": 0}}
+[PerfLog] {"event": "EVALUATION", "value": {"global_steps": 3800, "eval_loss": 1.3891334533691406, "eval_mlm_accuracy": 0.7061394453048706, "time": 16.123926639556885}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 154, "time_ms": 1646381241839, "rank": 0}}
+[PerfLog] {"event": "EPOCH_END", "value": {"epoch": 0}, "metadata": {"file": "/home/jian.wang/Project/deeplearningsamples/deeplearningsamples/benchmark/nlp/lm/bert/pytorch/base/train/trainer.py", "lineno": 159, "time_ms": 1646381241940, "rank": 0}}
+[PerfLog] {"event": "TRAIN_END", "value": null, "metadata": {"file": "./run_pretraining.py", "lineno": 128, "time_ms": 1646381241941, "rank": 0}}
+[PerfLog] {"event": "FINISHED", "value": {"e2e_time": 1092.9787755012512, "training_sequences_per_second": 776.4499550192552, "converged": true, "final_loss": 1.3891334533691406, "final_mlm_accuracy": 0.7061394453048706, "raw_train_time": 1057.119, "init_time": 34.432}, "metadata": {"file": "./run_pretraining.py", "lineno": 156, "time_ms": 1646381241969, "rank": 0}}
++ '[' 0 '!=' 0 ']'
++ echo 'eval result: pass.'
+eval result: pass.
