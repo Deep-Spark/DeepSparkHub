@@ -11,7 +11,7 @@ check_status()
     fi
 }
 
-cd ../../../cv/detection/ssd/pytorch/
+cd ../../../models/cv/detection/ssd/pytorch/
 
 echo "python3 train.py --no-dali --dali-cache 0 --data=${COCO_PATH} \
 --batch-size=${BATCH_SIZE} --warmup-factor=0 --warmup=650 --lr=2.92e-3 --threshold=0.08 --epochs 5 --eval-batch-size=160 \

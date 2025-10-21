@@ -17,7 +17,7 @@ check_status()
     fi
 }
 
-cd ../../../cv/classification/efficientnet_b4/pytorch
+cd ../../../models/cv/classification/efficientnet_b4/pytorch
 
 export PYTHONPATH=./:$PYTHONPATH
 

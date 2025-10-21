@@ -12,4 +12,4 @@ echo "prefix_sudo= $prefix_sudo"
 
 command -v yum >/dev/null && $prefix_sudo yum install -y numactl ||  $prefix_sudo apt install -y numactl
 
-pip3 install -r ../../../cv/classification/mobilenetv3/pytorch/requirements.txt
+pip3 install -r ../../../models/cv/classification/mobilenetv3/pytorch/requirements.txt

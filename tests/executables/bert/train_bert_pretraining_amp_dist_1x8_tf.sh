@@ -25,7 +25,7 @@ set -euox pipefail
 
 current_path=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 ROOT_DIR=${current_path}"/../../"
-SRC_DIR=${ROOT_DIR}../nlp/language_model/bert/tensorflow/base
+SRC_DIR=${ROOT_DIR}../models/nlp/language_model/bert/tensorflow/base
 DATA_DIR=${ROOT_DIR}data/datasets
 MODEL_DIR=${ROOT_DIR}data/model_zoo
 

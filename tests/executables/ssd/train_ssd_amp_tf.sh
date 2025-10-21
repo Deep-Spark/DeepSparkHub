@@ -10,7 +10,7 @@ ROOT_DIR="${CURRENT_DIR}/../.."
 DATASET_PATH="${ROOT_DIR}/data/datasets/imagenette"
 MODEL_ZOO="${ROOT_DIR}/data/model_zoo"
 WORKSPACE="${ROOT_DIR}/output/${MODEL_NAME}/$0/${CURTIME}"
-SRC_DIR="${ROOT_DIR}/../cv/detection/ssd/tensorflow"
+SRC_DIR="${ROOT_DIR}/../models/cv/detection/ssd/tensorflow"
 
 EXIT_STATUS=0
 check_status()

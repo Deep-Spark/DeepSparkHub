@@ -112,7 +112,7 @@ def run_detec_testcase(model):
         # 选择使用atss作为个例
         prepare_script = f"""
             apt install -y libgl1-mesa-glx
-            cd ../cv/detection/atss_mmdet/pytorch/
+            cd ../models/cv/detection/atss_mmdet/pytorch/
             cp -r /mnt/deepspark/data/3rd_party/mmdetection-v3.3.0 ./mmdetection > /dev/null 2>&1
             mkdir -p /root/.cache/torch/hub/checkpoints/
             cp /mnt/deepspark/data/checkpoints/resnet50-0676ba61.pth /root/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
@@ -127,7 +127,7 @@ def run_detec_testcase(model):
         # 选择使用CenterNet作为个例
         prepare_script = f"""
             apt install -y libgl1-mesa-glx
-            cd ../cv/detection/centernet/paddlepaddle/
+            cd ../models/cv/detection/centernet/paddlepaddle/
             cp -r /mnt/deepspark/data/3rd_party/PaddleDetection-release-2.6 ./PaddleDetection
             cd PaddleDetection
             pip install -r requirements.txt
@@ -139,7 +139,7 @@ def run_detec_testcase(model):
     elif is_yolov:
         # 选择使用yolov5作为个例
         prepare_script = f"""
-            cd ../cv/detection/yolov5/pytorch/
+            cd ../models/cv/detection/yolov5/pytorch/
             bash ci/prepare.sh
             """
     else:
@@ -212,7 +212,7 @@ def run_clf_testcase(model):
         # 选择使用mocov2作为个例
         prepare_script = f"""
             apt install -y libgl1-mesa-glx
-            cd ../cv/classification/mocov2/pytorch/
+            cd ../models/cv/classification/mocov2/pytorch/
             cp -r /mnt/deepspark/data/3rd_party/mmpretrain-v1.2.0 ./mmpretrain > /dev/null 2>&1
             cd mmpretrain
             python3 setup.py install
@@ -226,7 +226,7 @@ def run_clf_testcase(model):
         # 选择使用googlenet作为个例
         prepare_script = f"""
             apt install -y libgl1-mesa-glx
-            cd ../cv/classification/googlenet/paddlepaddle/
+            cd ../models/cv/classification/googlenet/paddlepaddle/
             cp -r /mnt/deepspark/data/3rd_party/PaddleClas-release-2.6 ./PaddleClas > /dev/null 2>&1
             cd PaddleClas
             pip3 install -r requirements.txt
@@ -239,7 +239,7 @@ def run_clf_testcase(model):
         # 选择使用alexnet作为个例
         prepare_script = f"""
             apt install -y libgl1-mesa-glx
-            cd ../cv/classification/alexnet/tensorflow/
+            cd ../models/cv/classification/alexnet/tensorflow/
             ln -s /mnt/deepspark/data/datasets/imagenet_tfrecord/ILSVRC2012 dataset/imagenet_tfrecord
             timeout 1800 bash run_train_alexnet_imagenet.sh
         """

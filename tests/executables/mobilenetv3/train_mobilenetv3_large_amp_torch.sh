@@ -16,7 +16,7 @@ check_status()
     fi
 }
 
-cd $CURRENT_DIR/../../../cv/classification/mobilenetv3/pytorch/
+cd $CURRENT_DIR/../../../models/cv/classification/mobilenetv3/pytorch/
 ixdltest-check --nonstrict_mode_args="--epoch ${NONSTRICT_EPOCH}" -b 10 --run_script \
 python3 train.py --model  mobilenet_v3_large --data-path "${DATA_DIR}" \
    --epochs 600 --batch-size ${BATCH_SIZE} --opt sgd --lr 0.1 \

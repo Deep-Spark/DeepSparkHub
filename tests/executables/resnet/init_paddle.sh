@@ -13,7 +13,7 @@ if [ ! -d "${DATASET_DIR}/flowers102" ]; then
     tar zxf ${DATASET_DIR}/flowers102.tgz -C ${DATASET_DIR}
 fi
 
-RESNET_PADDLE_DIR=${PRJ_DIR}/../cv/classification/resnet50/paddlepaddle
+RESNET_PADDLE_DIR=${PRJ_DIR}/../models/cv/classification/resnet50/paddlepaddle
 cd ${RESNET_PADDLE_DIR}
 pip3 install -r requirements.txt
 
