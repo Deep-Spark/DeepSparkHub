@@ -6,7 +6,7 @@ export ENABLE_FLASH_ATTENTION_WITH_IXATTNBKD=0
 : ${BATCH_SIZE:=8}
 
 ROOT_DIR="$(cd "$(dirname "$0")/../.."; pwd)"
-SRC_DIR=$ROOT_DIR/../models/multimodal/diffusion_model/stable-diffusion-2.1-pokemon/pytorch/examples/text_to_image
+SRC_DIR=$ROOT_DIR/../models/multimodal/diffusion_model/stable-diffusion-2.1/pytorch/examples/text_to_image
 DATASET_NAME=$ROOT_DIR/data/datasets/pokemon-blip-captions
 MODEL_NAME=$ROOT_DIR/data/model_zoo/stabilityai/stable-diffusion-2-1
 export DRT_MEMCPYUSEKERNEL=20000000000
