@@ -10,7 +10,7 @@ fi
 
 
 ixdltest-check --nonstrict_mode_args="--epoch ${NONSTRICT_EPOCH}" -b 8 --run_script \
-python3 ${PROJECT_DIR}../cv/classification/resnet50/pytorch/train.py \
+python3 ${PROJECT_DIR}../models/cv/classification/resnet50/pytorch/train.py \
 --data-path ${PROJECT_DIR}/data/datasets/imagenette \
 --batch-size ${BATCH_SIZE} \
 --output-dir ${OUTPUT_DIR} \

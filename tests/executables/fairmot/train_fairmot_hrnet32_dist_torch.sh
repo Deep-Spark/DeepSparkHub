@@ -14,7 +14,7 @@ fi
 ROOT_DIR=${CURRENT_DIR}/../..
 DADASAT_PATH=${ROOT_DIR}/data/datasets/MOT17
 
-cd ${ROOT_DIR}/../cv/multi_object_tracking/fairmot/pytorch/
+cd ${ROOT_DIR}/../models/cv/multi_object_tracking/fairmot/pytorch/
 
 bash train_hrnet32_mot17.sh --batch_size $((IX_NUM_CUDA_VISIBLE_DEVICES*BATCH_SIZE)) \
  --lr 0.001 \

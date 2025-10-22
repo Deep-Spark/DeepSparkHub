@@ -8,7 +8,7 @@ if [[ ! -d "${PROJECT_DATA}/VOC2012_sample" ]]; then
     tar zxf ${PROJECT_DATA}/VOC2012_sample.tgz -C ${PROJECT_DATA}
 fi
 
-cd ${PROJ_DIR}/cv/detection/maskrcnn/pytorch/
+cd ${PROJ_DIR}/models/cv/detection/maskrcnn/pytorch/
 OSNAME=$(cat /proc/version)
 # install the requirement
 if [[ "${OSNAME}" == *"aarch64"* ]] 

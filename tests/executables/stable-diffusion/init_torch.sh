@@ -1,6 +1,6 @@
 #!/bin/bash
 ROOT_DIR="$(cd "$(dirname "$0")/../.."; pwd)"
-SRC_DIR=$ROOT_DIR/../multimodal/diffusion_model/stable-diffusion-2.1-pokemon/pytorch
+SRC_DIR=$ROOT_DIR/../models/multimodal/diffusion_model/stable-diffusion-2.1-pokemon/pytorch
 DATA_DIR=$ROOT_DIR/data
 
 # install packages

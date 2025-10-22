@@ -18,7 +18,7 @@ GRADIENT_ACCUMULATION_STEPS=1
 SAVE_CKPT="./ckpt_stage3"
 LOG_NAME='train_log_stage3.json'
 
-cd ../../../cv/semantic_segmentation/unet3d/pytorch
+cd ../../../models/cv/semantic_segmentation/unet3d/pytorch
 if [ ! -d ${SAVE_CKPT} ]; then
     mkdir ${SAVE_CKPT};
 fi

@@ -7,7 +7,7 @@ unzip -q MOT17.zip
 mkdir MOT17/images && mkdir MOT17/labels_with_ids
 mv ./MOT17/train ./MOT17/images/ && mv ./MOT17/test ./MOT17/images/
 
-cd ${ROOT_DIR}/../cv/multi_object_tracking/fairmot/pytorch/
+cd ${ROOT_DIR}/../models/cv/multi_object_tracking/fairmot/pytorch/
 pip3 install Cython
 pip3 install -r requirements.txt
 

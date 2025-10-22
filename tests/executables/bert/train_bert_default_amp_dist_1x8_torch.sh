@@ -17,7 +17,7 @@ source ../_utils/global_environment_variables.sh
 
 : ${BATCH_SIZE:=10}
 
-cd ../../../nlp/language_model/bert_sample/pytorch/base
+cd ../../../models/nlp/language_model/bert_sample/pytorch/base
 if [ "$?" != "0" ]; then
     echo "train status: fail."
     exit 1

@@ -16,7 +16,7 @@ check_status()
 }
 
 ixdltest-check --nonstrict_mode_args="--epoch ${NONSTRICT_EPOCH}" -b 0 --run_script \
-python3 ../../../cv/detection/retinanet/pytorch/train.py \
+python3 ../../../models/cv/detection/retinanet/pytorch/train.py \
 --model retinanet_resnet50_fpn \
 --lr 0.01 \
 --data-path ${DATA_DIR} \
