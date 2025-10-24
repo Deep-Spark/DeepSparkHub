@@ -12,6 +12,7 @@ both model accuracy and interpretability.
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 | :----: | :----: | :----: |
+| BI-V150 | 4.3.0     |  25.12  |
 | BI-V150 | 4.1.1     |  24.12  |
 
 ## Model Preparation
@@ -20,12 +21,39 @@ both model accuracy and interpretability.
 
 ```bash
 pip3 install -r requirements.txt
+git clone https://github.com/KindXiaoming/pykan.git
+cd pykan
+```
+
+Change kan/spline.py line 117:
+
+```python
+try:
+    coef = torch.linalg.lstsq(mat, y_eval).solution[:,:,:,0]
+except:
+    print('lstsq failed')
+```
+
+with below
+
+```python
+try:
+    coef = torch.linalg.lstsq(mat.cpu(), y_eval.cpu()).solution[:,:,:,0]
+    coef = coef.to(device)
+except:
+    print('lstsq failed')
+```
+
+then
+
+```bash
+pip install -e .
 ```
 
 ## Model Training
 
 ```bash
-bash ./run_train.sh
+python3 ./train_kan.py --steps 100
 ```
 
 ## Model Results
