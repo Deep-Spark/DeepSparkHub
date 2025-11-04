@@ -1,5 +1,5 @@
 
-cd ../../../../../../data/model_zoo/
+cd ../../../../../../tests/data/model_zoo/
 echo "check pretrained model..."
 extract=1
 pretrained_model_files=("bert_config.json"  "model.ckpt-28252.data-00000-of-00001"  "model.ckpt-28252.index"  "model.ckpt-28252.meta"  "vocab.txt")
