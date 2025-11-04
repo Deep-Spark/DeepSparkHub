@@ -49,7 +49,7 @@ target_mlm_accuracy = 0.72
 save_checkpoint = False
 log_freq = 200
 eval_steps = 200
-init_checkpoint = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../../../../../../../data/model_zoo/lm_bert/model.ckpt-23000.pt')
+init_checkpoint = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../../../../../../../tests/data/model_zoo/lm_bert/model.ckpt-23000.pt')
 output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),'out')
 
 

@@ -27,11 +27,11 @@ fi
 bash run_training.sh \
 --name default \
 --config V100x1x8 \
---data_dir ../../../../../../data/datasets/bert_mini/ \
+--data_dir ../../../../../../tests/data/datasets/bert_mini/ \
 --max_steps 500 \
 --train_batch_size ${BATCH_SIZE} \
 --target_mlm_accuracy 0.33 \
---init_checkpoint "../../../../../../data/datasets/bert_mini/model.ckpt-28252.apex.pt"
+--init_checkpoint "../../../../../../tests/data/datasets/bert_mini/model.ckpt-28252.apex.pt"
 
 if [ "$?" != "0" ]; then
     echo "train status: fail."

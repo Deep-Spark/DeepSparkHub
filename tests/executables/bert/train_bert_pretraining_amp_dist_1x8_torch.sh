@@ -22,7 +22,7 @@ if [ "$?" != "0" ]; then
 fi
 
 master_port=22233
-bash run_training.sh --name iluvatar --config 03V100x1x8 --train_batch_size ${BATCH_SIZE} --data_dir ../../../../../../data/datasets/bert_mini/ --master_port $master_port
+bash run_training.sh --name iluvatar --config 03V100x1x8 --train_batch_size ${BATCH_SIZE} --data_dir ../../../../../../tests/data/datasets/bert_mini/ --master_port $master_port
 if [ "$?" != "0" ]; then
     echo "eval result: fail."
     exit 1

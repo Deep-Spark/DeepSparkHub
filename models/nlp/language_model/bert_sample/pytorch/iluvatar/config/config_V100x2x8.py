@@ -50,7 +50,7 @@ target_mlm_accuracy = 0.71
 save_checkpoint = True
 log_freq = 200
 eval_steps = 1000
-init_checkpoint = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../../../../../../../data/model_zoo/lm_bert/model.ckpt-0.pt')
+init_checkpoint = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../../../../../../../tests/data/model_zoo/lm_bert/model.ckpt-0.pt')
 output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../out')
 
 training_event = ApexTrainingEvent

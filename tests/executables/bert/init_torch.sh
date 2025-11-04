@@ -58,7 +58,7 @@ fi
 
 
 # install sdk
-cd ${CURRENT_DIR}/../../models/nlp/language_model/bert_sample/pytorch/base
+cd ${CURRENT_DIR}/../../../models/nlp/language_model/bert_sample/pytorch/base
 pip3 install -r requirements.txt
 $prefix_sudo python3 setup.py install
 
