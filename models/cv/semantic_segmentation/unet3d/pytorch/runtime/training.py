@@ -56,7 +56,7 @@ def train(flags, model, train_loader, val_loader, loss_fn, score_fn, device, is_
         model_without_ddp = model.module
     
     if flags.resume:
-        checkpoint = torch.load(flags.resume, map_location='cpu')
+        checkpoint = torch.load(flags.resume, map_location='cpu', weights_only=False)
         model_without_ddp.load_state_dict(checkpoint['model'])
         optimizer.load_state_dict(checkpoint['optimizer'])
         scheduler.load_state_dict(checkpoint['scheduler'])
