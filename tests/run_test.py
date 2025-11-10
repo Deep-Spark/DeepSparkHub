@@ -345,6 +345,7 @@ def run_llm_testcase(model):
     sout = r.stdout
     prec = "fp16"
     metrics = {}
+    epoch_matches = {}
     if is_firefly:
         for match in pattern.finditer(sout):
             key = match.group(1).strip()
