@@ -317,14 +317,14 @@ def run_llm_testcase(model):
         # {'train_runtime': 84.0969, 'train_samples_per_second': 2.378, 'train_steps_per_second': 1.189, 'train_loss': 0.24943359375, 'epoch': 0.0}
         pattern = r"({.*?})"
         prepare_script = f"""
-            cd ../../{model_path}
+            cd ../{model_path}
             pip3 install -r requirements.txt
             mkdir -p data
             ln -s /mnt/deepspark/data/datasets/AdvertiseGen data/
             python3 process_data.py
             mkdir -p checkpoint
             ln -s /mnt/deepspark/data/checkpoints/chatglm3-6b checkpoint/
-            timeout 1800 bash run.sh configs/lora.yaml 1
+            bash run.sh configs/lora.yaml 4
         """
     elif is_megatron_deepspeed:
         # 选择使用llama2-7b作为个例
