@@ -26,13 +26,14 @@ cd applications/ColossalChat/examples/
 # get qwen2.5-3b from https://huggingface.co/Qwen/Qwen2.5-3B and put it in checkpoints/Qwen2.5-3B
 mkdir -p checkpoints
 # get qwedsacf/competition_math dataset and put it in datasets/competition_math/data/train-00000-of-00001-7320a6f3aba8ebd2.parquet
-mkdir -p datasets/competition_math/data
-mkdir -p datasets/competition_math/sft
+mkdir -p dataset/competition_math/data
+mkdir -p dataset/competition_math/sft
 ```
 
 ### Install Dependencies
 
 ```sh
+pip install wheel
 pip install transformers==4.39.3
 pip install http://files.deepspark.org.cn:880/deepspark/add-ons/bitsandbytes-0.43.3+corex.4.3.0-cp310-cp310-linux_x86_64.whl
 

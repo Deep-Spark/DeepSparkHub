@@ -19,50 +19,58 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### 大语言模型（LLM）
 
-| Model                                                 | Framework | ToolBox            | Dataset/Weight         | IXUCA SDK |
-|-------------------------------------------------------|-----------|--------------------|------------------------|-----------|
-| [Aquila2-34B](models/nlp/llm/aquila2-34b/pytorch)            | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
-| [Baichuan2-7B](models/nlp/llm/baichuan2-7b/pytorch)          | PyTorch   | DeepSpeed          | baichuan2-7b-base      | 3.4.0     |
-| [Bloom-7B1](models/nlp/llm/bloom-7b1/pytorch)                | PyTorch   | Firefly            | school_math_0.25M      | 3.4.0     |
-| [ChatGLM-6B](models/nlp/llm/chatglm-6b/pytorch)              | PyTorch   | DeepSpeed          | ADGEN & chatglm-6b     | 3.1.0     |
-| [ChatGLM2-6B SFT](models/nlp/llm/chatglm2-6b-sft/pytorch)    | PyTorch   | DeepSpeed          | ADGEN & chatglm2-6b    | 3.4.0     |
-| [ChatGLM3-6B](models/nlp/llm/chatglm3-6b/pytorch)            | PyTorch   | DeepSpeed          | ADGEN & chatglm3-6b    | 4.1.1     |
-| [DeepSeekMoE 7B](models/nlp/llm/deepseek_moe_7b/pytorch)     | PyTorch   | ColossalAI         | deepseek-moe-16b-base  | 4.1.1     |
-| [DeepSeek-LLM-7B](models/nlp/llm/deepseek-llm-7b/verl)       | PyTorch   | verl               | deepseek-llm-7b-chat   | dev-only  |
-| [GLM-4](models/nlp/llm/glm-4/pytorch)                        | PyTorch   | Torchrun           | glm-4-9b-chat          | 4.2.0     |
-| [Gemma-2-2B-IT](models/nlp/llm/gemma-2-2b-it/verl)           | PyTorch   | verl               | gemma-2-2b-it          | dev-only  |
-| [Llama-7B](models/nlp/llm/llama-7b/pytorch)                  | PyTorch   | ColossalAI         | llama-7b-hf            | 3.1.0     |
-| [Llama2-7B](models/nlp/llm/llama2-7b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.1.0     |
-| [Llama2-7B RMF](models/nlp/llm/llama2-7b_reward_sft/pytorch) | PyTorch   | DeepSpeed          | Dahoas/rm-static       | 3.1.1     |
-| [Llama2-7B RLHF](models/nlp/llm/llama2-7b_rlhf/pytorch)      | PyTorch   | Megatron-DeepSpeed | llama2-7b&tiny-llama   | 3.4.0     |
-| [Llama2-7B SFT](models/nlp/llm/llama2-7b_sft/pytorch)        | PyTorch   | Megatron-DeepSpeed | GPT Small-117M         | 3.1.1     |
-| [Llama2-13B](models/nlp/llm/llama2-13b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
-| [Llama2-34B](models/nlp/llm/llama2-34b/pytorch)              | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
-| [Llama3-8B](models/nlp/llm/llama3_8b/pytorch)                | PyTorch   | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
-| [Llama3-8B](models/nlp/llm/llama3_8b/megatron-lm)            | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.3.0     |
-| [Llama3-8B SFT](models/nlp/llm/llama3_8b_sft/pytorch)        | PyTorch   | ColossalAI         | school_math_0.25M      | 4.1.1     |
-| [Llama3-8B SFT](models/nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Meta-Llama-3-8B        | 4.3.0     |
-| [Llama3-8B PPO](models/nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
-| [Llama3-8B DPO](models/nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
-| [Llama3-8B KTO](models/nlp/llm/llama3_8b/openrlhf)           | PyTorch   | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
-| [Mamba-2](models/nlp/llm/mamba-2/pytorch)                    | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.1.1     |
-| [MiniCPM](models/nlp/llm/minicpm/pytorch)                    | PyTorch   | DeepSpeed          | MiniCPM-2B-sft-bf16    | 4.2.0     |
-| [Mixtral 8x7B](models/nlp/llm/mixtral/pytorch)               | PyTorch   | Megatron-LM        | GPT Small-117M         | 4.1.1     |
-| [Mixtral 8x7B](models/nlp/llm/mixtral/openrlhf)              | PyTorch   | OpenRLHF           | Mixtral-8x7B-v0.1      | 4.3.0     |
-| [Phi-3](models/nlp/llm/phi-3/pytorch)                        | PyTorch   | Torchrun           | Phi-3-mini-4k-instruct | 4.2.0     |
-| [QWen-7B](models/nlp/llm/qwen-7b/pytorch)                    | PyTorch   | Firefly            | qwen-7b                | 3.4.0     |
-| [QWen1.5-7B](models/nlp/llm/qwen1.5-7b/pytorch)              | PyTorch   | Firefly            | school_math            | 4.1.1     |
-| [QWen1.5-14B](models/nlp/llm/qwen1.5-14b/pytorch)            | PyTorch   | Firefly            | school_math            | 4.1.1     |
-| [Qwen2-7B](models/nlp/llm/qwen2-7b/verl)                     | PyTorch   | verl               | qwen2-7b               | dev-only  |
-| [Qwen2.5-7B SFT](models/nlp/llm/qwen2.5-7b/pytorch)          | PyTorch   | LLaMA-Factory      | qwen2.5-7b             | 4.1.1     |
-| [Qwen2.5-1.5B verl](models/nlp/llm/qwen2.5-1.5b/verl)        | PyTorch   | verl               | qwen2.5-1.5b           | 4.2.0     |
-| [Qwen2.5-7B verl](models/nlp/llm/qwen2.5-7b/verl)            | PyTorch   | verl               | qwen2.5-7b             | 4.2.0     |
-| [Qwen2.5-3B](models/nlp/llm/qwen2.5-3b/pytorch)              | PyTorch   | ColossalAI         | qwen2.5-3b             | 4.3.0     |
-| [Qwen2.5-VL-7B](models/nlp/llm/qwen2.5-vl-7b/verl)           | PyTorch   | verl               | qwen2.5-vl-7b          | dev-only  |
-| [Qwen3-8B](models/nlp/llm/qwen3-8b/verl)                     | PyTorch   | verl               | qwen3-8b               | dev-only  |
-| [Yi-6B](models/nlp/llm/yi-6b/pytorch)                        | PyTorch   | DeepSpeed          | Yi-6B                  | 4.2.0     |
-| [Yi-1.5-6B](models/nlp/llm/yi-1.5-6b/pytorch)                | PyTorch   | DeepSpeed          | Yi-1.5-6B              | 4.2.0     |
-| [Yi-VL-6B](models/nlp/llm/yi-vl-6b/pytorch)                  | PyTorch   | LLaMA-Factory      | Yi-VL-6B-hf            | 4.2.0     |
+| Model                                                 | Framework            | Dataset/Weight         | IXUCA SDK |
+|-------------------------------------------------------|--------------------|------------------------|-----------|
+| [Aquila2-34B](models/nlp/llm/aquila2-34b/pytorch)            | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
+| [Baichuan2-7B](models/nlp/llm/baichuan2-7b/pytorch)          | DeepSpeed          | baichuan2-7b-base      | 3.4.0     |
+| [Bloom-7B1](models/nlp/llm/bloom-7b1/pytorch)                | Firefly            | school_math_0.25M      | 3.4.0     |
+| [ChatGLM-6B](models/nlp/llm/chatglm-6b/pytorch)              | DeepSpeed          | ADGEN & chatglm-6b     | 3.1.0     |
+| [ChatGLM2-6B SFT](models/nlp/llm/chatglm2-6b-sft/pytorch)    | DeepSpeed          | ADGEN & chatglm2-6b    | 3.4.0     |
+| [ChatGLM3-6B](models/nlp/llm/chatglm3-6b/pytorch)            | DeepSpeed          | ADGEN & chatglm3-6b    | 4.1.1     |
+| [DeepSeekMoE 7B](models/nlp/llm/deepseek_moe_7b/pytorch)     | ColossalAI         | deepseek-moe-16b-base  | 4.1.1     |
+| [DeepSeek-LLM-7B](models/nlp/llm/deepseek-llm-7b/verl)       | verl               | deepseek-llm-7b-chat   | dev-only  |
+| [GLM-4](models/nlp/llm/glm-4/pytorch)                        | Torchrun           | glm-4-9b-chat          | 4.2.0     |
+| [Gemma-2-2B-IT](models/nlp/llm/gemma-2-2b-it/verl)           | verl               | gemma-2-2b-it          | dev-only  |
+| [Llama-7B](models/nlp/llm/llama-7b/pytorch)                  | ColossalAI         | llama-7b-hf            | 3.1.0     |
+| [Llama2-7B](models/nlp/llm/llama2-7b/pytorch)                | Megatron-DeepSpeed | Bookcorpus             | 3.1.0     |
+| [Llama2-7B RMF](models/nlp/llm/llama2-7b_reward_sft/pytorch) | DeepSpeed          | Dahoas/rm-static       | 3.1.1     |
+| [Llama2-7B RLHF](models/nlp/llm/llama2-7b_rlhf/pytorch)      | Megatron-DeepSpeed | llama2-7b&tiny-llama   | 3.4.0     |
+| [Llama2-7B SFT](models/nlp/llm/llama2-7b_sft/pytorch)        | Megatron-DeepSpeed | GPT Small-117M         | 3.1.1     |
+| [Llama2-13B](models/nlp/llm/llama2-13b/pytorch)              | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
+| [Llama2-34B](models/nlp/llm/llama2-34b/pytorch)              | Megatron-DeepSpeed | Bookcorpus             | 3.4.0     |
+| [Llama3-8B](models/nlp/llm/llama3_8b/pytorch)                | Megatron-DeepSpeed | Bookcorpus             | 4.1.1     |
+| [Llama3-8B](models/nlp/llm/llama3_8b/megatron-lm)            | Megatron-LM        | GPT Small-117M         | 4.3.0     |
+| [Llama3-8B SFT](models/nlp/llm/llama3_8b_sft/pytorch)        | ColossalAI         | school_math_0.25M      | 4.1.1     |
+| [Llama3-8B SFT](models/nlp/llm/llama3_8b/openrlhf)           | OpenRLHF           | Meta-Llama-3-8B        | 4.3.0     |
+| [Llama3-8B PPO](models/nlp/llm/llama3_8b/openrlhf)           | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
+| [Llama3-8B DPO](models/nlp/llm/llama3_8b/openrlhf)           | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
+| [Llama3-8B KTO](models/nlp/llm/llama3_8b/openrlhf)           | OpenRLHF           | Llama-3-8b-sft-mixture | 4.2.0     |
+| [Llama3-8B DPO](models/nlp/llm/llama3_8b/llamafactory)       | LLaMA-Factory   | Meta-Llama-3-8B-Instruct | 4.3.0   |
+| [Llama3-8B Full SFT](models/nlp/llm/llama3_8b/llamafactory)  | LLaMA-Factory   | Meta-Llama-3-8B-Instruct | 4.3.0   |
+| [Llama3-8B KTO](models/nlp/llm/llama3_8b/llamafactory)       | LLaMA-Factory   | Meta-Llama-3-8B-Instruct | 4.3.0   |
+| [Llama3-8B Pretrain](models/nlp/llm/llama3_8b/llamafactory)  | LLaMA-Factory   | Meta-Llama-3-8B-Instruct | 4.3.0   |
+| [Llama3-8B Reward](models/nlp/llm/llama3_8b/llamafactory)    | LLaMA-Factory   | Meta-Llama-3-8B-Instruct | 4.3.0   |
+| [Llama3-8B SFT](models/nlp/llm/llama3_8b/llamafactory)       | LLaMA-Factory   | Meta-Llama-3-8B-Instruct | 4.3.0   |
+| [Mamba-2](models/nlp/llm/mamba-2/pytorch)                    | Megatron-LM        | GPT Small-117M         | 4.1.1     |
+| [MiniCPM](models/nlp/llm/minicpm/pytorch)                    | DeepSpeed          | MiniCPM-2B-sft-bf16    | 4.2.0     |
+| [Mixtral 8x7B](models/nlp/llm/mixtral/pytorch)               | Megatron-LM        | GPT Small-117M         | 4.1.1     |
+| [Mixtral 8x7B](models/nlp/llm/mixtral/openrlhf)              | OpenRLHF           | Mixtral-8x7B-v0.1      | 4.3.0     |
+| [Phi-3](models/nlp/llm/phi-3/pytorch)                        | Torchrun           | Phi-3-mini-4k-instruct | 4.2.0     |
+| [QWen-7B](models/nlp/llm/qwen-7b/pytorch)                    | Firefly            | qwen-7b                | 3.4.0     |
+| [QWen1.5-7B](models/nlp/llm/qwen1.5-7b/pytorch)              | Firefly            | school_math            | 4.1.1     |
+| [QWen1.5-14B](models/nlp/llm/qwen1.5-14b/pytorch)            | Firefly            | school_math            | 4.1.1     |
+| [Qwen2-7B](models/nlp/llm/qwen2-7b/verl)                     | verl               | qwen2-7b               | dev-only  |
+| [Qwen2.5-7B SFT](models/nlp/llm/qwen2.5-7b/pytorch)          | LLaMA-Factory      | qwen2.5-7b             | 4.1.1     |
+| [Qwen2.5-1.5B verl](models/nlp/llm/qwen2.5-1.5b/verl)        | verl               | qwen2.5-1.5b           | 4.2.0     |
+| [Qwen2.5-7B verl](models/nlp/llm/qwen2.5-7b/verl)            | verl               | qwen2.5-7b             | 4.2.0     |
+| [Qwen2.5-3B](models/nlp/llm/qwen2.5-3b/pytorch)              | ColossalAI         | qwen2.5-3b             | 4.3.0     |
+| [Qwen2.5-VL-7B](models/nlp/llm/qwen2.5-vl-7b/verl)           | verl               | qwen2.5-vl-7b          | dev-only  |
+| [Qwen2.5-VL-7B DPO](models/nlp/llm/qwen2.5-vl-7b/llamafactory) | LLaMA-Factory | Qwen2.5-VL-7B-Instruct | 4.3.0     |
+| [Qwen2.5-VL-7B SFT](models/nlp/llm/qwen2.5-vl-7b/llamafactory) | LLaMA-Factory | Qwen2.5-VL-7B-Instruct | 4.3.0     |
+| [Qwen3-8B](models/nlp/llm/qwen3-8b/verl)                     | verl               | qwen3-8b               | dev-only  |
+| [Yi-6B](models/nlp/llm/yi-6b/pytorch)                        | DeepSpeed          | Yi-6B                  | 4.2.0     |
+| [Yi-1.5-6B](models/nlp/llm/yi-1.5-6b/pytorch)                | DeepSpeed          | Yi-1.5-6B              | 4.2.0     |
+| [Yi-VL-6B](models/nlp/llm/yi-vl-6b/pytorch)                  | LLaMA-Factory      | Yi-VL-6B-hf            | 4.2.0     |
 
 ### 计算机视觉（CV）
 
@@ -408,6 +416,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 |------------------------------------------------------------------|-------------------|--------------------|-------|
 |  [BART](models/nlp/language_model/bart_fairseq/pytorch)                   |  PyTorch (Fairseq)  |  RTE                 | 3.0.0 |
 |  [BERT NER](models/nlp/ner/bert/pytorch)                                  |  PyTorch            |  CoNLL-2003          | 3.0.0 |
+|  [BERT Pretraining](models/nlp/language_model/bert_sample/pytorch)        |  PyTorch            |  bert_mini           | 4.3.0 |
 |  [BERT Pretraining](models/nlp/language_model/bert/pytorch)               |  PyTorch            |  MLCommon Wikipedia  | 2.2.0 |
 |  [BERT Pretraining](models/nlp/language_model/bert/paddlepaddle)          |  PaddlePaddle       |  MNLI                | 2.3.0 |
 |  [BERT Pretraining](models/nlp/language_model/bert/tensorflow)            |  TensorFlow         |  MNLI                | 3.0.0 |
@@ -447,6 +456,7 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 | Model                                                                                   | Framework       | Dataset  | IXUCA SDK |
 |-----------------------------------------------------------------------------------------|-----------------|----------|-------|
 |  [Conformer](models/audio/speech_recognition/conformer_wenet/pytorch)                            |  PyTorch (WeNet)  |  AISHELL   | 2.2.0 |
+|  [Conformer](models/audio/speech_recognition/conformer/pytorch)                                  |  PyTorch          | LibriSpeech | 4.3.0 |
 |  [Efficient Conformer v2](models/audio/speech_recognition/efficient_conformer_v2_wenet/pytorch)  |  PyTorch (WeNet)  |  AISHELL   | 3.1.0 |
 |  [PP-ASR-Conformer](models/audio/speech_recognition/conformer/paddlepaddle)                      |  PaddlePaddle     |  AISHELL   | 3.1.0 |
 |  [RNN-T](models/audio/speech_recognition/rnnt/pytorch)                                           |  PyTorch          |  LJSpeech  | 2.2.0 |
