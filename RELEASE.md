@@ -3,6 +3,51 @@
 <!-- markdownlint-disable no-duplicate-heading -->
 # DeepSparkHub Release Notes
 
+## DeepSparkHub 25.12 Release Notes
+
+### 模型与算法
+
+* 新增了8个大模型训练微调示例，使用了[LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)工具箱
+
+<table>
+    </tr>
+        <tr align="left"><th colspan=5>LLM</th></tr>
+    <tr>
+        <td>Llama3-8B-DPO (LLaMA-Factory)</td>
+        <td>Llama3-8B-Full-SFT (LLaMA-Factory)</td>
+        <td>Llama3-8B-KTO (LLaMA-Factory)</td>
+    </tr>
+    <tr>
+        <td>LlaMA3-8B-LoRA-Pretrain (LLaMA-Factory)</td>
+        <td>Llama3-8B-LoRA-Reward (LLaMA-Factory)</td>
+        <td>Llama3-8B-LoRA-SFT (LLaMA-Factory)</td>
+    </tr>
+    <tr>
+        <td>Qwen2.5-VL-LoRA-DPO (LLaMA-Factory)</td>
+        <td>Qwen2.5-VL-LoRA-SFT (LLaMA-Factory)</td>
+        <td></td>
+    </tr>
+</table>
+
+### 修复更新
+
+* 更新了Stable Diffusion 2.1模型的初始化脚本
+* 更新了KAN PyTorch模型的README指导文档
+* 优化了模型存放的路径，统一放到models子目录下 (#ID02NU)
+* 修复了UNet3D PyTorch模型权重加载报错的问题
+
+### 版本关联
+
+DeepSparkHub 25.12对应天数软件栈4.3.0版本。
+
+### 贡献者
+
+感谢以下社区贡献者
+
+sanghui_ilu，李一力，fanglaipeng，majorli6，honglyua。
+
+欢迎以任何形式为DeepSparkHub项目贡献。
+
 ## DeepSparkHub 25.09 Release Notes
 
 ### 模型与算法
