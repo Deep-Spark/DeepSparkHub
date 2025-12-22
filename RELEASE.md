@@ -1,11 +1,33 @@
 <!-- markdownlint-disable first-line-h1 -->
 <!-- markdownlint-disable html -->
 <!-- markdownlint-disable no-duplicate-heading -->
-# DeepSparkHub Release Notes
+# Releasing DeepSparkHub
 
-## DeepSparkHub 25.12 Release Notes
+## Release Versioning
 
-### 模型与算法
+本项目采用基于发布年月的版本号命名策略，格式为 YY.MM，发布节奏为按季度发布，一般在每年的 3/6/9/12 月发布正式版本，版本号对应为 YY.03/YY.06/YY.09/YY.12。已发布版本与 IXUCA SDK 关联关系如下表所示：
+
+| Release Date | Release Version | IXUCA SDK |
+|--------------|-----------------|-----------|
+| Dec 2025     | 25.12           | v4.3.0    |
+| Sep 2025     | 25.09           | v4.3.0    |
+| Jun 2025     | 25.06           | v4.2.0    |
+| Mar 2025     | 25.03           | v4.2.0    |
+| Dec 2024     | 24.12           | v4.1.1    |
+| Sep 2024     | 24.09           | v4.1.1    |
+| Jun 2024     | 24.06           | v3.4.0    |
+| Mar 2024     | 24.03           | v3.1.1    |
+| Dec 2023     | 23.12           | v3.1.0    |
+| Sep 2023     | 23.09           | v3.1.0    |
+| Jun 2023     | 23.06           | v3.0.0    |
+| Mar 2023     | 23.03           | v3.0.0    |
+| Dec 2022     | 22.12           | v2.3.0    |
+
+## Release Notes
+
+### DeepSparkHub 25.12
+
+#### 模型与算法
 
 * 新增了8个大模型训练微调示例，使用了[LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)工具箱
 
@@ -29,18 +51,18 @@
     </tr>
 </table>
 
-### 修复更新
+#### 修复更新
 
 * 更新了Stable Diffusion 2.1模型的初始化脚本
 * 更新了KAN PyTorch模型的README指导文档
 * 优化了模型存放的路径，统一放到models子目录下 (#ID02NU)
 * 修复了UNet3D PyTorch模型权重加载报错的问题
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 25.12对应天数软件栈4.3.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下社区贡献者
 
@@ -48,9 +70,9 @@ sanghui_ilu，李一力，fanglaipeng，majorli6，honglyua。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
 
-## DeepSparkHub 25.09 Release Notes
+### DeepSparkHub 25.09
 
-### 模型与算法
+#### 模型与算法
 
 * 新增了10个大模型训练微调示例，其中7个为强化学习相关示例，使用了[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)和[verl](https://github.com/volcengine/verl)工具箱
 
@@ -79,7 +101,7 @@ sanghui_ilu，李一力，fanglaipeng，majorli6，honglyua。
     </tr>
 </table>
 
-### 修复更新
+#### 修复更新
 
 * 修复了BERT TensorFlow模型在TensorFlow升级后不支持estimator的问题（#ICWA6Y）
 * 修复了ResNet50 TensorFlow模型在TensorFlow升级后，不兼容normalization_layers的问题（#ICWA59） 
@@ -87,11 +109,11 @@ sanghui_ilu，李一力，fanglaipeng，majorli6，honglyua。
 * 更新了AlexNet、GoogLeNet等模型所支持的最高SDK版本
 * 同步了Colossal-AI、Deepspeed和Megatron-Deepspeed框架的最新代码
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 25.09版本中使用verl的模型对应IXUCA SDK dev-only版本，其余模型对应SDK 4.3.0。
 
-### 贡献者
+#### 贡献者
 
 感谢以下社区贡献者
 
@@ -99,9 +121,9 @@ sanghui_ilu，李一力，郝燕龙，胡方健，lsy789，张汉涛，fanglaipe
 
 欢迎以任何形式为DeepSparkHub项目贡献。
 
-## DeepSparkHub 25.06 Release Notes
+### DeepSparkHub 25.06
 
-### 模型与算法
+#### 模型与算法
 
 * 新增了1个PyTorch训练小模型示例
 * 新增了5个大模型强化学习微调示例，使用了[verl](https://github.com/volcengine/verl)和[OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)工具箱
@@ -127,7 +149,7 @@ sanghui_ilu，李一力，郝燕龙，胡方健，lsy789，张汉涛，fanglaipe
     </tr>
 </table>
 
-### 修复更新
+#### 修复更新
 
 * 优化了AlphaPose模型的冗余代码。
 * 同步了BERT，SSD和Bloom-7B1等模型的最新代码。
@@ -135,11 +157,11 @@ sanghui_ilu，李一力，郝燕龙，胡方健，lsy789，张汉涛，fanglaipe
 * 增加了DeepSparkHub全部模型的json配置文件。
 * 增加了模型库首页的英文版README文档。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 25.06对应天数软件栈4.2.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下社区贡献者
 
@@ -147,9 +169,9 @@ DeepSparkHub 25.06对应天数软件栈4.2.0版本。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
 
-## DeepSparkHub 25.03 Release Notes
+### DeepSparkHub 25.03
 
-### 模型与算法
+#### 模型与算法
 
 * 新增了9个大模型训练示例，涉及DeepSpeed，MoE-LLaVA和LLaMA-Factory工具箱
 
@@ -173,7 +195,7 @@ DeepSparkHub 25.06对应天数软件栈4.2.0版本。
     </tr>
 </table>
 
-### 问题修复
+#### 问题修复
 
 * 同步了Tacotron2 PyTorch模型的最新代码。
 * 删除了ConvNeXt，Co-DETR和CenterNet等模型的冗余代码，并对齐社区版本。
@@ -181,11 +203,11 @@ DeepSparkHub 25.06对应天数软件栈4.2.0版本。
 * 增加了cv/classification和cv/detection的自动化CI脚本。
 * 更新了所有模型README文档格式，补充了模型所支持的IXUCA SDK版本。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 25.03对应天数软件栈4.2.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下社区贡献者
 
@@ -193,9 +215,7 @@ DeepSparkHub 25.03对应天数软件栈4.2.0版本。
 
 欢迎以任何形式为DeepSparkHub项目贡献。
 
-## DeepSparkHub 24.12 Release Notes
-
-### 特性和增强
+### DeepSparkHub 24.12
 
 #### 模型与算法
 
@@ -227,18 +247,18 @@ DeepSparkHub 25.03对应天数软件栈4.2.0版本。
     </tr>
 </table>
 
-### 问题修复
+#### 问题修复
 
 * 更新了Llama2-7B (Megatron-DeepSpeed)模型的数据集链接。
 * 同步了DBNet、Fast R-CNN和GoogLeNet等PyTorch模型的代码。
 * 同步了BERT Base、FaceNet和ResNet50等TensorFlow模型的代码。
 * 同步了ClossalAI、Megatron-DeepSpeed和OpenPCDet工具箱的代码。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 24.12对应天数软件栈4.1.1版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
@@ -248,9 +268,7 @@ DeepSparkHub 24.12对应天数软件栈4.1.1版本。
 
 ---
 
-## DeepSparkHub 24.09 Release Notes
-
-### 特性和增强
+### DeepSparkHub 24.09
 
 #### 模型与算法
 
@@ -276,18 +294,18 @@ DeepSparkHub 24.12对应天数软件栈4.1.1版本。
   * Qwen1.5-7B (Firefly)
   * Qwen1.5-14B (Firefly)
 
-### 问题修复
+#### 问题修复
 
 * 修复了HardNet PyTorch模型的torchvision导入报错的问题。
 * 同步了AlexNet，EfficientNet_B4等PyTorch模型的代码。
 * 同步了AlexNet，FaceNet，InceptionV3，VGG16等TensorFlow模型的代码。
 * 同步了工具箱Megatron-Deepspeed大语言模型框架的代码。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 24.09对应天数软件栈4.1.1版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
@@ -297,9 +315,7 @@ DeepSparkHub 24.09对应天数软件栈4.1.1版本。
 
 ---
 
-## DeepSparkHub 24.06 Release Notes
-
-### 特性和增强
+### DeepSparkHub 24.06
 
 #### 模型与算法
 
@@ -331,7 +347,7 @@ DeepSparkHub 24.09对应天数软件栈4.1.1版本。
   * Llama2-34B (Megatron-DeepSpeed)
   * Qwen-7B SFT LoRA Ptuning-V2 (Firefly)
 
-### 问题修复
+#### 问题修复
 
 * 修复了CenterNet PyTorch模型的DCNv2 版本不配套的问题。
 * 修复了BERT Pytorch模型的h5py依赖库版本不对的问题。
@@ -339,11 +355,11 @@ DeepSparkHub 24.09对应天数软件栈4.1.1版本。
 * 同步了YOLOv5，FaceNet，AlexNet，InceptionV3，VGG16模型的代码。
 * 完善了BiSeNetV2，DeepLabV3，SSD，YOLOv5模型的说明文档。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 24.06对应天数软件栈3.4.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
@@ -353,9 +369,7 @@ majorli，Jino Yang，李一力，shengquan.nian，wenfeng.zhang，吴永乐，z
 
 ---
 
-## DeepSparkHub 24.03 Release Notes
-
-### 特性和增强
+### DeepSparkHub 24.03
 
 #### 模型与算法
 
@@ -384,7 +398,7 @@ majorli，Jino Yang，李一力，shengquan.nian，wenfeng.zhang，吴永乐，z
   * Megatron-DeepSpeed Llama-2-7B SFT
   * DeepSpeed Llama-2-7B Reward Model Finetuning
 
-### 问题修复
+#### 问题修复
 
 * 修复了DeepLabV3+ PaddlePaddle模型依赖安装不全的问题。
 * 修复了MobileSeg 和Attention U-Net模型训练步骤路径错误问题。
@@ -392,11 +406,11 @@ majorli，Jino Yang，李一力，shengquan.nian，wenfeng.zhang，吴永乐，z
 * 清除了Swin Transformer模型目录下的冗余pycache文件。
 * 完善了basicVSR++，basicVSR，RealBasicVSR，TTVSR模型的执行代码示例。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 24.03对应天数软件栈3.1.1版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
@@ -406,9 +420,7 @@ majorli，songjian，xiaomei.wang，李一力，gaiqin.bai，wenfeng.zhang，吴
 
 ---
 
-## DeepSparkHub 23.12 Release Notes
-
-### 特性和增强
+### DeepSparkHub 23.12
 
 #### 模型与算法
 
@@ -462,7 +474,7 @@ majorli，songjian，xiaomei.wang，李一力，gaiqin.bai，wenfeng.zhang，吴
 * 新增了基于分布式训练框架的大语言模型训练示例。
   * Megatron-DeepSpeed LLaMA2-7B
 
-### 问题修复
+#### 问题修复
 
 * 修复了YOLOv5模型训练过程中数值类型报错问题。
 * 修复了ESRGAN，LIIF，TTSR模型配置文件路径问题。
@@ -472,11 +484,11 @@ majorli，songjian，xiaomei.wang，李一力，gaiqin.bai，wenfeng.zhang，吴
 * 改进了BERT系列模型对本地离线运行的支持。
 * 改进了MMDetection工具箱不同版本的安装流程。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 23.12对应天数软件栈3.1.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
@@ -486,9 +498,7 @@ majorli，songjian，may，jun.zhao，wz50525，gaiqin_bai，郝燕龙，巩亚�
 
 ---
 
-## DeepSparkHub 23.09 Release Notes
-
-### 特性和增强
+### DeepSparkHub 23.09
 
 #### 模型与算法
 
@@ -549,7 +559,7 @@ majorli，songjian，may，jun.zhao，wz50525，gaiqin_bai，郝燕龙，巩亚�
 * 新增了基于深度学习分子动力学套件的水分子模型训练示例。
   * DeePMD-kit water/se_e2_a
 
-### 问题修复
+#### 问题修复
 
 * 修复了Stable Diffusion模型的accelerate包版本问题。
 * 修复了PaddlePaddle GCN模型的环境变量设置问题。
@@ -558,11 +568,11 @@ majorli，songjian，may，jun.zhao，wz50525，gaiqin_bai，郝燕龙，巩亚�
 * 新增了DeepSparkHub模型REAME.md文档参考模板。
 * 优化了开源工具箱Fairseq/MMDetection/WeNet的模型存放路径和展示方式。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 23.09对应天数软件栈3.1.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
@@ -572,9 +582,7 @@ majorli，zhaojun0044，songjian，gongyafei，gaiqin_bai，Asltw，张文风，
 
 ---
 
-## DeepSparkHub 23.06 Release Notes
-
-### 特性和增强
+### DeepSparkHub 23.06
 
 #### 模型与算法
 
@@ -642,7 +650,7 @@ majorli，zhaojun0044，songjian，gongyafei，gaiqin_bai，Asltw，张文风，
 * ATSS，Cascade R-CNN，CornerNet，DCNV2，RepPoints模型基于开源的MMDetection工具箱，可以便捷的执行目标检测训练任务。
 * BART，Convoluntional，RoBERTa，Transformer模型基于开源的Fairseq工具箱，可以便捷的执行自然语言处理训练任务。
 
-### 问题修复
+#### 问题修复
 
 * 修复了MobileNetV2和YOLOv5模型参数问题。
 * 修复了LIIF和VGG16模型Python依赖包缺失问题。
@@ -651,11 +659,11 @@ majorli，zhaojun0044，songjian，gongyafei，gaiqin_bai，Asltw，张文风，
 * 新增了Tacotron2、YOLOv5、SATRN模型的性能指标输出。
 * 新增了FairMOT模型的性能指标和精度指标输出。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 23.06对应天数软件栈3.0.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
@@ -665,17 +673,11 @@ majorli，吴永乐，songjian，丁力，shengquan.nian，may，张文风，che
 
 ---
 
-## DeepSparkHub 23.03 Release Notes
-
-### 特性和增强
-
-#### 多框架支持
-
-新增了对TensorFlow和MindSpore的支持。
+### DeepSparkHub 23.03
 
 #### 模型与算法
 
-新增了35个算法模型，具体如下。
+新增了对TensorFlow和MindSpore的支持。新增了35个算法模型，具体如下。
 
 <table>
     <tr><th colspan="5", align="left">TensorFlow</th></tr>
@@ -733,17 +735,17 @@ majorli，吴永乐，songjian，丁力，shengquan.nian，may，张文风，che
     </tr>
 </table>
 
-### 问题修复
+#### 问题修复
 
 * 修复了CenterNet模型缺失make.sh文件的问题。
 * 更新了ResNet50模型的运行脚本路径。
 * 更新了HashNeRF模型的数据集准备和模型执行步骤。
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 23.03对应天数软件栈3.0.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
@@ -753,9 +755,9 @@ shengquan.nian，牛冠博，吴永乐，may，majorli6，yue.chang，wenfeng.zh
 
 ---
 
-## DeepSparkHub 22.12 Release Notes
+### DeepSparkHub 22.12
 
-### 特性和增强
+#### 特性和增强
 
 * SATRN，Conformer和ngp-nerf模型更新6维度评测数据。
 * DLRM和CPM模型增加checkpoint。
@@ -784,7 +786,7 @@ shengquan.nian，牛冠博，吴永乐，may，majorli6，yue.chang，wenfeng.zh
 | DeepFM           | PaddlePaddle | Criteo_Terabyte           |
 | Wide&Deep        | PaddlePaddle | Criteo_Terabyte           |
 
-### 问题修复
+#### 问题修复
 
 * ssd模型执行prepare.py报错。([#I5Y00S](https://gitee.com/deep-spark/deepsparkhub/issues/I5Y00S))
 * vqmivc模型使用数据集问题。([#I63WFR](https://gitee.com/deep-spark/deepsparkhub/issues/I63WFR))
@@ -801,11 +803,11 @@ shengquan.nian，牛冠博，吴永乐，may，majorli6，yue.chang，wenfeng.zh
 * RealBasicVSR模型执行报错。([#I64STQ](https://gitee.com/deep-spark/deepsparkhub/issues/I64STQ))
 * HRNet模型运行提示缺少json_tricks等python依赖。([#I63W67](https://gitee.com/deep-spark/deepsparkhub/issues/I63W67))
 
-### 版本关联
+#### 版本关联
 
 DeepSparkHub 22.12对应天数软件栈2.3.0版本。
 
-### 贡献者
+#### 贡献者
 
 感谢以下人员做出的贡献：
 
