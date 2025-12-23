@@ -13,7 +13,7 @@
 </div>
 <br>
 
-DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领域，支持主流市场智能计算场景，包括智慧城市、数字个人、医疗、教育、通信、能源等多个领域。
+`DeepSparkHub`甄选上百个应用算法和模型，覆盖 AI 和通用计算各领域，支持主流市场智能计算场景，包括智慧城市、数字个人、医疗、教育、通信、能源等多个领域。
 
 ## 模型库
 
@@ -526,14 +526,14 @@ DeepSparkHub甄选上百个应用算法和模型，覆盖AI和通用计算各领
 
 ### 免责声明
 
-DeepSparkHub仅提供公共数据集的下载和预处理脚本。这些数据集不属于DeepSparkHub，DeepSparkHub也不对其质量或维护负责。请确保
+DeepSparkHub 仅提供公共数据集的下载和预处理脚本。这些数据集不属于 DeepSparkHub，DeepSparkHub 也不对其质量或维护负责。请确保
 您具有这些数据集的使用许可，基于这些数据集训练的模型仅可用于非商业研究和教育。
 
 致数据集所有者：
 
-如果不希望您的数据集公布在DeepSparkHub上或希望更新DeepSparkHub中属于您的数据集，请在Gitee或Github上提交issue，我们将按您
-的issue删除或更新。衷心感谢您对我们社区的支持和贡献。
+如果不希望您的数据集公布在 DeepSparkHub 上或希望更新 DeepSparkHub 中属于您的数据集，请在 Gitee 或 Github 上提交 issue，我们将按您
+的 issue 删除或更新。衷心感谢您对我们社区的支持和贡献。
 
 ## 许可证
 
-本项目许可证遵循[Apache-2.0](LICENSE)。
+本项目许可证遵循 [Apache-2.0](LICENSE)。

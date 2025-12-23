@@ -32,3 +32,5 @@ dist/
 *.gif
 
 .markdownlint.json
+
+.vscode/
