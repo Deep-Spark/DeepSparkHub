@@ -27,7 +27,7 @@
 | [ChatGLM-6B](models/nlp/llm/chatglm-6b/pytorch)                | DeepSpeed          | ADGEN & chatglm-6b       | 3.1.0     |
 | [ChatGLM2-6B SFT](models/nlp/llm/chatglm2-6b-sft/pytorch)      | DeepSpeed          | ADGEN & chatglm2-6b      | 3.4.0     |
 | [ChatGLM3-6B](models/nlp/llm/chatglm3-6b/pytorch)              | DeepSpeed          | ADGEN & chatglm3-6b      | 4.2.0     |
-| [DeepSeekMoE 7B](models/nlp/llm/deepseek_moe_7b/pytorch)       | ColossalAI         | deepseek-moe-16b-base    | 4.2.0     |
+| [DeepSeekMoE 16B](models/nlp/llm/deepseek-moe-16b/pytorch)     | ColossalAI         | deepseek-moe-16b-base    | 4.2.0     |
 | [DeepSeek-LLM-7B](models/nlp/llm/deepseek-llm-7b/verl)         | verl               | deepseek-llm-7b-chat     | dev-only  |
 | [GLM-4](models/nlp/llm/glm-4/pytorch)                          | Torchrun           | glm-4-9b-chat            | 4.2.0     |
 | [Gemma-2-2B-IT](models/nlp/llm/gemma-2-2b-it/verl)             | verl               | gemma-2-2b-it            | dev-only  |

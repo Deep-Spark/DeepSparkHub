@@ -43,7 +43,6 @@ pip install transformers==4.49.0
 # dpo
 llamafactory-cli train examples/train_lora/qwen2_5vl_lora_dpo.yaml
 # sft
-pip install 
 llamafactory-cli train examples/train_lora/qwen2_5vl_lora_sft.yaml
 ```
 

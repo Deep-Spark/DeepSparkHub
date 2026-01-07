@@ -6385,7 +6385,7 @@
             "priority": "P4"
         },
         {
-            "model_name": "deepseek_moe_7b",
+            "model_name": "deepseek-moe-16b",
             "framework": "pytorch",
             "release_version": "24.12",
             "release_sdk": "4.1.1",
@@ -6397,7 +6397,7 @@
             "mdims": "",
             "dataset": "",
             "license": "待更新",
-            "model_path": "deepsparkhub/models/nlp/llm/deepseek_moe_7b/pytorch/",
+            "model_path": "deepsparkhub/models/nlp/llm/deepseek-moe-16b/pytorch/",
             "readme_file": "",
             "bitbucket_repo": "",
             "bitbucket_branch": "",

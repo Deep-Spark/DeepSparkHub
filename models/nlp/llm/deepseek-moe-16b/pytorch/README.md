@@ -1,13 +1,8 @@
-# DeepSeekMoE 7B (ColossalAI)
+# DeepSeekMoE 16B (ColossalAI)
 
 ## Model Description
 
-DeepSeekMoE 7B is an efficient variant of the DeepSeekMoE 16B model, utilizing a Mixture-of-Experts (MoE) architecture.
-This model features innovative strategies like fine-grained expert segmentation and shared experts isolation, enabling
-it to handle complex language tasks effectively. With 7 billion parameters, it balances computational efficiency and
-performance, making it suitable for various natural language processing applications. DeepSeekMoE 7B demonstrates strong
-capabilities in language understanding and generation while maintaining a more compact structure compared to its larger
-counterpart.
+DeepSeekMoE 16B is a Mixture-of-Experts (MoE) language model with 16.4B parameters. It employs an innovative MoE architecture, which involves two principal strategies: fine-grained expert segmentation and shared experts isolation. It is trained from scratch on 2T English and Chinese tokens, and exhibits comparable performance with DeekSeek 7B and LLaMA2 7B, with only about 40% of computations. For research purposes, we release the model checkpoints of DeepSeekMoE 16B Base and DeepSeekMoE 16B Chat to the public, which can be deployed on a single GPU with 40GB of memory without the need for quantization
 
 ## Supported Environments
 
