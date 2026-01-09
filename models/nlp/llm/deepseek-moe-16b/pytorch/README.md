@@ -20,7 +20,7 @@ Get "deepseek-moe-16b-base" models and config file from huggingface or other pla
 "<https://huggingface.co/deepseek-ai/deepseek-moe-16b-base/tree/main>".
 
 ```sh
-git clone -b v0.4.4 https://github.com/hpcaitech/ColossalAI.git --depth=1
+git clone -b v0.4.8 https://github.com/hpcaitech/ColossalAI.git --depth=1
 cd ColossalAI/
 
 pushd examples/language/deepseek
@@ -31,11 +31,13 @@ popd
 
 ### Install Dependencies
 
-Firstly, you should ensure that ColossalAI is installed in the environment. Generally, ColossalAI is installed by
-default.
+Contact the Iluvatar administrator to get the missing packages:
+
+- bitsandbytes-*.whl
 
 ```sh
-cp -rf <DeepSparkHub_Root>/toolbox/ColossalAI/v0.4.4/patches/* ./
+pip install bitsandbytes-*.whl
+cp -rf <DeepSparkHub_Root>/toolbox/ColossalAI/v0.4.8/patches/* ./
 pip3 install .
 ```
 
@@ -43,15 +45,15 @@ pip3 install .
 
 ```sh
 cd ColossalAI/examples/language/deepseek
-colossalai run --nproc_per_node 16 benchmark.py -c 7b -g  -b 16 --tp 1 --pp 4 --num_steps 50
+colossalai run --nproc_per_node 16 benchmark.py -c 7b -g -b 16 --tp 1 --pp 4 --num_steps 50
 ```
 
 ## Model Results
 
 | Model          | GPU     | Training speed   |
 |----------------|---------|------------------|
-| DeepSeekMoE 7B | BI-V150 | 6.85 samples/sec |
+| DeepSeekMoE 16B | BI-V150 | 6.85 samples/sec |
 
 ## References
 
-- [ColossalAI](https://github.com/hpcaitech/ColossalAI/tree/v0.4.4/examples/language/deepseek)
+- [ColossalAI](https://github.com/hpcaitech/ColossalAI/tree/v0.4.8/examples/language/deepseek)
