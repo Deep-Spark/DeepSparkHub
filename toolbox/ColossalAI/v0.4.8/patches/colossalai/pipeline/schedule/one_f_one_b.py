@@ -1,5 +1,5 @@
 from functools import partial
-from typing import Any, Callable, Dict, Iterable, List, Optional, Union
+from typing import Any, Callable, Dict, Iterator, List, Optional, Union
 
 import torch
 from torch.nn import Module
@@ -71,6 +71,8 @@ class OneForwardOneBackwardSchedule(PipelineSchedule):
             data_iter (Iterable): Data iterator.
             device (Optional[torch.device], optional): Target device. Defaults to None.
         """
+        if isinstance(batch, Iterator):
+            batch = next(batch)
         if device is not None:
             batch = tree_map(partial(to_device, device=device), batch)
 

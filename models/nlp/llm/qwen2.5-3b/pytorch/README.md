@@ -32,10 +32,14 @@ mkdir -p dataset/competition_math/sft
 
 ### Install Dependencies
 
+Contact the Iluvatar administrator to get the missing packages:
+
+- bitsandbytes-*.whl
+
 ```sh
 pip install wheel
 pip install transformers==4.39.3
-pip install http://files.deepspark.org.cn:880/deepspark/add-ons/bitsandbytes-0.43.3+corex.4.3.0-cp310-cp310-linux_x86_64.whl
+pip install bitsandbytes-*.whl
 
 cd ColossalAI/
 bash clean_colossalai.sh
@@ -54,7 +58,6 @@ bash prepare_sft_dataset.sh
 ## Model Training
 
 ```sh
-# pls remove the redundant /usr/local/corex-4.3.0/include/torch folder before you run.
 cd examples/training_scripts
 bash train_sft_Qwen.sh
 ```
