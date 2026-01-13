@@ -1,8 +1,8 @@
-# DeepSeekMoE 16B (ColossalAI)
+# DeepSeekMoE(ColossalAI)
 
 ## Model Description
 
-DeepSeekMoE 16B is a Mixture-of-Experts (MoE) language model with 16.4B parameters. It employs an innovative MoE architecture, which involves two principal strategies: fine-grained expert segmentation and shared experts isolation. It is trained from scratch on 2T English and Chinese tokens, and exhibits comparable performance with DeekSeek 7B and LLaMA2 7B, with only about 40% of computations. For research purposes, we release the model checkpoints of DeepSeekMoE 16B Base and DeepSeekMoE 16B Chat to the public, which can be deployed on a single GPU with 40GB of memory without the need for quantization
+DeepSeekMoE is a Mixture-of-Experts (MoE) language model with 16.4B parameters. It employs an innovative MoE architecture, which involves two principal strategies: fine-grained expert segmentation and shared experts isolation. It is trained from scratch on 2T English and Chinese tokens, and exhibits comparable performance with DeekSeek 7B and LLaMA2 7B, with only about 40% of computations.
 
 ## Supported Environments
 
@@ -52,7 +52,7 @@ colossalai run --nproc_per_node 16 benchmark.py -c 7b -g -b 16 --tp 1 --pp 4 --n
 
 | Model          | GPU     | Training speed   |
 |----------------|---------|------------------|
-| DeepSeekMoE 16B | BI-V150 | 6.85 samples/sec |
+| DeepSeekMoE    | BI-V150 | 6.85 samples/sec |
 
 ## References
 
