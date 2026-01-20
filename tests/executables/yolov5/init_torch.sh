@@ -14,7 +14,7 @@ pip3 install tqdm==4.62.1
 
 git clone https://gitee.com/deep-spark/deepsparkhub-gpl.git ../../deepsparkhub-gpl
 
-cd ${PROJ_DIR}/deepsparkhub-gpl/cv/detection/yolov5-sample/pytorch
+cd ${PROJ_DIR}/deepsparkhub-gpl/cv/detection/yolov5/pytorch
 
 # Remove exist datas
 if [[ -d "./datasets/coco128" ]]; then

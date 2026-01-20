@@ -14,7 +14,7 @@ check_status()
     fi
 }
 
-cd "${ROOT_DIR}/deepsparkhub-gpl/cv/detection/yolov5-sample/pytorch"
+cd "${ROOT_DIR}/deepsparkhub-gpl/cv/detection/yolov5/pytorch"
 ixdltest-check --nonstrict_mode_args="--epoch 1" -b 0.2 --run_script \
 python3 train.py --img-size 640 --batch-size ${BATCH_SIZE} \
  --cfg ./models/yolov5s.yaml --weights ./weights/yolov5s.pt --data ./data/coco.yaml  --amp ${nonstrict_mode_args} "$@";  check_status

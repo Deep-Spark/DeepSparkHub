@@ -11,8 +11,7 @@ and efficient inference, making it popular for real-time detection tasks across 
 
 | GPU    | [IXUCA SDK](https://gitee.com/deep-spark/deepspark#%E5%A4%A9%E6%95%B0%E6%99%BA%E7%AE%97%E8%BD%AF%E4%BB%B6%E6%A0%88-ixuca) | Release |
 | :----: | :----: | :----: |
-| BI-V150 | 4.2.0     |  25.03  |
-| BI-V100 | 2.2.0     |  22.09  |
+| BI-V150 | 4.3.0     |  25.12  |
 
 ## Model Preparation
 
@@ -46,73 +45,37 @@ coco2017
 ### Install Dependencies
 
 ```bash
-## clone yolov5 and install
+pip3 install seaborn
 git clone https://gitee.com/deep-spark/deepsparkhub-GPL.git
 cd deepsparkhub-GPL/cv/detection/yolov5/pytorch/
-bash init.sh
-```
-
-Modify the configuration file(data/coco.yaml)
-
-```bash
-vim data/coco.yaml
-# path: the root of coco data
-# train: the relative path of train images
-# val: the relative path of valid images
+mkdir -p weights
+wget -O weights/yolov5s.pt http://files.deepspark.org.cn:880/deepspark/data/checkpoints/yolov5s.pt
+mkdir -p datasets
+cd datasets
+wget http://files.deepspark.org.cn:880/deepspark/data/datasets/coco2017labels.zip
+wget http://files.deepspark.org.cn:880/deepspark/data/datasets/coco128.tgz
+tar xf coco128.tgz
+unzip -q -d ./ coco2017labels.zip
+ln -s coco2017/train2017 ./coco/images/
+ln -s coco2017/val2017 ./coco/images/
 ```
 
 ## Model Training
 
-Train the yolov5 model as follows, the train log is saved in ./runs/train/exp
-
 ```bash
-# On single GPU
-python3 train.py --data ./data/coco.yaml --batch-size 32 --cfg ./models/yolov5s.yaml --weights ''
-
-# On single GPU (AMP)
-python3 train.py --data ./data/coco.yaml --batch-size 32 --cfg ./models/yolov5s.yaml --weights '' --amp
-
-# Multiple GPUs on one machine
-## YOLOv5s
-python3 -m torch.distributed.launch --nproc_per_node 8 \
-    train.py \
-    --data ./data/coco.yaml \
-    --batch-size 64 \
-    --cfg ./models/yolov5s.yaml --weights '' \
-    --device 0,1,2,3,4,5,6,7
-
-## YOLOv5m
-bash run.sh
-
-# Multiple GPUs on one machine (AMP)
-## eight cards 
-python3 -m torch.distributed.launch --nproc_per_node 8 \
-    train.py \
-    --data ./data/coco.yaml \
-    --batch-size 256 \
-    --cfg ./models/yolov5s.yaml --weights '' \
-    --device 0,1,2,3,4,5,6,7 --amp
-```
-
-Test the YOLOv5 model as follows, the results are saved in ./runs/detect.
-
-```bash
-python3 detect.py --source ./data/images/bus.jpg --weights yolov5s.pt --img 640
-
-python3 detect.py --source ./data/images/zidane.jpg --weights yolov5s.pt --img 640
+python3 train.py --data coco.yaml
+or
+python3 train.py --img-size 640 --batch-size 8 \
+ --cfg ./models/yolov5s.yaml --weights ./weights/yolov5s.pt --data ./data/coco.yaml  --amp ${nonstrict_mode_args} "$@"
 ```
 
 ## Model Results
 
 
-| GPU        | FP16 | Batch size | FPS | E2E | mAP@.5 |
-|------------|------|------------|-----|-----|--------|
-| BI-V100 x8 | True | 64         | 598 | 24h | 0.632  |
-
-| Convergence criteria | Configuration (x denotes number of GPUs) | Performance | Accuracy | Power（W） | Scalability | Memory utilization（G） | Stability |
-| -------------------- | ---------------------------------------- | ----------- | -------- | ---------- | ----------- | ----------------------- | --------- |
-| mAP:0.5              | SDK V2.2, bs:128, 8x, AMP                | 1228        | 0.56     | 140\*8     | 0.92        | 27.3\*8                 | 1         |
+| GPU        | Batch size | IoU=0.50:0.95 | IoU=0.50 | IoU=0.75 |
+|------------|------------|---------------|----------|----------|
+| BI-V150 x8 | 8          | 0.365         | 0.546    | 0.400    |
 
 ## References
 
-- [YOLOv5](https://github.com/ultralytics/yolov5)
+- [YOLOv5](https://github.com/ultralytics/yolov5/tree/850970e081687df6427898948a27df37ab4de5d3)
