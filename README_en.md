@@ -30,9 +30,9 @@ individuals, healthcare, education, communication, energy, and more.
 | [ChatGLM2-6B SFT](models/nlp/llm/chatglm2-6b-sft/pytorch)      | DeepSpeed          | ADGEN & chatglm2-6b      | 3.4.0     |
 | [ChatGLM3-6B](models/nlp/llm/chatglm3-6b/pytorch)              | DeepSpeed          | ADGEN & chatglm3-6b      | 4.2.0     |
 | [DeepSeekMoE](models/nlp/llm/deepseek-moe/pytorch)             | ColossalAI         | deepseek-moe-16b-base    | 4.2.0     |
-| [DeepSeek-LLM-7B](models/nlp/llm/deepseek-llm-7b/verl)         | verl               | deepseek-llm-7b-chat     | dev-only  |
+| [DeepSeek-LLM-7B](models/nlp/llm/deepseek-llm-7b/verl)         | verl               | deepseek-llm-7b-chat     | 4.3.0     |
 | [GLM-4](models/nlp/llm/glm-4/pytorch)                          | Torchrun           | glm-4-9b-chat            | 4.2.0     |
-| [Gemma-2-2B-IT](models/nlp/llm/gemma-2-2b-it/verl)             | verl               | gemma-2-2b-it            | dev-only  |
+| [Gemma-2-2B-IT](models/nlp/llm/gemma-2-2b-it/verl)             | verl               | gemma-2-2b-it            | 4.3.0     |
 | [Llama-7B](models/nlp/llm/llama-7b/pytorch)                    | ColossalAI         | llama-7b-hf              | 3.1.0     |
 | [Llama2-7B](models/nlp/llm/llama2-7b/pytorch)                  | Megatron-DeepSpeed | Bookcorpus               | 3.1.0     |
 | [Llama2-7B RMF](models/nlp/llm/llama2-7b_reward_sft/pytorch)   | DeepSpeed          | Dahoas/rm-static         | 3.1.1     |
@@ -61,15 +61,18 @@ individuals, healthcare, education, communication, energy, and more.
 | [QWen-7B](models/nlp/llm/qwen-7b/pytorch)                      | Firefly            | qwen-7b                  | 3.4.0     |
 | [QWen1.5-7B](models/nlp/llm/qwen1.5-7b/pytorch)                | Firefly            | school_math              | 4.2.0     |
 | [QWen1.5-14B](models/nlp/llm/qwen1.5-14b/pytorch)              | Firefly            | school_math              | 4.2.0     |
-| [Qwen2-7B](models/nlp/llm/qwen2-7b/verl)                       | verl               | qwen2-7b                 | dev-only  |
+| [Qwen2-7B](models/nlp/llm/qwen2-7b/verl)                       | verl               | qwen2-7b                 | 4.3.0     |
 | [Qwen2.5-7B SFT](models/nlp/llm/qwen2.5-7b/pytorch)            | LLaMA-Factory      | qwen2.5-7b               | 4.2.0     |
 | [Qwen2.5-1.5B verl](models/nlp/llm/qwen2.5-1.5b/verl)          | verl               | qwen2.5-1.5b             | 4.2.0     |
 | [Qwen2.5-7B verl](models/nlp/llm/qwen2.5-7b/verl)              | verl               | qwen2.5-7b               | 4.2.0     |
 | [Qwen2.5-3B](models/nlp/llm/qwen2.5-3b/pytorch)                | ColossalAI         | qwen2.5-3b               | 4.3.0     |
-| [Qwen2.5-VL-7B](models/nlp/llm/qwen2.5-vl-7b/verl)             | verl               | qwen2.5-vl-7b            | dev-only  |
-| [Qwen2.5-VL-7B DPO](models/nlp/llm/qwen2.5-vl-7b/llamafactory) | LLaMA-Factory      | Qwen2.5-VL-7B-Instruct   | 4.3.0     |
-| [Qwen2.5-VL-7B SFT](models/nlp/llm/qwen2.5-vl-7b/llamafactory) | LLaMA-Factory      | Qwen2.5-VL-7B-Instruct   | 4.3.0     |
-| [Qwen3-8B](models/nlp/llm/qwen3-8b/verl)                       | verl               | qwen3-8b                 | dev-only  |
+| [Qwen3-4B Full SFT](models/nlp/llm/qwen3-4b/llamafactory)      | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
+| [Qwen3-4B SFT](models/nlp/llm/qwen3-4b/llamafactory)           | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
+| [Qwen3-4B DPO](models/nlp/llm/qwen3-4b/llamafactory)           | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
+| [Qwen3-4B KTO](models/nlp/llm/qwen3-4b/llamafactory)           | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
+| [Qwen3-4B Pretrain](models/nlp/llm/qwen3-4b/llamafactory)      | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
+| [Qwen3-4B Reward](models/nlp/llm/qwen3-4b/llamafactory)        | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
+| [Qwen3-8B](models/nlp/llm/qwen3-8b/verl)                       | verl               | qwen3-8b                 | 4.3.0     |
 | [Yi-6B](models/nlp/llm/yi-6b/pytorch)                          | DeepSpeed          | Yi-6B                    | 4.2.0     |
 | [Yi-1.5-6B](models/nlp/llm/yi-1.5-6b/pytorch)                  | DeepSpeed          | Yi-1.5-6B                | 4.2.0     |
 | [Yi-VL-6B](models/nlp/llm/yi-vl-6b/pytorch)                    | LLaMA-Factory      | Yi-VL-6B-hf              | 4.2.0     |
@@ -392,6 +395,12 @@ individuals, healthcare, education, communication, energy, and more.
 | [MoE-LLaVA-Phi2-2.7B](models/multimodal/vision-language_model/moe-llava-phi2-2.7b/pytorch)         | PyTorch   | MoE-LLaVA      | 4.2.0     |
 | [MoE-LLaVA-Qwen-1.8B](models/multimodal/vision-language_model/moe-llava-qwen-1.8b/pytorch)         | PyTorch   | MoE-LLaVA      | 4.2.0     |
 | [MoE-LLaVA-StableLM-1.6B](models/multimodal/vision-language_model/moe-llava-stablelm-1.6b/pytorch) | PyTorch   | MoE-LLaVA      | 4.2.0     |
+| [Qwen2.5-VL-7B](models/multimodal/vision-language_model/qwen2.5-vl-7b/verl)                        | verl      | geo3k          | 4.3.0     |
+| [Qwen2.5-VL-7B DPO](models/multimodal/vision-language_model/qwen2.5-vl-7b/llamafactory)            | LLaMA-Factory | rlhf_v     | 4.3.0     |
+| [Qwen2.5-VL-7B SFT](models/multimodal/vision-language_model/qwen2.5-vl-7b/llamafactory)            | LLaMA-Factory | mllm_demo  | 4.3.0     |
+| [Qwen3-VL-4B Full SFT](models/multimodal/vision-language_model/qwen3-vl-4b/llamafactory)           | LLaMA-Factory | mllm_demo  | 4.4.0     |
+| [Qwen3-VL-4B SFT](models/multimodal/vision-language_model/qwen3-vl-4b/llamafactory)                | LLaMA-Factory | mllm_demo  | 4.4.0     |
+| [Qwen3-VL-4B DPO](models/multimodal/vision-language_model/qwen3-vl-4b/llamafactory)                | LLaMA-Factory | rlhf_v     | 4.4.0     |
 | [Stable Diffusion 1.4](models/multimodal/diffusion_model/stable-diffusion-1.4/pytorch)             | PyTorch   | pokemon-images | 3.0.0     |
 | [Stable Diffusion 1.5](models/multimodal/diffusion_model/stable-diffusion-1.5/pytorch)             | PyTorch   | pokemon-images | 4.1.1     |
 | [Stable Diffusion 2.1](models/multimodal/diffusion_model/stable-diffusion-2.1/pytorch)             | PyTorch   | pokemon-images | 4.1.1     |
