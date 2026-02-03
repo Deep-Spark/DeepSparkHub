@@ -49,6 +49,8 @@ def train_one_epoch(model, criterion, optimizer, data_loader, device, epoch, pri
 
     header = 'Epoch: [{}]'.format(epoch)
     all_fps = []
+    num_samples = 0; total_dur = 0.0
+    warmup = 1 if epoch == 0 else 0
     for data in metric_logger.log_every(data_loader, print_freq, header):
         if use_dali:
             image, target = data[0]["data"], data[0]["label"][:, 0].long()
@@ -89,8 +91,12 @@ def train_one_epoch(model, criterion, optimizer, data_loader, device, epoch, pri
         fps = batch_size / (end_time - start_time) * get_world_size()
         metric_logger.meters['img/s'].update(fps)
         all_fps.append(fps)
+        if warmup > 0:
+            warmup -= 1
+        else:
+            num_samples += batch_size; total_dur += end_time - start_time
 
-    print(header, 'Avg img/s:', sum(all_fps) / len(all_fps))
+    print(header, 'Avg img/s:', num_samples / total_dur * get_world_size())
 
 
 def evaluate(model, criterion, data_loader, device, print_freq=100, use_dali=False):
