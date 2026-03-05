@@ -19,6 +19,8 @@ pip3 install "protobuf<4.0.0"
 python_version=$(python3 --version 2>&1 |awk '{print $2}'|awk -F '.' '{printf "%d.%d", $1,$2}')
 if [ $python_version == 3.7 ]; then
     pip3 install numpy==1.21.6
+elif [ $python_version == 3.12 ]; then
+    pip3 install numpy==1.26.4
 else
     pip3 install numpy==1.23.3
 fi
