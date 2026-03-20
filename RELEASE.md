@@ -9,6 +9,7 @@
 
 | Release Date | Release Version | IXUCA SDK |
 |--------------|-----------------|-----------|
+| Mar 2026     | 26.03           | v4.4.0    |
 | Dec 2025     | 25.12           | v4.3.0    |
 | Sep 2025     | 25.09           | v4.3.0    |
 | Jun 2025     | 25.06           | v4.2.0    |
@@ -24,6 +25,54 @@
 | Dec 2022     | 22.12           | v2.3.0    |
 
 ## Release Notes
+
+### DeepSparkHub 26.03
+
+#### 模型与算法
+
+* 新增了 9 个大模型训练微调示例，使用了 [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) 工具箱
+
+<table>
+    </tr>
+        <tr align="left"><th colspan=5>LLM</th></tr>
+    <tr>
+        <td>Qwen3-4B-Full-SFT (LLaMA-Factory)</td>
+        <td>Qwen3-4B-DPO (LLaMA-Factory)</td>
+        <td>Qwen3-4B-KTO (LLaMA-Factory)</td>
+    </tr>
+    <tr>
+        <td>Qwen3-4B-LoRA-Pretrain (LLaMA-Factory)</td>
+        <td>Qwen3-4B-LoRA-Reward (LLaMA-Factory)</td>
+        <td>Qwen3-4B-LoRA-SFT (LLaMA-Factory)</td>
+    </tr>
+    <tr>
+        <td>Qwen3-VL-4B-Full-SFT (LLaMA-Factory)</td>
+        <td>Qwen3-VL-4B-LoRA-SFT (LLaMA-Factory)</td>
+        <td>Qwen3-VL-4B-LoRA-DPO (LLaMA-Factory)</td>
+    </tr>
+</table>
+
+#### 修复更新
+
+* 修复了 numpy 版本对 Python 3.12 的兼容性问题
+* 引入了 warmup 机制来平滑训练吞吐量
+* 修复了 DeepSeekMoE 模型与 ColossalAI 0.4.8 版本的兼容性问题
+* 更新了 DeepSeekMoE 模型名称（deepseek_moe_7b → deepseek-moe）
+* 更新了 Qwen2.5-VL-7B 模型的分类目录（从 nlp/llm 移至 multimodal/vision-language_model）
+* 优化了 YOLOv5 模型的 README 文档说明
+* 删除了 YOLOv5-sample 冗余模型示例
+
+#### 版本关联
+
+DeepSparkHub 26.03 对应天数软件栈 4.4.0 版本。
+
+#### 贡献者
+
+感谢以下社区贡献者
+
+shengyan.zhao，Zhiwen Fu，majorli6，honglyua。
+
+欢迎以任何形式为 DeepSparkHub 项目贡献。
 
 ### DeepSparkHub 25.12
 
