@@ -66,6 +66,12 @@ individuals, healthcare, education, communication, energy, and more.
 | [Qwen2.5-1.5B verl](models/nlp/llm/qwen2.5-1.5b/verl)          | verl               | qwen2.5-1.5b             | 4.2.0     |
 | [Qwen2.5-7B verl](models/nlp/llm/qwen2.5-7b/verl)              | verl               | qwen2.5-7b               | 4.2.0     |
 | [Qwen2.5-3B](models/nlp/llm/qwen2.5-3b/pytorch)                | ColossalAI         | qwen2.5-3b               | 4.3.0     |
+| [Qwen3-0.6B SFT](models/nlp/llm/qwen3/loongforge)              | LoongForge         | Qwen3-0.6B               | 4.4.0     |
+| [Qwen3-0.6B Pretrain](models/nlp/llm/qwen3/loongforge)         | LoongForge         | Qwen3-0.6B               | 4.4.0     |
+| [Qwen3-4B SFT](models/nlp/llm/qwen3/loongforge)                | LoongForge         | Qwen3-4B                 | 4.4.0     |
+| [Qwen3-4B Pretrain](models/nlp/llm/qwen3/loongforge)           | LoongForge         | Qwen3-4B                 | 4.4.0     |
+| [Qwen3-8B SFT](models/nlp/llm/qwen3/loongforge)                | LoongForge         | Qwen3-8B                 | 4.4.0     |
+| [Qwen3-8B Pretrain](models/nlp/llm/qwen3/loongforge)           | LoongForge         | Qwen3-8B                 | 4.4.0     |
 | [Qwen3-4B Full SFT](models/nlp/llm/qwen3-4b/llamafactory)      | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
 | [Qwen3-4B SFT](models/nlp/llm/qwen3-4b/llamafactory)           | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
 | [Qwen3-4B DPO](models/nlp/llm/qwen3-4b/llamafactory)           | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
