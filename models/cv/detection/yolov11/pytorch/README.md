@@ -59,7 +59,7 @@ yum install -y mesa-libGL
 apt install -y libgl1-mesa-glx
 
 # Install ultralytics
-pip3 install ultralytics==8.3.127
+pip3 install ultralytics==8.4.75
 ```
 
 ## Model Training
