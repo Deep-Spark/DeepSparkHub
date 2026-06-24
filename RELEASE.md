@@ -9,6 +9,7 @@
 
 | Release Date | Release Version | IXUCA SDK |
 |--------------|-----------------|-----------|
+| Jun 2026     | 26.06           | v4.4.0    |
 | Mar 2026     | 26.03           | v4.4.0    |
 | Dec 2025     | 25.12           | v4.3.0    |
 | Sep 2025     | 25.09           | v4.3.0    |
@@ -25,6 +26,42 @@
 | Dec 2022     | 22.12           | v2.3.0    |
 
 ## Release Notes
+
+### DeepSparkHub 26.06
+
+#### 模型与算法
+
+* 新增了 6 个大模型训练微调示例，使用了 [LoongForge](https://github.com/baidu-baige/LoongForge) 工具箱
+<table>
+    </tr>
+        <tr align="left"><th colspan=5>LLM</th></tr>
+    <tr>
+        <td>Qwen3-0.6B SFT (LoongForge)</td>
+        <td>Qwen3-4B SFT (LoongForge)</td>
+        <td>Qwen3-8B SFT (LoongForge)</td>
+    </tr>
+    <tr>
+        <td>Qwen3-0.6B Pretrain (LoongForge)</td>
+        <td>Qwen3-4B Pretrain (LoongForge)</td>
+        <td>Qwen3-8B Pretrain (LoongForge)</td>
+    </tr>
+</table>
+
+#### 修复更新
+
+* 修复了 ultralytics 版本对 yolov11 的兼容性问题
+
+#### 版本关联
+
+DeepSparkHub 26.06 对应天数软件栈 4.4.0 版本。
+
+#### 贡献者
+
+感谢以下社区贡献者
+
+tao.jiang，majorli6，honglyua。
+
+欢迎以任何形式为 DeepSparkHub 项目贡献。
 
 ### DeepSparkHub 26.03
 
