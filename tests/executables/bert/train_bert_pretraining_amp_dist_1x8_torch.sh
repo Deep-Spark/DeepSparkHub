@@ -13,6 +13,11 @@
 
 set -euox pipefail
 
+if [ "$(ulimit -n)" -lt 1048576 ]; then
+    ulimit -n 1048576
+fi
+
+
 : ${BATCH_SIZE:=27}
 
 cd ../../../models/nlp/language_model/bert_sample/pytorch/base/
