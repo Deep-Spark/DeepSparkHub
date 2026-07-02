@@ -13,6 +13,11 @@
 
 set -euox pipefail
 
+if [ "$(ulimit -n)" -lt 1048576 ]; then
+    ulimit -n 1048576
+fi
+
+
 source ../_utils/global_environment_variables.sh
 
 : ${BATCH_SIZE:=10}
