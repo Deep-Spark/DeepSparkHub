@@ -533,7 +533,7 @@
 
 ### 交流
 
-请联系 <contact@deepspark.org.cn>。
+请联系 <developers@iluvatar.com>。
 
 ### 贡献
 
