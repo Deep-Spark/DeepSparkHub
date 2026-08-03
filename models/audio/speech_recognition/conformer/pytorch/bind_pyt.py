@@ -13,6 +13,9 @@
 import sys
 import subprocess
 import os
+import shutil
+import socket
+import time
 from argparse import ArgumentParser
 
 
@@ -37,10 +40,10 @@ def parse_args():
                              "the IP address or the hostname of node 0, for "
                              "single node multi-proc training, the "
                              "--master_addr can simply be 127.0.0.1")
-    parser.add_argument("--master_port", default=29500, type=int,
-                        help="Master node (rank 0)'s free port that needs to "
-                             "be used for communciation during distributed "
-                             "training")
+    parser.add_argument("--master_port", default=0, type=int,
+                        help="Master node (rank 0)'s free port. A free port is "
+                             "selected automatically for single-node training "
+                             "when this is 0.")
     parser.add_argument('--no_hyperthreads', action='store_true',
                         help='Flag to disable binding to hyperthreads')
     parser.add_argument('--no_membind', action='store_true',
@@ -63,6 +66,25 @@ def parse_args():
     return args
 
 
+def get_free_port(address):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
+        server_socket.bind((address, 0))
+        return server_socket.getsockname()[1]
+
+
+def stop_processes(processes):
+    for process in processes:
+        if process.poll() is None:
+            process.terminate()
+
+    for process in processes:
+        if process.poll() is None:
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                process.kill()
+
+
 def get_cuda_visible_devices(gpus=1):
     if "CUDA_VISIBLE_DEVICES" in os.environ:
         return os.environ['CUDA_VISIBLE_DEVICES']
@@ -71,6 +93,14 @@ def get_cuda_visible_devices(gpus=1):
 
 def main():
     args = parse_args()
+
+    if args.master_port == 0:
+        if args.nnodes != 1:
+            raise ValueError(
+                "--master_port must be set explicitly for multi-node training"
+            )
+        args.master_port = get_free_port(args.master_addr)
+    print(f"Using distributed master port: {args.master_port}", flush=True)
 
     # set PyTorch distributed related environmental variables
     current_env = os.environ.copy()
@@ -86,7 +116,14 @@ def main():
     dist_world_size = args.nproc_per_node * args.nnodes
     current_env["WORLD_SIZE"] = str(dist_world_size)
 
-    # variables for numactrl binding
+    numactl = shutil.which("numactl")
+    if numactl is None:
+        print(
+            "Warning: numactl was not found; launching without CPU/NUMA binding.",
+            file=sys.stderr,
+        )
+
+    # variables for numactl binding
     NSOCKETS = args.nsockets_per_node
     NGPUS_PER_SOCKET = (args.nproc_per_node // args.nsockets_per_node) + \
                        (1 if (args.nproc_per_node % args.nsockets_per_node) else 0)
@@ -117,8 +154,7 @@ def main():
             numactlargs += [ "--membind={}".format(memnode) ]
 
         # spawn the processes
-        cmd = [ "/usr/bin/numactl" ] \
-            + numactlargs \
+        cmd = ([numactl] + numactlargs if numactl else []) \
             + [ sys.executable,
                 "-u",
                 args.training_script,
@@ -129,8 +165,28 @@ def main():
         process = subprocess.Popen(cmd, env=current_env)
         processes.append(process)
 
-    for process in processes:
-        process.wait()
+    exit_code = 0
+    try:
+        while processes:
+            running = False
+            for process in processes:
+                return_code = process.poll()
+                if return_code is None:
+                    running = True
+                elif return_code != 0:
+                    exit_code = return_code
+                    stop_processes(processes)
+                    break
+
+            if exit_code != 0 or not running:
+                break
+            time.sleep(0.1)
+    except KeyboardInterrupt:
+        exit_code = 130
+        stop_processes(processes)
+
+    if exit_code != 0:
+        sys.exit(exit_code)
 
 
 if __name__ == "__main__":
