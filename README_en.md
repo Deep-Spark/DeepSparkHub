@@ -63,6 +63,7 @@ individuals, healthcare, education, communication, energy, and more.
 | [QWen1.5-14B](models/nlp/llm/qwen1.5-14b/pytorch)              | Firefly            | school_math              | 4.2.0     |
 | [Qwen2-7B](models/nlp/llm/qwen2-7b/verl)                       | verl               | qwen2-7b                 | 4.3.0     |
 | [Qwen2.5-7B SFT](models/nlp/llm/qwen2.5-7b/pytorch)            | LLaMA-Factory      | qwen2.5-7b               | 4.2.0     |
+| [Qwen2.5-7B SWIFT](models/nlp/llm/qwen2.5-7b/ms-swift)         | SWIFT              | qwen2.5-7b               | 5.0.0     |
 | [Qwen2.5-1.5B verl](models/nlp/llm/qwen2.5-1.5b/verl)          | verl               | qwen2.5-1.5b             | 4.2.0     |
 | [Qwen2.5-7B verl](models/nlp/llm/qwen2.5-7b/verl)              | verl               | qwen2.5-7b               | 4.2.0     |
 | [Qwen2.5-3B](models/nlp/llm/qwen2.5-3b/pytorch)                | ColossalAI         | qwen2.5-3b               | 4.3.0     |
@@ -78,6 +79,7 @@ individuals, healthcare, education, communication, energy, and more.
 | [Qwen3-4B KTO](models/nlp/llm/qwen3-4b/llamafactory)           | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
 | [Qwen3-4B Pretrain](models/nlp/llm/qwen3-4b/llamafactory)      | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
 | [Qwen3-4B Reward](models/nlp/llm/qwen3-4b/llamafactory)        | LLaMA-Factory      | Qwen3-4B-Instruct-2507   | 4.4.0     |
+| [Qwen3-4B SWIFT](models/nlp/llm/qwen3-4b/ms-swift)             | SWIFT              | Qwen3-4B-Base            | 5.0.0     |
 | [Qwen3-8B](models/nlp/llm/qwen3-8b/verl)                       | verl               | qwen3-8b                 | 4.3.0     |
 | [Yi-6B](models/nlp/llm/yi-6b/pytorch)                          | DeepSpeed          | Yi-6B                    | 4.2.0     |
 | [Yi-1.5-6B](models/nlp/llm/yi-1.5-6b/pytorch)                  | DeepSpeed          | Yi-1.5-6B                | 4.2.0     |
