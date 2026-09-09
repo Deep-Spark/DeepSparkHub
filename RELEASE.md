@@ -9,6 +9,7 @@
 
 | Release Date | Release Version | IXUCA SDK |
 |--------------|-----------------|-----------|
+| Jun 2026     | 26.09           | v5.0.0    |
 | Jun 2026     | 26.06           | v4.4.0    |
 | Mar 2026     | 26.03           | v4.4.0    |
 | Dec 2025     | 25.12           | v4.3.0    |
@@ -26,6 +27,44 @@
 | Dec 2022     | 22.12           | v2.3.0    |
 
 ## Release Notes
+
+### DeepSparkHub 26.09
+
+#### 模型与算法
+
+* 新增了 6 个大模型训练微调示例，使用了 [ms-swift](https://github.com/modelscope/ms-swift) 工具箱
+<table>
+    </tr>
+        <tr align="left"><th colspan=5>LLM</th></tr>
+    <tr>
+        <td>Qwen3-4B-Base Pretrain (ms-swift)</td>
+        <td>Qwen3-4B-Instruct-2507 lora (ms-swift)</td>
+        <td>Qwen3-4B-Instruct-2507 dpo (ms-swift)</td>
+    </tr>
+    <tr>
+        <td>Qwen2.5-7B Pretrain (ms-swift)</td>
+        <td>Qwen2.5-7B-Instruct lora (ms-swift)</td>
+        <td>Qwen2.5-7B-Instruct dpo (ms-swift)</td>
+    </tr>
+</table>
+
+#### 修复更新
+
+* 修复了 BERT 预训练评估 dataloader 因打开文件过多导致的 "Too many open files" 报错问题
+* 修复了 bind_pyt launcher 无法正确传递子进程退出码的问题
+* 更新了 ResNet50 PaddlePaddle 分布式训练脚本，改用 --ips 参数指定分布式训练节点
+
+#### 版本关联
+
+DeepSparkHub 26.09 对应天数软件栈 5.0.0 版本。
+
+#### 贡献者
+
+感谢以下社区贡献者
+
+yougouda，yicuixi，tianyu8057，majorli6，honglyua。
+
+欢迎以任何形式为 DeepSparkHub 项目贡献。
 
 ### DeepSparkHub 26.06
 
