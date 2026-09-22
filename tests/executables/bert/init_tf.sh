@@ -12,7 +12,8 @@ fi
 echo "prefix_sudo= $prefix_sudo"
 
 if command_exists apt; then
-	$prefix_sudo apt install -y git numactl
+	export DEBIAN_FRONTEND=noninteractive
+	$prefix_sudo apt-get update -qq && $prefix_sudo apt-get install -y --no-install-recommends git numactl || exit 1
 elif command_exists dnf; then
 	$prefix_sudo dnf install -y git numactl
 else
