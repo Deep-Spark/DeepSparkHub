@@ -10,6 +10,11 @@ fi
 
 echo "prefix_sudo= $prefix_sudo"
 
-command -v yum >/dev/null && $prefix_sudo yum install -y numactl ||  $prefix_sudo apt install -y numactl
+if command -v yum >/dev/null; then
+    $prefix_sudo yum install -y numactl
+else
+    export DEBIAN_FRONTEND=noninteractive
+    $prefix_sudo apt-get update -qq && $prefix_sudo apt-get install -y --no-install-recommends numactl || exit 1
+fi
 
 pip3 install -r ../../../models/cv/classification/mobilenetv3/pytorch/requirements.txt

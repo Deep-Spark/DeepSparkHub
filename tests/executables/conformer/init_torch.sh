@@ -15,8 +15,8 @@ echo "prefix_sudo= $prefix_sudo"
 
 ID=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
 if [[ ${ID} == "ubuntu" ]]; then
-    $prefix_sudo apt install -y numactl
-    $prefix_sudo apt install -y libsndfile1
+    export DEBIAN_FRONTEND=noninteractive
+    $prefix_sudo apt-get update -qq && $prefix_sudo apt-get install -y --no-install-recommends numactl libsndfile1 || exit 1
 elif [[ ${ID} == "centos" ]]; then
     $prefix_sudo yum install -y numactl
     $prefix_sudo yum install -y libsndfile-devel
