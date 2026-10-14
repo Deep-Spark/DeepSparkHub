@@ -25,7 +25,17 @@ from pathlib import Path
 from typing import Dict, Optional, Union
 from urllib import request
 
-from huggingface_hub import cached_download, hf_hub_download, model_info
+try:
+    from huggingface_hub import cached_download, hf_hub_download, model_info
+except ImportError:  # huggingface_hub>=0.26 removed cached_download
+    from huggingface_hub import hf_hub_download, model_info
+
+    def cached_download(*args, **kwargs):
+        raise ImportError(
+            "huggingface_hub.cached_download was removed in 0.26; "
+            "community pipeline download from GitHub is not available on this hub"
+        )
+
 from huggingface_hub.utils import validate_hf_hub_args
 from packaging import version
 
